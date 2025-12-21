@@ -74,6 +74,7 @@ export interface UpdateRoomTypeRequest {
   description?: string;
   baseRate?: number;
   capacity?: number;
+  maxOccupancy?: number; // Alias for capacity
   amenities?: string[];
 }
 
