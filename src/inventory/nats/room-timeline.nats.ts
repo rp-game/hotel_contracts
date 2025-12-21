@@ -74,9 +74,22 @@ export interface UpdateRoomStatusTimelineRequest {
   estimatedDuration?: number;
 }
 
+export interface RoomStatusUpdate {
+  roomId: string;
+  oldStatus: string;
+  newStatus: string;
+  updatedAt: string;
+  reason?: string;
+}
+
 export interface UpdateRoomStatusTimelineResponse {
-  success: boolean;
-  message: string;
+  success?: boolean;
+  message?: string;
+  roomId?: string;
+  oldStatus?: string;
+  newStatus?: string;
+  updatedAt?: string;
+  reason?: string;
 }
 
 export type UpdateRoomStatusTimelineNatsResponse = NatsResponse<UpdateRoomStatusTimelineResponse>;
@@ -94,10 +107,17 @@ export interface GetRoomStatusHistoryRequest {
 export interface StatusHistoryItem {
   status: string;
   changedAt: string;
+  changedBy?: string;
   reason?: string;
+  duration?: number;
 }
 
-export type GetRoomStatusHistoryResponse = StatusHistoryItem[];
+export interface RoomStatusHistory {
+  roomId: string;
+  statusChanges: StatusHistoryItem[];
+}
+
+export type GetRoomStatusHistoryResponse = RoomStatusHistory;
 export type GetRoomStatusHistoryNatsResponse = NatsResponse<GetRoomStatusHistoryResponse>;
 
 /**
@@ -111,12 +131,20 @@ export interface CheckRoomAvailabilityTimelineRequest {
   checkOut: string; // YYYY-MM-DD
 }
 
-export interface AvailabilityCheckResult {
-  available: boolean;
-  conflicts?: string[];
+export interface ConflictInfo {
+  type: string;
+  startDate: string;
+  endDate: string;
+  description: string;
 }
 
-export type CheckRoomAvailabilityTimelineResponse = AvailabilityCheckResult;
+export interface TimelineAvailability {
+  roomId: string;
+  available: boolean;
+  conflicts: ConflictInfo[];
+}
+
+export type CheckRoomAvailabilityTimelineResponse = TimelineAvailability;
 export type CheckRoomAvailabilityTimelineNatsResponse = NatsResponse<CheckRoomAvailabilityTimelineResponse>;
 
 /**
