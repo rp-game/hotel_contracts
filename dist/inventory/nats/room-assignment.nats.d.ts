@@ -85,15 +85,15 @@ export type GetAvailableRoomsNatsResponse = NatsResponse<GetAvailableRoomsRespon
  * Pattern: rooms.assignment.optimal
  */
 export interface BookingData {
+    id?: string;
     bookingId: string;
     roomTypeId: string;
-    checkIn?: string;
-    checkOut?: string;
+    roomId?: string | null;
+    checkIn?: string | Date;
+    checkOut?: string | Date;
     checkInDate?: string;
     checkOutDate?: string;
     guestPreferences?: any;
-    id?: string;
-    roomId?: string | null;
     assignmentStatus?: string;
 }
 export interface FindOptimalRoomRequest {
@@ -105,7 +105,7 @@ export interface OptimalRoomResult {
     room?: {
         id?: string;
         roomId?: string;
-        roomNumber: string;
+        roomNumber?: string;
         floor?: number;
         roomType?: string;
     };

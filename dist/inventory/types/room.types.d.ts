@@ -1,7 +1,7 @@
 /**
  * Inventory Domain Types
  */
-import { RoomStatus, RoomTypeAmenity } from '../enums';
+import { RoomStatus } from '../enums';
 /**
  * Room Type entity
  */
@@ -12,12 +12,11 @@ export interface RoomType {
     name: string;
     description?: string;
     capacity: number;
-    beds: number;
-    bedType: 'SINGLE' | 'DOUBLE' | 'TWIN' | 'SOFA' | 'BUNK';
-    squareMeters: number;
-    amenities: RoomTypeAmenity[];
     basePrice: number;
-    currency: string;
+    images?: string[];
+    amenities?: string[];
+    features?: any;
+    isActive?: boolean;
     createdAt: string;
     updatedAt: string;
 }

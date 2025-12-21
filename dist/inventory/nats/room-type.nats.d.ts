@@ -50,6 +50,7 @@ export interface CreateRoomTypeRequest {
     description?: string;
     baseRate: number;
     capacity?: number;
+    maxOccupancy?: number;
     amenities?: string[];
 }
 export type CreateRoomTypeResponse = RoomTypeEntity;
@@ -65,6 +66,7 @@ export interface UpdateRoomTypeRequest {
     description?: string;
     baseRate?: number;
     capacity?: number;
+    maxOccupancy?: number;
     amenities?: string[];
 }
 export type UpdateRoomTypeResponse = RoomTypeEntity | null;

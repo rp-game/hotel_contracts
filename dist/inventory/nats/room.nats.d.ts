@@ -38,11 +38,7 @@ export interface PaginatedRoomsResponse {
     page: number;
     limit: number;
 }
-export interface FindAllRoomsResponse {
-    data: any[];
-    total: number;
-    page: number;
-    limit: number;
+export interface FindAllRoomsResponse extends PaginatedRoomsResponse {
 }
 export type FindAllRoomsNatsResponse = NatsResponse<FindAllRoomsResponse>;
 /**
