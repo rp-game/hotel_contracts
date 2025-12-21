@@ -164,6 +164,11 @@ export type GetRoomsNatsResponse = NatsResponse<GetRoomsResponse>;
 export interface RoomStatusChangedEvent {
   roomId: string;
   status: string;
+  newStatus?: string; // Alias for status, for compatibility
+  oldStatus?: string;
+  tenantId: string;
+  hotelId: string;
   changedAt: string;
   changedBy?: string;
+  reason?: string;
 }

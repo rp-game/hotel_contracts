@@ -38,7 +38,105 @@ export interface GetRoomTimelineRequest {
     roomIds?: string[];
     floors?: number[];
 }
-export type GetRoomTimelineResponse = any;
+export interface TimelineRoomType {
+    id: string;
+    name: string;
+    capacity: number;
+}
+export interface TimelineEvent {
+    id: string;
+    type: 'booking' | 'maintenance' | 'cleaning' | 'block';
+    startTime: string;
+    endTime: string;
+    title: string;
+    description?: string;
+    guestName?: string;
+    bookingId?: string;
+}
+export interface BookingTimelineItem {
+    id: string;
+    bookingCode: string;
+    guestName: string;
+    guestEmail?: string;
+    roomId: string;
+    roomNumber: string;
+    checkIn: string;
+    checkOut: string;
+    status: 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
+    adultCount: number;
+    childCount: number;
+    specialRequests?: string;
+    totalAmount: number;
+}
+export interface MaintenanceEvent {
+    id: string;
+    roomId: string;
+    type: 'ROUTINE' | 'REPAIR' | 'DEEP_CLEAN' | 'INSPECTION';
+    scheduledDate: string;
+    estimatedDuration: number;
+    description: string;
+    priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
+    status: 'SCHEDULED' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+    assignedTechnician?: string;
+}
+export interface RoomTimelineItem {
+    roomId: string;
+    roomNumber: string;
+    floor: number;
+    roomType: TimelineRoomType;
+    status: 'AVAILABLE' | 'OCCUPIED' | 'CLEANING' | 'MAINTENANCE' | 'OUT_OF_ORDER';
+    events: TimelineEvent[];
+}
+export interface TimelineData {
+    rooms: RoomTimelineItem[];
+    bookings: BookingTimelineItem[];
+    maintenanceEvents: MaintenanceEvent[];
+    dateRange: {
+        startDate: string;
+        endDate: string;
+    };
+    summary: {
+        totalRooms: number;
+        assignedBookings: number;
+        unassignedBookings: number;
+        occupancyRate: number;
+        availableRooms: number;
+    };
+    settings: {
+        defaultCleaningTime: number;
+        workingHours: {
+            start: string;
+            end: string;
+        };
+        statusColors: Record<string, string>;
+        viewPreferences: {
+            defaultView: string;
+            showGuestNames: boolean;
+            showCleaningTimes: boolean;
+            showUnassignedBookings: boolean;
+            showRoomTypeCapacity: boolean;
+        };
+        autoStatusTransitions?: {
+            enabled: boolean;
+            checkoutToCleaningDelay: number;
+            cleaningToAvailableAuto: boolean;
+        };
+    };
+    roomTypeCapacities: {
+        roomTypeId: string;
+        roomTypeName: string;
+        totalRooms: number;
+        timeSlots: {
+            startTime: string;
+            endTime: string;
+            totalRooms: number;
+            assignedRooms: number;
+            reservedUnassigned: number;
+            availableRooms: number;
+        }[];
+    }[];
+}
+export type GetRoomTimelineResponse = TimelineData;
 export type GetRoomTimelineNatsResponse = NatsResponse<GetRoomTimelineResponse>;
 /**
  * Get Timeline Stats Request
@@ -50,9 +148,11 @@ export interface GetTimelineStatsRequest {
 }
 export interface TimelineStats {
     totalRooms: number;
-    occupiedRooms: number;
+    occupancyRate: number;
     availableRooms: number;
-    maintenanceRooms?: number;
+    occupiedRooms: number;
+    maintenanceRooms: number;
+    cleaningRooms: number;
 }
 export type GetTimelineStatsResponse = TimelineStats;
 export type GetTimelineStatsNatsResponse = NatsResponse<GetTimelineStatsResponse>;
@@ -73,15 +173,7 @@ export interface RoomStatusUpdate {
     updatedAt: string;
     reason?: string;
 }
-export interface UpdateRoomStatusTimelineResponse {
-    success?: boolean;
-    message?: string;
-    roomId?: string;
-    oldStatus?: string;
-    newStatus?: string;
-    updatedAt?: string;
-    reason?: string;
-}
+export type UpdateRoomStatusTimelineResponse = RoomStatusUpdate;
 export type UpdateRoomStatusTimelineNatsResponse = NatsResponse<UpdateRoomStatusTimelineResponse>;
 /**
  * Get Room Status History Request
@@ -97,7 +189,7 @@ export interface StatusHistoryItem {
     changedAt: string;
     changedBy?: string;
     reason?: string;
-    duration?: number;
+    duration: number;
 }
 export interface RoomStatusHistory {
     roomId: string;
@@ -121,12 +213,12 @@ export interface ConflictInfo {
     endDate: string;
     description: string;
 }
-export interface TimelineAvailability {
+export interface RoomBookingAvailability {
     roomId: string;
     available: boolean;
     conflicts: ConflictInfo[];
 }
-export type CheckRoomAvailabilityTimelineResponse = TimelineAvailability;
+export type CheckRoomAvailabilityTimelineResponse = RoomBookingAvailability;
 export type CheckRoomAvailabilityTimelineNatsResponse = NatsResponse<CheckRoomAvailabilityTimelineResponse>;
 /**
  * Get Cleaning Config Request
@@ -137,11 +229,11 @@ export interface GetCleaningConfigRequest {
 }
 export interface CleaningConfig {
     hotelId: string;
-    standardCleaningTime?: number;
-    deepCleaningTime?: number;
-    checkoutCleaningTime?: number;
-    autoAssignCleaning?: boolean;
-    cleaningPriority?: string[];
+    standardCleaningTime: number;
+    deepCleaningTime: number;
+    checkoutCleaningTime: number;
+    autoAssignCleaning: boolean;
+    cleaningPriority: string[];
 }
 export type GetCleaningConfigResponse = CleaningConfig;
 export type GetCleaningConfigNatsResponse = NatsResponse<GetCleaningConfigResponse>;
@@ -163,7 +255,20 @@ export interface GetOptimizedRoomAssignmentRequest {
     hotelId: string;
     criteria: any;
 }
-export type GetOptimizedRoomAssignmentResponse = any;
+export interface OptimizedAssignment {
+    recommendations: {
+        bookingId: string;
+        recommendedRoomId: string;
+        score: number;
+        reasons: string[];
+    }[];
+    summary: {
+        totalBookings: number;
+        optimizedAssignments: number;
+        improvementPercentage: number;
+    };
+}
+export type GetOptimizedRoomAssignmentResponse = OptimizedAssignment;
 export type GetOptimizedRoomAssignmentNatsResponse = NatsResponse<GetOptimizedRoomAssignmentResponse>;
 /**
  * Get Room Maintenance Request
@@ -222,7 +327,25 @@ export interface GetRoomOccupancyAnalyticsRequest {
     to: string;
     groupBy: string;
 }
-export type GetRoomOccupancyAnalyticsResponse = any;
+export interface TimelineOccupancyAnalytics {
+    period: {
+        from: string;
+        to: string;
+        groupBy: string;
+    };
+    data: {
+        date: string;
+        occupancyRate: number;
+        totalRooms: number;
+        occupiedRooms: number;
+    }[];
+    summary: {
+        averageOccupancy: number;
+        peakOccupancy: number;
+        lowestOccupancy: number;
+    };
+}
+export type GetRoomOccupancyAnalyticsResponse = TimelineOccupancyAnalytics;
 export type GetRoomOccupancyAnalyticsNatsResponse = NatsResponse<GetRoomOccupancyAnalyticsResponse>;
 /**
  * Get Room Turnover Analytics Request
@@ -233,7 +356,25 @@ export interface GetRoomTurnoverAnalyticsRequest {
     from: string;
     to: string;
 }
-export type GetRoomTurnoverAnalyticsResponse = any;
+export interface TurnoverAnalytics {
+    period: {
+        from: string;
+        to: string;
+    };
+    turnoverData: {
+        roomId: string;
+        roomNumber: string;
+        checkouts: number;
+        checkins: number;
+        turnoverTime: number;
+    }[];
+    summary: {
+        averageTurnoverTime: number;
+        fastestTurnover: number;
+        slowestTurnover: number;
+    };
+}
+export type GetRoomTurnoverAnalyticsResponse = TurnoverAnalytics;
 export type GetRoomTurnoverAnalyticsNatsResponse = NatsResponse<GetRoomTurnoverAnalyticsResponse>;
 /**
  * Get Comprehensive Analytics Request
@@ -244,7 +385,43 @@ export interface GetComprehensiveAnalyticsRequest {
     startDate: string;
     endDate: string;
 }
-export type GetComprehensiveAnalyticsResponse = any;
+export interface ComprehensiveAnalytics {
+    overview: {
+        totalRooms: number;
+        availableRooms: number;
+        occupiedRooms: number;
+        outOfOrderRooms: number;
+        occupancyRate: number;
+        adr: number;
+        revpar: number;
+        totalRevenue: number;
+        avgLengthOfStay: number;
+        checkoutOnTime: number;
+        cleaningEfficiency: number;
+    };
+    trends: {
+        date: string;
+        occupancyRate: number;
+        adr: number;
+        revpar: number;
+        revenue: number;
+        availableRooms: number;
+        occupiedRooms: number;
+    }[];
+    roomTypePerformance: {
+        roomType: {
+            name: string;
+            id: string;
+        } | string;
+        totalRooms: number;
+        occupancyRate: number;
+        adr: number;
+        revpar: number;
+        revenue: number;
+        avgBookingValue: number;
+    }[];
+}
+export type GetComprehensiveAnalyticsResponse = ComprehensiveAnalytics;
 export type GetComprehensiveAnalyticsNatsResponse = NatsResponse<GetComprehensiveAnalyticsResponse>;
 /**
  * Get Analytics Comparison Request
@@ -256,7 +433,27 @@ export interface GetAnalyticsComparisonRequest {
     endDate: string;
     comparisonPeriod: string;
 }
-export type GetAnalyticsComparisonResponse = any;
+export interface AnalyticsComparison {
+    current: {
+        occupancyRate: number;
+        adr: number;
+        revpar: number;
+        revenue: number;
+    };
+    previous: {
+        occupancyRate: number;
+        adr: number;
+        revpar: number;
+        revenue: number;
+    };
+    growth: {
+        occupancyRate: number;
+        adr: number;
+        revpar: number;
+        revenue: number;
+    };
+}
+export type GetAnalyticsComparisonResponse = AnalyticsComparison;
 export type GetAnalyticsComparisonNatsResponse = NatsResponse<GetAnalyticsComparisonResponse>;
 /**
  * Detect Booking Conflicts Request
@@ -291,7 +488,16 @@ export interface GetConflictAnalysisRequest {
     startDate: string;
     endDate: string;
 }
-export type GetConflictAnalysisResponse = any;
+export interface ConflictAnalysis {
+    roomId: string;
+    totalConflicts: number;
+    conflictsByType: {
+        type: string;
+        count: number;
+    }[];
+    recommendations: string[];
+}
+export type GetConflictAnalysisResponse = ConflictAnalysis;
 export type GetConflictAnalysisNatsResponse = NatsResponse<GetConflictAnalysisResponse>;
 /**
  * Get Room Assignment (Timeline) Request
@@ -318,7 +524,49 @@ export type GetRoomAssignmentNatsResponse = NatsResponse<GetRoomAssignmentRespon
 export interface GetRoomSettingsRequest {
     hotelId: string;
 }
-export type GetRoomSettingsResponse = any;
+export interface RoomSettings {
+    hotelId: string;
+    autoAssignment: boolean;
+    cleaningBuffer: number;
+    maintenanceBuffer: number;
+    overbookingPolicy: string;
+    preferences: {
+        defaultCleaningTime?: number;
+        checkoutCleanTime?: number;
+        maintenanceCleanTime?: number;
+        deepCleanTime?: number;
+        inspectionTime?: number;
+        bufferTime?: number;
+        workingHours?: {
+            start: string;
+            end: string;
+        };
+        statusColors?: Record<string, string>;
+        workingHoursByDepartment?: Record<string, {
+            start: string;
+            end: string;
+        }>;
+        viewPreferences?: {
+            defaultView: string;
+            showGuestNames: boolean;
+            showCleaningTimes: boolean;
+            showUnassignedBookings: boolean;
+            showRoomTypeCapacity: boolean;
+        };
+        notificationSettings?: {
+            enableRealTime: boolean;
+            occupancyThreshold: number;
+            maintenanceAlerts: boolean;
+            checkoutReminders: boolean;
+        };
+        autoStatusTransitions?: {
+            enabled: boolean;
+            checkoutToCleaningDelay: number;
+            cleaningToAvailableAuto: boolean;
+        };
+    };
+}
+export type GetRoomSettingsResponse = RoomSettings;
 export type GetRoomSettingsNatsResponse = NatsResponse<GetRoomSettingsResponse>;
 /**
  * Update Room Settings Request
@@ -328,7 +576,7 @@ export interface UpdateRoomSettingsRequest {
     hotelId: string;
     settings: any;
 }
-export type UpdateRoomSettingsResponse = any;
+export type UpdateRoomSettingsResponse = RoomSettings;
 export type UpdateRoomSettingsNatsResponse = NatsResponse<UpdateRoomSettingsResponse>;
 /**
  * Get Room Status By Date (Pagination) Request

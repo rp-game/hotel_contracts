@@ -147,7 +147,12 @@ export type GetRoomsNatsResponse = NatsResponse<GetRoomsResponse>;
 export interface RoomStatusChangedEvent {
     roomId: string;
     status: string;
+    newStatus?: string;
+    oldStatus?: string;
+    tenantId: string;
+    hotelId: string;
     changedAt: string;
     changedBy?: string;
+    reason?: string;
 }
 //# sourceMappingURL=room.nats.d.ts.map
