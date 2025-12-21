@@ -73,4 +73,5 @@ __exportStar(require("./channel"), exports);
 __exportStar(require("./notification"), exports);
 __exportStar(require("./report"), exports);
 __exportStar(require("./platform"), exports);
+__exportStar(require("./room-move"), exports);
 //# sourceMappingURL=index.js.map

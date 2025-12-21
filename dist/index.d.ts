@@ -55,4 +55,5 @@ export * from './channel';
 export * from './notification';
 export * from './report';
 export * from './platform';
+export * from './room-move';
 //# sourceMappingURL=index.d.ts.map

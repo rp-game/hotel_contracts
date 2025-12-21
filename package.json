@@ -180,6 +180,22 @@
     "./platform": {
       "types": "./dist/platform/index.d.ts",
       "default": "./dist/platform/index.js"
+    },
+    "./room-move": {
+      "types": "./dist/room-move/index.d.ts",
+      "default": "./dist/room-move/index.js"
+    },
+    "./room-move/nats": {
+      "types": "./dist/room-move/nats/index.d.ts",
+      "default": "./dist/room-move/nats/index.js"
+    },
+    "./room-move/types": {
+      "types": "./dist/room-move/types/index.d.ts",
+      "default": "./dist/room-move/types/index.js"
+    },
+    "./room-move/enums": {
+      "types": "./dist/room-move/enums/index.d.ts",
+      "default": "./dist/room-move/enums/index.js"
     }
   },
   "typesVersions": {
@@ -225,7 +241,11 @@
       "financial": ["dist/financial/index.d.ts"],
       "channel": ["dist/channel/index.d.ts"],
       "report": ["dist/report/index.d.ts"],
-      "platform": ["dist/platform/index.d.ts"]
+      "platform": ["dist/platform/index.d.ts"],
+      "room-move": ["dist/room-move/index.d.ts"],
+      "room-move/nats": ["dist/room-move/nats/index.d.ts"],
+      "room-move/types": ["dist/room-move/types/index.d.ts"],
+      "room-move/enums": ["dist/room-move/enums/index.d.ts"]
     }
   },
   "files": [
