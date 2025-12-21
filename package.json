@@ -1,0 +1,76 @@
+{
+  "name": "@hotel/contracts",
+  "version": "0.1.0",
+  "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./common": "./dist/common/index.js",
+    "./booking": "./dist/booking/index.js",
+    "./booking/nats": "./dist/booking/nats/index.js",
+    "./booking/rest": "./dist/booking/rest/index.js",
+    "./booking/types": "./dist/booking/types/index.js",
+    "./booking/enums": "./dist/booking/enums/index.js",
+    "./pricing": "./dist/pricing/index.js",
+    "./pricing/nats": "./dist/pricing/nats/index.js",
+    "./pricing/rest": "./dist/pricing/rest/index.js",
+    "./pricing/types": "./dist/pricing/types/index.js",
+    "./pricing/enums": "./dist/pricing/enums/index.js",
+    "./inventory": "./dist/inventory/index.js",
+    "./inventory/nats": "./dist/inventory/nats/index.js",
+    "./inventory/rest": "./dist/inventory/rest/index.js",
+    "./inventory/types": "./dist/inventory/types/index.js",
+    "./inventory/enums": "./dist/inventory/enums/index.js",
+    "./housekeeping": "./dist/housekeeping/index.js",
+    "./housekeeping/nats": "./dist/housekeeping/nats/index.js",
+    "./housekeeping/rest": "./dist/housekeeping/rest/index.js",
+    "./housekeeping/types": "./dist/housekeeping/types/index.js",
+    "./housekeeping/enums": "./dist/housekeeping/enums/index.js",
+    "./user": "./dist/user/index.js",
+    "./payment": "./dist/payment/index.js",
+    "./crm": "./dist/crm/index.js",
+    "./financial": "./dist/financial/index.js",
+    "./channel": "./dist/channel/index.js",
+    "./notification": "./dist/notification/index.js",
+    "./report": "./dist/report/index.js",
+    "./platform": "./dist/platform/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Contract definitions are type-checked by TypeScript\" && exit 0"
+  },
+  "keywords": [
+    "hotel",
+    "contracts",
+    "typescript",
+    "shared-types",
+    "nats",
+    "microservices"
+  ],
+  "author": "Hotel Development Team",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "class-validator": "^0.14.0",
+    "class-transformer": "^0.5.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/hotel-contracts.git"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
