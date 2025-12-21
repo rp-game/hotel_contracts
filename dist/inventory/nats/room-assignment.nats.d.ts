@@ -87,9 +87,14 @@ export type GetAvailableRoomsNatsResponse = NatsResponse<GetAvailableRoomsRespon
 export interface BookingData {
     bookingId: string;
     roomTypeId: string;
-    checkInDate: string;
-    checkOutDate: string;
+    checkIn?: string;
+    checkOut?: string;
+    checkInDate?: string;
+    checkOutDate?: string;
     guestPreferences?: any;
+    id?: string;
+    roomId?: string | null;
+    assignmentStatus?: string;
 }
 export interface FindOptimalRoomRequest {
     booking: BookingData;
@@ -98,8 +103,11 @@ export interface FindOptimalRoomRequest {
 }
 export interface OptimalRoomResult {
     room?: {
-        roomId: string;
+        id?: string;
+        roomId?: string;
         roomNumber: string;
+        floor?: number;
+        roomType?: string;
     };
     score?: number;
     reasons?: string[];
