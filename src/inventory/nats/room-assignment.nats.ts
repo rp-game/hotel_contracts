@@ -29,6 +29,7 @@ export interface AssignRoomRequest {
 export interface AssignmentData {
   bookingId: string;
   roomId: string;
+  roomNumber?: string; // Optional room number for display purposes
   assignedAt: string;
 }
 

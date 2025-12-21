@@ -26,6 +26,7 @@ export interface AssignRoomRequest {
 export interface AssignmentData {
     bookingId: string;
     roomId: string;
+    roomNumber?: string;
     assignedAt: string;
 }
 export interface AssignRoomResponse {
