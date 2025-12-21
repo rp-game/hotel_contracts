@@ -1,11 +1,4 @@
-/**
- * Notification Domain Contracts
- *
- * Includes:
- * - NATS message contracts (notification.* patterns)
- * - REST API DTOs
- * - Domain types and enums
- */
-
-// TODO: Add notification contracts
-export {};
+export * from './nats';
+export * from './rest';
+export * from './types';
+export * from './enums';
