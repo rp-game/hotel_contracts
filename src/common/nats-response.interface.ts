@@ -54,9 +54,9 @@ export interface NatsResponse<T = any> {
   };
 
   /**
-   * Optional success message
+   * Optional success message with bilingual support
    */
-  message?: string;
+  message?: { en: string; vi: string; [key: string]: string };
 }
 
 /**
