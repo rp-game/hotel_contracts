@@ -5,36 +5,126 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./common": "./dist/common/index.js",
-    "./booking": "./dist/booking/index.js",
-    "./booking/nats": "./dist/booking/nats/index.js",
-    "./booking/rest": "./dist/booking/rest/index.js",
-    "./booking/types": "./dist/booking/types/index.js",
-    "./booking/enums": "./dist/booking/enums/index.js",
-    "./pricing": "./dist/pricing/index.js",
-    "./pricing/nats": "./dist/pricing/nats/index.js",
-    "./pricing/rest": "./dist/pricing/rest/index.js",
-    "./pricing/types": "./dist/pricing/types/index.js",
-    "./pricing/enums": "./dist/pricing/enums/index.js",
-    "./inventory": "./dist/inventory/index.js",
-    "./inventory/nats": "./dist/inventory/nats/index.js",
-    "./inventory/rest": "./dist/inventory/rest/index.js",
-    "./inventory/types": "./dist/inventory/types/index.js",
-    "./inventory/enums": "./dist/inventory/enums/index.js",
-    "./housekeeping": "./dist/housekeeping/index.js",
-    "./housekeeping/nats": "./dist/housekeeping/nats/index.js",
-    "./housekeeping/rest": "./dist/housekeeping/rest/index.js",
-    "./housekeeping/types": "./dist/housekeeping/types/index.js",
-    "./housekeeping/enums": "./dist/housekeeping/enums/index.js",
-    "./user": "./dist/user/index.js",
-    "./payment": "./dist/payment/index.js",
-    "./crm": "./dist/crm/index.js",
-    "./financial": "./dist/financial/index.js",
-    "./channel": "./dist/channel/index.js",
-    "./notification": "./dist/notification/index.js",
-    "./report": "./dist/report/index.js",
-    "./platform": "./dist/platform/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./common": {
+      "types": "./dist/common/index.d.ts",
+      "default": "./dist/common/index.js"
+    },
+    "./booking": {
+      "types": "./dist/booking/index.d.ts",
+      "default": "./dist/booking/index.js"
+    },
+    "./booking/nats": {
+      "types": "./dist/booking/nats/index.d.ts",
+      "default": "./dist/booking/nats/index.js"
+    },
+    "./booking/rest": {
+      "types": "./dist/booking/rest/index.d.ts",
+      "default": "./dist/booking/rest/index.js"
+    },
+    "./booking/types": {
+      "types": "./dist/booking/types/index.d.ts",
+      "default": "./dist/booking/types/index.js"
+    },
+    "./booking/enums": {
+      "types": "./dist/booking/enums/index.d.ts",
+      "default": "./dist/booking/enums/index.js"
+    },
+    "./pricing": {
+      "types": "./dist/pricing/index.d.ts",
+      "default": "./dist/pricing/index.js"
+    },
+    "./pricing/nats": {
+      "types": "./dist/pricing/nats/index.d.ts",
+      "default": "./dist/pricing/nats/index.js"
+    },
+    "./pricing/rest": {
+      "types": "./dist/pricing/rest/index.d.ts",
+      "default": "./dist/pricing/rest/index.js"
+    },
+    "./pricing/types": {
+      "types": "./dist/pricing/types/index.d.ts",
+      "default": "./dist/pricing/types/index.js"
+    },
+    "./pricing/enums": {
+      "types": "./dist/pricing/enums/index.d.ts",
+      "default": "./dist/pricing/enums/index.js"
+    },
+    "./inventory": {
+      "types": "./dist/inventory/index.d.ts",
+      "default": "./dist/inventory/index.js"
+    },
+    "./inventory/nats": {
+      "types": "./dist/inventory/nats/index.d.ts",
+      "default": "./dist/inventory/nats/index.js"
+    },
+    "./inventory/rest": {
+      "types": "./dist/inventory/rest/index.d.ts",
+      "default": "./dist/inventory/rest/index.js"
+    },
+    "./inventory/types": {
+      "types": "./dist/inventory/types/index.d.ts",
+      "default": "./dist/inventory/types/index.js"
+    },
+    "./inventory/enums": {
+      "types": "./dist/inventory/enums/index.d.ts",
+      "default": "./dist/inventory/enums/index.js"
+    },
+    "./housekeeping": {
+      "types": "./dist/housekeeping/index.d.ts",
+      "default": "./dist/housekeeping/index.js"
+    },
+    "./housekeeping/nats": {
+      "types": "./dist/housekeeping/nats/index.d.ts",
+      "default": "./dist/housekeeping/nats/index.js"
+    },
+    "./housekeeping/rest": {
+      "types": "./dist/housekeeping/rest/index.d.ts",
+      "default": "./dist/housekeeping/rest/index.js"
+    },
+    "./housekeeping/types": {
+      "types": "./dist/housekeeping/types/index.d.ts",
+      "default": "./dist/housekeeping/types/index.js"
+    },
+    "./housekeeping/enums": {
+      "types": "./dist/housekeeping/enums/index.d.ts",
+      "default": "./dist/housekeeping/enums/index.js"
+    },
+    "./user": {
+      "types": "./dist/user/index.d.ts",
+      "default": "./dist/user/index.js"
+    },
+    "./payment": {
+      "types": "./dist/payment/index.d.ts",
+      "default": "./dist/payment/index.js"
+    },
+    "./crm": {
+      "types": "./dist/crm/index.d.ts",
+      "default": "./dist/crm/index.js"
+    },
+    "./financial": {
+      "types": "./dist/financial/index.d.ts",
+      "default": "./dist/financial/index.js"
+    },
+    "./channel": {
+      "types": "./dist/channel/index.d.ts",
+      "default": "./dist/channel/index.js"
+    },
+    "./notification": {
+      "types": "./dist/notification/index.d.ts",
+      "default": "./dist/notification/index.js"
+    },
+    "./report": {
+      "types": "./dist/report/index.d.ts",
+      "default": "./dist/report/index.js"
+    },
+    "./platform": {
+      "types": "./dist/platform/index.d.ts",
+      "default": "./dist/platform/index.js"
+    }
   },
   "typesVersions": {
     "*": {
