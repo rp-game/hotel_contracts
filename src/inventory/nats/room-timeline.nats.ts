@@ -128,9 +128,12 @@ export interface GetCleaningConfigRequest {
 }
 
 export interface CleaningConfig {
-  cleaningTime: number;
-  inspectionTime?: number;
-  laundryTime?: number;
+  hotelId: string;
+  standardCleaningTime?: number;
+  deepCleaningTime?: number;
+  checkoutCleaningTime?: number;
+  autoAssignCleaning?: boolean;
+  cleaningPriority?: string[];
 }
 
 export type GetCleaningConfigResponse = CleaningConfig;
@@ -174,7 +177,25 @@ export interface MaintenanceTask {
   scheduledAt: string;
 }
 
-export type GetRoomMaintenanceResponse = MaintenanceTask[];
+export interface RoomMaintenance {
+  roomId: string;
+  maintenanceHistory: {
+    id: string;
+    type: string;
+    scheduledDate: string;
+    completedDate?: string;
+    status: string;
+    description: string;
+  }[];
+  upcomingMaintenance: {
+    id: string;
+    type: string;
+    scheduledDate: string;
+    description: string;
+  }[];
+}
+
+export type GetRoomMaintenanceResponse = RoomMaintenance;
 export type GetRoomMaintenanceNatsResponse = NatsResponse<GetRoomMaintenanceResponse>;
 
 /**
@@ -263,8 +284,14 @@ export interface DetectBookingConflictsRequest {
 
 export interface BookingConflict {
   roomId: string;
-  bookingIds: string[];
-  conflictType: string;
+  conflicts: {
+    bookingId1: string;
+    bookingId2: string;
+    conflictType: string;
+    startDate: string;
+    endDate: string;
+    severity: string;
+  }[];
 }
 
 export type DetectBookingConflictsResponse = BookingConflict[];
@@ -295,8 +322,11 @@ export interface GetRoomAssignmentRequest {
 
 export interface AssignmentInfo {
   bookingId: string;
-  roomId: string;
-  assignedAt: string;
+  roomId?: string;
+  roomNumber?: string;
+  assignedAt?: string;
+  assignedBy?: string;
+  status: string;
 }
 
 export type GetRoomAssignmentResponse = AssignmentInfo | null;
@@ -345,10 +375,14 @@ export interface RoomStatusPaginationItem {
   floor: number;
 }
 
-export type GetRoomStatusByDatePaginationResponse = {
-  data: RoomStatusPaginationItem[];
-  total: number;
-  page: number;
-  limit: number;
-};
+export interface RoomStatusSummary {
+  totalRooms: number;
+  occupancyRate: number;
+  availableRooms: number;
+  occupiedRooms: number;
+  maintenanceRooms: number;
+  cleaningRooms: number;
+}
+
+export type GetRoomStatusByDatePaginationResponse = RoomStatusSummary;
 export type GetRoomStatusByDatePaginationNatsResponse = NatsResponse<GetRoomStatusByDatePaginationResponse>;
