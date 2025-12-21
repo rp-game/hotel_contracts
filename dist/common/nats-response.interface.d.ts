@@ -40,17 +40,13 @@ export interface NatsResponse<T = any> {
      */
     data?: T;
     /**
-     * Error information (only present if success === false)
-     * Contains bilingual error messages
+     * Optional status/error code (e.g., 'NOT_FOUND', 'VALIDATION_ERROR', 'BAD_REQUEST')
      */
-    error?: {
-        /** Vietnamese error message */
-        vi: string;
-        /** English error message */
-        en: string;
-    };
+    status?: string;
     /**
-     * Optional success message with bilingual support
+     * Bilingual message - used for both success and error messages
+     * On success: describes the operation result
+     * On error: contains the error description
      */
     message?: {
         en: string;
