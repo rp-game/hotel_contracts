@@ -27,15 +27,24 @@ import { Room as RoomEntity } from '../types';
 export interface FindAllRoomsRequest {
   tenantId: string;
   hotelId: string;
+  page?: number;
+  limit?: number;
   filters?: any;
   pagination?: { page?: number; limit?: number };
 }
 
+export interface PaginatedRoomsResponse {
+  data: any[];
+  total: number;
+  page: number;
+  limit: number;
+}
+
 export interface FindAllRoomsResponse {
-  data: RoomEntity[];
-  total?: number;
-  page?: number;
-  limit?: number;
+  data: any[];
+  total: number;
+  page: number;
+  limit: number;
 }
 
 export type FindAllRoomsNatsResponse = NatsResponse<FindAllRoomsResponse>;
