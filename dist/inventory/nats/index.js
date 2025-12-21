@@ -19,4 +19,11 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./get-room-availability.nats"), exports);
 __exportStar(require("./update-room-status.nats"), exports);
+__exportStar(require("./room-availability.nats"), exports);
+__exportStar(require("./room-type.nats"), exports);
+__exportStar(require("./room-assignment.nats"), exports);
+__exportStar(require("./room.nats"), exports);
+__exportStar(require("./hotel.nats"), exports);
+__exportStar(require("./room-timeline.nats"), exports);
+__exportStar(require("./room-move-events.nats"), exports);
 //# sourceMappingURL=index.js.map
