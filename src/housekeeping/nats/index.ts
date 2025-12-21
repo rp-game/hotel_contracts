@@ -2,5 +2,4 @@
  * Housekeeping NATS Message Contracts
  */
 
-// TODO: Add housekeeping NATS contracts
-export {};
+export * from './create-task.nats';

@@ -2,5 +2,4 @@
  * Housekeeping Domain Types
  */
 
-// TODO: Add housekeeping types
-export {};
+export * from './housekeeping.types';

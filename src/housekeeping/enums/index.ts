@@ -2,5 +2,5 @@
  * Housekeeping Domain Enums
  */
 
-// TODO: Add housekeeping enums
-export {};
+export * from './task-status.enum';
+export * from './task-type.enum';
