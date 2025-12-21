@@ -32,12 +32,11 @@ import { NatsResponse } from '../../common';
  * Pattern: rooms.timeline.get
  */
 export interface GetRoomTimelineRequest {
-    hotelId: string;
+    date: string;
     viewType: 'day' | 'week' | 'month';
-    dateRange: {
-        start: string;
-        end: string;
-    };
+    hotelId: string;
+    roomIds?: string[];
+    floors?: number[];
 }
 export type GetRoomTimelineResponse = any;
 export type GetRoomTimelineNatsResponse = NatsResponse<GetRoomTimelineResponse>;
@@ -46,8 +45,8 @@ export type GetRoomTimelineNatsResponse = NatsResponse<GetRoomTimelineResponse>;
  * Pattern: rooms.timeline.stats
  */
 export interface GetTimelineStatsRequest {
+    date: string;
     hotelId: string;
-    date?: string;
 }
 export interface TimelineStats {
     totalRooms: number;
@@ -64,8 +63,8 @@ export type GetTimelineStatsNatsResponse = NatsResponse<GetTimelineStatsResponse
 export interface UpdateRoomStatusTimelineRequest {
     roomId: string;
     status: string;
-    reason: string;
-    hotelId: string;
+    reason?: string;
+    estimatedDuration?: number;
 }
 export interface UpdateRoomStatusTimelineResponse {
     success: boolean;
@@ -78,9 +77,8 @@ export type UpdateRoomStatusTimelineNatsResponse = NatsResponse<UpdateRoomStatus
  */
 export interface GetRoomStatusHistoryRequest {
     roomId: string;
-    hotelId: string;
-    startDate: string;
-    endDate: string;
+    from: string;
+    to: string;
 }
 export interface StatusHistoryItem {
     status: string;
@@ -134,9 +132,8 @@ export type UpdateCleaningConfigNatsResponse = NatsResponse<UpdateCleaningConfig
  * Pattern: rooms.assignment.optimize
  */
 export interface GetOptimizedRoomAssignmentRequest {
-    bookings: any[];
     hotelId: string;
-    constraints?: any;
+    criteria: any;
 }
 export type GetOptimizedRoomAssignmentResponse = any;
 export type GetOptimizedRoomAssignmentNatsResponse = NatsResponse<GetOptimizedRoomAssignmentResponse>;
@@ -145,8 +142,7 @@ export type GetOptimizedRoomAssignmentNatsResponse = NatsResponse<GetOptimizedRo
  * Pattern: rooms.maintenance.get
  */
 export interface GetRoomMaintenanceRequest {
-    hotelId: string;
-    status?: string;
+    roomId: string;
 }
 export interface MaintenanceTask {
     roomId: string;
@@ -161,9 +157,10 @@ export type GetRoomMaintenanceNatsResponse = NatsResponse<GetRoomMaintenanceResp
  */
 export interface ScheduleRoomMaintenanceRequest {
     roomId: string;
-    hotelId: string;
-    startDate: string;
-    endDate: string;
+    scheduledDate: string;
+    type: string;
+    description?: string;
+    [key: string]: unknown;
 }
 export interface MaintenanceScheduleResponse {
     success: boolean;
@@ -176,7 +173,9 @@ export type ScheduleRoomMaintenanceNatsResponse = NatsResponse<MaintenanceSchedu
  */
 export interface GetRoomOccupancyAnalyticsRequest {
     hotelId: string;
-    groupBy: 'day' | 'week' | 'month';
+    from: string;
+    to: string;
+    groupBy: string;
 }
 export type GetRoomOccupancyAnalyticsResponse = any;
 export type GetRoomOccupancyAnalyticsNatsResponse = NatsResponse<GetRoomOccupancyAnalyticsResponse>;
@@ -186,7 +185,8 @@ export type GetRoomOccupancyAnalyticsNatsResponse = NatsResponse<GetRoomOccupanc
  */
 export interface GetRoomTurnoverAnalyticsRequest {
     hotelId: string;
-    period: string;
+    from: string;
+    to: string;
 }
 export type GetRoomTurnoverAnalyticsResponse = any;
 export type GetRoomTurnoverAnalyticsNatsResponse = NatsResponse<GetRoomTurnoverAnalyticsResponse>;
@@ -196,7 +196,8 @@ export type GetRoomTurnoverAnalyticsNatsResponse = NatsResponse<GetRoomTurnoverA
  */
 export interface GetComprehensiveAnalyticsRequest {
     hotelId: string;
-    metrics: string[];
+    startDate: string;
+    endDate: string;
 }
 export type GetComprehensiveAnalyticsResponse = any;
 export type GetComprehensiveAnalyticsNatsResponse = NatsResponse<GetComprehensiveAnalyticsResponse>;
@@ -206,7 +207,9 @@ export type GetComprehensiveAnalyticsNatsResponse = NatsResponse<GetComprehensiv
  */
 export interface GetAnalyticsComparisonRequest {
     hotelId: string;
-    period: 'current' | 'previous';
+    startDate: string;
+    endDate: string;
+    comparisonPeriod: string;
 }
 export type GetAnalyticsComparisonResponse = any;
 export type GetAnalyticsComparisonNatsResponse = NatsResponse<GetAnalyticsComparisonResponse>;
@@ -216,10 +219,9 @@ export type GetAnalyticsComparisonNatsResponse = NatsResponse<GetAnalyticsCompar
  */
 export interface DetectBookingConflictsRequest {
     hotelId: string;
-    dateRange: {
-        start: string;
-        end: string;
-    };
+    roomId: string;
+    startDate: string;
+    endDate: string;
 }
 export interface BookingConflict {
     roomId: string;
@@ -234,7 +236,9 @@ export type DetectBookingConflictsNatsResponse = NatsResponse<DetectBookingConfl
  */
 export interface GetConflictAnalysisRequest {
     hotelId: string;
-    timeframe: string;
+    roomId: string;
+    startDate: string;
+    endDate: string;
 }
 export type GetConflictAnalysisResponse = any;
 export type GetConflictAnalysisNatsResponse = NatsResponse<GetConflictAnalysisResponse>;
@@ -277,12 +281,12 @@ export type UpdateRoomSettingsNatsResponse = NatsResponse<UpdateRoomSettingsResp
  * Pattern: rooms.status.get
  */
 export interface GetRoomStatusByDatePaginationRequest {
-    hotelId: string;
     date: string;
-    pagination: {
-        page?: number;
-        limit?: number;
-    };
+    roomTypeId?: string;
+    hotelId: string;
+    tenantId: string;
+    page?: number;
+    limit?: number;
 }
 export interface RoomStatusPaginationItem {
     roomId: string;
