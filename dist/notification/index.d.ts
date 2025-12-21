@@ -1,5 +1,3 @@
-export * from './nats';
-export * from './rest';
-export * from './types';
 export * from './enums';
+export * from './inter-service';
 //# sourceMappingURL=index.d.ts.map

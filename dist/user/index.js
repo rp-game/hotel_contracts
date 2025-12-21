@@ -1,12 +1,4 @@
 "use strict";
-/**
- * User Domain Contracts
- *
- * Includes:
- * - NATS message contracts (user.* patterns)
- * - REST API DTOs
- * - Domain types and enums
- */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -22,8 +14,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./nats"), exports);
-__exportStar(require("./rest"), exports);
-__exportStar(require("./types"), exports);
 __exportStar(require("./enums"), exports);
+__exportStar(require("./inter-service"), exports);
+__exportStar(require("./types"), exports);
 //# sourceMappingURL=index.js.map

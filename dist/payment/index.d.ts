@@ -1,13 +1,17 @@
 /**
- * Payment Domain Contracts
+ * Payment Service Domain Contracts
  *
  * Includes:
- * - NATS message contracts (payment.* patterns)
- * - REST API DTOs
- * - Domain types and enums
+ * - Payment request/response types
+ * - Payment method enums
+ * - Inter-service communication types
+ *
+ * Import examples:
+ * ```typescript
+ * import { PaymentResponse } from '@hotel/contracts/payment/inter-service';
+ * import { PaymentMethod } from '@hotel/contracts/payment/enums';
+ * ```
  */
-export * from './nats';
-export * from './rest';
-export * from './types';
 export * from './enums';
+export * from './inter-service';
 //# sourceMappingURL=index.d.ts.map
