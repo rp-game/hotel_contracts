@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/booking/inter-service/index.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;GAWG;AAEH,cAAc,aAAa,CAAC;AAC5B,cAAc,mBAAmB,CAAC"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/booking/inter-service/index.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;GAWG;AAEH,cAAc,aAAa,CAAC;AAE5B,cAAc,+BAA+B,CAAC"}

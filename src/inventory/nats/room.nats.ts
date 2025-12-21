@@ -18,19 +18,7 @@
  */
 
 import { NatsResponse } from '../../common';
-
-export interface Room {
-  id: string;
-  tenantId: string;
-  hotelId: string;
-  roomNumber: string;
-  roomTypeId: string;
-  floor: number;
-  status: string;
-  isActive: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-}
+import { Room as RoomEntity } from '../types';
 
 /**
  * Find All Rooms Request
@@ -43,7 +31,7 @@ export interface FindAllRoomsRequest {
 }
 
 export interface FindAllRoomsResponse {
-  data: Room[];
+  data: RoomEntity[];
   total?: number;
   page?: number;
   limit?: number;
@@ -60,7 +48,7 @@ export interface FindOneRoomRequest {
   tenantId: string;
 }
 
-export type FindOneRoomResponse = Room | null;
+export type FindOneRoomResponse = RoomEntity | null;
 export type FindOneRoomNatsResponse = NatsResponse<FindOneRoomResponse>;
 
 /**
@@ -75,7 +63,7 @@ export interface CreateRoomRequest {
   floor: number;
 }
 
-export type CreateRoomResponse = Room;
+export type CreateRoomResponse = RoomEntity;
 export type CreateRoomNatsResponse = NatsResponse<CreateRoomResponse>;
 
 /**
@@ -92,7 +80,7 @@ export interface UpdateRoomRequest {
   isActive?: boolean;
 }
 
-export type UpdateRoomResponse = Room | null;
+export type UpdateRoomResponse = RoomEntity | null;
 export type UpdateRoomNatsResponse = NatsResponse<UpdateRoomResponse>;
 
 /**
@@ -120,14 +108,14 @@ export interface GetRoomStatusByDateRequest {
   pagination?: { page?: number; limit?: number };
 }
 
-export interface RoomStatusInfo {
+export interface RoomStatusDetail {
   roomId: string;
   roomNumber: string;
   status: string;
   floor: number;
 }
 
-export type GetRoomStatusByDateResponse = RoomStatusInfo[];
+export type GetRoomStatusByDateResponse = RoomStatusDetail[];
 export type GetRoomStatusByDateNatsResponse = NatsResponse<GetRoomStatusByDateResponse>;
 
 /**
@@ -139,7 +127,7 @@ export interface GetAlternativeRoomsRequest {
   criteria: any;
 }
 
-export type GetAlternativeRoomsResponse = Room[];
+export type GetAlternativeRoomsResponse = RoomEntity[];
 export type GetAlternativeRoomsNatsResponse = NatsResponse<GetAlternativeRoomsResponse>;
 
 /**
@@ -152,7 +140,7 @@ export interface GetRoomByIdRequest {
   hotelId?: string;
 }
 
-export type GetRoomByIdResponse = Room;
+export type GetRoomByIdResponse = RoomEntity;
 export type GetRoomByIdNatsResponse = NatsResponse<GetRoomByIdResponse>;
 
 /**
@@ -165,7 +153,7 @@ export interface GetRoomsRequest {
   hotelId?: string;
 }
 
-export type GetRoomsResponse = Room[];
+export type GetRoomsResponse = RoomEntity[];
 export type GetRoomsNatsResponse = NatsResponse<GetRoomsResponse>;
 
 /**

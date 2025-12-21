@@ -7,9 +7,10 @@
  * Import examples:
  * ```typescript
  * import { CustomerResponse, CreateCustomerRequest } from '@hotel/contracts/booking/inter-service';
- * import { BookRoomDetailedResponse } from '@hotel/contracts/booking/inter-service';
+ * import { CheckRoomAvailabilityRequest } from '@hotel/contracts/inventory/inter-service';
  * ```
  */
 
 export * from './crm.types';
-export * from './inventory.types';
+// Re-export Inventory inter-service types from the canonical inventory domain
+export * from '../../inventory/inter-service';

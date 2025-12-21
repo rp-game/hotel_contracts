@@ -13,17 +13,7 @@
  * Called by: api-gateway, pricing-service
  */
 import { NatsResponse } from '../../common';
-export interface RoomType {
-    id: string;
-    tenantId: string;
-    name: string;
-    description?: string;
-    baseRate: number;
-    capacity: number;
-    amenities?: string[];
-    createdAt?: string;
-    updatedAt?: string;
-}
+import { RoomType as RoomTypeEntity } from '../types';
 /**
  * Find All Room Types Request
  * Pattern: inventory.roomTypes.findAll
@@ -34,7 +24,7 @@ export interface FindAllRoomTypesRequest {
     limit?: number;
 }
 export interface FindAllRoomTypesResponse {
-    data: RoomType[];
+    data: RoomTypeEntity[];
     total: number;
     page: number;
     limit: number;
@@ -48,7 +38,7 @@ export interface FindOneRoomTypeRequest {
     id: string;
     tenantId: string;
 }
-export type FindOneRoomTypeResponse = RoomType | null;
+export type FindOneRoomTypeResponse = RoomTypeEntity | null;
 export type FindOneRoomTypeNatsResponse = NatsResponse<FindOneRoomTypeResponse>;
 /**
  * Create Room Type Request
@@ -62,7 +52,7 @@ export interface CreateRoomTypeRequest {
     capacity?: number;
     amenities?: string[];
 }
-export type CreateRoomTypeResponse = RoomType;
+export type CreateRoomTypeResponse = RoomTypeEntity;
 export type CreateRoomTypeNatsResponse = NatsResponse<CreateRoomTypeResponse>;
 /**
  * Update Room Type Request
@@ -77,7 +67,7 @@ export interface UpdateRoomTypeRequest {
     capacity?: number;
     amenities?: string[];
 }
-export type UpdateRoomTypeResponse = RoomType | null;
+export type UpdateRoomTypeResponse = RoomTypeEntity | null;
 export type UpdateRoomTypeNatsResponse = NatsResponse<UpdateRoomTypeResponse>;
 /**
  * Delete Room Type Request
@@ -100,6 +90,6 @@ export interface GetRoomTypesByIdsRequest {
     hotelId: string;
     roomTypeIds: string[];
 }
-export type GetRoomTypesByIdsResponse = RoomType[];
+export type GetRoomTypesByIdsResponse = RoomTypeEntity[];
 export type GetRoomTypesByIdsNatsResponse = NatsResponse<GetRoomTypesByIdsResponse>;
 //# sourceMappingURL=room-type.nats.d.ts.map

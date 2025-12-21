@@ -8,7 +8,7 @@
  * Import examples:
  * ```typescript
  * import { CustomerResponse, CreateCustomerRequest } from '@hotel/contracts/booking/inter-service';
- * import { BookRoomDetailedResponse } from '@hotel/contracts/booking/inter-service';
+ * import { CheckRoomAvailabilityRequest } from '@hotel/contracts/inventory/inter-service';
  * ```
  */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -27,5 +27,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./crm.types"), exports);
-__exportStar(require("./inventory.types"), exports);
+// Re-export Inventory inter-service types from the canonical inventory domain
+__exportStar(require("../../inventory/inter-service"), exports);
 //# sourceMappingURL=index.js.map

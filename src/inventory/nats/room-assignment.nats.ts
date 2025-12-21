@@ -76,14 +76,14 @@ export interface GetAvailableRoomsRequest {
   checkOut: string; // YYYY-MM-DD
 }
 
-export interface AvailableRoom {
+export interface AssignableRoom {
   roomId: string;
   roomNumber: string;
   floor: number;
   status: string;
 }
 
-export type GetAvailableRoomsResponse = AvailableRoom[];
+export type GetAvailableRoomsResponse = AssignableRoom[];
 export type GetAvailableRoomsNatsResponse = NatsResponse<GetAvailableRoomsResponse>;
 
 /**

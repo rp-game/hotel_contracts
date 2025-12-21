@@ -72,13 +72,13 @@ export interface GetAvailableRoomsRequest {
     checkIn: string;
     checkOut: string;
 }
-export interface AvailableRoom {
+export interface AssignableRoom {
     roomId: string;
     roomNumber: string;
     floor: number;
     status: string;
 }
-export type GetAvailableRoomsResponse = AvailableRoom[];
+export type GetAvailableRoomsResponse = AssignableRoom[];
 export type GetAvailableRoomsNatsResponse = NatsResponse<GetAvailableRoomsResponse>;
 /**
  * Find Optimal Room Request

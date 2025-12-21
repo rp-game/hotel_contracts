@@ -17,42 +17,18 @@
  * Called by: booking-service, api-gateway, pricing-service
  */
 import { NatsResponse } from '../../common';
+import { CheckRoomAvailabilityRequest, BookRoomRequest, BookRoomDetailedResponse, ReleaseRoomRequest, RoomAvailabilityResponse } from '../inter-service/inventory.types';
+export { CheckRoomAvailabilityRequest, BookRoomRequest, BookRoomDetailedResponse, ReleaseRoomRequest, RoomAvailabilityResponse, };
 /**
- * Check Room Availability Request
+ * Check Room Availability Response with NATS wrapper
  * Pattern: room.check_availability
  */
-export interface CheckRoomAvailabilityRequest {
-    tenantId: string;
-    hotelId: string;
-    roomTypeId?: string;
-    checkInDate: string;
-    checkOutDate: string;
-    startTime?: string;
-    endTime?: string;
-    roomCount?: number;
-}
-export interface RoomAvailabilityResponse {
-    success: boolean;
-    available: boolean;
-    availableRooms: any[];
-    totalAvailable: number;
-}
 export type CheckRoomAvailabilityNatsResponse = NatsResponse<RoomAvailabilityResponse>;
 /**
- * Book Room Request
+ * Book Room Response with NATS wrapper
  * Pattern: room.book
  */
-export interface BookRoomRequest {
-    tenantId: string;
-    hotelId: string;
-    roomIds: string[];
-    bookingId: string;
-    checkInDate: string;
-    checkOutDate?: string;
-    startTime?: string;
-    endTime?: string;
-}
-export interface BookRoomDetailedResponse {
+export interface BookRoomData {
     success: boolean;
     results: Array<{
         roomId: string;
@@ -61,17 +37,11 @@ export interface BookRoomDetailedResponse {
     }>;
     bookingId: string;
 }
-export type BookRoomNatsResponse = NatsResponse<BookRoomDetailedResponse>;
+export type BookRoomNatsResponse = NatsResponse<BookRoomData>;
 /**
- * Release Room Request
+ * Release Room Response
  * Pattern: room.release
  */
-export interface ReleaseRoomRequest {
-    tenantId: string;
-    hotelId: string;
-    bookingId: string;
-    roomIds?: string[];
-}
 export interface ReleaseRoomResponse {
     success: boolean;
     results: Array<{
@@ -92,12 +62,12 @@ export interface GetRoomStatusRequest {
     roomId: string;
     date?: string;
 }
-export interface RoomStatusResponse {
+export interface RoomStatusInfo {
     roomId: string;
     status: string;
     date: string;
 }
-export type GetRoomStatusNatsResponse = NatsResponse<RoomStatusResponse>;
+export type GetRoomStatusNatsResponse = NatsResponse<RoomStatusInfo>;
 /**
  * Get Room Type Info Request
  * Pattern: room_type.get_info

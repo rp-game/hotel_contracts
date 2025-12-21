@@ -17,18 +17,7 @@
  * Called by: api-gateway, booking-service
  */
 import { NatsResponse } from '../../common';
-export interface Room {
-    id: string;
-    tenantId: string;
-    hotelId: string;
-    roomNumber: string;
-    roomTypeId: string;
-    floor: number;
-    status: string;
-    isActive: boolean;
-    createdAt?: string;
-    updatedAt?: string;
-}
+import { Room as RoomEntity } from '../types';
 /**
  * Find All Rooms Request
  * Pattern: inventory.rooms.findAll
@@ -42,7 +31,7 @@ export interface FindAllRoomsRequest {
     };
 }
 export interface FindAllRoomsResponse {
-    data: Room[];
+    data: RoomEntity[];
     total?: number;
     page?: number;
     limit?: number;
@@ -56,7 +45,7 @@ export interface FindOneRoomRequest {
     id: string;
     tenantId: string;
 }
-export type FindOneRoomResponse = Room | null;
+export type FindOneRoomResponse = RoomEntity | null;
 export type FindOneRoomNatsResponse = NatsResponse<FindOneRoomResponse>;
 /**
  * Create Room Request
@@ -69,7 +58,7 @@ export interface CreateRoomRequest {
     roomTypeId: string;
     floor: number;
 }
-export type CreateRoomResponse = Room;
+export type CreateRoomResponse = RoomEntity;
 export type CreateRoomNatsResponse = NatsResponse<CreateRoomResponse>;
 /**
  * Update Room Request
@@ -84,7 +73,7 @@ export interface UpdateRoomRequest {
     status?: string;
     isActive?: boolean;
 }
-export type UpdateRoomResponse = Room | null;
+export type UpdateRoomResponse = RoomEntity | null;
 export type UpdateRoomNatsResponse = NatsResponse<UpdateRoomResponse>;
 /**
  * Delete Room Request
@@ -110,13 +99,13 @@ export interface GetRoomStatusByDateRequest {
         limit?: number;
     };
 }
-export interface RoomStatusInfo {
+export interface RoomStatusDetail {
     roomId: string;
     roomNumber: string;
     status: string;
     floor: number;
 }
-export type GetRoomStatusByDateResponse = RoomStatusInfo[];
+export type GetRoomStatusByDateResponse = RoomStatusDetail[];
 export type GetRoomStatusByDateNatsResponse = NatsResponse<GetRoomStatusByDateResponse>;
 /**
  * Get Alternative Rooms Request
@@ -126,7 +115,7 @@ export interface GetAlternativeRoomsRequest {
     roomId: string;
     criteria: any;
 }
-export type GetAlternativeRoomsResponse = Room[];
+export type GetAlternativeRoomsResponse = RoomEntity[];
 export type GetAlternativeRoomsNatsResponse = NatsResponse<GetAlternativeRoomsResponse>;
 /**
  * Get Room By ID Request
@@ -137,7 +126,7 @@ export interface GetRoomByIdRequest {
     tenantId?: string;
     hotelId?: string;
 }
-export type GetRoomByIdResponse = Room;
+export type GetRoomByIdResponse = RoomEntity;
 export type GetRoomByIdNatsResponse = NatsResponse<GetRoomByIdResponse>;
 /**
  * Get Multiple Rooms Request
@@ -148,7 +137,7 @@ export interface GetRoomsRequest {
     tenantId?: string;
     hotelId?: string;
 }
-export type GetRoomsResponse = Room[];
+export type GetRoomsResponse = RoomEntity[];
 export type GetRoomsNatsResponse = NatsResponse<GetRoomsResponse>;
 /**
  * Room Status Changed Event
