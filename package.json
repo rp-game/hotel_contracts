@@ -1,6 +1,6 @@
 {
   "name": "@hotel/contracts",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -169,6 +169,22 @@
       "types": "./dist/channel/index.d.ts",
       "default": "./dist/channel/index.js"
     },
+    "./channel/nats": {
+      "types": "./dist/channel/nats/index.d.ts",
+      "default": "./dist/channel/nats/index.js"
+    },
+    "./channel/rest": {
+      "types": "./dist/channel/rest/index.d.ts",
+      "default": "./dist/channel/rest/index.js"
+    },
+    "./channel/types": {
+      "types": "./dist/channel/types/index.d.ts",
+      "default": "./dist/channel/types/index.js"
+    },
+    "./channel/enums": {
+      "types": "./dist/channel/enums/index.d.ts",
+      "default": "./dist/channel/enums/index.js"
+    },
     "./notification": {
       "types": "./dist/notification/index.d.ts",
       "default": "./dist/notification/index.js"
@@ -240,6 +256,10 @@
       "crm": ["dist/crm/index.d.ts"],
       "financial": ["dist/financial/index.d.ts"],
       "channel": ["dist/channel/index.d.ts"],
+      "channel/nats": ["dist/channel/nats/index.d.ts"],
+      "channel/rest": ["dist/channel/rest/index.d.ts"],
+      "channel/types": ["dist/channel/types/index.d.ts"],
+      "channel/enums": ["dist/channel/enums/index.d.ts"],
       "report": ["dist/report/index.d.ts"],
       "platform": ["dist/platform/index.d.ts"],
       "room-move": ["dist/room-move/index.d.ts"],
