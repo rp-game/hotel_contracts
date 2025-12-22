@@ -14,21 +14,16 @@ import { NatsResponse } from '../../common';
  * Execute Failover Request
  * Pattern: channel.failover.execute
  *
- * Executes failover from one provider to another (e.g., when primary provider fails).
- *
- * Request fields:
- * - sourceProviderId: string (required)
- * - targetProviderId: string (required)
- * - reason?: string (optional)
- *
- * Response: FailoverResult with 6 fields:
- * - success, sourceProviderId, targetProviderId
- * - timestamp, reason, error
+ * Matches API Gateway ExecuteFailoverDto structure
  */
 export interface ExecuteFailoverNatsRequest {
     sourceProviderId: string;
-    targetProviderId: string;
+    targetProviderIds: string[];
+    trigger?: string;
     reason?: string;
+    targetChannels?: string[];
+    performFullResync?: boolean;
+    notifyOperations?: boolean;
 }
 export interface FailoverResult {
     success: boolean;

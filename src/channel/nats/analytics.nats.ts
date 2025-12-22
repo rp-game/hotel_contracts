@@ -114,10 +114,28 @@ export type ListAlertsNatsResponse = NatsResponse<Alert[]>;
  * - testId, testName, variants, trafficSplit
  * - status, createdAt, updatedAt
  */
+/**
+ * Create A/B Test Request
+ * Matches API Gateway CreateABTestDto structure
+ */
 export interface CreateABTestNatsRequest {
   testName: string;
-  variants: ABTestVariant[];
-  trafficSplit?: any;
+  description: string;
+  startDate: string;
+  endDate: string;
+  controlProviderId: string;
+  testProviderId: string;
+  controlPercentage: number;
+  targetSegments?: string[];
+  targetRoomTypes?: string[];
+  targetChannels?: string[];
+  trackedMetrics: string[];
+  successCriteria?: {
+    primaryMetric: string;
+    minimumDetectableEffect: number;
+    confidenceLevel: number;
+    statisticalPower: number;
+  };
 }
 
 export type CreateABTestNatsResponse = NatsResponse<ABTest>;
