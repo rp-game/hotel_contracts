@@ -27,7 +27,7 @@ var FailoverTrigger;
  */
 var FailoverStatus;
 (function (FailoverStatus) {
-    FailoverStatus["PENDING"] = "PENDING";
+    FailoverStatus["INITIATED"] = "INITIATED";
     FailoverStatus["IN_PROGRESS"] = "IN_PROGRESS";
     FailoverStatus["COMPLETED"] = "COMPLETED";
     FailoverStatus["FAILED"] = "FAILED";
@@ -49,15 +49,14 @@ var ABTestStatus;
  */
 var ErrorType;
 (function (ErrorType) {
-    ErrorType["CONNECTION"] = "CONNECTION";
-    ErrorType["AUTHENTICATION"] = "AUTHENTICATION";
-    ErrorType["VALIDATION"] = "VALIDATION";
-    ErrorType["MAPPING"] = "MAPPING";
-    ErrorType["RATE_LIMIT"] = "RATE_LIMIT";
-    ErrorType["TIMEOUT"] = "TIMEOUT";
-    ErrorType["DATA_MISMATCH"] = "DATA_MISMATCH";
+    ErrorType["RATE_LIMIT_EXCEEDED"] = "RATE_LIMIT_EXCEEDED";
+    ErrorType["CONNECTION_TIMEOUT"] = "CONNECTION_TIMEOUT";
+    ErrorType["AUTHENTICATION_FAILED"] = "AUTHENTICATION_FAILED";
+    ErrorType["MAPPING_NOT_FOUND"] = "MAPPING_NOT_FOUND";
+    ErrorType["VALIDATION_ERROR"] = "VALIDATION_ERROR";
     ErrorType["PROVIDER_ERROR"] = "PROVIDER_ERROR";
-    ErrorType["UNKNOWN"] = "UNKNOWN";
+    ErrorType["DATA_CONFLICT"] = "DATA_CONFLICT";
+    ErrorType["UNKNOWN_ERROR"] = "UNKNOWN_ERROR";
 })(ErrorType || (exports.ErrorType = ErrorType = {}));
 /**
  * Error Severity Enum
