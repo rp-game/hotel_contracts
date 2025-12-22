@@ -8,3 +8,4 @@ export * from './chain-config.types';
 export * from './channel-data.types';
 export * from './analytics.types';
 export * from './abtest.types';
+export * from './api-response.types';

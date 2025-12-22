@@ -25,6 +25,7 @@ import {
   CreateProviderRequest,
   UpdateProviderRequest,
   CredentialValidationResult,
+  ProviderComparisonDto,
 } from '../types';
 
 /**
@@ -141,6 +142,8 @@ export type GetProviderStatusNatsResponse = NatsResponse<ProviderStatusResponse>
 /**
  * Get Provider Performance Metrics Request
  * Pattern: channel.providers.performance
+ *
+ * Response: ProviderComparisonDto with providers[], period, marketSummary, and optional trends
  */
 export interface GetProviderPerformanceNatsRequest {
   providerId?: string;  // Optional - may query all providers
@@ -148,18 +151,4 @@ export interface GetProviderPerformanceNatsRequest {
   timeRange?: 'hour' | 'day' | 'week' | 'month';
 }
 
-export interface ProviderPerformanceMetrics {
-  providerId: string;
-  timeRange: string;
-  totalSyncs: number;
-  successfulSyncs: number;
-  failedSyncs: number;
-  successRate: number;
-  averageSyncDurationMs: number;
-  lastSyncAt: string;
-  recordsProcessed: number;
-  recordsSuccessful: number;
-  recordsFailed: number;
-}
-
-export type GetProviderPerformanceNatsResponse = NatsResponse<ProviderPerformanceMetrics>;
+export type GetProviderPerformanceNatsResponse = NatsResponse<ProviderComparisonDto>;

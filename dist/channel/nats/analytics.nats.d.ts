@@ -13,7 +13,7 @@
  * Called by: api-gateway
  */
 import { NatsResponse } from '../../common';
-import { AnalyticsDashboard, RealTimeMetrics, Alert, ABTest, ABTestStatusUpdate } from '../types';
+import { RealTimeMetrics, AnalyticsDashboardDto, ABTestConfigurationDto, AlertDto } from '../types';
 /**
  * Get Analytics Dashboard Request
  * Pattern: channel.analytics.dashboard
@@ -28,11 +28,8 @@ import { AnalyticsDashboard, RealTimeMetrics, Alert, ABTest, ABTestStatusUpdate 
  * - startDate?: string (optional)
  * - endDate?: string (optional)
  *
- * Response: AnalyticsDashboard with 4 nested objects:
- * - realtimeMetrics (4 fields)
- * - providerPerformance[] (13 fields each)
- * - recentSyncs[] (14 fields each)
- * - activeAlerts[] (8 fields each)
+ * Response: AnalyticsDashboardDto with realtimeMetrics, providerPerformance[],
+ * recentSyncs[], activeAlerts[], and optional chartData
  */
 export interface GetAnalyticsDashboardNatsRequest {
     tenantId?: string;
@@ -41,7 +38,7 @@ export interface GetAnalyticsDashboardNatsRequest {
     startDate?: string;
     endDate?: string;
 }
-export type GetAnalyticsDashboardNatsResponse = NatsResponse<AnalyticsDashboard>;
+export type GetAnalyticsDashboardNatsResponse = NatsResponse<AnalyticsDashboardDto>;
 /**
  * Get Real-Time Metrics Request
  * Pattern: channel.analytics.real-time
@@ -76,32 +73,23 @@ export type GetRealTimeMetricsNatsResponse = NatsResponse<RealTimeMetrics>;
  * - limit?: number (optional)
  * - offset?: number (optional)
  *
- * Response: Array of Alert (8 fields each)
+ * Response: Array of AlertDto with full alert details including category, acknowledged status
  */
 export interface ListAlertsNatsRequest {
     severity?: string;
     limit?: number;
     offset?: number;
 }
-export type ListAlertsNatsResponse = NatsResponse<Alert[]>;
+export type ListAlertsNatsResponse = NatsResponse<AlertDto[]>;
 /**
  * Create A/B Test Request
  * Pattern: channel.abtest.create
  *
  * Creates a new A/B test configuration for provider failover/comparison testing.
+ * Matches API Gateway CreateABTestDto structure.
  *
- * Request fields:
- * - testName: string (required)
- * - variants: ABTestVariant[] (required)
- * - trafficSplit?: any (optional)
- *
- * Response: ABTest with 7 fields:
- * - testId, testName, variants, trafficSplit
- * - status, createdAt, updatedAt
- */
-/**
- * Create A/B Test Request
- * Matches API Gateway CreateABTestDto structure
+ * Response: ABTestConfigurationDto with full test configuration including traffic split,
+ * targeting, metrics, and optional success criteria and current results
  */
 export interface CreateABTestNatsRequest {
     testName: string;
@@ -122,7 +110,7 @@ export interface CreateABTestNatsRequest {
         statisticalPower: number;
     };
 }
-export type CreateABTestNatsResponse = NatsResponse<ABTest>;
+export type CreateABTestNatsResponse = NatsResponse<ABTestConfigurationDto>;
 /**
  * List A/B Tests Request
  * Pattern: channel.abtest.list
@@ -131,11 +119,11 @@ export type CreateABTestNatsResponse = NatsResponse<ABTest>;
  *
  * Request fields: None required
  *
- * Response: Array of ABTest (7 fields each)
+ * Response: Array of ABTestConfigurationDto with full test details
  */
 export interface ListABTestsNatsRequest {
 }
-export type ListABTestsNatsResponse = NatsResponse<ABTest[]>;
+export type ListABTestsNatsResponse = NatsResponse<ABTestConfigurationDto[]>;
 /**
  * Update A/B Test Status Request
  * Pattern: channel.abtest.status
@@ -146,12 +134,11 @@ export type ListABTestsNatsResponse = NatsResponse<ABTest[]>;
  * - testId: string (required)
  * - status: string (required)
  *
- * Response: ABTestStatusUpdate with 3 fields:
- * - testId, status, updatedAt
+ * Response: ABTestConfigurationDto with updated status
  */
 export interface UpdateABTestStatusNatsRequest {
     testId: string;
     status: string;
 }
-export type UpdateABTestStatusNatsResponse = NatsResponse<ABTestStatusUpdate>;
+export type UpdateABTestStatusNatsResponse = NatsResponse<ABTestConfigurationDto>;
 //# sourceMappingURL=analytics.nats.d.ts.map

@@ -2,17 +2,20 @@
  * Sync Status Enum
  *
  * Represents the result/status of a synchronization operation
+ * Values match API Gateway SyncStatus enum EXACTLY
  */
 export declare enum SyncStatus {
-    /** Synchronization completed successfully */
-    SUCCESS = "SUCCESS",
-    /** Synchronization failed completely */
-    FAILED = "FAILED",
-    /** Synchronization completed with partial success (some records failed) */
-    PARTIAL = "PARTIAL",
+    /** Synchronization is pending execution */
+    PENDING = "PENDING",
     /** Synchronization is currently in progress */
     IN_PROGRESS = "IN_PROGRESS",
-    /** Synchronization is pending execution */
-    PENDING = "PENDING"
+    /** Synchronization completed successfully */
+    SUCCESS = "SUCCESS",
+    /** Synchronization completed with partial success (some records failed) */
+    PARTIAL = "PARTIAL",
+    /** Synchronization failed completely */
+    FAILED = "FAILED",
+    /** Synchronization was cancelled */
+    CANCELLED = "CANCELLED"
 }
 //# sourceMappingURL=sync-status.enum.d.ts.map

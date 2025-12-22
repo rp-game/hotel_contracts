@@ -11,6 +11,7 @@
  */
 
 import { NatsResponse } from '../../common';
+import { SyncResponseDto } from '../types';
 
 /**
  * Trigger Rate Sync Request
@@ -18,7 +19,7 @@ import { NatsResponse } from '../../common';
  *
  * Matches API Gateway RateUpdateDto structure (flat, not nested)
  *
- * Response: {message: string} ("Rates synced successfully")
+ * Response: SyncResponseDto with syncId, status, timestamps, record counts
  */
 export interface TriggerRateSyncNatsRequest {
   tenantId: string;       // Added to match API Gateway DTO
@@ -36,11 +37,7 @@ export interface TriggerRateSyncNatsRequest {
   };
 }
 
-export interface RateSyncResult {
-  message: string;
-}
-
-export type TriggerRateSyncNatsResponse = NatsResponse<RateSyncResult>;
+export type TriggerRateSyncNatsResponse = NatsResponse<SyncResponseDto>;
 
 /**
  * Sync Promotion Request
@@ -48,7 +45,7 @@ export type TriggerRateSyncNatsResponse = NatsResponse<RateSyncResult>;
  *
  * Matches API Gateway PromotionSyncDto structure
  *
- * Response: {message: string} ("Promotion synced successfully")
+ * Response: SyncResponseDto with syncId, status, timestamps, record counts
  */
 export interface SyncPromotionNatsRequest {
   tenantId: string;
@@ -68,11 +65,7 @@ export interface SyncPromotionNatsRequest {
   targetProviders?: string[];
 }
 
-export interface PromotionSyncResult {
-  message: string;
-}
-
-export type SyncPromotionNatsResponse = NatsResponse<PromotionSyncResult>;
+export type SyncPromotionNatsResponse = NatsResponse<SyncResponseDto>;
 
 /**
  * Sync Dynamic Rates Request
@@ -80,7 +73,7 @@ export type SyncPromotionNatsResponse = NatsResponse<PromotionSyncResult>;
  *
  * Matches API Gateway SyncRequestDto structure
  *
- * Response: {message: string} ("Dynamic rates synced successfully")
+ * Response: SyncResponseDto with syncId, status, timestamps, record counts
  */
 export interface SyncDynamicRatesNatsRequest {
   operation: string;  // SyncOperation enum from API Gateway
@@ -92,8 +85,4 @@ export interface SyncDynamicRatesNatsRequest {
   parameters?: Record<string, any>;
 }
 
-export interface DynamicRateSyncResult {
-  message: string;
-}
-
-export type SyncDynamicRatesNatsResponse = NatsResponse<DynamicRateSyncResult>;
+export type SyncDynamicRatesNatsResponse = NatsResponse<SyncResponseDto>;

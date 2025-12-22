@@ -17,7 +17,7 @@
  */
 import { NatsResponse } from '../../common';
 import { ProviderType, ProviderStatus } from '../enums';
-import { ChannelProvider, ProviderResponse, ProvidersListResponse, CreateProviderRequest, UpdateProviderRequest, CredentialValidationResult } from '../types';
+import { ChannelProvider, ProviderResponse, ProvidersListResponse, CreateProviderRequest, UpdateProviderRequest, CredentialValidationResult, ProviderComparisonDto } from '../types';
 /**
  * Create Provider Request
  * Pattern: channel.providers.create
@@ -114,24 +114,13 @@ export type GetProviderStatusNatsResponse = NatsResponse<ProviderStatusResponse>
 /**
  * Get Provider Performance Metrics Request
  * Pattern: channel.providers.performance
+ *
+ * Response: ProviderComparisonDto with providers[], period, marketSummary, and optional trends
  */
 export interface GetProviderPerformanceNatsRequest {
     providerId?: string;
     tenantId?: string;
     timeRange?: 'hour' | 'day' | 'week' | 'month';
 }
-export interface ProviderPerformanceMetrics {
-    providerId: string;
-    timeRange: string;
-    totalSyncs: number;
-    successfulSyncs: number;
-    failedSyncs: number;
-    successRate: number;
-    averageSyncDurationMs: number;
-    lastSyncAt: string;
-    recordsProcessed: number;
-    recordsSuccessful: number;
-    recordsFailed: number;
-}
-export type GetProviderPerformanceNatsResponse = NatsResponse<ProviderPerformanceMetrics>;
+export type GetProviderPerformanceNatsResponse = NatsResponse<ProviderComparisonDto>;
 //# sourceMappingURL=provider.nats.d.ts.map

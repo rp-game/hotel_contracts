@@ -17,51 +17,52 @@ import { SyncOperation } from '../enums';
 import {
   SyncHistory,
   TriggerSyncRequest,
-  TriggerSyncResponse,
   GetSyncStatusRequest,
-  SyncStatusResponse,
   GetSyncHistoryRequest,
-  SyncHistoryListResponse,
   BulkSyncRequest,
-  BulkSyncResponse,
-  SyncFromProviderResponse,
-  GetRoomMappingsResponse,
-  GetRateMappingsResponse,
-  DeleteMappingResponse,
-  RoomMapping,
-  RateMapping,
+  SyncResponseDto,
+  SyncStatusDto,
+  SyncHistoryListResponseDto,
 } from '../types';
 
 /**
  * Trigger Sync Request
  * Pattern: inventory.sync.trigger
+ *
+ * Response: SyncResponseDto with syncId, status, timestamps, record counts
  */
 export type TriggerSyncNatsRequest = TriggerSyncRequest;
 
-export type TriggerSyncNatsResponse = NatsResponse<TriggerSyncResponse>;
+export type TriggerSyncNatsResponse = NatsResponse<SyncResponseDto>;
 
 /**
  * Bulk Sync Request
  * Pattern: inventory.sync.bulk
+ *
+ * Response: SyncResponseDto with syncId, status, timestamps, record counts
  */
 export type BulkSyncNatsRequest = BulkSyncRequest;
 
-export type BulkSyncNatsResponse = NatsResponse<BulkSyncResponse>;
+export type BulkSyncNatsResponse = NatsResponse<SyncResponseDto>;
 
 /**
  * Get Sync Status Request
  * Pattern: inventory.sync.status
+ *
+ * Response: SyncStatusDto with full sync status details including operation, direction
  */
 export interface GetSyncStatusNatsRequest extends GetSyncStatusRequest {
   syncId: string;
 }
 
-export type GetSyncStatusNatsResponse = NatsResponse<SyncStatusResponse>;
+export type GetSyncStatusNatsResponse = NatsResponse<SyncStatusDto>;
 
 /**
  * Sync From Provider Request
  * Pattern: inventory.sync.from_provider
  * Matches API Gateway SyncFromProviderDto structure
+ *
+ * Response: SyncResponseDto with syncId, status, timestamps, record counts
  */
 export interface SyncFromProviderNatsRequest {
   providerId: string;
@@ -72,11 +73,13 @@ export interface SyncFromProviderNatsRequest {
   operation?: string;   // Changed from syncType to match API Gateway DTO (SyncOperation enum)
 }
 
-export type SyncFromProviderNatsResponse = NatsResponse<SyncFromProviderResponse>;
+export type SyncFromProviderNatsResponse = NatsResponse<SyncResponseDto>;
 
 /**
  * Get Sync History Request
  * Pattern: inventory.sync_history.get
+ *
+ * Response: SyncHistoryListResponseDto with history[], total, page, limit, totalPages
  */
 export interface GetSyncHistoryNatsRequest extends GetSyncHistoryRequest {
   providerId?: string;  // Optional to match API Gateway DTO
@@ -84,7 +87,7 @@ export interface GetSyncHistoryNatsRequest extends GetSyncHistoryRequest {
   hotelId?: string;
 }
 
-export type GetSyncHistoryNatsResponse = NatsResponse<SyncHistoryListResponse>;
+export type GetSyncHistoryNatsResponse = NatsResponse<SyncHistoryListResponseDto>;
 
 /**
  * Sync history entity (for reference in responses)

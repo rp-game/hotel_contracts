@@ -10,13 +10,14 @@
  * Called by: pricing-service, api-gateway
  */
 import { NatsResponse } from '../../common';
+import { SyncResponseDto } from '../types';
 /**
  * Trigger Rate Sync Request
  * Pattern: rates.sync.trigger
  *
  * Matches API Gateway RateUpdateDto structure (flat, not nested)
  *
- * Response: {message: string} ("Rates synced successfully")
+ * Response: SyncResponseDto with syncId, status, timestamps, record counts
  */
 export interface TriggerRateSyncNatsRequest {
     tenantId: string;
@@ -33,17 +34,14 @@ export interface TriggerRateSyncNatsRequest {
         inclusions?: string[];
     };
 }
-export interface RateSyncResult {
-    message: string;
-}
-export type TriggerRateSyncNatsResponse = NatsResponse<RateSyncResult>;
+export type TriggerRateSyncNatsResponse = NatsResponse<SyncResponseDto>;
 /**
  * Sync Promotion Request
  * Pattern: rates.promotions.sync
  *
  * Matches API Gateway PromotionSyncDto structure
  *
- * Response: {message: string} ("Promotion synced successfully")
+ * Response: SyncResponseDto with syncId, status, timestamps, record counts
  */
 export interface SyncPromotionNatsRequest {
     tenantId: string;
@@ -62,17 +60,14 @@ export interface SyncPromotionNatsRequest {
     };
     targetProviders?: string[];
 }
-export interface PromotionSyncResult {
-    message: string;
-}
-export type SyncPromotionNatsResponse = NatsResponse<PromotionSyncResult>;
+export type SyncPromotionNatsResponse = NatsResponse<SyncResponseDto>;
 /**
  * Sync Dynamic Rates Request
  * Pattern: rates.dynamic.sync
  *
  * Matches API Gateway SyncRequestDto structure
  *
- * Response: {message: string} ("Dynamic rates synced successfully")
+ * Response: SyncResponseDto with syncId, status, timestamps, record counts
  */
 export interface SyncDynamicRatesNatsRequest {
     operation: string;
@@ -83,8 +78,5 @@ export interface SyncDynamicRatesNatsRequest {
     endDate?: string;
     parameters?: Record<string, any>;
 }
-export interface DynamicRateSyncResult {
-    message: string;
-}
-export type SyncDynamicRatesNatsResponse = NatsResponse<DynamicRateSyncResult>;
+export type SyncDynamicRatesNatsResponse = NatsResponse<SyncResponseDto>;
 //# sourceMappingURL=rates.nats.d.ts.map
