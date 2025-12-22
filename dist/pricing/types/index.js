@@ -18,4 +18,14 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./rate-plan.types"), exports);
+__exportStar(require("./channel-pricing.types"), exports);
+__exportStar(require("./date-specific-rates.types"), exports);
+__exportStar(require("./extra-person-charges.types"), exports);
+__exportStar(require("./hourly-pricing-advanced.types"), exports);
+__exportStar(require("./los-discounts.types"), exports);
+__exportStar(require("./meal-plan-rates.types"), exports);
+__exportStar(require("./promotions.types"), exports);
+__exportStar(require("./rates-core.types"), exports);
+__exportStar(require("./room-type-base-rates.types"), exports);
+__exportStar(require("./seasonal-adjustments.types"), exports);
 //# sourceMappingURL=index.js.map

@@ -1,6 +1,8 @@
 "use strict";
 /**
  * Pricing Domain NATS Message Contracts
+ *
+ * 98 total patterns across 12 modules
  */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -20,4 +22,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./create-rate-plan.nats"), exports);
 __exportStar(require("./create-date-rate.nats"), exports);
 __exportStar(require("./create-hourly-pricing.nats"), exports);
+__exportStar(require("./channel-pricing.nats"), exports);
+__exportStar(require("./date-specific-rates.nats"), exports);
+__exportStar(require("./extra-person-charges.nats"), exports);
+__exportStar(require("./hourly-pricing.nats"), exports);
+__exportStar(require("./los-discounts.nats"), exports);
+__exportStar(require("./meal-plan-rates.nats"), exports);
+__exportStar(require("./promotions.nats"), exports);
+__exportStar(require("./rates.nats"), exports);
+__exportStar(require("./rate-plans.nats"), exports);
+__exportStar(require("./room-move-pricing.nats"), exports);
+__exportStar(require("./room-type-base-rates.nats"), exports);
+__exportStar(require("./seasonal-adjustments.nats"), exports);
 //# sourceMappingURL=index.js.map
