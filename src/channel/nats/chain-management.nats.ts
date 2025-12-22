@@ -31,7 +31,7 @@ import {
  */
 export interface GetChainConfigNatsRequest extends GetChainConfigRequest {
   chainId: string;
-  tenantId: string;
+  tenantId?: string;  // Optional - API Gateway may not have access
 }
 
 export type GetChainConfigNatsResponse = NatsResponse<GetChainConfigResponse>;

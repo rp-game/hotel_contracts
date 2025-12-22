@@ -19,7 +19,7 @@ import { GetChainConfigRequest, GetChainConfigResponse, ApplyChainToHotelRequest
  */
 export interface GetChainConfigNatsRequest extends GetChainConfigRequest {
     chainId: string;
-    tenantId: string;
+    tenantId?: string;
 }
 export type GetChainConfigNatsResponse = NatsResponse<GetChainConfigResponse>;
 /**

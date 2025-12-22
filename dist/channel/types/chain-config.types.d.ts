@@ -16,7 +16,7 @@ export interface ChainConfigSettings {
  */
 export interface GetChainConfigRequest {
     chainId: string;
-    tenantId: string;
+    tenantId?: string;
 }
 /**
  * Get chain configuration response

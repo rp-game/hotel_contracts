@@ -18,7 +18,7 @@ export interface ChainConfigSettings {
  */
 export interface GetChainConfigRequest {
   chainId: string;
-  tenantId: string;
+  tenantId?: string;  // Optional - API Gateway may not have access
 }
 
 /**
