@@ -46,6 +46,7 @@ export type FindOneRoomTypeNatsResponse = NatsResponse<FindOneRoomTypeResponse>;
  */
 export interface CreateRoomTypeRequest {
     tenantId: string;
+    hotelId: string;
     name: string;
     description?: string;
     baseRate: number;
@@ -62,6 +63,7 @@ export type CreateRoomTypeNatsResponse = NatsResponse<CreateRoomTypeResponse>;
 export interface UpdateRoomTypeRequest {
     id: string;
     tenantId: string;
+    hotelId?: string;
     name?: string;
     description?: string;
     baseRate?: number;
