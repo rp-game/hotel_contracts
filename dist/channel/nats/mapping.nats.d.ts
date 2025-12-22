@@ -21,8 +21,8 @@ import { RoomMapping, RateMapping, CreateRoomMappingRequest, UpdateRoomMappingRe
  * Pattern: inventory.mappings.get
  */
 export interface GetRoomMappingsNatsRequest {
-    providerId: string;
-    tenantId: string;
+    providerId?: string;
+    tenantId?: string;
     hotelId?: string;
     page?: number;
     limit?: number;
@@ -33,9 +33,9 @@ export type GetRoomMappingsNatsResponse = NatsResponse<GetRoomMappingsResponse>;
  * Pattern: inventory.mapping.upsert
  */
 export interface UpsertRoomMappingNatsRequest extends CreateRoomMappingRequest {
-    providerId: string;
-    tenantId: string;
-    hotelId: string;
+    providerId?: string;
+    tenantId?: string;
+    hotelId?: string;
     internalRoomId: string;
 }
 export type UpsertRoomMappingNatsResponse = NatsResponse<RoomMapping>;
@@ -45,8 +45,8 @@ export type UpsertRoomMappingNatsResponse = NatsResponse<RoomMapping>;
  */
 export interface UpdateRoomMappingNatsRequest extends UpdateRoomMappingRequest {
     mappingId: string;
-    providerId: string;
-    tenantId: string;
+    providerId?: string;
+    tenantId?: string;
 }
 export type UpdateRoomMappingNatsResponse = NatsResponse<RoomMapping | null>;
 /**
@@ -55,8 +55,8 @@ export type UpdateRoomMappingNatsResponse = NatsResponse<RoomMapping | null>;
  */
 export interface DeleteRoomMappingNatsRequest {
     mappingId: string;
-    providerId: string;
-    tenantId: string;
+    providerId?: string;
+    tenantId?: string;
 }
 export type DeleteRoomMappingNatsResponse = NatsResponse<DeleteMappingResponse>;
 /**
@@ -64,8 +64,8 @@ export type DeleteRoomMappingNatsResponse = NatsResponse<DeleteMappingResponse>;
  * Pattern: inventory.rate_mappings.get
  */
 export interface GetRateMappingsNatsRequest {
-    providerId: string;
-    tenantId: string;
+    providerId?: string;
+    tenantId?: string;
     hotelId?: string;
     page?: number;
     limit?: number;
@@ -76,9 +76,9 @@ export type GetRateMappingsNatsResponse = NatsResponse<GetRateMappingsResponse>;
  * Pattern: inventory.rate_mapping.upsert
  */
 export interface UpsertRateMappingNatsRequest extends CreateRateMappingRequest {
-    providerId: string;
-    tenantId: string;
-    hotelId: string;
+    providerId?: string;
+    tenantId?: string;
+    hotelId?: string;
     internalRateId: string;
 }
 export type UpsertRateMappingNatsResponse = NatsResponse<RateMapping>;
@@ -88,8 +88,8 @@ export type UpsertRateMappingNatsResponse = NatsResponse<RateMapping>;
  */
 export interface UpdateRateMappingNatsRequest extends UpdateRateMappingRequest {
     mappingId: string;
-    providerId: string;
-    tenantId: string;
+    providerId?: string;
+    tenantId?: string;
 }
 export type UpdateRateMappingNatsResponse = NatsResponse<RateMapping | null>;
 /**
@@ -98,8 +98,8 @@ export type UpdateRateMappingNatsResponse = NatsResponse<RateMapping | null>;
  */
 export interface DeleteRateMappingNatsRequest {
     mappingId: string;
-    providerId: string;
-    tenantId: string;
+    providerId?: string;
+    tenantId?: string;
 }
 export type DeleteRateMappingNatsResponse = NatsResponse<DeleteMappingResponse>;
 //# sourceMappingURL=mapping.nats.d.ts.map

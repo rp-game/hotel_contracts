@@ -33,8 +33,8 @@ export interface ChannelProvider {
  * Provider creation request
  */
 export interface CreateProviderRequest {
-    tenantId: string;
-    hotelId: string;
+    tenantId?: string;
+    hotelId?: string;
     name: string;
     providerType: ProviderType;
     description?: string;

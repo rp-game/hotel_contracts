@@ -32,8 +32,8 @@ import {
  * Pattern: channel.providers.create
  */
 export interface CreateProviderNatsRequest extends CreateProviderRequest {
-  tenantId: string;
-  hotelId: string;
+  tenantId?: string;  // Optional - API Gateway may not have access
+  hotelId?: string;   // Optional - API Gateway may not have access
 }
 
 export type CreateProviderNatsResponse = NatsResponse<ChannelProvider>;
@@ -54,7 +54,7 @@ export type GetProviderNatsResponse = NatsResponse<ChannelProvider | null>;
  * Pattern: channel.providers.list
  */
 export interface ListProvidersNatsRequest {
-  tenantId: string;
+  tenantId?: string;  // Optional - API Gateway may not have access
   hotelId?: string;
   page?: number;
   limit?: number;
@@ -95,7 +95,7 @@ export type UpdateProviderNatsResponse = NatsResponse<ChannelProvider | null>;
  */
 export interface DeleteProviderNatsRequest {
   providerId: string;
-  tenantId: string;
+  tenantId?: string;  // Optional - API Gateway may not have access
 }
 
 export interface DeleteProviderResponse {
@@ -111,7 +111,7 @@ export type DeleteProviderNatsResponse = NatsResponse<DeleteProviderResponse>;
  */
 export interface TestProviderNatsRequest {
   providerId: string;
-  tenantId: string;
+  tenantId?: string;  // Optional - API Gateway may not have access
 }
 
 export type TestProviderNatsResponse = NatsResponse<CredentialValidationResult>;
@@ -122,7 +122,7 @@ export type TestProviderNatsResponse = NatsResponse<CredentialValidationResult>;
  */
 export interface GetProviderStatusNatsRequest {
   providerId: string;
-  tenantId: string;
+  tenantId?: string;  // Optional - API Gateway may not have access
 }
 
 export interface ProviderStatusResponse {
@@ -143,8 +143,8 @@ export type GetProviderStatusNatsResponse = NatsResponse<ProviderStatusResponse>
  * Pattern: channel.providers.performance
  */
 export interface GetProviderPerformanceNatsRequest {
-  providerId: string;
-  tenantId: string;
+  providerId?: string;  // Optional - may query all providers
+  tenantId?: string;    // Optional - API Gateway may not have access
   timeRange?: 'hour' | 'day' | 'week' | 'month';
 }
 

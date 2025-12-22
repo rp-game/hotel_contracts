@@ -77,9 +77,9 @@ export interface RateMapping {
  * Create room mapping request
  */
 export interface CreateRoomMappingRequest {
-    providerId: string;
-    tenantId: string;
-    hotelId: string;
+    providerId?: string;
+    tenantId?: string;
+    hotelId?: string;
     internalRoomId: string;
     internalRoomName: string;
     externalRoomId: string;
@@ -100,9 +100,9 @@ export interface UpdateRoomMappingRequest {
  * Create rate mapping request
  */
 export interface CreateRateMappingRequest {
-    providerId: string;
-    tenantId: string;
-    hotelId: string;
+    providerId?: string;
+    tenantId?: string;
+    hotelId?: string;
     internalRoomId: string;
     internalRateId: string;
     internalRateName: string;

@@ -36,8 +36,8 @@ export interface ChannelProvider {
  * Provider creation request
  */
 export interface CreateProviderRequest {
-  tenantId: string;
-  hotelId: string;
+  tenantId?: string;  // Optional - API Gateway may not have access
+  hotelId?: string;   // Optional - API Gateway may not have access
   name: string;
   providerType: ProviderType;
   description?: string;

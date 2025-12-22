@@ -23,8 +23,8 @@ import { ChannelProvider, ProviderResponse, ProvidersListResponse, CreateProvide
  * Pattern: channel.providers.create
  */
 export interface CreateProviderNatsRequest extends CreateProviderRequest {
-    tenantId: string;
-    hotelId: string;
+    tenantId?: string;
+    hotelId?: string;
 }
 export type CreateProviderNatsResponse = NatsResponse<ChannelProvider>;
 /**
@@ -41,7 +41,7 @@ export type GetProviderNatsResponse = NatsResponse<ChannelProvider | null>;
  * Pattern: channel.providers.list
  */
 export interface ListProvidersNatsRequest {
-    tenantId: string;
+    tenantId?: string;
     hotelId?: string;
     page?: number;
     limit?: number;
@@ -76,7 +76,7 @@ export type UpdateProviderNatsResponse = NatsResponse<ChannelProvider | null>;
  */
 export interface DeleteProviderNatsRequest {
     providerId: string;
-    tenantId: string;
+    tenantId?: string;
 }
 export interface DeleteProviderResponse {
     message: string;
@@ -89,7 +89,7 @@ export type DeleteProviderNatsResponse = NatsResponse<DeleteProviderResponse>;
  */
 export interface TestProviderNatsRequest {
     providerId: string;
-    tenantId: string;
+    tenantId?: string;
 }
 export type TestProviderNatsResponse = NatsResponse<CredentialValidationResult>;
 /**
@@ -98,7 +98,7 @@ export type TestProviderNatsResponse = NatsResponse<CredentialValidationResult>;
  */
 export interface GetProviderStatusNatsRequest {
     providerId: string;
-    tenantId: string;
+    tenantId?: string;
 }
 export interface ProviderStatusResponse {
     providerId: string;
@@ -116,8 +116,8 @@ export type GetProviderStatusNatsResponse = NatsResponse<ProviderStatusResponse>
  * Pattern: channel.providers.performance
  */
 export interface GetProviderPerformanceNatsRequest {
-    providerId: string;
-    tenantId: string;
+    providerId?: string;
+    tenantId?: string;
     timeRange?: 'hour' | 'day' | 'week' | 'month';
 }
 export interface ProviderPerformanceMetrics {
