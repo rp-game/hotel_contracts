@@ -1,7 +1,5 @@
 /**
  * User Domain NATS Message Contracts
- *
- * TODO: Add specific user NATS contracts (create-user, update-user, etc)
  */
-export {};
+export * from './tenant.nats';
 //# sourceMappingURL=index.d.ts.map

@@ -15,4 +15,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./tenant-settings"), exports);
+__exportStar(require("./tenant.types"), exports);
 //# sourceMappingURL=index.js.map

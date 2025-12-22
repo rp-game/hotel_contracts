@@ -8,4 +8,6 @@
  * Handler: booking-service
  */
 export * from './create-booking.nats';
+export * from './unassigned-bookings.nats';
+export * from './timeline-action.nats';
 //# sourceMappingURL=index.d.ts.map

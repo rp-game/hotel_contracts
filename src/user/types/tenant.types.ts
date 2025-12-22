@@ -1,0 +1,8 @@
+/**
+ * Tenant Type Enum
+ */
+export enum TenantType {
+  HOTEL_CHAIN = 'HOTEL_CHAIN',
+  INDIVIDUAL_HOTEL = 'INDIVIDUAL_HOTEL',
+  STANDALONE = 'STANDALONE',
+}
