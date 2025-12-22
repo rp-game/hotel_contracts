@@ -1,0 +1,1 @@
+{"version":3,"file":"tenant-billing.nats.d.ts","sourceRoot":"","sources":["../../../src/billing/nats/tenant-billing.nats.ts"],"names":[],"mappings":"AAAA;;;;;;;;GAQG;AAEH,OAAO,EAAE,YAAY,EAAE,MAAM,cAAc,CAAC;AAC5C,OAAO,EAAE,oBAAoB,EAAE,MAAM,UAAU,CAAC;AAEhD;;;;;GAKG;AACH,MAAM,WAAW,2BAA2B;IAC1C,QAAQ,EAAE,MAAM,CAAC;CAClB;AAED,MAAM,MAAM,4BAA4B,GAAG,YAAY,CAAC,oBAAoB,CAAC,CAAC"}

@@ -69,6 +69,7 @@ __exportStar(require("./user"), exports);
 __exportStar(require("./payment"), exports);
 __exportStar(require("./crm"), exports);
 __exportStar(require("./financial"), exports);
+__exportStar(require("./billing"), exports);
 __exportStar(require("./channel"), exports);
 __exportStar(require("./notification"), exports);
 __exportStar(require("./report"), exports);

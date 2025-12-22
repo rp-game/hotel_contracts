@@ -1,6 +1,6 @@
 {
   "name": "@hotel/contracts",
-  "version": "0.1.24",
+  "version": "0.1.33",
   "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -212,6 +212,18 @@
     "./room-move/enums": {
       "types": "./dist/room-move/enums/index.d.ts",
       "default": "./dist/room-move/enums/index.js"
+    },
+    "./billing": {
+      "types": "./dist/billing/index.d.ts",
+      "default": "./dist/billing/index.js"
+    },
+    "./billing/nats": {
+      "types": "./dist/billing/nats/index.d.ts",
+      "default": "./dist/billing/nats/index.js"
+    },
+    "./billing/types": {
+      "types": "./dist/billing/types/index.d.ts",
+      "default": "./dist/billing/types/index.js"
     }
   },
   "typesVersions": {
@@ -265,7 +277,10 @@
       "room-move": ["dist/room-move/index.d.ts"],
       "room-move/nats": ["dist/room-move/nats/index.d.ts"],
       "room-move/types": ["dist/room-move/types/index.d.ts"],
-      "room-move/enums": ["dist/room-move/enums/index.d.ts"]
+      "room-move/enums": ["dist/room-move/enums/index.d.ts"],
+      "billing": ["dist/billing/index.d.ts"],
+      "billing/nats": ["dist/billing/nats/index.d.ts"],
+      "billing/types": ["dist/billing/types/index.d.ts"]
     }
   },
   "files": [

@@ -55,6 +55,7 @@ export * from './user';
 export * from './payment';
 export * from './crm';
 export * from './financial';
+export * from './billing';
 export * from './channel';
 export * from './notification';
 export * from './report';
