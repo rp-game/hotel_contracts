@@ -34,29 +34,38 @@ export interface ChannelProvider {
 
 /**
  * Provider creation request
+ * Matches API Gateway CreateProviderConfigDto structure (flat, not nested)
  */
 export interface CreateProviderRequest {
-  tenantId?: string;  // Optional - API Gateway may not have access
-  hotelId?: string;   // Optional - API Gateway may not have access
-  name: string;
   providerType: ProviderType;
-  description?: string;
-  configuration: Partial<ProviderConfiguration>;
+  providerName: string;  // NOT "name" - matches API Gateway DTO
+  tenantId?: string;  // Optional - added from auth context
+  hotelId?: string;   // Optional - added from auth context
   credentials?: ProviderCredentials;
-  isSandbox?: boolean;
+  enableInventorySync?: boolean;
+  enableRateSync?: boolean;
+  enableBookingSync?: boolean;
+  settings?: any;  // ProviderSettingsDto
+  endpoints?: any;  // ProviderEndpointsDto
+  otaAccounts?: any;  // OTAAccountsConfigDto
+  chainConfiguration?: any;  // ChainConfigurationDto
 }
 
 /**
  * Provider update request
+ * Matches API Gateway UpdateProviderConfigDto structure (flat, not nested)
  */
 export interface UpdateProviderRequest {
   id: string;
-  name?: string;
-  description?: string;
-  configuration?: Partial<ProviderConfiguration>;
+  providerName?: string;  // NOT "name" - matches API Gateway DTO
   credentials?: ProviderCredentials;
-  isActive?: boolean;
-  isSandbox?: boolean;
+  enableInventorySync?: boolean;
+  enableRateSync?: boolean;
+  enableBookingSync?: boolean;
+  settings?: any;  // ProviderSettingsDto
+  endpoints?: any;  // ProviderEndpointsDto
+  otaAccounts?: any;  // OTAAccountsConfigDto
+  chainConfiguration?: any;  // ChainConfigurationDto
 }
 
 /**

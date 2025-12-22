@@ -61,14 +61,15 @@ export type GetSyncStatusNatsResponse = NatsResponse<SyncStatusResponse>;
 /**
  * Sync From Provider Request
  * Pattern: inventory.sync.from_provider
+ * Matches API Gateway SyncFromProviderDto structure
  */
 export interface SyncFromProviderNatsRequest {
   providerId: string;
-  tenantId: string;
-  hotelId?: string;
   startDate: string; // YYYY-MM-DD
   endDate: string; // YYYY-MM-DD
-  syncType?: 'AVAILABILITY' | 'RATES' | 'BOOKINGS' | 'ALL';
+  tenantId?: string;    // Optional to match API Gateway DTO
+  hotelId?: string;
+  operation?: string;   // Changed from syncType to match API Gateway DTO (SyncOperation enum)
 }
 
 export type SyncFromProviderNatsResponse = NatsResponse<SyncFromProviderResponse>;

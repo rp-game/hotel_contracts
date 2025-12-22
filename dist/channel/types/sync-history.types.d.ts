@@ -130,22 +130,22 @@ export type TriggerSyncResponse = string;
 export type SyncFromProviderResponse = string;
 /**
  * Bulk sync request
+ * Matches API Gateway BulkInventoryUpdateDto structure
  */
 export interface BulkSyncRequest {
     tenantId: string;
     hotelId: string;
-    updates: Array<{
+    startDate: string;
+    endDate: string;
+    inventoryUpdates: Array<{
         tenantId: string;
         hotelId: string;
         roomId: string;
         date: string;
         available: number;
-        rate?: number;
-        currency?: string;
         restrictions?: InventoryRestrictions;
     }>;
-    startDate: string;
-    endDate: string;
+    targetProviders?: string[];
 }
 /**
  * Bulk sync response - returns message string

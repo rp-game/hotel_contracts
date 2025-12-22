@@ -31,28 +31,37 @@ export interface ChannelProvider {
 }
 /**
  * Provider creation request
+ * Matches API Gateway CreateProviderConfigDto structure (flat, not nested)
  */
 export interface CreateProviderRequest {
+    providerType: ProviderType;
+    providerName: string;
     tenantId?: string;
     hotelId?: string;
-    name: string;
-    providerType: ProviderType;
-    description?: string;
-    configuration: Partial<ProviderConfiguration>;
     credentials?: ProviderCredentials;
-    isSandbox?: boolean;
+    enableInventorySync?: boolean;
+    enableRateSync?: boolean;
+    enableBookingSync?: boolean;
+    settings?: any;
+    endpoints?: any;
+    otaAccounts?: any;
+    chainConfiguration?: any;
 }
 /**
  * Provider update request
+ * Matches API Gateway UpdateProviderConfigDto structure (flat, not nested)
  */
 export interface UpdateProviderRequest {
     id: string;
-    name?: string;
-    description?: string;
-    configuration?: Partial<ProviderConfiguration>;
+    providerName?: string;
     credentials?: ProviderCredentials;
-    isActive?: boolean;
-    isSandbox?: boolean;
+    enableInventorySync?: boolean;
+    enableRateSync?: boolean;
+    enableBookingSync?: boolean;
+    settings?: any;
+    endpoints?: any;
+    otaAccounts?: any;
+    chainConfiguration?: any;
 }
 /**
  * Provider response

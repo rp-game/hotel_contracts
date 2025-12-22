@@ -16,24 +16,23 @@ import { NatsResponse } from '../../common';
  * Trigger Rate Sync Request
  * Pattern: rates.sync.trigger
  *
- * Manually triggers rate synchronization to external channels
- * for a specific hotel, room, and date.
- *
- * Request fields:
- * - hotelId: string (required)
- * - roomId: string (required)
- * - date: string (required)
- * - rates?: {rate?: number, currency?: string} (optional)
+ * Matches API Gateway RateUpdateDto structure (flat, not nested)
  *
  * Response: {message: string} ("Rates synced successfully")
  */
 export interface TriggerRateSyncNatsRequest {
+  tenantId: string;       // Added to match API Gateway DTO
   hotelId: string;
   roomId: string;
+  ratePlanId: string;     // Added to match API Gateway DTO
   date: string;
-  rates?: {
-    rate?: number;
-    currency?: string;
+  rate: number;           // Flattened from nested rates object
+  currency: string;       // Flattened from nested rates object
+  rateConfig?: {          // Added to match API Gateway DTO
+    rateBasis?: string;
+    mealPlan?: string;
+    cancellationPolicy?: string;
+    inclusions?: string[];
   };
 }
 
@@ -47,19 +46,26 @@ export type TriggerRateSyncNatsResponse = NatsResponse<RateSyncResult>;
  * Sync Promotion Request
  * Pattern: rates.promotions.sync
  *
- * Syncs promotional rates/offers to external channels.
- *
- * Request fields:
- * - promotionCode: string (required)
- * - hotelId: string (required)
- * - [key: string]: any (additional promotion fields allowed)
+ * Matches API Gateway PromotionSyncDto structure
  *
  * Response: {message: string} ("Promotion synced successfully")
  */
 export interface SyncPromotionNatsRequest {
-  promotionCode: string;
+  tenantId: string;
   hotelId: string;
-  [key: string]: any;
+  promotionCode: string;
+  bookingStartDate: string;  // YYYY-MM-DD
+  bookingEndDate: string;    // YYYY-MM-DD
+  stayStartDate: string;     // YYYY-MM-DD
+  stayEndDate: string;       // YYYY-MM-DD
+  discountPercent: number;   // 0-100
+  restrictions?: {
+    minStay?: number;
+    advanceBooking?: number;
+    nonRefundable?: boolean;
+    applicableRoomTypes?: string[];
+  };
+  targetProviders?: string[];
 }
 
 export interface PromotionSyncResult {
@@ -72,17 +78,18 @@ export type SyncPromotionNatsResponse = NatsResponse<PromotionSyncResult>;
  * Sync Dynamic Rates Request
  * Pattern: rates.dynamic.sync
  *
- * Syncs dynamically calculated rates to external channels.
- *
- * Request fields:
- * - hotelId: string (required)
- * - [key: string]: any (additional dynamic rate fields allowed)
+ * Matches API Gateway SyncRequestDto structure
  *
  * Response: {message: string} ("Dynamic rates synced successfully")
  */
 export interface SyncDynamicRatesNatsRequest {
+  operation: string;  // SyncOperation enum from API Gateway
+  tenantId: string;
   hotelId: string;
-  [key: string]: any;
+  targetProviders?: string[];
+  startDate?: string;  // YYYY-MM-DD
+  endDate?: string;    // YYYY-MM-DD
+  parameters?: Record<string, any>;
 }
 
 export interface DynamicRateSyncResult {

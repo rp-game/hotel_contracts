@@ -90,6 +90,7 @@ export interface CreateRoomMappingRequest {
   externalRoomId: string;
   externalRoomName: string;
   mappingConfiguration?: RoomMappingConfiguration;
+  isActive?: boolean;      // Added to match API Gateway DTO
 }
 
 /**
@@ -116,6 +117,7 @@ export interface CreateRateMappingRequest {
   externalRateId: string;
   externalRateName: string;
   mappingConfiguration?: RateMappingConfiguration;
+  isActive?: boolean;      // Added to match API Gateway DTO
 }
 
 /**

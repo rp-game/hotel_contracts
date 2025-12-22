@@ -85,6 +85,7 @@ export interface CreateRoomMappingRequest {
     externalRoomId: string;
     externalRoomName: string;
     mappingConfiguration?: RoomMappingConfiguration;
+    isActive?: boolean;
 }
 /**
  * Update room mapping request
@@ -109,6 +110,7 @@ export interface CreateRateMappingRequest {
     externalRateId: string;
     externalRateName: string;
     mappingConfiguration?: RateMappingConfiguration;
+    isActive?: boolean;
 }
 /**
  * Update rate mapping request
