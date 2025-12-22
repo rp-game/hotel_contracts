@@ -51,6 +51,28 @@ export interface SyncStatusDto {
 }
 
 /**
+ * Failover Trigger Enum
+ */
+export enum FailoverTrigger {
+  MANUAL = 'MANUAL',
+  AUTOMATIC = 'AUTOMATIC',
+  HEALTH_CHECK_FAILED = 'HEALTH_CHECK_FAILED',
+  ERROR_RATE_EXCEEDED = 'ERROR_RATE_EXCEEDED',
+  RESPONSE_TIME_EXCEEDED = 'RESPONSE_TIME_EXCEEDED',
+}
+
+/**
+ * Failover Status Enum
+ */
+export enum FailoverStatus {
+  PENDING = 'PENDING',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+  ROLLED_BACK = 'ROLLED_BACK',
+}
+
+/**
  * Provider Failover DTO
  * Returned by executeFailover operation
  */
@@ -60,8 +82,8 @@ export interface ProviderFailoverDto {
   sourceProviderName: string;
   targetProviderIds: string[];
   targetProviderNames: string[];
-  trigger: string; // FailoverTrigger enum value
-  status: string; // FailoverStatus enum value
+  trigger: FailoverTrigger;
+  status: FailoverStatus;
   initiatedAt: Date;
   completedAt?: Date;
   durationMs?: number;
@@ -115,6 +137,17 @@ export interface ProviderComparisonDto {
 }
 
 /**
+ * A/B Test Status Enum
+ */
+export enum ABTestStatus {
+  DRAFT = 'DRAFT',
+  ACTIVE = 'ACTIVE',
+  PAUSED = 'PAUSED',
+  COMPLETED = 'COMPLETED',
+  CANCELLED = 'CANCELLED',
+}
+
+/**
  * A/B Test Configuration DTO
  * Returned by A/B test operations
  */
@@ -122,7 +155,7 @@ export interface ABTestConfigurationDto {
   id: string;
   testName: string;
   description: string;
-  status: string; // ABTestStatus enum value
+  status: ABTestStatus;
   startDate: string;
   endDate: string;
   trafficSplit: {
@@ -198,11 +231,11 @@ export interface ProviderPerformanceDto {
   bookingVolume: number;
   revenue: number;
   averageDailyRate: number;
-  syncSuccessRate: number;
+  responseTime: number;
   errorRate: number;
-  averageResponseTime: number;
-  lastSyncAt: Date;
-  status: string;
+  syncSuccessRate: number;
+  topChannels: string[];
+  additionalMetrics?: Record<string, any>;
 }
 
 /**
@@ -251,6 +284,42 @@ export interface AlertDto {
 }
 
 /**
+ * Error Type Enum
+ */
+export enum ErrorType {
+  CONNECTION = 'CONNECTION',
+  AUTHENTICATION = 'AUTHENTICATION',
+  VALIDATION = 'VALIDATION',
+  MAPPING = 'MAPPING',
+  RATE_LIMIT = 'RATE_LIMIT',
+  TIMEOUT = 'TIMEOUT',
+  DATA_MISMATCH = 'DATA_MISMATCH',
+  PROVIDER_ERROR = 'PROVIDER_ERROR',
+  UNKNOWN = 'UNKNOWN',
+}
+
+/**
+ * Error Severity Enum
+ */
+export enum ErrorSeverity {
+  LOW = 'LOW',
+  MEDIUM = 'MEDIUM',
+  HIGH = 'HIGH',
+  CRITICAL = 'CRITICAL',
+}
+
+/**
+ * Recovery Action Enum
+ */
+export enum RecoveryAction {
+  RETRY = 'RETRY',
+  SKIP = 'SKIP',
+  MANUAL_INTERVENTION = 'MANUAL_INTERVENTION',
+  FAILOVER = 'FAILOVER',
+  QUEUE_FOR_LATER = 'QUEUE_FOR_LATER',
+}
+
+/**
  * Sync Error DTO
  * Individual error record
  */
@@ -259,14 +328,21 @@ export interface SyncErrorDto {
   syncId: string;
   providerId: string;
   providerName: string;
-  errorType: string;
-  severity: string;
+  errorType: ErrorType;
+  severity: ErrorSeverity;
   message: string;
   messageVi?: string;
+  stackTrace?: string;
   occurredAt: Date;
+  httpStatusCode?: number;
+  requestData?: Record<string, any>;
+  responseData?: Record<string, any>;
+  retryCount: number;
+  maxRetries: number;
   resolved: boolean;
   resolvedAt?: Date;
-  affectedRecords?: number;
+  resolutionMethod?: string;
+  suggestedActions: RecoveryAction[];
   context?: Record<string, any>;
 }
 
