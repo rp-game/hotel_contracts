@@ -4,18 +4,18 @@
  * Represents the different types of channel/PMS providers
  * that the system can integrate with.
  *
- * Values match API Gateway ProviderType enum (UPPERCASE)
+ * Values match API Gateway ProviderType enum EXACTLY (PascalCase)
  */
 export enum ProviderType {
   /** STAAH integration */
   STAAH = 'STAAH',
 
   /** SiteMinder integration */
-  SITEMINDER = 'SITEMINDER',
+  SITEMINDER = 'SiteMinder',
 
   /** Beds24 integration */
-  BEDS24 = 'BEDS24',
+  BEDS24 = 'Beds24',
 
   /** RateGain integration */
-  RATEGAIN = 'RATEGAIN',
+  RATEGAIN = 'RateGain',
 }

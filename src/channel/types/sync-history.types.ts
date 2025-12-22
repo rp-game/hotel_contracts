@@ -114,7 +114,7 @@ export interface SyncStatusResponse {
  * Get sync history request
  */
 export interface GetSyncHistoryRequest {
-  providerId: string;
+  providerId?: string;  // Optional to match API Gateway DTO
   tenantId?: string;
   hotelId?: string;
   limit?: number;

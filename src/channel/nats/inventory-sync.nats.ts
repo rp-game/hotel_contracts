@@ -79,7 +79,7 @@ export type SyncFromProviderNatsResponse = NatsResponse<SyncFromProviderResponse
  * Pattern: inventory.sync_history.get
  */
 export interface GetSyncHistoryNatsRequest extends GetSyncHistoryRequest {
-  providerId: string;
+  providerId?: string;  // Optional to match API Gateway DTO
   tenantId?: string;
   hotelId?: string;
 }

@@ -7,17 +7,17 @@ exports.ProviderType = void 0;
  * Represents the different types of channel/PMS providers
  * that the system can integrate with.
  *
- * Values match API Gateway ProviderType enum (UPPERCASE)
+ * Values match API Gateway ProviderType enum EXACTLY (PascalCase)
  */
 var ProviderType;
 (function (ProviderType) {
     /** STAAH integration */
     ProviderType["STAAH"] = "STAAH";
     /** SiteMinder integration */
-    ProviderType["SITEMINDER"] = "SITEMINDER";
+    ProviderType["SITEMINDER"] = "SiteMinder";
     /** Beds24 integration */
-    ProviderType["BEDS24"] = "BEDS24";
+    ProviderType["BEDS24"] = "Beds24";
     /** RateGain integration */
-    ProviderType["RATEGAIN"] = "RATEGAIN";
+    ProviderType["RATEGAIN"] = "RateGain";
 })(ProviderType || (exports.ProviderType = ProviderType = {}));
 //# sourceMappingURL=provider-type.enum.js.map

@@ -105,7 +105,7 @@ export interface SyncStatusResponse {
  * Get sync history request
  */
 export interface GetSyncHistoryRequest {
-    providerId: string;
+    providerId?: string;
     tenantId?: string;
     hotelId?: string;
     limit?: number;
