@@ -1,5 +1,2 @@
-/**
- * Housekeeping NATS Message Contracts
- */
-export * from './create-task.nats';
+export * from './automation.nats';
 //# sourceMappingURL=index.d.ts.map
