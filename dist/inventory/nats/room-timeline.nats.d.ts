@@ -34,6 +34,7 @@ import { NatsResponse } from '../../common';
 export interface GetRoomTimelineRequest {
     date: string;
     viewType: 'day' | 'week' | 'month';
+    tenantId: string;
     hotelId: string;
     roomIds?: string[];
     floors?: number[];

@@ -36,6 +36,7 @@ import { NatsResponse } from '../../common';
 export interface GetRoomTimelineRequest {
   date: string; // YYYY-MM-DD - Date for timeline
   viewType: 'day' | 'week' | 'month';
+  tenantId: string; // Multi-tenant isolation
   hotelId: string;
   roomIds?: string[]; // Optional: Filter specific rooms
   floors?: number[]; // Optional: Filter by floor numbers
