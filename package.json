@@ -1,6 +1,6 @@
 {
   "name": "@hotel/contracts",
-  "version": "0.1.35",
+  "version": "0.1.36",
   "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -165,6 +165,14 @@
       "types": "./dist/crm/index.d.ts",
       "default": "./dist/crm/index.js"
     },
+    "./crm/nats": {
+      "types": "./dist/crm/nats/index.d.ts",
+      "default": "./dist/crm/nats/index.js"
+    },
+    "./crm/types": {
+      "types": "./dist/crm/types/index.d.ts",
+      "default": "./dist/crm/types/index.js"
+    },
     "./financial": {
       "types": "./dist/financial/index.d.ts",
       "default": "./dist/financial/index.js"
@@ -271,6 +279,8 @@
       "ota/inter-service": ["dist/ota/inter-service/index.d.ts"],
       "ota/enums": ["dist/ota/enums/index.d.ts"],
       "crm": ["dist/crm/index.d.ts"],
+      "crm/nats": ["dist/crm/nats/index.d.ts"],
+      "crm/types": ["dist/crm/types/index.d.ts"],
       "financial": ["dist/financial/index.d.ts"],
       "channel": ["dist/channel/index.d.ts"],
       "channel/nats": ["dist/channel/nats/index.d.ts"],

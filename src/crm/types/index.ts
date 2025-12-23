@@ -1,1 +1,1 @@
-export * from './guest.types';
+export * from './customer-stats.types';

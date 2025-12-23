@@ -3,3 +3,4 @@
  */
 
 export * from './tenant.nats';
+export * from './hotel-chain.nats';
