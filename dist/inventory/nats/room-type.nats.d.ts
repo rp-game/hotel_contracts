@@ -20,6 +20,7 @@ import { RoomType as RoomTypeEntity } from '../types';
  */
 export interface FindAllRoomTypesRequest {
     tenantId: string;
+    hotelId?: string;
     page?: number;
     limit?: number;
 }
