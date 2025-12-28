@@ -26,4 +26,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./create-booking.nats"), exports);
 __exportStar(require("./unassigned-bookings.nats"), exports);
 __exportStar(require("./timeline-action.nats"), exports);
+__exportStar(require("./analytics.nats"), exports);
 //# sourceMappingURL=index.js.map
