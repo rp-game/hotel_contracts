@@ -15,4 +15,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./automation.nats"), exports);
+__exportStar(require("./cleaning-stats.nats"), exports);
 //# sourceMappingURL=index.js.map

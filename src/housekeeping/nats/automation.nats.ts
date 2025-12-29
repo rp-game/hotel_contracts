@@ -51,3 +51,73 @@ export interface GetAutomationEventsNatsRequest {
 }
 
 export type GetAutomationEventsNatsResponse = NatsResponse<AutomationEventsData>;
+
+/**
+ * Automation Status Data
+ */
+export interface LastRunTimes {
+  autoAssignment: string | null;
+  taskCreation: string | null;
+  overdueProcessing: string | null;
+}
+
+export interface ActiveRules {
+  checkoutAutomation: boolean;
+  checkinAutomation: boolean;
+  autoAssignment: boolean;
+  overdueMonitoring: boolean;
+}
+
+export interface AutomationStats {
+  tasksAutoAssigned: number;
+  tasksAutoCreated: number;
+  overdueTasksProcessed: number;
+  automationSuccessRate: number;
+}
+
+export interface AutomationStatusData {
+  tenantId: string;
+  hotelId: string;
+  automationEnabled: boolean;
+  lastRunTimes: LastRunTimes;
+  activeRules: ActiveRules;
+  stats: AutomationStats;
+}
+
+/**
+ * Get Automation Status Request
+ * Pattern: housekeeping.automation.status
+ */
+export interface AutomationStatusPayload {
+  tenantId: string;
+  hotelId: string;
+}
+
+/**
+ * Trigger Auto Assignment Request
+ * Pattern: housekeeping.automation.trigger-assignment
+ */
+export interface TriggerAutoAssignmentPayload {
+  tenantId: string;
+  hotelId: string;
+}
+
+export interface OperationResult {
+  success: boolean;
+  message: string;
+  data?: unknown;
+}
+
+/**
+ * Auto Schedule Tasks Request
+ * Pattern: housekeeping.automation.schedule
+ */
+export interface AutoScheduleTasksPayload {
+  tenantId: string;
+  hotelId: string;
+  date: string;
+}
+
+export type AutomationStatusNatsResponse = NatsResponse<AutomationStatusData>;
+export type TriggerAutoAssignmentNatsResponse = NatsResponse<OperationResult>;
+export type AutoScheduleTasksNatsResponse = NatsResponse<OperationResult>;
