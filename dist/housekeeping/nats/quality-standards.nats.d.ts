@@ -74,7 +74,10 @@ export interface QualityStandardsStatistics {
     totalStandards: number;
     activeStandards: number;
     inactiveStandards?: number;
+    averageScore: number;
+    standardsByRoomType?: Record<string, number>;
     byRoomType?: Record<string, number>;
+    averageItemsPerStandard?: number;
 }
 export type QualityStandardsStatisticsNatsResponse = NatsResponse<QualityStandardsStatistics>;
 export interface FindByRoomTypeNatsRequest {
@@ -118,6 +121,7 @@ export interface DeleteQualityStandardNatsRequest {
     hotelId: string;
 }
 export type DeleteQualityStandardNatsResponse = NatsResponse<{
+    success: boolean;
     message: string;
 }>;
 //# sourceMappingURL=quality-standards.nats.d.ts.map

@@ -116,11 +116,13 @@ export interface GetNotificationStatsNatsRequest {
     filters?: any;
 }
 export interface NotificationStatsResult {
-    total: number;
-    unread: number;
-    read: number;
-    byType?: Record<string, number>;
-    byPriority?: Record<string, number>;
+    totalSent: number;
+    totalRead: number;
+    totalUnread: number;
+    readPercentage: number;
+    byType: Record<string, number>;
+    byChannel: Record<string, number>;
+    byPriority: Record<string, number>;
 }
 export type GetNotificationStatsNatsResponse = NatsResponse<NotificationStatsResult>;
 export interface MarkAsReadNatsRequest {
