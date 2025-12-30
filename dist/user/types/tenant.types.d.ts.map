@@ -1,1 +1,1 @@
-{"version":3,"file":"tenant.types.d.ts","sourceRoot":"","sources":["../../../src/user/types/tenant.types.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,oBAAY,UAAU;IACpB,WAAW,gBAAgB;IAC3B,gBAAgB,qBAAqB;IACrC,UAAU,eAAe;CAC1B"}
+{"version":3,"file":"tenant.types.d.ts","sourceRoot":"","sources":["../../../src/user/types/tenant.types.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,oBAAY,UAAU;IACpB,WAAW,gBAAgB;IAC3B,gBAAgB,qBAAqB;IACrC,UAAU,eAAe;IACzB,QAAQ,aAAa;CACtB"}

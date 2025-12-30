@@ -57,6 +57,13 @@ export interface FindTenantByIdNatsRequest {
 }
 export type FindTenantByIdNatsResponse = NatsResponse<Tenant>;
 /**
+ * Find Tenant Request (alias for FindTenantByIdNatsRequest)
+ * Pattern: tenants.findById
+ */
+export interface FindTenantRequestDto {
+    id: string;
+}
+/**
  * Get Tenant Settings Request
  * Pattern: tenants.settings.get
  */
@@ -71,6 +78,41 @@ export interface GetTenantSettingsRequestDto {
 export interface UpdateTenantSettingsRequestDto {
     hotelId: string;
     settings: Partial<HotelOperationSettings>;
+}
+/**
+ * Update Hotel Settings Payload (Hotel-focused settings update)
+ * Pattern: tenants.settings.update
+ */
+export interface UpdateHotelSettingsPayload {
+    hotelId: string;
+    settings: {
+        checkInTime?: string;
+        checkOutTime?: string;
+        timezone?: string;
+        currency?: string;
+        defaultCleaningDuration?: number;
+        gracePeriodMinutes?: number;
+        autoAssignRooms?: boolean;
+        businessHours?: {
+            start: string;
+            end: string;
+        };
+    };
+}
+/**
+ * Update Settings Payload
+ * Pattern: tenants.updateSettings
+ */
+export interface UpdateSettingsPayload {
+    id: string;
+    settings: object;
+}
+/**
+ * Get Settings Payload
+ * Pattern: tenants.getSettings
+ */
+export interface GetSettingsPayload {
+    id: string;
 }
 /**
  * Find All Tenants Request

@@ -9,5 +9,6 @@ var TenantType;
     TenantType["HOTEL_CHAIN"] = "HOTEL_CHAIN";
     TenantType["INDIVIDUAL_HOTEL"] = "INDIVIDUAL_HOTEL";
     TenantType["STANDALONE"] = "STANDALONE";
+    TenantType["PLATFORM"] = "PLATFORM";
 })(TenantType || (exports.TenantType = TenantType = {}));
 //# sourceMappingURL=tenant.types.js.map
