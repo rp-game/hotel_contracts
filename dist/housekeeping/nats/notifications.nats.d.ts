@@ -37,31 +37,44 @@ export interface CreateNotificationNatsRequest {
 export type CreateNotificationNatsResponse = NatsResponse<Notification>;
 export interface SendNotificationFromTemplateNatsRequest {
     sendData: {
-        templateId?: string;
-        recipientId: string;
-        variables: Record<string, unknown>;
-    };
-    tenantId: string;
-    hotelId: string;
-}
-export type SendNotificationFromTemplateNatsResponse = NatsResponse<Notification>;
-export interface SendBulkNotificationsNatsRequest {
-    bulkData: {
+        templateId: string;
         recipientIds: string[];
-        title: string;
-        message: string;
-        type: string;
-        priority: string;
+        templateData?: Record<string, any>;
+        priority?: string;
+        channels?: string[];
     };
     tenantId: string;
     hotelId: string;
 }
-export interface BulkNotificationResult {
+export interface BulkSendResult {
     sent: number;
     failed: number;
     notifications: Notification[];
 }
-export type SendBulkNotificationsNatsResponse = NatsResponse<BulkNotificationResult>;
+export type SendNotificationFromTemplateNatsResponse = NatsResponse<BulkSendResult>;
+export interface SendBulkNotificationsNatsRequest {
+    bulkData: {
+        notifications: Array<{
+            recipientId: string;
+            recipientRole?: string;
+            type: string;
+            priority?: string;
+            title: string;
+            message: string;
+            data?: Record<string, any>;
+            channels: string[];
+            scheduledFor?: string | Date;
+            expiresAt?: string | Date;
+            referenceId?: string;
+            referenceType?: string;
+        }>;
+        immediate?: boolean;
+        campaignId?: string;
+    };
+    tenantId: string;
+    hotelId: string;
+}
+export type SendBulkNotificationsNatsResponse = NatsResponse<BulkSendResult>;
 export interface FindByRecipientNatsRequest {
     recipientId: string;
     tenantId: string;
@@ -92,14 +105,14 @@ export interface GetNotificationStatsNatsRequest {
     hotelId: string;
     filters?: any;
 }
-export interface NotificationStats {
+export interface NotificationStatsResult {
     total: number;
     unread: number;
     read: number;
     byType?: Record<string, number>;
     byPriority?: Record<string, number>;
 }
-export type GetNotificationStatsNatsResponse = NatsResponse<NotificationStats>;
+export type GetNotificationStatsNatsResponse = NatsResponse<NotificationStatsResult>;
 export interface MarkAsReadNatsRequest {
     id: string;
     readData: {
