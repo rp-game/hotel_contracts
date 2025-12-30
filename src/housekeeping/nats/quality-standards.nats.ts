@@ -45,8 +45,8 @@ export interface CreateQualityStandardNatsRequest {
     description?: string;
     roomType: string;  // RoomType enum value
     passingScore: number;
+    createdBy: string;  // User ID creating this standard - REQUIRED
     items: QualityStandardItem[];
-    createdBy: string;
     configuration?: Record<string, any>;
     effectiveDate?: string | Date;
     expiryDate?: string | Date;

@@ -65,10 +65,13 @@ export interface GetTimerStatsNatsRequest {
     hotelId: string;
 }
 export interface TimerStats {
-    totalDuration: number;
-    pauseDuration?: number;
-    workDuration?: number;
-    pauseCount?: number;
+    elapsedSeconds: number;
+    pausedSeconds: number;
+    workingSeconds: number;
+    elapsedTime: string;
+    pausedTime: string;
+    workingTime: string;
+    efficiency: number;
 }
 export type GetTimerStatsNatsResponse = NatsResponse<TimerStats>;
 export interface GetTaskTimersNatsRequest {

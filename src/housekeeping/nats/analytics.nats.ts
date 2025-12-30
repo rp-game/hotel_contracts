@@ -8,12 +8,14 @@ import { NatsResponse } from '../../common';
 // CALCULATE-METRIC
 export interface CalculateMetricNatsRequest {
   calculateData: {
-    metricType: 'TASK_COMPLETION_RATE' | 'QUALITY_SCORE' | 'EFFICIENCY' | 'STAFF_PERFORMANCE';
-    dateRange: {
-      startDate: string;
-      endDate: string;
-    };
-    filters?: Record<string, unknown>;
+    metricType: string;
+    metricPeriod: string;  // MetricPeriod enum value - REQUIRED
+    metricDate: string;  // Date for metric calculation - REQUIRED
+    staffId?: string;
+    roomId?: string;
+    roomType?: string;
+    taskType?: string;
+    options?: Record<string, any>;
   };
   tenantId: string;
   hotelId: string;
@@ -30,12 +32,13 @@ export type CalculateMetricNatsResponse = NatsResponse<MetricResult>;
 export interface QueryMetricsNatsRequest {
   queryData: {
     metricTypes: string[];
-    dateRange: {
-      startDate: string;
-      endDate: string;
-    };
-    groupBy?: string;
-    filters?: Record<string, unknown>;
+    metricPeriod: string;  // MetricPeriod enum value - REQUIRED
+    startDate: string;  // Start date for metrics query - REQUIRED
+    endDate: string;  // End date for metrics query - REQUIRED
+    staffIds?: string[];
+    roomTypes?: string[];
+    includeTrends?: boolean;
+    includeTargets?: boolean;
   };
   tenantId: string;
   hotelId: string;

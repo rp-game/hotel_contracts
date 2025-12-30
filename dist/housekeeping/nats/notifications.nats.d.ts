@@ -6,16 +6,21 @@ import { NatsResponse } from '../../common';
 export interface Notification {
     id: string;
     recipientId: string;
+    recipientRole?: string;
     title: string;
     message: string;
     type: string;
     priority: string;
     data?: Record<string, unknown>;
+    channels: string[];
     isRead: boolean;
+    isSent: boolean;
     readAt?: string | Date;
-    scheduledFor?: string | Date;
     sentAt?: string | Date;
+    scheduledFor?: string | Date;
     expiresAt?: string | Date;
+    referenceId?: string;
+    referenceType?: string;
     tenantId: string;
     hotelId: string;
     createdAt: string | Date;
@@ -24,12 +29,17 @@ export interface Notification {
 export interface CreateNotificationNatsRequest {
     createData: {
         recipientId: string;
+        recipientRole?: string;
         title: string;
         message: string;
         type: string;
-        priority: string;
+        priority?: string;
         data?: Record<string, unknown>;
+        channels: string[];
         scheduledFor?: string | Date;
+        expiresAt?: string | Date;
+        referenceId?: string;
+        referenceType?: string;
     };
     tenantId: string;
     hotelId: string;

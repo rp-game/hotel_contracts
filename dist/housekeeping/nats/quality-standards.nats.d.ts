@@ -38,8 +38,8 @@ export interface CreateQualityStandardNatsRequest {
         description?: string;
         roomType: string;
         passingScore: number;
-        items: QualityStandardItem[];
         createdBy: string;
+        items: QualityStandardItem[];
         configuration?: Record<string, any>;
         effectiveDate?: string | Date;
         expiryDate?: string | Date;

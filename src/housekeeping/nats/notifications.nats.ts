@@ -10,16 +10,21 @@ import { NatsResponse } from '../../common';
 export interface Notification {
   id: string;
   recipientId: string;
+  recipientRole?: string;  // Role of the recipient (for role-based notifications)
   title: string;
   message: string;
   type: string;  // NotificationType enum value as string
   priority: string;  // NotificationPriority enum value as string
   data?: Record<string, unknown>;
+  channels: string[];  // NotificationChannel enum values
   isRead: boolean;
+  isSent: boolean;  // Whether notification was successfully sent
   readAt?: string | Date;  // Accept both for compatibility during conversion
-  scheduledFor?: string | Date;  // Accept both for compatibility during conversion
   sentAt?: string | Date;  // Accept both for compatibility during conversion
+  scheduledFor?: string | Date;  // Accept both for compatibility during conversion
   expiresAt?: string | Date;  // Accept both for compatibility during conversion
+  referenceId?: string;  // Reference ID for related entity (task, booking, etc)
+  referenceType?: string;  // Type of referenced entity
   tenantId: string;
   hotelId: string;
   createdAt: string | Date;  // Accept both for compatibility during conversion
@@ -30,12 +35,17 @@ export interface Notification {
 export interface CreateNotificationNatsRequest {
   createData: {
     recipientId: string;
+    recipientRole?: string;
     title: string;
     message: string;
     type: string;  // NotificationType enum value
-    priority: string;  // NotificationPriority enum value
+    priority?: string;  // NotificationPriority enum value
     data?: Record<string, unknown>;
+    channels: string[];  // NotificationChannel enum values - REQUIRED
     scheduledFor?: string | Date;
+    expiresAt?: string | Date;
+    referenceId?: string;
+    referenceType?: string;
   };
   tenantId: string;
   hotelId: string;
