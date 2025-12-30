@@ -9,10 +9,10 @@ export interface Amenity {
   id: string;
   name: string;
   description?: string;
-  category: string;
-  quantity: number;
-  unit: string;
-  costPerUnit?: number;
+  category?: string;
+  cost?: number;
+  estimatedTime?: number;
+  isAvailable: boolean;
   tenantId: string;
   hotelId: string;
   createdAt: string;
@@ -23,10 +23,10 @@ export interface Amenity {
 export interface CreateAmenityNatsRequest {
   name: string;
   description?: string;
-  category: string;
-  quantity: number;
-  unit: string;
-  costPerUnit?: number;
+  category?: string;
+  cost?: number;
+  estimatedTime?: number;
+  isAvailable?: boolean;
   tenantId: string;
   hotelId: string;
 }
@@ -63,9 +63,9 @@ export interface UpdateAmenityNatsRequest {
     name?: string;
     description?: string;
     category?: string;
-    quantity?: number;
-    unit?: string;
-    costPerUnit?: number;
+    cost?: number;
+    estimatedTime?: number;
+    isAvailable?: boolean;
   };
   tenantId: string;
   hotelId: string;
