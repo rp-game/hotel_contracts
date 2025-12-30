@@ -5,22 +5,25 @@
 
 import { NatsResponse } from '../../common';
 
+// Note: Dates are strings because they're serialized over NATS
+// Type and Priority are enum strings (NotificationType/NotificationPriority values)
 export interface Notification {
   id: string;
   recipientId: string;
   title: string;
   message: string;
-  type: string;
-  priority: string;
+  type: string;  // NotificationType enum value as string
+  priority: string;  // NotificationPriority enum value as string
   data?: Record<string, unknown>;
   isRead: boolean;
-  readAt?: string;
-  scheduledFor?: string;
-  sentAt?: string;
+  readAt?: string | Date;  // Accept both for compatibility during conversion
+  scheduledFor?: string | Date;  // Accept both for compatibility during conversion
+  sentAt?: string | Date;  // Accept both for compatibility during conversion
+  expiresAt?: string | Date;  // Accept both for compatibility during conversion
   tenantId: string;
   hotelId: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: string | Date;  // Accept both for compatibility during conversion
+  updatedAt: string | Date;  // Accept both for compatibility during conversion
 }
 
 // CREATE
@@ -29,10 +32,10 @@ export interface CreateNotificationNatsRequest {
     recipientId: string;
     title: string;
     message: string;
-    type: string;
-    priority: string;
+    type: string;  // NotificationType enum value
+    priority: string;  // NotificationPriority enum value
     data?: Record<string, unknown>;
-    scheduledFor?: Date;
+    scheduledFor?: string | Date;
   };
   tenantId: string;
   hotelId: string;

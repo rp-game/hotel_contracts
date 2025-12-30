@@ -12,13 +12,14 @@ export interface Notification {
     priority: string;
     data?: Record<string, unknown>;
     isRead: boolean;
-    readAt?: string;
-    scheduledFor?: string;
-    sentAt?: string;
+    readAt?: string | Date;
+    scheduledFor?: string | Date;
+    sentAt?: string | Date;
+    expiresAt?: string | Date;
     tenantId: string;
     hotelId: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: string | Date;
+    updatedAt: string | Date;
 }
 export interface CreateNotificationNatsRequest {
     createData: {
@@ -28,7 +29,7 @@ export interface CreateNotificationNatsRequest {
         type: string;
         priority: string;
         data?: Record<string, unknown>;
-        scheduledFor?: Date;
+        scheduledFor?: string | Date;
     };
     tenantId: string;
     hotelId: string;
