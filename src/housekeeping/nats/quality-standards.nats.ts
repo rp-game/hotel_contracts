@@ -9,9 +9,12 @@ export interface QualityStandardItem {
   name: string;
   description?: string;
   category: string;
-  isRequired: boolean;
   points: number;
-  order: number;
+  isCritical?: boolean;
+  sortOrder: number;
+  isActive?: boolean;
+  instructions?: Record<string, any>;
+  inspectorNotes?: string;
 }
 
 export interface QualityStandard {
@@ -22,6 +25,11 @@ export interface QualityStandard {
   version: number;
   isActive: boolean;
   items: QualityStandardItem[];
+  passingScore?: number;
+  configuration?: Record<string, any>;
+  effectiveDate?: string;
+  expiryDate?: string;
+  createdBy: string;
   tenantId: string;
   hotelId: string;
   createdAt: string;
@@ -34,10 +42,12 @@ export interface CreateQualityStandardNatsRequest {
     name: string;
     description?: string;
     roomType: string;
-    version: number;
-    isActive: boolean;
+    passingScore: number;
     items: QualityStandardItem[];
     createdBy: string;
+    configuration?: Record<string, any>;
+    effectiveDate?: string;
+    expiryDate?: string;
   };
   tenantId: string;
   hotelId: string;
@@ -100,9 +110,12 @@ export interface UpdateQualityStandardNatsRequest {
     name?: string;
     description?: string;
     roomType?: string;
-    isActive?: boolean;
+    passingScore?: number;
+    configuration?: Record<string, any>;
+    effectiveDate?: string;
+    expiryDate?: string;
+    updatedBy?: string;
     items?: QualityStandardItem[];
-    updatedBy: string;
   };
   tenantId: string;
   hotelId: string;
