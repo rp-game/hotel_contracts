@@ -5,6 +5,7 @@
 
 import { NatsResponse } from '../../common';
 
+// Note: Dates are strings because they're serialized over NATS
 export interface Amenity {
   id: string;
   name: string;
@@ -15,8 +16,8 @@ export interface Amenity {
   isAvailable: boolean;
   tenantId: string;
   hotelId: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: string | Date;  // Accept both for compatibility during conversion
+  updatedAt: string | Date;  // Accept both for compatibility during conversion
 }
 
 // CREATE

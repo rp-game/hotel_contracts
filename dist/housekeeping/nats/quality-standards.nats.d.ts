@@ -24,13 +24,13 @@ export interface QualityStandard {
     items: QualityStandardItem[];
     passingScore?: number;
     configuration?: Record<string, any>;
-    effectiveDate?: string;
-    expiryDate?: string;
+    effectiveDate?: string | Date;
+    expiryDate?: string | Date;
     createdBy: string;
     tenantId: string;
     hotelId: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: string | Date;
+    updatedAt: string | Date;
 }
 export interface CreateQualityStandardNatsRequest {
     createData: {
@@ -41,8 +41,8 @@ export interface CreateQualityStandardNatsRequest {
         items: QualityStandardItem[];
         createdBy: string;
         configuration?: Record<string, any>;
-        effectiveDate?: string;
-        expiryDate?: string;
+        effectiveDate?: string | Date;
+        expiryDate?: string | Date;
     };
     tenantId: string;
     hotelId: string;
@@ -97,8 +97,8 @@ export interface UpdateQualityStandardNatsRequest {
         roomType?: string;
         passingScore?: number;
         configuration?: Record<string, any>;
-        effectiveDate?: string;
-        expiryDate?: string;
+        effectiveDate?: string | Date;
+        expiryDate?: string | Date;
         updatedBy?: string;
         items?: QualityStandardItem[];
     };

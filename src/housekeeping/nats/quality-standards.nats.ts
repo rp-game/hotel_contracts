@@ -5,10 +5,12 @@
 
 import { NatsResponse } from '../../common';
 
+// Note: Dates are strings because they're serialized over NATS
+// Category in items is an enum string (InspectionItemCategory value)
 export interface QualityStandardItem {
   name: string;
   description?: string;
-  category: string;
+  category: string;  // InspectionItemCategory enum value as string
   points: number;
   isCritical?: boolean;
   sortOrder: number;
@@ -21,19 +23,19 @@ export interface QualityStandard {
   id: string;
   name: string;
   description?: string;
-  roomType: string;
+  roomType: string;  // RoomType enum value as string
   version: number;
   isActive: boolean;
   items: QualityStandardItem[];
   passingScore?: number;
   configuration?: Record<string, any>;
-  effectiveDate?: string;
-  expiryDate?: string;
+  effectiveDate?: string | Date;  // Accept both for compatibility during conversion
+  expiryDate?: string | Date;     // Accept both for compatibility during conversion
   createdBy: string;
   tenantId: string;
   hotelId: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: string | Date;  // Accept both for compatibility during conversion
+  updatedAt: string | Date;  // Accept both for compatibility during conversion
 }
 
 // CREATE
@@ -41,13 +43,13 @@ export interface CreateQualityStandardNatsRequest {
   createData: {
     name: string;
     description?: string;
-    roomType: string;
+    roomType: string;  // RoomType enum value
     passingScore: number;
     items: QualityStandardItem[];
     createdBy: string;
     configuration?: Record<string, any>;
-    effectiveDate?: string;
-    expiryDate?: string;
+    effectiveDate?: string | Date;
+    expiryDate?: string | Date;
   };
   tenantId: string;
   hotelId: string;
@@ -109,11 +111,11 @@ export interface UpdateQualityStandardNatsRequest {
   updateData: {
     name?: string;
     description?: string;
-    roomType?: string;
+    roomType?: string;  // RoomType enum value
     passingScore?: number;
     configuration?: Record<string, any>;
-    effectiveDate?: string;
-    expiryDate?: string;
+    effectiveDate?: string | Date;
+    expiryDate?: string | Date;
     updatedBy?: string;
     items?: QualityStandardItem[];
   };

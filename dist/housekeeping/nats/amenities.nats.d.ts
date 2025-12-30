@@ -13,8 +13,8 @@ export interface Amenity {
     isAvailable: boolean;
     tenantId: string;
     hotelId: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: string | Date;
+    updatedAt: string | Date;
 }
 export interface CreateAmenityNatsRequest {
     name: string;
