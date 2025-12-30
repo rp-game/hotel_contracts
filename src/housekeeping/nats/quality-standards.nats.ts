@@ -85,7 +85,10 @@ export interface QualityStandardsStatistics {
   totalStandards: number;
   activeStandards: number;
   inactiveStandards?: number;
+  averageScore: number;
+  standardsByRoomType?: Record<string, number>;
   byRoomType?: Record<string, number>;
+  averageItemsPerStandard?: number;
 }
 export type QualityStandardsStatisticsNatsResponse = NatsResponse<QualityStandardsStatistics>;
 
@@ -138,4 +141,4 @@ export interface DeleteQualityStandardNatsRequest {
   tenantId: string;
   hotelId: string;
 }
-export type DeleteQualityStandardNatsResponse = NatsResponse<{ message: string }>;
+export type DeleteQualityStandardNatsResponse = NatsResponse<{ success: boolean; message: string }>;

@@ -65,8 +65,12 @@ export interface GetDashboardSummaryNatsRequest {
 export interface DashboardSummary {
   totalTasks: number;
   completedTasks: number;
+  pendingTasks: number;
   completionRate: number;
-  averageQualityScore: number;
+  averageQualityScore?: number;
+  averageCompletionTime?: number;
+  qualityScore?: number;
+  topPerformers?: Array<{ staffId: string; score: number }>;
   staffPerformance?: {
     topPerformers?: Array<{ staffId: string; score: number }>;
     needsImprovement?: Array<{ staffId: string; score: number }>;
