@@ -89,10 +89,10 @@ export interface StaffDto {
     email: string;
     fullName: string;
     phoneNumber?: string;
-    roles: UserRole[];
+    roles: UserRole[] | string[];
     departmentId?: string;
     position?: string;
-    staffStatus?: StaffStatus;
+    staffStatus?: StaffStatus | string;
     tenantId: string;
     hotelId?: string;
     createdAt: Date;
