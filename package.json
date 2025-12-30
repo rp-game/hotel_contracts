@@ -1,6 +1,6 @@
 {
   "name": "@hotel/contracts",
-  "version": "0.1.43",
+  "version": "0.1.44",
   "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -209,10 +209,6 @@
       "types": "./dist/channel/enums/index.d.ts",
       "default": "./dist/channel/enums/index.js"
     },
-    "./notification": {
-      "types": "./dist/notification/index.d.ts",
-      "default": "./dist/notification/index.js"
-    },
     "./report": {
       "types": "./dist/report/index.d.ts",
       "default": "./dist/report/index.js"
@@ -252,65 +248,183 @@
   },
   "typesVersions": {
     "*": {
-      "common": ["dist/common/index.d.ts"],
-      "booking": ["dist/booking/index.d.ts"],
-      "booking/nats": ["dist/booking/nats/index.d.ts"],
-      "booking/rest": ["dist/booking/rest/index.d.ts"],
-      "booking/types": ["dist/booking/types/index.d.ts"],
-      "booking/enums": ["dist/booking/enums/index.d.ts"],
-      "booking/inter-service": ["dist/booking/inter-service/index.d.ts"],
-      "payment": ["dist/payment/index.d.ts"],
-      "payment/enums": ["dist/payment/enums/index.d.ts"],
-      "payment/inter-service": ["dist/payment/inter-service/index.d.ts"],
-      "pricing": ["dist/pricing/index.d.ts"],
-      "pricing/nats": ["dist/pricing/nats/index.d.ts"],
-      "pricing/rest": ["dist/pricing/rest/index.d.ts"],
-      "pricing/types": ["dist/pricing/types/index.d.ts"],
-      "pricing/enums": ["dist/pricing/enums/index.d.ts"],
-      "pricing/inter-service": ["dist/pricing/inter-service/index.d.ts"],
-      "inventory": ["dist/inventory/index.d.ts"],
-      "inventory/nats": ["dist/inventory/nats/index.d.ts"],
-      "inventory/rest": ["dist/inventory/rest/index.d.ts"],
-      "inventory/types": ["dist/inventory/types/index.d.ts"],
-      "inventory/enums": ["dist/inventory/enums/index.d.ts"],
-      "inventory/inter-service": ["dist/inventory/inter-service/index.d.ts"],
-      "housekeeping": ["dist/housekeeping/index.d.ts"],
-      "housekeeping/nats": ["dist/housekeeping/nats/index.d.ts"],
-      "housekeeping/rest": ["dist/housekeeping/rest/index.d.ts"],
-      "housekeeping/types": ["dist/housekeeping/types/index.d.ts"],
-      "housekeeping/enums": ["dist/housekeeping/enums/index.d.ts"],
-      "housekeeping/inter-service": ["dist/housekeeping/inter-service/index.d.ts"],
-      "user": ["dist/user/index.d.ts"],
-      "user/nats": ["dist/user/nats/index.d.ts"],
-      "user/inter-service": ["dist/user/inter-service/index.d.ts"],
-      "user/types": ["dist/user/types/index.d.ts"],
-      "notification": ["dist/notification/index.d.ts"],
-      "notification/inter-service": ["dist/notification/inter-service/index.d.ts"],
-      "notification/enums": ["dist/notification/enums/index.d.ts"],
-      "ota": ["dist/ota/index.d.ts"],
-      "ota/inter-service": ["dist/ota/inter-service/index.d.ts"],
-      "ota/enums": ["dist/ota/enums/index.d.ts"],
-      "crm": ["dist/crm/index.d.ts"],
-      "crm/nats": ["dist/crm/nats/index.d.ts"],
-      "crm/types": ["dist/crm/types/index.d.ts"],
-      "loyalty": ["dist/loyalty/index.d.ts"],
-      "loyalty/nats": ["dist/loyalty/nats/index.d.ts"],
-      "loyalty/types": ["dist/loyalty/types/index.d.ts"],
-      "financial": ["dist/financial/index.d.ts"],
-      "channel": ["dist/channel/index.d.ts"],
-      "channel/nats": ["dist/channel/nats/index.d.ts"],
-      "channel/rest": ["dist/channel/rest/index.d.ts"],
-      "channel/types": ["dist/channel/types/index.d.ts"],
-      "channel/enums": ["dist/channel/enums/index.d.ts"],
-      "report": ["dist/report/index.d.ts"],
-      "platform": ["dist/platform/index.d.ts"],
-      "room-move": ["dist/room-move/index.d.ts"],
-      "room-move/nats": ["dist/room-move/nats/index.d.ts"],
-      "room-move/types": ["dist/room-move/types/index.d.ts"],
-      "room-move/enums": ["dist/room-move/enums/index.d.ts"],
-      "billing": ["dist/billing/index.d.ts"],
-      "billing/nats": ["dist/billing/nats/index.d.ts"],
-      "billing/types": ["dist/billing/types/index.d.ts"]
+      "common": [
+        "dist/common/index.d.ts"
+      ],
+      "booking": [
+        "dist/booking/index.d.ts"
+      ],
+      "booking/nats": [
+        "dist/booking/nats/index.d.ts"
+      ],
+      "booking/rest": [
+        "dist/booking/rest/index.d.ts"
+      ],
+      "booking/types": [
+        "dist/booking/types/index.d.ts"
+      ],
+      "booking/enums": [
+        "dist/booking/enums/index.d.ts"
+      ],
+      "booking/inter-service": [
+        "dist/booking/inter-service/index.d.ts"
+      ],
+      "payment": [
+        "dist/payment/index.d.ts"
+      ],
+      "payment/enums": [
+        "dist/payment/enums/index.d.ts"
+      ],
+      "payment/inter-service": [
+        "dist/payment/inter-service/index.d.ts"
+      ],
+      "pricing": [
+        "dist/pricing/index.d.ts"
+      ],
+      "pricing/nats": [
+        "dist/pricing/nats/index.d.ts"
+      ],
+      "pricing/rest": [
+        "dist/pricing/rest/index.d.ts"
+      ],
+      "pricing/types": [
+        "dist/pricing/types/index.d.ts"
+      ],
+      "pricing/enums": [
+        "dist/pricing/enums/index.d.ts"
+      ],
+      "pricing/inter-service": [
+        "dist/pricing/inter-service/index.d.ts"
+      ],
+      "inventory": [
+        "dist/inventory/index.d.ts"
+      ],
+      "inventory/nats": [
+        "dist/inventory/nats/index.d.ts"
+      ],
+      "inventory/rest": [
+        "dist/inventory/rest/index.d.ts"
+      ],
+      "inventory/types": [
+        "dist/inventory/types/index.d.ts"
+      ],
+      "inventory/enums": [
+        "dist/inventory/enums/index.d.ts"
+      ],
+      "inventory/inter-service": [
+        "dist/inventory/inter-service/index.d.ts"
+      ],
+      "housekeeping": [
+        "dist/housekeeping/index.d.ts"
+      ],
+      "housekeeping/nats": [
+        "dist/housekeeping/nats/index.d.ts"
+      ],
+      "housekeeping/rest": [
+        "dist/housekeeping/rest/index.d.ts"
+      ],
+      "housekeeping/types": [
+        "dist/housekeeping/types/index.d.ts"
+      ],
+      "housekeeping/enums": [
+        "dist/housekeeping/enums/index.d.ts"
+      ],
+      "housekeeping/inter-service": [
+        "dist/housekeeping/inter-service/index.d.ts"
+      ],
+      "user": [
+        "dist/user/index.d.ts"
+      ],
+      "user/nats": [
+        "dist/user/nats/index.d.ts"
+      ],
+      "user/inter-service": [
+        "dist/user/inter-service/index.d.ts"
+      ],
+      "user/types": [
+        "dist/user/types/index.d.ts"
+      ],
+      "notification": [
+        "dist/notification/index.d.ts"
+      ],
+      "notification/inter-service": [
+        "dist/notification/inter-service/index.d.ts"
+      ],
+      "notification/enums": [
+        "dist/notification/enums/index.d.ts"
+      ],
+      "ota": [
+        "dist/ota/index.d.ts"
+      ],
+      "ota/inter-service": [
+        "dist/ota/inter-service/index.d.ts"
+      ],
+      "ota/enums": [
+        "dist/ota/enums/index.d.ts"
+      ],
+      "crm": [
+        "dist/crm/index.d.ts"
+      ],
+      "crm/nats": [
+        "dist/crm/nats/index.d.ts"
+      ],
+      "crm/types": [
+        "dist/crm/types/index.d.ts"
+      ],
+      "loyalty": [
+        "dist/loyalty/index.d.ts"
+      ],
+      "loyalty/nats": [
+        "dist/loyalty/nats/index.d.ts"
+      ],
+      "loyalty/types": [
+        "dist/loyalty/types/index.d.ts"
+      ],
+      "financial": [
+        "dist/financial/index.d.ts"
+      ],
+      "channel": [
+        "dist/channel/index.d.ts"
+      ],
+      "channel/nats": [
+        "dist/channel/nats/index.d.ts"
+      ],
+      "channel/rest": [
+        "dist/channel/rest/index.d.ts"
+      ],
+      "channel/types": [
+        "dist/channel/types/index.d.ts"
+      ],
+      "channel/enums": [
+        "dist/channel/enums/index.d.ts"
+      ],
+      "report": [
+        "dist/report/index.d.ts"
+      ],
+      "platform": [
+        "dist/platform/index.d.ts"
+      ],
+      "room-move": [
+        "dist/room-move/index.d.ts"
+      ],
+      "room-move/nats": [
+        "dist/room-move/nats/index.d.ts"
+      ],
+      "room-move/types": [
+        "dist/room-move/types/index.d.ts"
+      ],
+      "room-move/enums": [
+        "dist/room-move/enums/index.d.ts"
+      ],
+      "billing": [
+        "dist/billing/index.d.ts"
+      ],
+      "billing/nats": [
+        "dist/billing/nats/index.d.ts"
+      ],
+      "billing/types": [
+        "dist/billing/types/index.d.ts"
+      ]
     }
   },
   "files": [
