@@ -89,13 +89,7 @@ export interface GetKPIsNatsRequest {
         };
     };
 }
-export interface KPIs {
-    taskCompletionRate: number;
-    averageTaskDuration: number;
-    qualityScore: number;
-    customerSatisfaction?: number;
-    staffEfficiency: number;
-}
+export type KPIs = Record<string, number>;
 export type GetKPIsNatsResponse = NatsResponse<KPIs>;
 export interface GeneratePerformanceReportNatsRequest {
     tenantId: string;
@@ -108,13 +102,23 @@ export interface GeneratePerformanceReportNatsRequest {
     };
 }
 export interface PerformanceReport {
-    period: {
-        startDate: string;
-        endDate: string;
-    };
-    summary: DashboardSummary;
-    kpis: KPIs;
-    trends?: any[];
+    title: string;
+    startDate: string;
+    endDate: string;
+    kpis: Record<string, number>;
+    summary: Record<string, any>;
+    trends: Array<{
+        date: string;
+        value: number;
+    }>;
+    staffPerformance: Record<string, any>;
+    distribution: Array<{
+        category: string;
+        count: number;
+        color?: string;
+    }>;
+    generatedAt: string;
+    generatedBy: string;
 }
 export type GeneratePerformanceReportNatsResponse = NatsResponse<PerformanceReport>;
 export interface GetTrendsNatsRequest {
@@ -129,15 +133,16 @@ export interface GetTrendsNatsRequest {
         groupBy?: string;
     };
 }
-export interface TrendData {
-    metricType: string;
+export interface TrendAnalysis {
+    slope: number;
+    intercept: number;
+    trend: 'INCREASING' | 'DECREASING' | 'STABLE';
     dataPoints: Array<{
         date: string;
         value: number;
     }>;
-    trend: 'UP' | 'DOWN' | 'STABLE';
-    changePercentage: number;
 }
+export type TrendData = Record<string, TrendAnalysis>;
 export type GetTrendsNatsResponse = NatsResponse<TrendData>;
 export interface GetComparisonNatsRequest {
     tenantId: string;
@@ -154,12 +159,14 @@ export interface GetComparisonNatsRequest {
     };
 }
 export interface ComparisonResult {
-    current: DashboardSummary;
-    previous?: DashboardSummary;
-    changes?: Record<string, {
-        value: number;
-        percentage: number;
-        trend: 'UP' | 'DOWN' | 'STABLE';
+    totalMetrics: number;
+    periodsCovered: number;
+    metricTypes: Record<string, number>;
+    averageValues: Record<string, number>;
+    trends: Record<string, {
+        direction: 'UP' | 'DOWN' | 'STABLE';
+        change: number;
+        changePercentage: number;
     }>;
 }
 export type GetComparisonNatsResponse = NatsResponse<ComparisonResult>;

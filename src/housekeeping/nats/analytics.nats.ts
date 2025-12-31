@@ -89,13 +89,9 @@ export interface GetKPIsNatsRequest {
     };
   };
 }
-export interface KPIs {
-  taskCompletionRate: number;
-  averageTaskDuration: number;
-  qualityScore: number;
-  customerSatisfaction?: number;
-  staffEfficiency: number;
-}
+// KPIs returned as Record with MetricType enum keys
+// Example: { "TASK_COMPLETION_RATE": 94.2, "QUALITY_SCORE": 85, "AVERAGE_TASK_DURATION": 15 }
+export type KPIs = Record<string, number>;
 export type GetKPIsNatsResponse = NatsResponse<KPIs>;
 
 // PERFORMANCE-REPORT
@@ -109,14 +105,25 @@ export interface GeneratePerformanceReportNatsRequest {
     };
   };
 }
+// Comprehensive performance report with all analytics
 export interface PerformanceReport {
-  period: {
-    startDate: string;
-    endDate: string;
-  };
-  summary: DashboardSummary;
-  kpis: KPIs;
-  trends?: any[];
+  title: string;  // Report title with date range
+  startDate: string;  // Start date in ISO format
+  endDate: string;  // End date in ISO format
+  kpis: Record<string, number>;  // KPIs with MetricType enum keys
+  summary: Record<string, any>;  // Summary statistics
+  trends: Array<{
+    date: string;
+    value: number;
+  }>;  // Trend data points
+  staffPerformance: Record<string, any>;  // Staff breakdown
+  distribution: Array<{
+    category: string;
+    count: number;
+    color?: string;
+  }>;  // Performance distribution
+  generatedAt: string;  // Generation timestamp in ISO format
+  generatedBy: string;  // User or system that generated report
 }
 export type GeneratePerformanceReportNatsResponse = NatsResponse<PerformanceReport>;
 
@@ -133,15 +140,18 @@ export interface GetTrendsNatsRequest {
     groupBy?: string;
   };
 }
-export interface TrendData {
-  metricType: string;
+export interface TrendAnalysis {
+  slope: number;
+  intercept: number;
+  trend: 'INCREASING' | 'DECREASING' | 'STABLE';
   dataPoints: Array<{
     date: string;
     value: number;
   }>;
-  trend: 'UP' | 'DOWN' | 'STABLE';
-  changePercentage: number;
 }
+// Trends returned as Record with metricType as key and TrendAnalysis as value
+// Example: { "TASK_COMPLETION_RATE": { slope: 0.5, intercept: 80, trend: 'INCREASING', dataPoints: [...] } }
+export type TrendData = Record<string, TrendAnalysis>;
 export type GetTrendsNatsResponse = NatsResponse<TrendData>;
 
 // COMPARISON
@@ -159,13 +169,16 @@ export interface GetComparisonNatsRequest {
     };
   };
 }
+// Aggregate metrics summary comparing metrics across period
 export interface ComparisonResult {
-  current: DashboardSummary;
-  previous?: DashboardSummary;
-  changes?: Record<string, {
-    value: number;
-    percentage: number;
-    trend: 'UP' | 'DOWN' | 'STABLE';
+  totalMetrics: number;
+  periodsCovered: number;
+  metricTypes: Record<string, number>;  // {metricType: count}
+  averageValues: Record<string, number>;  // {metricType: avgValue}
+  trends: Record<string, {
+    direction: 'UP' | 'DOWN' | 'STABLE';
+    change: number;
+    changePercentage: number;
   }>;
 }
 export type GetComparisonNatsResponse = NatsResponse<ComparisonResult>;
