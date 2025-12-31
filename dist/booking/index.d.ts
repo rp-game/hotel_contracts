@@ -20,4 +20,5 @@ export * from './rest';
 export * from './types';
 export * from './enums';
 export * from './inter-service';
+export * from './dto';
 //# sourceMappingURL=index.d.ts.map

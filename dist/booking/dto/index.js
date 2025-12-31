@@ -1,20 +1,6 @@
 "use strict";
 /**
- * Booking Domain Contracts
- *
- * Includes:
- * - NATS message contracts (booking.* patterns)
- * - REST API DTOs
- * - Domain types and enums
- * - Inter-service communication types
- *
- * Import examples:
- * ```typescript
- * import { CreateBookingRequest } from '@hotel/contracts/booking/nats';
- * import { BookingStatus } from '@hotel/contracts/booking';
- * import { CustomerResponse } from '@hotel/contracts/booking/inter-service';
- * import * as BookingContracts from '@hotel/contracts/booking';
- * ```
+ * Booking Domain - Data Transfer Objects
  */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -31,10 +17,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./nats"), exports);
-__exportStar(require("./rest"), exports);
-__exportStar(require("./types"), exports);
-__exportStar(require("./enums"), exports);
-__exportStar(require("./inter-service"), exports);
-__exportStar(require("./dto"), exports);
+__exportStar(require("./booking-response.dto"), exports);
 //# sourceMappingURL=index.js.map
