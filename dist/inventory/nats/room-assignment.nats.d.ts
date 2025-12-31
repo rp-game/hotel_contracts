@@ -85,7 +85,7 @@ export type GetAvailableRoomsNatsResponse = NatsResponse<GetAvailableRoomsRespon
  * Find Optimal Room Request
  * Pattern: rooms.assignment.optimal
  */
-export interface BookingData {
+export interface RoomAssignmentBookingData {
     id?: string;
     bookingId: string;
     roomTypeId: string;
@@ -98,7 +98,7 @@ export interface BookingData {
     assignmentStatus?: string;
 }
 export interface FindOptimalRoomRequest {
-    booking: BookingData;
+    booking: RoomAssignmentBookingData;
     hotelId: string;
     constraints?: any;
 }

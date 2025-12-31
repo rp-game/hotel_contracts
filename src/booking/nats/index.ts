@@ -11,5 +11,6 @@
 export * from './create-booking.nats';
 export * from './unassigned-bookings.nats';
 export * from './check-in.nats';
+export * from './mobile-checkout.nats';
 export * from './timeline-action.nats';
 export * from './analytics.nats';

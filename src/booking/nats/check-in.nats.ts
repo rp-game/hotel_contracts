@@ -31,7 +31,7 @@ export interface CheckInBookingNatsRequest {
   checkedInBy: string;
 }
 
-export interface CheckInBookingData {
+export interface BookingData {
   id: string;
   bookingReference: string;
   tenantId: string;
@@ -56,6 +56,9 @@ export interface CheckInBookingData {
   updatedAt: string;
 }
 
+// Backward compatibility alias (deprecated, use BookingData instead)
+export type CheckInBookingData = BookingData;
+
 export type CheckInBookingNatsResponse = NatsResponse<CheckInBookingData>;
 
 // ============= CHECK-OUT =============
@@ -75,7 +78,7 @@ export interface CheckOutBookingNatsRequest {
   billItems?: any[];
 }
 
-export type CheckOutBookingNatsResponse = NatsResponse<CheckInBookingData>;
+export type CheckOutBookingNatsResponse = NatsResponse<BookingData>;
 
 // ============= PENDING CHECK-INS =============
 
@@ -88,7 +91,7 @@ export interface GetPendingCheckinsNatsRequest {
 }
 
 export interface PendingCheckinsListData {
-  bookings: CheckInBookingData[];
+  bookings: BookingData[];
   total: number;
   page: number;
   limit: number;
