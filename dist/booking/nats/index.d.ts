@@ -9,6 +9,7 @@
  */
 export * from './create-booking.nats';
 export * from './unassigned-bookings.nats';
+export * from './check-in.nats';
 export * from './timeline-action.nats';
 export * from './analytics.nats';
 //# sourceMappingURL=index.d.ts.map
