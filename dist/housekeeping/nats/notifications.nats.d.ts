@@ -3,6 +3,22 @@
  * Patterns: housekeeping.notifications.*
  */
 import { NatsResponse } from '../../common';
+export interface NotificationUIDto {
+    id: string;
+    title: string;
+    message: string;
+    type: 'info' | 'warning' | 'error' | 'success';
+    priority: 'low' | 'medium' | 'high' | 'urgent';
+    isRead: boolean;
+    createdAt: string;
+    readAt?: string;
+    relatedTask?: {
+        id: string;
+        roomNumber: string;
+        taskType: string;
+    };
+    data?: Record<string, unknown>;
+}
 export interface Notification {
     id: string;
     recipientId: string;

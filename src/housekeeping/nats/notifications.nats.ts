@@ -5,8 +5,29 @@
 
 import { NatsResponse } from '../../common';
 
-// Note: Dates are strings because they're serialized over NATS
+// NOTE: Dates are strings because they're serialized over NATS
 // Type and Priority are enum strings (NotificationType/NotificationPriority values)
+
+// Frontend/REST API Notification DTO (simplified UI model)
+// This is what the API Gateway returns to the frontend
+export interface NotificationUIDto {
+  id: string;
+  title: string;
+  message: string;
+  type: 'info' | 'warning' | 'error' | 'success';
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  isRead: boolean;
+  createdAt: string;
+  readAt?: string;
+  relatedTask?: {
+    id: string;
+    roomNumber: string;
+    taskType: string;
+  };
+  data?: Record<string, unknown>;
+}
+
+// Internal NATS Notification (full model with metadata)
 export interface Notification {
   id: string;
   recipientId: string;
