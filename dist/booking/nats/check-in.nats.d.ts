@@ -3,6 +3,7 @@
  * Patterns: booking.check_in, booking.check_out, booking.pending_checkins
  */
 import { NatsResponse } from '../../common';
+import { BookingResponseDto } from '../dto/booking-response.dto';
 export interface PrimaryGuestData {
     fullName: string;
     email?: string;
@@ -65,7 +66,7 @@ export interface CheckOutBookingNatsRequest {
     depositRefund?: number;
     billItems?: any[];
 }
-export type CheckOutBookingNatsResponse = NatsResponse<BookingData>;
+export type CheckOutBookingNatsResponse = NatsResponse<BookingResponseDto>;
 export interface GetPendingCheckinsNatsRequest {
     tenantId: string;
     hotelId: string;

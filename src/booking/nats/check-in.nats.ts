@@ -4,6 +4,7 @@
  */
 
 import { NatsResponse } from '../../common';
+import { BookingResponseDto } from '../dto/booking-response.dto';
 
 // ============= CHECK-IN =============
 
@@ -78,7 +79,7 @@ export interface CheckOutBookingNatsRequest {
   billItems?: any[];
 }
 
-export type CheckOutBookingNatsResponse = NatsResponse<BookingData>;
+export type CheckOutBookingNatsResponse = NatsResponse<BookingResponseDto>;
 
 // ============= PENDING CHECK-INS =============
 
