@@ -103,8 +103,7 @@ export interface SearchCheckoutsNatsRequest {
   tenantId: string;
   hotelId: string;
   query: string;
-  page?: number;
-  limit?: number;
+  filters?: any;
 }
 
 export interface SearchCheckoutsData {
@@ -123,9 +122,20 @@ export interface ValidateCheckoutQRNatsRequest {
 }
 
 export interface ValidateQRData {
-  valid: boolean;
-  roomNumber?: string;
+  isValid: boolean;
   bookingId?: string;
+  roomNumber?: string;
+  guestName?: string;
+  checkoutData?: {
+    id: string;
+    bookingCode: string;
+    guestName: string;
+    guestEmail?: string;
+    roomNumber: string;
+    checkOutDate: string;
+    status: string;
+    totalAmount: number;
+  };
   message?: string;
 }
 
@@ -139,8 +149,16 @@ export interface GetReadyRoomsNatsRequest {
   date: string;
 }
 
+export interface ReadyRoom {
+  roomNumber: string;
+  guestName: string;
+  checkOutTime: string;
+  status: 'overdue' | 'pending';
+  bookingId: string;
+}
+
 export interface ReadyRoomsData {
-  data: CheckoutData[];
+  data: ReadyRoom[];
   total: number;
 }
 
@@ -155,8 +173,17 @@ export interface GetCheckoutItemsNatsRequest {
 }
 
 export interface CheckoutItemsData {
-  items: BillItem[];
-  total: number;
+  booking: {
+    id: string;
+    bookingCode: string;
+    guestName: string;
+    totalAmount: number;
+    paymentStatus: string;
+  };
+  rooms: any[];
+  services: any[];
+  damages: any[];
+  specialRequests: string;
 }
 
 export type GetCheckoutItemsNatsResponse = NatsResponse<CheckoutItemsData>;
@@ -168,13 +195,14 @@ export interface StartCheckoutNatsRequest {
   staffId: string;
   tenantId: string;
   hotelId: string;
-  startTime: Date;
+  startTime: string | Date;
 }
 
 export interface StartCheckoutData {
-  success: boolean;
-  checkoutId: string;
-  message: string;
+  bookingId: string;
+  status: string;
+  startTime: string | Date;
+  staffId: string;
 }
 
 export type StartCheckoutNatsResponse = NatsResponse<StartCheckoutData>;
@@ -186,16 +214,17 @@ export interface CompleteCheckoutNatsRequest {
   staffId: string;
   tenantId: string;
   hotelId: string;
-  completedTime: Date;
-  finalBillAmount?: number;
-  paymentMethod?: string;
+  completedTime: string | Date;
   notes?: string;
+  damages?: any[];
+  services?: any[];
 }
 
 export interface CompleteCheckoutData {
-  success: boolean;
-  checkoutId: string;
-  message: string;
+  bookingId: string;
+  status: string;
+  completedTime: string | Date;
+  finalAmount: number;
 }
 
 export type CompleteCheckoutNatsResponse = NatsResponse<CompleteCheckoutData>;
