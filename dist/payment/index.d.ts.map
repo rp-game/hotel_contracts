@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../src/payment/index.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;GAaG;AAEH,cAAc,SAAS,CAAC;AACxB,cAAc,iBAAiB,CAAC"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../src/payment/index.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;;;GAeG;AAEH,cAAc,QAAQ,CAAC;AACvB,cAAc,SAAS,CAAC;AACxB,cAAc,iBAAiB,CAAC"}

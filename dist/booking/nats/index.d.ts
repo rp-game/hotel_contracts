@@ -8,6 +8,7 @@
  * Handler: booking-service
  */
 export * from './create-booking.nats';
+export * from './find-bookings.nats';
 export * from './unassigned-bookings.nats';
 export * from './check-in.nats';
 export * from './mobile-checkout.nats';

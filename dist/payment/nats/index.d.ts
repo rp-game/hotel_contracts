@@ -1,7 +1,11 @@
 /**
  * Payment Domain NATS Message Contracts
  *
- * TODO: Add specific payment NATS contracts
+ * These interfaces define the request/response shapes for inter-service
+ * communication via NATS messaging pattern.
+ *
+ * Pattern: *-payment.*
+ * Handler: payment-service
  */
-export {};
+export * from './offline-payment.nats';
 //# sourceMappingURL=index.d.ts.map
