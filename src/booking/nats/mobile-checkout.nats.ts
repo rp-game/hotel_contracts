@@ -12,7 +12,18 @@
  */
 
 import { NatsResponse } from '../../common';
-import { BookingResponseDto } from '../dto/booking-response.dto';
+
+// ============= ADDITIONAL SERVICE =============
+
+export interface AdditionalService {
+  id: string;
+  serviceName: string;
+  quantity: number;
+  unitPrice: string;
+  totalPrice: string;
+  date: string;
+  status: 'PENDING' | 'PAID';
+}
 
 // ============= BILL ITEM =============
 
@@ -22,6 +33,29 @@ export interface BillItem {
   unitPrice: string;
   totalPrice: string;
   category: 'ROOM' | 'SERVICE' | 'TAX' | 'DEPOSIT';
+}
+
+// ============= CHECKOUT DATA (Extended Booking) =============
+
+export interface CheckoutData {
+  id: string;
+  guestName: string;
+  email: string;
+  phone: string;
+  rooms: Array<{
+    roomId: string;
+    roomNumber: string;
+    roomType: string;
+    roomTypeName?: string;
+  }>;
+  checkInDate: string;
+  checkOutDate: string;
+  totalAmount: string;
+  paidAmount: string;
+  status: string;
+  adults: number;
+  children: number;
+  additionalServices: AdditionalService[];
 }
 
 // ============= TODAY'S STATS =============
@@ -55,7 +89,7 @@ export interface GetCheckoutHistoryNatsRequest {
 }
 
 export interface CheckoutHistoryData {
-  data: BookingResponseDto[];
+  data: CheckoutData[];
   total: number;
   page: number;
   limit: number;
@@ -74,7 +108,7 @@ export interface SearchCheckoutsNatsRequest {
 }
 
 export interface SearchCheckoutsData {
-  data: BookingResponseDto[];
+  data: CheckoutData[];
   total: number;
 }
 
@@ -106,7 +140,7 @@ export interface GetReadyRoomsNatsRequest {
 }
 
 export interface ReadyRoomsData {
-  data: BookingResponseDto[];
+  data: CheckoutData[];
   total: number;
 }
 

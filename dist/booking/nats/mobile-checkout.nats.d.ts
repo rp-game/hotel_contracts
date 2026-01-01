@@ -11,13 +11,41 @@
  *   - booking.checkout.complete - Complete checkout process
  */
 import { NatsResponse } from '../../common';
-import { BookingResponseDto } from '../dto/booking-response.dto';
+export interface AdditionalService {
+    id: string;
+    serviceName: string;
+    quantity: number;
+    unitPrice: string;
+    totalPrice: string;
+    date: string;
+    status: 'PENDING' | 'PAID';
+}
 export interface BillItem {
     description: string;
     quantity: number;
     unitPrice: string;
     totalPrice: string;
     category: 'ROOM' | 'SERVICE' | 'TAX' | 'DEPOSIT';
+}
+export interface CheckoutData {
+    id: string;
+    guestName: string;
+    email: string;
+    phone: string;
+    rooms: Array<{
+        roomId: string;
+        roomNumber: string;
+        roomType: string;
+        roomTypeName?: string;
+    }>;
+    checkInDate: string;
+    checkOutDate: string;
+    totalAmount: string;
+    paidAmount: string;
+    status: string;
+    adults: number;
+    children: number;
+    additionalServices: AdditionalService[];
 }
 export interface GetTodayCheckoutStatsNatsRequest {
     tenantId: string;
@@ -42,7 +70,7 @@ export interface GetCheckoutHistoryNatsRequest {
     endDate?: string;
 }
 export interface CheckoutHistoryData {
-    data: BookingResponseDto[];
+    data: CheckoutData[];
     total: number;
     page: number;
     limit: number;
@@ -56,7 +84,7 @@ export interface SearchCheckoutsNatsRequest {
     limit?: number;
 }
 export interface SearchCheckoutsData {
-    data: BookingResponseDto[];
+    data: CheckoutData[];
     total: number;
 }
 export type SearchCheckoutsNatsResponse = NatsResponse<SearchCheckoutsData>;
@@ -78,7 +106,7 @@ export interface GetReadyRoomsNatsRequest {
     date: string;
 }
 export interface ReadyRoomsData {
-    data: BookingResponseDto[];
+    data: CheckoutData[];
     total: number;
 }
 export type GetReadyRoomsNatsResponse = NatsResponse<ReadyRoomsData>;
