@@ -55,22 +55,29 @@ export interface RateHistory {
  * Dynamic rate calculation result
  */
 export interface DynamicRateCalculation {
+    tenantId: string;
+    hotelId: string;
     roomTypeId: string;
     checkIn: string;
     checkOut: string;
+    guests: number;
     nights: number;
+    units: number;
     baseRate: number;
-    occupancyAdjustment: number;
-    seasonalAdjustment: number;
-    losDiscount: number;
-    promotionDiscount: number;
-    extraPersonCharges: number;
-    mealPlanCharge: number;
-    totalBeforeTax: number;
-    taxes: TaxBreakdown[];
-    totalAfterTax: number;
+    calculatedRate: number;
     currency: string;
-    dailyRates: DailyRateBreakdown[];
+    breakdown: {
+        baseAmount: number;
+        seasonalAdjustment: number;
+        occupancyAdjustment: number;
+        lengthOfStayDiscount: number;
+        promotionDiscount: number;
+        yieldAdjustment: number;
+        advanceBookingDiscount: number;
+        lastMinuteDiscount: number;
+        taxes: number;
+    };
+    adjustmentDetails: string[];
 }
 /**
  * Tax breakdown

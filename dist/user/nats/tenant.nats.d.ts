@@ -20,6 +20,8 @@ export interface HotelOperationSettings {
     defaultCleaningDuration?: number;
     gracePeriodMinutes?: number;
     autoAssignRooms?: boolean;
+    hourlyBooking?: boolean;
+    preferBookingMode?: 'hourly' | 'daily';
     businessHours?: {
         start: string;
         end: string;
@@ -162,6 +164,8 @@ export interface HotelOperationSettingsDto {
     defaultCleaningDuration?: number;
     gracePeriodMinutes?: number;
     autoAssignRooms?: boolean;
+    hourlyBooking?: boolean;
+    preferBookingMode?: 'hourly' | 'daily';
     businessHours?: {
         start: string;
         end: string;
