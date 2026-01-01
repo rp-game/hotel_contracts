@@ -45,6 +45,7 @@ export interface CalculateRateRequest {
     guests?: number;
     channel?: string;
     promoCode?: string;
+    promotionCodes?: string[];
     corporateId?: string;
     loyaltyId?: string;
     bookingType?: string;

@@ -50,6 +50,7 @@ export interface CalculateRateRequest {
   guests?: number;
   channel?: string;
   promoCode?: string;
+  promotionCodes?: string[]; // Array of promotion codes to apply
   corporateId?: string;
   loyaltyId?: string;
   bookingType?: string;
