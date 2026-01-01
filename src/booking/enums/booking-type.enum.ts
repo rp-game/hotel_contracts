@@ -7,7 +7,7 @@ export enum BookingType {
   /**
    * Standard overnight stay (check-in one day, check-out the next day)
    */
-  ROOM_NIGHT = 'ROOM_NIGHT',
+  OVERNIGHT = 'OVERNIGHT',
 
   /**
    * Hourly room rental (less than a day)

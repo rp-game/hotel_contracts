@@ -11,7 +11,7 @@ var BookingType;
     /**
      * Standard overnight stay (check-in one day, check-out the next day)
      */
-    BookingType["ROOM_NIGHT"] = "ROOM_NIGHT";
+    BookingType["OVERNIGHT"] = "OVERNIGHT";
     /**
      * Hourly room rental (less than a day)
      */
