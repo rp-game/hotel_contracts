@@ -35,27 +35,28 @@ export interface BillItem {
   category: 'ROOM' | 'SERVICE' | 'TAX' | 'DEPOSIT';
 }
 
-// ============= CHECKOUT DATA (Extended Booking) =============
+// ============= CHECKOUT DATA (Booking Summary for Checkout Lists) =============
 
 export interface CheckoutData {
   id: string;
+  bookingCode: string;
+  tenantId: string;
+  hotelId: string;
+  status: string;
+  source: string;
   guestName: string;
-  email: string;
-  phone: string;
-  rooms: Array<{
-    roomId: string;
-    roomNumber: string;
-    roomType: string;
-    roomTypeName?: string;
-  }>;
+  guestEmail?: string;
+  guestPhone?: string;
   checkInDate: string;
   checkOutDate: string;
-  totalAmount: string;
-  paidAmount: string;
-  status: string;
-  adults: number;
-  children: number;
-  additionalServices: AdditionalService[];
+  totalAmount: number;
+  paidAmount: number;
+  paymentStatus: string;
+  roomCount: number;
+  adultCount: number;
+  childCount: number;
+  createdAt: string;
+  createdBy?: string;
 }
 
 // ============= TODAY'S STATS =============
