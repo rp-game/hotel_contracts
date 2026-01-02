@@ -34,7 +34,7 @@ export interface FindAllRoomsRequest {
 }
 
 export interface PaginatedRoomsResponse {
-  data: any[];
+  data: RoomEntity[];
   total: number;
   page: number;
   limit: number;

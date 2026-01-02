@@ -17,6 +17,7 @@
  * Called by: api-gateway, booking-service
  */
 import { NatsResponse } from '../../common';
+import { Room as RoomEntity } from '../types';
 /**
  * Find All Rooms Request
  * Pattern: inventory.rooms.findAll
@@ -33,7 +34,7 @@ export interface FindAllRoomsRequest {
     };
 }
 export interface PaginatedRoomsResponse {
-    data: any[];
+    data: RoomEntity[];
     total: number;
     page: number;
     limit: number;
