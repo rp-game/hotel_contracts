@@ -166,13 +166,17 @@ export interface UpdateRoomStatusTimelineRequest {
     status: string;
     reason?: string;
     estimatedDuration?: number;
+    updatedBy?: string;
 }
 export interface RoomStatusUpdate {
     roomId: string;
+    roomNumber: string;
     oldStatus: string;
     newStatus: string;
+    updatedBy: string;
     updatedAt: string;
     reason?: string;
+    estimatedAvailability?: string;
 }
 export type UpdateRoomStatusTimelineResponse = RoomStatusUpdate;
 export type UpdateRoomStatusTimelineNatsResponse = NatsResponse<UpdateRoomStatusTimelineResponse>;

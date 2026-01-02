@@ -176,14 +176,18 @@ export interface UpdateRoomStatusTimelineRequest {
   status: string;
   reason?: string;
   estimatedDuration?: number;
+  updatedBy?: string; // User ID who is making the status change
 }
 
 export interface RoomStatusUpdate {
   roomId: string;
+  roomNumber: string; // Room number (e.g., "101", "A-205")
   oldStatus: string;
   newStatus: string;
+  updatedBy: string; // User ID who updated the status
   updatedAt: string;
   reason?: string;
+  estimatedAvailability?: string; // ISO timestamp when room will be available again
 }
 
 export type UpdateRoomStatusTimelineResponse = RoomStatusUpdate;
