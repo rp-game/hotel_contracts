@@ -61,6 +61,9 @@ export interface CreateRoomTypeRequest {
   capacity?: number;
   maxOccupancy?: number; // Alias for capacity
   amenities?: string[];
+  size?: number; // Room size in square meters
+  category?: string; // Room category (e.g., "Premium", "Standard")
+  images?: string[]; // Room type images/photos
 }
 
 export type CreateRoomTypeResponse = RoomTypeEntity;
@@ -80,6 +83,10 @@ export interface UpdateRoomTypeRequest {
   capacity?: number;
   maxOccupancy?: number; // Alias for capacity
   amenities?: string[];
+  size?: number; // Room size in square meters
+  category?: string; // Room category (e.g., "Premium", "Standard")
+  images?: string[]; // Room type images/photos
+  isActive?: boolean; // Whether the room type is active
 }
 
 export type UpdateRoomTypeResponse = RoomTypeEntity | null;

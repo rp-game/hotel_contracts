@@ -54,6 +54,9 @@ export interface CreateRoomTypeRequest {
     capacity?: number;
     maxOccupancy?: number;
     amenities?: string[];
+    size?: number;
+    category?: string;
+    images?: string[];
 }
 export type CreateRoomTypeResponse = RoomTypeEntity;
 export type CreateRoomTypeNatsResponse = NatsResponse<CreateRoomTypeResponse>;
@@ -71,6 +74,10 @@ export interface UpdateRoomTypeRequest {
     capacity?: number;
     maxOccupancy?: number;
     amenities?: string[];
+    size?: number;
+    category?: string;
+    images?: string[];
+    isActive?: boolean;
 }
 export type UpdateRoomTypeResponse = RoomTypeEntity | null;
 export type UpdateRoomTypeNatsResponse = NatsResponse<UpdateRoomTypeResponse>;
