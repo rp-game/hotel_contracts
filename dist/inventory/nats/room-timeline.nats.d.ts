@@ -529,47 +529,63 @@ export type GetRoomAssignmentNatsResponse = NatsResponse<GetRoomAssignmentRespon
 export interface GetRoomSettingsRequest {
     hotelId: string;
 }
+/**
+ * Timeline Preferences Data Structure
+ * Defines hotel-wide timeline management settings
+ */
+export interface TimelinePreferences {
+    cleaningTimes?: {
+        default?: number;
+        checkout?: number;
+        maintenance?: number;
+        deep?: number;
+        inspection?: number;
+    };
+    statusColors?: Record<string, string>;
+    workingHours?: {
+        start: string;
+        end: string;
+    };
+    workingHoursByDepartment?: {
+        reception?: {
+            start: string;
+            end: string;
+        };
+        housekeeping?: {
+            start: string;
+            end: string;
+        };
+        maintenance?: {
+            start: string;
+            end: string;
+        };
+    };
+    viewPreferences?: {
+        defaultView?: string;
+        showGuestNames?: boolean;
+        showCleaningTimes?: boolean;
+        showUnassignedBookings?: boolean;
+        showRoomTypeCapacity?: boolean;
+    };
+    notificationSettings?: {
+        enableRealTime?: boolean;
+        occupancyThreshold?: number;
+        maintenanceAlerts?: boolean;
+        checkoutReminders?: boolean;
+    };
+    autoStatusTransitions?: {
+        enabled?: boolean;
+        checkoutToCleaningDelay?: number;
+        cleaningToAvailableAuto?: boolean;
+    };
+}
 export interface RoomSettings {
     hotelId: string;
     autoAssignment: boolean;
     cleaningBuffer: number;
     maintenanceBuffer: number;
     overbookingPolicy: string;
-    preferences: {
-        defaultCleaningTime?: number;
-        checkoutCleanTime?: number;
-        maintenanceCleanTime?: number;
-        deepCleanTime?: number;
-        inspectionTime?: number;
-        bufferTime?: number;
-        workingHours?: {
-            start: string;
-            end: string;
-        };
-        statusColors?: Record<string, string>;
-        workingHoursByDepartment?: Record<string, {
-            start: string;
-            end: string;
-        }>;
-        viewPreferences?: {
-            defaultView: string;
-            showGuestNames: boolean;
-            showCleaningTimes: boolean;
-            showUnassignedBookings: boolean;
-            showRoomTypeCapacity: boolean;
-        };
-        notificationSettings?: {
-            enableRealTime: boolean;
-            occupancyThreshold: number;
-            maintenanceAlerts: boolean;
-            checkoutReminders: boolean;
-        };
-        autoStatusTransitions?: {
-            enabled: boolean;
-            checkoutToCleaningDelay: number;
-            cleaningToAvailableAuto: boolean;
-        };
-    };
+    preferences: TimelinePreferences;
 }
 export type GetRoomSettingsResponse = RoomSettings;
 export type GetRoomSettingsNatsResponse = NatsResponse<GetRoomSettingsResponse>;
@@ -579,7 +595,7 @@ export type GetRoomSettingsNatsResponse = NatsResponse<GetRoomSettingsResponse>;
  */
 export interface UpdateRoomSettingsRequest {
     hotelId: string;
-    settings: any;
+    settings: TimelinePreferences;
 }
 export type UpdateRoomSettingsResponse = RoomSettings;
 export type UpdateRoomSettingsNatsResponse = NatsResponse<UpdateRoomSettingsResponse>;
