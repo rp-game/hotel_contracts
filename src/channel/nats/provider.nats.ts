@@ -57,16 +57,15 @@ export type GetProviderNatsResponse = NatsResponse<ChannelProvider | null>;
 export interface ListProvidersNatsRequest {
   tenantId?: string;  // Optional - API Gateway may not have access
   hotelId?: string;
-  page?: number;
-  limit?: number;
   filters?: {
     providerType?: ProviderType;
     isActive?: boolean;
     isSandbox?: boolean;
+    status?: string;
   };
 }
 
-export type ListProvidersNatsResponse = NatsResponse<ProvidersListResponse>;
+export type ListProvidersNatsResponse = NatsResponse<ChannelProvider[]>;
 
 /**
  * Find All Providers Request

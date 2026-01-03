@@ -17,7 +17,7 @@
  */
 import { NatsResponse } from '../../common';
 import { ProviderType, ProviderStatus } from '../enums';
-import { ChannelProvider, ProviderResponse, ProvidersListResponse, CreateProviderRequest, UpdateProviderRequest, CredentialValidationResult, ProviderComparisonDto } from '../types';
+import { ChannelProvider, ProviderResponse, CreateProviderRequest, UpdateProviderRequest, CredentialValidationResult, ProviderComparisonDto } from '../types';
 /**
  * Create Provider Request
  * Pattern: channel.providers.create
@@ -43,15 +43,14 @@ export type GetProviderNatsResponse = NatsResponse<ChannelProvider | null>;
 export interface ListProvidersNatsRequest {
     tenantId?: string;
     hotelId?: string;
-    page?: number;
-    limit?: number;
     filters?: {
         providerType?: ProviderType;
         isActive?: boolean;
         isSandbox?: boolean;
+        status?: string;
     };
 }
-export type ListProvidersNatsResponse = NatsResponse<ProvidersListResponse>;
+export type ListProvidersNatsResponse = NatsResponse<ChannelProvider[]>;
 /**
  * Find All Providers Request
  * Pattern: channel.providers.findAll
