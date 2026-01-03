@@ -15,12 +15,11 @@
 
 import { NatsResponse } from '../../common';
 import {
-  AnalyticsDashboard,
-  RealTimeMetrics,
   AnalyticsDashboardDto,
-  ABTestConfigurationDto,
+  RealTimeMetricsDto,
   AlertDto,
-} from '../types';
+} from '../rest';
+import { ABTestConfigurationDto } from '../types';
 
 /**
  * Get Analytics Dashboard Request
@@ -61,7 +60,7 @@ export type GetAnalyticsDashboardNatsResponse = NatsResponse<AnalyticsDashboardD
  * - hotelId?: string (optional)
  * - providerId?: string (optional)
  *
- * Response: RealTimeMetrics with 7 fields:
+ * Response: RealTimeMetricsDto with 7 fields:
  * - activeSyncs, todayBookings, todayRevenue
  * - averageResponseTime, systemHealthScore
  * - providerStatuses[], unresolvedAlerts
@@ -72,7 +71,7 @@ export interface GetRealTimeMetricsNatsRequest {
   providerId?: string;
 }
 
-export type GetRealTimeMetricsNatsResponse = NatsResponse<RealTimeMetrics>;
+export type GetRealTimeMetricsNatsResponse = NatsResponse<RealTimeMetricsDto>;
 
 /**
  * List Alerts Request

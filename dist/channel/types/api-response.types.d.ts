@@ -365,4 +365,73 @@ export interface ErrorListResponseDto {
         byProvider: Record<string, number>;
     };
 }
+/**
+ * Time Range Enum
+ * For analytics queries
+ */
+export declare enum TimeRange {
+    LAST_24_HOURS = "LAST_24_HOURS",
+    LAST_7_DAYS = "LAST_7_DAYS",
+    LAST_30_DAYS = "LAST_30_DAYS",
+    LAST_90_DAYS = "LAST_90_DAYS",
+    CUSTOM = "CUSTOM"
+}
+/**
+ * Metric Type Enum
+ * For analytics queries
+ */
+export declare enum MetricType {
+    BOOKING_VOLUME = "BOOKING_VOLUME",
+    REVENUE = "REVENUE",
+    AVERAGE_DAILY_RATE = "AVERAGE_DAILY_RATE",
+    RESPONSE_TIME = "RESPONSE_TIME",
+    ERROR_RATE = "ERROR_RATE",
+    SYNC_SUCCESS_RATE = "SYNC_SUCCESS_RATE"
+}
+/**
+ * Real-Time Metrics DTO
+ * Returned by getRealTimeMetrics operation
+ */
+export interface RealTimeMetricsDto {
+    activeSyncs: number;
+    todayBookings: number;
+    todayRevenue: number;
+    averageResponseTime: number;
+    systemHealthScore: number;
+    providerStatuses: Array<{
+        providerId: string;
+        providerName: string;
+        status: 'HEALTHY' | 'WARNING' | 'ERROR';
+        lastSyncAt: Date;
+    }>;
+    unresolvedAlerts: number;
+}
+/**
+ * Get Analytics Query DTO
+ * Request parameters for getAnalyticsDashboard
+ */
+export interface GetAnalyticsQueryDto {
+    timeRange?: TimeRange;
+    startDate?: string;
+    endDate?: string;
+    providerIds?: string[];
+    tenantId?: string;
+    hotelId?: string;
+    metrics?: MetricType[];
+}
+/**
+ * Get Sync History Query DTO
+ * Request parameters for getSyncHistory
+ */
+export interface GetSyncHistoryQueryDto {
+    providerId?: string;
+    tenantId?: string;
+    hotelId?: string;
+    status?: string;
+    operation?: string;
+    startDate?: string;
+    endDate?: string;
+    limit?: number;
+    offset?: number;
+}
 //# sourceMappingURL=api-response.types.d.ts.map

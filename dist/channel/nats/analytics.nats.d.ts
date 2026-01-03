@@ -13,7 +13,8 @@
  * Called by: api-gateway
  */
 import { NatsResponse } from '../../common';
-import { RealTimeMetrics, AnalyticsDashboardDto, ABTestConfigurationDto, AlertDto } from '../types';
+import { AnalyticsDashboardDto, RealTimeMetricsDto, AlertDto } from '../rest';
+import { ABTestConfigurationDto } from '../types';
 /**
  * Get Analytics Dashboard Request
  * Pattern: channel.analytics.dashboard
@@ -51,7 +52,7 @@ export type GetAnalyticsDashboardNatsResponse = NatsResponse<AnalyticsDashboardD
  * - hotelId?: string (optional)
  * - providerId?: string (optional)
  *
- * Response: RealTimeMetrics with 7 fields:
+ * Response: RealTimeMetricsDto with 7 fields:
  * - activeSyncs, todayBookings, todayRevenue
  * - averageResponseTime, systemHealthScore
  * - providerStatuses[], unresolvedAlerts
@@ -61,7 +62,7 @@ export interface GetRealTimeMetricsNatsRequest {
     hotelId?: string;
     providerId?: string;
 }
-export type GetRealTimeMetricsNatsResponse = NatsResponse<RealTimeMetrics>;
+export type GetRealTimeMetricsNatsResponse = NatsResponse<RealTimeMetricsDto>;
 /**
  * List Alerts Request
  * Pattern: channel.alerts.list

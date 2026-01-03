@@ -10,7 +10,7 @@
  * for transformation layers.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RecoveryAction = exports.ErrorSeverity = exports.ErrorType = exports.ABTestStatus = exports.FailoverStatus = exports.FailoverTrigger = void 0;
+exports.MetricType = exports.TimeRange = exports.RecoveryAction = exports.ErrorSeverity = exports.ErrorType = exports.ABTestStatus = exports.FailoverStatus = exports.FailoverTrigger = void 0;
 /**
  * Failover Trigger Enum
  */
@@ -79,4 +79,29 @@ var RecoveryAction;
     RecoveryAction["FAILOVER"] = "FAILOVER";
     RecoveryAction["QUEUE_FOR_LATER"] = "QUEUE_FOR_LATER";
 })(RecoveryAction || (exports.RecoveryAction = RecoveryAction = {}));
+/**
+ * Time Range Enum
+ * For analytics queries
+ */
+var TimeRange;
+(function (TimeRange) {
+    TimeRange["LAST_24_HOURS"] = "LAST_24_HOURS";
+    TimeRange["LAST_7_DAYS"] = "LAST_7_DAYS";
+    TimeRange["LAST_30_DAYS"] = "LAST_30_DAYS";
+    TimeRange["LAST_90_DAYS"] = "LAST_90_DAYS";
+    TimeRange["CUSTOM"] = "CUSTOM";
+})(TimeRange || (exports.TimeRange = TimeRange = {}));
+/**
+ * Metric Type Enum
+ * For analytics queries
+ */
+var MetricType;
+(function (MetricType) {
+    MetricType["BOOKING_VOLUME"] = "BOOKING_VOLUME";
+    MetricType["REVENUE"] = "REVENUE";
+    MetricType["AVERAGE_DAILY_RATE"] = "AVERAGE_DAILY_RATE";
+    MetricType["RESPONSE_TIME"] = "RESPONSE_TIME";
+    MetricType["ERROR_RATE"] = "ERROR_RATE";
+    MetricType["SYNC_SUCCESS_RATE"] = "SYNC_SUCCESS_RATE";
+})(MetricType || (exports.MetricType = MetricType = {}));
 //# sourceMappingURL=api-response.types.js.map
