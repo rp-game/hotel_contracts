@@ -152,3 +152,28 @@ export interface DeleteRateMappingNatsRequest {
 }
 
 export type DeleteRateMappingNatsResponse = NatsResponse<DeleteMappingResponse>;
+
+/**
+ * Get Single Rate Mapping Request
+ * Pattern: inventory.rate_mapping.get
+ */
+export interface GetRateMappingNatsRequest {
+  mappingId: string;
+  providerId?: string;  // Optional - API Gateway may not have access
+  tenantId?: string;    // Optional - API Gateway may not have access
+}
+
+export type GetRateMappingNatsResponse = NatsResponse<RateMapping | null>;
+
+/**
+ * Bulk Create Rate Mappings Request
+ * Pattern: inventory.rate_mappings.bulk_create
+ */
+export interface BulkCreateRateMappingsNatsRequest {
+  mappings: CreateRateMappingRequest[];
+  providerId?: string;  // Optional - API Gateway may not have access
+  tenantId?: string;    // Optional - API Gateway may not have access
+  hotelId?: string;     // Optional - API Gateway may not have access
+}
+
+export type BulkCreateRateMappingsNatsResponse = NatsResponse<RateMapping[]>;

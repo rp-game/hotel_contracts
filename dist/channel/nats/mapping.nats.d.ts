@@ -120,4 +120,25 @@ export interface DeleteRateMappingNatsRequest {
     tenantId?: string;
 }
 export type DeleteRateMappingNatsResponse = NatsResponse<DeleteMappingResponse>;
+/**
+ * Get Single Rate Mapping Request
+ * Pattern: inventory.rate_mapping.get
+ */
+export interface GetRateMappingNatsRequest {
+    mappingId: string;
+    providerId?: string;
+    tenantId?: string;
+}
+export type GetRateMappingNatsResponse = NatsResponse<RateMapping | null>;
+/**
+ * Bulk Create Rate Mappings Request
+ * Pattern: inventory.rate_mappings.bulk_create
+ */
+export interface BulkCreateRateMappingsNatsRequest {
+    mappings: CreateRateMappingRequest[];
+    providerId?: string;
+    tenantId?: string;
+    hotelId?: string;
+}
+export type BulkCreateRateMappingsNatsResponse = NatsResponse<RateMapping[]>;
 //# sourceMappingURL=mapping.nats.d.ts.map
