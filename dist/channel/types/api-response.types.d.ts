@@ -414,6 +414,7 @@ export interface GetAnalyticsQueryDto {
     timeRange?: TimeRange;
     startDate?: string;
     endDate?: string;
+    providerId?: string;
     providerIds?: string[];
     tenantId?: string;
     hotelId?: string;

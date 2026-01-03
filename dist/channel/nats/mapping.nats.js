@@ -4,9 +4,11 @@
  *
  * Patterns:
  * - inventory.mappings.get
+ * - inventory.mapping.get
  * - inventory.mapping.upsert
  * - inventory.mapping.update
  * - inventory.mapping.delete
+ * - inventory.mappings.bulk_create
  * - inventory.rate_mappings.get
  * - inventory.rate_mapping.upsert
  * - inventory.rate_mapping.update

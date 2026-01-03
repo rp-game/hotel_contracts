@@ -3,9 +3,11 @@
  *
  * Patterns:
  * - inventory.mappings.get
+ * - inventory.mapping.get
  * - inventory.mapping.upsert
  * - inventory.mapping.update
  * - inventory.mapping.delete
+ * - inventory.mappings.bulk_create
  * - inventory.rate_mappings.get
  * - inventory.rate_mapping.upsert
  * - inventory.rate_mapping.update
@@ -44,6 +46,16 @@ export interface GetRoomMappingsNatsRequest {
 export type GetRoomMappingsNatsResponse = NatsResponse<GetRoomMappingsResponse>;
 
 /**
+ * Get Single Room Mapping Request
+ * Pattern: inventory.mapping.get
+ */
+export interface GetRoomMappingNatsRequest {
+  mappingId: string;
+}
+
+export type GetRoomMappingNatsResponse = NatsResponse<RoomMapping | null>;
+
+/**
  * Upsert Room Mapping Request (Create/Update)
  * Pattern: inventory.mapping.upsert
  */
@@ -79,6 +91,16 @@ export interface DeleteRoomMappingNatsRequest {
 }
 
 export type DeleteRoomMappingNatsResponse = NatsResponse<DeleteMappingResponse>;
+
+/**
+ * Bulk Create Room Mappings Request
+ * Pattern: inventory.mappings.bulk_create
+ */
+export interface BulkCreateRoomMappingsNatsRequest {
+  mappings: CreateRoomMappingRequest[];
+}
+
+export type BulkCreateRoomMappingsNatsResponse = NatsResponse<RoomMapping[]>;
 
 /**
  * Get Rate Mappings Request
