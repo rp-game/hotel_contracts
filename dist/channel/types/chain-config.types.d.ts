@@ -20,12 +20,11 @@ export interface GetChainConfigRequest {
 }
 /**
  * Get chain configuration response
+ * Contains both NATS fields (camelCase) and database fields (snake_case in nested objects)
  */
 export interface GetChainConfigResponse {
     chainId: string;
     tenantId: string;
-    providerConfigurations: ChainProviderConfig[];
-    inheritedSettings?: string[];
     createdAt: string;
     updatedAt: string;
     chain_id?: string;
@@ -74,11 +73,6 @@ export interface ApplyChainResponse {
     appliedAt: string;
     providersActivated: number;
     settingsApplied: string[];
-    providerId?: string;
-    providerType?: string;
-    providerName?: string;
-    tenantId?: string;
-    credentials?: Record<string, any>;
 }
 /**
  * List chain hotels request
@@ -106,8 +100,8 @@ export interface ChainHotelConfig {
 export interface ListChainHotelsResponse {
     data: ChainHotelConfig[];
     total: number;
-    page?: number;
-    limit?: number;
+    page: number;
+    limit: number;
     chainId: string;
 }
 /**
@@ -133,20 +127,6 @@ export interface ChainSyncResult {
     errors?: Array<{
         hotelId: string;
         error: string;
-    }>;
-    chain_id?: string;
-    sync_id?: string;
-    success?: boolean;
-    total_hotels?: number;
-    successful_syncs?: number;
-    failed_syncs?: number;
-    timestamp?: string;
-    results?: Array<{
-        hotel_id: string;
-        success: boolean;
-        synced_settings?: string[];
-        skipped_settings?: string[];
-        error?: string;
     }>;
 }
 //# sourceMappingURL=chain-config.types.d.ts.map

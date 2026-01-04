@@ -23,17 +23,16 @@ export interface GetChainConfigRequest {
 
 /**
  * Get chain configuration response
+ * Contains both NATS fields (camelCase) and database fields (snake_case in nested objects)
  */
 export interface GetChainConfigResponse {
-  // NATS fields (camelCase)
+  // NATS envelope (camelCase)
   chainId: string;
   tenantId: string;
-  providerConfigurations: ChainProviderConfig[];
-  inheritedSettings?: string[];
   createdAt: string;
   updatedAt: string;
 
-  // REST API DTO mapping fields (snake_case) - for compatibility with API Gateway
+  // JSONB database fields (snake_case) - nested configuration data
   chain_id?: string;
   chain_name?: string;
   tenant_id?: string;
@@ -79,19 +78,12 @@ export interface ApplyChainToHotelRequest {
  * Chain application response
  */
 export interface ApplyChainResponse {
-  // NATS fields
+  // NATS envelope (camelCase)
   hotelId: string;
   chainId: string;
   appliedAt: string;
   providersActivated: number;
   settingsApplied: string[];
-
-  // REST API DTO mapping fields - can be either in this format or as nested providerId, providerType, etc.
-  providerId?: string;
-  providerType?: string;
-  providerName?: string;
-  tenantId?: string;
-  credentials?: Record<string, any>;
 }
 
 /**
@@ -122,8 +114,8 @@ export interface ChainHotelConfig {
 export interface ListChainHotelsResponse {
   data: ChainHotelConfig[];
   total: number;
-  page?: number;
-  limit?: number;
+  page: number;
+  limit: number;
   chainId: string;
 }
 
@@ -141,7 +133,7 @@ export interface SyncChainRequest {
  * Chain sync result
  */
 export interface ChainSyncResult {
-  // NATS fields
+  // NATS envelope (camelCase)
   chainId: string;
   startedAt: string;
   completedAt?: string;
@@ -152,21 +144,5 @@ export interface ChainSyncResult {
   errors?: Array<{
     hotelId: string;
     error: string;
-  }>;
-
-  // REST API DTO mapping fields (snake_case) - for compatibility with API Gateway
-  chain_id?: string;
-  sync_id?: string;
-  success?: boolean;
-  total_hotels?: number;
-  successful_syncs?: number;
-  failed_syncs?: number;
-  timestamp?: string;
-  results?: Array<{
-    hotel_id: string;
-    success: boolean;
-    synced_settings?: string[];
-    skipped_settings?: string[];
-    error?: string;
   }>;
 }
