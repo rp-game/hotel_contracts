@@ -19,3 +19,14 @@ export * from './analytics.nats';
 export * from './calendar-data.nats';
 export * from './update-booking.nats';
 export * from './move-booking.nats';
+
+// Conflict-related NATS contracts
+export * from './get-conflicts.nats';
+export * from './detect-conflicts.nats';
+export * from './get-conflict-stats.nats';
+export * from './get-pending-conflicts.nats';
+export * from './get-critical-conflicts.nats';
+export * from './get-conflict-by-id.nats';
+export * from './create-conflict.nats';
+export * from './update-conflict.nats';
+export * from './delete-conflict.nats';

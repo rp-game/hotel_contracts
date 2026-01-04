@@ -34,4 +34,14 @@ __exportStar(require("./analytics.nats"), exports);
 __exportStar(require("./calendar-data.nats"), exports);
 __exportStar(require("./update-booking.nats"), exports);
 __exportStar(require("./move-booking.nats"), exports);
+// Conflict-related NATS contracts
+__exportStar(require("./get-conflicts.nats"), exports);
+__exportStar(require("./detect-conflicts.nats"), exports);
+__exportStar(require("./get-conflict-stats.nats"), exports);
+__exportStar(require("./get-pending-conflicts.nats"), exports);
+__exportStar(require("./get-critical-conflicts.nats"), exports);
+__exportStar(require("./get-conflict-by-id.nats"), exports);
+__exportStar(require("./create-conflict.nats"), exports);
+__exportStar(require("./update-conflict.nats"), exports);
+__exportStar(require("./delete-conflict.nats"), exports);
 //# sourceMappingURL=index.js.map

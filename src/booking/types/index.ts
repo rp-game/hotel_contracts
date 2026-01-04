@@ -3,3 +3,4 @@
  */
 
 export * from './booking.types';
+export * from './conflict-enums';

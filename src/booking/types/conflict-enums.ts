@@ -1,0 +1,35 @@
+/**
+ * Booking conflict type definitions and enums
+ */
+
+export enum ConflictStatus {
+  PENDING = 'PENDING',
+  IN_PROGRESS = 'IN_PROGRESS',
+  RESOLVED = 'RESOLVED',
+  ESCALATED = 'ESCALATED',
+  CANCELLED = 'CANCELLED',
+}
+
+export enum ConflictSeverity {
+  LOW = 'LOW',
+  MEDIUM = 'MEDIUM',
+  HIGH = 'HIGH',
+  CRITICAL = 'CRITICAL',
+}
+
+export enum ConflictType {
+  DOUBLE_BOOKING = 'DOUBLE_BOOKING',
+  OVERBOOKING = 'OVERBOOKING',
+  MAINTENANCE_OVERLAP = 'MAINTENANCE_OVERLAP',
+  BLOCKED_ROOM = 'BLOCKED_ROOM',
+  ALLOCATION_ERROR = 'ALLOCATION_ERROR',
+}
+
+export enum ResolutionType {
+  UPGRADE = 'UPGRADE',
+  RELOCATE = 'RELOCATE',
+  COMPENSATE = 'COMPENSATE',
+  CANCEL = 'CANCEL',
+  SPLIT_BOOKING = 'SPLIT_BOOKING',
+  MANUAL = 'MANUAL',
+}
