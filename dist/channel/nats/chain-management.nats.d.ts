@@ -12,7 +12,7 @@
  * Called by: api-gateway
  */
 import { NatsResponse } from '../../common';
-import { GetChainConfigRequest, GetChainConfigResponse, ApplyChainToHotelRequest, ApplyChainResponse, SyncChainRequest, ChainSyncResult } from '../types';
+import { GetChainConfigRequest, GetChainConfigResponse, UpdateChainConfigRequest, ApplyChainToHotelRequest, ApplyChainResponse, ListChainHotelsResponse, SyncChainRequest, ChainSyncResult } from '../types';
 /**
  * Get Chain Configuration Request
  * Pattern: channel.chains.config.get
@@ -28,7 +28,7 @@ export type GetChainConfigNatsResponse = NatsResponse<GetChainConfigResponse>;
  */
 export interface UpdateChainConfigNatsRequest {
     chainId: string;
-    configuration: any;
+    configuration: UpdateChainConfigRequest;
     tenantId?: string;
 }
 export type UpdateChainConfigNatsResponse = NatsResponse<GetChainConfigResponse>;
@@ -53,7 +53,7 @@ export interface ListChainHotelsNatsRequest {
     page?: number;
     limit?: number;
 }
-export type ListChainHotelsNatsResponse = NatsResponse<any[]>;
+export type ListChainHotelsNatsResponse = NatsResponse<ListChainHotelsResponse>;
 /**
  * Sync Chain to Hotels Request
  * Pattern: channel.chains.sync

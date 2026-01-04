@@ -42,7 +42,7 @@ export type GetChainConfigNatsResponse = NatsResponse<GetChainConfigResponse>;
  */
 export interface UpdateChainConfigNatsRequest {
   chainId: string;
-  configuration: any;
+  configuration: UpdateChainConfigRequest;
   tenantId?: string;
 }
 
@@ -72,7 +72,7 @@ export interface ListChainHotelsNatsRequest {
   limit?: number;
 }
 
-export type ListChainHotelsNatsResponse = NatsResponse<any[]>;
+export type ListChainHotelsNatsResponse = NatsResponse<ListChainHotelsResponse>;
 
 /**
  * Sync Chain to Hotels Request

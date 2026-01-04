@@ -28,6 +28,12 @@ export interface GetChainConfigResponse {
     inheritedSettings?: string[];
     createdAt: string;
     updatedAt: string;
+    chain_id?: string;
+    tenant_id?: string;
+    provider_templates?: ChainProviderConfig[];
+    inheritance_rules?: string[];
+    created_at?: string;
+    updated_at?: string;
 }
 /**
  * Provider configuration within a chain

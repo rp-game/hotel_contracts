@@ -25,12 +25,21 @@ export interface GetChainConfigRequest {
  * Get chain configuration response
  */
 export interface GetChainConfigResponse {
+  // NATS fields (camelCase)
   chainId: string;
   tenantId: string;
   providerConfigurations: ChainProviderConfig[];
   inheritedSettings?: string[];
   createdAt: string;
   updatedAt: string;
+
+  // REST API DTO mapping fields (snake_case) - for compatibility with API Gateway
+  chain_id?: string;
+  tenant_id?: string;
+  provider_templates?: ChainProviderConfig[];
+  inheritance_rules?: string[];
+  created_at?: string;
+  updated_at?: string;
 }
 
 /**
