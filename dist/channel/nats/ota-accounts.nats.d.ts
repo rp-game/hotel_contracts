@@ -35,6 +35,7 @@ export interface ConfigureOTAAccountNatsRequest {
     providerId: string;
     otaName: string;
     credentials: Record<string, any>;
+    enabled: boolean;
     tenantId: string;
     hotelId?: string;
 }

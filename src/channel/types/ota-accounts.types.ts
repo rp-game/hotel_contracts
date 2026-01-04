@@ -5,6 +5,22 @@
  */
 
 /**
+ * OTA Name Enum
+ * Standard names for all supported OTA providers
+ */
+export enum OTAName {
+  BOOKING_COM = 'booking_com',
+  EXPEDIA = 'expedia',
+  AGODA = 'agoda',
+  AIRBNB = 'airbnb',
+  HOTELS_COM = 'hotels_com',
+  PRICELINE = 'priceline',
+  KAYAK = 'kayak',
+  TRIVAGO = 'trivago',
+  TRIPADVISOR = 'tripadvisor'
+}
+
+/**
  * Generic OTA account configuration
  */
 export interface BaseOTAConfig {
