@@ -17,6 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./provider.nats"), exports);
 __exportStar(require("./mapping.nats"), exports);
 __exportStar(require("./inventory-sync.nats"), exports);
+__exportStar(require("./sync.nats"), exports);
 __exportStar(require("./chain-management.nats"), exports);
 __exportStar(require("./ota-accounts.nats"), exports);
 __exportStar(require("./events.nats"), exports);

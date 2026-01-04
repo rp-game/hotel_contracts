@@ -1,6 +1,7 @@
 export * from './provider.nats';
 export * from './mapping.nats';
 export * from './inventory-sync.nats';
+export * from './sync.nats';
 export * from './chain-management.nats';
 export * from './ota-accounts.nats';
 export * from './events.nats';
