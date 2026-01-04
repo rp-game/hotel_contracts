@@ -15,4 +15,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./customer-stats.nats"), exports);
+__exportStar(require("./service-booking-stats.nats"), exports);
 //# sourceMappingURL=index.js.map
