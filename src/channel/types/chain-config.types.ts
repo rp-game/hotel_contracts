@@ -35,9 +35,11 @@ export interface GetChainConfigResponse {
 
   // REST API DTO mapping fields (snake_case) - for compatibility with API Gateway
   chain_id?: string;
+  chain_name?: string;
   tenant_id?: string;
   provider_templates?: ChainProviderConfig[];
-  inheritance_rules?: string[];
+  inheritance_rules?: Record<string, any>;
+  global_settings?: Record<string, any>;
   created_at?: string;
   updated_at?: string;
 }
@@ -77,11 +79,19 @@ export interface ApplyChainToHotelRequest {
  * Chain application response
  */
 export interface ApplyChainResponse {
+  // NATS fields
   hotelId: string;
   chainId: string;
   appliedAt: string;
   providersActivated: number;
   settingsApplied: string[];
+
+  // REST API DTO mapping fields - can be either in this format or as nested providerId, providerType, etc.
+  providerId?: string;
+  providerType?: string;
+  providerName?: string;
+  tenantId?: string;
+  credentials?: Record<string, any>;
 }
 
 /**
@@ -112,8 +122,8 @@ export interface ChainHotelConfig {
 export interface ListChainHotelsResponse {
   data: ChainHotelConfig[];
   total: number;
-  page: number;
-  limit: number;
+  page?: number;
+  limit?: number;
   chainId: string;
 }
 
@@ -131,6 +141,7 @@ export interface SyncChainRequest {
  * Chain sync result
  */
 export interface ChainSyncResult {
+  // NATS fields
   chainId: string;
   startedAt: string;
   completedAt?: string;
@@ -141,5 +152,21 @@ export interface ChainSyncResult {
   errors?: Array<{
     hotelId: string;
     error: string;
+  }>;
+
+  // REST API DTO mapping fields (snake_case) - for compatibility with API Gateway
+  chain_id?: string;
+  sync_id?: string;
+  success?: boolean;
+  total_hotels?: number;
+  successful_syncs?: number;
+  failed_syncs?: number;
+  timestamp?: string;
+  results?: Array<{
+    hotel_id: string;
+    success: boolean;
+    synced_settings?: string[];
+    skipped_settings?: string[];
+    error?: string;
   }>;
 }
