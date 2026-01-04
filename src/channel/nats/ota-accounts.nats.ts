@@ -18,6 +18,8 @@ import {
   AllOTAAccounts,
   TestOTAAccountRequest,
   TestOTAAccountResponse,
+  OTAAccountConfigurationDto,
+  OTAConnectionTestDto,
 } from '../types';
 
 /**
@@ -30,7 +32,12 @@ export interface ListOTAAccountsNatsRequest {
   hotelId?: string;
 }
 
-export type ListOTAAccountsNatsResponse = NatsResponse<AllOTAAccounts[]>;
+/**
+ * List OTA Accounts Response
+ * Returns array of OTA account configurations
+ * Wrapped in NatsResponse by handler, unwrapped by API Gateway
+ */
+export type ListOTAAccountsNatsResponse = NatsResponse<OTAAccountConfigurationDto[]>;
 
 /**
  * Configure OTA Account Request
@@ -44,7 +51,12 @@ export interface ConfigureOTAAccountNatsRequest {
   hotelId?: string;
 }
 
-export type ConfigureOTAAccountNatsResponse = NatsResponse<AllOTAAccounts>;
+/**
+ * Configure OTA Account Response
+ * Returns single OTA account configuration after update
+ * Wrapped in NatsResponse by handler, unwrapped by API Gateway
+ */
+export type ConfigureOTAAccountNatsResponse = NatsResponse<OTAAccountConfigurationDto>;
 
 /**
  * Disable OTA Account Request
@@ -57,7 +69,12 @@ export interface DisableOTAAccountNatsRequest {
   hotelId?: string;
 }
 
-export type DisableOTAAccountNatsResponse = NatsResponse<AllOTAAccounts>;
+/**
+ * Disable OTA Account Response
+ * Returns success message after disabling
+ * Wrapped in NatsResponse by handler, unwrapped by API Gateway
+ */
+export type DisableOTAAccountNatsResponse = NatsResponse<{ message: string }>;
 
 /**
  * Test OTA Account Connection Request
@@ -70,4 +87,9 @@ export interface TestOTAAccountNatsRequest extends TestOTAAccountRequest {
   hotelId?: string;
 }
 
-export type TestOTAAccountNatsResponse = NatsResponse<TestOTAAccountResponse>;
+/**
+ * Test OTA Account Connection Response
+ * Returns connection test results
+ * Wrapped in NatsResponse by handler, unwrapped by API Gateway
+ */
+export type TestOTAAccountNatsResponse = NatsResponse<OTAConnectionTestDto>;

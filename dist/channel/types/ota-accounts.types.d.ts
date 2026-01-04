@@ -122,4 +122,31 @@ export interface OTAAccountsListResponse {
     providerId: string;
     testedAt?: string;
 }
+/**
+ * OTA Account Configuration DTO
+ * Represents a single OTA account configuration
+ * Returned by API Gateway endpoints
+ */
+export interface OTAAccountConfigurationDto {
+    ota_name: string;
+    provider_id: string;
+    tenant_id: string;
+    hotel_id: string;
+    enabled: boolean;
+    credentials: Record<string, any>;
+    last_verified?: string;
+    ota_config?: Record<string, any>;
+}
+/**
+ * OTA Connection Test DTO
+ * Results from OTA connection testing
+ * Returned by API Gateway test endpoint
+ */
+export interface OTAConnectionTestDto {
+    connected: boolean;
+    last_verified?: string;
+    error?: string;
+    response_time?: number;
+    test_details?: Record<string, any>;
+}
 //# sourceMappingURL=ota-accounts.types.d.ts.map
