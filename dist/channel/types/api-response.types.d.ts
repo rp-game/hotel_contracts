@@ -435,4 +435,88 @@ export interface GetSyncHistoryQueryDto {
     limit?: number;
     offset?: number;
 }
+/**
+ * Get Errors Query DTO
+ * Request parameters for querying sync and mapping errors
+ */
+export interface GetErrorsQueryDto {
+    providerId?: string;
+    errorType?: ErrorType;
+    severity?: ErrorSeverity;
+    resolved?: boolean;
+    startDate?: string;
+    endDate?: string;
+    limit?: number;
+    offset?: number;
+}
+/**
+ * Mapping Error DTO
+ * Represents a room/rate mapping error
+ */
+export interface MappingErrorDto {
+    id: string;
+    providerId: string;
+    providerName: string;
+    internalId: string;
+    internalName: string;
+    attemptedExternalId?: string;
+    errorDescription: string;
+    occurredAt: Date;
+    resolved: boolean;
+    suggestedMapping?: {
+        externalId: string;
+        externalName: string;
+        confidence: number;
+        reasoning: string;
+    };
+    availableOptions: Array<{
+        externalId: string;
+        externalName: string;
+        similarity: number;
+    }>;
+}
+/**
+ * Retry Failed Operations DTO
+ * Request to retry previously failed sync operations
+ */
+export interface RetryFailedOperationsDto {
+    syncIds: string[];
+    providerId?: string;
+    maxRetries?: number;
+    retryDelaySeconds?: number;
+    useExponentialBackoff?: boolean;
+}
+/**
+ * Retry Response DTO
+ * Response from retry failed operations request
+ */
+export interface RetryResponseDto {
+    queuedForRetry: number;
+    alreadyInProgress: number;
+    exceededMaxRetries: number;
+    retryJobIds: string[];
+    estimatedCompletionTime: string;
+}
+/**
+ * Resolve Error DTO
+ * Request to resolve a sync or mapping error
+ */
+export interface ResolveErrorDto {
+    errorId: string;
+    action: RecoveryAction;
+    actionParameters?: Record<string, any>;
+    resolutionNotes?: string;
+}
+/**
+ * Error Resolution Response DTO
+ * Response from error resolution request
+ */
+export interface ErrorResolutionResponseDto {
+    errorId: string;
+    resolved: boolean;
+    message: string;
+    messageVi?: string;
+    followupActionId?: string;
+    context?: Record<string, any>;
+}
 //# sourceMappingURL=api-response.types.d.ts.map

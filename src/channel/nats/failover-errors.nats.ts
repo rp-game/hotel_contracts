@@ -5,13 +5,24 @@
  * - channel.failover.execute
  * - channel.errors.sync
  * - channel.errors.mapping
+ * - channel.errors.resolve
+ * - channel.recovery.retry
  *
  * Handler: channel-service (ProvidersNatsController)
  * Called by: api-gateway
  */
 
 import { NatsResponse } from '../../common';
-import { ProviderFailoverDto, ErrorListResponseDto } from '../types';
+import {
+  ProviderFailoverDto,
+  ErrorListResponseDto,
+  MappingErrorDto,
+  ResolveErrorDto,
+  ErrorResolutionResponseDto,
+  RetryFailedOperationsDto,
+  RetryResponseDto,
+  GetErrorsQueryDto
+} from '../types';
 
 /**
  * Execute Failover Request
@@ -37,17 +48,14 @@ export type ExecuteFailoverNatsResponse = NatsResponse<ProviderFailoverDto>;
  * Get Sync Errors Request
  * Pattern: channel.errors.sync
  *
- * Retrieves paginated list of synchronization errors.
- *
- * Request fields:
- * - limit?: number (optional)
- * - offset?: number (optional)
+ * Retrieves paginated list of synchronization errors with filtering.
+ * This mirrors GetErrorsQueryDto from api-response.types
  *
  * Response: ErrorListResponseDto with errors[], total, page, limit, unresolvedCount, statistics
  */
-export interface GetSyncErrorsNatsRequest {
-  limit?: number;
-  offset?: number;
+export interface GetSyncErrorsNatsRequest extends GetErrorsQueryDto {
+  tenantId?: string;
+  hotelId?: string;
 }
 
 export type GetSyncErrorsNatsResponse = NatsResponse<ErrorListResponseDto>;
@@ -56,16 +64,53 @@ export type GetSyncErrorsNatsResponse = NatsResponse<ErrorListResponseDto>;
  * Get Mapping Errors Request
  * Pattern: channel.errors.mapping
  *
- * Retrieves list of room/rate mapping errors.
- * NOTE: Currently returns empty array (not implemented).
+ * Retrieves list of room/rate mapping errors with filtering and pagination.
  *
  * Request fields:
- * - [key: string]: any (accepts any payload)
+ * - providerId?: string
+ * - resolved?: boolean
+ * - limit?: number
+ * - offset?: number
+ * - tenantId?: string (internal, set by API Gateway)
+ * - hotelId?: string (internal, set by API Gateway)
  *
- * Response: any[] (empty array in current implementation)
+ * Response: Properly typed MappingErrorDto[] array
  */
 export interface GetMappingErrorsNatsRequest {
-  [key: string]: any;
+  providerId?: string;
+  resolved?: boolean;
+  limit?: number;
+  offset?: number;
+  tenantId?: string;
+  hotelId?: string;
 }
 
-export type GetMappingErrorsNatsResponse = NatsResponse<any[]>;
+export type GetMappingErrorsNatsResponse = NatsResponse<MappingErrorDto[]>;
+
+/**
+ * Resolve Error Request
+ * Pattern: channel.errors.resolve
+ *
+ * Resolves a sync or mapping error with specified recovery action.
+ * Mirrors ResolveErrorDto from api-response.types
+ */
+export interface ResolveErrorNatsRequest extends ResolveErrorDto {
+  tenantId?: string;
+  hotelId?: string;
+}
+
+export type ResolveErrorNatsResponse = NatsResponse<ErrorResolutionResponseDto>;
+
+/**
+ * Retry Failed Operations Request
+ * Pattern: channel.recovery.retry
+ *
+ * Queues previously failed sync operations for retry.
+ * Mirrors RetryFailedOperationsDto from api-response.types
+ */
+export interface RetryFailedOperationsNatsRequest extends RetryFailedOperationsDto {
+  tenantId?: string;
+  hotelId?: string;
+}
+
+export type RetryFailedOperationsNatsResponse = NatsResponse<RetryResponseDto>;
