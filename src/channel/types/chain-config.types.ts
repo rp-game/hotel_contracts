@@ -2,6 +2,7 @@
  * Chain Configuration Type Definitions
  *
  * Handles multi-property configuration and settings inheritance from chain level
+ * NOTE: NATS contracts use camelCase only. REST API DTOs handle snake_case conversion.
  */
 
 /**
@@ -22,25 +23,15 @@ export interface GetChainConfigRequest {
 }
 
 /**
- * Get chain configuration response
- * Contains both NATS fields (camelCase) and database fields (snake_case in nested objects)
+ * Get chain configuration response (NATS format - camelCase only)
  */
 export interface GetChainConfigResponse {
-  // NATS envelope (camelCase)
   chainId: string;
   tenantId: string;
+  providerConfigurations: ChainProviderConfig[];
+  inheritedSettings?: string[];
   createdAt: string;
   updatedAt: string;
-
-  // JSONB database fields (snake_case) - nested configuration data
-  chain_id?: string;
-  chain_name?: string;
-  tenant_id?: string;
-  provider_templates?: ChainProviderConfig[];
-  inheritance_rules?: Record<string, any>;
-  global_settings?: Record<string, any>;
-  created_at?: string;
-  updated_at?: string;
 }
 
 /**
@@ -75,10 +66,9 @@ export interface ApplyChainToHotelRequest {
 }
 
 /**
- * Chain application response
+ * Chain application response (NATS format - camelCase only)
  */
 export interface ApplyChainResponse {
-  // NATS envelope (camelCase)
   hotelId: string;
   chainId: string;
   appliedAt: string;
@@ -97,7 +87,7 @@ export interface ListChainHotelsRequest {
 }
 
 /**
- * Chain hotel configuration
+ * Chain hotel configuration (NATS format - camelCase only)
  */
 export interface ChainHotelConfig {
   hotelId: string;
@@ -109,7 +99,7 @@ export interface ChainHotelConfig {
 }
 
 /**
- * List chain hotels response
+ * List chain hotels response (NATS format - camelCase only)
  */
 export interface ListChainHotelsResponse {
   data: ChainHotelConfig[];
@@ -130,10 +120,9 @@ export interface SyncChainRequest {
 }
 
 /**
- * Chain sync result
+ * Chain sync result (NATS format - camelCase only)
  */
 export interface ChainSyncResult {
-  // NATS envelope (camelCase)
   chainId: string;
   startedAt: string;
   completedAt?: string;

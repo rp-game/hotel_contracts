@@ -2,6 +2,7 @@
  * Chain Configuration Type Definitions
  *
  * Handles multi-property configuration and settings inheritance from chain level
+ * NOTE: NATS contracts use camelCase only. REST API DTOs handle snake_case conversion.
  */
 /**
  * Chain configuration settings
@@ -19,22 +20,15 @@ export interface GetChainConfigRequest {
     tenantId?: string;
 }
 /**
- * Get chain configuration response
- * Contains both NATS fields (camelCase) and database fields (snake_case in nested objects)
+ * Get chain configuration response (NATS format - camelCase only)
  */
 export interface GetChainConfigResponse {
     chainId: string;
     tenantId: string;
+    providerConfigurations: ChainProviderConfig[];
+    inheritedSettings?: string[];
     createdAt: string;
     updatedAt: string;
-    chain_id?: string;
-    chain_name?: string;
-    tenant_id?: string;
-    provider_templates?: ChainProviderConfig[];
-    inheritance_rules?: Record<string, any>;
-    global_settings?: Record<string, any>;
-    created_at?: string;
-    updated_at?: string;
 }
 /**
  * Provider configuration within a chain
@@ -65,7 +59,7 @@ export interface ApplyChainToHotelRequest {
     overrideSettings?: Record<string, any>;
 }
 /**
- * Chain application response
+ * Chain application response (NATS format - camelCase only)
  */
 export interface ApplyChainResponse {
     hotelId: string;
@@ -84,7 +78,7 @@ export interface ListChainHotelsRequest {
     limit?: number;
 }
 /**
- * Chain hotel configuration
+ * Chain hotel configuration (NATS format - camelCase only)
  */
 export interface ChainHotelConfig {
     hotelId: string;
@@ -95,7 +89,7 @@ export interface ChainHotelConfig {
     overrideSettings?: Record<string, any>;
 }
 /**
- * List chain hotels response
+ * List chain hotels response (NATS format - camelCase only)
  */
 export interface ListChainHotelsResponse {
     data: ChainHotelConfig[];
@@ -114,7 +108,7 @@ export interface SyncChainRequest {
     dryRun?: boolean;
 }
 /**
- * Chain sync result
+ * Chain sync result (NATS format - camelCase only)
  */
 export interface ChainSyncResult {
     chainId: string;
