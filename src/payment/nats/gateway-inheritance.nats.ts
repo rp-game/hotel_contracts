@@ -290,6 +290,36 @@ export interface GatewayConfigData {
 }
 
 /**
+ * Gateway statistics for dashboard display
+ */
+export interface GatewayStatistics {
+  /**
+   * Total number of transactions
+   */
+  totalTransactions: number;
+
+  /**
+   * Number of successful transactions
+   */
+  successfulTransactions: number;
+
+  /**
+   * Success rate percentage (0-100)
+   */
+  successRate: number;
+
+  /**
+   * Total transaction volume
+   */
+  totalVolume: string;
+
+  /**
+   * Monthly transaction volume
+   */
+  monthlyVolume: string;
+}
+
+/**
  * Resolved gateway configuration with inheritance metadata
  */
 export interface ResolvedGatewayConfigData extends GatewayConfigData {
@@ -297,6 +327,11 @@ export interface ResolvedGatewayConfigData extends GatewayConfigData {
    * Metadata about how this config was resolved through inheritance
    */
   _metadata?: ResolvedConfigMetadata;
+
+  /**
+   * Gateway statistics for display
+   */
+  statistics?: GatewayStatistics;
 }
 
 // ============ FIND PLATFORM (gateway.findPlatform) ============
