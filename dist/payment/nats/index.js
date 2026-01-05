@@ -5,7 +5,7 @@
  * These interfaces define the request/response shapes for inter-service
  * communication via NATS messaging pattern.
  *
- * Pattern: *-payment.*
+ * Pattern: *-payment.*, gateway.*
  * Handler: payment-service
  */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -24,4 +24,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./offline-payment.nats"), exports);
+__exportStar(require("./gateway-inheritance.nats"), exports);
 //# sourceMappingURL=index.js.map
