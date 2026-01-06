@@ -264,6 +264,27 @@ export interface GatewayStatistics {
     monthlyVolume: string;
 }
 /**
+ * Gateway fee configuration for dashboard display
+ */
+export interface GatewayFees {
+    /**
+     * Fee percentage rate
+     */
+    percentage: number;
+    /**
+     * Fixed fee amount
+     */
+    fixedAmount: string;
+    /**
+     * Minimum fee amount
+     */
+    minimumFee: string;
+    /**
+     * Maximum fee amount (optional)
+     */
+    maximumFee?: string;
+}
+/**
  * Resolved gateway configuration with inheritance metadata
  */
 export interface ResolvedGatewayConfigData extends GatewayConfigData {
@@ -275,6 +296,10 @@ export interface ResolvedGatewayConfigData extends GatewayConfigData {
      * Gateway statistics for display
      */
     statistics?: GatewayStatistics;
+    /**
+     * Gateway fees for display
+     */
+    fees?: GatewayFees;
 }
 /**
  * NATS request to find platform-level gateway configurations
