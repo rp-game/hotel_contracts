@@ -431,6 +431,10 @@ export type FindHotelGatewaysNatsResponse = NatsResponse<FindHotelGatewaysRespon
  * Legacy NATS request to update gateway configuration
  * Used by legacy gateway.update endpoint (without inheritance support)
  *
+ * Credentials are sent at ROOT LEVEL (not nested in configuration):
+ * - merchantId, apiKey, secretKey come from database columns
+ * - configuration contains gateway-specific settings (environment, URLs, etc)
+ *
  * @deprecated Use UpdateGatewayRequest for inheritance-aware updates via gateway.updateByLevel
  */
 export interface UpdateGatewayPayload {
@@ -447,20 +451,34 @@ export interface UpdateGatewayPayload {
      */
     hotelId?: string;
     /**
+     * Chain ID (optional)
+     */
+    chainId?: string;
+    /**
      * Active/enabled status
      */
     isEnabled?: boolean;
     /**
-     * Gateway configuration
+     * Merchant ID (ROOT LEVEL - database column, not configuration)
+     */
+    merchantId?: string;
+    /**
+     * API Key (ROOT LEVEL - database column, not configuration)
+     */
+    apiKey?: string;
+    /**
+     * Secret Key (ROOT LEVEL - database column, not configuration)
+     */
+    secretKey?: string;
+    /**
+     * Gateway-specific configuration (OnePay URLs, environment, etc)
      */
     configuration?: {
-        merchantId?: string;
-        apiKey?: string;
-        secretKey?: string;
         webhook?: string;
         environment?: string;
         currencies?: string[];
         supportedMethods?: string[];
+        [key: string]: any;
     };
     /**
      * Fee configuration
