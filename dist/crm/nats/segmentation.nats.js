@@ -20,7 +20,18 @@
  * Called by: api-gateway (CrmController)
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SegmentStatus = void 0;
+exports.SegmentStatus = exports.SegmentType = void 0;
+/**
+ * Segment Type Enum
+ */
+var SegmentType;
+(function (SegmentType) {
+    SegmentType["RFM"] = "RFM";
+    SegmentType["BEHAVIORAL"] = "BEHAVIORAL";
+    SegmentType["DEMOGRAPHIC"] = "DEMOGRAPHIC";
+    SegmentType["GEOGRAPHIC"] = "GEOGRAPHIC";
+    SegmentType["VALUE_BASED"] = "VALUE_BASED";
+})(SegmentType || (exports.SegmentType = SegmentType = {}));
 /**
  * Segment Status Enum
  */

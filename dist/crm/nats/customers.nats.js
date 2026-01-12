@@ -37,15 +37,13 @@ var Gender;
 var NationalIdType;
 (function (NationalIdType) {
     NationalIdType["PASSPORT"] = "PASSPORT";
-    NationalIdType["ID_CARD"] = "ID_CARD";
-    NationalIdType["DRIVER_LICENSE"] = "DRIVER_LICENSE";
-    NationalIdType["OTHER"] = "OTHER";
+    NationalIdType["CITIZEN_ID"] = "CITIZEN_ID";
+    NationalIdType["DRIVING_LICENSE"] = "DRIVING_LICENSE";
 })(NationalIdType || (exports.NationalIdType = NationalIdType = {}));
 var CommunicationChannel;
 (function (CommunicationChannel) {
     CommunicationChannel["EMAIL"] = "EMAIL";
     CommunicationChannel["SMS"] = "SMS";
-    CommunicationChannel["PUSH"] = "PUSH";
-    CommunicationChannel["IN_APP"] = "IN_APP";
+    CommunicationChannel["APP_NOTIFICATION"] = "APP_NOTIFICATION";
 })(CommunicationChannel || (exports.CommunicationChannel = CommunicationChannel = {}));
 //# sourceMappingURL=customers.nats.js.map

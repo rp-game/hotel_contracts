@@ -24,7 +24,6 @@
  */
 
 import { NatsResponse } from '../../common';
-import type { LoyaltyMemberNatsResponse } from './loyalty-members.nats';
 
 /**
  * Enums
@@ -37,16 +36,14 @@ export enum Gender {
 
 export enum NationalIdType {
   PASSPORT = 'PASSPORT',
-  ID_CARD = 'ID_CARD',
-  DRIVER_LICENSE = 'DRIVER_LICENSE',
-  OTHER = 'OTHER',
+  CITIZEN_ID = 'CITIZEN_ID',
+  DRIVING_LICENSE = 'DRIVING_LICENSE',
 }
 
 export enum CommunicationChannel {
   EMAIL = 'EMAIL',
   SMS = 'SMS',
-  PUSH = 'PUSH',
-  IN_APP = 'IN_APP',
+  APP_NOTIFICATION = 'APP_NOTIFICATION',
 }
 
 /**
@@ -97,6 +94,11 @@ export interface UpdateCustomerNatsRequest {
   customerId: string;
   updateDto: Partial<CreateCustomerNatsRequest>;
 }
+
+/**
+ * Update Customer Response
+ */
+export type UpdateCustomerNatsResponse = NatsResponse<CustomerNatsResponse>;
 
 /**
  * Customer Response
@@ -245,6 +247,19 @@ export type UpdateStatsNatsResponse = NatsResponse<{
 }>;
 
 /**
+ * Recalculate Booking Stats Data
+ */
+export interface RecalculateBookingStatsData {
+  totalBookings: number;
+  totalSpent: string;
+  lastBookingDate?: string | Date;
+  membershipLevel?: string;
+  previousTotalBookings: number;
+  previousTotalSpent: number;
+  previousMembershipLevel?: string;
+}
+
+/**
  * Recalculate Booking Stats Request
  * Pattern: crm.customer.recalculateBookingStats
  */
@@ -257,7 +272,27 @@ export interface RecalculateBookingStatsNatsRequest {
 /**
  * Recalculate Booking Stats Response
  */
-export type RecalculateBookingStatsNatsResponse = NatsResponse<any>;
+export type RecalculateBookingStatsNatsResponse = NatsResponse<RecalculateBookingStatsData>;
+
+/**
+ * Recalculate All Booking Stats Result Item
+ */
+export interface RecalculateAllBookingStatsResultItem {
+  customerId: string;
+  email?: string;
+  success: boolean;
+  error?: string;
+}
+
+/**
+ * Recalculate All Booking Stats Data
+ */
+export interface RecalculateAllBookingStatsData {
+  totalProcessed: number;
+  successful: number;
+  failed: number;
+  results: RecalculateAllBookingStatsResultItem[];
+}
 
 /**
  * Recalculate All Booking Stats Request
@@ -271,7 +306,7 @@ export interface RecalculateAllBookingStatsNatsRequest {
 /**
  * Recalculate All Booking Stats Response
  */
-export type RecalculateAllBookingStatsNatsResponse = NatsResponse<any>;
+export type RecalculateAllBookingStatsNatsResponse = NatsResponse<RecalculateAllBookingStatsData>;
 
 /**
  * Customer Stats Request
@@ -288,21 +323,46 @@ export interface CustomerStatsNatsRequest {
  * Customer Stats Response
  */
 export interface CustomerStatsData {
-  totalCustomers: number;
-  activeCustomers: number;
-  newCustomersThisMonth: number;
-  totalSpent: string;
-  averageSpentPerCustomer: string;
-  recentCustomers?: Array<{
+  overview: {
+    totalCustomers: number;
+    newCustomersLast30Days: number;
+    averageSpent: string;
+    totalRevenue: string;
+    averageBookings: number;
+  };
+  membershipDistribution: {
+    bronze: number;
+    silver: number;
+    gold: number;
+    platinum: number;
+  };
+  topCustomers: Array<{
+    id: string;
+    name: string;
+    email: string;
+    totalSpent: string;
+    membershipLevel: string;
+  }>;
+  recentCustomers: Array<{
     id: string;
     name: string;
     email: string;
     createdAt: string | Date;
   }>;
-  [key: string]: any;
 }
 
 export type CustomerStatsNatsResponse = NatsResponse<CustomerStatsData>;
+
+/**
+ * Find By Customer Loyalty Data
+ */
+export interface FindByCustomerLoyaltyData {
+  customerId: string;
+  loyaltyTier: string;
+  loyaltyPoints: number;
+  memberSince: string;
+  benefits: string[];
+}
 
 /**
  * Find By Customer Request
@@ -311,14 +371,12 @@ export type CustomerStatsNatsResponse = NatsResponse<CustomerStatsData>;
 export interface FindByCustomerNatsRequest {
   tenantId: string;
   customerId: string;
-  loyaltyProgramId?: string;
 }
 
 /**
  * Find By Customer Response
- * (Uses LoyaltyMemberNatsResponse from loyalty-members.nats)
  */
-export type FindByCustomerNatsResponse = NatsResponse<LoyaltyMemberNatsResponse | LoyaltyMemberNatsResponse[]>;
+export type FindByCustomerNatsResponse = NatsResponse<FindByCustomerLoyaltyData>;
 
 /**
  * Search Customers Request
@@ -326,17 +384,10 @@ export type FindByCustomerNatsResponse = NatsResponse<LoyaltyMemberNatsResponse 
  */
 export interface SearchCustomersNatsRequest {
   tenantId: string;
-  query: string;
-  fields?: string[];
-  page?: number;
+  q?: string;
+  phone?: string;
+  email?: string;
   limit?: number;
-  filters?: {
-    membershipLevel?: string;
-    nationality?: string;
-    createdAfter?: string;
-    createdBefore?: string;
-    [key: string]: any;
-  };
 }
 
 /**
@@ -350,36 +401,57 @@ export type SearchCustomersNatsResponse = NatsResponse<{
 }>;
 
 /**
+ * Export Job Data
+ */
+export interface ExportJobData {
+  jobId: string;
+  status: string;
+  totalRecords: number;
+  processedRecords: number;
+  estimatedCompletion?: string;
+}
+
+/**
+ * Export Status Data
+ */
+export interface ExportStatusData {
+  jobId: string;
+  status: string;
+  progress: number;
+  totalRecords: number;
+  processedRecords: number;
+  downloadUrl?: string;
+  error?: string;
+  startedAt: string;
+  completedAt?: string;
+}
+
+/**
+ * Export Download Data
+ */
+export interface ExportDownloadData {
+  buffer: string;
+  filename: string;
+  mimeType: string;
+}
+
+/**
  * Export Customers Request
  * Pattern: crm.customer.export
  */
 export interface ExportCustomersNatsRequest {
   tenantId: string;
-  format: 'csv' | 'excel' | 'json';
-  filters?: {
-    membershipLevel?: string;
-    nationality?: string;
-    createdAfter?: string;
-    createdBefore?: string;
-    [key: string]: any;
-  };
-  userId?: string;
-  dateRange?: {
-    startDate: string;
-    endDate: string;
-  };
+  format: 'excel' | 'csv';
+  filters?: any;
+  fields?: string[];
+  includeSensitive?: boolean;
+  chunkSize?: number;
 }
 
 /**
  * Export Customers Response
  */
-export type ExportCustomersNatsResponse = NatsResponse<{
-  exportId: string;
-  status: 'pending' | 'processing' | 'completed' | 'failed';
-  createdAt: string;
-  expiresAt: string;
-  downloadUrl?: string;
-}>;
+export type ExportCustomersNatsResponse = NatsResponse<ExportJobData>;
 
 /**
  * Export Status Request
@@ -387,23 +459,13 @@ export type ExportCustomersNatsResponse = NatsResponse<{
  */
 export interface ExportStatusNatsRequest {
   tenantId: string;
-  exportId: string;
+  jobId: string;
 }
 
 /**
  * Export Status Response
  */
-export type ExportStatusNatsResponse = NatsResponse<{
-  exportId: string;
-  status: 'pending' | 'processing' | 'completed' | 'failed';
-  progress?: number;
-  totalRecords?: number;
-  processedRecords?: number;
-  errorMessage?: string;
-  completedAt?: string;
-  expiresAt: string;
-  downloadUrl?: string;
-}>;
+export type ExportStatusNatsResponse = NatsResponse<ExportStatusData>;
 
 /**
  * Export Download Request
@@ -411,16 +473,10 @@ export type ExportStatusNatsResponse = NatsResponse<{
  */
 export interface ExportDownloadNatsRequest {
   tenantId: string;
-  exportId: string;
+  jobId: string;
 }
 
 /**
  * Export Download Response
  */
-export type ExportDownloadNatsResponse = NatsResponse<{
-  fileName: string;
-  fileSize: number;
-  fileType: string;
-  downloadUrl: string;
-  expiresAt: string;
-}>;
+export type ExportDownloadNatsResponse = NatsResponse<ExportDownloadData>;

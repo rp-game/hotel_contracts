@@ -20,6 +20,16 @@
  */
 import { NatsResponse } from '../../common';
 /**
+ * Segment Type Enum
+ */
+export declare enum SegmentType {
+    RFM = "RFM",
+    BEHAVIORAL = "BEHAVIORAL",
+    DEMOGRAPHIC = "DEMOGRAPHIC",
+    GEOGRAPHIC = "GEOGRAPHIC",
+    VALUE_BASED = "VALUE_BASED"
+}
+/**
  * Segment Status Enum
  */
 export declare enum SegmentStatus {
@@ -199,17 +209,17 @@ export interface GetSegmentMembersNatsRequest {
  */
 export type GetSegmentMembersNatsResponse = NatsResponse<SegmentMembersNatsResponse>;
 /**
- * Segment Analysis Response
+ * Segment Analysis Response (exact copy from SegmentAnalysisDto in service)
  */
 export interface SegmentAnalysisNatsResponse {
     segmentId: string;
     segmentName: string;
-    type: string;
     customerCount: number;
-    averageClv: string;
-    totalRevenue: string;
+    percentage: number;
+    avgClv: number;
+    totalRevenue: number;
+    avgBookingFrequency: number;
     growthRate: number;
-    churnRate: number;
 }
 /**
  * Get Segment Analysis Request
