@@ -27,9 +27,8 @@ export interface EnrollMemberNatsRequest {
   programId: string;
   membershipId: string;
   joinDate: string;
-  currentTierId?: string;
-  enrollmentDate?: string;
-  statusExpiryDate?: string;
+  initialTierId?: string;
+  isActive?: boolean;
 }
 
 /**
@@ -41,17 +40,16 @@ export interface LoyaltyMemberNatsResponse {
   customerId: string;
   programId: string;
   membershipId: string;
-  currentTierId: string;
-  enrollmentDate: string | Date;
-  statusExpiryDate?: string | Date;
-  totalPoints: number;
-  redeemedPoints: number;
-  availablePoints: number;
+  currentTierId?: string;
+  pointsBalance: number;
+  lifetimePoints: number;
   joinDate: string | Date;
+  tierAchievedDate?: string | Date;
+  tierExpirationDate?: string | Date;
+  lastActivityDate?: string | Date;
   isActive: boolean;
   createdAt: string | Date;
   updatedAt: string | Date;
-  [key: string]: any;
 }
 
 /**
@@ -74,19 +72,19 @@ export interface FindAllByTenantNatsRequest {
 }
 
 /**
- * List Loyalty Members Response
+ * List Loyalty Members Data
  */
-export interface ListLoyaltyMembersNatsResponse {
+export interface ListLoyaltyMembersData {
   data: LoyaltyMemberNatsResponse[];
   total: number;
-  page?: number;
-  limit?: number;
+  page: number;
+  limit: number;
 }
 
 /**
  * Find All By Tenant Response
  */
-export type FindAllByTenantNatsResponse = NatsResponse<ListLoyaltyMembersNatsResponse>;
+export type FindAllByTenantNatsResponse = NatsResponse<ListLoyaltyMembersData>;
 
 /**
  * Find One By Id Request
@@ -131,7 +129,7 @@ export interface FindAllByCustomerNatsRequest {
 /**
  * Find All By Customer Response
  */
-export type FindAllByCustomerNatsResponse = NatsResponse<ListLoyaltyMembersNatsResponse>;
+export type FindAllByCustomerNatsResponse = NatsResponse<ListLoyaltyMembersData>;
 
 /**
  * Update Details Request
@@ -140,7 +138,14 @@ export type FindAllByCustomerNatsResponse = NatsResponse<ListLoyaltyMembersNatsR
 export interface UpdateDetailsNatsRequest {
   memberId: string;
   tenantId: string;
-  updateDto: Partial<EnrollMemberNatsRequest>;
+  updateDto: {
+    currentTierId?: string;
+    pointsBalance?: number;
+    tierAchievedDate?: string;
+    tierExpirationDate?: string;
+    lastActivityDate?: string;
+    isActive?: boolean;
+  };
 }
 
 /**
@@ -163,15 +168,13 @@ export interface RemoveMemberNatsRequest {
 export type RemoveMemberNatsResponse = NatsResponse<{ message: string }>;
 
 /**
- * Loyalty Member Stats
+ * Loyalty Member Stats Data
  */
-export interface LoyaltyMemberStats {
+export interface LoyaltyMemberStatsData {
   totalMembers: number;
   activeMembers: number;
   totalPoints: number;
-  redeemedPoints: number;
-  availablePoints: number;
-  [key: string]: any;
+  averagePointsPerMember: number;
 }
 
 /**
@@ -185,4 +188,4 @@ export interface StatsNatsRequest {
 /**
  * Stats Response
  */
-export type StatsNatsResponse = NatsResponse<LoyaltyMemberStats>;
+export type StatsNatsResponse = NatsResponse<LoyaltyMemberStatsData>;
