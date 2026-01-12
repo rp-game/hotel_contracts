@@ -255,7 +255,7 @@ export interface RecalculateBookingStatsData {
   lastBookingDate?: string | Date;
   membershipLevel?: string;
   previousTotalBookings: number;
-  previousTotalSpent: number;
+  previousTotalSpent: string;
   previousMembershipLevel?: string;
 }
 
