@@ -123,6 +123,8 @@ export type CreateLoyaltyProgramNatsResponse = NatsResponse<LoyaltyProgramNatsRe
  */
 export interface FindAllProgramsNatsRequest {
   tenantId: string;
+  page?: number;
+  limit?: number;
 }
 
 /**
