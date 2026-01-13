@@ -168,13 +168,35 @@ export interface RemoveMemberNatsRequest {
 export type RemoveMemberNatsResponse = NatsResponse<{ message: string }>;
 
 /**
+ * Members by Tier Data
+ */
+export interface MembersByTierData {
+  tierId: string;
+  tierName: string;
+  memberCount: number;
+  averagePoints: number;
+}
+
+/**
+ * Members by Program Data
+ */
+export interface MembersByProgramData {
+  programId: string;
+  programName: string;
+  memberCount: number;
+}
+
+/**
  * Loyalty Member Stats Data
  */
 export interface LoyaltyMemberStatsData {
   totalMembers: number;
   activeMembers: number;
+  inactiveMembers: number;
   totalPoints: number;
   averagePointsPerMember: number;
+  membersByTier: MembersByTierData[];
+  membersByProgram: MembersByProgramData[];
 }
 
 /**
