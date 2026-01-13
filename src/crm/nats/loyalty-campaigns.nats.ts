@@ -148,6 +148,7 @@ export interface LoyaltyCampaignNatsResponse {
 export interface FindAllCampaignsNatsRequest {
   tenantId: string;
   programId?: string;
+  status?: string;
   page?: number;
   limit?: number;
 }
