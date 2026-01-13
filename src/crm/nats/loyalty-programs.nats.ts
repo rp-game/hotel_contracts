@@ -32,6 +32,8 @@ export interface EarningRulesRequest {
   bonusMultiplier?: string;
 }
 
+export type EarningRulesResponse = EarningRulesRequest;
+
 /**
  * Redemption Rules
  */
@@ -42,20 +44,22 @@ export interface RedemptionRulesRequest {
   redemptionCategories?: string[];
 }
 
+export type RedemptionRulesResponse = RedemptionRulesRequest;
+
 /**
  * Create Loyalty Program Request
  * Pattern: crm.loyalty_program.create
  */
 export interface CreateLoyaltyProgramNatsRequest {
   tenantId: string;
+  hotelId?: string;
   name: string;
   description?: string;
   startDate?: string;
   endDate?: string;
-  isActive: boolean;
+  isActive?: boolean;
   earningRules?: EarningRulesRequest;
   redemptionRules?: RedemptionRulesRequest;
-  pointsValidityPeriod?: number;
 }
 
 /**
@@ -76,15 +80,14 @@ export interface TierBenefitsRequest {
  * Create Loyalty Tier Request
  */
 export interface CreateLoyaltyTierNatsRequest {
+  tenantId: string;
+  programId: string;
   name: string;
-  description?: string;
-  minPoints: number;
-  maxPoints?: number;
+  minimumPoints: number;
   pointsMultiplier?: number;
-  tierOrder: number;
-  color?: string;
-  icon?: string;
   benefits?: TierBenefitsRequest;
+  order?: number;
+  isActive?: boolean;
 }
 
 
@@ -94,18 +97,19 @@ export interface CreateLoyaltyTierNatsRequest {
 export interface LoyaltyProgramNatsResponse {
   id: string;
   tenantId: string;
+  hotelId?: string;
   name: string;
   description?: string;
   startDate?: string | Date;
   endDate?: string | Date;
   isActive: boolean;
-  earningRules?: EarningRulesRequest;
-  redemptionRules?: RedemptionRulesRequest;
-  pointsValidityPeriod?: number;
-  tiers: LoyaltyTierNatsResponse[];
+  earningRules?: EarningRulesResponse;
+  redemptionRules?: RedemptionRulesResponse;
+  tiers?: LoyaltyTierNatsResponse[];
+  stats?: LoyaltyProgramStats;
   createdAt: string | Date;
   updatedAt: string | Date;
-  stats?: any;
+  deletedAt?: string | Date;
 }
 
 /**
@@ -240,19 +244,12 @@ export type FindAllTiersNatsResponse = NatsResponse<{
  * Loyalty Program Stats
  */
 export interface LoyaltyProgramStats {
-  totalPrograms: number;
-  activePrograms: number;
   totalMembers: number;
-  totalPointsIssued: number;
+  activeMembers: number;
+  totalPointsAwarded: number;
   totalPointsRedeemed: number;
-  programMetrics?: Array<{
-    programId: string;
-    programName: string;
-    memberCount: number;
-    pointsIssued: number;
-    pointsRedeemed: number;
-  }>;
-  [key: string]: any;
+  averagePointsPerMember: number;
+  tierDistribution: Record<string, number>;
 }
 
 /**

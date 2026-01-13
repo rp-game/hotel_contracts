@@ -29,17 +29,15 @@ export interface TierBenefitsNatsResponse {
  */
 export interface LoyaltyTierNatsResponse {
   id: string;
+  tenantId: string;
   programId: string;
   name: string;
-  description?: string;
-  minPoints: number;
-  maxPoints?: number;
-  benefits?: TierBenefitsNatsResponse;
-  pointsMultiplier?: number;
+  minimumPoints: number;
+  pointsMultiplier: number;
   multiplier?: number;
-  tierOrder: number;
-  color?: string;
-  icon?: string;
+  benefits?: TierBenefitsNatsResponse;
+  order: number;
+  isActive: boolean;
   createdAt: string | Date;
   updatedAt: string | Date;
 }
