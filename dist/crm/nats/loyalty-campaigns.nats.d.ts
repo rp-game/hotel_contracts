@@ -116,19 +116,20 @@ export interface LoyaltyCampaignNatsResponse {
     description?: string;
     campaignType: CampaignType;
     status: CampaignStatus;
-    startDate: string | Date;
-    endDate: string | Date;
+    startDate: string;
+    endDate: string;
     rules: CampaignRulesNatsRequest;
     conditions?: CampaignConditionsNatsRequest;
     isAutoApply: boolean;
     promotionCode?: string;
+    isActive?: boolean;
     participationCount?: number;
     pointsAwarded?: number;
     costToDate?: number;
     tracking?: CampaignTracking;
     createdBy: string;
-    createdAt: string | Date;
-    updatedAt: string | Date;
+    createdAt: string;
+    updatedAt: string;
 }
 /**
  * Find All Campaigns Request
