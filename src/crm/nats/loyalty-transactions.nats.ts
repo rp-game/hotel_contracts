@@ -59,6 +59,10 @@ export interface LoyaltyTransactionNatsResponse {
   balanceBefore: number;
   balanceAfter: number;
   metadata?: Record<string, any>;
+  transactionDate: string | Date;
+  pointsExpirationDate?: string | Date;
+  relatedInteractionId?: string;
+  staffId?: string;
   createdAt: string | Date;
   updatedAt: string | Date;
 }

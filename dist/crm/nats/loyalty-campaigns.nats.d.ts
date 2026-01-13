@@ -26,15 +26,21 @@ export declare enum CampaignType {
     DISCOUNT = "DISCOUNT",
     FREE_SERVICE = "FREE_SERVICE",
     TIER_BONUS = "TIER_BONUS",
-    REFERRAL = "REFERRAL"
+    REFERRAL = "REFERRAL",
+    BIRTHDAY = "BIRTHDAY",
+    ANNIVERSARY = "ANNIVERSARY",
+    SEASONAL = "SEASONAL",
+    SPEND_THRESHOLD = "SPEND_THRESHOLD"
 }
 /**
  * Campaign Status Enum
  */
 export declare enum CampaignStatus {
     DRAFT = "DRAFT",
+    SCHEDULED = "SCHEDULED",
     ACTIVE = "ACTIVE",
     PAUSED = "PAUSED",
+    COMPLETED = "COMPLETED",
     ENDED = "ENDED",
     CANCELLED = "CANCELLED"
 }
@@ -91,6 +97,15 @@ export interface UpdateCampaignNatsRequest {
     updateDto: Partial<CreateCampaignNatsRequest>;
 }
 /**
+ * Campaign Tracking Metrics
+ */
+export interface CampaignTracking {
+    views?: number;
+    enrollments?: number;
+    redemptions?: number;
+    conversionRate?: number;
+}
+/**
  * Loyalty Campaign Response
  */
 export interface LoyaltyCampaignNatsResponse {
@@ -107,6 +122,10 @@ export interface LoyaltyCampaignNatsResponse {
     conditions?: CampaignConditionsNatsRequest;
     isAutoApply: boolean;
     promotionCode?: string;
+    participationCount?: number;
+    pointsAwarded?: number;
+    costToDate?: number;
+    tracking?: CampaignTracking;
     createdBy: string;
     createdAt: string | Date;
     updatedAt: string | Date;

@@ -30,6 +30,10 @@ var CampaignType;
     CampaignType["FREE_SERVICE"] = "FREE_SERVICE";
     CampaignType["TIER_BONUS"] = "TIER_BONUS";
     CampaignType["REFERRAL"] = "REFERRAL";
+    CampaignType["BIRTHDAY"] = "BIRTHDAY";
+    CampaignType["ANNIVERSARY"] = "ANNIVERSARY";
+    CampaignType["SEASONAL"] = "SEASONAL";
+    CampaignType["SPEND_THRESHOLD"] = "SPEND_THRESHOLD";
 })(CampaignType || (exports.CampaignType = CampaignType = {}));
 /**
  * Campaign Status Enum
@@ -37,8 +41,10 @@ var CampaignType;
 var CampaignStatus;
 (function (CampaignStatus) {
     CampaignStatus["DRAFT"] = "DRAFT";
+    CampaignStatus["SCHEDULED"] = "SCHEDULED";
     CampaignStatus["ACTIVE"] = "ACTIVE";
     CampaignStatus["PAUSED"] = "PAUSED";
+    CampaignStatus["COMPLETED"] = "COMPLETED";
     CampaignStatus["ENDED"] = "ENDED";
     CampaignStatus["CANCELLED"] = "CANCELLED";
 })(CampaignStatus || (exports.CampaignStatus = CampaignStatus = {}));
