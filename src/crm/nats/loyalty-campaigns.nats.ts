@@ -88,8 +88,8 @@ export interface CreateCampaignNatsRequest {
   startDate: string;
   endDate: string;
   rules: CampaignRulesNatsRequest;
-  conditions?: CampaignConditionsNatsRequest;
-  isAutoApply?: boolean;
+  conditions?: CampaignConditionsNatsRequest;  // Optional - apply to all customers if not specified
+  isAutoApply?: boolean;  // Optional - manual apply if false/undefined
   promotionCode?: string;
 }
 

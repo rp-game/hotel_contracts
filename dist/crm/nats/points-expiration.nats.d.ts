@@ -162,19 +162,60 @@ export interface GetExpirationRulesNatsRequest {
     programId?: string;
 }
 /**
+ * Expiration Rule Response (from entity)
+ */
+export interface ExpirationRuleNatsResponse {
+    id: string;
+    tenantId: string;
+    ruleName: string;
+    description?: string;
+    expirationDays: number;
+    applicationType: string;
+    appliesToTransactionType?: string;
+    appliesToTier?: string;
+    appliesToCampaignId?: string;
+    allowExtension: boolean;
+    maxExtensions?: number;
+    extensionDays?: number;
+    extensionConditions?: any;
+    priority: number;
+    effectiveFrom?: string | Date;
+    effectiveUntil?: string | Date;
+    isActive: boolean;
+    createdAt: string | Date;
+    updatedAt: string | Date;
+    createdBy?: string;
+    updatedBy?: string;
+}
+/**
  * Get Rules Response
  */
-export type GetExpirationRulesNatsResponse = NatsResponse<ExpirationRuleNatsRequest[]>;
+export type GetExpirationRulesNatsResponse = NatsResponse<ExpirationRuleNatsResponse[]>;
 /**
  * Create Rules Request
  * Pattern: crm.loyalty.points_expiration.rules.create
  */
-export interface CreateExpirationRuleNatsRequest extends ExpirationRuleNatsRequest {
+export interface CreateExpirationRuleNatsRequest {
+    tenantId: string;
+    ruleName: string;
+    description?: string;
+    expirationDays: number;
+    applicationType: string;
+    appliesToTransactionType?: string;
+    appliesToTier?: string;
+    appliesToCampaignId?: string;
+    allowExtension?: boolean;
+    maxExtensions?: number;
+    extensionDays?: number;
+    extensionConditions?: any;
+    priority?: number;
+    effectiveFrom?: string | Date;
+    effectiveUntil?: string | Date;
 }
 /**
  * Create Rules Response
  */
-export type CreateExpirationRuleNatsResponse = NatsResponse<ExpirationRuleNatsRequest>;
+export type CreateExpirationRuleNatsResponse = NatsResponse<ExpirationRuleNatsResponse>;
 /**
  * Get Settings Request
  * Pattern: crm.loyalty.points_expiration.settings.get
@@ -214,4 +255,193 @@ export type ProcessExpirationNatsResponse = NatsResponse<{
     pointsExpired: number;
     message: string;
 }>;
+/**
+ * Batch Notification Result
+ */
+export interface BatchNotificationResultNatsResponse {
+    sent: number;
+    failed: number;
+    skipped: number;
+    totalAttempted: number;
+}
+/**
+ * Send Batch Notifications Request
+ * Pattern: crm.loyalty.points_expiration.notifications.send_batch
+ */
+export interface SendBatchNotificationsNatsRequest {
+    tenantId: string;
+    programId?: string;
+    daysBefore?: number;
+    notificationType?: string;
+}
+/**
+ * Send Batch Notifications Response
+ */
+export type SendBatchNotificationsNatsResponse = NatsResponse<BatchNotificationResultNatsResponse>;
+/**
+ * Batch History Entry
+ */
+export interface ExpirationBatchHistoryNatsResponse {
+    batchId: string;
+    tenantId: string;
+    processedAt: string | Date;
+    pointsExpired: number;
+    membersAffected: number;
+    status: string;
+}
+/**
+ * Get Batch History Request
+ * Pattern: crm.loyalty.points_expiration.batch_history
+ */
+export interface GetBatchHistoryNatsRequest {
+    tenantId: string;
+    limit?: number;
+    offset?: number;
+}
+/**
+ * Get Batch History Response
+ */
+export type GetBatchHistoryNatsResponse = NatsResponse<ExpirationBatchHistoryNatsResponse[]>;
+/**
+ * Member Expiring Points
+ */
+export interface MemberExpiringPointsNatsResponse {
+    memberId: string;
+    customerId: string;
+    currentPoints: number;
+    expiringPoints: number;
+    expirationDate: string | Date;
+    tierName?: string;
+    email?: string;
+}
+/**
+ * Get Member Expiring Points Request
+ * Pattern: crm.loyalty.points_expiration.member.get
+ */
+export interface GetMemberExpiringPointsNatsRequest {
+    tenantId: string;
+    memberId: string;
+}
+/**
+ * Get Member Expiring Points Response
+ */
+export type GetMemberExpiringPointsNatsResponse = NatsResponse<MemberExpiringPointsNatsResponse>;
+/**
+ * Extend Expiration Result
+ */
+export interface ExtendExpirationResultNatsResponse {
+    expirationId: string;
+    previousExpirationDate: string | Date;
+    newExpirationDate: string | Date;
+    extensionDays: number;
+    pointsAmount: number;
+}
+/**
+ * Extend Points Expiration Request
+ * Pattern: crm.loyalty.points_expiration.extend
+ */
+export interface ExtendExpirationNatsRequest {
+    tenantId: string;
+    expirationId: string;
+    extensionDays: number;
+    reason?: string;
+}
+/**
+ * Extend Points Expiration Response
+ */
+export type ExtendExpirationNatsResponse = NatsResponse<ExtendExpirationResultNatsResponse>;
+/**
+ * Send Notification Result
+ */
+export interface SendNotificationResultNatsResponse {
+    notificationId: string;
+    expirationId: string;
+    sent: boolean;
+    sentAt: string | Date;
+    channel: string;
+}
+/**
+ * Send Single Notification Request
+ * Pattern: crm.loyalty.points_expiration.notifications.send
+ */
+export interface SendNotificationNatsRequest {
+    tenantId: string;
+    expirationId: string;
+    notificationType: string;
+    daysBeforeExpiry: number;
+    channel?: string;
+}
+/**
+ * Send Single Notification Response
+ */
+export type SendNotificationNatsResponse = NatsResponse<SendNotificationResultNatsResponse>;
+/**
+ * Notification History Entry
+ */
+export interface NotificationHistoryNatsResponse {
+    notificationId: string;
+    memberId: string;
+    notificationType: string;
+    sentAt: string | Date;
+    channel: string;
+    status: string;
+    openedAt?: string | Date;
+}
+/**
+ * Get Notification History Request
+ * Pattern: crm.loyalty.points_expiration.notifications.history
+ */
+export interface GetNotificationHistoryNatsRequest {
+    tenantId: string;
+    memberId?: string;
+    limit?: number;
+    offset?: number;
+}
+/**
+ * Get Notification History Response
+ */
+export type GetNotificationHistoryNatsResponse = NatsResponse<NotificationHistoryNatsResponse[]>;
+/**
+ * Daily Processing Result
+ */
+export interface DailyProcessingResultNatsResponse {
+    processingDate: string | Date;
+    pointsExpired: number;
+    membersNotified: number;
+    batchesProcessed: number;
+    successRate: number;
+}
+/**
+ * Daily Expiration Processing Request
+ * Pattern: crm.loyalty.points_expiration.job.daily_processing
+ */
+export interface DailyExpirationProcessingNatsRequest {
+    tenantId: string;
+    processingDate?: string;
+    dryRun?: boolean;
+}
+/**
+ * Daily Expiration Processing Response
+ */
+export type DailyExpirationProcessingNatsResponse = NatsResponse<DailyProcessingResultNatsResponse>;
+/**
+ * Send Notification Reminders Result
+ */
+export interface SendRemindersResultNatsResponse {
+    totalReminders: number;
+    sentSuccessfully: number;
+    failedToSend: number;
+}
+/**
+ * Send Notification Reminders Request
+ * Pattern: crm.loyalty.points_expiration.job.notification_reminders
+ */
+export interface SendNotificationRemindersNatsRequest {
+    tenantId: string;
+    daysBefore?: number[];
+}
+/**
+ * Send Notification Reminders Response
+ */
+export type SendNotificationRemindersNatsResponse = NatsResponse<SendRemindersResultNatsResponse>;
 //# sourceMappingURL=points-expiration.nats.d.ts.map
