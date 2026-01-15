@@ -325,7 +325,13 @@ export interface PointsExpirationBatchNatsResponse {
     triggeredBy?: string;
     processingParameters?: any;
     processingSummary?: any;
-    errorSummary?: string;
+    errorSummary?: {
+        errorTypes?: {
+            [errorType: string]: number;
+        };
+        failedMemberIds?: string[];
+        retryRecommendations?: string[];
+    };
     errorDetails?: any;
     logFilePath?: string;
     createdAt: string | Date;
