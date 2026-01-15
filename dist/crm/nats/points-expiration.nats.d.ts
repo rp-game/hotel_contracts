@@ -278,7 +278,7 @@ export interface SendBatchNotificationsNatsRequest {
 /**
  * Send Batch Notifications Response
  */
-export type SendBatchNotificationsNatsResponse = NatsResponse<BatchNotificationResultNatsResponse>;
+export type SendBatchNotificationsNatsResponse = NatsResponse<PointsExpirationBatchNatsResponse>;
 /**
  * Batch History Entry
  */
@@ -304,6 +304,33 @@ export interface GetBatchHistoryNatsRequest {
  */
 export type GetBatchHistoryNatsResponse = NatsResponse<ExpirationBatchHistoryNatsResponse[]>;
 /**
+ * Points Expiration Batch Response
+ */
+export interface PointsExpirationBatchNatsResponse {
+    id: string | number;
+    tenantId: string;
+    batchName: string;
+    batchType: string;
+    status: string;
+    processingDate: string | Date;
+    startedAt: string | Date;
+    completedAt?: string | Date;
+    totalRecords: number;
+    processedRecords: number;
+    successfulRecords: number;
+    failedRecords: number;
+    skippedRecords?: number;
+    durationSeconds?: number;
+    triggerSource: string;
+    triggeredBy?: string;
+    processingParameters?: any;
+    processingSummary?: any;
+    errorSummary?: string;
+    errorDetails?: any;
+    logFilePath?: string;
+    createdAt: string | Date;
+}
+/**
  * Member Expiring Points
  */
 export interface MemberExpiringPointsNatsResponse {
@@ -326,7 +353,7 @@ export interface GetMemberExpiringPointsNatsRequest {
 /**
  * Get Member Expiring Points Response
  */
-export type GetMemberExpiringPointsNatsResponse = NatsResponse<MemberExpiringPointsNatsResponse>;
+export type GetMemberExpiringPointsNatsResponse = NatsResponse<MemberExpiringPointsNatsResponse[]>;
 /**
  * Extend Expiration Result
  */
@@ -429,9 +456,13 @@ export type DailyExpirationProcessingNatsResponse = NatsResponse<DailyProcessing
  * Send Notification Reminders Result
  */
 export interface SendRemindersResultNatsResponse {
-    totalReminders: number;
-    sentSuccessfully: number;
-    failedToSend: number;
+    success: boolean;
+    results: Array<{
+        daysBefore: number;
+        batchId: number;
+        status: string;
+    }>;
+    message: string;
 }
 /**
  * Send Notification Reminders Request
