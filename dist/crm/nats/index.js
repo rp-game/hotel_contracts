@@ -34,6 +34,8 @@ __exportStar(require("./feedback.nats"), exports);
 __exportStar(require("./segmentation.nats"), exports);
 // Interactions
 __exportStar(require("./interactions.nats"), exports);
+// Customer Preferences and History
+__exportStar(require("./customer-preferences.nats"), exports);
 // Marketing
 __exportStar(require("./marketing-automation.nats"), exports);
 __exportStar(require("./email-marketing.nats"), exports);

@@ -24,6 +24,9 @@ export * from './segmentation.nats';
 // Interactions
 export * from './interactions.nats';
 
+// Customer Preferences and History
+export * from './customer-preferences.nats';
+
 // Marketing
 export * from './marketing-automation.nats';
 export * from './email-marketing.nats';
