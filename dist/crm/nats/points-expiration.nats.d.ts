@@ -60,7 +60,7 @@ export interface GetPointsExpirationStatsNatsRequest {
 /**
  * Stats Response
  */
-export type GetPointsExpirationStatsNatsResponse = NatsResponse<PointsExpirationStatsNatsResponse>;
+export type GetPointsExpirationStatsNatsResponse = NatsResponse<any>;
 /**
  * Expiration Schedule
  */
@@ -79,11 +79,12 @@ export interface GetExpirationScheduleNatsRequest {
     tenantId: string;
     programId?: string;
     month?: string;
+    periodDays?: number[];
 }
 /**
  * Schedule Response
  */
-export type GetExpirationScheduleNatsResponse = NatsResponse<ExpirationScheduleNatsResponse[]>;
+export type GetExpirationScheduleNatsResponse = NatsResponse<any[]>;
 /**
  * Member Segments with Expiring Points
  */
@@ -106,7 +107,7 @@ export interface GetMemberSegmentsNatsRequest {
 /**
  * Member Segments Response
  */
-export type GetMemberSegmentsNatsResponse = NatsResponse<MemberSegmentExpirationNatsResponse[]>;
+export type GetMemberSegmentsNatsResponse = NatsResponse<any[]>;
 /**
  * Retention Opportunities Response
  */
@@ -129,7 +130,7 @@ export interface GetRetentionOpportunitiesNatsRequest {
 /**
  * Retention Opportunities Response
  */
-export type GetRetentionOpportunitiesNatsResponse = NatsResponse<RetentionOpportunitiesNatsResponse[]>;
+export type GetRetentionOpportunitiesNatsResponse = NatsResponse<any[]>;
 /**
  * Notification Effectiveness Response
  */
@@ -226,7 +227,7 @@ export interface GetExpirationSettingsNatsRequest {
 /**
  * Get Settings Response
  */
-export type GetExpirationSettingsNatsResponse = NatsResponse<ExpirationSettingsNatsRequest>;
+export type GetExpirationSettingsNatsResponse = NatsResponse<any>;
 /**
  * Update Settings Request
  * Pattern: crm.loyalty.points_expiration.settings.update
@@ -236,7 +237,7 @@ export interface UpdateExpirationSettingsNatsRequest extends ExpirationSettingsN
 /**
  * Update Settings Response
  */
-export type UpdateExpirationSettingsNatsResponse = NatsResponse<ExpirationSettingsNatsRequest>;
+export type UpdateExpirationSettingsNatsResponse = NatsResponse<any>;
 /**
  * Process Expiration Request
  * Pattern: crm.loyalty.points_expiration.process
