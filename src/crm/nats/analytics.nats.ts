@@ -2,14 +2,39 @@
  * Analytics NATS Contracts
  *
  * Patterns:
- * - (HTTP only - no NATS patterns found in controller)
+ * - crm.analytics.overview
+ * - crm.analytics.customer_analytics
+ * - crm.analytics.export_customer_analytics
+ * - crm.analytics.calculate_customer
+ * - crm.analytics.bulk_calculate
+ * - crm.analytics.segments
+ * - crm.analytics.churn_analysis
+ * - crm.analytics.clv_analysis
  *
- * Handler: crm-service (AnalyticsController)
- * Note: This controller currently uses HTTP endpoints with header-based tenant identification
- * No NATS message patterns are implemented yet
+ * Handler: crm-service (AnalyticsNatsController)
  */
 
 import { NatsResponse } from '../../common';
+
+/**
+ * Export Format Options
+ */
+export enum ExportFormatEnum {
+  CSV = 'csv',
+  XLSX = 'xlsx',
+  PDF = 'pdf',
+  JSON = 'json',
+}
+
+/**
+ * Date Format Options
+ */
+export enum DateFormatEnum {
+  ISO = 'iso',
+  US = 'us',
+  EU = 'eu',
+  CUSTOM = 'custom',
+}
 
 /**
  * Analytics Query Parameters
@@ -101,11 +126,15 @@ export type GetAnalyticsOverviewNatsResponse = NatsResponse<AnalyticsOverviewNat
 
 /**
  * Get Customer Analytics Request
- * Pattern: crm.analytics.customer (potential)
+ * Pattern: crm.analytics.customer_analytics
  */
 export interface GetCustomerAnalyticsNatsRequest {
   tenantId: string;
-  customerId: string;
+  customerId?: string;
+  hotelId?: string;
+  startDate?: string;
+  endDate?: string;
+  segment?: string;
 }
 
 /**
@@ -174,3 +203,35 @@ export interface GetClvAnalysisNatsRequest extends AnalyticsQueryNatsRequest {}
  * Get CLV Analysis Response
  */
 export type GetClvAnalysisNatsResponse = NatsResponse<ClvAnalysisNatsResponse>;
+
+/**
+ * Analytics Export File Result
+ */
+export interface AnalyticsExportFileNatsResponse {
+  buffer: string;
+  filename: string;
+  mimeType: string;
+  size: number;
+}
+
+/**
+ * Export Customer Analytics Request
+ * Pattern: crm.analytics.export_customer_analytics
+ */
+export interface ExportCustomerAnalyticsNatsRequest {
+  tenantId: string;
+  hotelId?: string;
+  startDate?: string;
+  endDate?: string;
+  segment?: string;
+  format: ExportFormatEnum;
+  preserveDecimals?: boolean;
+  dateFormat?: DateFormatEnum;
+  includeCharts?: boolean;
+  maxRows?: number;
+}
+
+/**
+ * Export Customer Analytics Response
+ */
+export type ExportCustomerAnalyticsNatsResponse = NatsResponse<AnalyticsExportFileNatsResponse>;
