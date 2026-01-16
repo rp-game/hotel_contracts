@@ -15,13 +15,17 @@
 import { NatsResponse } from '../../common';
 /**
  * Loyalty Transaction Type Enum
+ * Matches entity transaction types for proper database queries
  */
 export declare enum LoyaltyTransactionType {
-    EARN = "EARN",
-    REDEEM = "REDEEM",
-    ADJUST = "ADJUST",
-    EXPIRE = "EXPIRE",
-    BONUS = "BONUS"
+    EARN_POINTS = "EARN_POINTS",
+    REDEEM_POINTS = "REDEEM_POINTS",
+    ADJUSTMENT_ADD = "ADJUSTMENT_ADD",
+    ADJUSTMENT_DEDUCT = "ADJUSTMENT_DEDUCT",
+    EXPIRE_POINTS = "EXPIRE_POINTS",
+    TIER_UPGRADE = "TIER_UPGRADE",
+    TIER_DOWNGRADE = "TIER_DOWNGRADE",
+    JOIN_PROGRAM = "JOIN_PROGRAM"
 }
 /**
  * Create Loyalty Transaction Request
@@ -30,9 +34,13 @@ export declare enum LoyaltyTransactionType {
 export interface CreateLoyaltyTransactionNatsRequest {
     tenantId: string;
     memberId: string;
-    type: LoyaltyTransactionType;
-    pointsAmount: number;
+    transactionType: LoyaltyTransactionType;
+    pointsChanged: number;
+    transactionDate: string;
     description?: string;
+    relatedInteractionId?: string;
+    staffId?: string;
+    pointsExpirationDate?: string;
     referenceId?: string;
     referenceType?: string;
     metadata?: Record<string, any>;
@@ -46,8 +54,8 @@ export interface LoyaltyTransactionNatsResponse {
     memberId: string;
     programId: string;
     customerId: string;
-    type: LoyaltyTransactionType;
-    pointsAmount: number;
+    transactionType: LoyaltyTransactionType;
+    pointsChanged: number;
     description?: string;
     referenceId?: string;
     referenceType?: string;
@@ -55,12 +63,12 @@ export interface LoyaltyTransactionNatsResponse {
     balanceBefore: number;
     balanceAfter: number;
     metadata?: Record<string, any>;
-    transactionDate: string | Date;
-    pointsExpirationDate?: string | Date;
+    transactionDate: string;
+    pointsExpirationDate?: string;
     relatedInteractionId?: string;
     staffId?: string;
-    createdAt: string | Date;
-    updatedAt: string | Date;
+    createdAt: string;
+    updatedAt: string;
 }
 /**
  * List Loyalty Transactions Response
