@@ -28,6 +28,7 @@ __exportStar(require("./loyalty-tiers.nats"), exports);
 __exportStar(require("./loyalty-transactions.nats"), exports);
 __exportStar(require("./loyalty-events.nats"), exports);
 __exportStar(require("./loyalty-campaigns.nats"), exports);
+__exportStar(require("./loyalty-analytics.nats"), exports);
 __exportStar(require("./points-expiration.nats"), exports);
 // Feedback and Communication
 __exportStar(require("./feedback.nats"), exports);

@@ -14,6 +14,7 @@ export * from './loyalty-tiers.nats';
 export * from './loyalty-transactions.nats';
 export * from './loyalty-events.nats';
 export * from './loyalty-campaigns.nats';
+export * from './loyalty-analytics.nats';
 export * from './points-expiration.nats';
 
 // Feedback and Communication
