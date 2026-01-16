@@ -266,6 +266,20 @@ export type CreateCampaignNatsResponse = NatsResponse<LoyaltyCampaignNatsRespons
  */
 export type UpdateCampaignNatsResponse = NatsResponse<LoyaltyCampaignNatsResponse>;
 /**
+ * Manage Campaign Status Request
+ * Pattern: crm.loyalty.campaigns.manage_status
+ */
+export interface ManageCampaignStatusNatsRequest {
+    tenantId: string;
+    campaignId: string;
+    status: CampaignStatus;
+    userId: string;
+}
+/**
+ * Manage Campaign Status Response
+ */
+export type ManageCampaignStatusNatsResponse = NatsResponse<LoyaltyCampaignNatsResponse>;
+/**
  * Apply Campaign Request
  * Pattern: crm.loyalty.campaigns.apply
  */
