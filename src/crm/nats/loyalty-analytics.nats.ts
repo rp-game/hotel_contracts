@@ -48,11 +48,32 @@ export interface LoyaltyTierDataNatsResponse {
  */
 export interface LoyaltyMemberDataNatsResponse {
   id: string;
-  customerId: string;
-  points: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
   tier: string;
   status: string;
-  joinedAt: string; // ISO date string
+  joinDate: string;
+  points: number;
+  lifetimeSpend: number;
+  lastActivity: string;
+  bookings: number;
+  averageSpend: number;
+}
+
+/**
+ * Paginated Members Response
+ */
+export interface PaginatedMembersNatsResponse {
+  members: LoyaltyMemberDataNatsResponse[];
+  totalCount: number;
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+  };
 }
 
 /**
@@ -99,7 +120,7 @@ export interface GetLoyaltyMembersNatsRequest {
 /**
  * Get Loyalty Members Response
  */
-export type GetLoyaltyMembersNatsResponse = NatsResponse<LoyaltyMemberDataNatsResponse[]>;
+export type GetLoyaltyMembersNatsResponse = NatsResponse<PaginatedMembersNatsResponse>;
 
 /**
  * Get Rewards Analytics Request
