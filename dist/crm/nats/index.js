@@ -20,6 +20,7 @@ __exportStar(require("./service-booking-stats.nats"), exports);
 // Customers and Analytics
 __exportStar(require("./customers.nats"), exports);
 __exportStar(require("./analytics.nats"), exports);
+__exportStar(require("./hotels-analytics.nats"), exports);
 // Loyalty Module
 __exportStar(require("./loyalty-members.nats"), exports);
 __exportStar(require("./loyalty-programs.nats"), exports);

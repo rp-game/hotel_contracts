@@ -5,6 +5,7 @@ export * from './service-booking-stats.nats';
 // Customers and Analytics
 export * from './customers.nats';
 export * from './analytics.nats';
+export * from './hotels-analytics.nats';
 
 // Loyalty Module
 export * from './loyalty-members.nats';

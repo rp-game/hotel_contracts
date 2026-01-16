@@ -2,6 +2,7 @@ export * from './customer-stats.nats';
 export * from './service-booking-stats.nats';
 export * from './customers.nats';
 export * from './analytics.nats';
+export * from './hotels-analytics.nats';
 export * from './loyalty-members.nats';
 export * from './loyalty-programs.nats';
 export * from './loyalty-tiers.nats';
