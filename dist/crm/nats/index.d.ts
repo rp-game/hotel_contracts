@@ -15,6 +15,7 @@ export * from './feedback.nats';
 export * from './segmentation.nats';
 export * from './interactions.nats';
 export * from './customer-preferences.nats';
+export * from './guest-preferences.nats';
 export * from './marketing-automation.nats';
 export * from './email-marketing.nats';
 export * from './sms-marketing.nats';

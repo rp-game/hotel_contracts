@@ -28,6 +28,7 @@ export * from './interactions.nats';
 
 // Customer Preferences and History
 export * from './customer-preferences.nats';
+export * from './guest-preferences.nats';
 
 // Marketing
 export * from './marketing-automation.nats';
