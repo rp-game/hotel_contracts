@@ -347,7 +347,7 @@ export interface CustomerStatsData {
     id: string;
     name: string;
     email: string;
-    createdAt: string | Date;
+    createdAt: string;
   }>;
 }
 
