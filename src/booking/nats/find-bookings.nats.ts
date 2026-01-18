@@ -7,7 +7,7 @@
  * Used by: dashboard bookings list with pagination and filtering
  */
 
-import { NatsPaginatedResponse } from '../../common/nats-response.interface';
+import { NatsResponse } from '../../common/nats-response.interface';
 
 /**
  * Booking summary for list operations
@@ -205,6 +205,50 @@ export interface FindBookingsNatsRequest {
 }
 
 /**
- * NATS response containing list of bookings with pagination
+ * Bookings list response data structure
  */
-export type FindBookingsNatsResponse = NatsPaginatedResponse<BookingSummary>;
+export interface FindBookingsData {
+  /**
+   * Array of booking summaries
+   */
+  bookings: BookingSummary[];
+
+  /**
+   * Total number of bookings matching filters
+   */
+  total: number;
+
+  /**
+   * Current page number (1-indexed)
+   */
+  page: number;
+
+  /**
+   * Number of items per page
+   */
+  limit: number;
+
+  /**
+   * Total number of pages
+   */
+  totalPages: number;
+}
+
+/**
+ * NATS response containing list of bookings with pagination
+ *
+ * Response structure:
+ * ```
+ * {
+ *   success: true,
+ *   data: {
+ *     bookings: BookingSummary[],
+ *     total: number,
+ *     page: number,
+ *     limit: number,
+ *     totalPages: number
+ *   }
+ * }
+ * ```
+ */
+export type FindBookingsNatsResponse = NatsResponse<FindBookingsData>;
