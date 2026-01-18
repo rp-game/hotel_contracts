@@ -131,17 +131,20 @@ export interface AmenityRequestNatsResponse {
 export interface CreateAmenityRequestNatsRequest {
   tenantId: string;
   hotelId: string;
-  roomId?: string;
   guestId?: string;
-  guestName?: string;
-  roomNumber?: string;
+  guestName: string;
+  roomNumber: string;
   amenityType: string;
   requestCategory?: SpecialRequestCategory;
   description: string;
   priority?: AmenityPriority;
-  requestedTime?: string;
-  specialInstructions?: string;
+  assignedTo?: string;
+  estimatedTime?: number;
+  staffNotes?: string;
   estimatedCost?: number;
+  departmentsInvolved?: string[];
+  guestApprovalRequired?: boolean;
+  customerPreferencesApplied?: string[];
 }
 
 /**
@@ -155,10 +158,10 @@ export type CreateAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRe
  */
 export interface FindAllAmenityRequestsNatsRequest {
   tenantId: string;
-  hotelId?: string;
+  hotelId: string;
   status?: AmenityStatus;
   priority?: AmenityPriority;
-  category?: string; // amenityType filter
+  amenityType?: string;
   requestCategory?: SpecialRequestCategory;
   startDate?: string;
   endDate?: string;
@@ -173,9 +176,9 @@ export interface FindAllAmenityRequestsNatsRequest {
  */
 export type FindAllAmenityRequestsNatsResponse = NatsResponse<{
   data: AmenityRequestNatsResponse[];
+  total: number;
   page: number;
   limit: number;
-  total: number;
   totalPages: number;
 }>;
 
@@ -291,10 +294,14 @@ export type CancelAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRe
  * Amenity Request Stats Response
  */
 export interface AmenityRequestStatsNatsResponse {
-  total: number;
-  byStatus: Record<AmenityStatus, number>;
-  byPriority: Record<AmenityPriority, number>;
-  byAmenityType: Record<string, number>;
+  totalRequests: number;
+  pendingRequests: number;
+  assignedRequests: number;
+  inProgressRequests: number;
+  completedRequests: number;
+  cancelledRequests: number;
+  averageRating: number;
+  averageCompletionTime: number;
 }
 
 /**
@@ -303,7 +310,7 @@ export interface AmenityRequestStatsNatsResponse {
  */
 export interface GetAmenityRequestStatsNatsRequest {
   tenantId: string;
-  hotelId?: string;
+  hotelId: string;
 }
 
 /**
@@ -319,10 +326,10 @@ export interface AssessFeasibilityNatsRequest {
   id: string;
   tenantId: string;
   hotelId: string;
-  feasibilityStatus: FeasibilityStatus;
+  feasibilityStatus: string;
   estimatedCost?: number;
-  departmentsInvolved?: string[];
-  assessedBy: string;
+  feasibilityNotes?: string;
+  assessedBy?: string;
 }
 
 /**
@@ -338,8 +345,9 @@ export interface PerformQualityCheckNatsRequest {
   id: string;
   tenantId: string;
   hotelId: string;
-  qualityCheckStatus: QualityCheckStatus;
-  checkedBy: string;
+  qualityCheckStatus: string;
+  qualityNotes?: string;
+  checkedBy?: string;
 }
 
 /**
@@ -355,7 +363,7 @@ export interface RequestGuestApprovalNatsRequest {
   id: string;
   tenantId: string;
   hotelId: string;
-  guestApprovalRequired: boolean;
+  approvalMessage?: string;
 }
 
 /**
@@ -371,7 +379,8 @@ export interface CoordinateDepartmentsNatsRequest {
   id: string;
   tenantId: string;
   hotelId: string;
-  departmentsInvolved: string[];
+  departments: string[];
+  coordinationNotes?: string;
 }
 
 /**
