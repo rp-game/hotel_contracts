@@ -38,6 +38,10 @@ export interface Room {
   lastCleanedAt?: string;
   createdAt: string;
   updatedAt: string;
+  // Optional fields from associated RoomType (populated in API responses)
+  capacity?: number;
+  price?: number;
+  amenities?: string[];
 }
 
 /**

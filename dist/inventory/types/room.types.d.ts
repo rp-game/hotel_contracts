@@ -35,6 +35,9 @@ export interface Room {
     lastCleanedAt?: string;
     createdAt: string;
     updatedAt: string;
+    capacity?: number;
+    price?: number;
+    amenities?: string[];
 }
 /**
  * Room availability for a date
