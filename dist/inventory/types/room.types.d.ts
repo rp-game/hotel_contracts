@@ -37,7 +37,9 @@ export interface Room {
     updatedAt: string;
     capacity?: number;
     price?: number;
+    numberOfBeds?: number;
     amenities?: string[];
+    bookingCount?: number;
 }
 /**
  * Room availability for a date

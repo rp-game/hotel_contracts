@@ -41,7 +41,10 @@ export interface Room {
   // Optional fields from associated RoomType (populated in API responses)
   capacity?: number;
   price?: number;
+  numberOfBeds?: number;
   amenities?: string[];
+  // Booking statistics (populated on demand)
+  bookingCount?: number;
 }
 
 /**
