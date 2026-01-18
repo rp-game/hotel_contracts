@@ -69,14 +69,14 @@ export interface GetPointsExpirationStatsNatsRequest {
 export type GetPointsExpirationStatsNatsResponse = NatsResponse<any>;
 
 /**
- * Expiration Schedule
+ * Expiration Schedule Item
+ * Matches: crm-service/src/database/repositories/points-expiration.repository.ts ExpirationSchedule interface
  */
-export interface ExpirationScheduleNatsResponse {
-  scheduleId: string;
-  date: string | Date;
-  pointsExpiring: number;
-  membersAffected: number;
-  status: string;
+export interface ExpirationScheduleItem {
+  period: string;
+  points: number;
+  members: number;
+  value: number;
 }
 
 /**
@@ -93,7 +93,7 @@ export interface GetExpirationScheduleNatsRequest {
 /**
  * Schedule Response
  */
-export type GetExpirationScheduleNatsResponse = NatsResponse<any[]>;
+export type GetExpirationScheduleNatsResponse = NatsResponse<ExpirationScheduleItem[]>;
 
 /**
  * Member Segments with Expiring Points
