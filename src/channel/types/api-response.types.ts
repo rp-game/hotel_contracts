@@ -255,8 +255,14 @@ export interface AnalyticsDashboardDto {
     id: string;
     severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
     message: string;
+    messageVi?: string;
     providerId?: string;
+    providerName?: string;
+    category: string;
     createdAt: Date;
+    resolvedAt?: Date;
+    acknowledged: boolean;
+    context?: Record<string, any>;
   }>;
   chartData?: {
     bookingTrends: Array<{ date: string; bookings: number; revenue: number }>;
