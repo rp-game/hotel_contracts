@@ -25,11 +25,50 @@ import { NatsResponse } from '../../common';
  * Loyalty Analytics Response
  */
 export interface LoyaltyAnalyticsNatsResponse {
-  totalMembers: number;
-  activeMembers: number;
-  totalPoints: number;
-  redeemedPoints: number;
-  avgPointsPerMember: number;
+  overview: {
+    totalMembers: number;
+    activeMembers: number;
+    newMembersThisPeriod: number;
+    totalPointsEarned: number;
+    totalPointsRedeemed: number;
+    pointsOutstanding: number;
+    averagePointsPerMember: number;
+    memberRetentionRate: number;
+    programEngagementRate: number;
+  };
+  membershipGrowth: Array<{
+    date: string;
+    newMembers: number;
+    totalMembers: number;
+  }>;
+  tierDistribution: Array<{
+    tier: string;
+    members: number;
+    percentage: number;
+    averageSpend: number;
+  }>;
+  pointsActivity: {
+    totalEarned: number;
+    totalRedeemed: number;
+    redemptionRate: number;
+    averageEarnPerTransaction: number;
+    averageRedemptionPerTransaction: number;
+    popularRedemptions: Array<{
+      item: string;
+      count: number;
+      points: number;
+    }>;
+  };
+  revenueImpact: {
+    totalRevenueFromMembers: number;
+    averageRevenuePerMember: number;
+    incrementalRevenue: number;
+    memberVsNonMemberSpend: {
+      memberAverage: number;
+      nonMemberAverage: number;
+      uplift: number;
+    };
+  };
 }
 
 /**
