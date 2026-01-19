@@ -16,9 +16,38 @@ export interface CalendarEvent {
      */
     id: string;
     /**
-     * Event title (guest name)
+     * Booking code (e.g., BK2024123456)
+     */
+    bookingCode: string;
+    /**
+     * Event title (guest name) - for calendar display
      */
     title: string;
+    /**
+     * Guest name
+     */
+    guestName: string;
+    /**
+     * Guest email (optional)
+     */
+    guestEmail?: string;
+    /**
+     * Room number (e.g., "101")
+     */
+    roomNumber: string;
+    /**
+     * Room type information
+     */
+    roomType: {
+        /**
+         * Room type name
+         */
+        name: string;
+        /**
+         * Room type ID
+         */
+        id: string;
+    };
     /**
      * Check-in date (YYYY-MM-DD)
      */
@@ -32,33 +61,13 @@ export interface CalendarEvent {
      */
     roomId: string;
     /**
-     * Room number (e.g., "101")
-     */
-    roomNumber: string;
-    /**
-     * Room type name
-     */
-    roomType: string;
-    /**
-     * Guest name
-     */
-    guestName: string;
-    /**
-     * Guest email (optional)
-     */
-    guestEmail?: string;
-    /**
-     * Booking code (e.g., BK2024123456)
-     */
-    bookingCode: string;
-    /**
      * Booking status (PENDING, CONFIRMED, CHECKED_IN, CHECKED_OUT, CANCELLED)
      */
     status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
     /**
-     * Total booking amount
+     * Total booking amount (as string for precision)
      */
-    totalAmount: number;
+    totalAmount: string;
     /**
      * Number of adults
      */
@@ -67,6 +76,22 @@ export interface CalendarEvent {
      * Number of children
      */
     childCount: number;
+    /**
+     * Room assignment status
+     */
+    assignmentStatus?: string;
+    /**
+     * Special requests from guest
+     */
+    specialRequests?: string;
+    /**
+     * Booking source (DIRECT, OTA, etc.)
+     */
+    source?: string;
+    /**
+     * Creation timestamp
+     */
+    createdAt?: Date;
 }
 /**
  * Room occupancy metrics for a date range
@@ -104,19 +129,19 @@ export interface GetCalendarDataRequest {
     /**
      * Tenant ID (multi-tenant isolation)
      */
-    tenantId: string;
+    tenantId?: string;
     /**
      * Hotel ID
      */
-    hotelId: string;
+    hotelId?: string;
     /**
-     * Check-in date start (YYYY-MM-DD)
+     * Start date for calendar range (YYYY-MM-DD)
      */
-    checkInDateStart: string;
+    startDate?: string;
     /**
-     * Check-in date end (YYYY-MM-DD)
+     * End date for calendar range (YYYY-MM-DD)
      */
-    checkInDateEnd: string;
+    endDate?: string;
     /**
      * Room type ID filter (optional)
      */
