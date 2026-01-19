@@ -5,12 +5,22 @@
  * NOTE: NATS contracts use camelCase only. REST API DTOs handle snake_case conversion.
  */
 /**
- * Chain configuration settings
+ * Chain configuration settings (snake_case - for database entity)
  */
 export interface ChainConfigSettings {
     inherit_from_chain: boolean;
     chain_id?: string;
     override_settings?: string[];
+}
+/**
+ * Chain configuration DTO (camelCase - for NATS/API)
+ * Matches API Gateway ChainConfigurationDto structure
+ */
+export interface ChainConfigurationDto {
+    inheritFromChain: boolean;
+    chainId?: string;
+    overrideSettings?: string[];
+    hotelSpecificOtaAccounts?: any;
 }
 /**
  * Get chain configuration request

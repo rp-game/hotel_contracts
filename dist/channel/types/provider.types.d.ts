@@ -7,6 +7,7 @@ import { ProviderType, SyncStatus } from '../enums';
 import { ProviderCredentials } from './credentials.types';
 import { ProviderConfiguration } from './provider-configuration.types';
 import { SyncErrorDetails } from './sync-history.types';
+import { ChainConfigurationDto } from './chain-config.types';
 /**
  * Main ChannelProvider type
  * Represents a provider configuration for channel/PMS integration
@@ -45,7 +46,7 @@ export interface CreateProviderRequest {
     settings?: any;
     endpoints?: any;
     otaAccounts?: any;
-    chainConfiguration?: any;
+    chainConfiguration?: ChainConfigurationDto;
 }
 /**
  * Provider update request
@@ -61,7 +62,7 @@ export interface UpdateProviderRequest {
     settings?: any;
     endpoints?: any;
     otaAccounts?: any;
-    chainConfiguration?: any;
+    chainConfiguration?: ChainConfigurationDto;
 }
 /**
  * Provider response

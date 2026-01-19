@@ -8,6 +8,7 @@ import { ProviderType, ProviderStatus, SyncStatus } from '../enums';
 import { ProviderCredentials } from './credentials.types';
 import { ProviderConfiguration } from './provider-configuration.types';
 import { SyncErrorDetails } from './sync-history.types';
+import { ChainConfigurationDto } from './chain-config.types';
 
 /**
  * Main ChannelProvider type
@@ -48,7 +49,7 @@ export interface CreateProviderRequest {
   settings?: any;  // ProviderSettingsDto
   endpoints?: any;  // ProviderEndpointsDto
   otaAccounts?: any;  // OTAAccountsConfigDto
-  chainConfiguration?: any;  // ChainConfigurationDto
+  chainConfiguration?: ChainConfigurationDto;
 }
 
 /**
@@ -65,7 +66,7 @@ export interface UpdateProviderRequest {
   settings?: any;  // ProviderSettingsDto
   endpoints?: any;  // ProviderEndpointsDto
   otaAccounts?: any;  // OTAAccountsConfigDto
-  chainConfiguration?: any;  // ChainConfigurationDto
+  chainConfiguration?: ChainConfigurationDto;
 }
 
 /**
