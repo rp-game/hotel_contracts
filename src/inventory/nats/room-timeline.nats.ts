@@ -91,9 +91,14 @@ export interface RoomTimelineItem {
   roomId: string;
   roomNumber: string;
   floor: number;
-  roomType: TimelineRoomType;
+  roomType: TimelineRoomType | string; // Can be object or string
+  roomTypeId?: string;
   status: 'AVAILABLE' | 'OCCUPIED' | 'CLEANING' | 'MAINTENANCE' | 'OUT_OF_ORDER';
-  events: TimelineEvent[];
+  timeBlocks: TimelineEvent[]; // Renamed from events to match handler implementation
+  cleaningTime: number; // Minutes required for cleaning
+  lastCleaned: string | null; // ISO datetime or null
+  nextMaintenance: string | null; // ISO datetime or null
+  notes: string | null; // Additional notes
 }
 
 export interface TimelineData {

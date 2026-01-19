@@ -84,9 +84,14 @@ export interface RoomTimelineItem {
     roomId: string;
     roomNumber: string;
     floor: number;
-    roomType: TimelineRoomType;
+    roomType: TimelineRoomType | string;
+    roomTypeId?: string;
     status: 'AVAILABLE' | 'OCCUPIED' | 'CLEANING' | 'MAINTENANCE' | 'OUT_OF_ORDER';
-    events: TimelineEvent[];
+    timeBlocks: TimelineEvent[];
+    cleaningTime: number;
+    lastCleaned: string | null;
+    nextMaintenance: string | null;
+    notes: string | null;
 }
 export interface TimelineData {
     rooms: RoomTimelineItem[];
