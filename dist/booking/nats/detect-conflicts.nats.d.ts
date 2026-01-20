@@ -7,7 +7,17 @@ export interface DetectConflictsNatsRequest {
     endDate: string;
     roomIds?: string[];
 }
-export interface DetectConflictsNatsResponse extends NatsResponse<ConflictNatsData[]> {
-    data: ConflictNatsData[];
+export interface DetectConflictsNatsResponseData {
+    conflicts: ConflictNatsData[];
+    totalConflicts: number;
+    highSeverityCount: number;
+    summary: {
+        doubleBookings: number;
+        maintenanceOverlaps: number;
+        totalRoomsAffected: number;
+    };
+}
+export interface DetectConflictsNatsResponse extends NatsResponse<DetectConflictsNatsResponseData> {
+    data: DetectConflictsNatsResponseData;
 }
 //# sourceMappingURL=detect-conflicts.nats.d.ts.map

@@ -9,14 +9,11 @@ export interface GetConflictStatsNatsRequest {
 }
 
 export interface ConflictStatsNatsData {
+  pending: number;
+  inProgress: number;
+  resolved: number;
+  critical: number;
   total: number;
-  byStatus: Record<ConflictStatus, number>;
-  bySeverity: Record<ConflictSeverity, number>;
-  byType: Record<ConflictType, number>;
-  pendingCount: number;
-  criticalCount: number;
-  resolvedCount: number;
-  averageResolutionTime: number;
 }
 
 export interface GetConflictStatsNatsResponse extends NatsResponse<ConflictStatsNatsData> {

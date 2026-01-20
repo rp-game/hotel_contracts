@@ -22,19 +22,31 @@ export interface ConflictNatsData {
   conflictType: ConflictType;
   severity: ConflictSeverity;
   status: ConflictStatus;
-  affectedBookings: string[];
-  affectedRooms: string[];
-  detectedAt: string;
-  description: string;
+  roomId: string;
+  roomNumber: string;
+  conflictDate: string;
+  primaryBookingId: string;
+  conflictingBookingIds: string[];
+  totalGuestsAffected: number;
+  hoursUntilImpact: number;
+  detectedBy: string;
+  detectionMethod: string;
   resolutionType?: ResolutionType;
   resolvedAt?: string;
   resolvedBy?: string;
   notes?: string;
 }
 
-export interface GetConflictsNatsResponse extends NatsResponse<ConflictNatsData[]> {
+export interface GetConflictsNatsResponseData {
   data: ConflictNatsData[];
-  total: number;
-  page: number;
-  limit: number;
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}
+
+export interface GetConflictsNatsResponse extends NatsResponse<GetConflictsNatsResponseData> {
+  data: GetConflictsNatsResponseData;
 }
