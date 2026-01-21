@@ -9,6 +9,8 @@ class HotelOperationSettingsDto {
     defaultCleaningDuration;
     gracePeriodMinutes;
     autoAssignRooms;
+    hourlyBooking;
+    preferBookingMode;
     businessHours;
 }
 exports.HotelOperationSettingsDto = HotelOperationSettingsDto;
