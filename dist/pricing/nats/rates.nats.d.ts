@@ -25,10 +25,22 @@ export interface GetRatesRequest {
     limit?: number;
 }
 export interface GetRatesResponse {
-    data: Rate[];
-    total?: number;
-    page?: number;
-    limit?: number;
+    tenantId: string;
+    hotelId: string;
+    roomTypes: Array<{
+        id: string | null;
+        roomTypeId: string;
+        roomTypeName: string;
+        baseRate: number;
+        currentRate: number;
+        currency: string;
+        availableRooms: number;
+        rateDetails: {
+            weekdayRate: number;
+            weekendRate: number;
+            extraPersonCharge: number;
+        };
+    }>;
 }
 export type GetRatesNatsResponse = NatsResponse<GetRatesResponse>;
 /**
