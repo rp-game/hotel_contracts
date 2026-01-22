@@ -89,6 +89,7 @@ export interface DeleteRoomRequest {
     tenantId: string;
 }
 export interface DeleteRoomResponse {
+    success: boolean;
     message: string;
 }
 export type DeleteRoomNatsResponse = NatsResponse<DeleteRoomResponse>;

@@ -98,6 +98,7 @@ export interface DeleteRoomRequest {
 }
 
 export interface DeleteRoomResponse {
+  success: boolean;
   message: string;
 }
 

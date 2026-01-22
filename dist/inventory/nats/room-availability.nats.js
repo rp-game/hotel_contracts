@@ -13,6 +13,7 @@
  * - inventory.availability.generate
  * - inventory.room.compare
  * - inventory.update
+ * - inventory.rooms.available
  *
  * Handler: inventory-service
  * Called by: booking-service, api-gateway, pricing-service

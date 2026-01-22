@@ -12,6 +12,7 @@
  * - inventory.availability.generate
  * - inventory.room.compare
  * - inventory.update
+ * - inventory.rooms.available
  *
  * Handler: inventory-service
  * Called by: booking-service, api-gateway, pricing-service
@@ -210,3 +211,36 @@ export interface InventoryUpdateResponse {
 }
 
 export type InventoryUpdateNatsResponse = NatsResponse<InventoryUpdateResponse>;
+
+/**
+ * Find Available Rooms Request
+ * Pattern: inventory.rooms.available
+ */
+export interface FindAvailableRoomsRequest {
+  tenantId: string;
+  hotelId: string;
+  checkInDate: string; // YYYY-MM-DD HH:mm
+  checkOutDate: string; // YYYY-MM-DD HH:mm
+  guestCount: number;
+  roomTypeId?: string;
+}
+
+export interface AvailableRoomTypeInfo {
+  roomTypeId: string;
+  roomTypeName: string;
+  totalRooms: number;
+  availableRooms: number;
+  bookedRooms: number;
+  occupancyRate: number;
+  averagePrice: string;
+  dynamicPrice: string;
+  priceAdjustment: string;
+  lastUpdated: string;
+  status: 'available' | 'limited' | 'unavailable';
+}
+
+export interface FindAvailableRoomsResponse {
+  availableRooms: AvailableRoomTypeInfo[];
+}
+
+export type FindAvailableRoomsNatsResponse = NatsResponse<FindAvailableRoomsResponse>;
