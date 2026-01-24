@@ -79,6 +79,13 @@ export interface HotelWithStats extends Hotel {
     occupiedRooms?: number;
 }
 /**
+ * Hotel with room count
+ * Returned by hotels.findAll
+ */
+export interface HotelWithRoomCount extends Hotel {
+    roomCount?: number;
+}
+/**
  * Find All Hotels Request
  * Pattern: hotels.findAll
  */
@@ -89,7 +96,7 @@ export interface FindAllHotelsRequest {
         limit?: number;
     };
 }
-export type FindAllHotelsResponse = Hotel[];
+export type FindAllHotelsResponse = HotelWithRoomCount[];
 export type FindAllHotelsNatsResponse = NatsResponse<FindAllHotelsResponse>;
 /**
  * Find One Hotel Request
@@ -138,7 +145,7 @@ export interface UpdateHotelStatusRequest {
     id: string;
     status: string;
 }
-export type UpdateHotelStatusResponse = Hotel;
+export type UpdateHotelStatusResponse = HotelWithStats;
 export type UpdateHotelStatusNatsResponse = NatsResponse<UpdateHotelStatusResponse>;
 /**
  * Find Hotels By Chain Request
@@ -242,7 +249,6 @@ export interface HotelSettingsUpdatedRequest {
     settings: any;
 }
 export interface HotelSettingsUpdatedResponse {
-    success: boolean;
     message: string;
 }
 export type HotelSettingsUpdatedNatsResponse = NatsResponse<HotelSettingsUpdatedResponse>;
@@ -270,7 +276,17 @@ export interface FindRoomsByHotelRequest {
 export interface RoomData {
     id: string;
     roomNumber: string;
+    floor?: number;
+    roomTypeId: string;
     status: string;
+    currentStatus?: string;
+    tenantId: string;
+    hotelId: string;
+    lastCleanedAt?: string;
+    features?: Record<string, any>;
+    notes?: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 export type FindRoomsByHotelResponse = RoomData[];
 export type FindRoomsByHotelNatsResponse = NatsResponse<FindRoomsByHotelResponse>;
