@@ -32,11 +32,51 @@ export interface Hotel {
     id: string;
     tenantId: string;
     name: string;
+    description?: string;
     address?: string;
+    city?: string;
+    country?: string;
+    postalCode?: string;
+    latitude?: number;
+    longitude?: number;
+    phone?: string;
+    email?: string;
+    website?: string;
+    stars?: number;
     chainId?: string;
     status?: string;
+    amenities?: string[];
+    operationSettings?: {
+        timelineSettings?: any;
+        checkInTime?: string;
+        checkOutTime?: string;
+        timezone?: string;
+        currency?: string;
+        defaultCleaningDuration?: number;
+        gracePeriodMinutes?: number;
+        autoAssignRooms?: boolean;
+        businessHours?: {
+            start: string;
+            end: string;
+        };
+    };
+    brandStandards?: any;
+    policies?: any;
+    checkInTime?: string;
+    checkOutTime?: string;
+    timezone?: string;
+    currency?: string;
     createdAt?: string;
     updatedAt?: string;
+}
+/**
+ * Hotel with statistics
+ * Returned by hotels.findOne with room counts
+ */
+export interface HotelWithStats extends Hotel {
+    roomCount?: number;
+    availableRooms?: number;
+    occupiedRooms?: number;
 }
 /**
  * Find All Hotels Request
@@ -58,7 +98,7 @@ export type FindAllHotelsNatsResponse = NatsResponse<FindAllHotelsResponse>;
 export interface FindOneHotelRequest {
     id: string;
 }
-export type FindOneHotelResponse = Hotel | null;
+export type FindOneHotelResponse = HotelWithStats | null;
 export type FindOneHotelNatsResponse = NatsResponse<FindOneHotelResponse>;
 /**
  * Create Hotel Request
