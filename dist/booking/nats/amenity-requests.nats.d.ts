@@ -263,14 +263,25 @@ export type CancelAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRe
  * Amenity Request Stats Response
  */
 export interface AmenityRequestStatsNatsResponse {
-    totalRequests: number;
-    pendingRequests: number;
-    assignedRequests: number;
-    inProgressRequests: number;
-    completedRequests: number;
-    cancelledRequests: number;
-    averageRating: number;
-    averageCompletionTime: number;
+    total: number;
+    byStatus: {
+        PENDING: number;
+        ASSIGNED: number;
+        IN_PROGRESS: number;
+        COMPLETED: number;
+        CANCELLED: number;
+    };
+    byPriority: {
+        LOW: number;
+        MEDIUM: number;
+        HIGH: number;
+        URGENT: number;
+    };
+    byAmenityType: Record<string, number>;
+    averageCompletionTime?: number;
+    averageRating?: number;
+    totalEstimatedCost?: number;
+    totalActualCost?: number;
 }
 /**
  * Get Amenity Request Stats Request
