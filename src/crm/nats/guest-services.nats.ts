@@ -20,23 +20,39 @@
 import { NatsResponse } from '../../common';
 
 /**
- * Service Status Enum
+ * Service Type Enum (matches CRM GuestService entity)
  */
-export enum ServiceStatus {
-  ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE',
-  ARCHIVED = 'ARCHIVED',
+export enum ServiceType {
+  SPA = 'SPA',
+  RESTAURANT = 'RESTAURANT',
+  ROOM_SERVICE = 'ROOM_SERVICE',
+  LAUNDRY = 'LAUNDRY',
+  TRANSPORTATION = 'TRANSPORTATION',
+  TOUR = 'TOUR',
+  CONCIERGE = 'CONCIERGE',
+  FITNESS = 'FITNESS',
+  BUSINESS_CENTER = 'BUSINESS_CENTER',
+  OTHER = 'OTHER',
 }
 
 /**
- * Booking Status Enum
+ * Guest Service Status Enum (matches CRM GuestService entity)
+ */
+export enum GuestServiceStatus {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+  MAINTENANCE = 'MAINTENANCE',
+}
+
+/**
+ * Booking Status Enum (matches CRM ServiceBooking entity)
  */
 export enum ServiceBookingStatus {
   PENDING = 'PENDING',
   CONFIRMED = 'CONFIRMED',
-  IN_PROGRESS = 'IN_PROGRESS',
   COMPLETED = 'COMPLETED',
   CANCELLED = 'CANCELLED',
+  NO_SHOW = 'NO_SHOW',
 }
 
 /**
@@ -48,12 +64,19 @@ export interface CreateGuestServiceNatsRequest {
   hotelId: string;
   name: string;
   description?: string;
-  category: string;
-  price: string;
-  duration?: number;
+  serviceType: ServiceType; // Changed from category
+  price?: number; // Changed from string to number
+  currency?: string;
+  durationMinutes?: number; // Changed from duration
   maxCapacity?: number;
-  availability?: Record<string, any>;
-  status?: ServiceStatus;
+  requiresBooking?: boolean;
+  advanceBookingHours?: number;
+  operatingHours?: string; // Text format
+  location?: string;
+  contactInfo?: string;
+  amenities?: string[];
+  specialRequirements?: string;
+  status?: GuestServiceStatus;
 }
 
 /**
@@ -67,22 +90,43 @@ export interface UpdateGuestServiceNatsRequest {
 }
 
 /**
- * Guest Service Response
+ * Guest Service Response (matches CRM GuestService entity)
  */
 export interface GuestServiceNatsResponse {
   id: string;
   tenantId: string;
   hotelId: string;
+
+  // Core Fields
   name: string;
   description?: string;
-  category: string;
-  price: string;
-  duration?: number;
+  serviceType: ServiceType; // Changed from category to match entity
+  status: GuestServiceStatus;
+
+  // Pricing
+  price?: number; // Changed from string to number to match entity
+  currency?: string;
+
+  // Timing & Capacity
+  durationMinutes?: number; // Changed from duration to match entity
   maxCapacity?: number;
-  status: ServiceStatus;
-  availability?: Record<string, any>;
+  advanceBookingHours?: number;
+
+  // Requirements & Details
+  requiresBooking: boolean;
+  operatingHours?: string;
+  location?: string;
+  contactInfo?: string;
+  amenities?: string[];
+  specialRequirements?: string;
+
+  // Timestamps
   createdAt: string | Date;
   updatedAt: string | Date;
+
+  // Audit Fields
+  createdBy?: string;
+  updatedBy?: string;
 }
 
 /**
@@ -97,8 +141,8 @@ export type CreateGuestServiceNatsResponse = NatsResponse<GuestServiceNatsRespon
 export interface FindAllGuestServicesNatsRequest {
   tenantId: string;
   hotelId?: string;
-  category?: string;
-  status?: ServiceStatus;
+  serviceType?: ServiceType; // Changed from category to match entity
+  status?: GuestServiceStatus;
   page?: number;
   limit?: number;
 }
@@ -147,9 +191,9 @@ export interface DeleteGuestServiceNatsRequest {
 export type DeleteGuestServiceNatsResponse = NatsResponse<{ success: boolean }>;
 
 /**
- * Service Stats Response
+ * Guest Service Stats Response
  */
-export interface ServiceStatsNatsResponse {
+export interface GuestServiceStatsNatsResponse {
   totalServices: number;
   activeServices: number;
   inactiveServices: number;
@@ -162,7 +206,7 @@ export interface ServiceStatsNatsResponse {
  * Stats Request
  * Pattern: guest_services.services.stats
  */
-export interface GetServiceStatsNatsRequest {
+export interface GetGuestServiceStatsNatsRequest {
   tenantId: string;
   hotelId?: string;
 }
@@ -170,7 +214,7 @@ export interface GetServiceStatsNatsRequest {
 /**
  * Stats Response
  */
-export type GetServiceStatsNatsResponse = NatsResponse<ServiceStatsNatsResponse>;
+export type GetGuestServiceStatsNatsResponse = NatsResponse<GuestServiceStatsNatsResponse>;
 
 /**
  * Create Service Booking Request
@@ -178,33 +222,52 @@ export type GetServiceStatsNatsResponse = NatsResponse<ServiceStatsNatsResponse>
  */
 export interface CreateServiceBookingNatsRequest {
   tenantId: string;
-  guestId: string;
+  hotelId: string;
   serviceId: string;
+  customerId: string; // Changed from guestId to match entity
+  roomBookingId?: string;
+  roomNumber?: string;
   bookingDate: string;
-  bookingTime?: string;
-  quantity: number;
+  serviceDate: string; // Added - separate field in entity
+  durationMinutes?: number;
+  numberOfGuests: number; // Changed from quantity to match entity
+  price?: number; // Changed from string to number to match entity
+  currency?: string;
   specialRequests?: string;
-  price: string;
+  notes?: string;
+  confirmationCode?: string;
+  paymentStatus?: string;
+  staffAssigned?: string;
   status?: ServiceBookingStatus;
 }
 
 /**
- * Service Booking Response
+ * Service Booking Response (matches CRM ServiceBooking entity)
  */
 export interface ServiceBookingNatsResponse {
   id: string;
   tenantId: string;
-  guestId: string;
+  hotelId: string;
   serviceId: string;
-  bookingDate: string | Date;
-  bookingTime?: string;
-  quantity: number;
-  specialRequests?: string;
-  price: string;
+  customerId: string; // Changed from guestId to match entity
+  roomBookingId?: string;
+  roomNumber?: string;
   status: ServiceBookingStatus;
-  totalAmount: string;
+  bookingDate: string | Date;
+  serviceDate: string | Date; // Added - separate field in entity
+  durationMinutes?: number;
+  numberOfGuests: number; // Changed from quantity to match entity
+  price?: number; // Changed from string to number to match entity
+  currency?: string;
+  specialRequests?: string;
+  notes?: string;
+  confirmationCode?: string;
+  paymentStatus: string;
+  staffAssigned?: string;
   createdAt: string | Date;
   updatedAt: string | Date;
+  createdBy?: string;
+  updatedBy?: string;
 }
 
 /**

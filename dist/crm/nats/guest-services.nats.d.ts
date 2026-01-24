@@ -18,22 +18,37 @@
  */
 import { NatsResponse } from '../../common';
 /**
- * Service Status Enum
+ * Service Type Enum (matches CRM GuestService entity)
  */
-export declare enum ServiceStatus {
-    ACTIVE = "ACTIVE",
-    INACTIVE = "INACTIVE",
-    ARCHIVED = "ARCHIVED"
+export declare enum ServiceType {
+    SPA = "SPA",
+    RESTAURANT = "RESTAURANT",
+    ROOM_SERVICE = "ROOM_SERVICE",
+    LAUNDRY = "LAUNDRY",
+    TRANSPORTATION = "TRANSPORTATION",
+    TOUR = "TOUR",
+    CONCIERGE = "CONCIERGE",
+    FITNESS = "FITNESS",
+    BUSINESS_CENTER = "BUSINESS_CENTER",
+    OTHER = "OTHER"
 }
 /**
- * Booking Status Enum
+ * Guest Service Status Enum (matches CRM GuestService entity)
+ */
+export declare enum GuestServiceStatus {
+    ACTIVE = "ACTIVE",
+    INACTIVE = "INACTIVE",
+    MAINTENANCE = "MAINTENANCE"
+}
+/**
+ * Booking Status Enum (matches CRM ServiceBooking entity)
  */
 export declare enum ServiceBookingStatus {
     PENDING = "PENDING",
     CONFIRMED = "CONFIRMED",
-    IN_PROGRESS = "IN_PROGRESS",
     COMPLETED = "COMPLETED",
-    CANCELLED = "CANCELLED"
+    CANCELLED = "CANCELLED",
+    NO_SHOW = "NO_SHOW"
 }
 /**
  * Create Guest Service Request
@@ -44,12 +59,19 @@ export interface CreateGuestServiceNatsRequest {
     hotelId: string;
     name: string;
     description?: string;
-    category: string;
-    price: string;
-    duration?: number;
+    serviceType: ServiceType;
+    price?: number;
+    currency?: string;
+    durationMinutes?: number;
     maxCapacity?: number;
-    availability?: Record<string, any>;
-    status?: ServiceStatus;
+    requiresBooking?: boolean;
+    advanceBookingHours?: number;
+    operatingHours?: string;
+    location?: string;
+    contactInfo?: string;
+    amenities?: string[];
+    specialRequirements?: string;
+    status?: GuestServiceStatus;
 }
 /**
  * Update Guest Service Request
@@ -61,7 +83,7 @@ export interface UpdateGuestServiceNatsRequest {
     updateDto: Partial<CreateGuestServiceNatsRequest>;
 }
 /**
- * Guest Service Response
+ * Guest Service Response (matches CRM GuestService entity)
  */
 export interface GuestServiceNatsResponse {
     id: string;
@@ -69,14 +91,23 @@ export interface GuestServiceNatsResponse {
     hotelId: string;
     name: string;
     description?: string;
-    category: string;
-    price: string;
-    duration?: number;
+    serviceType: ServiceType;
+    status: GuestServiceStatus;
+    price?: number;
+    currency?: string;
+    durationMinutes?: number;
     maxCapacity?: number;
-    status: ServiceStatus;
-    availability?: Record<string, any>;
+    advanceBookingHours?: number;
+    requiresBooking: boolean;
+    operatingHours?: string;
+    location?: string;
+    contactInfo?: string;
+    amenities?: string[];
+    specialRequirements?: string;
     createdAt: string | Date;
     updatedAt: string | Date;
+    createdBy?: string;
+    updatedBy?: string;
 }
 /**
  * Create Service Response
@@ -89,8 +120,8 @@ export type CreateGuestServiceNatsResponse = NatsResponse<GuestServiceNatsRespon
 export interface FindAllGuestServicesNatsRequest {
     tenantId: string;
     hotelId?: string;
-    category?: string;
-    status?: ServiceStatus;
+    serviceType?: ServiceType;
+    status?: GuestServiceStatus;
     page?: number;
     limit?: number;
 }
@@ -134,9 +165,9 @@ export type DeleteGuestServiceNatsResponse = NatsResponse<{
     success: boolean;
 }>;
 /**
- * Service Stats Response
+ * Guest Service Stats Response
  */
-export interface ServiceStatsNatsResponse {
+export interface GuestServiceStatsNatsResponse {
     totalServices: number;
     activeServices: number;
     inactiveServices: number;
@@ -148,46 +179,65 @@ export interface ServiceStatsNatsResponse {
  * Stats Request
  * Pattern: guest_services.services.stats
  */
-export interface GetServiceStatsNatsRequest {
+export interface GetGuestServiceStatsNatsRequest {
     tenantId: string;
     hotelId?: string;
 }
 /**
  * Stats Response
  */
-export type GetServiceStatsNatsResponse = NatsResponse<ServiceStatsNatsResponse>;
+export type GetGuestServiceStatsNatsResponse = NatsResponse<GuestServiceStatsNatsResponse>;
 /**
  * Create Service Booking Request
  * Pattern: guest_services.bookings.create
  */
 export interface CreateServiceBookingNatsRequest {
     tenantId: string;
-    guestId: string;
+    hotelId: string;
     serviceId: string;
+    customerId: string;
+    roomBookingId?: string;
+    roomNumber?: string;
     bookingDate: string;
-    bookingTime?: string;
-    quantity: number;
+    serviceDate: string;
+    durationMinutes?: number;
+    numberOfGuests: number;
+    price?: number;
+    currency?: string;
     specialRequests?: string;
-    price: string;
+    notes?: string;
+    confirmationCode?: string;
+    paymentStatus?: string;
+    staffAssigned?: string;
     status?: ServiceBookingStatus;
 }
 /**
- * Service Booking Response
+ * Service Booking Response (matches CRM ServiceBooking entity)
  */
 export interface ServiceBookingNatsResponse {
     id: string;
     tenantId: string;
-    guestId: string;
+    hotelId: string;
     serviceId: string;
-    bookingDate: string | Date;
-    bookingTime?: string;
-    quantity: number;
-    specialRequests?: string;
-    price: string;
+    customerId: string;
+    roomBookingId?: string;
+    roomNumber?: string;
     status: ServiceBookingStatus;
-    totalAmount: string;
+    bookingDate: string | Date;
+    serviceDate: string | Date;
+    durationMinutes?: number;
+    numberOfGuests: number;
+    price?: number;
+    currency?: string;
+    specialRequests?: string;
+    notes?: string;
+    confirmationCode?: string;
+    paymentStatus: string;
+    staffAssigned?: string;
     createdAt: string | Date;
     updatedAt: string | Date;
+    createdBy?: string;
+    updatedBy?: string;
 }
 /**
  * Create Booking Response

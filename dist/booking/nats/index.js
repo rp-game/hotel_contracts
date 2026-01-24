@@ -37,6 +37,8 @@ __exportStar(require("./update-booking.nats"), exports);
 __exportStar(require("./move-booking.nats"), exports);
 // Amenity Request NATS contracts
 __exportStar(require("./amenity-requests.nats"), exports);
+// Service NATS contracts
+__exportStar(require("./services.nats"), exports);
 // Conflict-related NATS contracts
 __exportStar(require("./get-conflicts.nats"), exports);
 __exportStar(require("./detect-conflicts.nats"), exports);

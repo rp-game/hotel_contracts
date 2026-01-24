@@ -24,6 +24,9 @@ export * from './move-booking.nats';
 // Amenity Request NATS contracts
 export * from './amenity-requests.nats';
 
+// Service NATS contracts
+export * from './services.nats';
+
 // Conflict-related NATS contracts
 export * from './get-conflicts.nats';
 export * from './detect-conflicts.nats';

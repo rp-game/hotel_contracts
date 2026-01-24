@@ -20,6 +20,7 @@ export * from './calendar-data.nats';
 export * from './update-booking.nats';
 export * from './move-booking.nats';
 export * from './amenity-requests.nats';
+export * from './services.nats';
 export * from './get-conflicts.nats';
 export * from './detect-conflicts.nats';
 export * from './get-conflict-stats.nats';

@@ -18,25 +18,41 @@
  * Called by: api-gateway (CrmController)
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ServiceBookingStatus = exports.ServiceStatus = void 0;
+exports.ServiceBookingStatus = exports.GuestServiceStatus = exports.ServiceType = void 0;
 /**
- * Service Status Enum
+ * Service Type Enum (matches CRM GuestService entity)
  */
-var ServiceStatus;
-(function (ServiceStatus) {
-    ServiceStatus["ACTIVE"] = "ACTIVE";
-    ServiceStatus["INACTIVE"] = "INACTIVE";
-    ServiceStatus["ARCHIVED"] = "ARCHIVED";
-})(ServiceStatus || (exports.ServiceStatus = ServiceStatus = {}));
+var ServiceType;
+(function (ServiceType) {
+    ServiceType["SPA"] = "SPA";
+    ServiceType["RESTAURANT"] = "RESTAURANT";
+    ServiceType["ROOM_SERVICE"] = "ROOM_SERVICE";
+    ServiceType["LAUNDRY"] = "LAUNDRY";
+    ServiceType["TRANSPORTATION"] = "TRANSPORTATION";
+    ServiceType["TOUR"] = "TOUR";
+    ServiceType["CONCIERGE"] = "CONCIERGE";
+    ServiceType["FITNESS"] = "FITNESS";
+    ServiceType["BUSINESS_CENTER"] = "BUSINESS_CENTER";
+    ServiceType["OTHER"] = "OTHER";
+})(ServiceType || (exports.ServiceType = ServiceType = {}));
 /**
- * Booking Status Enum
+ * Guest Service Status Enum (matches CRM GuestService entity)
+ */
+var GuestServiceStatus;
+(function (GuestServiceStatus) {
+    GuestServiceStatus["ACTIVE"] = "ACTIVE";
+    GuestServiceStatus["INACTIVE"] = "INACTIVE";
+    GuestServiceStatus["MAINTENANCE"] = "MAINTENANCE";
+})(GuestServiceStatus || (exports.GuestServiceStatus = GuestServiceStatus = {}));
+/**
+ * Booking Status Enum (matches CRM ServiceBooking entity)
  */
 var ServiceBookingStatus;
 (function (ServiceBookingStatus) {
     ServiceBookingStatus["PENDING"] = "PENDING";
     ServiceBookingStatus["CONFIRMED"] = "CONFIRMED";
-    ServiceBookingStatus["IN_PROGRESS"] = "IN_PROGRESS";
     ServiceBookingStatus["COMPLETED"] = "COMPLETED";
     ServiceBookingStatus["CANCELLED"] = "CANCELLED";
+    ServiceBookingStatus["NO_SHOW"] = "NO_SHOW";
 })(ServiceBookingStatus || (exports.ServiceBookingStatus = ServiceBookingStatus = {}));
 //# sourceMappingURL=guest-services.nats.js.map
