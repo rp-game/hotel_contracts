@@ -12,6 +12,7 @@ export interface RoomType {
     name: string;
     description?: string;
     capacity: number;
+    numberOfBeds: number;
     basePrice: number;
     images?: string[];
     amenities?: string[];
@@ -32,7 +33,10 @@ export interface Room {
     roomTypeName: string;
     floor: number;
     status: RoomStatus;
+    currentStatus?: string;
     lastCleanedAt?: string;
+    features?: Record<string, any>;
+    notes?: string;
     createdAt: string;
     updatedAt: string;
     capacity?: number;

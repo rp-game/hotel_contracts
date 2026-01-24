@@ -281,7 +281,7 @@ export type CreateServiceBookingNatsResponse = NatsResponse<ServiceBookingNatsRe
  */
 export interface FindAllServiceBookingsNatsRequest {
   tenantId: string;
-  guestId?: string;
+  customerId?: string; // Changed from guestId to match entity field
   serviceId?: string;
   status?: ServiceBookingStatus;
   page?: number;

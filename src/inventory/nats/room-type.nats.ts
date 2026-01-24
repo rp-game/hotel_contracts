@@ -59,6 +59,7 @@ export interface CreateRoomTypeRequest {
   description?: string;
   baseRate: number;
   capacity?: number;
+  numberOfBeds?: number; // Number of beds in this room type (default 1)
   maxOccupancy?: number; // Alias for capacity
   amenities?: string[];
   size?: number; // Room size in square meters
@@ -81,6 +82,7 @@ export interface UpdateRoomTypeRequest {
   description?: string;
   baseRate?: number;
   capacity?: number;
+  numberOfBeds?: number; // Number of beds in this room type (default 1)
   maxOccupancy?: number; // Alias for capacity
   amenities?: string[];
   size?: number; // Room size in square meters

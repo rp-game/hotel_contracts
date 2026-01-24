@@ -14,6 +14,7 @@ export interface RoomType {
   name: string;
   description?: string;
   capacity: number;
+  numberOfBeds: number; // Number of beds in this room type (default 1)
   basePrice: number;
   images?: string[];
   amenities?: string[];
@@ -35,7 +36,10 @@ export interface Room {
   roomTypeName: string;
   floor: number;
   status: RoomStatus;
+  currentStatus?: string; // String representation of status (may differ from enum)
   lastCleanedAt?: string;
+  features?: Record<string, any>; // Room-specific features (JSONB)
+  notes?: string; // Operational notes about the room
   createdAt: string;
   updatedAt: string;
   // Optional fields from associated RoomType (populated in API responses)

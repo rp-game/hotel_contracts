@@ -52,6 +52,7 @@ export interface CreateRoomTypeRequest {
     description?: string;
     baseRate: number;
     capacity?: number;
+    numberOfBeds?: number;
     maxOccupancy?: number;
     amenities?: string[];
     size?: number;
@@ -72,6 +73,7 @@ export interface UpdateRoomTypeRequest {
     description?: string;
     baseRate?: number;
     capacity?: number;
+    numberOfBeds?: number;
     maxOccupancy?: number;
     amenities?: string[];
     size?: number;

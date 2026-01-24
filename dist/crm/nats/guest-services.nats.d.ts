@@ -249,7 +249,7 @@ export type CreateServiceBookingNatsResponse = NatsResponse<ServiceBookingNatsRe
  */
 export interface FindAllServiceBookingsNatsRequest {
     tenantId: string;
-    guestId?: string;
+    customerId?: string;
     serviceId?: string;
     status?: ServiceBookingStatus;
     page?: number;

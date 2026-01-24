@@ -76,6 +76,9 @@ export interface UpdateRoomRequest {
     roomTypeId?: string;
     floor?: number;
     status?: string;
+    currentStatus?: string;
+    features?: Record<string, any>;
+    notes?: string;
     isActive?: boolean;
 }
 export type UpdateRoomResponse = RoomDetailResponse | null;
@@ -144,12 +147,18 @@ export interface RoomDetailResponse {
     id: string;
     roomNumber: string;
     floor: number;
+    roomTypeId: string;
     status: string;
+    currentStatus?: string;
     roomType: {
         id: string;
         name: string;
         maxGuests: number;
+        numberOfBeds?: number;
     };
+    lastCleanedAt?: string;
+    features?: Record<string, any>;
+    notes?: string;
     hotelId: string;
     tenantId: string;
     createdAt: string;

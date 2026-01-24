@@ -82,6 +82,9 @@ export interface UpdateRoomRequest {
   roomTypeId?: string;
   floor?: number;
   status?: string;
+  currentStatus?: string; // String representation of status
+  features?: Record<string, any>; // Room-specific features
+  notes?: string; // Operational notes
   isActive?: boolean;
 }
 
@@ -157,12 +160,18 @@ export interface RoomDetailResponse {
   id: string;
   roomNumber: string;
   floor: number;
+  roomTypeId: string; // Added - room type ID reference
   status: string;
+  currentStatus?: string; // Added - string representation of status
   roomType: {
     id: string;
     name: string;
     maxGuests: number;
+    numberOfBeds?: number; // Added - number of beds in room type
   };
+  lastCleanedAt?: string; // Added - last cleaning timestamp
+  features?: Record<string, any>; // Added - room-specific features
+  notes?: string; // Added - operational notes
   hotelId: string;
   tenantId: string;
   createdAt: string;
