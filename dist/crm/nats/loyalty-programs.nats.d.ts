@@ -222,12 +222,11 @@ export type FindAllTiersNatsResponse = NatsResponse<{
  * Loyalty Program Stats
  */
 export interface LoyaltyProgramStats {
+    totalPrograms: number;
+    activePrograms: number;
     totalMembers: number;
-    activeMembers: number;
-    totalPointsAwarded: number;
-    totalPointsRedeemed: number;
-    averagePointsPerMember: number;
-    tierDistribution: Record<string, number>;
+    totalCustomersEligible: number;
+    redemptionRate: number;
 }
 /**
  * Stats Request

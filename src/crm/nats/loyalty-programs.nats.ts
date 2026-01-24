@@ -246,12 +246,11 @@ export type FindAllTiersNatsResponse = NatsResponse<{
  * Loyalty Program Stats
  */
 export interface LoyaltyProgramStats {
-  totalMembers: number;
-  activeMembers: number;
-  totalPointsAwarded: number;
-  totalPointsRedeemed: number;
-  averagePointsPerMember: number;
-  tierDistribution: Record<string, number>;
+  totalPrograms: number;           // Total number of loyalty programs
+  activePrograms: number;          // Number of active programs
+  totalMembers: number;            // Total members across all programs
+  totalCustomersEligible: number;  // Customers eligible for enrollment
+  redemptionRate: number;          // Redemption rate percentage (redeemed/awarded * 100)
 }
 
 /**
