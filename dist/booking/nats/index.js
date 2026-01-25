@@ -35,6 +35,7 @@ __exportStar(require("./analytics.nats"), exports);
 __exportStar(require("./calendar-data.nats"), exports);
 __exportStar(require("./update-booking.nats"), exports);
 __exportStar(require("./move-booking.nats"), exports);
+__exportStar(require("./get-booking-stats.nats"), exports);
 // Amenity Request NATS contracts
 __exportStar(require("./amenity-requests.nats"), exports);
 // Service NATS contracts
