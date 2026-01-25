@@ -1,1 +1,17 @@
-export {};
+/**
+ * Financial Domain NATS Message Contracts
+ *
+ * These interfaces define the request/response shapes for inter-service
+ * communication via NATS messaging pattern between API Gateway and Financial Service.
+ *
+ * Includes:
+ * - Invoice contracts (re-exported from payment module): payment.invoice.*
+ * - Additional Services: additional-services.*
+ * - Additional Service Bookings: service-bookings.*
+ *
+ * Handler: financial-service
+ */
+
+// Financial-specific types only (not re-exporting payment types to avoid conflicts in root index)
+export * from './services.nats';
+export * from './service-bookings.nats';
