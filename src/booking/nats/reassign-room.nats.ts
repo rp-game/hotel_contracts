@@ -15,17 +15,9 @@ export interface ReassignRoomNatsRequest {
 }
 
 export interface RoomAssignmentData {
-  id: string;
   bookingId: string;
-  oldRoomId?: string;
-  oldRoomNumber?: string;
-  newRoomId: string;
-  newRoomNumber: string;
-  assignedBy: string;
-  assignedAt: string;
-  reason?: string;
-  assignmentType: string;
-  rateDifference?: number;
+  roomId: string;
+  roomNumber?: string;
 }
 
 export type ReassignRoomNatsResponse = NatsResponse<RoomAssignmentData>;
