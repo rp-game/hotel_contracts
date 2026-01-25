@@ -12,6 +12,7 @@ export interface AddServiceNatsRequest {
   unitPrice?: number;
   notes?: string;
   tenantId: string;
+  hotelId: string;
   addedBy: string;
 }
 
