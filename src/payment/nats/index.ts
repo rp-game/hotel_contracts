@@ -14,3 +14,4 @@ export * from './onepay.nats';
 export * from './invoice.nats';
 export * from './transaction.nats';
 export * from './settings.nats';
+export * from './stats.nats';

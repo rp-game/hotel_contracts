@@ -29,4 +29,5 @@ __exportStar(require("./onepay.nats"), exports);
 __exportStar(require("./invoice.nats"), exports);
 __exportStar(require("./transaction.nats"), exports);
 __exportStar(require("./settings.nats"), exports);
+__exportStar(require("./stats.nats"), exports);
 //# sourceMappingURL=index.js.map
