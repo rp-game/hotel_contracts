@@ -41,3 +41,6 @@ export * from './delete-conflict.nats';
 
 // Room assignment history NATS contracts
 export * from './room-assignment.nats';
+
+// Reassign room NATS contracts
+export * from './reassign-room.nats';

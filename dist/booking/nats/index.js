@@ -52,4 +52,6 @@ __exportStar(require("./update-conflict.nats"), exports);
 __exportStar(require("./delete-conflict.nats"), exports);
 // Room assignment history NATS contracts
 __exportStar(require("./room-assignment.nats"), exports);
+// Reassign room NATS contracts
+__exportStar(require("./reassign-room.nats"), exports);
 //# sourceMappingURL=index.js.map
