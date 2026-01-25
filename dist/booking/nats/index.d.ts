@@ -31,4 +31,5 @@ export * from './get-conflict-by-id.nats';
 export * from './create-conflict.nats';
 export * from './update-conflict.nats';
 export * from './delete-conflict.nats';
+export * from './room-assignment.nats';
 //# sourceMappingURL=index.d.ts.map
