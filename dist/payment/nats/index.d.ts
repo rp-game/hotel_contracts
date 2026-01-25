@@ -12,4 +12,5 @@ export * from './gateway-inheritance.nats';
 export * from './onepay.nats';
 export * from './invoice.nats';
 export * from './transaction.nats';
+export * from './settings.nats';
 //# sourceMappingURL=index.d.ts.map
