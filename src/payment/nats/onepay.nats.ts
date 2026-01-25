@@ -5,6 +5,8 @@
  * including payment creation, verification, refunds, and status queries.
  */
 
+import { NatsResponse } from '../../common/nats-response.interface';
+
 /**
  * Request payload for payment.onepay.create pattern
  * Used to initiate a OnePay payment and get payment URL
@@ -311,3 +313,92 @@ export interface GetOnePayConfigNatsResponse {
   /** Error code (if failed) */
   errorCode?: string;
 }
+
+// ============================================================================
+// NATS RESPONSE WRAPPERS
+// ============================================================================
+
+/**
+ * Create OnePay Payment - NATS Response
+ * Pattern: payment.onepay.create
+ */
+export type CreateOnePayPaymentNatsResponse = NatsResponse<CreateOnePayPaymentResponse>;
+
+/**
+ * Verify OnePay Payment - NATS Response
+ * Pattern: payment.onepay.verify
+ */
+export type VerifyOnePayPaymentNatsResponse = NatsResponse<VerifyOnePayPaymentResponse>;
+
+/**
+ * Query OnePay Payment Status - NATS Response
+ * Pattern: payment.onepay.query (or onepay.status)
+ */
+export type QueryOnePayPaymentNatsResponse = NatsResponse<QueryOnePayPaymentResponse>;
+
+/**
+ * Refund OnePay Payment - NATS Response
+ * Pattern: payment.onepay.refund
+ */
+export type RefundOnePayPaymentNatsResponse = NatsResponse<RefundOnePayPaymentResponse>;
+
+// ============================================================================
+// GET PAYMENT STATUS (by Payment ID)
+// ============================================================================
+
+/**
+ * Request payload for payment.onepay.paymentStatus pattern
+ * Used to retrieve payment status by internal payment ID (for polling)
+ */
+export interface GetOnePayPaymentStatusNatsRequest {
+  /** Tenant ID (required) */
+  tenantId: string;
+
+  /** Hotel ID (required) */
+  hotelId: string;
+
+  /** Payment ID to look up */
+  paymentId: string;
+}
+
+/**
+ * Response payload for payment.onepay.paymentStatus pattern
+ * Contains complete payment details for polling use case
+ */
+export interface GetOnePayPaymentStatusData {
+  /** Payment ID */
+  paymentId: string;
+
+  /** Current payment status (PENDING, COMPLETED, FAILED) */
+  status: string;
+
+  /** Payment amount */
+  amount: number;
+
+  /** Currency code */
+  currency: string;
+
+  /** Associated booking ID (if any) */
+  bookingId?: string;
+
+  /** When payment was completed (ISO 8601) */
+  paidAt?: string;
+
+  /** OnePay transaction ID */
+  transactionId?: string;
+
+  /** Card information (if paid) */
+  card?: string;
+
+  /** When payment record was created (ISO 8601) */
+  createdAt?: string;
+
+  /** When payment was last updated (ISO 8601) */
+  updatedAt?: string;
+}
+
+/**
+ * Get Payment Status - NATS Response
+ * Pattern: payment.onepay.paymentStatus
+ */
+export type GetOnePayPaymentStatusNatsResponse = NatsResponse<GetOnePayPaymentStatusData>;
