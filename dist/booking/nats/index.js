@@ -56,4 +56,6 @@ __exportStar(require("./room-assignment.nats"), exports);
 __exportStar(require("./reassign-room.nats"), exports);
 // Add service NATS contracts
 __exportStar(require("./add-service.nats"), exports);
+// Add payment NATS contracts
+__exportStar(require("./add-payment.nats"), exports);
 //# sourceMappingURL=index.js.map

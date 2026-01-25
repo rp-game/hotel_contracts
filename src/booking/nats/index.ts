@@ -47,3 +47,6 @@ export * from './reassign-room.nats';
 
 // Add service NATS contracts
 export * from './add-service.nats';
+
+// Add payment NATS contracts
+export * from './add-payment.nats';
