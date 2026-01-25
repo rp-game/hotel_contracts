@@ -86,13 +86,33 @@ export type CheckOutBookingNatsResponse = NatsResponse<BookingResponseDto>;
 export interface GetPendingCheckinsNatsRequest {
   tenantId: string;
   hotelId: string;
+  date?: string;  // Check-in date (YYYY-MM-DD), defaults to today in hotel timezone
   page?: number;
   limit?: number;
   status?: string;
 }
 
+export interface PendingCheckinBooking {
+  id: string;
+  bookingCode: string;
+  guestName: string;
+  guestEmail: string;
+  guestPhone: string;
+  checkInDate: string;
+  checkOutDate: string;
+  guestCount: number;
+  roomType: string;
+  roomNumber: string;
+  totalAmount: number;
+  status: string;
+  specialRequests?: string;
+  assignmentStatus: string;
+  roomId?: string;
+  roomTypeId: string;
+}
+
 export interface PendingCheckinsListData {
-  bookings: BookingData[];
+  bookings: PendingCheckinBooking[];
   total: number;
   page: number;
   limit: number;
