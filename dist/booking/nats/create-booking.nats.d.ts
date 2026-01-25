@@ -112,9 +112,11 @@ export interface CreateBookingRequest {
          */
         totalAmount: number;
         /**
-         * Currency code (USD, EUR, etc.)
+         * Currency code (USD, EUR, VND, etc.)
+         * @default VND - If not provided, system defaults to VND
+         * @optional This field is optional; omit to use default VND currency
          */
-        currency: string;
+        currency?: string;
         /**
          * Booking source (WEB, OTA, PHONE, etc.)
          */
@@ -200,7 +202,8 @@ export interface CreateBookingResponse {
      */
     totalAmount: number;
     /**
-     * Currency
+     * Currency code (USD, VND, etc.)
+     * @default VND - If not provided in request, defaults to VND
      */
     currency: string;
     /**
@@ -241,6 +244,47 @@ export interface CreateBookingResponse {
         lastName: string;
         email: string;
     };
+    /**
+     * Guest ID reference (top-level for easy access)
+     */
+    guestId: string;
+    /**
+     * Room type ID for this booking
+     */
+    roomTypeId: string;
+    /**
+     * Room assignment status (ASSIGNED, PENDING, UNASSIGNED)
+     * CRITICAL: Indicates if room has been assigned or is pending
+     */
+    assignmentStatus: string;
+    /**
+     * Booking source (WEB, OTA, PHONE, WALK_IN, etc.)
+     */
+    source: string;
+    /**
+     * Booking type (OVERNIGHT, HOURLY, etc.)
+     */
+    bookingType: string;
+    /**
+     * Number of adults in booking
+     */
+    adultCount: number;
+    /**
+     * Number of children in booking
+     */
+    childCount: number;
+    /**
+     * Guest special requests (transferred from request)
+     */
+    specialRequests?: string;
+    /**
+     * Payment status (PENDING, PARTIAL, PAID, REFUNDED, etc.)
+     */
+    paymentStatus: string;
+    /**
+     * Amount already paid/deposited
+     */
+    paidAmount: number;
 }
 /**
  * Full NATS response type for create booking

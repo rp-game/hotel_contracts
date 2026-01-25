@@ -107,6 +107,74 @@ export interface BookingSummary {
     roomNumber: string;
     roomTypeName: string;
   }>;
+
+  // ===== ADDED FIELDS (2026-01-25) - Complete entity representation =====
+
+  /**
+   * Tenant ID (multi-tenant isolation)
+   */
+  tenantId: string;
+
+  /**
+   * Hotel ID (property reference)
+   */
+  hotelId: string;
+
+  /**
+   * Guest ID reference
+   */
+  guestId: string;
+
+  /**
+   * Room type ID for this booking
+   */
+  roomTypeId: string;
+
+  /**
+   * Assigned room ID (null if unassigned)
+   */
+  roomId: string | null;
+
+  /**
+   * Assigned room number (null if unassigned)
+   */
+  roomNumber: string | null;
+
+  /**
+   * Room assignment status (ASSIGNED, PENDING, UNASSIGNED)
+   * CRITICAL: Indicates if room has been assigned or is pending
+   */
+  assignmentStatus: string;
+
+  /**
+   * Booking type (OVERNIGHT, HOURLY)
+   */
+  bookingType: string;
+
+  /**
+   * Start time for hourly bookings (HH:mm format)
+   */
+  startTime?: string;
+
+  /**
+   * End time for hourly bookings (HH:mm format)
+   */
+  endTime?: string;
+
+  /**
+   * Last update timestamp
+   */
+  updatedAt: string;
+
+  /**
+   * User ID who last updated booking
+   */
+  updatedBy?: string;
+
+  /**
+   * Guest special requests
+   */
+  specialRequests?: string;
 }
 
 /**
@@ -182,6 +250,22 @@ export interface FindBookingsNatsRequest {
    * Room type ID filter (optional)
    */
   roomTypeId?: string;
+
+  /**
+   * Room ID filter (optional) - filter by assigned room
+   */
+  roomId?: string;
+
+  /**
+   * Room assignment status filter (ASSIGNED, PENDING, UNASSIGNED)
+   * CRITICAL: Enables filtering for unassigned bookings
+   */
+  assignmentStatus?: 'ASSIGNED' | 'PENDING' | 'UNASSIGNED';
+
+  /**
+   * Booking type filter (OVERNIGHT, HOURLY)
+   */
+  bookingType?: 'OVERNIGHT' | 'HOURLY';
 
   /**
    * Pagination: page number (1-indexed, default: 1)
