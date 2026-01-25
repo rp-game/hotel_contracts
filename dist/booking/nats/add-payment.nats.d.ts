@@ -6,8 +6,8 @@ import { NatsResponse } from '../../common';
 export interface AddPaymentNatsRequest {
     bookingId: string;
     amount: number;
-    method: string;
-    reference?: string;
+    paymentMethod: string;
+    transactionId?: string;
     notes?: string;
     tenantId: string;
     hotelId: string;
@@ -17,8 +17,8 @@ export interface PaymentData {
     id: string;
     bookingId: string;
     amount: number;
-    method: string;
-    reference?: string;
+    paymentMethod: string;
+    transactionId?: string;
     notes?: string;
     addedBy: string;
     addedAt: string;
