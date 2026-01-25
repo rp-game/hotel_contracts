@@ -786,4 +786,119 @@ export interface ApplyChainToHotelGatewayRequest {
  * Full NATS response type for apply chain to hotel
  */
 export type ApplyChainToHotelGatewayNatsResponse = NatsResponse<GatewayConfigData>;
+/**
+ * Update fields for bulk gateway update operation
+ */
+export interface BulkGatewayUpdateFields {
+    /**
+     * Enable or disable gateways
+     */
+    isActive?: boolean;
+    /**
+     * Merchant ID for the gateway
+     */
+    merchantId?: string;
+    /**
+     * API key for gateway authentication
+     */
+    apiKey?: string;
+    /**
+     * Secret key for gateway authentication
+     */
+    secretKey?: string;
+    /**
+     * Webhook URL for callbacks
+     */
+    webhookUrl?: string;
+    /**
+     * Currency code(s) supported
+     */
+    currency?: string;
+    /**
+     * Payment methods supported by this gateway
+     */
+    paymentMethods?: string[];
+    /**
+     * Gateway-specific configuration
+     */
+    configuration?: Record<string, any>;
+}
+/**
+ * NATS request to bulk update payment gateways
+ *
+ * Updates multiple gateway configurations at once
+ *
+ * @example
+ * ```typescript
+ * const request: BulkUpdatePaymentGatewayNatsRequest = {
+ *   tenantId: 'tenant-123',
+ *   hotelId: 'hotel-456',
+ *   gatewayIds: ['gateway-1', 'gateway-2', 'gateway-3'],
+ *   updates: {
+ *     isActive: true,
+ *     merchantId: 'new-merchant-id'
+ *   }
+ * };
+ * ```
+ */
+export interface BulkUpdatePaymentGatewayNatsRequest {
+    /**
+     * Tenant ID (multi-tenant isolation)
+     */
+    tenantId: string;
+    /**
+     * Hotel ID (optional - affects which gateways are updated)
+     */
+    hotelId?: string;
+    /**
+     * Array of gateway IDs to update
+     */
+    gatewayIds: string[];
+    /**
+     * Fields to update on each gateway
+     */
+    updates: BulkGatewayUpdateFields;
+}
+/**
+ * Result for a single gateway in bulk update
+ */
+export interface BulkUpdateGatewayResult {
+    /**
+     * Gateway ID that was processed
+     */
+    gatewayId: string;
+    /**
+     * Whether the update succeeded for this gateway
+     */
+    success: boolean;
+    /**
+     * Error message if update failed
+     */
+    error?: string;
+    /**
+     * Error code if update failed
+     */
+    errorCode?: string;
+}
+/**
+ * Response data for bulk update operation
+ */
+export interface BulkUpdateGatewayResponseData {
+    /**
+     * Number of gateways successfully updated
+     */
+    updatedCount: number;
+    /**
+     * Number of gateways that were skipped or failed
+     */
+    skippedCount: number;
+    /**
+     * Detailed results for gateways that failed
+     */
+    errors: BulkUpdateGatewayResult[];
+}
+/**
+ * Full NATS response type for bulk update gateways
+ */
+export type BulkUpdatePaymentGatewayNatsResponse = NatsResponse<BulkUpdateGatewayResponseData>;
 //# sourceMappingURL=gateway-inheritance.nats.d.ts.map
