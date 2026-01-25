@@ -44,3 +44,6 @@ export * from './room-assignment.nats';
 
 // Reassign room NATS contracts
 export * from './reassign-room.nats';
+
+// Add service NATS contracts
+export * from './add-service.nats';

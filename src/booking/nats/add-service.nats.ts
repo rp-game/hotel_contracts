@@ -1,0 +1,39 @@
+/**
+ * Add Service to Booking NATS Contracts
+ * Pattern: booking.add_service
+ */
+
+import { NatsResponse } from '../../common';
+
+export interface AddServiceNatsRequest {
+  bookingId: string;
+  serviceId: string;
+  quantity: number;
+  unitPrice?: number;
+  notes?: string;
+  tenantId: string;
+  addedBy: string;
+}
+
+export interface ServiceData {
+  id: string;
+  bookingId: string;
+  serviceId: string;
+  quantity: number;
+  unitPrice?: number;
+  notes?: string;
+  addedBy: string;
+  addedAt: string;
+}
+
+export interface AddServiceResponseData {
+  booking: {
+    id: string;
+    bookingCode: string;
+    status: string;
+    totalAmount: number;
+  };
+  service: ServiceData;
+}
+
+export type AddServiceNatsResponse = NatsResponse<AddServiceResponseData>;

@@ -33,4 +33,5 @@ export * from './update-conflict.nats';
 export * from './delete-conflict.nats';
 export * from './room-assignment.nats';
 export * from './reassign-room.nats';
+export * from './add-service.nats';
 //# sourceMappingURL=index.d.ts.map
