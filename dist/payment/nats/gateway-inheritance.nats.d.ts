@@ -901,4 +901,78 @@ export interface BulkUpdateGatewayResponseData {
  * Full NATS response type for bulk update gateways
  */
 export type BulkUpdatePaymentGatewayNatsResponse = NatsResponse<BulkUpdateGatewayResponseData>;
+/**
+ * Request payload for gateway.test pattern
+ * Used to test a payment gateway connection and credentials
+ */
+export interface TestPaymentGatewayNatsRequest {
+    /** Gateway ID to test */
+    id: string;
+    /** Test transaction amount */
+    amount: number;
+    /** Currency code for test */
+    currency: string;
+    /** Tenant ID (required) */
+    tenantId: string;
+    /** Hotel ID (optional) */
+    hotelId?: string;
+}
+/**
+ * Response data for gateway.test pattern
+ * Contains test result details
+ */
+export interface TestPaymentGatewayData {
+    /** Whether test was successful */
+    success: boolean;
+    /** Time taken to complete test (in milliseconds) */
+    responseTime: number;
+    /** Human-readable message about test result */
+    message: string;
+    /** Optional test transaction ID from gateway */
+    testTransactionId?: string;
+    /** Gateway provider name */
+    provider?: string;
+    /** Test timestamp (ISO 8601) */
+    testedAt?: string;
+}
+/**
+ * Full NATS response type for test payment gateway
+ */
+export type TestPaymentGatewayNatsResponse = NatsResponse<TestPaymentGatewayData>;
+/**
+ * Get payment gateways with inheritance resolution
+ * Alias for FindHotelGatewaysRequest with resolveInheritance: true
+ */
+export type GetPaymentGatewaysNatsRequest = FindHotelGatewaysRequest;
+export type GetPaymentGatewaysNatsResponse = FindHotelGatewaysNatsResponse;
+/**
+ * Get hotel-specific payment gateways
+ * Alias for FindHotelGatewaysNatsResponse
+ */
+export type GetHotelPaymentGatewaysNatsRequest = FindHotelGatewaysRequest;
+export type GetHotelPaymentGatewaysNatsResponse = FindHotelGatewaysNatsResponse;
+/**
+ * Get chain-level payment gateways
+ * Alias for FindChainGatewaysNatsResponse
+ */
+export type GetChainPaymentGatewaysNatsRequest = FindChainGatewaysRequest;
+export type GetChainPaymentGatewaysNatsResponse = FindChainGatewaysNatsResponse;
+/**
+ * Update hotel-level payment gateway
+ * Alias for UpdateGatewayRequest with hotelId
+ */
+export type UpdateHotelPaymentGatewayNatsRequest = UpdateGatewayRequest;
+export type UpdateHotelPaymentGatewayNatsResponse = UpdateGatewayNatsResponse;
+/**
+ * Update chain-level payment gateway
+ * Alias for UpdateGatewayRequest with chainId
+ */
+export type UpdateChainPaymentGatewayNatsRequest = UpdateGatewayRequest;
+export type UpdateChainPaymentGatewayNatsResponse = UpdateGatewayNatsResponse;
+/**
+ * Update single payment gateway (generic update)
+ * Alias for UpdateGatewayRequest
+ */
+export type UpdatePaymentGatewayNatsRequest = UpdateGatewayRequest;
+export type UpdatePaymentGatewayNatsResponse = UpdateGatewayNatsResponse;
 //# sourceMappingURL=gateway-inheritance.nats.d.ts.map
