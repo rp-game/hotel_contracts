@@ -197,4 +197,43 @@ export interface OnePayWebhookResponse {
     /** OnePay response message */
     vpc_Message: string;
 }
+/**
+ * Request payload for payment.onepay.config pattern
+ * Used to retrieve OnePay configuration for a tenant/hotel
+ */
+export interface GetOnePayConfigNatsRequest {
+    /** Tenant ID (required) */
+    tenantId: string;
+    /** Hotel ID (required) */
+    hotelId: string;
+}
+/**
+ * OnePay configuration data returned from backend
+ */
+export interface GetOnePayConfigData {
+    /** Whether webhook mode is enabled */
+    webhookMode: boolean;
+    /** Webhook return URL (if configured) */
+    returnUrl?: string;
+    /** OnePay merchant ID (if configured) */
+    merchantId?: string;
+    /** OnePay access key (if configured) */
+    accessKey?: string;
+    /** Secure hash key for webhook verification (if configured) */
+    secureHashKey?: string;
+}
+/**
+ * Response payload for payment.onepay.config pattern
+ * Contains OnePay configuration for the tenant
+ */
+export interface GetOnePayConfigNatsResponse {
+    /** Success flag */
+    success: boolean;
+    /** Configuration data (if successful) */
+    data?: GetOnePayConfigData;
+    /** Error message (if failed) */
+    error?: string;
+    /** Error code (if failed) */
+    errorCode?: string;
+}
 //# sourceMappingURL=onepay.nats.d.ts.map
