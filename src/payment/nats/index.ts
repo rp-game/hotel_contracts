@@ -11,3 +11,5 @@
 export * from './offline-payment.nats';
 export * from './gateway-inheritance.nats';
 export * from './onepay.nats';
+export * from './invoice.nats';
+export * from './transaction.nats';
