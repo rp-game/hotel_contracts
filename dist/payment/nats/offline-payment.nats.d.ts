@@ -144,4 +144,52 @@ export interface OfflinePaymentData {
  * Full NATS response type for create offline payment
  */
 export type CreateOfflinePaymentNatsResponse = NatsResponse<OfflinePaymentData>;
+/**
+ * NATS request to find offline payment by ID
+ * Pattern: offline-payment.findById
+ */
+export interface GetOfflinePaymentByIdNatsRequest {
+    /**
+     * Offline payment record ID
+     */
+    id: string;
+    /**
+     * Tenant ID (multi-tenant isolation)
+     */
+    tenantId: string;
+    /**
+     * Hotel ID (optional but recommended for additional validation)
+     */
+    hotelId?: string;
+}
+/**
+ * Full NATS response type for get offline payment by ID
+ */
+export type GetOfflinePaymentByIdNatsResponse = NatsResponse<OfflinePaymentData>;
+/**
+ * NATS request to find offline payments (list)
+ * Pattern: offline-payment.find
+ */
+export interface FindOfflinePaymentsNatsRequest {
+    /**
+     * Tenant ID (multi-tenant isolation)
+     */
+    tenantId: string;
+    /**
+     * Hotel ID (specific property)
+     */
+    hotelId: string;
+    /**
+     * Filter by booking ID (optional)
+     */
+    bookingId?: string;
+    /**
+     * Filter by status (optional)
+     */
+    status?: OfflinePaymentStatus | string;
+}
+/**
+ * Full NATS response type for find offline payments
+ */
+export type FindOfflinePaymentsNatsResponse = NatsResponse<OfflinePaymentData[]>;
 //# sourceMappingURL=offline-payment.nats.d.ts.map
