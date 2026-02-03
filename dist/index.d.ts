@@ -41,6 +41,7 @@
  * - **notification**: Notification service contracts
  * - **report**: Report service contracts
  * - **platform**: Platform management contracts
+ * - **cms**: CMS service contracts
  */
 export * from './common';
 export * from './booking';
@@ -57,4 +58,5 @@ export * from './notification';
 export * from './report';
 export * from './platform';
 export * from './room-move';
+export * from './cms';
 //# sourceMappingURL=index.d.ts.map

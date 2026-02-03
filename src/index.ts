@@ -41,6 +41,7 @@
  * - **notification**: Notification service contracts
  * - **report**: Report service contracts
  * - **platform**: Platform management contracts
+ * - **cms**: CMS service contracts
  */
 
 // Common contracts - used across all services
@@ -61,3 +62,4 @@ export * from './notification';
 export * from './report';
 export * from './platform';
 export * from './room-move';
+export * from './cms';
