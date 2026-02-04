@@ -36,6 +36,7 @@ export interface HotelOperationSettings {
 export interface Tenant {
   id: string;
   name: string;
+  slug: string;
   type: TenantType;
   parentId: string | null;
   isActive: boolean;
@@ -141,11 +142,22 @@ export interface FindAllTenantsRequestDto {
 }
 
 /**
+ * Find Tenant By Slug Request
+ * Pattern: tenant.findBySlug
+ */
+export interface FindTenantBySlugNatsRequest {
+  slug: string;
+}
+
+export type FindTenantBySlugNatsResponse = NatsResponse<Tenant>;
+
+/**
  * Create Tenant Request
  * Pattern: tenants.create
  */
 export interface CreateTenantRequestDto {
   name: string;
+  slug: string;
   type: TenantType;
   description?: string;
   parentId?: string;
@@ -198,6 +210,7 @@ export interface HotelOperationSettingsDto {
 export interface TenantResponseDto {
   id: string;
   name: string;
+  slug: string;
   type: TenantType;
   parentId: string | null;
   isActive: boolean;
