@@ -4,8 +4,11 @@
 import { RoomStatus } from '../enums';
 /**
  * Room Type entity
+ *
+ * Note: basePrice is string because PostgreSQL decimal type is returned as string by TypeORM
+ * to avoid precision loss. Frontend should parse to number if needed for calculations.
  */
-export interface RoomType {
+export declare class RoomType {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -13,10 +16,10 @@ export interface RoomType {
     description?: string;
     capacity: number;
     numberOfBeds: number;
-    basePrice: number;
-    images?: string[];
-    amenities?: string[];
-    features?: any;
+    basePrice: string;
+    images?: string[] | null;
+    amenities?: string[] | null;
+    features?: string[] | null;
     isActive?: boolean;
     createdAt: string;
     updatedAt: string;

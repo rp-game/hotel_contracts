@@ -14,7 +14,7 @@
  */
 
 import { NatsResponse } from '../../common';
-import { RoomType as RoomTypeEntity } from '../types';
+import { RoomType } from '../types';
 
 /**
  * Find All Room Types Request
@@ -28,7 +28,7 @@ export interface FindAllRoomTypesRequest {
 }
 
 export interface FindAllRoomTypesResponse {
-  data: RoomTypeEntity[];
+  data: RoomType[];
   total: number;
   page: number;
   limit: number;
@@ -45,7 +45,7 @@ export interface FindOneRoomTypeRequest {
   tenantId: string;
 }
 
-export type FindOneRoomTypeResponse = RoomTypeEntity | null;
+export type FindOneRoomTypeResponse = RoomType | null;
 export type FindOneRoomTypeNatsResponse = NatsResponse<FindOneRoomTypeResponse>;
 
 /**
@@ -67,7 +67,7 @@ export interface CreateRoomTypeRequest {
   images?: string[]; // Room type images/photos
 }
 
-export type CreateRoomTypeResponse = RoomTypeEntity;
+export type CreateRoomTypeResponse = RoomType;
 export type CreateRoomTypeNatsResponse = NatsResponse<CreateRoomTypeResponse>;
 
 /**
@@ -91,7 +91,7 @@ export interface UpdateRoomTypeRequest {
   isActive?: boolean; // Whether the room type is active
 }
 
-export type UpdateRoomTypeResponse = RoomTypeEntity | null;
+export type UpdateRoomTypeResponse = RoomType | null;
 export type UpdateRoomTypeNatsResponse = NatsResponse<UpdateRoomTypeResponse>;
 
 /**
@@ -119,5 +119,5 @@ export interface GetRoomTypesByIdsRequest {
   roomTypeIds: string[];
 }
 
-export type GetRoomTypesByIdsResponse = RoomTypeEntity[];
+export type GetRoomTypesByIdsResponse = RoomType[];
 export type GetRoomTypesByIdsNatsResponse = NatsResponse<GetRoomTypesByIdsResponse>;

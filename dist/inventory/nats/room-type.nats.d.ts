@@ -13,7 +13,7 @@
  * Called by: api-gateway, pricing-service
  */
 import { NatsResponse } from '../../common';
-import { RoomType as RoomTypeEntity } from '../types';
+import { RoomType } from '../types';
 /**
  * Find All Room Types Request
  * Pattern: inventory.roomTypes.findAll
@@ -25,7 +25,7 @@ export interface FindAllRoomTypesRequest {
     limit?: number;
 }
 export interface FindAllRoomTypesResponse {
-    data: RoomTypeEntity[];
+    data: RoomType[];
     total: number;
     page: number;
     limit: number;
@@ -39,7 +39,7 @@ export interface FindOneRoomTypeRequest {
     id: string;
     tenantId: string;
 }
-export type FindOneRoomTypeResponse = RoomTypeEntity | null;
+export type FindOneRoomTypeResponse = RoomType | null;
 export type FindOneRoomTypeNatsResponse = NatsResponse<FindOneRoomTypeResponse>;
 /**
  * Create Room Type Request
@@ -59,7 +59,7 @@ export interface CreateRoomTypeRequest {
     category?: string;
     images?: string[];
 }
-export type CreateRoomTypeResponse = RoomTypeEntity;
+export type CreateRoomTypeResponse = RoomType;
 export type CreateRoomTypeNatsResponse = NatsResponse<CreateRoomTypeResponse>;
 /**
  * Update Room Type Request
@@ -81,7 +81,7 @@ export interface UpdateRoomTypeRequest {
     images?: string[];
     isActive?: boolean;
 }
-export type UpdateRoomTypeResponse = RoomTypeEntity | null;
+export type UpdateRoomTypeResponse = RoomType | null;
 export type UpdateRoomTypeNatsResponse = NatsResponse<UpdateRoomTypeResponse>;
 /**
  * Delete Room Type Request
@@ -104,6 +104,6 @@ export interface GetRoomTypesByIdsRequest {
     hotelId: string;
     roomTypeIds: string[];
 }
-export type GetRoomTypesByIdsResponse = RoomTypeEntity[];
+export type GetRoomTypesByIdsResponse = RoomType[];
 export type GetRoomTypesByIdsNatsResponse = NatsResponse<GetRoomTypesByIdsResponse>;
 //# sourceMappingURL=room-type.nats.d.ts.map
