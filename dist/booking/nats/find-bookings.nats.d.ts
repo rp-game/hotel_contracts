@@ -11,7 +11,11 @@ import { NatsResponse } from '../../common/nats-response.interface';
  * Booking summary for list operations
  * Contains essential fields for display without full booking details
  */
-export interface BookingSummary {
+/**
+ * Booking summary for list operations
+ * Contains essential fields for display without full booking details
+ */
+export declare class BookingSummary {
     /**
      * Unique booking ID
      */
@@ -233,9 +237,12 @@ export interface FindBookingsNatsRequest {
     sortOrder?: 'ASC' | 'DESC';
 }
 /**
- * Bookings list response data structure
+ * Bookings list response - shared between NATS and REST API
+ * Used by:
+ * - NATS pattern: booking.find_all (booking-service handler response)
+ * - REST API: GET /bookings (api-gateway controller response)
  */
-export interface FindBookingsData {
+export declare class BookingListResponseDto {
     /**
      * Array of booking summaries
      */
@@ -257,6 +264,11 @@ export interface FindBookingsData {
      */
     totalPages: number;
 }
+/**
+ * Type alias for backward compatibility
+ * FindBookingsData is now BookingListResponseDto
+ */
+export type FindBookingsData = BookingListResponseDto;
 /**
  * NATS response containing list of bookings with pagination
  *
