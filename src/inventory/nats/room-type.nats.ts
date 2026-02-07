@@ -13,6 +13,8 @@
  * Called by: api-gateway, pricing-service
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsUUID, IsNumber, IsOptional, IsArray, IsBoolean, Min } from 'class-validator';
 import { NatsResponse } from '../../common';
 import { RoomType } from '../types';
 
@@ -52,20 +54,72 @@ export type FindOneRoomTypeNatsResponse = NatsResponse<FindOneRoomTypeResponse>;
  * Create Room Type Request
  * Pattern: inventory.roomTypes.create
  */
-export interface CreateRoomTypeRequest {
+export class CreateRoomTypeRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsUUID()
   hotelId: string;
+
+  @ApiProperty({ description: 'Room type name' })
+  @IsString()
   name: string;
+
+  @ApiPropertyOptional({ description: 'Room type description' })
+  @IsOptional()
+  @IsString()
   description?: string;
+
+  @ApiProperty({ description: 'Base rate per night' })
+  @IsNumber()
+  @Min(0)
   baseRate: number;
+
+  @ApiPropertyOptional({ description: 'Maximum capacity' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
   capacity?: number;
-  numberOfBeds?: number; // Number of beds in this room type (default 1)
-  maxOccupancy?: number; // Alias for capacity
+
+  @ApiPropertyOptional({ description: 'Number of beds in this room type (default 1)' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  numberOfBeds?: number;
+
+  @ApiPropertyOptional({ description: 'Maximum occupancy (alias for capacity)' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  maxOccupancy?: number;
+
+  @ApiPropertyOptional({ description: 'Standard amenities' })
+  @IsOptional()
+  @IsArray()
   amenities?: string[];
-  features?: string[]; // Room feature tags (e.g., ["Non-smoking", "City View"])
-  size?: number; // Room size in square meters
-  category?: string; // Room category (e.g., "Premium", "Standard")
-  images?: string[]; // Room type images/photos
+
+  @ApiPropertyOptional({ description: 'Room feature tags (e.g., ["Non-smoking", "City View"])' })
+  @IsOptional()
+  @IsArray()
+  features?: string[];
+
+  @ApiPropertyOptional({ description: 'Room size in square meters' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  size?: number;
+
+  @ApiPropertyOptional({ description: 'Room category (e.g., "Premium", "Standard")' })
+  @IsOptional()
+  @IsString()
+  category?: string;
+
+  @ApiPropertyOptional({ description: 'Room type images/photos' })
+  @IsOptional()
+  @IsArray()
+  images?: string[];
 }
 
 export type CreateRoomTypeResponse = RoomType;
@@ -75,22 +129,84 @@ export type CreateRoomTypeNatsResponse = NatsResponse<CreateRoomTypeResponse>;
  * Update Room Type Request
  * Pattern: inventory.roomTypes.update
  */
-export interface UpdateRoomTypeRequest {
+export class UpdateRoomTypeRequest {
+  @ApiProperty({ description: 'Room type ID' })
+  @IsUUID()
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
   hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Room type name' })
+  @IsOptional()
+  @IsString()
   name?: string;
+
+  @ApiPropertyOptional({ description: 'Room type description' })
+  @IsOptional()
+  @IsString()
   description?: string;
+
+  @ApiPropertyOptional({ description: 'Base rate per night' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
   baseRate?: number;
+
+  @ApiPropertyOptional({ description: 'Maximum capacity' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
   capacity?: number;
-  numberOfBeds?: number; // Number of beds in this room type (default 1)
-  maxOccupancy?: number; // Alias for capacity
+
+  @ApiPropertyOptional({ description: 'Number of beds in this room type (default 1)' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  numberOfBeds?: number;
+
+  @ApiPropertyOptional({ description: 'Maximum occupancy (alias for capacity)' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  maxOccupancy?: number;
+
+  @ApiPropertyOptional({ description: 'Standard amenities' })
+  @IsOptional()
+  @IsArray()
   amenities?: string[];
-  features?: string[]; // Room feature tags (e.g., ["Non-smoking", "City View"])
-  size?: number; // Room size in square meters
-  category?: string; // Room category (e.g., "Premium", "Standard")
-  images?: string[]; // Room type images/photos
-  isActive?: boolean; // Whether the room type is active
+
+  @ApiPropertyOptional({ description: 'Room feature tags (e.g., ["Non-smoking", "City View"])' })
+  @IsOptional()
+  @IsArray()
+  features?: string[];
+
+  @ApiPropertyOptional({ description: 'Room size in square meters' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  size?: number;
+
+  @ApiPropertyOptional({ description: 'Room category (e.g., "Premium", "Standard")' })
+  @IsOptional()
+  @IsString()
+  category?: string;
+
+  @ApiPropertyOptional({ description: 'Room type images/photos' })
+  @IsOptional()
+  @IsArray()
+  images?: string[];
+
+  @ApiPropertyOptional({ description: 'Whether the room type is active' })
+  @IsOptional()
+  @IsBoolean()
+  isActive?: boolean;
 }
 
 export type UpdateRoomTypeResponse = RoomType | null;

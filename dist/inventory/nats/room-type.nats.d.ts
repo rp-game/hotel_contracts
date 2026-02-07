@@ -45,7 +45,7 @@ export type FindOneRoomTypeNatsResponse = NatsResponse<FindOneRoomTypeResponse>;
  * Create Room Type Request
  * Pattern: inventory.roomTypes.create
  */
-export interface CreateRoomTypeRequest {
+export declare class CreateRoomTypeRequest {
     tenantId: string;
     hotelId: string;
     name: string;
@@ -66,7 +66,7 @@ export type CreateRoomTypeNatsResponse = NatsResponse<CreateRoomTypeResponse>;
  * Update Room Type Request
  * Pattern: inventory.roomTypes.update
  */
-export interface UpdateRoomTypeRequest {
+export declare class UpdateRoomTypeRequest {
     id: string;
     tenantId: string;
     hotelId?: string;
