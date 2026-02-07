@@ -12,6 +12,7 @@ export * from './create-booking.nats';
 export * from './find-bookings.nats';
 export * from './find-one-booking.nats';
 export * from './unassigned-bookings.nats';
+export * from './smart-search.nats';
 export * from './bookings-timeline.nats';
 export * from './timeline-action.nats';
 export * from './timeline-room-details.nats';
