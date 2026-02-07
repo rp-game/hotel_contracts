@@ -55,6 +55,7 @@ export interface CreateRoomTypeRequest {
     numberOfBeds?: number;
     maxOccupancy?: number;
     amenities?: string[];
+    features?: string[];
     size?: number;
     category?: string;
     images?: string[];
@@ -76,6 +77,7 @@ export interface UpdateRoomTypeRequest {
     numberOfBeds?: number;
     maxOccupancy?: number;
     amenities?: string[];
+    features?: string[];
     size?: number;
     category?: string;
     images?: string[];

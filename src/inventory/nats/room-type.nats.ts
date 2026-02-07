@@ -62,6 +62,7 @@ export interface CreateRoomTypeRequest {
   numberOfBeds?: number; // Number of beds in this room type (default 1)
   maxOccupancy?: number; // Alias for capacity
   amenities?: string[];
+  features?: string[]; // Room feature tags (e.g., ["Non-smoking", "City View"])
   size?: number; // Room size in square meters
   category?: string; // Room category (e.g., "Premium", "Standard")
   images?: string[]; // Room type images/photos
@@ -85,6 +86,7 @@ export interface UpdateRoomTypeRequest {
   numberOfBeds?: number; // Number of beds in this room type (default 1)
   maxOccupancy?: number; // Alias for capacity
   amenities?: string[];
+  features?: string[]; // Room feature tags (e.g., ["Non-smoking", "City View"])
   size?: number; // Room size in square meters
   category?: string; // Room category (e.g., "Premium", "Standard")
   images?: string[]; // Room type images/photos
