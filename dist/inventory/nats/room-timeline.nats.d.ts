@@ -498,6 +498,106 @@ export interface AnalyticsComparison {
     };
 }
 export type GetAnalyticsComparisonResponse = AnalyticsComparison;
+/**
+ * Comprehensive Analytics Response DTO
+ * REST API response for GET /api/rooms/analytics/comprehensive
+ * Used for both REST API responses and NATS messaging
+ */
+export declare class ComprehensiveAnalyticsResponseDto {
+    overview: {
+        totalRooms: number;
+        availableRooms: number;
+        occupiedRooms: number;
+        outOfOrderRooms: number;
+        occupancyRate: number;
+        adr: number;
+        revpar: number;
+        totalRevenue: number;
+        avgLengthOfStay: number;
+        checkoutOnTime: number;
+        cleaningEfficiency: number;
+    };
+    trends: {
+        date: string;
+        occupancyRate: number;
+        adr: number;
+        revpar: number;
+        revenue: number;
+        availableRooms: number;
+        occupiedRooms: number;
+    }[];
+    roomTypePerformance: {
+        roomType: {
+            name: string;
+            id: string;
+        } | string;
+        totalRooms: number;
+        occupancyRate: number;
+        adr: number;
+        revpar: number;
+        revenue: number;
+        avgBookingValue: number;
+    }[];
+    hourlyOccupancy?: {
+        hour: number;
+        occupancyRate: number;
+        checkIns: number;
+        checkOuts: number;
+    }[];
+    revenueBreakdown?: {
+        source: string;
+        revenue: number;
+        percentage: number;
+        color: string;
+    }[];
+    topPerformingRooms?: {
+        roomNumber: string;
+        roomType: string;
+        revenue: number;
+        occupancyRate: number;
+        adr: number;
+        totalBookings: number;
+        avgRating: number;
+    }[];
+    cleaningMetrics?: {
+        avgCleaningTime: number;
+        onTimeCompletion: number;
+        qualityScore: number;
+        staffEfficiency: number;
+        totalTasksCompleted: number;
+    };
+    forecast?: {
+        date: string;
+        predictedOccupancy: number;
+        predictedRevenue: number;
+        demandLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'PEAK';
+    }[];
+}
+/**
+ * Analytics Comparison Response DTO
+ * REST API response for GET /api/rooms/analytics/comparison
+ * Used for both REST API responses and NATS messaging
+ */
+export declare class AnalyticsComparisonResponseDto {
+    current: {
+        occupancyRate: number;
+        adr: number;
+        revpar: number;
+        revenue: number;
+    };
+    previous: {
+        occupancyRate: number;
+        adr: number;
+        revpar: number;
+        revenue: number;
+    };
+    growth: {
+        occupancyRate: number;
+        adr: number;
+        revpar: number;
+        revenue: number;
+    };
+}
 export type GetAnalyticsComparisonNatsResponse = NatsResponse<GetAnalyticsComparisonResponse>;
 /**
  * Detect Booking Conflicts Request

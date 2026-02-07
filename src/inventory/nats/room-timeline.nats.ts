@@ -27,6 +27,7 @@
  * Called by: api-gateway, pricing-service
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 
 /**
@@ -542,6 +543,214 @@ export interface AnalyticsComparison {
 }
 
 export type GetAnalyticsComparisonResponse = AnalyticsComparison;
+
+/**
+ * Comprehensive Analytics Response DTO
+ * REST API response for GET /api/rooms/analytics/comprehensive
+ * Used for both REST API responses and NATS messaging
+ */
+export class ComprehensiveAnalyticsResponseDto {
+  @ApiProperty({
+    description: 'Overview metrics with room counts and KPIs',
+    type: 'object',
+    properties: {
+      totalRooms: { type: 'number' },
+      availableRooms: { type: 'number' },
+      occupiedRooms: { type: 'number' },
+      outOfOrderRooms: { type: 'number' },
+      occupancyRate: { type: 'number' },
+      adr: { type: 'number', description: 'Average Daily Rate' },
+      revpar: { type: 'number', description: 'Revenue Per Available Room' },
+      totalRevenue: { type: 'number' },
+      avgLengthOfStay: { type: 'number' },
+      checkoutOnTime: { type: 'number' },
+      cleaningEfficiency: { type: 'number' }
+    }
+  })
+  overview: {
+    totalRooms: number;
+    availableRooms: number;
+    occupiedRooms: number;
+    outOfOrderRooms: number;
+    occupancyRate: number;
+    adr: number;
+    revpar: number;
+    totalRevenue: number;
+    avgLengthOfStay: number;
+    checkoutOnTime: number;
+    cleaningEfficiency: number;
+  };
+
+  @ApiProperty({
+    description: 'Daily trends data',
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: {
+        date: { type: 'string' },
+        occupancyRate: { type: 'number' },
+        adr: { type: 'number' },
+        revpar: { type: 'number' },
+        revenue: { type: 'number' },
+        availableRooms: { type: 'number' },
+        occupiedRooms: { type: 'number' }
+      }
+    }
+  })
+  trends: {
+    date: string;
+    occupancyRate: number;
+    adr: number;
+    revpar: number;
+    revenue: number;
+    availableRooms: number;
+    occupiedRooms: number;
+  }[];
+
+  @ApiProperty({
+    description: 'Room type performance metrics',
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: {
+        roomType: { type: 'object' },
+        totalRooms: { type: 'number' },
+        occupancyRate: { type: 'number' },
+        adr: { type: 'number' },
+        revpar: { type: 'number' },
+        revenue: { type: 'number' },
+        avgBookingValue: { type: 'number' }
+      }
+    }
+  })
+  roomTypePerformance: {
+    roomType: { name: string; id: string } | string;
+    totalRooms: number;
+    occupancyRate: number;
+    adr: number;
+    revpar: number;
+    revenue: number;
+    avgBookingValue: number;
+  }[];
+
+  @ApiPropertyOptional({
+    description: 'Hourly occupancy data',
+    type: 'array'
+  })
+  hourlyOccupancy?: {
+    hour: number;
+    occupancyRate: number;
+    checkIns: number;
+    checkOuts: number;
+  }[];
+
+  @ApiPropertyOptional({
+    description: 'Revenue breakdown by source',
+    type: 'array'
+  })
+  revenueBreakdown?: {
+    source: string;
+    revenue: number;
+    percentage: number;
+    color: string;
+  }[];
+
+  @ApiPropertyOptional({
+    description: 'Top performing rooms',
+    type: 'array'
+  })
+  topPerformingRooms?: {
+    roomNumber: string;
+    roomType: string;
+    revenue: number;
+    occupancyRate: number;
+    adr: number;
+    totalBookings: number;
+    avgRating: number;
+  }[];
+
+  @ApiPropertyOptional({
+    description: 'Cleaning metrics and efficiency',
+    type: 'object',
+    additionalProperties: true
+  })
+  cleaningMetrics?: {
+    avgCleaningTime: number;
+    onTimeCompletion: number;
+    qualityScore: number;
+    staffEfficiency: number;
+    totalTasksCompleted: number;
+  };
+
+  @ApiPropertyOptional({
+    description: 'Occupancy forecast',
+    type: 'array'
+  })
+  forecast?: {
+    date: string;
+    predictedOccupancy: number;
+    predictedRevenue: number;
+    demandLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'PEAK';
+  }[];
+}
+
+/**
+ * Analytics Comparison Response DTO
+ * REST API response for GET /api/rooms/analytics/comparison
+ * Used for both REST API responses and NATS messaging
+ */
+export class AnalyticsComparisonResponseDto {
+  @ApiProperty({
+    description: 'Current period analytics',
+    type: 'object',
+    properties: {
+      occupancyRate: { type: 'number' },
+      adr: { type: 'number', description: 'Average Daily Rate' },
+      revpar: { type: 'number', description: 'Revenue Per Available Room' },
+      revenue: { type: 'number' }
+    }
+  })
+  current: {
+    occupancyRate: number;
+    adr: number;
+    revpar: number;
+    revenue: number;
+  };
+
+  @ApiProperty({
+    description: 'Previous period analytics',
+    type: 'object',
+    properties: {
+      occupancyRate: { type: 'number' },
+      adr: { type: 'number', description: 'Average Daily Rate' },
+      revpar: { type: 'number', description: 'Revenue Per Available Room' },
+      revenue: { type: 'number' }
+    }
+  })
+  previous: {
+    occupancyRate: number;
+    adr: number;
+    revpar: number;
+    revenue: number;
+  };
+
+  @ApiProperty({
+    description: 'Growth percentage between periods',
+    type: 'object',
+    properties: {
+      occupancyRate: { type: 'number' },
+      adr: { type: 'number' },
+      revpar: { type: 'number' },
+      revenue: { type: 'number' }
+    }
+  })
+  growth: {
+    occupancyRate: number;
+    adr: number;
+    revpar: number;
+    revenue: number;
+  };
+}
 export type GetAnalyticsComparisonNatsResponse = NatsResponse<GetAnalyticsComparisonResponse>;
 
 /**
