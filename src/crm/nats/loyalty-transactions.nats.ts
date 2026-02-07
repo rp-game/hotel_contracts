@@ -13,6 +13,7 @@
  * Called by: api-gateway (CrmController)
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 
 /**
@@ -52,36 +53,82 @@ export interface CreateLoyaltyTransactionNatsRequest {
 /**
  * Loyalty Transaction Response
  */
-export interface LoyaltyTransactionNatsResponse {
-  id: string;
-  tenantId: string;
-  memberId: string;
-  programId: string;
-  customerId: string;
-  transactionType: LoyaltyTransactionType;
-  pointsChanged: number;
+export class LoyaltyTransactionNatsResponse {
+  @ApiProperty({ description: 'Transaction ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Loyalty member ID' })
+  memberId!: string;
+
+  @ApiProperty({ description: 'Loyalty program ID' })
+  programId!: string;
+
+  @ApiProperty({ description: 'Customer ID' })
+  customerId!: string;
+
+  @ApiProperty({ enum: LoyaltyTransactionType, description: 'Transaction type' })
+  transactionType!: LoyaltyTransactionType;
+
+  @ApiProperty({ description: 'Points changed (positive or negative)' })
+  pointsChanged!: number;
+
+  @ApiPropertyOptional({ description: 'Transaction description' })
   description?: string;
+
+  @ApiPropertyOptional({ description: 'Reference ID (booking, order, etc)' })
   referenceId?: string;
+
+  @ApiPropertyOptional({ description: 'Reference type' })
   referenceType?: string;
-  balance: number;
-  balanceBefore: number;
-  balanceAfter: number;
+
+  @ApiProperty({ description: 'Current balance' })
+  balance!: number;
+
+  @ApiProperty({ description: 'Balance before transaction' })
+  balanceBefore!: number;
+
+  @ApiProperty({ description: 'Balance after transaction' })
+  balanceAfter!: number;
+
+  @ApiPropertyOptional({ description: 'Additional metadata' })
   metadata?: Record<string, any>;
-  transactionDate: string;
+
+  @ApiProperty({ description: 'Transaction date' })
+  transactionDate!: string;
+
+  @ApiPropertyOptional({ description: 'Points expiration date' })
   pointsExpirationDate?: string;
+
+  @ApiPropertyOptional({ description: 'Related interaction ID' })
   relatedInteractionId?: string;
+
+  @ApiPropertyOptional({ description: 'Staff ID who performed the transaction' })
   staffId?: string;
-  createdAt: string;
-  updatedAt: string;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt!: string;
+
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt!: string;
 }
 
 /**
  * List Loyalty Transactions Response
  */
-export interface ListLoyaltyTransactionsNatsResponse {
-  transactions: LoyaltyTransactionNatsResponse[];
-  total: number;
+export class ListLoyaltyTransactionsNatsResponse {
+  @ApiProperty({ type: [LoyaltyTransactionNatsResponse], description: 'List of transactions' })
+  transactions!: LoyaltyTransactionNatsResponse[];
+
+  @ApiProperty({ description: 'Total number of transactions' })
+  total!: number;
+
+  @ApiPropertyOptional({ description: 'Current page number' })
   page?: number;
+
+  @ApiPropertyOptional({ description: 'Number of items per page' })
   limit?: number;
 }
 

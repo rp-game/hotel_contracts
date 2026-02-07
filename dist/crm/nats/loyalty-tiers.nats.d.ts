@@ -11,7 +11,7 @@ import { NatsResponse } from '../../common';
 /**
  * Tier Benefits
  */
-export interface TierBenefitsNatsResponse {
+export declare class TierBenefitsNatsResponse {
     roomUpgrade?: boolean;
     lateCheckout?: boolean;
     discountPercentage?: string;
@@ -24,7 +24,7 @@ export interface TierBenefitsNatsResponse {
 /**
  * Loyalty Tier Response
  */
-export interface LoyaltyTierNatsResponse {
+export declare class LoyaltyTierNatsResponse {
     id: string;
     tenantId: string;
     programId: string;

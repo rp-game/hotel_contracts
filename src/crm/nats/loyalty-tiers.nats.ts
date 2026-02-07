@@ -8,38 +8,77 @@
  * Called by: api-gateway (CrmController)
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 
 /**
  * Tier Benefits
  */
-export interface TierBenefitsNatsResponse {
+export class TierBenefitsNatsResponse {
+  @ApiPropertyOptional({ description: 'Room upgrade benefit' })
   roomUpgrade?: boolean;
+
+  @ApiPropertyOptional({ description: 'Late checkout benefit' })
   lateCheckout?: boolean;
+
+  @ApiPropertyOptional({ description: 'Discount percentage' })
   discountPercentage?: string;
+
+  @ApiPropertyOptional({ type: [String], description: 'Free services' })
   freeServices?: string[];
+
+  @ApiPropertyOptional({ description: 'Priority support benefit' })
   prioritySupport?: boolean;
+
+  @ApiPropertyOptional({ description: 'Welcome gift benefit' })
   welcomeGift?: boolean;
+
+  @ApiPropertyOptional({ description: 'Airport transfer benefit' })
   airportTransfer?: boolean;
+
+  @ApiPropertyOptional({ description: 'Maximum number of guests' })
   maxGuests?: number;
 }
 
 /**
  * Loyalty Tier Response
  */
-export interface LoyaltyTierNatsResponse {
-  id: string;
-  tenantId: string;
-  programId: string;
-  name: string;
-  minimumPoints: number;
-  pointsMultiplier: number;
+export class LoyaltyTierNatsResponse {
+  @ApiProperty({ description: 'Tier ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Loyalty program ID' })
+  programId!: string;
+
+  @ApiProperty({ description: 'Tier name' })
+  name!: string;
+
+  @ApiProperty({ description: 'Minimum points required for this tier' })
+  minimumPoints!: number;
+
+  @ApiProperty({ description: 'Points multiplier for this tier' })
+  pointsMultiplier!: number;
+
+  @ApiPropertyOptional({ description: 'Legacy multiplier field' })
   multiplier?: number;
+
+  @ApiPropertyOptional({ description: 'Tier benefits' })
   benefits?: TierBenefitsNatsResponse;
-  order: number;
-  isActive: boolean;
-  createdAt: string | Date;
-  updatedAt: string | Date;
+
+  @ApiProperty({ description: 'Tier display order' })
+  order!: number;
+
+  @ApiProperty({ description: 'Whether tier is active' })
+  isActive!: boolean;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt!: string | Date;
+
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt!: string | Date;
 }
 
 /**

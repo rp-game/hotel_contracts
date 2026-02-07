@@ -48,7 +48,7 @@ export interface CreateLoyaltyTransactionNatsRequest {
 /**
  * Loyalty Transaction Response
  */
-export interface LoyaltyTransactionNatsResponse {
+export declare class LoyaltyTransactionNatsResponse {
     id: string;
     tenantId: string;
     memberId: string;
@@ -73,7 +73,7 @@ export interface LoyaltyTransactionNatsResponse {
 /**
  * List Loyalty Transactions Response
  */
-export interface ListLoyaltyTransactionsNatsResponse {
+export declare class ListLoyaltyTransactionsNatsResponse {
     transactions: LoyaltyTransactionNatsResponse[];
     total: number;
     page?: number;
