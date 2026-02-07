@@ -1,15 +1,54 @@
 import { NatsResponse } from '../../common/nats-response.interface';
-export interface GuestPreferenceNatsData {
+/**
+ * Guest preferences data - shared between NATS and REST API
+ * Used by:
+ * - NATS pattern: crm.guest.preferences.find
+ * - REST API: GET /crm/guest-preferences
+ */
+export declare class GuestPreferenceNatsData {
+    /**
+     * Guest email address
+     */
     email: string;
+    /**
+     * Tenant ID (multi-tenant isolation)
+     */
     tenantId: string;
+    /**
+     * Hotel ID (optional, property reference)
+     */
     hotelId?: string;
+    /**
+     * General preferences (flexible key-value)
+     */
     preferences?: Record<string, any>;
+    /**
+     * Room-specific preferences
+     */
     roomPreferences?: Record<string, any>;
+    /**
+     * Service preferences
+     */
     servicePreferences?: Record<string, any>;
+    /**
+     * Dietary restrictions array
+     */
     dietaryRestrictions?: string[];
+    /**
+     * Special occasions
+     */
     specialOccasions?: string[];
+    /**
+     * Communication preferences
+     */
     communicationPreferences?: Record<string, any>;
+    /**
+     * Accessibility requirements
+     */
     accessibilityRequirements?: string[];
+    /**
+     * Last update timestamp (ISO string)
+     */
     updatedAt: string;
 }
 export interface FindGuestPreferencesNatsRequest {
