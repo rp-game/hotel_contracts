@@ -1,6 +1,6 @@
 {
   "name": "@hotel/contracts",
-  "version": "0.1.180",
+  "version": "0.1.181",
   "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -471,6 +471,7 @@
     "typescript": "^5.7.3"
   },
   "peerDependencies": {
+    "@nestjs/swagger": "^11.2.0",
     "class-validator": "^0.14.0",
     "class-transformer": "^0.5.1"
   },

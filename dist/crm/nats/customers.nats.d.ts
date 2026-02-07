@@ -227,7 +227,7 @@ export type UpdateStatsNatsResponse = NatsResponse<{
 /**
  * Recalculate Booking Stats Data
  */
-export interface RecalculateBookingStatsData {
+export declare class RecalculateBookingStatsData {
     totalBookings: number;
     totalSpent: string;
     lastBookingDate?: string | Date;

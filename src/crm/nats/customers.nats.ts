@@ -23,6 +23,7 @@
  * Called by: api-gateway (CrmController)
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 
 /**
@@ -249,13 +250,26 @@ export type UpdateStatsNatsResponse = NatsResponse<{
 /**
  * Recalculate Booking Stats Data
  */
-export interface RecalculateBookingStatsData {
+export class RecalculateBookingStatsData {
+  @ApiProperty({ description: 'Total number of bookings' })
   totalBookings: number;
+
+  @ApiProperty({ description: 'Total amount spent', example: '2500000.50' })
   totalSpent: string;
+
+  @ApiPropertyOptional({ description: 'Last booking date' })
   lastBookingDate?: string | Date;
+
+  @ApiPropertyOptional({ description: 'Current membership level' })
   membershipLevel?: string;
+
+  @ApiProperty({ description: 'Previous total bookings count' })
   previousTotalBookings: number;
+
+  @ApiProperty({ description: 'Previous total amount spent', example: '2000000.00' })
   previousTotalSpent: string;
+
+  @ApiPropertyOptional({ description: 'Previous membership level' })
   previousMembershipLevel?: string;
 }
 
