@@ -27,6 +27,7 @@ __exportStar(require("./create-booking.nats"), exports);
 __exportStar(require("./find-bookings.nats"), exports);
 __exportStar(require("./find-one-booking.nats"), exports);
 __exportStar(require("./unassigned-bookings.nats"), exports);
+__exportStar(require("./smart-search.nats"), exports);
 __exportStar(require("./bookings-timeline.nats"), exports);
 __exportStar(require("./timeline-action.nats"), exports);
 __exportStar(require("./timeline-room-details.nats"), exports);

@@ -137,7 +137,7 @@ export class SmartRecommendation {
   /**
    * Why this room is recommended (e.g., ['Price within budget', 'Preferred amenities'])
    */
-  @ApiProperty({ description: 'Reasons for recommendation', type: ['string'] })
+  @ApiProperty({ description: 'Reasons for recommendation', type: [String] })
   reasons: string[];
 
   /**
@@ -196,13 +196,13 @@ export class SmartRecommendation {
   /**
    * Room features (e.g., ['King bed', 'Work desk', 'Mini bar'])
    */
-  @ApiProperty({ description: 'Room features', type: ['string'] })
+  @ApiProperty({ description: 'Room features', type: [String] })
   features: string[];
 
   /**
    * Room amenities (e.g., ['WiFi', 'Air Conditioning', 'Hot water'])
    */
-  @ApiProperty({ description: 'Room amenities', type: ['string'] })
+  @ApiProperty({ description: 'Room amenities', type: [String] })
   amenities: string[];
 
   /**
