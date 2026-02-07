@@ -33,7 +33,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RecalculateBookingStatsData = exports.CustomersListData = exports.CommunicationChannel = exports.NationalIdType = exports.Gender = void 0;
+exports.RecalculateBookingStatsData = exports.CustomersListData = exports.CustomerNatsResponse = exports.CommunicationChannel = exports.NationalIdType = exports.Gender = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Enums
@@ -56,6 +56,157 @@ var CommunicationChannel;
     CommunicationChannel["SMS"] = "SMS";
     CommunicationChannel["APP_NOTIFICATION"] = "APP_NOTIFICATION";
 })(CommunicationChannel || (exports.CommunicationChannel = CommunicationChannel = {}));
+/**
+ * Customer Response
+ */
+class CustomerNatsResponse {
+    id;
+    tenantId;
+    platformCustomerId;
+    firstName;
+    lastName;
+    fullName;
+    gender;
+    dateOfBirth;
+    email;
+    phoneNumber;
+    nationalIdType;
+    nationalIdNumber;
+    nationality;
+    address;
+    languagePreferences;
+    communicationPreferences;
+    tags;
+    notes;
+    isAnonymized;
+    createdAt;
+    updatedAt;
+    firstSeenAt;
+    lastSeenAt;
+    totalBookings;
+    totalSpent;
+    lastBookingDate;
+    membershipLevel;
+    loyaltyPoints;
+    loyaltyMembers;
+}
+exports.CustomerNatsResponse = CustomerNatsResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Platform Customer ID' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "platformCustomerId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'First name' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "firstName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Last name' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "lastName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Full name' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "fullName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: Gender, description: 'Gender' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "gender", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Date of birth' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "dateOfBirth", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Email address' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Phone number' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "phoneNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: NationalIdType, description: 'National ID type' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "nationalIdType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'National ID number' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "nationalIdNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Nationality' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "nationality", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Address information' }),
+    __metadata("design:type", Object)
+], CustomerNatsResponse.prototype, "address", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [String], description: 'Language preferences' }),
+    __metadata("design:type", Array)
+], CustomerNatsResponse.prototype, "languagePreferences", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Communication preferences' }),
+    __metadata("design:type", Object)
+], CustomerNatsResponse.prototype, "communicationPreferences", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [String], description: 'Tags' }),
+    __metadata("design:type", Array)
+], CustomerNatsResponse.prototype, "tags", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Notes' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether customer data is anonymized' }),
+    __metadata("design:type", Boolean)
+], CustomerNatsResponse.prototype, "isAnonymized", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp' }),
+    __metadata("design:type", Object)
+], CustomerNatsResponse.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp' }),
+    __metadata("design:type", Object)
+], CustomerNatsResponse.prototype, "updatedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'First seen timestamp' }),
+    __metadata("design:type", Object)
+], CustomerNatsResponse.prototype, "firstSeenAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Last seen timestamp' }),
+    __metadata("design:type", Object)
+], CustomerNatsResponse.prototype, "lastSeenAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of bookings' }),
+    __metadata("design:type", Number)
+], CustomerNatsResponse.prototype, "totalBookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total amount spent', example: '2500000.50' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "totalSpent", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Last booking date' }),
+    __metadata("design:type", Object)
+], CustomerNatsResponse.prototype, "lastBookingDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: ['BRONZE', 'SILVER', 'GOLD', 'PLATINUM'], description: 'Membership level' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "membershipLevel", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Loyalty points balance' }),
+    __metadata("design:type", Number)
+], CustomerNatsResponse.prototype, "loyaltyPoints", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: 'array', description: 'Loyalty program memberships' }),
+    __metadata("design:type", Array)
+], CustomerNatsResponse.prototype, "loyaltyMembers", void 0);
 /**
  * Customers List Data (for paginated responses)
  */

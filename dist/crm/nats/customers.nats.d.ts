@@ -93,7 +93,7 @@ export type UpdateCustomerNatsResponse = NatsResponse<CustomerNatsResponse>;
 /**
  * Customer Response
  */
-export interface CustomerNatsResponse {
+export declare class CustomerNatsResponse {
     id: string;
     tenantId?: string;
     platformCustomerId?: string;

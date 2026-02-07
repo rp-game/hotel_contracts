@@ -104,35 +104,92 @@ export type UpdateCustomerNatsResponse = NatsResponse<CustomerNatsResponse>;
 /**
  * Customer Response
  */
-export interface CustomerNatsResponse {
-  id: string;
+export class CustomerNatsResponse {
+  @ApiProperty({ description: 'Customer ID' })
+  id!: string;
+
+  @ApiPropertyOptional({ description: 'Tenant ID' })
   tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Platform Customer ID' })
   platformCustomerId?: string;
-  firstName: string;
-  lastName: string;
+
+  @ApiProperty({ description: 'First name' })
+  firstName!: string;
+
+  @ApiProperty({ description: 'Last name' })
+  lastName!: string;
+
+  @ApiPropertyOptional({ description: 'Full name' })
   fullName?: string;
+
+  @ApiPropertyOptional({ enum: Gender, description: 'Gender' })
   gender?: Gender;
+
+  @ApiPropertyOptional({ description: 'Date of birth' })
   dateOfBirth?: string;
+
+  @ApiPropertyOptional({ description: 'Email address' })
   email?: string;
+
+  @ApiPropertyOptional({ description: 'Phone number' })
   phoneNumber?: string;
+
+  @ApiPropertyOptional({ enum: NationalIdType, description: 'National ID type' })
   nationalIdType?: NationalIdType;
+
+  @ApiPropertyOptional({ description: 'National ID number' })
   nationalIdNumber?: string;
+
+  @ApiPropertyOptional({ description: 'Nationality' })
   nationality?: string;
+
+  @ApiPropertyOptional({ description: 'Address information' })
   address?: AddressRequest;
+
+  @ApiPropertyOptional({ type: [String], description: 'Language preferences' })
   languagePreferences?: string[];
+
+  @ApiPropertyOptional({ description: 'Communication preferences' })
   communicationPreferences?: CommunicationPreferencesRequest;
+
+  @ApiPropertyOptional({ type: [String], description: 'Tags' })
   tags?: string[];
+
+  @ApiPropertyOptional({ description: 'Notes' })
   notes?: string;
-  isAnonymized: boolean;
-  createdAt: string | Date;
-  updatedAt: string | Date;
+
+  @ApiProperty({ description: 'Whether customer data is anonymized' })
+  isAnonymized!: boolean;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt!: string | Date;
+
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt!: string | Date;
+
+  @ApiPropertyOptional({ description: 'First seen timestamp' })
   firstSeenAt?: string | Date;
+
+  @ApiPropertyOptional({ description: 'Last seen timestamp' })
   lastSeenAt?: string | Date;
-  totalBookings: number;
-  totalSpent: string;
+
+  @ApiProperty({ description: 'Total number of bookings' })
+  totalBookings!: number;
+
+  @ApiProperty({ description: 'Total amount spent', example: '2500000.50' })
+  totalSpent!: string;
+
+  @ApiPropertyOptional({ description: 'Last booking date' })
   lastBookingDate?: string | Date;
+
+  @ApiPropertyOptional({ enum: ['BRONZE', 'SILVER', 'GOLD', 'PLATINUM'], description: 'Membership level' })
   membershipLevel?: 'BRONZE' | 'SILVER' | 'GOLD' | 'PLATINUM';
-  loyaltyPoints: number;
+
+  @ApiProperty({ description: 'Loyalty points balance' })
+  loyaltyPoints!: number;
+
+  @ApiPropertyOptional({ type: 'array', description: 'Loyalty program memberships' })
   loyaltyMembers?: any[];
 }
 
