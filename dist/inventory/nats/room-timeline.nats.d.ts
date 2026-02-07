@@ -430,6 +430,40 @@ export interface ComprehensiveAnalytics {
         revenue: number;
         avgBookingValue: number;
     }[];
+    hourlyOccupancy?: {
+        hour: number;
+        occupancyRate: number;
+        checkIns: number;
+        checkOuts: number;
+    }[];
+    revenueBreakdown?: {
+        source: string;
+        revenue: number;
+        percentage: number;
+        color: string;
+    }[];
+    topPerformingRooms?: {
+        roomNumber: string;
+        roomType: string;
+        revenue: number;
+        occupancyRate: number;
+        adr: number;
+        totalBookings: number;
+        avgRating: number;
+    }[];
+    cleaningMetrics?: {
+        avgCleaningTime: number;
+        onTimeCompletion: number;
+        qualityScore: number;
+        staffEfficiency: number;
+        totalTasksCompleted: number;
+    };
+    forecast?: {
+        date: string;
+        predictedOccupancy: number;
+        predictedRevenue: number;
+        demandLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'PEAK';
+    }[];
 }
 export type GetComprehensiveAnalyticsResponse = ComprehensiveAnalytics;
 export type GetComprehensiveAnalyticsNatsResponse = NatsResponse<GetComprehensiveAnalyticsResponse>;
