@@ -33,7 +33,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RecalculateBookingStatsData = exports.CustomersListData = exports.CustomerNatsResponse = exports.UpdateCustomerNatsRequest = exports.CreateCustomerNatsRequest = exports.CommunicationChannel = exports.NationalIdType = exports.Gender = void 0;
+exports.ExportDownloadData = exports.ExportStatusData = exports.ExportJobData = exports.RecalculateAllBookingStatsData = exports.RecalculateAllBookingStatsResultItem = exports.RecalculateBookingStatsData = exports.CustomersListData = exports.CustomerNatsResponse = exports.UpdateCustomerNatsRequest = exports.CreateCustomerNatsRequest = exports.CommunicationChannel = exports.NationalIdType = exports.Gender = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Enums
@@ -378,4 +378,159 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Previous membership level' }),
     __metadata("design:type", String)
 ], RecalculateBookingStatsData.prototype, "previousMembershipLevel", void 0);
+/**
+ * Recalculate All Booking Stats Result Item
+ */
+class RecalculateAllBookingStatsResultItem {
+    customerId;
+    email;
+    success;
+    error;
+}
+exports.RecalculateAllBookingStatsResultItem = RecalculateAllBookingStatsResultItem;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], RecalculateAllBookingStatsResultItem.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer email' }),
+    __metadata("design:type", String)
+], RecalculateAllBookingStatsResultItem.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether the recalculation was successful' }),
+    __metadata("design:type", Boolean)
+], RecalculateAllBookingStatsResultItem.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Error message if failed' }),
+    __metadata("design:type", String)
+], RecalculateAllBookingStatsResultItem.prototype, "error", void 0);
+/**
+ * Recalculate All Booking Stats Data
+ */
+class RecalculateAllBookingStatsData {
+    totalProcessed;
+    successful;
+    failed;
+    results;
+}
+exports.RecalculateAllBookingStatsData = RecalculateAllBookingStatsData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of customers processed' }),
+    __metadata("design:type", Number)
+], RecalculateAllBookingStatsData.prototype, "totalProcessed", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of successful recalculations' }),
+    __metadata("design:type", Number)
+], RecalculateAllBookingStatsData.prototype, "successful", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of failed recalculations' }),
+    __metadata("design:type", Number)
+], RecalculateAllBookingStatsData.prototype, "failed", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Individual results for each customer', type: [RecalculateAllBookingStatsResultItem] }),
+    __metadata("design:type", Array)
+], RecalculateAllBookingStatsData.prototype, "results", void 0);
+/**
+ * Export Job Data
+ */
+class ExportJobData {
+    jobId;
+    status;
+    totalRecords;
+    processedRecords;
+    estimatedCompletion;
+}
+exports.ExportJobData = ExportJobData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Export job ID' }),
+    __metadata("design:type", String)
+], ExportJobData.prototype, "jobId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Export job status' }),
+    __metadata("design:type", String)
+], ExportJobData.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of records to export' }),
+    __metadata("design:type", Number)
+], ExportJobData.prototype, "totalRecords", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of records processed' }),
+    __metadata("design:type", Number)
+], ExportJobData.prototype, "processedRecords", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated completion time' }),
+    __metadata("design:type", String)
+], ExportJobData.prototype, "estimatedCompletion", void 0);
+/**
+ * Export Status Data
+ */
+class ExportStatusData {
+    jobId;
+    status;
+    progress;
+    totalRecords;
+    processedRecords;
+    downloadUrl;
+    error;
+    startedAt;
+    completedAt;
+}
+exports.ExportStatusData = ExportStatusData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Export job ID' }),
+    __metadata("design:type", String)
+], ExportStatusData.prototype, "jobId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Export job status' }),
+    __metadata("design:type", String)
+], ExportStatusData.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Export progress percentage (0-100)' }),
+    __metadata("design:type", Number)
+], ExportStatusData.prototype, "progress", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of records to export' }),
+    __metadata("design:type", Number)
+], ExportStatusData.prototype, "totalRecords", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of records processed' }),
+    __metadata("design:type", Number)
+], ExportStatusData.prototype, "processedRecords", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Download URL when completed' }),
+    __metadata("design:type", String)
+], ExportStatusData.prototype, "downloadUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Error message if failed' }),
+    __metadata("design:type", String)
+], ExportStatusData.prototype, "error", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Export start timestamp' }),
+    __metadata("design:type", String)
+], ExportStatusData.prototype, "startedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Export completion timestamp' }),
+    __metadata("design:type", String)
+], ExportStatusData.prototype, "completedAt", void 0);
+/**
+ * Export Download Data
+ */
+class ExportDownloadData {
+    buffer;
+    filename;
+    mimeType;
+}
+exports.ExportDownloadData = ExportDownloadData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'File buffer (base64 encoded)' }),
+    __metadata("design:type", String)
+], ExportDownloadData.prototype, "buffer", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Export filename' }),
+    __metadata("design:type", String)
+], ExportDownloadData.prototype, "filename", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'File MIME type' }),
+    __metadata("design:type", String)
+], ExportDownloadData.prototype, "mimeType", void 0);
 //# sourceMappingURL=customers.nats.js.map

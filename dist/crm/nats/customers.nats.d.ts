@@ -256,7 +256,7 @@ export type RecalculateBookingStatsNatsResponse = NatsResponse<RecalculateBookin
 /**
  * Recalculate All Booking Stats Result Item
  */
-export interface RecalculateAllBookingStatsResultItem {
+export declare class RecalculateAllBookingStatsResultItem {
     customerId: string;
     email?: string;
     success: boolean;
@@ -265,7 +265,7 @@ export interface RecalculateAllBookingStatsResultItem {
 /**
  * Recalculate All Booking Stats Data
  */
-export interface RecalculateAllBookingStatsData {
+export declare class RecalculateAllBookingStatsData {
     totalProcessed: number;
     successful: number;
     failed: number;
@@ -365,7 +365,7 @@ export type SearchCustomersNatsResponse = NatsResponse<CustomersListData>;
 /**
  * Export Job Data
  */
-export interface ExportJobData {
+export declare class ExportJobData {
     jobId: string;
     status: string;
     totalRecords: number;
@@ -375,7 +375,7 @@ export interface ExportJobData {
 /**
  * Export Status Data
  */
-export interface ExportStatusData {
+export declare class ExportStatusData {
     jobId: string;
     status: string;
     progress: number;
@@ -389,7 +389,7 @@ export interface ExportStatusData {
 /**
  * Export Download Data
  */
-export interface ExportDownloadData {
+export declare class ExportDownloadData {
     buffer: string;
     filename: string;
     mimeType: string;

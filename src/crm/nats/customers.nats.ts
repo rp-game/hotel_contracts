@@ -394,21 +394,35 @@ export type RecalculateBookingStatsNatsResponse = NatsResponse<RecalculateBookin
 /**
  * Recalculate All Booking Stats Result Item
  */
-export interface RecalculateAllBookingStatsResultItem {
-  customerId: string;
+export class RecalculateAllBookingStatsResultItem {
+  @ApiProperty({ description: 'Customer ID' })
+  customerId!: string;
+
+  @ApiPropertyOptional({ description: 'Customer email' })
   email?: string;
-  success: boolean;
+
+  @ApiProperty({ description: 'Whether the recalculation was successful' })
+  success!: boolean;
+
+  @ApiPropertyOptional({ description: 'Error message if failed' })
   error?: string;
 }
 
 /**
  * Recalculate All Booking Stats Data
  */
-export interface RecalculateAllBookingStatsData {
-  totalProcessed: number;
-  successful: number;
-  failed: number;
-  results: RecalculateAllBookingStatsResultItem[];
+export class RecalculateAllBookingStatsData {
+  @ApiProperty({ description: 'Total number of customers processed' })
+  totalProcessed!: number;
+
+  @ApiProperty({ description: 'Number of successful recalculations' })
+  successful!: number;
+
+  @ApiProperty({ description: 'Number of failed recalculations' })
+  failed!: number;
+
+  @ApiProperty({ description: 'Individual results for each customer', type: [RecalculateAllBookingStatsResultItem] })
+  results!: RecalculateAllBookingStatsResultItem[];
 }
 
 /**
@@ -515,36 +529,67 @@ export type SearchCustomersNatsResponse = NatsResponse<CustomersListData>;
 /**
  * Export Job Data
  */
-export interface ExportJobData {
-  jobId: string;
-  status: string;
-  totalRecords: number;
-  processedRecords: number;
+export class ExportJobData {
+  @ApiProperty({ description: 'Export job ID' })
+  jobId!: string;
+
+  @ApiProperty({ description: 'Export job status' })
+  status!: string;
+
+  @ApiProperty({ description: 'Total number of records to export' })
+  totalRecords!: number;
+
+  @ApiProperty({ description: 'Number of records processed' })
+  processedRecords!: number;
+
+  @ApiPropertyOptional({ description: 'Estimated completion time' })
   estimatedCompletion?: string;
 }
 
 /**
  * Export Status Data
  */
-export interface ExportStatusData {
-  jobId: string;
-  status: string;
-  progress: number;
-  totalRecords: number;
-  processedRecords: number;
+export class ExportStatusData {
+  @ApiProperty({ description: 'Export job ID' })
+  jobId!: string;
+
+  @ApiProperty({ description: 'Export job status' })
+  status!: string;
+
+  @ApiProperty({ description: 'Export progress percentage (0-100)' })
+  progress!: number;
+
+  @ApiProperty({ description: 'Total number of records to export' })
+  totalRecords!: number;
+
+  @ApiProperty({ description: 'Number of records processed' })
+  processedRecords!: number;
+
+  @ApiPropertyOptional({ description: 'Download URL when completed' })
   downloadUrl?: string;
+
+  @ApiPropertyOptional({ description: 'Error message if failed' })
   error?: string;
-  startedAt: string;
+
+  @ApiProperty({ description: 'Export start timestamp' })
+  startedAt!: string;
+
+  @ApiPropertyOptional({ description: 'Export completion timestamp' })
   completedAt?: string;
 }
 
 /**
  * Export Download Data
  */
-export interface ExportDownloadData {
-  buffer: string;
-  filename: string;
-  mimeType: string;
+export class ExportDownloadData {
+  @ApiProperty({ description: 'File buffer (base64 encoded)' })
+  buffer!: string;
+
+  @ApiProperty({ description: 'Export filename' })
+  filename!: string;
+
+  @ApiProperty({ description: 'File MIME type' })
+  mimeType!: string;
 }
 
 /**
