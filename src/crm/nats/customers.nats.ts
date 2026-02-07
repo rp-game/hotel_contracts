@@ -155,14 +155,26 @@ export interface FindAllCustomersNatsRequest {
 }
 
 /**
+ * Customers List Data (for paginated responses)
+ */
+export class CustomersListData {
+  @ApiProperty({ description: 'List of customers', type: 'array' })
+  data!: CustomerNatsResponse[];
+
+  @ApiProperty({ description: 'Total number of customers' })
+  total!: number;
+
+  @ApiProperty({ description: 'Current page number' })
+  page!: number;
+
+  @ApiProperty({ description: 'Number of items per page' })
+  limit!: number;
+}
+
+/**
  * Find All Customers Response
  */
-export type FindAllCustomersNatsResponse = NatsResponse<{
-  data: CustomerNatsResponse[];
-  total: number;
-  page: number;
-  limit: number;
-}>;
+export type FindAllCustomersNatsResponse = NatsResponse<CustomersListData>;
 
 /**
  * Find One Customer Request
@@ -407,12 +419,7 @@ export interface SearchCustomersNatsRequest {
 /**
  * Search Customers Response
  */
-export type SearchCustomersNatsResponse = NatsResponse<{
-  data: CustomerNatsResponse[];
-  total: number;
-  page: number;
-  limit: number;
-}>;
+export type SearchCustomersNatsResponse = NatsResponse<CustomersListData>;
 
 /**
  * Export Job Data

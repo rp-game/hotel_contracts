@@ -33,7 +33,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RecalculateBookingStatsData = exports.CommunicationChannel = exports.NationalIdType = exports.Gender = void 0;
+exports.RecalculateBookingStatsData = exports.CustomersListData = exports.CommunicationChannel = exports.NationalIdType = exports.Gender = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Enums
@@ -56,6 +56,32 @@ var CommunicationChannel;
     CommunicationChannel["SMS"] = "SMS";
     CommunicationChannel["APP_NOTIFICATION"] = "APP_NOTIFICATION";
 })(CommunicationChannel || (exports.CommunicationChannel = CommunicationChannel = {}));
+/**
+ * Customers List Data (for paginated responses)
+ */
+class CustomersListData {
+    data;
+    total;
+    page;
+    limit;
+}
+exports.CustomersListData = CustomersListData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'List of customers', type: 'array' }),
+    __metadata("design:type", Array)
+], CustomersListData.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of customers' }),
+    __metadata("design:type", Number)
+], CustomersListData.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current page number' }),
+    __metadata("design:type", Number)
+], CustomersListData.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of items per page' }),
+    __metadata("design:type", Number)
+], CustomersListData.prototype, "limit", void 0);
 /**
  * Recalculate Booking Stats Data
  */

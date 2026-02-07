@@ -141,14 +141,18 @@ export interface FindAllCustomersNatsRequest {
     membershipLevel?: string;
 }
 /**
- * Find All Customers Response
+ * Customers List Data (for paginated responses)
  */
-export type FindAllCustomersNatsResponse = NatsResponse<{
+export declare class CustomersListData {
     data: CustomerNatsResponse[];
     total: number;
     page: number;
     limit: number;
-}>;
+}
+/**
+ * Find All Customers Response
+ */
+export type FindAllCustomersNatsResponse = NatsResponse<CustomersListData>;
 /**
  * Find One Customer Request
  * Pattern: crm.customer.findOne
@@ -357,12 +361,7 @@ export interface SearchCustomersNatsRequest {
 /**
  * Search Customers Response
  */
-export type SearchCustomersNatsResponse = NatsResponse<{
-    data: CustomerNatsResponse[];
-    total: number;
-    page: number;
-    limit: number;
-}>;
+export type SearchCustomersNatsResponse = NatsResponse<CustomersListData>;
 /**
  * Export Job Data
  */
