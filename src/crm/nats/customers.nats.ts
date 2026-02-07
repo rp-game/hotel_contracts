@@ -68,21 +68,50 @@ export interface CommunicationPreferencesRequest {
  * Create Customer Request
  * Pattern: crm.customer.create
  */
-export interface CreateCustomerNatsRequest {
+export class CreateCustomerNatsRequest {
+  @ApiPropertyOptional({ description: 'Tenant ID' })
   tenantId?: string;
-  firstName: string;
-  lastName: string;
+
+  @ApiProperty({ description: 'First name' })
+  firstName!: string;
+
+  @ApiProperty({ description: 'Last name' })
+  lastName!: string;
+
+  @ApiPropertyOptional({ enum: Gender, description: 'Gender' })
   gender?: Gender;
+
+  @ApiPropertyOptional({ description: 'Date of birth (YYYY-MM-DD)' })
   dateOfBirth?: string;
+
+  @ApiPropertyOptional({ description: 'Email address' })
   email?: string;
+
+  @ApiPropertyOptional({ description: 'Phone number' })
   phoneNumber?: string;
+
+  @ApiPropertyOptional({ enum: NationalIdType, description: 'National ID type' })
   nationalIdType?: NationalIdType;
+
+  @ApiPropertyOptional({ description: 'National ID number' })
   nationalIdNumber?: string;
+
+  @ApiPropertyOptional({ description: 'Nationality' })
   nationality?: string;
+
+  @ApiPropertyOptional({ description: 'Address information' })
   address?: AddressRequest;
+
+  @ApiPropertyOptional({ type: [String], description: 'Language preferences' })
   languagePreferences?: string[];
+
+  @ApiPropertyOptional({ description: 'Communication preferences' })
   communicationPreferences?: CommunicationPreferencesRequest;
+
+  @ApiPropertyOptional({ type: [String], description: 'Tags' })
   tags?: string[];
+
+  @ApiPropertyOptional({ description: 'Notes' })
   notes?: string;
 }
 
@@ -90,10 +119,15 @@ export interface CreateCustomerNatsRequest {
  * Update Customer Request
  * Pattern: crm.customer.update
  */
-export interface UpdateCustomerNatsRequest {
-  tenantId: string;
-  customerId: string;
-  updateDto: Partial<CreateCustomerNatsRequest>;
+export class UpdateCustomerNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Customer ID' })
+  customerId!: string;
+
+  @ApiProperty({ description: 'Customer update data' })
+  updateDto!: Partial<CreateCustomerNatsRequest>;
 }
 
 /**

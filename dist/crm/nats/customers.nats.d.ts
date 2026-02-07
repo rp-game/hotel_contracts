@@ -60,7 +60,7 @@ export interface CommunicationPreferencesRequest {
  * Create Customer Request
  * Pattern: crm.customer.create
  */
-export interface CreateCustomerNatsRequest {
+export declare class CreateCustomerNatsRequest {
     tenantId?: string;
     firstName: string;
     lastName: string;
@@ -81,7 +81,7 @@ export interface CreateCustomerNatsRequest {
  * Update Customer Request
  * Pattern: crm.customer.update
  */
-export interface UpdateCustomerNatsRequest {
+export declare class UpdateCustomerNatsRequest {
     tenantId: string;
     customerId: string;
     updateDto: Partial<CreateCustomerNatsRequest>;
