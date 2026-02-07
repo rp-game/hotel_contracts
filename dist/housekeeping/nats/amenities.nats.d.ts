@@ -3,7 +3,7 @@
  * Patterns: housekeeping.amenities.*
  */
 import { NatsResponse } from '../../common';
-export interface Amenity {
+export declare class Amenity {
     id: string;
     name: string;
     description?: string;
@@ -34,7 +34,7 @@ export interface FindAllAmenitiesNatsRequest {
     page?: number;
     limit?: number;
 }
-export interface AmenitiesListData {
+export declare class AmenitiesListData {
     data: Amenity[];
     total: number;
     page: number;

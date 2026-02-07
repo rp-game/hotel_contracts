@@ -3,21 +3,43 @@
  * Patterns: housekeeping.amenities.*
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 
 // Note: Dates are strings because they're serialized over NATS
-export interface Amenity {
-  id: string;
-  name: string;
+export class Amenity {
+  @ApiProperty({ description: 'Amenity ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Amenity name' })
+  name!: string;
+
+  @ApiPropertyOptional({ description: 'Amenity description' })
   description?: string;
+
+  @ApiPropertyOptional({ description: 'Amenity category' })
   category?: string;
+
+  @ApiPropertyOptional({ description: 'Amenity cost' })
   cost?: number;
+
+  @ApiPropertyOptional({ description: 'Estimated time in minutes' })
   estimatedTime?: number;
-  isAvailable: boolean;
-  tenantId: string;
-  hotelId: string;
-  createdAt: string | Date;  // Accept both for compatibility during conversion
-  updatedAt: string | Date;  // Accept both for compatibility during conversion
+
+  @ApiProperty({ description: 'Whether amenity is available' })
+  isAvailable!: boolean;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId!: string;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt!: string | Date;  // Accept both for compatibility during conversion
+
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt!: string | Date;  // Accept both for compatibility during conversion
 }
 
 // CREATE
@@ -41,11 +63,18 @@ export interface FindAllAmenitiesNatsRequest {
   page?: number;
   limit?: number;
 }
-export interface AmenitiesListData {
-  data: Amenity[];
-  total: number;
-  page: number;
-  limit: number;
+export class AmenitiesListData {
+  @ApiProperty({ type: [Amenity], description: 'List of amenities' })
+  data!: Amenity[];
+
+  @ApiProperty({ description: 'Total number of amenities' })
+  total!: number;
+
+  @ApiProperty({ description: 'Current page number' })
+  page!: number;
+
+  @ApiProperty({ description: 'Number of items per page' })
+  limit!: number;
 }
 export type FindAllAmenitiesNatsResponse = NatsResponse<AmenitiesListData>;
 
