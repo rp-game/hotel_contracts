@@ -4,7 +4,7 @@
  */
 import { NatsResponse } from '../../common';
 import { BookingResponseDto } from '../dto/booking-response.dto';
-import { BillItemDto } from '../dto/bill-item.dto';
+import { BillItem } from './mobile-checkout.nats';
 export interface PrimaryGuestData {
     fullName: string;
     email?: string;
@@ -65,7 +65,7 @@ export interface CheckOutBookingNatsRequest {
     finalBillAmount?: string | number;
     paymentMethod?: string;
     depositRefund?: number;
-    billItems?: BillItemDto[];
+    billItems?: BillItem[];
 }
 export type CheckOutBookingNatsResponse = NatsResponse<BookingResponseDto>;
 export interface GetPendingCheckinsNatsRequest {

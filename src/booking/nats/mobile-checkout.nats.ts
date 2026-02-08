@@ -11,6 +11,7 @@
  *   - booking.checkout.complete - Complete checkout process
  */
 
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 
 // ============= ADDITIONAL SERVICE =============
@@ -27,12 +28,21 @@ export interface AdditionalService {
 
 // ============= BILL ITEM =============
 
-export interface BillItem {
-  description: string;
-  quantity: number;
-  unitPrice: string;
-  totalPrice: string;
-  category: 'ROOM' | 'SERVICE' | 'TAX' | 'DEPOSIT';
+export class BillItem {
+  @ApiPropertyOptional({ description: 'Item description' })
+  description?: string;
+
+  @ApiPropertyOptional({ description: 'Quantity' })
+  quantity?: number;
+
+  @ApiPropertyOptional({ description: 'Unit price' })
+  unitPrice?: string;
+
+  @ApiPropertyOptional({ description: 'Total price' })
+  totalPrice?: string;
+
+  @ApiPropertyOptional({ description: 'Item category', enum: ['ROOM', 'SERVICE', 'TAX', 'DEPOSIT'] })
+  category?: 'ROOM' | 'SERVICE' | 'TAX' | 'DEPOSIT';
 }
 
 // ============= CHECKOUT DATA (Booking Summary for Checkout Lists) =============

@@ -20,12 +20,12 @@ export interface AdditionalService {
     date: string;
     status: 'PENDING' | 'PAID';
 }
-export interface BillItem {
-    description: string;
-    quantity: number;
-    unitPrice: string;
-    totalPrice: string;
-    category: 'ROOM' | 'SERVICE' | 'TAX' | 'DEPOSIT';
+export declare class BillItem {
+    description?: string;
+    quantity?: number;
+    unitPrice?: string;
+    totalPrice?: string;
+    category?: 'ROOM' | 'SERVICE' | 'TAX' | 'DEPOSIT';
 }
 export interface CheckoutData {
     id: string;
