@@ -7,6 +7,8 @@
  * Used by: calendar page to edit booking details
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsOptional, IsEnum, IsNumber, IsUUID } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 /**
@@ -55,82 +57,196 @@ export interface UpdatedBookingRoom {
 }
 
 /**
- * NATS request to update a booking
+ * Unified UpdateBookingDto for both NATS and REST
+ * Single source of truth for booking update operations
+ * Used as request DTO for API Gateway and NATS request for booking-service
+ *
+ * All fields optional at contract level - let consumers (controller, handler) add validation
+ *
+ * @pattern booking.update
+ * @handler booking-service
+ * @caller api-gateway
  */
-export interface UpdateBookingRequest {
+export class UpdateBookingDto {
   /**
    * Tenant ID (multi-tenant isolation)
    */
-  tenantId: string;
+  @ApiPropertyOptional({
+    description: 'Tenant ID (multi-tenant isolation)',
+    example: '550e8400-e29b-41d4-a716-446655440001',
+  })
+  @IsOptional()
+  @IsString()
+  @IsUUID()
+  tenantId?: string;
 
   /**
    * Hotel ID
    */
-  hotelId: string;
+  @ApiPropertyOptional({
+    description: 'Hotel ID',
+    example: 'htl-001',
+  })
+  @IsOptional()
+  @IsString()
+  hotelId?: string;
 
   /**
    * Booking ID to update
    */
-  bookingId: string;
+  @ApiPropertyOptional({
+    description: 'Booking ID to update',
+    example: 'bk-001',
+  })
+  @IsOptional()
+  @IsString()
+  bookingId?: string;
 
   /**
-   * Guest first name (optional)
+   * Guest first name
    */
+  @ApiPropertyOptional({
+    description: 'Guest first name',
+    example: 'John',
+  })
+  @IsOptional()
+  @IsString()
   guestName?: string;
 
   /**
-   * Guest email (optional)
+   * Guest email
    */
+  @ApiPropertyOptional({
+    description: 'Guest email address',
+    example: 'john@example.com',
+  })
+  @IsOptional()
+  @IsString()
   guestEmail?: string;
 
   /**
-   * Guest phone number (optional)
+   * Guest phone number
    */
+  @ApiPropertyOptional({
+    description: 'Guest phone number',
+    example: '+1234567890',
+  })
+  @IsOptional()
+  @IsString()
   phoneNumber?: string;
 
   /**
-   * New check-in date (YYYY-MM-DD, optional)
+   * New check-in date (YYYY-MM-DD)
    */
+  @ApiPropertyOptional({
+    description: 'New check-in date (YYYY-MM-DD)',
+    example: '2024-02-15',
+  })
+  @IsOptional()
+  @IsString()
   checkInDate?: string;
 
   /**
-   * New check-out date (YYYY-MM-DD, optional)
+   * New check-out date (YYYY-MM-DD)
    */
+  @ApiPropertyOptional({
+    description: 'New check-out date (YYYY-MM-DD)',
+    example: '2024-02-17',
+  })
+  @IsOptional()
+  @IsString()
   checkOutDate?: string;
 
   /**
-   * Room ID to assign (optional)
+   * Room ID to assign
    */
+  @ApiPropertyOptional({
+    description: 'Room ID to assign',
+    example: 'room-001',
+  })
+  @IsOptional()
+  @IsString()
   roomId?: string;
 
   /**
-   * Number of adults (optional)
+   * Number of adults
    */
+  @ApiPropertyOptional({
+    description: 'Number of adults',
+    type: 'number',
+    example: 2,
+  })
+  @IsOptional()
+  @IsNumber()
   adultCount?: number;
 
   /**
-   * Number of children (optional)
+   * Number of children
    */
+  @ApiPropertyOptional({
+    description: 'Number of children',
+    type: 'number',
+    example: 1,
+  })
+  @IsOptional()
+  @IsNumber()
   childCount?: number;
 
   /**
-   * Special requests from guest (optional)
+   * Special requests from guest
    */
+  @ApiPropertyOptional({
+    description: 'Special requests from guest',
+    example: 'Early check-in requested',
+  })
+  @IsOptional()
+  @IsString()
   specialRequests?: string;
 
   /**
-   * New booking status (optional)
+   * Internal notes about the booking
    */
+  @ApiPropertyOptional({
+    description: 'Internal notes about the booking',
+    example: 'VIP guest - ensure room upgrade',
+  })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+
+  /**
+   * New booking status
+   */
+  @ApiPropertyOptional({
+    description: 'New booking status',
+    enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'CHECKED_OUT', 'CANCELLED'],
+    example: 'CONFIRMED',
+  })
+  @IsOptional()
+  @IsEnum(['PENDING', 'CONFIRMED', 'CHECKED_IN', 'CHECKED_OUT', 'CANCELLED'])
   status?: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
 
   /**
    * User ID who made the update
    */
-  updatedBy: string;
+  @ApiPropertyOptional({
+    description: 'User ID who made the update',
+    example: '550e8400-e29b-41d4-a716-446655440002',
+  })
+  @IsOptional()
+  @IsString()
+  @IsUUID()
+  updatedBy?: string;
 
   /**
    * Additional metadata
    */
+  @ApiPropertyOptional({
+    description: 'Additional metadata',
+    type: 'object',
+    additionalProperties: true,
+  })
+  @IsOptional()
   metadata?: Record<string, any>;
 }
 
@@ -214,6 +330,11 @@ export interface UpdateBookingResponse {
   specialRequests?: string;
 
   /**
+   * Internal notes about the booking
+   */
+  notes?: string;
+
+  /**
    * Last updated date
    */
   updatedAt: string;
@@ -223,6 +344,11 @@ export interface UpdateBookingResponse {
    */
   updatedBy: string;
 }
+
+/**
+ * Backward compatibility alias
+ */
+export type UpdateBookingRequest = UpdateBookingDto;
 
 /**
  * Full NATS response type for update booking
