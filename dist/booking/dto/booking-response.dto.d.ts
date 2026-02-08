@@ -1,7 +1,7 @@
 import { BookingStatus } from '../enums/booking-status.enum';
 import { BookingSource } from '../enums/booking-source.enum';
 import { PaymentStatus } from '../enums/payment-status.enum';
-export interface BookingRoomResponseDto {
+export declare class BookingRoomResponseDto {
     id: string;
     roomTypeId: string;
     roomTypeName: string;
@@ -13,7 +13,7 @@ export interface BookingRoomResponseDto {
     adultCount: number;
     childCount: number;
 }
-export interface BookingGuestResponseDto {
+export declare class BookingGuestResponseDto {
     id: string;
     isMainGuest: boolean;
     fullName: string;
@@ -23,7 +23,7 @@ export interface BookingGuestResponseDto {
     idNumber?: string;
     nationality?: string;
 }
-export interface BookingPaymentResponseDto {
+export declare class BookingPaymentResponseDto {
     id: string;
     amount: number;
     paymentMethod: string;
@@ -31,7 +31,7 @@ export interface BookingPaymentResponseDto {
     paymentDate: Date;
     transactionId?: string;
 }
-export interface BookingServiceResponseDto {
+export declare class BookingServiceResponseDto {
     id: string;
     serviceId: string;
     serviceName: string;
@@ -41,7 +41,7 @@ export interface BookingServiceResponseDto {
     serviceDate: Date;
     isPaid: boolean;
 }
-export interface BookingResponseDto {
+export declare class BookingResponseDto {
     id: string;
     bookingCode: string;
     tenantId: string;
