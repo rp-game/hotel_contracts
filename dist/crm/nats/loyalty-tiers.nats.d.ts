@@ -50,4 +50,12 @@ export interface FindOneTierByIdNatsRequest {
  * Find One Tier By Id Response
  */
 export type FindOneTierByIdNatsResponse = NatsResponse<LoyaltyTierNatsResponse>;
+/**
+ * Find All Loyalty Tiers Response DTO
+ * Used for both NATS messaging and REST API responses
+ */
+export declare class FindAllLoyaltyTiersDto {
+    tiers: LoyaltyTierNatsResponse[];
+    total: number;
+}
 //# sourceMappingURL=loyalty-tiers.nats.d.ts.map

@@ -18,7 +18,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoyaltyTierNatsResponse = exports.TierBenefitsNatsResponse = void 0;
+exports.FindAllLoyaltyTiersDto = exports.LoyaltyTierNatsResponse = exports.TierBenefitsNatsResponse = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Tier Benefits
@@ -132,4 +132,29 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Last update timestamp' }),
     __metadata("design:type", Object)
 ], LoyaltyTierNatsResponse.prototype, "updatedAt", void 0);
+/**
+ * Find All Loyalty Tiers Response DTO
+ * Used for both NATS messaging and REST API responses
+ */
+class FindAllLoyaltyTiersDto {
+    tiers;
+    total;
+}
+exports.FindAllLoyaltyTiersDto = FindAllLoyaltyTiersDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'List of loyalty tiers with full details',
+        type: [LoyaltyTierNatsResponse],
+        isArray: true
+    }),
+    __metadata("design:type", Array)
+], FindAllLoyaltyTiersDto.prototype, "tiers", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Total number of tiers',
+        type: 'number',
+        example: 5
+    }),
+    __metadata("design:type", Number)
+], FindAllLoyaltyTiersDto.prototype, "total", void 0);
 //# sourceMappingURL=loyalty-tiers.nats.js.map

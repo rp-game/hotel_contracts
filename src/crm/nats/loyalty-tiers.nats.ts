@@ -94,3 +94,23 @@ export interface FindOneTierByIdNatsRequest {
  * Find One Tier By Id Response
  */
 export type FindOneTierByIdNatsResponse = NatsResponse<LoyaltyTierNatsResponse>;
+
+/**
+ * Find All Loyalty Tiers Response DTO
+ * Used for both NATS messaging and REST API responses
+ */
+export class FindAllLoyaltyTiersDto {
+  @ApiProperty({
+    description: 'List of loyalty tiers with full details',
+    type: [LoyaltyTierNatsResponse],
+    isArray: true
+  })
+  tiers!: LoyaltyTierNatsResponse[];
+
+  @ApiProperty({
+    description: 'Total number of tiers',
+    type: 'number',
+    example: 5
+  })
+  total!: number;
+}

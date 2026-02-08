@@ -20,6 +20,7 @@
 
 import { NatsResponse } from '../../common';
 import type { LoyaltyTierNatsResponse } from './loyalty-tiers.nats';
+import { FindAllLoyaltyTiersDto } from './loyalty-tiers.nats';
 
 /**
  * Earning Rules
@@ -237,10 +238,7 @@ export interface FindAllTiersNatsRequest {
 /**
  * Find All Tiers Response
  */
-export type FindAllTiersNatsResponse = NatsResponse<{
-  tiers: LoyaltyTierNatsResponse[];
-  total: number;
-}>;
+export type FindAllTiersNatsResponse = NatsResponse<FindAllLoyaltyTiersDto>;
 
 /**
  * Loyalty Program Stats
