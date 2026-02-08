@@ -5,6 +5,7 @@
  * Core pricing module for room rates and restrictions.
  */
 
+import { ApiProperty } from '@nestjs/swagger';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { Rate, DynamicRateCalculation, BulkCreateRatesResult, BulkUpdateRatesResult } from '../types';
 
@@ -27,23 +28,52 @@ export interface GetRatesRequest {
   limit?: number;
 }
 
-export interface GetRatesResponse {
+export class RateDetails {
+  @ApiProperty({ description: 'Weekday rate' })
+  weekdayRate: number;
+
+  @ApiProperty({ description: 'Weekend rate' })
+  weekendRate: number;
+
+  @ApiProperty({ description: 'Extra person charge' })
+  extraPersonCharge: number;
+}
+
+export class RoomRateResponse {
+  @ApiProperty({ description: 'Rate ID (null if no base rate configured)', nullable: true })
+  id: string | null;
+
+  @ApiProperty({ description: 'Room type ID' })
+  roomTypeId: string;
+
+  @ApiProperty({ description: 'Room type name from inventory service' })
+  roomTypeName: string;
+
+  @ApiProperty({ description: 'Base rate price' })
+  baseRate: number;
+
+  @ApiProperty({ description: 'Current calculated rate' })
+  currentRate: number;
+
+  @ApiProperty({ description: 'Currency code (e.g., VND, USD)' })
+  currency: string;
+
+  @ApiProperty({ description: 'Number of available rooms' })
+  availableRooms: number;
+
+  @ApiProperty({ description: 'Detailed rate breakdown', type: RateDetails })
+  rateDetails: RateDetails;
+}
+
+export class GetRatesResponse {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
-  roomTypes: Array<{
-    id: string | null;
-    roomTypeId: string;
-    roomTypeName: string;
-    baseRate: number;
-    currentRate: number;
-    currency: string;
-    availableRooms: number;
-    rateDetails: {
-      weekdayRate: number;
-      weekendRate: number;
-      extraPersonCharge: number;
-    };
-  }>;
+
+  @ApiProperty({ type: [RoomRateResponse], description: 'List of room types with their rates' })
+  roomTypes: RoomRateResponse[];
 }
 
 export type GetRatesNatsResponse = NatsResponse<GetRatesResponse>;
@@ -70,7 +100,8 @@ export interface CalculateRateRequest {
   endTime?: string;
 }
 
-export interface CalculateRateResponse {
+export class CalculateRateResponse {
+  @ApiProperty({ description: 'Calculated rate details', type: DynamicRateCalculation })
   data: DynamicRateCalculation;
 }
 
@@ -89,7 +120,8 @@ export interface UpdateRateRequest {
   endDate: string;
 }
 
-export interface UpdateRateResponse {
+export class UpdateRateResponse {
+  @ApiProperty({ description: 'Updated rate data', type: Rate })
   data: Rate;
 }
 
@@ -106,12 +138,20 @@ export interface SyncRatesRequest {
   forceSync?: boolean;
 }
 
-export interface SyncRatesResponse {
-  data: {
-    synced: number;
-    skipped: number;
-    errors: number;
-  };
+export class SyncRatesData {
+  @ApiProperty({ description: 'Number of synced rates' })
+  synced: number;
+
+  @ApiProperty({ description: 'Number of skipped rates' })
+  skipped: number;
+
+  @ApiProperty({ description: 'Number of errors' })
+  errors: number;
+}
+
+export class SyncRatesResponse {
+  @ApiProperty({ description: 'Sync status data', type: SyncRatesData })
+  data: SyncRatesData;
 }
 
 export type SyncRatesNatsResponse = NatsResponse<SyncRatesResponse>;
@@ -124,7 +164,8 @@ export interface GetRateByIdRequest {
   tenantId: string;
 }
 
-export interface GetRateByIdResponse {
+export class GetRateByIdResponse {
+  @ApiProperty({ description: 'Rate data', type: Rate })
   data: Rate;
 }
 
@@ -144,7 +185,8 @@ export interface CreateRateRequest {
   isActive?: boolean;
 }
 
-export interface CreateRateResponse {
+export class CreateRateResponse {
+  @ApiProperty({ description: 'Created rate data', type: Rate })
   data: Rate;
 }
 

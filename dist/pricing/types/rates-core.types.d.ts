@@ -5,9 +5,19 @@
  * Handles base rates, restrictions, and dynamic calculations.
  */
 /**
+ * Rate restriction (min stay, closed to arrival, etc.)
+ */
+export declare class RateRestrictionDto {
+    minStay?: number;
+    maxStay?: number;
+    closedToArrival?: boolean;
+    closedToDeparture?: boolean;
+    stopSell?: boolean;
+}
+/**
  * Base rate entity
  */
-export interface Rate {
+export declare class Rate {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -18,7 +28,7 @@ export interface Rate {
     endDate: string;
     currency: string;
     status: RateStatus;
-    lengthOfStayRules?: RateRestriction;
+    lengthOfStayRules?: RateRestrictionDto;
     extraAdultCharge?: number;
     extraChildCharge?: number;
     isActive: boolean;
@@ -30,15 +40,9 @@ export interface Rate {
  */
 export type RateStatus = 'ACTIVE' | 'INACTIVE' | 'ARCHIVED';
 /**
- * Rate restrictions (min stay, closed to arrival, etc.)
+ * For backward compatibility, alias RateRestrictionDto to RateRestriction
  */
-export interface RateRestriction {
-    minStay?: number;
-    maxStay?: number;
-    closedToArrival?: boolean;
-    closedToDeparture?: boolean;
-    stopSell?: boolean;
-}
+export type RateRestriction = RateRestrictionDto;
 /**
  * Rate history entry
  */
@@ -52,9 +56,23 @@ export interface RateHistory {
     changedAt: string;
 }
 /**
+ * Rate breakdown details
+ */
+export declare class RateBreakdown {
+    baseAmount: number | string;
+    seasonalAdjustment: number;
+    occupancyAdjustment: number;
+    lengthOfStayDiscount: number;
+    promotionDiscount: number;
+    yieldAdjustment: number;
+    advanceBookingDiscount: number;
+    lastMinuteDiscount: number;
+    taxes: number;
+}
+/**
  * Dynamic rate calculation result
  */
-export interface DynamicRateCalculation {
+export declare class DynamicRateCalculation {
     tenantId: string;
     hotelId: string;
     roomTypeId: string;
@@ -63,20 +81,10 @@ export interface DynamicRateCalculation {
     guests: number;
     nights: number;
     units: number;
-    baseRate: number;
+    baseRate: number | string;
     calculatedRate: number;
     currency: string;
-    breakdown: {
-        baseAmount: number;
-        seasonalAdjustment: number;
-        occupancyAdjustment: number;
-        lengthOfStayDiscount: number;
-        promotionDiscount: number;
-        yieldAdjustment: number;
-        advanceBookingDiscount: number;
-        lastMinuteDiscount: number;
-        taxes: number;
-    };
+    breakdown: RateBreakdown;
     adjustmentDetails: string[];
 }
 /**

@@ -5,25 +5,78 @@
  * Handles base rates, restrictions, and dynamic calculations.
  */
 
+import { ApiProperty } from '@nestjs/swagger';
+
+/**
+ * Rate restriction (min stay, closed to arrival, etc.)
+ */
+export class RateRestrictionDto {
+  @ApiProperty({ description: 'Minimum stay requirement', required: false })
+  minStay?: number;
+
+  @ApiProperty({ description: 'Maximum stay limit', required: false })
+  maxStay?: number;
+
+  @ApiProperty({ description: 'Closed to arrival', required: false })
+  closedToArrival?: boolean;
+
+  @ApiProperty({ description: 'Closed to departure', required: false })
+  closedToDeparture?: boolean;
+
+  @ApiProperty({ description: 'Stop sell flag', required: false })
+  stopSell?: boolean;
+}
+
 /**
  * Base rate entity
  */
-export interface Rate {
+export class Rate {
+  @ApiProperty({ description: 'Rate ID' })
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiProperty({ description: 'Room type ID' })
   roomTypeId: string;
+
+  @ApiProperty({ description: 'Rate plan ID', required: false })
   ratePlanId?: string;
+
+  @ApiProperty({ description: 'Base price' })
   basePrice: number;
+
+  @ApiProperty({ description: 'Start date' })
   startDate: string;
+
+  @ApiProperty({ description: 'End date' })
   endDate: string;
+
+  @ApiProperty({ description: 'Currency code' })
   currency: string;
+
+  @ApiProperty({ description: 'Rate status', enum: ['ACTIVE', 'INACTIVE', 'ARCHIVED'] })
   status: RateStatus;
-  lengthOfStayRules?: RateRestriction;
+
+  @ApiProperty({ description: 'Length of stay rules', type: RateRestrictionDto, required: false })
+  lengthOfStayRules?: RateRestrictionDto;
+
+  @ApiProperty({ description: 'Extra adult charge', required: false })
   extraAdultCharge?: number;
+
+  @ApiProperty({ description: 'Extra child charge', required: false })
   extraChildCharge?: number;
+
+  @ApiProperty({ description: 'Is active flag' })
   isActive: boolean;
+
+  @ApiProperty({ description: 'Created at timestamp' })
   createdAt: string;
+
+  @ApiProperty({ description: 'Updated at timestamp' })
   updatedAt: string;
 }
 
@@ -33,15 +86,9 @@ export interface Rate {
 export type RateStatus = 'ACTIVE' | 'INACTIVE' | 'ARCHIVED';
 
 /**
- * Rate restrictions (min stay, closed to arrival, etc.)
+ * For backward compatibility, alias RateRestrictionDto to RateRestriction
  */
-export interface RateRestriction {
-  minStay?: number;
-  maxStay?: number;
-  closedToArrival?: boolean;
-  closedToDeparture?: boolean;
-  stopSell?: boolean;
-}
+export type RateRestriction = RateRestrictionDto;
 
 /**
  * Rate history entry
@@ -57,31 +104,78 @@ export interface RateHistory {
 }
 
 /**
+ * Rate breakdown details
+ */
+export class RateBreakdown {
+  @ApiProperty({ description: 'Base amount' })
+  baseAmount: number | string;
+
+  @ApiProperty({ description: 'Seasonal adjustment' })
+  seasonalAdjustment: number;
+
+  @ApiProperty({ description: 'Occupancy adjustment' })
+  occupancyAdjustment: number;
+
+  @ApiProperty({ description: 'Length of stay discount' })
+  lengthOfStayDiscount: number;
+
+  @ApiProperty({ description: 'Promotion discount' })
+  promotionDiscount: number;
+
+  @ApiProperty({ description: 'Yield adjustment' })
+  yieldAdjustment: number;
+
+  @ApiProperty({ description: 'Advance booking discount' })
+  advanceBookingDiscount: number;
+
+  @ApiProperty({ description: 'Last minute discount' })
+  lastMinuteDiscount: number;
+
+  @ApiProperty({ description: 'Taxes' })
+  taxes: number;
+}
+
+/**
  * Dynamic rate calculation result
  */
-export interface DynamicRateCalculation {
+export class DynamicRateCalculation {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiProperty({ description: 'Room type ID' })
   roomTypeId: string;
+
+  @ApiProperty({ description: 'Check-in date' })
   checkIn: string;
+
+  @ApiProperty({ description: 'Check-out date' })
   checkOut: string;
+
+  @ApiProperty({ description: 'Number of guests' })
   guests: number;
+
+  @ApiProperty({ description: 'Number of nights (for overnight bookings)' })
   nights: number;
-  units: number; // nights for OVERNIGHT, hours for HOURLY
-  baseRate: number;
+
+  @ApiProperty({ description: 'Number of units (nights for overnight, hours for hourly)' })
+  units: number;
+
+  @ApiProperty({ description: 'Base rate per night/hour' })
+  baseRate: number | string;
+
+  @ApiProperty({ description: 'Final calculated rate' })
   calculatedRate: number;
+
+  @ApiProperty({ description: 'Currency code' })
   currency: string;
-  breakdown: {
-    baseAmount: number;
-    seasonalAdjustment: number;
-    occupancyAdjustment: number;
-    lengthOfStayDiscount: number;
-    promotionDiscount: number;
-    yieldAdjustment: number;
-    advanceBookingDiscount: number;
-    lastMinuteDiscount: number;
-    taxes: number;
-  };
+
+  @ApiProperty({ description: 'Rate breakdown details', type: RateBreakdown })
+  breakdown: RateBreakdown;
+
+  @ApiProperty({ description: 'Adjustment details', isArray: true })
   adjustmentDetails: string[];
 }
 

@@ -24,23 +24,25 @@ export interface GetRatesRequest {
     page?: number;
     limit?: number;
 }
-export interface GetRatesResponse {
+export declare class RateDetails {
+    weekdayRate: number;
+    weekendRate: number;
+    extraPersonCharge: number;
+}
+export declare class RoomRateResponse {
+    id: string | null;
+    roomTypeId: string;
+    roomTypeName: string;
+    baseRate: number;
+    currentRate: number;
+    currency: string;
+    availableRooms: number;
+    rateDetails: RateDetails;
+}
+export declare class GetRatesResponse {
     tenantId: string;
     hotelId: string;
-    roomTypes: Array<{
-        id: string | null;
-        roomTypeId: string;
-        roomTypeName: string;
-        baseRate: number;
-        currentRate: number;
-        currency: string;
-        availableRooms: number;
-        rateDetails: {
-            weekdayRate: number;
-            weekendRate: number;
-            extraPersonCharge: number;
-        };
-    }>;
+    roomTypes: RoomRateResponse[];
 }
 export type GetRatesNatsResponse = NatsResponse<GetRatesResponse>;
 /**
@@ -64,7 +66,7 @@ export interface CalculateRateRequest {
     startTime?: string;
     endTime?: string;
 }
-export interface CalculateRateResponse {
+export declare class CalculateRateResponse {
     data: DynamicRateCalculation;
 }
 export type CalculateRateNatsResponse = NatsResponse<CalculateRateResponse>;
@@ -80,7 +82,7 @@ export interface UpdateRateRequest {
     startDate: string;
     endDate: string;
 }
-export interface UpdateRateResponse {
+export declare class UpdateRateResponse {
     data: Rate;
 }
 export type UpdateRateNatsResponse = NatsResponse<UpdateRateResponse>;
@@ -94,12 +96,13 @@ export interface SyncRatesRequest {
     source?: string;
     forceSync?: boolean;
 }
-export interface SyncRatesResponse {
-    data: {
-        synced: number;
-        skipped: number;
-        errors: number;
-    };
+export declare class SyncRatesData {
+    synced: number;
+    skipped: number;
+    errors: number;
+}
+export declare class SyncRatesResponse {
+    data: SyncRatesData;
 }
 export type SyncRatesNatsResponse = NatsResponse<SyncRatesResponse>;
 /**
@@ -109,7 +112,7 @@ export interface GetRateByIdRequest {
     id: string;
     tenantId: string;
 }
-export interface GetRateByIdResponse {
+export declare class GetRateByIdResponse {
     data: Rate;
 }
 export type GetRateByIdNatsResponse = NatsResponse<GetRateByIdResponse>;
@@ -126,7 +129,7 @@ export interface CreateRateRequest {
     endDate: string;
     isActive?: boolean;
 }
-export interface CreateRateResponse {
+export declare class CreateRateResponse {
     data: Rate;
 }
 export type CreateRateNatsResponse = NatsResponse<CreateRateResponse>;
