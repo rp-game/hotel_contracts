@@ -6,6 +6,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 import { BookingResponseDto } from '../dto/booking-response.dto';
+import { BillItemDto } from '../dto/bill-item.dto';
 
 // ============= CHECK-IN =============
 
@@ -77,7 +78,7 @@ export interface CheckOutBookingNatsRequest {
   finalBillAmount?: string | number;
   paymentMethod?: string;
   depositRefund?: number;
-  billItems?: any[];
+  billItems?: BillItemDto[];
 }
 
 export type CheckOutBookingNatsResponse = NatsResponse<BookingResponseDto>;
