@@ -75,7 +75,12 @@ export interface GetPendingCheckinsNatsRequest {
     limit?: number;
     status?: string;
 }
-export interface PendingCheckinBooking {
+/**
+ * Pending Check-in Booking Information
+ * Used for both NATS response and REST API response
+ * Single source of truth for check-in data structure
+ */
+export declare class PendingCheckinBooking {
     id: string;
     bookingCode: string;
     guestName: string;
@@ -83,17 +88,25 @@ export interface PendingCheckinBooking {
     guestPhone: string;
     checkInDate: string;
     checkOutDate: string;
-    guestCount: number;
+    estimatedCheckInTime?: string;
     roomType: string;
     roomNumber: string;
-    totalAmount: number;
-    status: string;
-    specialRequests?: string;
-    assignmentStatus: string;
-    roomId?: string;
     roomTypeId: string;
+    roomId?: string;
+    guestCount: number;
+    status: string;
+    assignmentStatus: string;
+    specialRequests?: string;
+    totalAmount: number;
+    paidAmount: number;
+    remainingAmount: number;
+    loyaltyPoints?: number;
+    loyaltyTier?: string;
 }
-export interface PendingCheckinsListData {
+/**
+ * Pending Check-ins List Response Data
+ */
+export declare class PendingCheckinsListData {
     bookings: PendingCheckinBooking[];
     total: number;
     page: number;
