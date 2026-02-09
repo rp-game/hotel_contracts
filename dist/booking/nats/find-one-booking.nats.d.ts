@@ -196,6 +196,10 @@ export interface GetBookingByIdResponse {
      */
     specialRequests?: string;
     /**
+     * Internal notes about the booking
+     */
+    notes?: string;
+    /**
      * Booking creation date
      */
     createdAt: string;
