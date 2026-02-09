@@ -21,13 +21,21 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LastRunTimesDto = exports.AutomationStatsDto = exports.ActiveRulesDto = exports.AutomationStatusDto = void 0;
+exports.AutomationSettingsDto = exports.AutomationLastRunTimesDto = exports.OverdueMonitoringSettingsDto = exports.AutoAssignmentSettingsDto = exports.CheckinAutomationSettingsDto = exports.CheckoutAutomationSettingsDto = exports.LastRunTimesDto = exports.AutomationStatsDto = exports.ActiveRulesDto = exports.AutomationStatusDto = void 0;
 // Shared automation DTOs with @ApiProperty for Swagger documentation
 var automation_rest_1 = require("./automation.rest");
 Object.defineProperty(exports, "AutomationStatusDto", { enumerable: true, get: function () { return automation_rest_1.AutomationStatusDto; } });
 Object.defineProperty(exports, "ActiveRulesDto", { enumerable: true, get: function () { return automation_rest_1.ActiveRulesDto; } });
 Object.defineProperty(exports, "AutomationStatsDto", { enumerable: true, get: function () { return automation_rest_1.AutomationStatsDto; } });
 Object.defineProperty(exports, "LastRunTimesDto", { enumerable: true, get: function () { return automation_rest_1.LastRunTimesDto; } });
+// Automation Settings DTOs (unified for NATS and REST)
+var automation_settings_dto_1 = require("./automation-settings.dto");
+Object.defineProperty(exports, "CheckoutAutomationSettingsDto", { enumerable: true, get: function () { return automation_settings_dto_1.CheckoutAutomationSettingsDto; } });
+Object.defineProperty(exports, "CheckinAutomationSettingsDto", { enumerable: true, get: function () { return automation_settings_dto_1.CheckinAutomationSettingsDto; } });
+Object.defineProperty(exports, "AutoAssignmentSettingsDto", { enumerable: true, get: function () { return automation_settings_dto_1.AutoAssignmentSettingsDto; } });
+Object.defineProperty(exports, "OverdueMonitoringSettingsDto", { enumerable: true, get: function () { return automation_settings_dto_1.OverdueMonitoringSettingsDto; } });
+Object.defineProperty(exports, "AutomationLastRunTimesDto", { enumerable: true, get: function () { return automation_settings_dto_1.AutomationLastRunTimesDto; } });
+Object.defineProperty(exports, "AutomationSettingsDto", { enumerable: true, get: function () { return automation_settings_dto_1.AutomationSettingsDto; } });
 // Re-export NATS contracts for internal use
 __exportStar(require("../nats"), exports);
 //# sourceMappingURL=index.js.map

@@ -14,5 +14,15 @@ export {
   LastRunTimesDto,
 } from './automation.rest';
 
+// Automation Settings DTOs (unified for NATS and REST)
+export {
+  CheckoutAutomationSettingsDto,
+  CheckinAutomationSettingsDto,
+  AutoAssignmentSettingsDto,
+  OverdueMonitoringSettingsDto,
+  AutomationLastRunTimesDto,
+  AutomationSettingsDto,
+} from './automation-settings.dto';
+
 // Re-export NATS contracts for internal use
 export * from '../nats';

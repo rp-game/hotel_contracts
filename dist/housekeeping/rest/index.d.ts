@@ -6,5 +6,6 @@
  * - REST API Gateway endpoints (with @ApiProperty decorators)
  */
 export { AutomationStatusDto, ActiveRulesDto, AutomationStatsDto, LastRunTimesDto, } from './automation.rest';
+export { CheckoutAutomationSettingsDto, CheckinAutomationSettingsDto, AutoAssignmentSettingsDto, OverdueMonitoringSettingsDto, AutomationLastRunTimesDto, AutomationSettingsDto, } from './automation-settings.dto';
 export * from '../nats';
 //# sourceMappingURL=index.d.ts.map
