@@ -14,9 +14,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FindStaffByHotelQueryDto = void 0;
-__exportStar(require("../nats"), exports);
+// Only export REST-specific DTOs, not NATS (to avoid conflicts)
 __exportStar(require("./find-staff-by-hotel.dto"), exports);
-var find_staff_by_hotel_dto_1 = require("./find-staff-by-hotel.dto");
-Object.defineProperty(exports, "FindStaffByHotelQueryDto", { enumerable: true, get: function () { return find_staff_by_hotel_dto_1.FindStaffByHotelQueryDto; } });
 //# sourceMappingURL=index.js.map

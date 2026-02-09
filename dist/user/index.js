@@ -17,4 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./enums"), exports);
 __exportStar(require("./inter-service"), exports);
 __exportStar(require("./types"), exports);
+__exportStar(require("./rest"), exports);
+// Note: ./nats not exported here to avoid conflicts with ./types
+// Import from '@hotel/contracts/user/nats' directly if needed
 //# sourceMappingURL=index.js.map
