@@ -3,6 +3,7 @@
  * Patterns: housekeeping.timers.*
  */
 import { NatsResponse } from '../../common';
+import { TimerReportSummaryDto, TimerReportStaffStatsDto, TimerReportTaskDto, TimerReportTimerItemDto, TimerReportDataDto } from '../rest/timers.rest';
 export interface TaskTimer {
     id: string;
     taskId: string;
@@ -99,65 +100,10 @@ export interface GetTimerReportNatsRequest {
     filters?: any;
 }
 /**
- * Timer Report Summary Statistics
+ * Timer Report DTOs
+ * Re-exported from REST contracts for consistency
  */
-export declare class TimerReportSummaryDto {
-    totalTimers: number;
-    totalElapsedTime: number;
-    totalPausedTime: number;
-    avgTaskTime: number;
-    totalElapsedFormatted: string;
-    avgTaskTimeFormatted: string;
-    averageEfficiency: number;
-}
-/**
- * Staff Statistics in Timer Report
- */
-export declare class TimerReportStaffStatsDto {
-    staffId: string;
-    totalTasks: number;
-    totalTime: number;
-    avgTime: number;
-    efficiency: number;
-}
-/**
- * Task Details in Timer
- */
-export declare class TimerReportTaskDto {
-    id: string;
-    roomId: string;
-    taskType: string;
-    status: string;
-}
-/**
- * Individual Timer Item in Report
- */
-export declare class TimerReportTimerItemDto {
-    id: string;
-    taskId: string;
-    staffId: string;
-    status: string;
-    startTime: string;
-    endTime?: string;
-    elapsedSeconds: number;
-    elapsedFormatted: string;
-    pausedSeconds: number;
-    efficiency: number;
-    isReviewed: boolean;
-    reviewedBy?: string;
-    reviewedAt?: string;
-    notes?: string;
-    cleaningTask?: TimerReportTaskDto;
-}
-/**
- * Complete Timer Report Data
- */
-export declare class TimerReportDataDto {
-    summary: TimerReportSummaryDto;
-    staffStats: TimerReportStaffStatsDto[];
-    statusBreakdown: Record<string, number>;
-    timers: TimerReportTimerItemDto[];
-}
+export { TimerReportSummaryDto, TimerReportStaffStatsDto, TimerReportTaskDto, TimerReportTimerItemDto, TimerReportDataDto };
 export type GetTimerReportNatsResponse = NatsResponse<TimerReportDataDto>;
 export interface GetStaffTaskSummaryNatsRequest {
     staffId: string;
