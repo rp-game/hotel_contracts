@@ -192,3 +192,66 @@ export class AutoScheduleTasksDataDto {
 export type AutomationStatusNatsResponse = NatsResponse<AutomationStatusDataDto>;
 export type TriggerAutoAssignmentNatsResponse = NatsResponse<OperationResult>;
 export type AutoScheduleTasksNatsResponse = NatsResponse<AutoScheduleTasksDataDto>;
+
+/**
+ * Update Automation Settings Request
+ * Pattern: housekeeping.automation.settings.update
+ */
+export interface UpdateAutomationSettingsPayload {
+  tenantId: string;
+  hotelId: string;
+  settings: {
+    enabled: boolean;
+    rules: {
+      autoAssignment: boolean;
+      autoTaskCreation: boolean;
+      qualityChecks: boolean;
+      notifications: boolean;
+    };
+    thresholds: {
+      taskTimeout: number;
+      qualityMinScore: number;
+      maxTasksPerStaff: number;
+    };
+  };
+}
+
+export type UpdateAutomationSettingsNatsResponse = NatsResponse<OperationResult>;
+
+/**
+ * Toggle Automation Request
+ * Pattern: housekeeping.automation.settings.toggle
+ */
+export interface ToggleAutomationPayload {
+  tenantId: string;
+  hotelId: string;
+  enabled: boolean;
+}
+
+export interface ToggleAutomationResult {
+  success: boolean;
+  enabled: boolean;
+  data?: unknown;
+}
+
+export type ToggleAutomationNatsResponse = NatsResponse<ToggleAutomationResult>;
+
+/**
+ * Toggle Automation Rule Request
+ * Pattern: housekeeping.automation.rule.toggle
+ */
+export interface ToggleAutomationRulePayload {
+  tenantId: string;
+  hotelId: string;
+  ruleKey: string;
+  enabled: boolean;
+}
+
+export interface ToggleAutomationRuleResult {
+  success: boolean;
+  ruleKey: string;
+  enabled: boolean;
+  data?: unknown;
+}
+
+export type ToggleAutomationRuleNatsResponse = NatsResponse<ToggleAutomationRuleResult>;
