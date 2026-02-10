@@ -24,5 +24,14 @@ export {
   AutomationSettingsDto,
 } from './automation-settings.dto';
 
+// Timer Report DTOs (unified for NATS and REST)
+export {
+  TimerReportSummaryDto,
+  TimerReportStaffStatsDto,
+  TimerReportTaskDto,
+  TimerReportTimerItemDto,
+  TimerReportDataDto,
+} from './timers.rest';
+
 // Re-export NATS contracts for internal use
 export * from '../nats';

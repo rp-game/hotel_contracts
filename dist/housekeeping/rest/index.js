@@ -21,7 +21,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AutomationSettingsDto = exports.AutomationLastRunTimesDto = exports.OverdueMonitoringSettingsDto = exports.AutoAssignmentSettingsDto = exports.CheckinAutomationSettingsDto = exports.CheckoutAutomationSettingsDto = exports.LastRunTimesDto = exports.AutomationStatsDto = exports.ActiveRulesDto = exports.AutomationStatusDto = void 0;
+exports.TimerReportDataDto = exports.TimerReportTimerItemDto = exports.TimerReportTaskDto = exports.TimerReportStaffStatsDto = exports.TimerReportSummaryDto = exports.AutomationSettingsDto = exports.AutomationLastRunTimesDto = exports.OverdueMonitoringSettingsDto = exports.AutoAssignmentSettingsDto = exports.CheckinAutomationSettingsDto = exports.CheckoutAutomationSettingsDto = exports.LastRunTimesDto = exports.AutomationStatsDto = exports.ActiveRulesDto = exports.AutomationStatusDto = void 0;
 // Shared automation DTOs with @ApiProperty for Swagger documentation
 var automation_rest_1 = require("./automation.rest");
 Object.defineProperty(exports, "AutomationStatusDto", { enumerable: true, get: function () { return automation_rest_1.AutomationStatusDto; } });
@@ -36,6 +36,13 @@ Object.defineProperty(exports, "AutoAssignmentSettingsDto", { enumerable: true, 
 Object.defineProperty(exports, "OverdueMonitoringSettingsDto", { enumerable: true, get: function () { return automation_settings_dto_1.OverdueMonitoringSettingsDto; } });
 Object.defineProperty(exports, "AutomationLastRunTimesDto", { enumerable: true, get: function () { return automation_settings_dto_1.AutomationLastRunTimesDto; } });
 Object.defineProperty(exports, "AutomationSettingsDto", { enumerable: true, get: function () { return automation_settings_dto_1.AutomationSettingsDto; } });
+// Timer Report DTOs (unified for NATS and REST)
+var timers_rest_1 = require("./timers.rest");
+Object.defineProperty(exports, "TimerReportSummaryDto", { enumerable: true, get: function () { return timers_rest_1.TimerReportSummaryDto; } });
+Object.defineProperty(exports, "TimerReportStaffStatsDto", { enumerable: true, get: function () { return timers_rest_1.TimerReportStaffStatsDto; } });
+Object.defineProperty(exports, "TimerReportTaskDto", { enumerable: true, get: function () { return timers_rest_1.TimerReportTaskDto; } });
+Object.defineProperty(exports, "TimerReportTimerItemDto", { enumerable: true, get: function () { return timers_rest_1.TimerReportTimerItemDto; } });
+Object.defineProperty(exports, "TimerReportDataDto", { enumerable: true, get: function () { return timers_rest_1.TimerReportDataDto; } });
 // Re-export NATS contracts for internal use
 __exportStar(require("../nats"), exports);
 //# sourceMappingURL=index.js.map

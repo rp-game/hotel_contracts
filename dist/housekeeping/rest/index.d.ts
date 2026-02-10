@@ -7,5 +7,6 @@
  */
 export { AutomationStatusDto, ActiveRulesDto, AutomationStatsDto, LastRunTimesDto, } from './automation.rest';
 export { CheckoutAutomationSettingsDto, CheckinAutomationSettingsDto, AutoAssignmentSettingsDto, OverdueMonitoringSettingsDto, AutomationLastRunTimesDto, AutomationSettingsDto, } from './automation-settings.dto';
+export { TimerReportSummaryDto, TimerReportStaffStatsDto, TimerReportTaskDto, TimerReportTimerItemDto, TimerReportDataDto, } from './timers.rest';
 export * from '../nats';
 //# sourceMappingURL=index.d.ts.map
