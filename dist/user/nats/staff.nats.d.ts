@@ -98,6 +98,7 @@ export declare class StaffDto {
     departmentId?: string;
     position?: string;
     staffStatus?: StaffStatus | string;
+    isActive: boolean;
     tenantId: string;
     hotelId?: string;
     createdAt: Date;

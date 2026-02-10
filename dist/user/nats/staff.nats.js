@@ -31,6 +31,7 @@ class StaffDto {
     departmentId;
     position;
     staffStatus;
+    isActive;
     tenantId;
     hotelId;
     createdAt;
@@ -69,6 +70,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Staff status', type: String }),
     __metadata("design:type", String)
 ], StaffDto.prototype, "staffStatus", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether the staff member is active', type: Boolean }),
+    __metadata("design:type", Boolean)
+], StaffDto.prototype, "isActive", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID', type: String }),
     __metadata("design:type", String)

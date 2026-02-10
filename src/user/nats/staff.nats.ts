@@ -132,6 +132,9 @@ export class StaffDto {
   @ApiPropertyOptional({ description: 'Staff status', type: String })
   staffStatus?: StaffStatus | string;
 
+  @ApiProperty({ description: 'Whether the staff member is active', type: Boolean })
+  isActive: boolean;
+
   @ApiProperty({ description: 'Tenant ID', type: String })
   tenantId: string;
 
