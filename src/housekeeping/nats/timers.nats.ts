@@ -3,6 +3,7 @@
  * Patterns: housekeeping.timers.*
  */
 
+import { ApiProperty } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 
 export interface TaskTimer {
@@ -116,17 +117,138 @@ export interface GetTimerReportNatsRequest {
   hotelId: string;
   filters?: any;
 }
-export interface TimerReport {
-  totalTasks: number;
-  totalDuration: number;
-  averageDuration?: number;
-  byStaff?: Array<{
-    staffId: string;
-    tasks: number;
-    duration: number;
-  }>;
+
+/**
+ * Timer Report Summary Statistics
+ */
+export class TimerReportSummaryDto {
+  @ApiProperty({ description: 'Total number of timers' })
+  totalTimers: number;
+
+  @ApiProperty({ description: 'Total elapsed time in seconds' })
+  totalElapsedTime: number;
+
+  @ApiProperty({ description: 'Total paused time in seconds' })
+  totalPausedTime: number;
+
+  @ApiProperty({ description: 'Average task time in seconds' })
+  avgTaskTime: number;
+
+  @ApiProperty({ description: 'Total elapsed time formatted' })
+  totalElapsedFormatted: string;
+
+  @ApiProperty({ description: 'Average task time formatted' })
+  avgTaskTimeFormatted: string;
+
+  @ApiProperty({ description: 'Average efficiency percentage' })
+  averageEfficiency: number;
 }
-export type GetTimerReportNatsResponse = NatsResponse<TimerReport>;
+
+/**
+ * Staff Statistics in Timer Report
+ */
+export class TimerReportStaffStatsDto {
+  @ApiProperty({ description: 'Staff member ID' })
+  staffId: string;
+
+  @ApiProperty({ description: 'Total tasks completed' })
+  totalTasks: number;
+
+  @ApiProperty({ description: 'Total time in seconds' })
+  totalTime: number;
+
+  @ApiProperty({ description: 'Average time per task in seconds' })
+  avgTime: number;
+
+  @ApiProperty({ description: 'Efficiency percentage' })
+  efficiency: number;
+}
+
+/**
+ * Task Details in Timer
+ */
+export class TimerReportTaskDto {
+  @ApiProperty({ description: 'Task ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Room ID' })
+  roomId: string;
+
+  @ApiProperty({ description: 'Task type' })
+  taskType: string;
+
+  @ApiProperty({ description: 'Task status' })
+  status: string;
+}
+
+/**
+ * Individual Timer Item in Report
+ */
+export class TimerReportTimerItemDto {
+  @ApiProperty({ description: 'Timer ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Task ID' })
+  taskId: string;
+
+  @ApiProperty({ description: 'Staff ID' })
+  staffId: string;
+
+  @ApiProperty({ description: 'Timer status' })
+  status: string;
+
+  @ApiProperty({ description: 'Start time' })
+  startTime: string;
+
+  @ApiProperty({ description: 'End time', required: false })
+  endTime?: string;
+
+  @ApiProperty({ description: 'Elapsed seconds' })
+  elapsedSeconds: number;
+
+  @ApiProperty({ description: 'Elapsed time formatted' })
+  elapsedFormatted: string;
+
+  @ApiProperty({ description: 'Paused seconds' })
+  pausedSeconds: number;
+
+  @ApiProperty({ description: 'Efficiency percentage' })
+  efficiency: number;
+
+  @ApiProperty({ description: 'Is reviewed' })
+  isReviewed: boolean;
+
+  @ApiProperty({ description: 'Reviewed by', required: false })
+  reviewedBy?: string;
+
+  @ApiProperty({ description: 'Reviewed at', required: false })
+  reviewedAt?: string;
+
+  @ApiProperty({ description: 'Notes', required: false })
+  notes?: string;
+
+  @ApiProperty({ description: 'Cleaning task details', type: () => TimerReportTaskDto, required: false })
+  cleaningTask?: TimerReportTaskDto;
+}
+
+/**
+ * Complete Timer Report Data
+ */
+export class TimerReportDataDto {
+  @ApiProperty({ description: 'Summary statistics', type: () => TimerReportSummaryDto })
+  summary: TimerReportSummaryDto;
+
+  @ApiProperty({ description: 'Staff statistics', type: [TimerReportStaffStatsDto] })
+  staffStats: TimerReportStaffStatsDto[];
+
+  @ApiProperty({ description: 'Status breakdown', type: 'object', additionalProperties: { type: 'number' } })
+  statusBreakdown: Record<string, number>;
+
+  @ApiProperty({ description: 'Timer details', type: [TimerReportTimerItemDto] })
+  timers: TimerReportTimerItemDto[];
+}
+
+export type GetTimerReportNatsResponse = NatsResponse<TimerReportDataDto>;
 
 // STAFF SUMMARY
 export interface GetStaffTaskSummaryNatsRequest {

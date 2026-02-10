@@ -48,6 +48,6 @@ export declare class AutomationStatusDto {
     automationEnabled: boolean;
     lastRunTimes: LastRunTimesDto;
     activeRules: ActiveRulesDto;
-    stats?: AutomationStatsDto;
+    stats: AutomationStatsDto;
 }
 //# sourceMappingURL=automation.rest.d.ts.map

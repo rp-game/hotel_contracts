@@ -98,17 +98,67 @@ export interface GetTimerReportNatsRequest {
     hotelId: string;
     filters?: any;
 }
-export interface TimerReport {
-    totalTasks: number;
-    totalDuration: number;
-    averageDuration?: number;
-    byStaff?: Array<{
-        staffId: string;
-        tasks: number;
-        duration: number;
-    }>;
+/**
+ * Timer Report Summary Statistics
+ */
+export declare class TimerReportSummaryDto {
+    totalTimers: number;
+    totalElapsedTime: number;
+    totalPausedTime: number;
+    avgTaskTime: number;
+    totalElapsedFormatted: string;
+    avgTaskTimeFormatted: string;
+    averageEfficiency: number;
 }
-export type GetTimerReportNatsResponse = NatsResponse<TimerReport>;
+/**
+ * Staff Statistics in Timer Report
+ */
+export declare class TimerReportStaffStatsDto {
+    staffId: string;
+    totalTasks: number;
+    totalTime: number;
+    avgTime: number;
+    efficiency: number;
+}
+/**
+ * Task Details in Timer
+ */
+export declare class TimerReportTaskDto {
+    id: string;
+    roomId: string;
+    taskType: string;
+    status: string;
+}
+/**
+ * Individual Timer Item in Report
+ */
+export declare class TimerReportTimerItemDto {
+    id: string;
+    taskId: string;
+    staffId: string;
+    status: string;
+    startTime: string;
+    endTime?: string;
+    elapsedSeconds: number;
+    elapsedFormatted: string;
+    pausedSeconds: number;
+    efficiency: number;
+    isReviewed: boolean;
+    reviewedBy?: string;
+    reviewedAt?: string;
+    notes?: string;
+    cleaningTask?: TimerReportTaskDto;
+}
+/**
+ * Complete Timer Report Data
+ */
+export declare class TimerReportDataDto {
+    summary: TimerReportSummaryDto;
+    staffStats: TimerReportStaffStatsDto[];
+    statusBreakdown: Record<string, number>;
+    timers: TimerReportTimerItemDto[];
+}
+export type GetTimerReportNatsResponse = NatsResponse<TimerReportDataDto>;
 export interface GetStaffTaskSummaryNatsRequest {
     staffId: string;
     tenantId: string;

@@ -134,9 +134,9 @@ export class AutomationStatusDto {
   })
   activeRules: ActiveRulesDto;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: "Today's automation statistics",
     type: AutomationStatsDto,
   })
-  stats?: AutomationStatsDto;
+  stats: AutomationStatsDto;
 }

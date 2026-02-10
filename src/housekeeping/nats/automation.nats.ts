@@ -9,6 +9,12 @@
  */
 
 import { NatsResponse } from '../../common';
+import {
+  LastRunTimesDto,
+  ActiveRulesDto,
+  AutomationStatsDto,
+  AutomationStatusDto as AutomationStatusDataDto
+} from '../rest/automation.rest';
 
 /**
  * Automation Event Item
@@ -54,35 +60,15 @@ export type GetAutomationEventsNatsResponse = NatsResponse<AutomationEventsData>
 
 /**
  * Automation Status Data
+ * Re-exported from REST contracts for consistency
  */
-export interface LastRunTimes {
-  autoAssignment: string | null;
-  taskCreation: string | null;
-  overdueProcessing: string | null;
-}
+export { LastRunTimesDto, ActiveRulesDto, AutomationStatsDto, AutomationStatusDataDto };
 
-export interface ActiveRules {
-  checkoutAutomation: boolean;
-  checkinAutomation: boolean;
-  autoAssignment: boolean;
-  overdueMonitoring: boolean;
-}
-
-export interface AutomationStats {
-  tasksAutoAssigned: number;
-  tasksAutoCreated: number;
-  overdueTasksProcessed: number;
-  automationSuccessRate: number;
-}
-
-export interface AutomationStatusData {
-  tenantId: string;
-  hotelId: string;
-  automationEnabled: boolean;
-  lastRunTimes: LastRunTimes;
-  activeRules: ActiveRules;
-  stats: AutomationStats;
-}
+// Type aliases for backwards compatibility in NATS messages
+export type LastRunTimes = LastRunTimesDto;
+export type ActiveRules = ActiveRulesDto;
+export type AutomationStats = AutomationStatsDto;
+export type AutomationStatusData = AutomationStatusDataDto;
 
 /**
  * Get Automation Status Request
@@ -118,6 +104,6 @@ export interface AutoScheduleTasksPayload {
   date: string;
 }
 
-export type AutomationStatusNatsResponse = NatsResponse<AutomationStatusData>;
+export type AutomationStatusNatsResponse = NatsResponse<AutomationStatusDataDto>;
 export type TriggerAutoAssignmentNatsResponse = NatsResponse<OperationResult>;
 export type AutoScheduleTasksNatsResponse = NatsResponse<OperationResult>;

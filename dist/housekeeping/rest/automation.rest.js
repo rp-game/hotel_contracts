@@ -183,7 +183,7 @@ __decorate([
     __metadata("design:type", ActiveRulesDto)
 ], AutomationStatusDto.prototype, "activeRules", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({
+    (0, swagger_1.ApiProperty)({
         description: "Today's automation statistics",
         type: AutomationStatsDto,
     }),
