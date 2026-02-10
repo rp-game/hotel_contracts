@@ -255,3 +255,24 @@ export interface ToggleAutomationRuleResult {
 }
 
 export type ToggleAutomationRuleNatsResponse = NatsResponse<ToggleAutomationRuleResult>;
+
+/**
+ * Get Automation Statistics Request
+ * Pattern: housekeeping.automation.statistics
+ */
+export interface GetAutomationStatisticsPayload {
+  tenantId: string;
+  hotelId: string;
+  startDate?: string;
+  endDate?: string;
+}
+
+export interface AutomationStatisticsData {
+  totalAutomations: number;
+  successRate: number;
+  averageProcessingTime: number;
+  tasksByType: Record<string, number>;
+  errorCount: number;
+}
+
+export type GetAutomationStatisticsNatsResponse = NatsResponse<AutomationStatisticsData>;

@@ -119,4 +119,70 @@ export interface ClockOutNatsRequest {
     hotelId: string;
 }
 export type ClockOutNatsResponse = NatsResponse<ShiftData>;
+/**
+ * Enhanced Cleaning Task (from getHousekeepingTasks)
+ * This is what the service ACTUALLY returns - enhanced with room and staff details
+ */
+export interface EnhancedCleaningTask {
+    id: string;
+    roomId: string;
+    roomNumber: string;
+    roomType: string;
+    floor: number;
+    taskType: string;
+    priority: string;
+    status: string;
+    assignedTo: string | null;
+    staffName: string | null;
+    estimatedDuration: number;
+    actualDuration: number | null;
+    scheduledStart: string;
+    actualStart: string;
+    actualEnd: string | null;
+    notes: string;
+    deadline: string | null;
+    verifiedBy?: string;
+    verifiedAt: string | null;
+    guestCheckout: any;
+    nextGuestCheckin: any;
+    specialRequirements: any[];
+    completionPhotos: any[];
+    inspectionResults: any;
+}
+/**
+ * Get Housekeeping Tasks Request
+ * Pattern: housekeeping.tasks
+ */
+export interface GetHousekeepingTasksPayload {
+    tenantId: string;
+    hotelId: string;
+    date?: string;
+}
+export type GetHousekeepingTasksNatsResponse = NatsResponse<EnhancedCleaningTask[]>;
+/**
+ * Staff Performance Metrics (from getPerformanceMetrics)
+ * This is what the service ACTUALLY returns - NOT the PerformanceMetric entity
+ */
+export interface StaffPerformanceMetrics {
+    staffId: string;
+    staffName: string;
+    tasksCompleted: number;
+    averageTime: number;
+    averageRating: number;
+    onTimeRate: number;
+    efficiencyScore: number;
+    totalTasks: number;
+    pendingTasks: number;
+    inProgressTasks: number;
+}
+/**
+ * Get Performance Metrics Request
+ * Pattern: housekeeping.performance
+ */
+export interface GetPerformanceMetricsPayload {
+    tenantId: string;
+    hotelId: string;
+    date?: string;
+}
+export type GetPerformanceMetricsNatsResponse = NatsResponse<StaffPerformanceMetrics[]>;
 //# sourceMappingURL=cleaning-tasks-extended.nats.d.ts.map
