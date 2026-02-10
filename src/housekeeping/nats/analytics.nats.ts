@@ -4,6 +4,7 @@
  */
 
 import { NatsResponse } from '../../common';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 // CALCULATE-METRIC
 export interface CalculateMetricNatsRequest {
@@ -62,19 +63,49 @@ export interface GetDashboardSummaryNatsRequest {
     staffIds?: string[];
   };
 }
-export interface DashboardSummary {
+export class StaffPerformerDto {
+  @ApiProperty({ description: 'Staff member ID' })
+  staffId: string;
+
+  @ApiProperty({ description: 'Performance score' })
+  score: number;
+}
+
+export class StaffPerformanceDto {
+  @ApiPropertyOptional({ description: 'Top performing staff members', type: [StaffPerformerDto] })
+  topPerformers?: StaffPerformerDto[];
+
+  @ApiPropertyOptional({ description: 'Staff members needing improvement', type: [StaffPerformerDto] })
+  needsImprovement?: StaffPerformerDto[];
+}
+
+export class DashboardSummary {
+  @ApiProperty({ description: 'Total number of tasks' })
   totalTasks: number;
+
+  @ApiProperty({ description: 'Number of completed tasks' })
   completedTasks: number;
+
+  @ApiProperty({ description: 'Number of pending tasks' })
   pendingTasks: number;
+
+  @ApiProperty({ description: 'Task completion rate (percentage)' })
   completionRate: number;
+
+  @ApiPropertyOptional({ description: 'Average quality score' })
   averageQualityScore?: number;
+
+  @ApiPropertyOptional({ description: 'Average task completion time (minutes)' })
   averageCompletionTime?: number;
+
+  @ApiPropertyOptional({ description: 'Overall quality score' })
   qualityScore?: number;
-  topPerformers?: Array<{ staffId: string; score: number }>;
-  staffPerformance?: {
-    topPerformers?: Array<{ staffId: string; score: number }>;
-    needsImprovement?: Array<{ staffId: string; score: number }>;
-  };
+
+  @ApiPropertyOptional({ description: 'Top performing staff members', type: [StaffPerformerDto] })
+  topPerformers?: StaffPerformerDto[];
+
+  @ApiPropertyOptional({ description: 'Staff performance breakdown', type: StaffPerformanceDto })
+  staffPerformance?: StaffPerformanceDto;
 }
 export type GetDashboardSummaryNatsResponse = NatsResponse<DashboardSummary>;
 

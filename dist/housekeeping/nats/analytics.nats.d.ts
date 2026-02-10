@@ -55,7 +55,15 @@ export interface GetDashboardSummaryNatsRequest {
         staffIds?: string[];
     };
 }
-export interface DashboardSummary {
+export declare class StaffPerformerDto {
+    staffId: string;
+    score: number;
+}
+export declare class StaffPerformanceDto {
+    topPerformers?: StaffPerformerDto[];
+    needsImprovement?: StaffPerformerDto[];
+}
+export declare class DashboardSummary {
     totalTasks: number;
     completedTasks: number;
     pendingTasks: number;
@@ -63,20 +71,8 @@ export interface DashboardSummary {
     averageQualityScore?: number;
     averageCompletionTime?: number;
     qualityScore?: number;
-    topPerformers?: Array<{
-        staffId: string;
-        score: number;
-    }>;
-    staffPerformance?: {
-        topPerformers?: Array<{
-            staffId: string;
-            score: number;
-        }>;
-        needsImprovement?: Array<{
-            staffId: string;
-            score: number;
-        }>;
-    };
+    topPerformers?: StaffPerformerDto[];
+    staffPerformance?: StaffPerformanceDto;
 }
 export type GetDashboardSummaryNatsResponse = NatsResponse<DashboardSummary>;
 export interface GetKPIsNatsRequest {
