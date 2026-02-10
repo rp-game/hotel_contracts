@@ -84,7 +84,12 @@ export interface GetStaffTaskStatsPayload {
     startDate?: string;
     endDate?: string;
 }
-export interface StaffDto {
+/**
+ * Staff DTO
+ * Shared between NATS contracts and REST API
+ * Single source of truth for staff data structure
+ */
+export declare class StaffDto {
     id: string;
     email: string;
     fullName: string;

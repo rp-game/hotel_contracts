@@ -86,7 +86,51 @@ export interface AutoScheduleTasksPayload {
     hotelId: string;
     date: string;
 }
+/**
+ * Auto Schedule Task Assignment
+ * Shared between NATS contracts and REST API
+ */
+export declare class TaskAssignmentDto {
+    taskId: string;
+    roomNumber: string;
+    estimatedTime: number;
+    taskType: string;
+    priority: string;
+}
+/**
+ * Staff Assignment in Auto Schedule
+ * Shared between NATS contracts and REST API
+ */
+export declare class StaffAssignmentDto {
+    staffId: string;
+    staffName: string;
+    tasks: TaskAssignmentDto[];
+    totalTime: number;
+    workload: number;
+}
+/**
+ * Optimized Schedule Details
+ * Shared between NATS contracts and REST API
+ */
+export declare class OptimizedScheduleDto {
+    totalTasks: number;
+    assignedTasks: number;
+    unassignedTasks: number;
+    staffUtilization: number;
+    estimatedCompletionTime: string;
+    assignments: StaffAssignmentDto[];
+    recommendations: string[];
+}
+/**
+ * Auto Schedule Tasks Response Data
+ * Shared between NATS contracts and REST API
+ */
+export declare class AutoScheduleTasksDataDto {
+    success: boolean;
+    schedule: OptimizedScheduleDto;
+    scheduledAt: string;
+}
 export type AutomationStatusNatsResponse = NatsResponse<AutomationStatusDataDto>;
 export type TriggerAutoAssignmentNatsResponse = NatsResponse<OperationResult>;
-export type AutoScheduleTasksNatsResponse = NatsResponse<OperationResult>;
+export type AutoScheduleTasksNatsResponse = NatsResponse<AutoScheduleTasksDataDto>;
 //# sourceMappingURL=automation.nats.d.ts.map

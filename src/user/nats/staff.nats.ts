@@ -4,6 +4,7 @@
  * Exported from user-service
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { UserRole } from '../enums';
 import { StaffStatus } from '../enums';
 
@@ -101,18 +102,46 @@ export interface GetStaffTaskStatsPayload {
 
 // ============= NATS Response DTOs =============
 
-export interface StaffDto {
+/**
+ * Staff DTO
+ * Shared between NATS contracts and REST API
+ * Single source of truth for staff data structure
+ */
+export class StaffDto {
+  @ApiProperty({ description: 'Staff member ID', type: String })
   id: string;
+
+  @ApiProperty({ description: 'Email address', type: String })
   email: string;
+
+  @ApiProperty({ description: 'Full name of staff member', type: String })
   fullName: string;
+
+  @ApiPropertyOptional({ description: 'Phone number', type: String })
   phoneNumber?: string;
+
+  @ApiProperty({ description: 'User roles assigned to staff', type: [String] })
   roles: UserRole[] | string[];
+
+  @ApiPropertyOptional({ description: 'Department ID', type: String })
   departmentId?: string;
+
+  @ApiPropertyOptional({ description: 'Position/title', type: String })
   position?: string;
+
+  @ApiPropertyOptional({ description: 'Staff status', type: String })
   staffStatus?: StaffStatus | string;
+
+  @ApiProperty({ description: 'Tenant ID', type: String })
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID', type: String })
   hotelId?: string;
+
+  @ApiProperty({ description: 'Record creation timestamp', type: Date })
   createdAt: Date;
+
+  @ApiProperty({ description: 'Record last update timestamp', type: Date })
   updatedAt: Date;
 }
 

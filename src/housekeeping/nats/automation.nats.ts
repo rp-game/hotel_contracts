@@ -8,6 +8,7 @@
  * Called by: api-gateway (HousekeepingService)
  */
 
+import { ApiProperty } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 import {
   LastRunTimesDto,
@@ -104,6 +105,90 @@ export interface AutoScheduleTasksPayload {
   date: string;
 }
 
+/**
+ * Auto Schedule Task Assignment
+ * Shared between NATS contracts and REST API
+ */
+export class TaskAssignmentDto {
+  @ApiProperty({ description: 'Task ID', type: String })
+  taskId: string;
+
+  @ApiProperty({ description: 'Room number', type: String })
+  roomNumber: string;
+
+  @ApiProperty({ description: 'Estimated time in minutes', type: Number })
+  estimatedTime: number;
+
+  @ApiProperty({ description: 'Task type', type: String })
+  taskType: string;
+
+  @ApiProperty({ description: 'Task priority', type: String })
+  priority: string;
+}
+
+/**
+ * Staff Assignment in Auto Schedule
+ * Shared between NATS contracts and REST API
+ */
+export class StaffAssignmentDto {
+  @ApiProperty({ description: 'Staff member ID', type: String })
+  staffId: string;
+
+  @ApiProperty({ description: 'Staff member name', type: String })
+  staffName: string;
+
+  @ApiProperty({ description: 'Assigned tasks', type: [TaskAssignmentDto] })
+  tasks: TaskAssignmentDto[];
+
+  @ApiProperty({ description: 'Total time in minutes', type: Number })
+  totalTime: number;
+
+  @ApiProperty({ description: 'Workload percentage (0-100)', type: Number })
+  workload: number;
+}
+
+/**
+ * Optimized Schedule Details
+ * Shared between NATS contracts and REST API
+ */
+export class OptimizedScheduleDto {
+  @ApiProperty({ description: 'Total number of tasks', type: Number })
+  totalTasks: number;
+
+  @ApiProperty({ description: 'Number of assigned tasks', type: Number })
+  assignedTasks: number;
+
+  @ApiProperty({ description: 'Number of unassigned tasks', type: Number })
+  unassignedTasks: number;
+
+  @ApiProperty({ description: 'Staff utilization percentage', type: Number })
+  staffUtilization: number;
+
+  @ApiProperty({ description: 'Estimated completion time (HH:MM)', type: String })
+  estimatedCompletionTime: string;
+
+  @ApiProperty({ description: 'Staff assignments', type: [StaffAssignmentDto] })
+  assignments: StaffAssignmentDto[];
+
+  @ApiProperty({ description: 'Scheduling recommendations', type: [String] })
+  recommendations: string[];
+}
+
+/**
+ * Auto Schedule Tasks Response Data
+ * Shared between NATS contracts and REST API
+ */
+export class AutoScheduleTasksDataDto {
+  @ApiProperty({ description: 'Operation success status', type: Boolean })
+  success: boolean;
+
+  @ApiProperty({ description: 'Optimized schedule', type: () => OptimizedScheduleDto })
+  schedule: OptimizedScheduleDto;
+
+  @ApiProperty({ description: 'Schedule generation timestamp (ISO)', type: String })
+  scheduledAt: string;
+}
+
 export type AutomationStatusNatsResponse = NatsResponse<AutomationStatusDataDto>;
 export type TriggerAutoAssignmentNatsResponse = NatsResponse<OperationResult>;
-export type AutoScheduleTasksNatsResponse = NatsResponse<OperationResult>;
+export type AutoScheduleTasksNatsResponse = NatsResponse<AutoScheduleTasksDataDto>;
