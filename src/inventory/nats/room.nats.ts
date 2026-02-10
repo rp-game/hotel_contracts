@@ -17,6 +17,7 @@
  * Called by: api-gateway, booking-service
  */
 
+import { ApiProperty } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 import { Room as RoomEntity } from '../types';
 
@@ -33,14 +34,24 @@ export interface FindAllRoomsRequest {
   pagination?: { page?: number; limit?: number };
 }
 
-export interface PaginatedRoomsResponse {
+export class PaginatedRoomsResponse {
+  @ApiProperty({ 
+    description: 'Array of room entities', 
+    type: [RoomEntity]
+  })
   data: RoomEntity[];
+
+  @ApiProperty({ description: 'Total number of rooms' })
   total: number;
+
+  @ApiProperty({ description: 'Current page number' })
   page: number;
+
+  @ApiProperty({ description: 'Items per page' })
   limit: number;
 }
 
-export interface FindAllRoomsResponse extends PaginatedRoomsResponse {}
+export class FindAllRoomsResponse extends PaginatedRoomsResponse {}
 
 export type FindAllRoomsNatsResponse = NatsResponse<FindAllRoomsResponse>;
 

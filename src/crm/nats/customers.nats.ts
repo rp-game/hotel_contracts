@@ -451,35 +451,94 @@ export interface CustomerStatsNatsRequest {
 }
 
 /**
- * Customer Stats Response
+ * Customer Stats Overview
  */
-export interface CustomerStatsData {
-  overview: {
-    totalCustomers: number;
-    newCustomersLast30Days: number;
-    averageSpent: string;
-    totalRevenue: string;
-    averageBookings: number;
-  };
-  membershipDistribution: {
-    bronze: number;
-    silver: number;
-    gold: number;
-    platinum: number;
-  };
-  topCustomers: Array<{
-    id: string;
-    name: string;
-    email: string;
-    totalSpent: string;
-    membershipLevel: string;
-  }>;
-  recentCustomers: Array<{
-    id: string;
-    name: string;
-    email: string;
-    createdAt: string;
-  }>;
+export class CustomerStatsOverview {
+  @ApiProperty({ description: 'Total number of customers' })
+  totalCustomers!: number;
+
+  @ApiProperty({ description: 'Number of new customers in last 30 days' })
+  newCustomersLast30Days!: number;
+
+  @ApiProperty({ description: 'Average amount spent per customer' })
+  averageSpent!: string;
+
+  @ApiProperty({ description: 'Total revenue from all customers' })
+  totalRevenue!: string;
+
+  @ApiProperty({ description: 'Average number of bookings per customer' })
+  averageBookings!: number;
+}
+
+/**
+ * Membership Distribution
+ */
+export class MembershipDistribution {
+  @ApiProperty({ description: 'Number of bronze members' })
+  bronze!: number;
+
+  @ApiProperty({ description: 'Number of silver members' })
+  silver!: number;
+
+  @ApiProperty({ description: 'Number of gold members' })
+  gold!: number;
+
+  @ApiProperty({ description: 'Number of platinum members' })
+  platinum!: number;
+}
+
+/**
+ * Top Customer Info
+ */
+export class TopCustomerInfo {
+  @ApiProperty({ description: 'Customer ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Customer name' })
+  name!: string;
+
+  @ApiProperty({ description: 'Customer email' })
+  email!: string;
+
+  @ApiProperty({ description: 'Total amount spent' })
+  totalSpent!: string;
+
+  @ApiProperty({ description: 'Membership level' })
+  membershipLevel!: string;
+}
+
+/**
+ * Recent Customer Info
+ */
+export class RecentCustomerInfo {
+  @ApiProperty({ description: 'Customer ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Customer name' })
+  name!: string;
+
+  @ApiProperty({ description: 'Customer email' })
+  email!: string;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt!: string;
+}
+
+/**
+ * Customer Stats Response Data
+ */
+export class CustomerStatsData {
+  @ApiProperty({ description: 'Overview statistics', type: CustomerStatsOverview })
+  overview!: CustomerStatsOverview;
+
+  @ApiProperty({ description: 'Membership distribution', type: MembershipDistribution })
+  membershipDistribution!: MembershipDistribution;
+
+  @ApiProperty({ description: 'Top customers by spending', type: [TopCustomerInfo] })
+  topCustomers!: TopCustomerInfo[];
+
+  @ApiProperty({ description: 'Recently registered customers', type: [RecentCustomerInfo] })
+  recentCustomers!: RecentCustomerInfo[];
 }
 
 export type CustomerStatsNatsResponse = NatsResponse<CustomerStatsData>;

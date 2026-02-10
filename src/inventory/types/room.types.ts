@@ -77,27 +77,92 @@ export class RoomType {
 /**
  * Individual Room entity
  */
-export interface Room {
+export class Room {
+  @ApiProperty({ description: 'Room ID' })
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiProperty({ description: 'Room number' })
   roomNumber: string;
+
+  @ApiProperty({ description: 'Room type ID' })
   roomTypeId: string;
+
+  @ApiProperty({ description: 'Room type name' })
   roomTypeName: string;
+
+  @ApiProperty({ description: 'Floor number' })
   floor: number;
+
+  @ApiProperty({ description: 'Room status', enum: RoomStatus })
   status: RoomStatus;
-  currentStatus?: string; // String representation of status (may differ from enum)
+
+  @ApiProperty({ 
+    description: 'String representation of status (may differ from enum)', 
+    required: false 
+  })
+  currentStatus?: string;
+
+  @ApiProperty({ 
+    description: 'Last cleaned timestamp (ISO format)', 
+    required: false 
+  })
   lastCleanedAt?: string;
-  features?: Record<string, any>; // Room-specific features (JSONB)
-  notes?: string; // Operational notes about the room
+
+  @ApiProperty({
+    description: 'Room-specific features (JSONB)',
+    required: false
+  })
+  features?: Record<string, any>;
+
+  @ApiProperty({ 
+    description: 'Operational notes about the room', 
+    required: false 
+  })
+  notes?: string;
+
+  @ApiProperty({ description: 'Creation timestamp (ISO format)' })
   createdAt: string;
+
+  @ApiProperty({ description: 'Last update timestamp (ISO format)' })
   updatedAt: string;
+
   // Optional fields from associated RoomType (populated in API responses)
+  @ApiProperty({ 
+    description: 'Room capacity (from RoomType)', 
+    required: false 
+  })
   capacity?: number;
+
+  @ApiProperty({ 
+    description: 'Room price (from RoomType)', 
+    required: false 
+  })
   price?: number;
+
+  @ApiProperty({ 
+    description: 'Number of beds (from RoomType)', 
+    required: false 
+  })
   numberOfBeds?: number;
+
+  @ApiProperty({ 
+    description: 'Room amenities (from RoomType)', 
+    type: [String],
+    required: false 
+  })
   amenities?: string[];
+
   // Booking statistics (populated on demand)
+  @ApiProperty({ 
+    description: 'Number of bookings for this room', 
+    required: false 
+  })
   bookingCount?: number;
 }
 

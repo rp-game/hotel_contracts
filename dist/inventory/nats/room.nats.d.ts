@@ -33,13 +33,13 @@ export interface FindAllRoomsRequest {
         limit?: number;
     };
 }
-export interface PaginatedRoomsResponse {
+export declare class PaginatedRoomsResponse {
     data: RoomEntity[];
     total: number;
     page: number;
     limit: number;
 }
-export interface FindAllRoomsResponse extends PaginatedRoomsResponse {
+export declare class FindAllRoomsResponse extends PaginatedRoomsResponse {
 }
 export type FindAllRoomsNatsResponse = NatsResponse<FindAllRoomsResponse>;
 /**

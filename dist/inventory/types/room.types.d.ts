@@ -27,7 +27,7 @@ export declare class RoomType {
 /**
  * Individual Room entity
  */
-export interface Room {
+export declare class Room {
     id: string;
     tenantId: string;
     hotelId: string;

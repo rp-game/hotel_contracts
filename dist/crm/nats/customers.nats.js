@@ -33,7 +33,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ExportDownloadData = exports.ExportStatusData = exports.ExportJobData = exports.RecalculateAllBookingStatsData = exports.RecalculateAllBookingStatsResultItem = exports.RecalculateBookingStatsData = exports.CustomersListData = exports.CustomerNatsResponse = exports.UpdateCustomerNatsRequest = exports.CreateCustomerNatsRequest = exports.CommunicationChannel = exports.NationalIdType = exports.Gender = void 0;
+exports.ExportDownloadData = exports.ExportStatusData = exports.ExportJobData = exports.CustomerStatsData = exports.RecentCustomerInfo = exports.TopCustomerInfo = exports.MembershipDistribution = exports.CustomerStatsOverview = exports.RecalculateAllBookingStatsData = exports.RecalculateAllBookingStatsResultItem = exports.RecalculateBookingStatsData = exports.CustomersListData = exports.CustomerNatsResponse = exports.UpdateCustomerNatsRequest = exports.CreateCustomerNatsRequest = exports.CommunicationChannel = exports.NationalIdType = exports.Gender = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Enums
@@ -430,6 +430,146 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Individual results for each customer', type: [RecalculateAllBookingStatsResultItem] }),
     __metadata("design:type", Array)
 ], RecalculateAllBookingStatsData.prototype, "results", void 0);
+/**
+ * Customer Stats Overview
+ */
+class CustomerStatsOverview {
+    totalCustomers;
+    newCustomersLast30Days;
+    averageSpent;
+    totalRevenue;
+    averageBookings;
+}
+exports.CustomerStatsOverview = CustomerStatsOverview;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of customers' }),
+    __metadata("design:type", Number)
+], CustomerStatsOverview.prototype, "totalCustomers", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of new customers in last 30 days' }),
+    __metadata("design:type", Number)
+], CustomerStatsOverview.prototype, "newCustomersLast30Days", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Average amount spent per customer' }),
+    __metadata("design:type", String)
+], CustomerStatsOverview.prototype, "averageSpent", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total revenue from all customers' }),
+    __metadata("design:type", String)
+], CustomerStatsOverview.prototype, "totalRevenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Average number of bookings per customer' }),
+    __metadata("design:type", Number)
+], CustomerStatsOverview.prototype, "averageBookings", void 0);
+/**
+ * Membership Distribution
+ */
+class MembershipDistribution {
+    bronze;
+    silver;
+    gold;
+    platinum;
+}
+exports.MembershipDistribution = MembershipDistribution;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of bronze members' }),
+    __metadata("design:type", Number)
+], MembershipDistribution.prototype, "bronze", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of silver members' }),
+    __metadata("design:type", Number)
+], MembershipDistribution.prototype, "silver", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of gold members' }),
+    __metadata("design:type", Number)
+], MembershipDistribution.prototype, "gold", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of platinum members' }),
+    __metadata("design:type", Number)
+], MembershipDistribution.prototype, "platinum", void 0);
+/**
+ * Top Customer Info
+ */
+class TopCustomerInfo {
+    id;
+    name;
+    email;
+    totalSpent;
+    membershipLevel;
+}
+exports.TopCustomerInfo = TopCustomerInfo;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], TopCustomerInfo.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer name' }),
+    __metadata("design:type", String)
+], TopCustomerInfo.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer email' }),
+    __metadata("design:type", String)
+], TopCustomerInfo.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total amount spent' }),
+    __metadata("design:type", String)
+], TopCustomerInfo.prototype, "totalSpent", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Membership level' }),
+    __metadata("design:type", String)
+], TopCustomerInfo.prototype, "membershipLevel", void 0);
+/**
+ * Recent Customer Info
+ */
+class RecentCustomerInfo {
+    id;
+    name;
+    email;
+    createdAt;
+}
+exports.RecentCustomerInfo = RecentCustomerInfo;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], RecentCustomerInfo.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer name' }),
+    __metadata("design:type", String)
+], RecentCustomerInfo.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer email' }),
+    __metadata("design:type", String)
+], RecentCustomerInfo.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp' }),
+    __metadata("design:type", String)
+], RecentCustomerInfo.prototype, "createdAt", void 0);
+/**
+ * Customer Stats Response Data
+ */
+class CustomerStatsData {
+    overview;
+    membershipDistribution;
+    topCustomers;
+    recentCustomers;
+}
+exports.CustomerStatsData = CustomerStatsData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Overview statistics', type: CustomerStatsOverview }),
+    __metadata("design:type", CustomerStatsOverview)
+], CustomerStatsData.prototype, "overview", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Membership distribution', type: MembershipDistribution }),
+    __metadata("design:type", MembershipDistribution)
+], CustomerStatsData.prototype, "membershipDistribution", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Top customers by spending', type: [TopCustomerInfo] }),
+    __metadata("design:type", Array)
+], CustomerStatsData.prototype, "topCustomers", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Recently registered customers', type: [RecentCustomerInfo] }),
+    __metadata("design:type", Array)
+], CustomerStatsData.prototype, "recentCustomers", void 0);
 /**
  * Export Job Data
  */

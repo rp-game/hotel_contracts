@@ -12,8 +12,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RoomType = void 0;
+exports.Room = exports.RoomType = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const enums_1 = require("../enums");
 /**
  * Room Type entity
  *
@@ -112,4 +113,135 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Last update timestamp (ISO format)' }),
     __metadata("design:type", String)
 ], RoomType.prototype, "updatedAt", void 0);
+/**
+ * Individual Room entity
+ */
+class Room {
+    id;
+    tenantId;
+    hotelId;
+    roomNumber;
+    roomTypeId;
+    roomTypeName;
+    floor;
+    status;
+    currentStatus;
+    lastCleanedAt;
+    features;
+    notes;
+    createdAt;
+    updatedAt;
+    // Optional fields from associated RoomType (populated in API responses)
+    capacity;
+    price;
+    numberOfBeds;
+    amenities;
+    // Booking statistics (populated on demand)
+    bookingCount;
+}
+exports.Room = Room;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room ID' }),
+    __metadata("design:type", String)
+], Room.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], Room.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], Room.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room number' }),
+    __metadata("design:type", String)
+], Room.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type ID' }),
+    __metadata("design:type", String)
+], Room.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type name' }),
+    __metadata("design:type", String)
+], Room.prototype, "roomTypeName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Floor number' }),
+    __metadata("design:type", Number)
+], Room.prototype, "floor", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room status', enum: enums_1.RoomStatus }),
+    __metadata("design:type", String)
+], Room.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'String representation of status (may differ from enum)',
+        required: false
+    }),
+    __metadata("design:type", String)
+], Room.prototype, "currentStatus", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Last cleaned timestamp (ISO format)',
+        required: false
+    }),
+    __metadata("design:type", String)
+], Room.prototype, "lastCleanedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Room-specific features (JSONB)',
+        required: false
+    }),
+    __metadata("design:type", Object)
+], Room.prototype, "features", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Operational notes about the room',
+        required: false
+    }),
+    __metadata("design:type", String)
+], Room.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp (ISO format)' }),
+    __metadata("design:type", String)
+], Room.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp (ISO format)' }),
+    __metadata("design:type", String)
+], Room.prototype, "updatedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Room capacity (from RoomType)',
+        required: false
+    }),
+    __metadata("design:type", Number)
+], Room.prototype, "capacity", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Room price (from RoomType)',
+        required: false
+    }),
+    __metadata("design:type", Number)
+], Room.prototype, "price", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Number of beds (from RoomType)',
+        required: false
+    }),
+    __metadata("design:type", Number)
+], Room.prototype, "numberOfBeds", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Room amenities (from RoomType)',
+        type: [String],
+        required: false
+    }),
+    __metadata("design:type", Array)
+], Room.prototype, "amenities", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Number of bookings for this room',
+        required: false
+    }),
+    __metadata("design:type", Number)
+], Room.prototype, "bookingCount", void 0);
 //# sourceMappingURL=room.types.js.map

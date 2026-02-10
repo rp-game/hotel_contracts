@@ -294,35 +294,51 @@ export interface CustomerStatsNatsRequest {
     includeDetails?: boolean;
 }
 /**
- * Customer Stats Response
+ * Customer Stats Overview
  */
-export interface CustomerStatsData {
-    overview: {
-        totalCustomers: number;
-        newCustomersLast30Days: number;
-        averageSpent: string;
-        totalRevenue: string;
-        averageBookings: number;
-    };
-    membershipDistribution: {
-        bronze: number;
-        silver: number;
-        gold: number;
-        platinum: number;
-    };
-    topCustomers: Array<{
-        id: string;
-        name: string;
-        email: string;
-        totalSpent: string;
-        membershipLevel: string;
-    }>;
-    recentCustomers: Array<{
-        id: string;
-        name: string;
-        email: string;
-        createdAt: string;
-    }>;
+export declare class CustomerStatsOverview {
+    totalCustomers: number;
+    newCustomersLast30Days: number;
+    averageSpent: string;
+    totalRevenue: string;
+    averageBookings: number;
+}
+/**
+ * Membership Distribution
+ */
+export declare class MembershipDistribution {
+    bronze: number;
+    silver: number;
+    gold: number;
+    platinum: number;
+}
+/**
+ * Top Customer Info
+ */
+export declare class TopCustomerInfo {
+    id: string;
+    name: string;
+    email: string;
+    totalSpent: string;
+    membershipLevel: string;
+}
+/**
+ * Recent Customer Info
+ */
+export declare class RecentCustomerInfo {
+    id: string;
+    name: string;
+    email: string;
+    createdAt: string;
+}
+/**
+ * Customer Stats Response Data
+ */
+export declare class CustomerStatsData {
+    overview: CustomerStatsOverview;
+    membershipDistribution: MembershipDistribution;
+    topCustomers: TopCustomerInfo[];
+    recentCustomers: RecentCustomerInfo[];
 }
 export type CustomerStatsNatsResponse = NatsResponse<CustomerStatsData>;
 /**
