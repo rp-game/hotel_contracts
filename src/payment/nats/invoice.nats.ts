@@ -16,6 +16,7 @@
  * Handler: payment-service (invoices module)
  */
 
+import { ApiProperty } from '@nestjs/swagger';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 // ============================================================================
@@ -62,17 +63,38 @@ export interface PaymentInvoice {
  * Invoice item data with full details including tax, discount calculations
  * This matches what the handler actually returns
  */
-export interface InvoiceItemData {
+export class InvoiceItemData {
+  @ApiProperty({ description: 'Item ID' })
   id: string;
+
+  @ApiProperty({ description: 'Item description' })
   description: string;
+
+  @ApiProperty({ description: 'Quantity' })
   quantity: number;
+
+  @ApiProperty({ description: 'Unit price' })
   unitPrice: number;
+
+  @ApiProperty({ description: 'Total amount' })
   amount: number;
+
+  @ApiProperty({ description: 'Subtotal before tax and discount' })
   subtotal: number;
+
+  @ApiProperty({ description: 'Tax amount' })
   tax: number;
+
+  @ApiProperty({ description: 'Tax amount (alias)' })
   taxAmount: number;
+
+  @ApiProperty({ description: 'Tax rate percentage' })
   taxRate: number;
+
+  @ApiProperty({ description: 'Discount amount' })
   discount: number;
+
+  @ApiProperty({ description: 'Total amount after tax and discount' })
   total: number;
 }
 
@@ -81,39 +103,104 @@ export interface InvoiceItemData {
  * This matches what the NATS handler actually returns in invoice list responses
  * Replaces the simpler PaymentInvoice type for list responses
  */
-export interface InvoiceDataItem {
+export class InvoiceDataItem {
+  @ApiProperty({ description: 'Invoice ID' })
   id: string;
+
+  @ApiProperty({ description: 'Invoice number' })
   invoiceNumber: string;
+
+  @ApiProperty({ description: 'Booking ID', required: false })
   bookingId?: string;
+
+  @ApiProperty({ description: 'Booking code', required: false })
   bookingCode?: string;
+
+  @ApiProperty({ description: 'Customer ID', required: false })
   customerId?: string;
+
+  @ApiProperty({ description: 'Guest name', required: false })
   guestName?: string;
+
+  @ApiProperty({ description: 'Guest email', required: false })
   guestEmail?: string;
+
+  @ApiProperty({ description: 'Customer name', required: false })
   customerName?: string;
+
+  @ApiProperty({ description: 'Customer address', required: false })
   customerAddress?: string;
+
+  @ApiProperty({ description: 'Customer tax code', required: false })
   customerTaxCode?: string;
+
+  @ApiProperty({ description: 'Invoice amount' })
   amount: number;
+
+  @ApiProperty({ description: 'Subtotal before tax and discount' })
   subtotal: number;
+
+  @ApiProperty({ description: 'Tax amount' })
   tax: number;
+
+  @ApiProperty({ description: 'Tax amount (alias)' })
   taxAmount: number;
+
+  @ApiProperty({ description: 'Tax rate percentage' })
   taxRate: number;
+
+  @ApiProperty({ description: 'Discount amount' })
   discount: number;
+
+  @ApiProperty({ description: 'Total amount' })
   totalAmount: number;
+
+  @ApiProperty({ description: 'Total (alias)' })
   total: number;
+
+  @ApiProperty({ description: 'Paid amount', required: false })
   paidAmount?: number;
+
+  @ApiProperty({ description: 'Remaining amount', required: false })
   remainingAmount?: number;
+
+  @ApiProperty({ description: 'Currency code' })
   currency: string;
+
+  @ApiProperty({ description: 'Invoice status' })
   status: string;
+
+  @ApiProperty({ description: 'Payment status' })
   paymentStatus: string;
+
+  @ApiProperty({ description: 'Due date', required: false })
   dueDate?: string;
+
+  @ApiProperty({ description: 'Issued date', required: false })
   issuedDate?: string;
+
+  @ApiProperty({ description: 'Issued at timestamp', required: false })
   issuedAt?: string;
+
+  @ApiProperty({ description: 'Paid at timestamp', required: false })
   paidAt?: string;
+
+  @ApiProperty({ description: 'Notes', required: false })
   notes?: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID', required: false })
   hotelId?: string;
+
+  @ApiProperty({ description: 'Created at timestamp' })
   createdAt: string;
+
+  @ApiProperty({ description: 'Updated at timestamp' })
   updatedAt: string;
+
+  @ApiProperty({ description: 'Invoice items', type: [InvoiceItemData], required: false })
   items?: InvoiceItemData[];
 }
 
@@ -180,11 +267,20 @@ export interface GetInvoicesNatsRequest {
   limit?: number;
 }
 
-export interface GetPaymentInvoicesData {
+export class GetPaymentInvoicesData {
+  @ApiProperty({ description: 'List of invoices', type: [InvoiceDataItem] })
   data: InvoiceDataItem[];
+
+  @ApiProperty({ description: 'Total number of invoices' })
   total: number;
+
+  @ApiProperty({ description: 'Current page number' })
   page: number;
+
+  @ApiProperty({ description: 'Number of items per page' })
   limit: number;
+
+  @ApiProperty({ description: 'Total number of pages', required: false })
   totalPages?: number;
 }
 

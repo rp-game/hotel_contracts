@@ -49,7 +49,7 @@ export interface PaymentInvoice {
  * Invoice item data with full details including tax, discount calculations
  * This matches what the handler actually returns
  */
-export interface InvoiceItemData {
+export declare class InvoiceItemData {
     id: string;
     description: string;
     quantity: number;
@@ -67,7 +67,7 @@ export interface InvoiceItemData {
  * This matches what the NATS handler actually returns in invoice list responses
  * Replaces the simpler PaymentInvoice type for list responses
  */
-export interface InvoiceDataItem {
+export declare class InvoiceDataItem {
     id: string;
     invoiceNumber: string;
     bookingId?: string;
@@ -147,7 +147,7 @@ export interface GetInvoicesNatsRequest {
     page?: number;
     limit?: number;
 }
-export interface GetPaymentInvoicesData {
+export declare class GetPaymentInvoicesData {
     data: InvoiceDataItem[];
     total: number;
     page: number;

@@ -8,8 +8,10 @@ import { NatsResponse } from '../../common/nats-response.interface';
 export interface GetPaymentStatsNatsRequest {
   tenantId: string;
   hotelId?: string;
+  chainId?: string;
   startDate?: string;
   endDate?: string;
+  groupBy?: string;
 }
 
 export interface PaymentStatsData {

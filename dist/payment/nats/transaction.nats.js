@@ -13,7 +13,7 @@
  * Handler: payment-service (transactions module)
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TransactionStatus = void 0;
+exports.TransactionType = exports.TransactionStatus = void 0;
 // ============================================================================
 // SHARED TYPES
 // ============================================================================
@@ -25,4 +25,10 @@ var TransactionStatus;
     TransactionStatus["CANCELLED"] = "cancelled";
     TransactionStatus["REFUNDED"] = "refunded";
 })(TransactionStatus || (exports.TransactionStatus = TransactionStatus = {}));
+var TransactionType;
+(function (TransactionType) {
+    TransactionType["PAYMENT"] = "PAYMENT";
+    TransactionType["REFUND"] = "REFUND";
+    TransactionType["ADJUSTMENT"] = "ADJUSTMENT";
+})(TransactionType || (exports.TransactionType = TransactionType = {}));
 //# sourceMappingURL=transaction.nats.js.map

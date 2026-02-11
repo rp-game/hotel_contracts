@@ -26,6 +26,12 @@ export enum TransactionStatus {
   REFUNDED = 'refunded',
 }
 
+export enum TransactionType {
+  PAYMENT = 'PAYMENT',
+  REFUND = 'REFUND',
+  ADJUSTMENT = 'ADJUSTMENT',
+}
+
 export interface PaymentTransaction {
   id: string;
   tenantId: string;
@@ -49,7 +55,11 @@ export interface GetTransactionsNatsRequest {
   tenantId: string;
   hotelId?: string;
   status?: string;
+  type?: string;
   paymentMethod?: string;
+  startDate?: string;
+  endDate?: string;
+  bookingId?: string;
   page?: number;
   limit?: number;
 }
