@@ -22,6 +22,7 @@
  */
 
 import { NatsResponse } from '../../common';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 /**
  * Amenity Priority Enum
@@ -125,27 +126,65 @@ export interface AmenityRequestNatsResponse {
 }
 
 /**
- * Create Amenity Request Request
+ * Create Amenity Request DTO
  * Pattern: amenity_requests.create
+ * Used for both NATS messaging and REST API
  */
-export interface CreateAmenityRequestNatsRequest {
+export class CreateAmenityRequestDto {
+  @ApiProperty({ description: 'Tenant ID', example: '550e8400-e29b-41d4-a716-446655440000' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID', example: '550e8400-e29b-41d4-a716-446655440001' })
   hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Guest ID', example: '550e8400-e29b-41d4-a716-446655440002' })
   guestId?: string;
+
+  @ApiProperty({ description: 'Guest name', example: 'John Doe' })
   guestName: string;
+
+  @ApiProperty({ description: 'Room number', example: '101' })
   roomNumber: string;
+
+  @ApiProperty({ description: 'Amenity type requested', example: 'Extra Towels' })
   amenityType: string;
+
+  @ApiPropertyOptional({ description: 'Request category', enum: SpecialRequestCategory })
   requestCategory?: SpecialRequestCategory;
+
+  @ApiProperty({ description: 'Request description', example: 'Need 2 extra towels for guests' })
   description: string;
+
+  @ApiPropertyOptional({ description: 'Priority level', enum: AmenityPriority, default: AmenityPriority.MEDIUM })
   priority?: AmenityPriority;
+
+  @ApiPropertyOptional({ description: 'Assigned to staff ID' })
   assignedTo?: string;
+
+  @ApiPropertyOptional({ description: 'Estimated time in minutes', example: 15 })
   estimatedTime?: number;
+
+  @ApiPropertyOptional({ description: 'Staff notes' })
   staffNotes?: string;
+
+  @ApiPropertyOptional({ description: 'Estimated cost', example: 0 })
   estimatedCost?: number;
+
+  @ApiPropertyOptional({ description: 'Departments involved', type: [String] })
   departmentsInvolved?: string[];
+
+  @ApiPropertyOptional({ description: 'Guest approval required', default: false })
   guestApprovalRequired?: boolean;
+
+  @ApiPropertyOptional({ description: 'Customer preferences applied', type: [String] })
   customerPreferencesApplied?: string[];
 }
+
+/**
+ * @deprecated Use CreateAmenityRequestDto instead
+ * Kept for backward compatibility during migration
+ */
+export type CreateAmenityRequestNatsRequest = CreateAmenityRequestDto;
 
 /**
  * Create Amenity Request Response
@@ -198,25 +237,50 @@ export interface FindOneAmenityRequestNatsRequest {
 export type FindOneAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsResponse>;
 
 /**
- * Update Amenity Request Request
+ * Update Amenity Request DTO
+ * Used for both NATS messaging and REST API
+ */
+export class UpdateAmenityRequestDto {
+  @ApiPropertyOptional({ description: 'Amenity type requested', example: 'Extra Pillows' })
+  amenityType?: string;
+
+  @ApiPropertyOptional({ description: 'Request description', example: 'Need 2 extra pillows' })
+  description?: string;
+
+  @ApiPropertyOptional({ description: 'Priority level', enum: AmenityPriority })
+  priority?: AmenityPriority;
+
+  @ApiPropertyOptional({ description: 'Request status', enum: AmenityStatus })
+  status?: AmenityStatus;
+
+  @ApiPropertyOptional({ description: 'Assigned to staff ID' })
+  assignedTo?: string;
+
+  @ApiPropertyOptional({ description: 'Estimated time in minutes', example: 15 })
+  estimatedTime?: number;
+
+  @ApiPropertyOptional({ description: 'Staff notes' })
+  staffNotes?: string;
+
+  @ApiPropertyOptional({ description: 'Guest rating (1-5)', minimum: 1, maximum: 5 })
+  guestRating?: number;
+
+  @ApiPropertyOptional({ description: 'Guest feedback' })
+  guestFeedback?: string;
+
+  @ApiPropertyOptional({ description: 'Estimated cost', example: 0 })
+  estimatedCost?: number;
+}
+
+/**
+ * Update Amenity Request NATS Request
  * Pattern: amenity_requests.update
  */
 export interface UpdateAmenityRequestNatsRequest {
   id: string;
   tenantId: string;
   hotelId: string;
-  updateDto: {
-    amenityType?: string;
-    description?: string;
-    priority?: AmenityPriority;
-    status?: AmenityStatus;
-    assignedTo?: string;
-    estimatedTime?: number;
-    staffNotes?: string;
-    guestRating?: number;
-    guestFeedback?: string;
-    estimatedCost?: number;
-  };
+  updateDto: UpdateAmenityRequestDto;
 }
 
 /**

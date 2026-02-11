@@ -110,10 +110,11 @@ export interface AmenityRequestNatsResponse {
     updatedAt: string | Date;
 }
 /**
- * Create Amenity Request Request
+ * Create Amenity Request DTO
  * Pattern: amenity_requests.create
+ * Used for both NATS messaging and REST API
  */
-export interface CreateAmenityRequestNatsRequest {
+export declare class CreateAmenityRequestDto {
     tenantId: string;
     hotelId: string;
     guestId?: string;
@@ -131,6 +132,11 @@ export interface CreateAmenityRequestNatsRequest {
     guestApprovalRequired?: boolean;
     customerPreferencesApplied?: string[];
 }
+/**
+ * @deprecated Use CreateAmenityRequestDto instead
+ * Kept for backward compatibility during migration
+ */
+export type CreateAmenityRequestNatsRequest = CreateAmenityRequestDto;
 /**
  * Create Amenity Request Response
  */
@@ -177,25 +183,30 @@ export interface FindOneAmenityRequestNatsRequest {
  */
 export type FindOneAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsResponse>;
 /**
- * Update Amenity Request Request
+ * Update Amenity Request DTO
+ * Used for both NATS messaging and REST API
+ */
+export declare class UpdateAmenityRequestDto {
+    amenityType?: string;
+    description?: string;
+    priority?: AmenityPriority;
+    status?: AmenityStatus;
+    assignedTo?: string;
+    estimatedTime?: number;
+    staffNotes?: string;
+    guestRating?: number;
+    guestFeedback?: string;
+    estimatedCost?: number;
+}
+/**
+ * Update Amenity Request NATS Request
  * Pattern: amenity_requests.update
  */
 export interface UpdateAmenityRequestNatsRequest {
     id: string;
     tenantId: string;
     hotelId: string;
-    updateDto: {
-        amenityType?: string;
-        description?: string;
-        priority?: AmenityPriority;
-        status?: AmenityStatus;
-        assignedTo?: string;
-        estimatedTime?: number;
-        staffNotes?: string;
-        guestRating?: number;
-        guestFeedback?: string;
-        estimatedCost?: number;
-    };
+    updateDto: UpdateAmenityRequestDto;
 }
 /**
  * Update Amenity Request Response
