@@ -55,6 +55,69 @@ export interface PaymentInvoice {
 }
 
 // ============================================================================
+// ENRICHED INVOICE TYPES (from NATS handler - matches actual response)
+// ============================================================================
+
+/**
+ * Invoice item data with full details including tax, discount calculations
+ * This matches what the handler actually returns
+ */
+export interface InvoiceItemData {
+  id: string;
+  description: string;
+  quantity: number;
+  unitPrice: number;
+  amount: number;
+  subtotal: number;
+  tax: number;
+  taxAmount: number;
+  taxRate: number;
+  discount: number;
+  total: number;
+}
+
+/**
+ * Enriched invoice data with customer, booking details and calculated fields
+ * This matches what the NATS handler actually returns in invoice list responses
+ * Replaces the simpler PaymentInvoice type for list responses
+ */
+export interface InvoiceDataItem {
+  id: string;
+  invoiceNumber: string;
+  bookingId?: string;
+  bookingCode?: string;
+  customerId?: string;
+  guestName?: string;
+  guestEmail?: string;
+  customerName?: string;
+  customerAddress?: string;
+  customerTaxCode?: string;
+  amount: number;
+  subtotal: number;
+  tax: number;
+  taxAmount: number;
+  taxRate: number;
+  discount: number;
+  totalAmount: number;
+  total: number;
+  paidAmount?: number;
+  remainingAmount?: number;
+  currency: string;
+  status: string;
+  paymentStatus: string;
+  dueDate?: string;
+  issuedDate?: string;
+  issuedAt?: string;
+  paidAt?: string;
+  notes?: string;
+  tenantId: string;
+  hotelId?: string;
+  createdAt: string;
+  updatedAt: string;
+  items?: InvoiceItemData[];
+}
+
+// ============================================================================
 // CREATE INVOICE (POST /invoices)
 // ============================================================================
 
@@ -110,15 +173,19 @@ export interface GetInvoicesNatsRequest {
   hotelId?: string;
   status?: string;
   customerId?: string;
+  guestName?: string;
+  dateFrom?: string;
+  dateTo?: string;
   page?: number;
   limit?: number;
 }
 
 export interface GetPaymentInvoicesData {
-  invoices: PaymentInvoice[];
+  data: InvoiceDataItem[];
   total: number;
   page: number;
   limit: number;
+  totalPages?: number;
 }
 
 export type GetInvoicesNatsResponse = NatsResponse<GetPaymentInvoicesData>;
