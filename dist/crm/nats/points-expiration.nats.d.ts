@@ -39,15 +39,58 @@ export interface ExpirationSettingsNatsRequest {
     autoRenewalEnabled: boolean;
 }
 /**
- * Points Expiration Stats Response
+ * Expiration Overview Stats (nested in full stats response)
  */
-export interface PointsExpirationStatsNatsResponse {
+export declare class ExpirationOverviewNatsResponse {
     totalPointsExpiring: number;
     membersAffected: number;
-    expiringIn30Days: number;
-    expiringIn60Days: number;
-    expiringIn90Days: number;
-    riskOfChurnBySegment: Record<string, number>;
+    averagePointsPerMember: number;
+    expirationValue: number;
+}
+/**
+ * Expiration Schedule Item (period breakdown)
+ */
+export declare class ExpirationScheduleItemNatsResponse {
+    period: string;
+    points: number;
+    members: number;
+    value: number;
+}
+/**
+ * Member Segment Statistics (tier breakdown)
+ */
+export declare class MemberSegmentStatsNatsResponse {
+    tier: string;
+    expiringPoints: number;
+    members: number;
+    averagePerMember: number;
+}
+/**
+ * Retention Opportunity (suggested actions)
+ */
+export declare class RetentionOpportunityNatsResponse {
+    action: string;
+    targetMembers: number;
+    estimatedConversion: number;
+    potentialSavings: number;
+}
+/**
+ * Metadata for stats response
+ */
+export declare class StatsMetadataNatsResponse {
+    dataSource: string;
+    generatedAt: string;
+}
+/**
+ * Complete Points Expiration Stats Response (actual NATS response structure)
+ * Pattern: crm.loyalty.points_expiration.stats
+ */
+export declare class PointsExpirationStatsDataNatsResponse {
+    overview: ExpirationOverviewNatsResponse;
+    expirationSchedule: ExpirationScheduleItemNatsResponse[];
+    memberSegments: MemberSegmentStatsNatsResponse[];
+    retentionOpportunities: RetentionOpportunityNatsResponse[];
+    _metadata: StatsMetadataNatsResponse;
 }
 /**
  * Stats Request
@@ -60,7 +103,7 @@ export interface GetPointsExpirationStatsNatsRequest {
 /**
  * Stats Response
  */
-export type GetPointsExpirationStatsNatsResponse = NatsResponse<any>;
+export type GetPointsExpirationStatsNatsResponse = NatsResponse<PointsExpirationStatsDataNatsResponse>;
 /**
  * Expiration Schedule Item
  * Matches: crm-service/src/database/repositories/points-expiration.repository.ts ExpirationSchedule interface
@@ -305,8 +348,9 @@ export interface GetBatchHistoryNatsRequest {
 export type GetBatchHistoryNatsResponse = NatsResponse<ExpirationBatchHistoryNatsResponse[]>;
 /**
  * Points Expiration Batch Response
+ * Matches: crm-service PointsExpirationBatch entity
  */
-export interface PointsExpirationBatchNatsResponse {
+export declare class PointsExpirationBatchNatsResponse {
     id: string | number;
     tenantId: string;
     batchName: string;

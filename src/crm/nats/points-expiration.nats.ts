@@ -17,6 +17,7 @@
  * Called by: api-gateway (CrmController)
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 
 /**
@@ -43,15 +44,103 @@ export interface ExpirationSettingsNatsRequest {
 }
 
 /**
- * Points Expiration Stats Response
+ * Expiration Overview Stats (nested in full stats response)
  */
-export interface PointsExpirationStatsNatsResponse {
+export class ExpirationOverviewNatsResponse {
+  @ApiProperty({ description: 'Total points expiring across all periods' })
   totalPointsExpiring: number;
+
+  @ApiProperty({ description: 'Number of members affected by expiration' })
   membersAffected: number;
-  expiringIn30Days: number;
-  expiringIn60Days: number;
-  expiringIn90Days: number;
-  riskOfChurnBySegment: Record<string, number>;
+
+  @ApiProperty({ description: 'Average points per member expiring' })
+  averagePointsPerMember: number;
+
+  @ApiProperty({ description: 'Monetary value of expiring points' })
+  expirationValue: number;
+}
+
+/**
+ * Expiration Schedule Item (period breakdown)
+ */
+export class ExpirationScheduleItemNatsResponse {
+  @ApiProperty({ description: 'Period identifier (e.g., "30 days", "60 days", "90 days")' })
+  period: string;
+
+  @ApiProperty({ description: 'Total points expiring in this period' })
+  points: number;
+
+  @ApiProperty({ description: 'Number of members affected in this period' })
+  members: number;
+
+  @ApiProperty({ description: 'Monetary value of expiring points in this period' })
+  value: number;
+}
+
+/**
+ * Member Segment Statistics (tier breakdown)
+ */
+export class MemberSegmentStatsNatsResponse {
+  @ApiProperty({ description: 'Tier name or segment identifier' })
+  tier: string;
+
+  @ApiProperty({ description: 'Total points expiring for this segment' })
+  expiringPoints: number;
+
+  @ApiProperty({ description: 'Number of members in this segment' })
+  members: number;
+
+  @ApiProperty({ description: 'Average expiring points per member in segment' })
+  averagePerMember: number;
+}
+
+/**
+ * Retention Opportunity (suggested actions)
+ */
+export class RetentionOpportunityNatsResponse {
+  @ApiProperty({ description: 'Recommended action to retain members' })
+  action: string;
+
+  @ApiProperty({ description: 'Number of members this action targets' })
+  targetMembers: number;
+
+  @ApiProperty({ description: 'Estimated conversion rate/success rate' })
+  estimatedConversion: number;
+
+  @ApiProperty({ description: 'Potential savings or value recovered' })
+  potentialSavings: number;
+}
+
+/**
+ * Metadata for stats response
+ */
+export class StatsMetadataNatsResponse {
+  @ApiProperty({ description: 'Data source identifier', example: 'DATABASE' })
+  dataSource: string;
+
+  @ApiProperty({ description: 'When stats were generated', format: 'date-time' })
+  generatedAt: string;
+}
+
+/**
+ * Complete Points Expiration Stats Response (actual NATS response structure)
+ * Pattern: crm.loyalty.points_expiration.stats
+ */
+export class PointsExpirationStatsDataNatsResponse {
+  @ApiProperty({ description: 'Overview statistics', type: ExpirationOverviewNatsResponse })
+  overview: ExpirationOverviewNatsResponse;
+
+  @ApiProperty({ description: 'Expiration schedule by period', type: [ExpirationScheduleItemNatsResponse] })
+  expirationSchedule: ExpirationScheduleItemNatsResponse[];
+
+  @ApiProperty({ description: 'Member segment statistics', type: [MemberSegmentStatsNatsResponse] })
+  memberSegments: MemberSegmentStatsNatsResponse[];
+
+  @ApiProperty({ description: 'Retention opportunities', type: [RetentionOpportunityNatsResponse] })
+  retentionOpportunities: RetentionOpportunityNatsResponse[];
+
+  @ApiProperty({ description: 'Response metadata', type: StatsMetadataNatsResponse })
+  _metadata: StatsMetadataNatsResponse;
 }
 
 /**
@@ -66,7 +155,7 @@ export interface GetPointsExpirationStatsNatsRequest {
 /**
  * Stats Response
  */
-export type GetPointsExpirationStatsNatsResponse = NatsResponse<any>;
+export type GetPointsExpirationStatsNatsResponse = NatsResponse<PointsExpirationStatsDataNatsResponse>;
 
 /**
  * Expiration Schedule Item
@@ -340,26 +429,64 @@ export type GetBatchHistoryNatsResponse = NatsResponse<ExpirationBatchHistoryNat
 
 /**
  * Points Expiration Batch Response
+ * Matches: crm-service PointsExpirationBatch entity
  */
-export interface PointsExpirationBatchNatsResponse {
+export class PointsExpirationBatchNatsResponse {
+  @ApiProperty({ description: 'Batch ID', type: 'number' })
   id: string | number;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Batch name/description' })
   batchName: string;
+
+  @ApiProperty({ description: 'Type of batch operation', enum: ['EXPIRATION_PROCESSING', 'NOTIFICATION_SENDING', 'STATS_CALCULATION'] })
   batchType: string;
+
+  @ApiProperty({ description: 'Batch status', enum: ['PENDING', 'PROCESSING', 'COMPLETED', 'FAILED'] })
   status: string;
+
+  @ApiProperty({ description: 'When processing started', type: String, format: 'date-time' })
   processingDate: string | Date;
+
+  @ApiProperty({ description: 'When batch started', type: String, format: 'date-time' })
   startedAt: string | Date;
+
+  @ApiPropertyOptional({ description: 'When batch completed', type: String, format: 'date-time' })
   completedAt?: string | Date;
+
+  @ApiProperty({ description: 'Total records in batch' })
   totalRecords: number;
+
+  @ApiProperty({ description: 'Records successfully processed' })
   processedRecords: number;
+
+  @ApiProperty({ description: 'Records processed successfully' })
   successfulRecords: number;
+
+  @ApiProperty({ description: 'Records that failed' })
   failedRecords: number;
+
+  @ApiPropertyOptional({ description: 'Records skipped' })
   skippedRecords?: number;
+
+  @ApiPropertyOptional({ description: 'Processing duration in seconds' })
   durationSeconds?: number;
+
+  @ApiProperty({ description: 'Source of batch trigger', enum: ['SCHEDULED_JOB', 'MANUAL', 'API_CALL', 'EVENT_TRIGGER'] })
   triggerSource: string;
+
+  @ApiPropertyOptional({ description: 'User/system who triggered batch' })
   triggeredBy?: string;
+
+  @ApiPropertyOptional({ description: 'Processing parameters' })
   processingParameters?: any;
+
+  @ApiPropertyOptional({ description: 'Processing summary/statistics' })
   processingSummary?: any;
+
+  @ApiPropertyOptional({ description: 'Error summary with details' })
   errorSummary?: {
     errorTypes?: {
       [errorType: string]: number;
@@ -367,8 +494,14 @@ export interface PointsExpirationBatchNatsResponse {
     failedMemberIds?: string[];
     retryRecommendations?: string[];
   };
+
+  @ApiPropertyOptional({ description: 'Additional error details' })
   errorDetails?: any;
+
+  @ApiPropertyOptional({ description: 'Path to batch log file' })
   logFilePath?: string;
+
+  @ApiProperty({ description: 'When batch was created', type: String, format: 'date-time' })
   createdAt: string | Date;
 }
 
