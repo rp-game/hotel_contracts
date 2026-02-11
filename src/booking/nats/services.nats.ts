@@ -230,6 +230,7 @@ export type FindAllServicesNatsResponse = NatsResponse<FindAllServicesData>;
  */
 export interface FindOneServiceNatsRequest {
   tenantId: string;
+  hotelId: string;
   serviceId: string;
 }
 
@@ -241,6 +242,7 @@ export type FindOneServiceNatsResponse = NatsResponse<BookingServiceNatsResponse
  */
 export interface UpdateServiceNatsRequest {
   tenantId: string;
+  hotelId: string;
   serviceId: string;
   updateData: Partial<CreateServiceNatsRequest>;
 }
@@ -253,6 +255,7 @@ export type UpdateServiceNatsResponse = NatsResponse<BookingServiceNatsResponse>
  */
 export interface DeleteServiceNatsRequest {
   tenantId: string;
+  hotelId: string;
   serviceId: string;
 }
 
@@ -309,6 +312,7 @@ export type GetBookingServiceStatsNatsResponse = NatsResponse<BookingServiceStat
  */
 export interface CheckServiceAvailabilityNatsRequest {
   tenantId: string;
+  hotelId: string;
   serviceId: string;
   date: string; // YYYY-MM-DD
   time?: string; // HH:mm
