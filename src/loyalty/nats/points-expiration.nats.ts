@@ -15,6 +15,7 @@
  * - crm.loyalty.points_expiration.batch_history
  * - crm.loyalty.points_expiration.extend
  * - crm.loyalty.points_expiration.notifications.send
+ * - crm.loyalty.points_expiration.members.find_all
  * - crm.loyalty.points_expiration.notifications.send_batch
  * - crm.loyalty.points_expiration.notifications.history
  * - crm.loyalty.points_expiration.member.get
@@ -281,3 +282,42 @@ export interface NotificationRemindersJobNatsRequest {
 }
 
 export type NotificationRemindersJobNatsResponse = NatsResponse<NotificationRemindersJobResult>;
+
+/**
+ * Find All Members with Expiring Points Request
+ * Pattern: crm.loyalty.points_expiration.members.find_all
+ */
+export interface FindAllMembersExpiringPointsNatsRequest {
+  tenantId: string;
+  programId?: string;
+  daysUntilExpiration?: number; // e.g., 30 days - find members with points expiring within X days
+  minPointsExpiring?: number; // Optional filter for minimum points
+  tierFilter?: string[]; // Optional filter by member tiers
+  limit?: number;
+  offset?: number;
+}
+
+/**
+ * Member with Expiring Points (for list display)
+ */
+export interface MemberWithExpiringPoints {
+  memberId: string;
+  customerId: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone?: string;
+  programName: string;
+  memberTier: string;
+  totalPoints: number;
+  pointsToExpire: number;
+  daysUntilExpiration: number;
+  expirationDate: string | Date;
+  memberStatus?: string;
+  lastActivityDate?: string | Date;
+}
+
+export type FindAllMembersExpiringPointsNatsResponse = NatsResponse<{
+  members: MemberWithExpiringPoints[];
+  total: number;
+  hasMore: boolean;
+}>;

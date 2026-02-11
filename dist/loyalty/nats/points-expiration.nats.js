@@ -16,6 +16,7 @@
  * - crm.loyalty.points_expiration.batch_history
  * - crm.loyalty.points_expiration.extend
  * - crm.loyalty.points_expiration.notifications.send
+ * - crm.loyalty.points_expiration.members.find_all
  * - crm.loyalty.points_expiration.notifications.send_batch
  * - crm.loyalty.points_expiration.notifications.history
  * - crm.loyalty.points_expiration.member.get

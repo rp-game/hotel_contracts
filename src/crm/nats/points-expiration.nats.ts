@@ -12,6 +12,7 @@
  * - crm.loyalty.points_expiration.settings.get
  * - crm.loyalty.points_expiration.settings.update
  * - crm.loyalty.points_expiration.process
+ * - crm.loyalty.points_expiration.members.find_all
  *
  * Handler: crm-service (PointsExpirationNatsController)
  * Called by: api-gateway (CrmController)
@@ -668,3 +669,70 @@ export interface SendNotificationRemindersNatsRequest {
  * Send Notification Reminders Response
  */
 export type SendNotificationRemindersNatsResponse = NatsResponse<SendRemindersResultNatsResponse>;
+
+/**
+ * Member with Expiring Points (for list display)
+ */
+export class MemberWithExpiringPointsNatsResponse {
+  @ApiProperty({ description: 'Member ID' })
+  memberId: string;
+
+  @ApiProperty({ description: 'Customer ID' })
+  customerId: string;
+
+  @ApiProperty({ description: 'Customer name' })
+  customerName: string;
+
+  @ApiProperty({ description: 'Customer email' })
+  customerEmail: string;
+
+  @ApiPropertyOptional({ description: 'Customer phone number' })
+  customerPhone?: string;
+
+  @ApiProperty({ description: 'Loyalty program name' })
+  programName: string;
+
+  @ApiProperty({ description: 'Member tier name' })
+  memberTier: string;
+
+  @ApiProperty({ description: 'Current total points balance' })
+  totalPoints: number;
+
+  @ApiProperty({ description: 'Points expiring soon' })
+  pointsToExpire: number;
+
+  @ApiProperty({ description: 'Days until points expire' })
+  daysUntilExpiration: number;
+
+  @ApiProperty({ description: 'Expiration date', type: String, format: 'date-time' })
+  expirationDate: string | Date;
+
+  @ApiPropertyOptional({ description: 'Member status' })
+  memberStatus?: string;
+
+  @ApiPropertyOptional({ description: 'Last activity date', type: String, format: 'date-time' })
+  lastActivityDate?: string | Date;
+}
+
+/**
+ * Find All Members with Expiring Points Request
+ * Pattern: crm.loyalty.points_expiration.members.find_all
+ */
+export interface FindAllMembersExpiringPointsNatsRequest {
+  tenantId: string;
+  programId?: string;
+  daysUntilExpiration?: number; // e.g., 30 days - find members with points expiring within X days
+  minPointsExpiring?: number; // Optional filter for minimum points
+  tierFilter?: string[]; // Optional filter by member tiers
+  limit?: number;
+  offset?: number;
+}
+
+/**
+ * Find All Members with Expiring Points Response
+ */
+export type FindAllMembersExpiringPointsNatsResponse = NatsResponse<{
+  members: MemberWithExpiringPointsNatsResponse[];
+  total: number;
+  hasMore: boolean;
+}>;

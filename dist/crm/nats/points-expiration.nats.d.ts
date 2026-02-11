@@ -12,6 +12,7 @@
  * - crm.loyalty.points_expiration.settings.get
  * - crm.loyalty.points_expiration.settings.update
  * - crm.loyalty.points_expiration.process
+ * - crm.loyalty.points_expiration.members.find_all
  *
  * Handler: crm-service (PointsExpirationNatsController)
  * Called by: api-gateway (CrmController)
@@ -526,4 +527,43 @@ export interface SendNotificationRemindersNatsRequest {
  * Send Notification Reminders Response
  */
 export type SendNotificationRemindersNatsResponse = NatsResponse<SendRemindersResultNatsResponse>;
+/**
+ * Member with Expiring Points (for list display)
+ */
+export declare class MemberWithExpiringPointsNatsResponse {
+    memberId: string;
+    customerId: string;
+    customerName: string;
+    customerEmail: string;
+    customerPhone?: string;
+    programName: string;
+    memberTier: string;
+    totalPoints: number;
+    pointsToExpire: number;
+    daysUntilExpiration: number;
+    expirationDate: string | Date;
+    memberStatus?: string;
+    lastActivityDate?: string | Date;
+}
+/**
+ * Find All Members with Expiring Points Request
+ * Pattern: crm.loyalty.points_expiration.members.find_all
+ */
+export interface FindAllMembersExpiringPointsNatsRequest {
+    tenantId: string;
+    programId?: string;
+    daysUntilExpiration?: number;
+    minPointsExpiring?: number;
+    tierFilter?: string[];
+    limit?: number;
+    offset?: number;
+}
+/**
+ * Find All Members with Expiring Points Response
+ */
+export type FindAllMembersExpiringPointsNatsResponse = NatsResponse<{
+    members: MemberWithExpiringPointsNatsResponse[];
+    total: number;
+    hasMore: boolean;
+}>;
 //# sourceMappingURL=points-expiration.nats.d.ts.map

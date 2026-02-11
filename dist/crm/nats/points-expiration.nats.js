@@ -13,6 +13,7 @@
  * - crm.loyalty.points_expiration.settings.get
  * - crm.loyalty.points_expiration.settings.update
  * - crm.loyalty.points_expiration.process
+ * - crm.loyalty.points_expiration.members.find_all
  *
  * Handler: crm-service (PointsExpirationNatsController)
  * Called by: api-gateway (CrmController)
@@ -27,7 +28,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PointsExpirationBatchNatsResponse = exports.PointsExpirationStatsDataNatsResponse = exports.StatsMetadataNatsResponse = exports.RetentionOpportunityNatsResponse = exports.MemberSegmentStatsNatsResponse = exports.ExpirationScheduleItemNatsResponse = exports.ExpirationOverviewNatsResponse = void 0;
+exports.MemberWithExpiringPointsNatsResponse = exports.PointsExpirationBatchNatsResponse = exports.PointsExpirationStatsDataNatsResponse = exports.StatsMetadataNatsResponse = exports.RetentionOpportunityNatsResponse = exports.MemberSegmentStatsNatsResponse = exports.ExpirationScheduleItemNatsResponse = exports.ExpirationOverviewNatsResponse = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Expiration Overview Stats (nested in full stats response)
@@ -298,4 +299,75 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'When batch was created', type: String, format: 'date-time' }),
     __metadata("design:type", Object)
 ], PointsExpirationBatchNatsResponse.prototype, "createdAt", void 0);
+/**
+ * Member with Expiring Points (for list display)
+ */
+class MemberWithExpiringPointsNatsResponse {
+    memberId;
+    customerId;
+    customerName;
+    customerEmail;
+    customerPhone;
+    programName;
+    memberTier;
+    totalPoints;
+    pointsToExpire;
+    daysUntilExpiration;
+    expirationDate;
+    memberStatus;
+    lastActivityDate;
+}
+exports.MemberWithExpiringPointsNatsResponse = MemberWithExpiringPointsNatsResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Member ID' }),
+    __metadata("design:type", String)
+], MemberWithExpiringPointsNatsResponse.prototype, "memberId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], MemberWithExpiringPointsNatsResponse.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer name' }),
+    __metadata("design:type", String)
+], MemberWithExpiringPointsNatsResponse.prototype, "customerName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer email' }),
+    __metadata("design:type", String)
+], MemberWithExpiringPointsNatsResponse.prototype, "customerEmail", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer phone number' }),
+    __metadata("design:type", String)
+], MemberWithExpiringPointsNatsResponse.prototype, "customerPhone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Loyalty program name' }),
+    __metadata("design:type", String)
+], MemberWithExpiringPointsNatsResponse.prototype, "programName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Member tier name' }),
+    __metadata("design:type", String)
+], MemberWithExpiringPointsNatsResponse.prototype, "memberTier", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current total points balance' }),
+    __metadata("design:type", Number)
+], MemberWithExpiringPointsNatsResponse.prototype, "totalPoints", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Points expiring soon' }),
+    __metadata("design:type", Number)
+], MemberWithExpiringPointsNatsResponse.prototype, "pointsToExpire", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Days until points expire' }),
+    __metadata("design:type", Number)
+], MemberWithExpiringPointsNatsResponse.prototype, "daysUntilExpiration", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Expiration date', type: String, format: 'date-time' }),
+    __metadata("design:type", Object)
+], MemberWithExpiringPointsNatsResponse.prototype, "expirationDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Member status' }),
+    __metadata("design:type", String)
+], MemberWithExpiringPointsNatsResponse.prototype, "memberStatus", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Last activity date', type: String, format: 'date-time' }),
+    __metadata("design:type", Object)
+], MemberWithExpiringPointsNatsResponse.prototype, "lastActivityDate", void 0);
 //# sourceMappingURL=points-expiration.nats.js.map
