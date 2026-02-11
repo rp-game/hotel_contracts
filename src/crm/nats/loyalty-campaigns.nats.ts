@@ -17,7 +17,9 @@
  * Called by: api-gateway (CrmController)
  */
 
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common';
 
 /**
@@ -52,26 +54,52 @@ export enum CampaignStatus {
 /**
  * Campaign Rules
  */
-export interface CampaignRulesNatsRequest {
+export class CampaignRulesNatsRequest {
+  @ApiPropertyOptional({ description: 'Points multiplier (e.g., 2x, 3x)' })
   multiplier?: number;
+
+  @ApiPropertyOptional({ description: 'Fixed bonus points to award' })
   bonus_points?: number;
+
+  @ApiPropertyOptional({ description: 'Minimum spend requirement (VND)' })
   min_spend?: number;
+
+  @ApiPropertyOptional({ description: 'Maximum bonus points cap' })
   max_bonus?: number;
+
+  @ApiPropertyOptional({ description: 'Eligible tier IDs', type: [String] })
   eligible_tiers?: string[];
+
+  @ApiPropertyOptional({ description: 'Eligible service types', type: [String] })
   eligible_services?: string[];
+
+  @ApiPropertyOptional({ description: 'Maximum uses per customer' })
   max_uses_per_customer?: number;
+
+  @ApiPropertyOptional({ description: 'Total campaign budget (VND)' })
   total_budget?: number;
 }
 
 /**
  * Campaign Conditions
  */
-export interface CampaignConditionsNatsRequest {
+export class CampaignConditionsNatsRequest {
+  @ApiPropertyOptional({ description: 'Target customer segment IDs', type: [String] })
   customer_segments?: string[];
+
+  @ApiPropertyOptional({ description: 'Qualifying booking types', type: [String] })
   booking_types?: string[];
+
+  @ApiPropertyOptional({ description: 'Qualifying room categories', type: [String] })
   room_categories?: string[];
+
+  @ApiPropertyOptional({ description: 'Minimum nights stay requirement' })
   minimum_nights?: number;
+
+  @ApiPropertyOptional({ description: 'Advance booking days required' })
   advance_booking_days?: number;
+
+  @ApiPropertyOptional({ description: 'Exclude corporate bookings' })
   exclude_corporate?: boolean;
 }
 
@@ -108,37 +136,97 @@ export interface UpdateCampaignNatsRequest {
 /**
  * Campaign Tracking Metrics
  */
-export interface CampaignTracking {
+export class CampaignTracking {
+  @ApiPropertyOptional({ description: 'Number of campaign views' })
   views?: number;
+
+  @ApiPropertyOptional({ description: 'Number of enrollments' })
   enrollments?: number;
+
+  @ApiPropertyOptional({ description: 'Number of redemptions' })
   redemptions?: number;
+
+  @ApiPropertyOptional({ description: 'Conversion rate (%)' })
   conversionRate?: number;
 }
 
 /**
  * Loyalty Campaign Response
  */
-export interface LoyaltyCampaignNatsResponse {
+export class LoyaltyCampaignNatsResponse {
+  @ApiProperty({ description: 'Campaign ID' })
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Loyalty program ID' })
   programId: string;
+
+  @ApiProperty({ description: 'Campaign name' })
   name: string;
+
+  @ApiPropertyOptional({ description: 'Campaign description' })
   description?: string;
-  campaignType: CampaignType;
-  status: CampaignStatus;
+
+  @ApiProperty({ description: 'Campaign type' })
+  campaignType: string;
+
+  @ApiProperty({ description: 'Campaign status' })
+  status: string;
+
+  @ApiProperty({ description: 'Start date (ISO 8601)' })
   startDate: string;
+
+  @ApiProperty({ description: 'End date (ISO 8601)' })
   endDate: string;
+
+  @ApiProperty({ description: 'Campaign rules configuration', type: CampaignRulesNatsRequest })
+  @ValidateNested()
+  @Type(() => CampaignRulesNatsRequest)
   rules: CampaignRulesNatsRequest;
+
+  @ApiPropertyOptional({ description: 'Campaign conditions', type: CampaignConditionsNatsRequest })
+  @ValidateNested()
+  @Type(() => CampaignConditionsNatsRequest)
   conditions?: CampaignConditionsNatsRequest;
+
+  @ApiProperty({ description: 'Auto-apply campaign flag' })
   isAutoApply: boolean;
+
+  @ApiPropertyOptional({ description: 'Promotion code for campaign' })
   promotionCode?: string;
+
+  @ApiPropertyOptional({ description: 'Active flag' })
   isActive?: boolean;
+
+  @ApiPropertyOptional({ description: 'Campaign budget (VND)' })
+  budget?: number;
+
+  @ApiPropertyOptional({ description: 'Participants count' })
+  participantsCount?: number;
+
+  @ApiPropertyOptional({ description: 'Participation count' })
   participationCount?: number;
+
+  @ApiPropertyOptional({ description: 'Points awarded through this campaign' })
   pointsAwarded?: number;
+
+  @ApiPropertyOptional({ description: 'Cost to date (VND)' })
   costToDate?: number;
+
+  @ApiPropertyOptional({ description: 'Campaign tracking metrics', type: CampaignTracking })
+  @ValidateNested()
+  @Type(() => CampaignTracking)
   tracking?: CampaignTracking;
-  createdBy: string;
+
+  @ApiPropertyOptional({ description: 'Created by user ID' })
+  createdBy?: string;
+
+  @ApiProperty({ description: 'Creation timestamp (ISO 8601)' })
   createdAt: string;
+
+  @ApiProperty({ description: 'Last update timestamp (ISO 8601)' })
   updatedAt: string;
 }
 
@@ -182,20 +270,44 @@ export type FindActiveCampaignsNatsResponse = NatsResponse<{
 }>;
 
 /**
+ * Top Campaign Performer Item (for Stats.topCampaigns array)
+ */
+export class CampaignTopPerformerItem {
+  @ApiProperty({ description: 'Campaign ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Campaign name' })
+  name: string;
+
+  @ApiProperty({ description: 'Number of members impacted' })
+  membersImpacted: number;
+
+  @ApiProperty({ description: 'Points awarded' })
+  pointsAwarded: number;
+}
+
+/**
  * Campaign Stats Response
  */
-export interface CampaignStatsNatsResponse {
+export class CampaignStatsNatsResponse {
+  @ApiProperty({ description: 'Campaign statistics overview' })
   totalCampaigns: number;
+
+  @ApiProperty({ description: 'Active campaigns count' })
   activeCampaigns: number;
+
+  @ApiProperty({ description: 'Total members impacted' })
   totalMembersImpacted: number;
+
+  @ApiProperty({ description: 'Total points awarded' })
   totalPointsAwarded: number;
+
+  @ApiProperty({ description: 'Average redemption rate' })
   averageRedemptionRate: number;
-  topCampaigns: Array<{
-    id: string;
-    name: string;
-    membersImpacted: number;
-    pointsAwarded: number;
-  }>;
+
+  @ApiProperty({ description: 'Top campaigns', type: [CampaignTopPerformerItem] })
+  @Type(() => CampaignTopPerformerItem)
+  topCampaigns: CampaignTopPerformerItem[];
 }
 
 /**
@@ -212,19 +324,41 @@ export interface GetCampaignStatsNatsRequest {
 export type GetCampaignStatsNatsResponse = NatsResponse<CampaignStatsNatsResponse>;
 
 /**
+ * Campaign Performance Item (for Dashboard.campaignPerformance array)
+ */
+export class CampaignPerformanceItem {
+  @ApiProperty({ description: 'Campaign ID' })
+  campaignId: string;
+
+  @ApiProperty({ description: 'Campaign name' })
+  name: string;
+
+  @ApiProperty({ description: 'Engagement rate (0-100)' })
+  engagement: number;
+
+  @ApiProperty({ description: 'Return on investment (ROI) percentage' })
+  roi: number;
+}
+
+/**
  * Campaign Dashboard Response
  */
-export interface CampaignDashboardNatsResponse {
+export class CampaignDashboardNatsResponse {
+  @ApiProperty({ description: 'Number of active campaigns' })
   activeCampaigns: number;
+
+  @ApiProperty({ description: 'Number of upcoming campaigns' })
   upcomingCampaigns: number;
+
+  @ApiProperty({ description: 'Total members enrolled in campaigns' })
   totalMembersEnrolled: number;
+
+  @ApiProperty({ description: 'Total points distributed through campaigns' })
   totalPointsDistributed: number;
-  campaignPerformance: Array<{
-    campaignId: string;
-    name: string;
-    engagement: number;
-    roi: number;
-  }>;
+
+  @ApiProperty({ description: 'Campaign performance metrics', type: [CampaignPerformanceItem] })
+  @Type(() => CampaignPerformanceItem)
+  campaignPerformance: CampaignPerformanceItem[];
 }
 
 /**
@@ -349,12 +483,27 @@ export type ApplyCampaignNatsResponse = NatsResponse<{
 /**
  * Campaign Template Response
  */
-export interface CampaignTemplateNatsResponse {
+export class CampaignTemplateNatsResponse {
+  @ApiProperty({ description: 'Template ID' })
   id: string;
+
+  @ApiProperty({ description: 'Template name' })
   name: string;
-  type: CampaignType;
+
+  @ApiProperty({ description: 'Campaign type' })
+  type: string;
+
+  @ApiProperty({ description: 'Template description' })
   description: string;
+
+  @ApiProperty({ description: 'Campaign rules', type: CampaignRulesNatsRequest })
+  @ValidateNested()
+  @Type(() => CampaignRulesNatsRequest)
   rules: CampaignRulesNatsRequest;
+
+  @ApiPropertyOptional({ description: 'Campaign conditions', type: CampaignConditionsNatsRequest })
+  @ValidateNested()
+  @Type(() => CampaignConditionsNatsRequest)
   conditions?: CampaignConditionsNatsRequest;
 }
 
@@ -370,3 +519,31 @@ export interface GetCampaignTemplatesNatsRequest {
  * Templates Response
  */
 export type GetCampaignTemplatesNatsResponse = NatsResponse<CampaignTemplateNatsResponse[]>;
+
+/**
+ * Loyalty Campaigns List Data (wrapper for paginated list)
+ */
+export class LoyaltyCampaignsListData {
+  @ApiProperty({ description: 'List of loyalty campaigns', type: [LoyaltyCampaignNatsResponse] })
+  data: LoyaltyCampaignNatsResponse[];
+
+  @ApiProperty({ description: 'Total number of campaigns' })
+  total: number;
+
+  @ApiProperty({ description: 'Current page number' })
+  page: number;
+
+  @ApiProperty({ description: 'Number of items per page' })
+  limit: number;
+}
+
+/**
+ * Active Campaigns List Data (wrapper for active campaigns)
+ */
+export class ActiveCampaignsListData {
+  @ApiProperty({ description: 'List of active campaigns', type: [LoyaltyCampaignNatsResponse] })
+  data: LoyaltyCampaignNatsResponse[];
+
+  @ApiProperty({ description: 'Total number of active campaigns' })
+  total: number;
+}

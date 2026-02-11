@@ -47,7 +47,7 @@ export declare enum CampaignStatus {
 /**
  * Campaign Rules
  */
-export interface CampaignRulesNatsRequest {
+export declare class CampaignRulesNatsRequest {
     multiplier?: number;
     bonus_points?: number;
     min_spend?: number;
@@ -60,7 +60,7 @@ export interface CampaignRulesNatsRequest {
 /**
  * Campaign Conditions
  */
-export interface CampaignConditionsNatsRequest {
+export declare class CampaignConditionsNatsRequest {
     customer_segments?: string[];
     booking_types?: string[];
     room_categories?: string[];
@@ -99,7 +99,7 @@ export interface UpdateCampaignNatsRequest {
 /**
  * Campaign Tracking Metrics
  */
-export interface CampaignTracking {
+export declare class CampaignTracking {
     views?: number;
     enrollments?: number;
     redemptions?: number;
@@ -108,14 +108,14 @@ export interface CampaignTracking {
 /**
  * Loyalty Campaign Response
  */
-export interface LoyaltyCampaignNatsResponse {
+export declare class LoyaltyCampaignNatsResponse {
     id: string;
     tenantId: string;
     programId: string;
     name: string;
     description?: string;
-    campaignType: CampaignType;
-    status: CampaignStatus;
+    campaignType: string;
+    status: string;
     startDate: string;
     endDate: string;
     rules: CampaignRulesNatsRequest;
@@ -123,11 +123,13 @@ export interface LoyaltyCampaignNatsResponse {
     isAutoApply: boolean;
     promotionCode?: string;
     isActive?: boolean;
+    budget?: number;
+    participantsCount?: number;
     participationCount?: number;
     pointsAwarded?: number;
     costToDate?: number;
     tracking?: CampaignTracking;
-    createdBy: string;
+    createdBy?: string;
     createdAt: string;
     updatedAt: string;
 }
@@ -167,20 +169,24 @@ export type FindActiveCampaignsNatsResponse = NatsResponse<{
     total: number;
 }>;
 /**
+ * Top Campaign Performer Item (for Stats.topCampaigns array)
+ */
+export declare class CampaignTopPerformerItem {
+    id: string;
+    name: string;
+    membersImpacted: number;
+    pointsAwarded: number;
+}
+/**
  * Campaign Stats Response
  */
-export interface CampaignStatsNatsResponse {
+export declare class CampaignStatsNatsResponse {
     totalCampaigns: number;
     activeCampaigns: number;
     totalMembersImpacted: number;
     totalPointsAwarded: number;
     averageRedemptionRate: number;
-    topCampaigns: Array<{
-        id: string;
-        name: string;
-        membersImpacted: number;
-        pointsAwarded: number;
-    }>;
+    topCampaigns: CampaignTopPerformerItem[];
 }
 /**
  * Stats Request
@@ -194,19 +200,23 @@ export interface GetCampaignStatsNatsRequest {
  */
 export type GetCampaignStatsNatsResponse = NatsResponse<CampaignStatsNatsResponse>;
 /**
+ * Campaign Performance Item (for Dashboard.campaignPerformance array)
+ */
+export declare class CampaignPerformanceItem {
+    campaignId: string;
+    name: string;
+    engagement: number;
+    roi: number;
+}
+/**
  * Campaign Dashboard Response
  */
-export interface CampaignDashboardNatsResponse {
+export declare class CampaignDashboardNatsResponse {
     activeCampaigns: number;
     upcomingCampaigns: number;
     totalMembersEnrolled: number;
     totalPointsDistributed: number;
-    campaignPerformance: Array<{
-        campaignId: string;
-        name: string;
-        engagement: number;
-        roi: number;
-    }>;
+    campaignPerformance: CampaignPerformanceItem[];
 }
 /**
  * Dashboard Request
@@ -300,10 +310,10 @@ export type ApplyCampaignNatsResponse = NatsResponse<{
 /**
  * Campaign Template Response
  */
-export interface CampaignTemplateNatsResponse {
+export declare class CampaignTemplateNatsResponse {
     id: string;
     name: string;
-    type: CampaignType;
+    type: string;
     description: string;
     rules: CampaignRulesNatsRequest;
     conditions?: CampaignConditionsNatsRequest;
@@ -319,4 +329,20 @@ export interface GetCampaignTemplatesNatsRequest {
  * Templates Response
  */
 export type GetCampaignTemplatesNatsResponse = NatsResponse<CampaignTemplateNatsResponse[]>;
+/**
+ * Loyalty Campaigns List Data (wrapper for paginated list)
+ */
+export declare class LoyaltyCampaignsListData {
+    data: LoyaltyCampaignNatsResponse[];
+    total: number;
+    page: number;
+    limit: number;
+}
+/**
+ * Active Campaigns List Data (wrapper for active campaigns)
+ */
+export declare class ActiveCampaignsListData {
+    data: LoyaltyCampaignNatsResponse[];
+    total: number;
+}
 //# sourceMappingURL=loyalty-campaigns.nats.d.ts.map
