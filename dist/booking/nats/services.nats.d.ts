@@ -39,7 +39,7 @@ export declare enum BookingServiceStatus {
 /**
  * Booking Service Response (matches Service entity)
  */
-export interface BookingServiceNatsResponse {
+export declare class BookingServiceNatsResponse {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -70,7 +70,7 @@ export interface BookingServiceNatsResponse {
  * Create Service Request
  * Pattern: services.create
  */
-export interface CreateServiceNatsRequest {
+export declare class CreateServiceNatsRequest {
     tenantId: string;
     hotelId: string;
     name: string;
@@ -110,7 +110,7 @@ export interface FindAllServicesNatsRequest {
 /**
  * Find All Services Response (paginated)
  */
-export interface FindAllServicesData {
+export declare class FindAllServicesData {
     data: BookingServiceNatsResponse[];
     total: number;
     page: number;
@@ -153,7 +153,7 @@ export type DeleteServiceNatsResponse = NatsResponse<DeleteServiceData>;
 /**
  * Booking Service Statistics Response
  */
-export interface BookingServiceStatsData {
+export declare class BookingServiceStatsData {
     totalServices: number;
     activeServices: number;
     inactiveServices: number;
