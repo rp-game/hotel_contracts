@@ -101,7 +101,7 @@ export type CreateServiceNatsResponse = NatsResponse<BookingServiceNatsResponse>
  */
 export interface FindAllServicesNatsRequest {
     tenantId: string;
-    hotelId?: string;
+    hotelId: string;
     category?: ServiceCategory;
     status?: BookingServiceStatus;
     page?: number;
