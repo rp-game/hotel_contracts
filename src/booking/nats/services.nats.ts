@@ -301,7 +301,7 @@ export class BookingServiceStatsData {
  */
 export interface GetBookingServiceStatsNatsRequest {
   tenantId: string;
-  hotelId?: string;
+  hotelId: string;
 }
 
 export type GetBookingServiceStatsNatsResponse = NatsResponse<BookingServiceStatsData>;
