@@ -17,6 +17,7 @@
  * Called by: api-gateway (CrmController)
  */
 
+import { ApiProperty } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 
 /**
@@ -256,15 +257,32 @@ export type FindCampaignByIdNatsResponse = NatsResponse<LoyaltyCampaignNatsRespo
 /**
  * Campaign Analytics Response
  */
-export interface CampaignAnalyticsNatsResponse {
+export class CampaignAnalyticsNatsResponse {
+  @ApiProperty({ description: 'Campaign ID' })
   campaignId: string;
+
+  @ApiProperty({ description: 'Campaign name' })
   name: string;
+
+  @ApiProperty({ description: 'Total members in the program' })
   totalMembers: number;
+
+  @ApiProperty({ description: 'Total participants in the campaign' })
   totalParticipants: number;
+
+  @ApiProperty({ description: 'Conversion rate (0-100)' })
   conversionRate: number;
+
+  @ApiProperty({ description: 'Total points awarded through this campaign' })
   totalPointsAwarded: number;
+
+  @ApiProperty({ description: 'Average points per member' })
   averagePointsPerMember: number;
+
+  @ApiProperty({ description: 'Return on investment (ROI) percentage' })
   roi: number;
+
+  @ApiProperty({ description: 'Engagement rate (0-100)' })
   engagement: number;
 }
 

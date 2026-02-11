@@ -234,7 +234,7 @@ export type FindCampaignByIdNatsResponse = NatsResponse<LoyaltyCampaignNatsRespo
 /**
  * Campaign Analytics Response
  */
-export interface CampaignAnalyticsNatsResponse {
+export declare class CampaignAnalyticsNatsResponse {
     campaignId: string;
     name: string;
     totalMembers: number;
