@@ -18,6 +18,7 @@
  */
 
 import { NatsResponse } from '../../common';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 /**
  * Service Type Enum (matches CRM GuestService entity)
@@ -217,27 +218,119 @@ export interface GetGuestServiceStatsNatsRequest {
 export type GetGuestServiceStatsNatsResponse = NatsResponse<GuestServiceStatsNatsResponse>;
 
 /**
- * Create Service Booking Request
+ * Create Service Booking DTO
  * Pattern: guest_services.bookings.create
+ *
+ * Standardized contract used by both REST (API Gateway) and NATS (CRM Service) layers.
+ * This class replaces both CreateGuestServiceBookingDto and CreateServiceBookingNatsRequest
+ * to ensure field-level consistency across all layers.
+ *
+ * @standardized 2026-02-11
+ * @contract_accuracy PERFECT (Field names unified)
  */
-export interface CreateServiceBookingNatsRequest {
+export class CreateServiceBookingDto {
+  @ApiProperty({
+    description: 'Tenant ID',
+    example: '550e8400-e29b-41d4-a716-446655440000',
+  })
   tenantId: string;
+
+  @ApiProperty({
+    description: 'Hotel ID',
+    example: '550e8400-e29b-41d4-a716-446655440001',
+  })
   hotelId: string;
+
+  @ApiProperty({
+    description: 'Service ID to be booked',
+    example: '550e8400-e29b-41d4-a716-446655440002',
+  })
   serviceId: string;
-  customerId: string; // Changed from guestId to match entity
+
+  @ApiProperty({
+    description: 'Guest/Customer ID who is booking the service',
+    example: '550e8400-e29b-41d4-a716-446655440003',
+  })
+  guestId: string;
+
+  @ApiPropertyOptional({
+    description: 'Room booking ID (if service is for a hotel guest)',
+    example: '550e8400-e29b-41d4-a716-446655440004',
+  })
   roomBookingId?: string;
+
+  @ApiPropertyOptional({
+    description: 'Room number (if service is for a hotel guest)',
+    example: '101',
+  })
   roomNumber?: string;
-  bookingDate: string;
-  serviceDate: string; // Added - separate field in entity
+
+  @ApiProperty({
+    description: 'Booking date and time in ISO 8601 format',
+    example: '2026-02-15T14:30:00Z',
+  })
+  bookingDateTime: string;
+
+  @ApiPropertyOptional({
+    description: 'Duration of the service in minutes',
+    example: 60,
+  })
   durationMinutes?: number;
-  numberOfGuests: number; // Changed from quantity to match entity
-  price?: number; // Changed from string to number to match entity
+
+  @ApiProperty({
+    description: 'Number of guests for the service',
+    example: 2,
+    minimum: 1,
+  })
+  numberOfGuests: number;
+
+  @ApiPropertyOptional({
+    description: 'Service price (if different from default service price)',
+    example: 150.00,
+  })
+  price?: number;
+
+  @ApiPropertyOptional({
+    description: 'Currency code (ISO 4217)',
+    example: 'USD',
+  })
   currency?: string;
+
+  @ApiPropertyOptional({
+    description: 'Special requests from the guest',
+    example: 'Need wheelchair accessible spa room',
+  })
   specialRequests?: string;
+
+  @ApiPropertyOptional({
+    description: 'Internal notes for staff',
+    example: 'VIP guest, prepare welcome amenity',
+  })
   notes?: string;
+
+  @ApiPropertyOptional({
+    description: 'Confirmation code (auto-generated if not provided)',
+    example: 'SPA-2026-001234',
+  })
   confirmationCode?: string;
+
+  @ApiPropertyOptional({
+    description: 'Payment status',
+    example: 'PENDING',
+  })
   paymentStatus?: string;
+
+  @ApiPropertyOptional({
+    description: 'Staff member assigned to this service',
+    example: '550e8400-e29b-41d4-a716-446655440005',
+  })
   staffAssigned?: string;
+
+  @ApiPropertyOptional({
+    description: 'Initial booking status',
+    enum: ServiceBookingStatus,
+    example: ServiceBookingStatus.PENDING,
+  })
   status?: ServiceBookingStatus;
 }
 

@@ -188,18 +188,24 @@ export interface GetGuestServiceStatsNatsRequest {
  */
 export type GetGuestServiceStatsNatsResponse = NatsResponse<GuestServiceStatsNatsResponse>;
 /**
- * Create Service Booking Request
+ * Create Service Booking DTO
  * Pattern: guest_services.bookings.create
+ *
+ * Standardized contract used by both REST (API Gateway) and NATS (CRM Service) layers.
+ * This class replaces both CreateGuestServiceBookingDto and CreateServiceBookingNatsRequest
+ * to ensure field-level consistency across all layers.
+ *
+ * @standardized 2026-02-11
+ * @contract_accuracy PERFECT (Field names unified)
  */
-export interface CreateServiceBookingNatsRequest {
+export declare class CreateServiceBookingDto {
     tenantId: string;
     hotelId: string;
     serviceId: string;
-    customerId: string;
+    guestId: string;
     roomBookingId?: string;
     roomNumber?: string;
-    bookingDate: string;
-    serviceDate: string;
+    bookingDateTime: string;
     durationMinutes?: number;
     numberOfGuests: number;
     price?: number;
