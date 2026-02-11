@@ -97,7 +97,7 @@ export interface LoyaltyProgramNatsResponse {
     earningRules?: EarningRulesResponse;
     redemptionRules?: RedemptionRulesResponse;
     tiers?: LoyaltyTierNatsResponse[];
-    stats?: LoyaltyProgramStats;
+    stats?: IndividualProgramStats;
     createdAt: string | Date;
     updatedAt: string | Date;
     deletedAt?: string | Date;
@@ -217,7 +217,20 @@ export interface FindAllTiersNatsRequest {
  */
 export type FindAllTiersNatsResponse = NatsResponse<FindAllLoyaltyTiersDto>;
 /**
- * Loyalty Program Stats
+ * Individual Loyalty Program Stats
+ * Statistics for a single loyalty program - can be used in both NATS responses and REST API
+ * Calculated from loyalty_members and loyalty_transactions tables
+ */
+export declare class IndividualProgramStats {
+    totalMembers?: number;
+    activeMembers?: number;
+    totalPointsIssued?: number;
+    totalPointsRedeemed?: number;
+    averagePointsPerMember?: number;
+}
+/**
+ * Aggregate Loyalty Program Stats
+ * Statistics for all loyalty programs combined (used in crm.loyalty_program.stats endpoint)
  */
 export interface LoyaltyProgramStats {
     totalPrograms: number;

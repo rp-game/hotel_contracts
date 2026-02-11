@@ -18,6 +18,8 @@
  * Called by: api-gateway (CrmController)
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsNumber, IsOptional } from 'class-validator';
 import { NatsResponse } from '../../common';
 import type { LoyaltyTierNatsResponse } from './loyalty-tiers.nats';
 import { FindAllLoyaltyTiersDto } from './loyalty-tiers.nats';
@@ -107,7 +109,7 @@ export interface LoyaltyProgramNatsResponse {
   earningRules?: EarningRulesResponse;
   redemptionRules?: RedemptionRulesResponse;
   tiers?: LoyaltyTierNatsResponse[];
-  stats?: LoyaltyProgramStats;
+  stats?: IndividualProgramStats;
   createdAt: string | Date;
   updatedAt: string | Date;
   deletedAt?: string | Date;
@@ -241,7 +243,60 @@ export interface FindAllTiersNatsRequest {
 export type FindAllTiersNatsResponse = NatsResponse<FindAllLoyaltyTiersDto>;
 
 /**
- * Loyalty Program Stats
+ * Individual Loyalty Program Stats
+ * Statistics for a single loyalty program - can be used in both NATS responses and REST API
+ * Calculated from loyalty_members and loyalty_transactions tables
+ */
+export class IndividualProgramStats {
+  @ApiPropertyOptional({
+    description: 'Total members enrolled in this program',
+    example: 1250,
+    type: Number
+  })
+  @IsOptional()
+  @IsNumber()
+  totalMembers?: number;
+
+  @ApiPropertyOptional({
+    description: 'Active members (with activity in last 90 days)',
+    example: 980,
+    type: Number
+  })
+  @IsOptional()
+  @IsNumber()
+  activeMembers?: number;
+
+  @ApiPropertyOptional({
+    description: 'Total points issued to date (sum of all positive transactions)',
+    example: 2500000,
+    type: Number
+  })
+  @IsOptional()
+  @IsNumber()
+  totalPointsIssued?: number;
+
+  @ApiPropertyOptional({
+    description: 'Total points redeemed to date (sum of all negative transactions)',
+    example: 750000,
+    type: Number
+  })
+  @IsOptional()
+  @IsNumber()
+  totalPointsRedeemed?: number;
+
+  @ApiPropertyOptional({
+    description: 'Average points per member (totalPointsIssued / totalMembers)',
+    example: 2040.8,
+    type: Number
+  })
+  @IsOptional()
+  @IsNumber()
+  averagePointsPerMember?: number;
+}
+
+/**
+ * Aggregate Loyalty Program Stats
+ * Statistics for all loyalty programs combined (used in crm.loyalty_program.stats endpoint)
  */
 export interface LoyaltyProgramStats {
   totalPrograms: number;           // Total number of loyalty programs

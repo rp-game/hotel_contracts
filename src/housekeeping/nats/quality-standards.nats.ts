@@ -3,39 +3,88 @@
  * Patterns: housekeeping.quality-standards.*
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 
 // Note: Dates are strings because they're serialized over NATS
 // Category in items is an enum string (InspectionItemCategory value)
-export interface QualityStandardItem {
+export class QualityStandardItem {
+  @ApiProperty({ description: 'Item name' })
   name: string;
+
+  @ApiPropertyOptional({ description: 'Item description' })
   description?: string;
-  category: string;  // InspectionItemCategory enum value as string
+
+  @ApiProperty({ description: 'InspectionItemCategory enum value as string' })
+  category: string;
+
+  @ApiProperty({ description: 'Points for this item' })
   points: number;
+
+  @ApiPropertyOptional({ description: 'Is this a critical item' })
   isCritical?: boolean;
+
+  @ApiProperty({ description: 'Sort order' })
   sortOrder: number;
+
+  @ApiPropertyOptional({ description: 'Is item active' })
   isActive?: boolean;
+
+  @ApiPropertyOptional({ description: 'Additional instructions' })
   instructions?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Inspector notes' })
   inspectorNotes?: string;
 }
 
-export interface QualityStandard {
+export class QualityStandard {
+  @ApiProperty({ description: 'Quality standard ID' })
   id: string;
+
+  @ApiProperty({ description: 'Standard name' })
   name: string;
+
+  @ApiPropertyOptional({ description: 'Standard description' })
   description?: string;
-  roomType: string;  // RoomType enum value as string
+
+  @ApiProperty({ description: 'RoomType enum value as string' })
+  roomType: string;
+
+  @ApiProperty({ description: 'Version number' })
   version: number;
+
+  @ApiProperty({ description: 'Is standard active' })
   isActive: boolean;
+
+  @ApiProperty({ description: 'Quality standard items', type: [QualityStandardItem] })
   items: QualityStandardItem[];
+
+  @ApiPropertyOptional({ description: 'Minimum passing score' })
   passingScore?: number;
+
+  @ApiPropertyOptional({ description: 'Additional configuration' })
   configuration?: Record<string, any>;
-  effectiveDate?: string | Date;  // Accept both for compatibility during conversion
-  expiryDate?: string | Date;     // Accept both for compatibility during conversion
+
+  @ApiPropertyOptional({ description: 'Effective date (string or Date for compatibility)' })
+  effectiveDate?: string | Date;
+
+  @ApiPropertyOptional({ description: 'Expiry date (string or Date for compatibility)' })
+  expiryDate?: string | Date;
+
+  @ApiProperty({ description: 'User ID who created this standard' })
   createdBy: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
-  createdAt: string | Date;  // Accept both for compatibility during conversion
-  updatedAt: string | Date;  // Accept both for compatibility during conversion
+
+  @ApiProperty({ description: 'Creation timestamp (string or Date for compatibility)' })
+  createdAt: string | Date;
+
+  @ApiProperty({ description: 'Last update timestamp (string or Date for compatibility)' })
+  updatedAt: string | Date;
 }
 
 // CREATE
@@ -81,15 +130,30 @@ export interface QualityStandardsStatisticsNatsRequest {
   hotelId: string;
   filters?: any;
 }
-export interface QualityStandardsStatistics {
+
+export class QualityStandardsStatistics {
+  @ApiProperty({ description: 'Total number of quality standards' })
   totalStandards: number;
+
+  @ApiProperty({ description: 'Number of active quality standards' })
   activeStandards: number;
+
+  @ApiPropertyOptional({ description: 'Number of inactive quality standards' })
   inactiveStandards?: number;
+
+  @ApiProperty({ description: 'Average quality score across all standards' })
   averageScore: number;
+
+  @ApiPropertyOptional({ description: 'Standards count by room type' })
   standardsByRoomType?: Record<string, number>;
+
+  @ApiPropertyOptional({ description: 'Standards count by room type (alternative field)' })
   byRoomType?: Record<string, number>;
+
+  @ApiPropertyOptional({ description: 'Average number of items per standard' })
   averageItemsPerStandard?: number;
 }
+
 export type QualityStandardsStatisticsNatsResponse = NatsResponse<QualityStandardsStatistics>;
 
 // FIND-BY-ROOM-TYPE

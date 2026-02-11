@@ -3,7 +3,7 @@
  * Patterns: housekeeping.quality-standards.*
  */
 import { NatsResponse } from '../../common';
-export interface QualityStandardItem {
+export declare class QualityStandardItem {
     name: string;
     description?: string;
     category: string;
@@ -14,7 +14,7 @@ export interface QualityStandardItem {
     instructions?: Record<string, any>;
     inspectorNotes?: string;
 }
-export interface QualityStandard {
+export declare class QualityStandard {
     id: string;
     name: string;
     description?: string;
@@ -70,7 +70,7 @@ export interface QualityStandardsStatisticsNatsRequest {
     hotelId: string;
     filters?: any;
 }
-export interface QualityStandardsStatistics {
+export declare class QualityStandardsStatistics {
     totalStandards: number;
     activeStandards: number;
     inactiveStandards?: number;
