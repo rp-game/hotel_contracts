@@ -7,7 +7,7 @@
 /**
  * Room type base rate entity
  */
-export interface RoomTypeBaseRate {
+export declare class RoomTypeBaseRate {
     id: string;
     tenantId: string;
     hotelId: string;

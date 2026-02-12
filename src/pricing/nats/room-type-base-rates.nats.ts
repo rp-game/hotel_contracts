@@ -33,7 +33,7 @@ export class FindAllRoomTypeBaseRatesRequest {
 export class FindAllRoomTypeBaseRatesResponse {
   @ApiProperty({
     description: 'List of room type base rates',
-    type: [Object], // RoomTypeBaseRate type
+    type: RoomTypeBaseRate,
     isArray: true,
   })
   data: RoomTypeBaseRate[];

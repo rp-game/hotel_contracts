@@ -18,6 +18,7 @@ exports.BulkUpsertRoomTypeBaseRatesResponse = exports.BulkUpsertRoomTypeBaseRate
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
+const types_1 = require("../types");
 // ============================================================================
 // Find All Room Type Base Rates
 // ============================================================================
@@ -49,7 +50,7 @@ exports.FindAllRoomTypeBaseRatesResponse = FindAllRoomTypeBaseRatesResponse;
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'List of room type base rates',
-        type: [Object], // RoomTypeBaseRate type
+        type: types_1.RoomTypeBaseRate,
         isArray: true,
     }),
     __metadata("design:type", Array)
@@ -96,7 +97,7 @@ __decorate([
         description: 'Room type base rate data',
         type: Object, // RoomTypeBaseRate type
     }),
-    __metadata("design:type", Object)
+    __metadata("design:type", types_1.RoomTypeBaseRate)
 ], FindOneRoomTypeBaseRateResponse.prototype, "data", void 0);
 // ============================================================================
 // Upsert Room Type Base Rate
@@ -210,7 +211,7 @@ __decorate([
         description: 'Upserted room type base rate',
         type: Object, // RoomTypeBaseRate type
     }),
-    __metadata("design:type", Object)
+    __metadata("design:type", types_1.RoomTypeBaseRate)
 ], UpsertRoomTypeBaseRateResponse.prototype, "data", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
