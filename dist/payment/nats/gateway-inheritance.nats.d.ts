@@ -45,235 +45,84 @@ export declare enum GatewaySyncStatus {
 /**
  * Inheritance configuration metadata stored in PaymentSetting.configuration
  */
-export interface InheritanceConfig {
-    /**
-     * Whether to inherit from chain-level config
-     * @default true
-     */
+export declare class InheritanceConfig {
     inherit_from_chain?: boolean;
-    /**
-     * Whether to inherit from platform-level config
-     * @default true
-     */
     inherit_from_platform?: boolean;
-    /**
-     * The chain ID this config inherits from
-     */
     chain_id?: string;
-    /**
-     * The platform ID this config inherits from
-     */
     platform_id?: string;
-    /**
-     * Fields that this level has explicitly overridden
-     * Examples: ['merchantId', 'configuration.returnUrl', 'isActive']
-     */
     override_settings?: string[];
-    /**
-     * When this config was last synced from parent
-     */
     last_synced_at?: string;
-    /**
-     * Version of sync to support rollback/versioning
-     */
     sync_version?: number;
 }
 /**
  * Metadata about resolved gateway configuration
  */
-export interface ResolvedConfigMetadata {
-    /**
-     * The inheritance chain that was followed to resolve config
-     * Examples: ['PLATFORM'], ['PLATFORM', 'CHAIN(inherited)'], ['PLATFORM', 'CHAIN(inherited)', 'HOTEL(inherited)']
-     */
+export declare class ResolvedConfigMetadata {
     inheritanceChain: string[];
-    /**
-     * The level at which this config is actually defined
-     */
     configLevel: ConfigLevel | string;
-    /**
-     * Whether this config is inherited from a parent level
-     */
     isInherited: boolean;
-    /**
-     * Whether this level can be overridden by child levels
-     */
     canOverride: boolean;
-    /**
-     * Fields that have been explicitly overridden at this level
-     */
     overriddenFields: string[];
-    /**
-     * ISO timestamp when config was resolved
-     */
     resolvedAt: string;
+}
+/**
+ * Gateway configuration nested object
+ */
+export declare class GatewayConfiguration {
+    environment?: string;
+    currencies?: string[];
+    accessCode?: string;
+    url?: string;
+    returnUrl?: string;
+    queryUrl?: string;
+    refundUrl?: string;
+    version?: string;
+    locale?: string;
+    feePercentage?: number;
+    fixedAmount?: string;
+    minimumFee?: string;
+    maximumFee?: string;
+    lastTestedAt?: string;
+    lastUpdatedAt?: string;
+    inheritance?: InheritanceConfig;
+    [key: string]: any;
 }
 /**
  * Gateway configuration response data
  */
-export interface GatewayConfigData {
-    /**
-     * Payment setting ID
-     */
+export declare class GatewayConfigData {
     id: string;
-    /**
-     * Gateway type (ONEPAY, VNPAY, STRIPE, MOMO, PAYPAL)
-     */
     gatewayType: string;
-    /**
-     * Tenant ID (multi-tenant isolation)
-     */
     tenantId: string;
-    /**
-     * Hotel ID (null for platform/chain-level)
-     */
     hotelId?: string;
-    /**
-     * Chain ID (null for hotel/platform-level)
-     */
     chainId?: string;
-    /**
-     * Platform ID (null for hotel/chain-level)
-     */
     platformId?: string;
-    /**
-     * Merchant ID for this gateway
-     */
     merchantId?: string;
-    /**
-     * API key for this gateway
-     */
     apiKey?: string;
-    /**
-     * Secret key for this gateway
-     */
     secretKey?: string;
-    /**
-     * Webhook URL for payment notifications
-     */
     webhookUrl?: string;
-    /**
-     * Default currency (VND, USD, EUR, etc.)
-     */
     currency: string;
-    /**
-     * Supported payment methods
-     */
     paymentMethods: string[];
-    /**
-     * Whether this gateway is active
-     */
     isActive: boolean;
-    /**
-     * Gateway-specific configuration
-     * Includes environment, currencies, OnePay-specific fields, etc.
-     */
-    configuration?: {
-        /**
-         * Execution environment (SANDBOX, PRODUCTION)
-         */
-        environment?: string;
-        /**
-         * Supported currencies
-         */
-        currencies?: string[];
-        /**
-         * OnePay-specific: access code
-         */
-        accessCode?: string;
-        /**
-         * OnePay-specific: payment URL
-         */
-        url?: string;
-        /**
-         * OnePay-specific: return URL after payment
-         */
-        returnUrl?: string;
-        /**
-         * OnePay-specific: query URL for transaction status
-         */
-        queryUrl?: string;
-        /**
-         * OnePay-specific: refund URL
-         */
-        refundUrl?: string;
-        /**
-         * OnePay-specific: API version
-         */
-        version?: string;
-        /**
-         * OnePay-specific: locale
-         */
-        locale?: string;
-        /**
-         * Fee configuration
-         */
-        feePercentage?: number;
-        fixedAmount?: string;
-        minimumFee?: string;
-        maximumFee?: string;
-        /**
-         * Last tested timestamp
-         */
-        lastTestedAt?: string;
-        /**
-         * Last updated timestamp
-         */
-        lastUpdatedAt?: string;
-        /**
-         * Inheritance configuration
-         */
-        inheritance?: InheritanceConfig;
-        /**
-         * Allow other gateway-specific fields
-         */
-        [key: string]: any;
-    };
-    /**
-     * Record creation timestamp
-     */
+    configuration?: GatewayConfiguration;
     createdAt?: string;
-    /**
-     * Record last update timestamp
-     */
     updatedAt?: string;
 }
 /**
  * Gateway statistics for dashboard display
  */
-export interface GatewayStatistics {
-    /**
-     * Total number of transactions
-     */
+export declare class GatewayStatistics {
     totalTransactions: number;
-    /**
-     * Number of successful transactions
-     */
     successfulTransactions: number;
-    /**
-     * Success rate percentage (0-100)
-     */
     successRate: number;
-    /**
-     * Total transaction volume
-     */
     totalVolume: string;
-    /**
-     * Monthly transaction volume
-     */
     monthlyVolume: string;
 }
 /**
  * Resolved gateway configuration with inheritance metadata
  */
-export interface ResolvedGatewayConfigData extends GatewayConfigData {
-    /**
-     * Metadata about how this config was resolved through inheritance
-     */
+export declare class ResolvedGatewayConfigData extends GatewayConfigData {
     _metadata?: ResolvedConfigMetadata;
-    /**
-     * Gateway statistics for display
-     */
     statistics?: GatewayStatistics;
 }
 /**
@@ -428,6 +277,25 @@ export interface FindHotelGatewaysResponse {
  */
 export type FindHotelGatewaysNatsResponse = NatsResponse<FindHotelGatewaysResponse>;
 /**
+ * Fee configuration for legacy update payload
+ */
+export declare class UpdateGatewayFees {
+    percentage?: number;
+    fixedAmount?: string;
+    minimumFee?: string;
+    maximumFee?: string;
+}
+/**
+ * Configuration for legacy update payload
+ */
+export declare class UpdateGatewayConfigPayload {
+    webhook?: string;
+    environment?: string;
+    currencies?: string[];
+    supportedMethods?: string[];
+    [key: string]: any;
+}
+/**
  * Legacy NATS request to update gateway configuration
  * Used by legacy gateway.update endpoint (without inheritance support)
  *
@@ -437,58 +305,17 @@ export type FindHotelGatewaysNatsResponse = NatsResponse<FindHotelGatewaysRespon
  *
  * @deprecated Use UpdateGatewayRequest for inheritance-aware updates via gateway.updateByLevel
  */
-export interface UpdateGatewayPayload {
-    /**
-     * Payment setting ID to update
-     */
+export declare class UpdateGatewayPayload {
     id: string;
-    /**
-     * Tenant ID (multi-tenant isolation)
-     */
     tenantId: string;
-    /**
-     * Hotel ID (optional)
-     */
     hotelId?: string;
-    /**
-     * Chain ID (optional)
-     */
     chainId?: string;
-    /**
-     * Active/enabled status
-     */
-    isEnabled?: boolean;
-    /**
-     * Merchant ID (ROOT LEVEL - database column, not configuration)
-     */
+    isActive?: boolean;
     merchantId?: string;
-    /**
-     * API Key (ROOT LEVEL - database column, not configuration)
-     */
     apiKey?: string;
-    /**
-     * Secret Key (ROOT LEVEL - database column, not configuration)
-     */
     secretKey?: string;
-    /**
-     * Gateway-specific configuration (OnePay URLs, environment, etc)
-     */
-    configuration?: {
-        webhook?: string;
-        environment?: string;
-        currencies?: string[];
-        supportedMethods?: string[];
-        [key: string]: any;
-    };
-    /**
-     * Fee configuration
-     */
-    fees?: {
-        percentage?: number;
-        fixedAmount?: string;
-        minimumFee?: string;
-        maximumFee?: string;
-    };
+    configuration?: UpdateGatewayConfigPayload;
+    fees?: UpdateGatewayFees;
 }
 /**
  * Full NATS response type for legacy update gateway
@@ -789,38 +616,14 @@ export type ApplyChainToHotelGatewayNatsResponse = NatsResponse<GatewayConfigDat
 /**
  * Update fields for bulk gateway update operation
  */
-export interface BulkGatewayUpdateFields {
-    /**
-     * Enable or disable gateways
-     */
+export declare class BulkGatewayUpdateFields {
     isActive?: boolean;
-    /**
-     * Merchant ID for the gateway
-     */
     merchantId?: string;
-    /**
-     * API key for gateway authentication
-     */
     apiKey?: string;
-    /**
-     * Secret key for gateway authentication
-     */
     secretKey?: string;
-    /**
-     * Webhook URL for callbacks
-     */
     webhookUrl?: string;
-    /**
-     * Currency code(s) supported
-     */
     currency?: string;
-    /**
-     * Payment methods supported by this gateway
-     */
     paymentMethods?: string[];
-    /**
-     * Gateway-specific configuration
-     */
     configuration?: Record<string, any>;
 }
 /**
@@ -841,60 +644,27 @@ export interface BulkGatewayUpdateFields {
  * };
  * ```
  */
-export interface BulkUpdatePaymentGatewayNatsRequest {
-    /**
-     * Tenant ID (multi-tenant isolation)
-     */
+export declare class BulkUpdatePaymentGatewayNatsRequest {
     tenantId: string;
-    /**
-     * Hotel ID (optional - affects which gateways are updated)
-     */
     hotelId?: string;
-    /**
-     * Array of gateway IDs to update
-     */
     gatewayIds: string[];
-    /**
-     * Fields to update on each gateway
-     */
     updates: BulkGatewayUpdateFields;
 }
 /**
  * Result for a single gateway in bulk update
  */
-export interface BulkUpdateGatewayResult {
-    /**
-     * Gateway ID that was processed
-     */
+export declare class BulkUpdateGatewayResult {
     gatewayId: string;
-    /**
-     * Whether the update succeeded for this gateway
-     */
     success: boolean;
-    /**
-     * Error message if update failed
-     */
     error?: string;
-    /**
-     * Error code if update failed
-     */
     errorCode?: string;
 }
 /**
  * Response data for bulk update operation
  */
-export interface BulkUpdateGatewayResponseData {
-    /**
-     * Number of gateways successfully updated
-     */
+export declare class BulkUpdateGatewayResponseData {
     updatedCount: number;
-    /**
-     * Number of gateways that were skipped or failed
-     */
     skippedCount: number;
-    /**
-     * Detailed results for gateways that failed
-     */
     errors: BulkUpdateGatewayResult[];
 }
 /**
@@ -905,34 +675,23 @@ export type BulkUpdatePaymentGatewayNatsResponse = NatsResponse<BulkUpdateGatewa
  * Request payload for gateway.test pattern
  * Used to test a payment gateway connection and credentials
  */
-export interface TestPaymentGatewayNatsRequest {
-    /** Gateway ID to test */
+export declare class TestPaymentGatewayNatsRequest {
     id: string;
-    /** Test transaction amount */
     amount: number;
-    /** Currency code for test */
     currency: string;
-    /** Tenant ID (required) */
     tenantId: string;
-    /** Hotel ID (optional) */
     hotelId?: string;
 }
 /**
  * Response data for gateway.test pattern
  * Contains test result details
  */
-export interface TestPaymentGatewayData {
-    /** Whether test was successful */
+export declare class TestPaymentGatewayData {
     success: boolean;
-    /** Time taken to complete test (in milliseconds) */
     responseTime: number;
-    /** Human-readable message about test result */
     message: string;
-    /** Optional test transaction ID from gateway */
     testTransactionId?: string;
-    /** Gateway provider name */
     provider?: string;
-    /** Test timestamp (ISO 8601) */
     testedAt?: string;
 }
 /**

@@ -16,6 +16,9 @@
  * PLATFORM → CHAIN → HOTEL
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { ValidateNested } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 // ============ ENUMS ============
@@ -54,283 +57,196 @@ export enum GatewaySyncStatus {
 /**
  * Inheritance configuration metadata stored in PaymentSetting.configuration
  */
-export interface InheritanceConfig {
-  /**
-   * Whether to inherit from chain-level config
-   * @default true
-   */
+export class InheritanceConfig {
+  @ApiPropertyOptional({ description: 'Whether to inherit from chain-level config', default: true })
   inherit_from_chain?: boolean;
 
-  /**
-   * Whether to inherit from platform-level config
-   * @default true
-   */
+  @ApiPropertyOptional({ description: 'Whether to inherit from platform-level config', default: true })
   inherit_from_platform?: boolean;
 
-  /**
-   * The chain ID this config inherits from
-   */
+  @ApiPropertyOptional({ description: 'The chain ID this config inherits from' })
   chain_id?: string;
 
-  /**
-   * The platform ID this config inherits from
-   */
+  @ApiPropertyOptional({ description: 'The platform ID this config inherits from' })
   platform_id?: string;
 
-  /**
-   * Fields that this level has explicitly overridden
-   * Examples: ['merchantId', 'configuration.returnUrl', 'isActive']
-   */
+  @ApiPropertyOptional({ description: 'Fields that this level has explicitly overridden', type: [String] })
   override_settings?: string[];
 
-  /**
-   * When this config was last synced from parent
-   */
+  @ApiPropertyOptional({ description: 'When this config was last synced from parent' })
   last_synced_at?: string;
 
-  /**
-   * Version of sync to support rollback/versioning
-   */
+  @ApiPropertyOptional({ description: 'Version of sync to support rollback/versioning' })
   sync_version?: number;
 }
 
 /**
  * Metadata about resolved gateway configuration
  */
-export interface ResolvedConfigMetadata {
-  /**
-   * The inheritance chain that was followed to resolve config
-   * Examples: ['PLATFORM'], ['PLATFORM', 'CHAIN(inherited)'], ['PLATFORM', 'CHAIN(inherited)', 'HOTEL(inherited)']
-   */
+export class ResolvedConfigMetadata {
+  @ApiProperty({ description: 'The inheritance chain that was followed to resolve config', type: [String] })
   inheritanceChain: string[];
 
-  /**
-   * The level at which this config is actually defined
-   */
+  @ApiProperty({ description: 'The level at which this config is actually defined' })
   configLevel: ConfigLevel | string;
 
-  /**
-   * Whether this config is inherited from a parent level
-   */
+  @ApiProperty({ description: 'Whether this config is inherited from a parent level' })
   isInherited: boolean;
 
-  /**
-   * Whether this level can be overridden by child levels
-   */
+  @ApiProperty({ description: 'Whether this level can be overridden by child levels' })
   canOverride: boolean;
 
-  /**
-   * Fields that have been explicitly overridden at this level
-   */
+  @ApiProperty({ description: 'Fields that have been explicitly overridden at this level', type: [String] })
   overriddenFields: string[];
 
-  /**
-   * ISO timestamp when config was resolved
-   */
+  @ApiProperty({ description: 'ISO timestamp when config was resolved' })
   resolvedAt: string;
+}
+
+/**
+ * Gateway configuration nested object
+ */
+export class GatewayConfiguration {
+  @ApiPropertyOptional({ description: 'Execution environment (SANDBOX, PRODUCTION)' })
+  environment?: string;
+
+  @ApiPropertyOptional({ description: 'Supported currencies', type: [String] })
+  currencies?: string[];
+
+  @ApiPropertyOptional({ description: 'OnePay-specific: access code' })
+  accessCode?: string;
+
+  @ApiPropertyOptional({ description: 'OnePay-specific: payment URL' })
+  url?: string;
+
+  @ApiPropertyOptional({ description: 'OnePay-specific: return URL after payment' })
+  returnUrl?: string;
+
+  @ApiPropertyOptional({ description: 'OnePay-specific: query URL for transaction status' })
+  queryUrl?: string;
+
+  @ApiPropertyOptional({ description: 'OnePay-specific: refund URL' })
+  refundUrl?: string;
+
+  @ApiPropertyOptional({ description: 'OnePay-specific: API version' })
+  version?: string;
+
+  @ApiPropertyOptional({ description: 'OnePay-specific: locale' })
+  locale?: string;
+
+  @ApiPropertyOptional({ description: 'Fee percentage' })
+  feePercentage?: number;
+
+  @ApiPropertyOptional({ description: 'Fixed amount fee' })
+  fixedAmount?: string;
+
+  @ApiPropertyOptional({ description: 'Minimum fee' })
+  minimumFee?: string;
+
+  @ApiPropertyOptional({ description: 'Maximum fee' })
+  maximumFee?: string;
+
+  @ApiPropertyOptional({ description: 'Last tested timestamp (ISO 8601)' })
+  lastTestedAt?: string;
+
+  @ApiPropertyOptional({ description: 'Last updated timestamp (ISO 8601)' })
+  lastUpdatedAt?: string;
+
+  @ApiPropertyOptional({ description: 'Inheritance configuration', type: () => InheritanceConfig })
+  @ValidateNested()
+  @Type(() => InheritanceConfig)
+  inheritance?: InheritanceConfig;
+
+  [key: string]: any;
 }
 
 /**
  * Gateway configuration response data
  */
-export interface GatewayConfigData {
-  /**
-   * Payment setting ID
-   */
+export class GatewayConfigData {
+  @ApiProperty({ description: 'Payment setting ID' })
   id: string;
 
-  /**
-   * Gateway type (ONEPAY, VNPAY, STRIPE, MOMO, PAYPAL)
-   */
+  @ApiProperty({ description: 'Gateway type (ONEPAY, VNPAY, STRIPE, MOMO, PAYPAL)' })
   gatewayType: string;
 
-  /**
-   * Tenant ID (multi-tenant isolation)
-   */
+  @ApiProperty({ description: 'Tenant ID (multi-tenant isolation)' })
   tenantId: string;
 
-  /**
-   * Hotel ID (null for platform/chain-level)
-   */
+  @ApiPropertyOptional({ description: 'Hotel ID (null for platform/chain-level)' })
   hotelId?: string;
 
-  /**
-   * Chain ID (null for hotel/platform-level)
-   */
+  @ApiPropertyOptional({ description: 'Chain ID (null for hotel/platform-level)' })
   chainId?: string;
 
-  /**
-   * Platform ID (null for hotel/chain-level)
-   */
+  @ApiPropertyOptional({ description: 'Platform ID (null for hotel/chain-level)' })
   platformId?: string;
 
-  /**
-   * Merchant ID for this gateway
-   */
+  @ApiPropertyOptional({ description: 'Merchant ID for this gateway' })
   merchantId?: string;
 
-  /**
-   * API key for this gateway
-   */
+  @ApiPropertyOptional({ description: 'API key for this gateway' })
   apiKey?: string;
 
-  /**
-   * Secret key for this gateway
-   */
+  @ApiPropertyOptional({ description: 'Secret key for this gateway' })
   secretKey?: string;
 
-  /**
-   * Webhook URL for payment notifications
-   */
+  @ApiPropertyOptional({ description: 'Webhook URL for payment notifications' })
   webhookUrl?: string;
 
-  /**
-   * Default currency (VND, USD, EUR, etc.)
-   */
+  @ApiProperty({ description: 'Default currency (VND, USD, EUR, etc.)' })
   currency: string;
 
-  /**
-   * Supported payment methods
-   */
+  @ApiProperty({ description: 'Supported payment methods', type: [String] })
   paymentMethods: string[];
 
-  /**
-   * Whether this gateway is active
-   */
+  @ApiProperty({ description: 'Whether this gateway is active' })
   isActive: boolean;
 
-  /**
-   * Gateway-specific configuration
-   * Includes environment, currencies, OnePay-specific fields, etc.
-   */
-  configuration?: {
-    /**
-     * Execution environment (SANDBOX, PRODUCTION)
-     */
-    environment?: string;
+  @ApiPropertyOptional({ description: 'Gateway-specific configuration', type: () => GatewayConfiguration })
+  @ValidateNested()
+  @Type(() => GatewayConfiguration)
+  configuration?: GatewayConfiguration;
 
-    /**
-     * Supported currencies
-     */
-    currencies?: string[];
-
-    /**
-     * OnePay-specific: access code
-     */
-    accessCode?: string;
-
-    /**
-     * OnePay-specific: payment URL
-     */
-    url?: string;
-
-    /**
-     * OnePay-specific: return URL after payment
-     */
-    returnUrl?: string;
-
-    /**
-     * OnePay-specific: query URL for transaction status
-     */
-    queryUrl?: string;
-
-    /**
-     * OnePay-specific: refund URL
-     */
-    refundUrl?: string;
-
-    /**
-     * OnePay-specific: API version
-     */
-    version?: string;
-
-    /**
-     * OnePay-specific: locale
-     */
-    locale?: string;
-
-    /**
-     * Fee configuration
-     */
-    feePercentage?: number;
-    fixedAmount?: string;
-    minimumFee?: string;
-    maximumFee?: string;
-
-    /**
-     * Last tested timestamp
-     */
-    lastTestedAt?: string;
-
-    /**
-     * Last updated timestamp
-     */
-    lastUpdatedAt?: string;
-
-    /**
-     * Inheritance configuration
-     */
-    inheritance?: InheritanceConfig;
-
-    /**
-     * Allow other gateway-specific fields
-     */
-    [key: string]: any;
-  };
-
-  /**
-   * Record creation timestamp
-   */
+  @ApiPropertyOptional({ description: 'Record creation timestamp (ISO 8601)' })
   createdAt?: string;
 
-  /**
-   * Record last update timestamp
-   */
+  @ApiPropertyOptional({ description: 'Record last update timestamp (ISO 8601)' })
   updatedAt?: string;
 }
 
 /**
  * Gateway statistics for dashboard display
  */
-export interface GatewayStatistics {
-  /**
-   * Total number of transactions
-   */
+export class GatewayStatistics {
+  @ApiProperty({ description: 'Total number of transactions' })
   totalTransactions: number;
 
-  /**
-   * Number of successful transactions
-   */
+  @ApiProperty({ description: 'Number of successful transactions' })
   successfulTransactions: number;
 
-  /**
-   * Success rate percentage (0-100)
-   */
+  @ApiProperty({ description: 'Success rate percentage (0-100)' })
   successRate: number;
 
-  /**
-   * Total transaction volume
-   */
+  @ApiProperty({ description: 'Total transaction volume' })
   totalVolume: string;
 
-  /**
-   * Monthly transaction volume
-   */
+  @ApiProperty({ description: 'Monthly transaction volume' })
   monthlyVolume: string;
 }
 
 /**
  * Resolved gateway configuration with inheritance metadata
  */
-export interface ResolvedGatewayConfigData extends GatewayConfigData {
-  /**
-   * Metadata about how this config was resolved through inheritance
-   */
+export class ResolvedGatewayConfigData extends GatewayConfigData {
+  @ApiPropertyOptional({ description: 'Metadata about how this config was resolved through inheritance', type: () => ResolvedConfigMetadata })
+  @ValidateNested()
+  @Type(() => ResolvedConfigMetadata)
   _metadata?: ResolvedConfigMetadata;
 
-  /**
-   * Gateway statistics for display
-   */
+  @ApiPropertyOptional({ description: 'Gateway statistics for display', type: () => GatewayStatistics })
+  @ValidateNested()
+  @Type(() => GatewayStatistics)
   statistics?: GatewayStatistics;
 }
 
@@ -513,6 +429,42 @@ export type FindHotelGatewaysNatsResponse = NatsResponse<FindHotelGatewaysRespon
 // ============ LEGACY UPDATE GATEWAY (gateway.update) ============
 
 /**
+ * Fee configuration for legacy update payload
+ */
+export class UpdateGatewayFees {
+  @ApiPropertyOptional({ description: 'Fee percentage' })
+  percentage?: number;
+
+  @ApiPropertyOptional({ description: 'Fixed amount fee' })
+  fixedAmount?: string;
+
+  @ApiPropertyOptional({ description: 'Minimum fee' })
+  minimumFee?: string;
+
+  @ApiPropertyOptional({ description: 'Maximum fee' })
+  maximumFee?: string;
+}
+
+/**
+ * Configuration for legacy update payload
+ */
+export class UpdateGatewayConfigPayload {
+  @ApiPropertyOptional({ description: 'Webhook URL' })
+  webhook?: string;
+
+  @ApiPropertyOptional({ description: 'Environment (SANDBOX, PRODUCTION)' })
+  environment?: string;
+
+  @ApiPropertyOptional({ description: 'Supported currencies', type: [String] })
+  currencies?: string[];
+
+  @ApiPropertyOptional({ description: 'Supported payment methods', type: [String] })
+  supportedMethods?: string[];
+
+  [key: string]: any;
+}
+
+/**
  * Legacy NATS request to update gateway configuration
  * Used by legacy gateway.update endpoint (without inheritance support)
  *
@@ -522,67 +474,40 @@ export type FindHotelGatewaysNatsResponse = NatsResponse<FindHotelGatewaysRespon
  *
  * @deprecated Use UpdateGatewayRequest for inheritance-aware updates via gateway.updateByLevel
  */
-export interface UpdateGatewayPayload {
-  /**
-   * Payment setting ID to update
-   */
+export class UpdateGatewayPayload {
+  @ApiProperty({ description: 'Payment setting ID to update' })
   id: string;
 
-  /**
-   * Tenant ID (multi-tenant isolation)
-   */
+  @ApiProperty({ description: 'Tenant ID (multi-tenant isolation)' })
   tenantId: string;
 
-  /**
-   * Hotel ID (optional)
-   */
+  @ApiPropertyOptional({ description: 'Hotel ID (optional)' })
   hotelId?: string;
 
-  /**
-   * Chain ID (optional)
-   */
+  @ApiPropertyOptional({ description: 'Chain ID (optional)' })
   chainId?: string;
 
-  /**
-   * Active/enabled status
-   */
-  isEnabled?: boolean;
+  @ApiPropertyOptional({ description: 'Active/enabled status' })
+  isActive?: boolean;
 
-  /**
-   * Merchant ID (ROOT LEVEL - database column, not configuration)
-   */
+  @ApiPropertyOptional({ description: 'Merchant ID (ROOT LEVEL - database column)' })
   merchantId?: string;
 
-  /**
-   * API Key (ROOT LEVEL - database column, not configuration)
-   */
+  @ApiPropertyOptional({ description: 'API Key (ROOT LEVEL - database column)' })
   apiKey?: string;
 
-  /**
-   * Secret Key (ROOT LEVEL - database column, not configuration)
-   */
+  @ApiPropertyOptional({ description: 'Secret Key (ROOT LEVEL - database column)' })
   secretKey?: string;
 
-  /**
-   * Gateway-specific configuration (OnePay URLs, environment, etc)
-   */
-  configuration?: {
-    webhook?: string;
-    environment?: string;
-    currencies?: string[];
-    supportedMethods?: string[];
-    [key: string]: any;
-  };
+  @ApiPropertyOptional({ description: 'Gateway-specific configuration', type: () => UpdateGatewayConfigPayload })
+  @ValidateNested()
+  @Type(() => UpdateGatewayConfigPayload)
+  configuration?: UpdateGatewayConfigPayload;
 
-  /**
-   * Fee configuration
-   */
-  fees?: {
-    percentage?: number;
-    fixedAmount?: string;
-    minimumFee?: string;
-    maximumFee?: string;
-  };
+  @ApiPropertyOptional({ description: 'Fee configuration', type: () => UpdateGatewayFees })
+  @ValidateNested()
+  @Type(() => UpdateGatewayFees)
+  fees?: UpdateGatewayFees;
 }
 
 /**
@@ -938,45 +863,29 @@ export type ApplyChainToHotelGatewayNatsResponse = NatsResponse<GatewayConfigDat
 /**
  * Update fields for bulk gateway update operation
  */
-export interface BulkGatewayUpdateFields {
-  /**
-   * Enable or disable gateways
-   */
+export class BulkGatewayUpdateFields {
+  @ApiPropertyOptional({ description: 'Enable or disable gateways' })
   isActive?: boolean;
 
-  /**
-   * Merchant ID for the gateway
-   */
+  @ApiPropertyOptional({ description: 'Merchant ID for the gateway' })
   merchantId?: string;
 
-  /**
-   * API key for gateway authentication
-   */
+  @ApiPropertyOptional({ description: 'API key for gateway authentication' })
   apiKey?: string;
 
-  /**
-   * Secret key for gateway authentication
-   */
+  @ApiPropertyOptional({ description: 'Secret key for gateway authentication' })
   secretKey?: string;
 
-  /**
-   * Webhook URL for callbacks
-   */
+  @ApiPropertyOptional({ description: 'Webhook URL for callbacks' })
   webhookUrl?: string;
 
-  /**
-   * Currency code(s) supported
-   */
+  @ApiPropertyOptional({ description: 'Currency code(s) supported' })
   currency?: string;
 
-  /**
-   * Payment methods supported by this gateway
-   */
+  @ApiPropertyOptional({ description: 'Payment methods supported by this gateway', type: [String] })
   paymentMethods?: string[];
 
-  /**
-   * Gateway-specific configuration
-   */
+  @ApiPropertyOptional({ description: 'Gateway-specific configuration' })
   configuration?: Record<string, any>;
 }
 
@@ -998,70 +907,51 @@ export interface BulkGatewayUpdateFields {
  * };
  * ```
  */
-export interface BulkUpdatePaymentGatewayNatsRequest {
-  /**
-   * Tenant ID (multi-tenant isolation)
-   */
+export class BulkUpdatePaymentGatewayNatsRequest {
+  @ApiProperty({ description: 'Tenant ID (multi-tenant isolation)' })
   tenantId: string;
 
-  /**
-   * Hotel ID (optional - affects which gateways are updated)
-   */
+  @ApiPropertyOptional({ description: 'Hotel ID (optional - affects which gateways are updated)' })
   hotelId?: string;
 
-  /**
-   * Array of gateway IDs to update
-   */
+  @ApiProperty({ description: 'Array of gateway IDs to update', type: [String] })
   gatewayIds: string[];
 
-  /**
-   * Fields to update on each gateway
-   */
+  @ApiProperty({ description: 'Fields to update on each gateway', type: () => BulkGatewayUpdateFields })
+  @ValidateNested()
+  @Type(() => BulkGatewayUpdateFields)
   updates: BulkGatewayUpdateFields;
 }
 
 /**
  * Result for a single gateway in bulk update
  */
-export interface BulkUpdateGatewayResult {
-  /**
-   * Gateway ID that was processed
-   */
+export class BulkUpdateGatewayResult {
+  @ApiProperty({ description: 'Gateway ID that was processed' })
   gatewayId: string;
 
-  /**
-   * Whether the update succeeded for this gateway
-   */
+  @ApiProperty({ description: 'Whether the update succeeded for this gateway' })
   success: boolean;
 
-  /**
-   * Error message if update failed
-   */
+  @ApiPropertyOptional({ description: 'Error message if update failed' })
   error?: string;
 
-  /**
-   * Error code if update failed
-   */
+  @ApiPropertyOptional({ description: 'Error code if update failed' })
   errorCode?: string;
 }
 
 /**
  * Response data for bulk update operation
  */
-export interface BulkUpdateGatewayResponseData {
-  /**
-   * Number of gateways successfully updated
-   */
+export class BulkUpdateGatewayResponseData {
+  @ApiProperty({ description: 'Number of gateways successfully updated' })
   updatedCount: number;
 
-  /**
-   * Number of gateways that were skipped or failed
-   */
+  @ApiProperty({ description: 'Number of gateways that were skipped or failed' })
   skippedCount: number;
 
-  /**
-   * Detailed results for gateways that failed
-   */
+  @ApiProperty({ description: 'Detailed results for gateways that failed', type: [BulkUpdateGatewayResult] })
+  @Type(() => BulkUpdateGatewayResult)
   errors: BulkUpdateGatewayResult[];
 }
 
@@ -1078,20 +968,20 @@ export type BulkUpdatePaymentGatewayNatsResponse = NatsResponse<BulkUpdateGatewa
  * Request payload for gateway.test pattern
  * Used to test a payment gateway connection and credentials
  */
-export interface TestPaymentGatewayNatsRequest {
-  /** Gateway ID to test */
+export class TestPaymentGatewayNatsRequest {
+  @ApiProperty({ description: 'Gateway ID to test' })
   id: string;
 
-  /** Test transaction amount */
+  @ApiProperty({ description: 'Test transaction amount' })
   amount: number;
 
-  /** Currency code for test */
+  @ApiProperty({ description: 'Currency code for test' })
   currency: string;
 
-  /** Tenant ID (required) */
+  @ApiProperty({ description: 'Tenant ID (required)' })
   tenantId: string;
 
-  /** Hotel ID (optional) */
+  @ApiPropertyOptional({ description: 'Hotel ID (optional)' })
   hotelId?: string;
 }
 
@@ -1099,23 +989,23 @@ export interface TestPaymentGatewayNatsRequest {
  * Response data for gateway.test pattern
  * Contains test result details
  */
-export interface TestPaymentGatewayData {
-  /** Whether test was successful */
+export class TestPaymentGatewayData {
+  @ApiProperty({ description: 'Whether test was successful' })
   success: boolean;
 
-  /** Time taken to complete test (in milliseconds) */
+  @ApiProperty({ description: 'Time taken to complete test (in milliseconds)' })
   responseTime: number;
 
-  /** Human-readable message about test result */
+  @ApiProperty({ description: 'Human-readable message about test result' })
   message: string;
 
-  /** Optional test transaction ID from gateway */
+  @ApiPropertyOptional({ description: 'Optional test transaction ID from gateway' })
   testTransactionId?: string;
 
-  /** Gateway provider name */
+  @ApiPropertyOptional({ description: 'Gateway provider name' })
   provider?: string;
 
-  /** Test timestamp (ISO 8601) */
+  @ApiPropertyOptional({ description: 'Test timestamp (ISO 8601)' })
   testedAt?: string;
 }
 
