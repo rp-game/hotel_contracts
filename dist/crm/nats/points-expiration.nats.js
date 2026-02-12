@@ -28,7 +28,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MemberWithExpiringPointsNatsResponse = exports.PointsExpirationBatchNatsResponse = exports.PointsExpirationStatsDataNatsResponse = exports.StatsMetadataNatsResponse = exports.RetentionOpportunityNatsResponse = exports.MemberSegmentStatsNatsResponse = exports.ExpirationScheduleItemNatsResponse = exports.ExpirationOverviewNatsResponse = void 0;
+exports.FindAllMembersExpiringPointsData = exports.MemberWithExpiringPointsNatsResponse = exports.PointsExpirationBatchNatsResponse = exports.PointsExpirationStatsDataNatsResponse = exports.StatsMetadataNatsResponse = exports.RetentionOpportunityNatsResponse = exports.MemberSegmentStatsNatsResponse = exports.ExpirationScheduleItemNatsResponse = exports.ExpirationOverviewNatsResponse = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Expiration Overview Stats (nested in full stats response)
@@ -370,4 +370,35 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Last activity date', type: String, format: 'date-time' }),
     __metadata("design:type", Object)
 ], MemberWithExpiringPointsNatsResponse.prototype, "lastActivityDate", void 0);
+/**
+ * Find All Members with Expiring Points Response Data
+ * Used by both NATS and REST API
+ */
+class FindAllMembersExpiringPointsData {
+    members;
+    total;
+    hasMore;
+}
+exports.FindAllMembersExpiringPointsData = FindAllMembersExpiringPointsData;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'List of members with expiring points',
+        type: [MemberWithExpiringPointsNatsResponse],
+    }),
+    __metadata("design:type", Array)
+], FindAllMembersExpiringPointsData.prototype, "members", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Total number of members matching criteria',
+        type: Number,
+    }),
+    __metadata("design:type", Number)
+], FindAllMembersExpiringPointsData.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Whether there are more results available',
+        type: Boolean,
+    }),
+    __metadata("design:type", Boolean)
+], FindAllMembersExpiringPointsData.prototype, "hasMore", void 0);
 //# sourceMappingURL=points-expiration.nats.js.map

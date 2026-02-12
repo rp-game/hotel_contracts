@@ -729,10 +729,30 @@ export interface FindAllMembersExpiringPointsNatsRequest {
 }
 
 /**
- * Find All Members with Expiring Points Response
+ * Find All Members with Expiring Points Response Data
+ * Used by both NATS and REST API
  */
-export type FindAllMembersExpiringPointsNatsResponse = NatsResponse<{
+export class FindAllMembersExpiringPointsData {
+  @ApiProperty({
+    description: 'List of members with expiring points',
+    type: [MemberWithExpiringPointsNatsResponse],
+  })
   members: MemberWithExpiringPointsNatsResponse[];
+
+  @ApiProperty({
+    description: 'Total number of members matching criteria',
+    type: Number,
+  })
   total: number;
+
+  @ApiProperty({
+    description: 'Whether there are more results available',
+    type: Boolean,
+  })
   hasMore: boolean;
-}>;
+}
+
+/**
+ * Find All Members with Expiring Points Response (NATS wrapper)
+ */
+export type FindAllMembersExpiringPointsNatsResponse = NatsResponse<FindAllMembersExpiringPointsData>;

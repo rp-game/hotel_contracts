@@ -559,11 +559,16 @@ export interface FindAllMembersExpiringPointsNatsRequest {
     offset?: number;
 }
 /**
- * Find All Members with Expiring Points Response
+ * Find All Members with Expiring Points Response Data
+ * Used by both NATS and REST API
  */
-export type FindAllMembersExpiringPointsNatsResponse = NatsResponse<{
+export declare class FindAllMembersExpiringPointsData {
     members: MemberWithExpiringPointsNatsResponse[];
     total: number;
     hasMore: boolean;
-}>;
+}
+/**
+ * Find All Members with Expiring Points Response (NATS wrapper)
+ */
+export type FindAllMembersExpiringPointsNatsResponse = NatsResponse<FindAllMembersExpiringPointsData>;
 //# sourceMappingURL=points-expiration.nats.d.ts.map
