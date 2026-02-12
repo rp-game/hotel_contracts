@@ -1,25 +1,15 @@
 /**
  * Extra Person Charges NATS Contracts (5 patterns)
+ *
+ * @updated 2026-02-12 - Converted to classes with @ApiProperty for dual use (NATS + REST)
  */
 import { NatsResponse } from '../../common/nats-response.interface';
-import { ExtraPersonCharge } from '../types';
-export interface FindAllExtraPersonChargesRequest {
+export declare class FindAllExtraPersonChargesRequest {
     tenantId: string;
     hotelId: string;
 }
-export interface FindAllExtraPersonChargesResponse {
-    data: ExtraPersonCharge[];
-}
-export type FindAllExtraPersonChargesNatsResponse = NatsResponse<FindAllExtraPersonChargesResponse>;
-export interface FindExtraPersonChargeByIdRequest {
+export declare class ExtraPersonChargeResponse {
     id: string;
-    tenantId: string;
-}
-export interface FindExtraPersonChargeByIdResponse {
-    data: ExtraPersonCharge;
-}
-export type FindExtraPersonChargeByIdNatsResponse = NatsResponse<FindExtraPersonChargeByIdResponse>;
-export interface CreateExtraPersonChargeRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId: string;
@@ -29,14 +19,40 @@ export interface CreateExtraPersonChargeRequest {
     extraChildCharge?: number;
     childMaxAge: number;
     currency: string;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+}
+export declare class FindAllExtraPersonChargesResponse {
+    data: ExtraPersonChargeResponse[];
+}
+export type FindAllExtraPersonChargesNatsResponse = NatsResponse<FindAllExtraPersonChargesResponse>;
+export declare class FindExtraPersonChargeByIdRequest {
+    id: string;
+    tenantId: string;
+}
+export declare class FindExtraPersonChargeByIdResponse {
+    data: ExtraPersonChargeResponse;
+}
+export type FindExtraPersonChargeByIdNatsResponse = NatsResponse<FindExtraPersonChargeByIdResponse>;
+export declare class CreateExtraPersonChargeRequest {
+    tenantId: string;
+    hotelId: string;
+    roomTypeId: string;
+    standardOccupancy: number;
+    maxOccupancy: number;
+    extraAdultCharge: number;
+    extraChildCharge?: number;
+    childMaxAge?: number;
+    currency?: string;
     isActive?: boolean;
 }
-export interface CreateExtraPersonChargeResponse {
-    data: ExtraPersonCharge;
+export declare class CreateExtraPersonChargeResponse {
+    data: ExtraPersonChargeResponse;
     message: string;
 }
 export type CreateExtraPersonChargeNatsResponse = NatsResponse<CreateExtraPersonChargeResponse>;
-export interface UpdateExtraPersonChargeRequest {
+export declare class UpdateExtraPersonChargeRequest {
     id: string;
     tenantId: string;
     standardOccupancy?: number;
@@ -44,18 +60,19 @@ export interface UpdateExtraPersonChargeRequest {
     extraAdultCharge?: number;
     extraChildCharge?: number;
     childMaxAge?: number;
+    currency?: string;
     isActive?: boolean;
 }
-export interface UpdateExtraPersonChargeResponse {
-    data: ExtraPersonCharge;
+export declare class UpdateExtraPersonChargeResponse {
+    data: ExtraPersonChargeResponse;
     message: string;
 }
 export type UpdateExtraPersonChargeNatsResponse = NatsResponse<UpdateExtraPersonChargeResponse>;
-export interface DeleteExtraPersonChargeRequest {
+export declare class DeleteExtraPersonChargeRequest {
     id: string;
     tenantId: string;
 }
-export interface DeleteExtraPersonChargeResponse {
+export declare class DeleteExtraPersonChargeResponse {
     message: string;
 }
 export type DeleteExtraPersonChargeNatsResponse = NatsResponse<DeleteExtraPersonChargeResponse>;
