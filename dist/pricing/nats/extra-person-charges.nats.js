@@ -161,7 +161,7 @@ exports.FindAllExtraPersonChargesResponse = FindAllExtraPersonChargesResponse;
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'List of extra person charges',
-        type: [ExtraPersonChargeResponse],
+        type: ExtraPersonChargeResponse,
         isArray: true,
     }),
     __metadata("design:type", Array)

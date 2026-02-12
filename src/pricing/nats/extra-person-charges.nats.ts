@@ -117,7 +117,7 @@ export class ExtraPersonChargeResponse {
 export class FindAllExtraPersonChargesResponse {
   @ApiProperty({
     description: 'List of extra person charges',
-    type: [ExtraPersonChargeResponse],
+    type: ExtraPersonChargeResponse,
     isArray: true,
   })
   data: ExtraPersonChargeResponse[];
