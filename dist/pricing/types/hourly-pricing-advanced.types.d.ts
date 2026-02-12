@@ -1,13 +1,14 @@
 /**
  * Hourly Pricing Advanced Types
  *
- * Shared types for advanced hourly pricing patterns.
+ * Shared entity types for advanced hourly pricing patterns.
  * Includes tiered blocks, peak periods, and rate calculations.
+ * All classes have @ApiProperty decorators for Swagger generation.
  */
 /**
  * Hourly pricing rule with tiered blocks
  */
-export interface HourlyPricingRule {
+export declare class HourlyPricingRule {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -31,7 +32,7 @@ export interface HourlyPricingRule {
 /**
  * Tiered hour block for progressive pricing
  */
-export interface HourlyBlock {
+export declare class HourlyBlock {
     blockName: string;
     fromHour: number;
     toHour: number;
@@ -42,7 +43,7 @@ export interface HourlyBlock {
 /**
  * Peak/off-peak period adjustment
  */
-export interface PeakPeriod {
+export declare class PeakPeriod {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -62,7 +63,7 @@ export interface PeakPeriod {
 /**
  * Hourly rate calculation result with breakdown
  */
-export interface HourlyRateCalculation {
+export declare class HourlyRateCalculation {
     roomTypeId: string;
     checkIn: string;
     startTime: string;
@@ -80,7 +81,7 @@ export interface HourlyRateCalculation {
 /**
  * Calculation breakdown for a single block
  */
-export interface HourlyBlockCalculation {
+export declare class HourlyBlockCalculation {
     blockName: string;
     hours: number;
     ratePerHour: number;
@@ -90,7 +91,7 @@ export interface HourlyBlockCalculation {
 /**
  * Peak period adjustment in calculation
  */
-export interface PeakAdjustmentCalculation {
+export declare class PeakAdjustmentCalculation {
     periodName: string;
     hours: number;
     adjustmentType: 'PERCENTAGE' | 'FIXED';
