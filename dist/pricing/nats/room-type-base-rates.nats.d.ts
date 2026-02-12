@@ -1,26 +1,28 @@
 /**
  * Room Type Base Rates NATS Contracts (5 patterns)
+ *
+ * @updated 2026-02-12 - Converted to classes with @ApiProperty for dual use (NATS + REST)
  */
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomTypeBaseRate } from '../types';
-export interface FindAllRoomTypeBaseRatesRequest {
+export declare class FindAllRoomTypeBaseRatesRequest {
     tenantId: string;
     hotelId: string;
 }
-export interface FindAllRoomTypeBaseRatesResponse {
+export declare class FindAllRoomTypeBaseRatesResponse {
     data: RoomTypeBaseRate[];
 }
 export type FindAllRoomTypeBaseRatesNatsResponse = NatsResponse<FindAllRoomTypeBaseRatesResponse>;
-export interface FindOneRoomTypeBaseRateRequest {
+export declare class FindOneRoomTypeBaseRateRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId: string;
 }
-export interface FindOneRoomTypeBaseRateResponse {
+export declare class FindOneRoomTypeBaseRateResponse {
     data: RoomTypeBaseRate;
 }
 export type FindOneRoomTypeBaseRateNatsResponse = NatsResponse<FindOneRoomTypeBaseRateResponse>;
-export interface UpsertRoomTypeBaseRateRequest {
+export declare class UpsertRoomTypeBaseRateRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId: string;
@@ -32,30 +34,31 @@ export interface UpsertRoomTypeBaseRateRequest {
     currency?: string;
     isActive?: boolean;
 }
-export interface UpsertRoomTypeBaseRateResponse {
+export declare class UpsertRoomTypeBaseRateResponse {
     data: RoomTypeBaseRate;
     message: string;
 }
 export type UpsertRoomTypeBaseRateNatsResponse = NatsResponse<UpsertRoomTypeBaseRateResponse>;
-export interface RemoveRoomTypeBaseRateRequest {
+export declare class RemoveRoomTypeBaseRateRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId: string;
 }
-export interface RemoveRoomTypeBaseRateResponse {
+export declare class RemoveRoomTypeBaseRateResponse {
     message: string;
 }
 export type RemoveRoomTypeBaseRateNatsResponse = NatsResponse<RemoveRoomTypeBaseRateResponse>;
-export interface BulkUpsertRoomTypeBaseRatesRequest {
+export declare class BulkRateItem {
+    roomTypeId: string;
+    baseRate: number;
+    currency?: string;
+}
+export declare class BulkUpsertRoomTypeBaseRatesRequest {
     tenantId: string;
     hotelId: string;
-    rates: Array<{
-        roomTypeId: string;
-        baseRate: number;
-        currency?: string;
-    }>;
+    rates: BulkRateItem[];
 }
-export interface BulkUpsertRoomTypeBaseRatesResponse {
+export declare class BulkUpsertRoomTypeBaseRatesResponse {
     data: RoomTypeBaseRate[];
     message: string;
 }
