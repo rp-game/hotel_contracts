@@ -28,7 +28,12 @@
  * Called by: api-gateway, user-service
  */
 import { NatsResponse } from '../../common';
-export interface Hotel {
+/**
+ * Hotel Entity
+ * Shared DTO for both NATS messages and REST API responses
+ * Used across: inventory-service, api-gateway, frontend
+ */
+export declare class HotelDto {
     id: string;
     tenantId: string;
     name: string;
@@ -69,22 +74,27 @@ export interface Hotel {
     createdAt?: string;
     updatedAt?: string;
 }
+export type Hotel = HotelDto;
 /**
  * Hotel with statistics
  * Returned by hotels.findOne with room counts
+ * Extends HotelDto with additional statistical fields
  */
-export interface HotelWithStats extends Hotel {
+export declare class HotelWithStatsDto extends HotelDto {
     roomCount?: number;
     availableRooms?: number;
     occupiedRooms?: number;
 }
 /**
  * Hotel with room count
- * Returned by hotels.findAll
+ * Returned by hotels.findAll and hotels.findByChain
+ * Extends HotelDto with roomCount field
  */
-export interface HotelWithRoomCount extends Hotel {
+export declare class HotelWithRoomCountDto extends HotelDto {
     roomCount?: number;
 }
+export type HotelWithStats = HotelWithStatsDto;
+export type HotelWithRoomCount = HotelWithRoomCountDto;
 /**
  * Find All Hotels Request
  * Pattern: hotels.findAll
@@ -96,7 +106,7 @@ export interface FindAllHotelsRequest {
         limit?: number;
     };
 }
-export type FindAllHotelsResponse = HotelWithRoomCount[];
+export type FindAllHotelsResponse = HotelWithRoomCountDto[];
 export type FindAllHotelsNatsResponse = NatsResponse<FindAllHotelsResponse>;
 /**
  * Find One Hotel Request
@@ -105,7 +115,7 @@ export type FindAllHotelsNatsResponse = NatsResponse<FindAllHotelsResponse>;
 export interface FindOneHotelRequest {
     id: string;
 }
-export type FindOneHotelResponse = HotelWithStats | null;
+export type FindOneHotelResponse = HotelWithStatsDto | null;
 export type FindOneHotelNatsResponse = NatsResponse<FindOneHotelResponse>;
 /**
  * Create Hotel Request
@@ -114,7 +124,7 @@ export type FindOneHotelNatsResponse = NatsResponse<FindOneHotelResponse>;
 export interface CreateHotelRequest {
     hotelData: any;
 }
-export type CreateHotelResponse = Hotel;
+export type CreateHotelResponse = HotelDto;
 export type CreateHotelNatsResponse = NatsResponse<CreateHotelResponse>;
 /**
  * Update Hotel Request
@@ -124,7 +134,7 @@ export interface UpdateHotelRequest {
     id: string;
     updateData: any;
 }
-export type UpdateHotelResponse = Hotel | null;
+export type UpdateHotelResponse = HotelDto | null;
 export type UpdateHotelNatsResponse = NatsResponse<UpdateHotelResponse>;
 /**
  * Delete Hotel Request
@@ -145,17 +155,32 @@ export interface UpdateHotelStatusRequest {
     id: string;
     status: string;
 }
-export type UpdateHotelStatusResponse = HotelWithStats;
+export type UpdateHotelStatusResponse = HotelWithStatsDto;
 export type UpdateHotelStatusNatsResponse = NatsResponse<UpdateHotelStatusResponse>;
 /**
  * Find Hotels By Chain Request
  * Pattern: hotels.findByChain
+ * Includes optional filters for city, country, and status
  */
-export interface FindHotelsByChainRequest {
+export declare class FindHotelsByChainRequestDto {
     chainId: string;
+    city?: string;
+    country?: string;
+    status?: string;
 }
-export type FindHotelsByChainResponse = Hotel[];
+export type FindHotelsByChainResponse = HotelWithRoomCountDto[];
 export type FindHotelsByChainNatsResponse = NatsResponse<FindHotelsByChainResponse>;
+/**
+ * Paginated response wrapper for hotel list endpoints
+ * Used by REST API to return paginated hotel data
+ */
+export declare class HotelListResponseDto {
+    data: HotelWithRoomCountDto[];
+    total: number;
+    page: number;
+    limit: number;
+    totalPages?: number;
+}
 /**
  * Get Occupancy Analytics Request
  * Pattern: hotels.analytics.occupancy
@@ -366,6 +391,6 @@ export interface UpdateChainIdRequest {
     hotelId: string;
     chainId: string;
 }
-export type UpdateChainIdResponse = Hotel;
+export type UpdateChainIdResponse = HotelDto;
 export type UpdateChainIdNatsResponse = NatsResponse<UpdateChainIdResponse>;
 //# sourceMappingURL=hotel.nats.d.ts.map

@@ -29,25 +29,103 @@
  */
 
 import { NatsResponse } from '../../common';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsUUID, IsOptional, IsArray, IsNumber, IsEmail, IsObject, Min, Max } from 'class-validator';
 
-export interface Hotel {
+/**
+ * Hotel Entity
+ * Shared DTO for both NATS messages and REST API responses
+ * Used across: inventory-service, api-gateway, frontend
+ */
+export class HotelDto {
+  @ApiProperty({ description: 'Hotel unique identifier' })
+  @IsUUID()
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID that owns this hotel' })
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel name' })
+  @IsString()
   name: string;
+
+  @ApiPropertyOptional({ description: 'Hotel description' })
+  @IsOptional()
+  @IsString()
   description?: string;
+
+  @ApiPropertyOptional({ description: 'Street address' })
+  @IsOptional()
+  @IsString()
   address?: string;
+
+  @ApiPropertyOptional({ description: 'City' })
+  @IsOptional()
+  @IsString()
   city?: string;
+
+  @ApiPropertyOptional({ description: 'Country' })
+  @IsOptional()
+  @IsString()
   country?: string;
+
+  @ApiPropertyOptional({ description: 'Postal/ZIP code' })
+  @IsOptional()
+  @IsString()
   postalCode?: string;
+
+  @ApiPropertyOptional({ description: 'Latitude coordinate' })
+  @IsOptional()
+  @IsNumber()
   latitude?: number;
+
+  @ApiPropertyOptional({ description: 'Longitude coordinate' })
+  @IsOptional()
+  @IsNumber()
   longitude?: number;
+
+  @ApiPropertyOptional({ description: 'Contact phone number' })
+  @IsOptional()
+  @IsString()
   phone?: string;
+
+  @ApiPropertyOptional({ description: 'Contact email address' })
+  @IsOptional()
+  @IsEmail()
   email?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel website URL' })
+  @IsOptional()
+  @IsString()
   website?: string;
+
+  @ApiPropertyOptional({ description: 'Star rating (1-5)', minimum: 1, maximum: 5 })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  @Max(5)
   stars?: number;
+
+  @ApiPropertyOptional({ description: 'Hotel chain ID if part of a chain' })
+  @IsOptional()
+  @IsUUID()
   chainId?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel operational status', enum: ['ACTIVE', 'INACTIVE', 'MAINTENANCE', 'CLOSED'] })
+  @IsOptional()
+  @IsString()
   status?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel amenities list', type: [String] })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
   amenities?: string[];
+
+  @ApiPropertyOptional({ description: 'Operational settings' })
+  @IsOptional()
+  @IsObject()
   operationSettings?: {
     timelineSettings?: any;
     checkInTime?: string;
@@ -62,33 +140,88 @@ export interface Hotel {
       end: string;
     };
   };
+
+  @ApiPropertyOptional({ description: 'Brand standards configuration' })
+  @IsOptional()
+  @IsObject()
   brandStandards?: any;
+
+  @ApiPropertyOptional({ description: 'Hotel policies' })
+  @IsOptional()
+  @IsObject()
   policies?: any;
+
+  @ApiPropertyOptional({ description: 'Default check-in time (HH:mm format)' })
+  @IsOptional()
+  @IsString()
   checkInTime?: string;
+
+  @ApiPropertyOptional({ description: 'Default check-out time (HH:mm format)' })
+  @IsOptional()
+  @IsString()
   checkOutTime?: string;
+
+  @ApiPropertyOptional({ description: 'Timezone (IANA format, e.g., Asia/Ho_Chi_Minh)' })
+  @IsOptional()
+  @IsString()
   timezone?: string;
+
+  @ApiPropertyOptional({ description: 'Default currency code (ISO 4217, e.g., VND, USD)' })
+  @IsOptional()
+  @IsString()
   currency?: string;
+
+  @ApiPropertyOptional({ description: 'Creation timestamp (ISO 8601 format)' })
+  @IsOptional()
+  @IsString()
   createdAt?: string;
+
+  @ApiPropertyOptional({ description: 'Last update timestamp (ISO 8601 format)' })
+  @IsOptional()
+  @IsString()
   updatedAt?: string;
 }
+
+// Keep Hotel type alias for backward compatibility during migration
+export type Hotel = HotelDto;
 
 /**
  * Hotel with statistics
  * Returned by hotels.findOne with room counts
+ * Extends HotelDto with additional statistical fields
  */
-export interface HotelWithStats extends Hotel {
+export class HotelWithStatsDto extends HotelDto {
+  @ApiPropertyOptional({ description: 'Total number of rooms in the hotel' })
+  @IsOptional()
+  @IsNumber()
   roomCount?: number;
+
+  @ApiPropertyOptional({ description: 'Number of available rooms' })
+  @IsOptional()
+  @IsNumber()
   availableRooms?: number;
+
+  @ApiPropertyOptional({ description: 'Number of occupied rooms' })
+  @IsOptional()
+  @IsNumber()
   occupiedRooms?: number;
 }
 
 /**
  * Hotel with room count
- * Returned by hotels.findAll
+ * Returned by hotels.findAll and hotels.findByChain
+ * Extends HotelDto with roomCount field
  */
-export interface HotelWithRoomCount extends Hotel {
+export class HotelWithRoomCountDto extends HotelDto {
+  @ApiPropertyOptional({ description: 'Total number of rooms in the hotel' })
+  @IsOptional()
+  @IsNumber()
   roomCount?: number;
 }
+
+// Type aliases for backward compatibility during migration
+export type HotelWithStats = HotelWithStatsDto;
+export type HotelWithRoomCount = HotelWithRoomCountDto;
 
 /**
  * Find All Hotels Request
@@ -99,7 +232,7 @@ export interface FindAllHotelsRequest {
   pagination?: { page?: number; limit?: number };
 }
 
-export type FindAllHotelsResponse = HotelWithRoomCount[];
+export type FindAllHotelsResponse = HotelWithRoomCountDto[];
 export type FindAllHotelsNatsResponse = NatsResponse<FindAllHotelsResponse>;
 
 /**
@@ -110,7 +243,7 @@ export interface FindOneHotelRequest {
   id: string;
 }
 
-export type FindOneHotelResponse = HotelWithStats | null;
+export type FindOneHotelResponse = HotelWithStatsDto | null;
 export type FindOneHotelNatsResponse = NatsResponse<FindOneHotelResponse>;
 
 /**
@@ -121,7 +254,7 @@ export interface CreateHotelRequest {
   hotelData: any;
 }
 
-export type CreateHotelResponse = Hotel;
+export type CreateHotelResponse = HotelDto;
 export type CreateHotelNatsResponse = NatsResponse<CreateHotelResponse>;
 
 /**
@@ -133,7 +266,7 @@ export interface UpdateHotelRequest {
   updateData: any;
 }
 
-export type UpdateHotelResponse = Hotel | null;
+export type UpdateHotelResponse = HotelDto | null;
 export type UpdateHotelNatsResponse = NatsResponse<UpdateHotelResponse>;
 
 /**
@@ -159,19 +292,58 @@ export interface UpdateHotelStatusRequest {
   status: string;
 }
 
-export type UpdateHotelStatusResponse = HotelWithStats;
+export type UpdateHotelStatusResponse = HotelWithStatsDto;
 export type UpdateHotelStatusNatsResponse = NatsResponse<UpdateHotelStatusResponse>;
 
 /**
  * Find Hotels By Chain Request
  * Pattern: hotels.findByChain
+ * Includes optional filters for city, country, and status
  */
-export interface FindHotelsByChainRequest {
+export class FindHotelsByChainRequestDto {
+  @ApiProperty({ description: 'Hotel chain ID to find hotels for' })
+  @IsUUID()
   chainId: string;
+
+  @ApiPropertyOptional({ description: 'Filter by city (case-insensitive partial match)' })
+  @IsOptional()
+  @IsString()
+  city?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by country (case-insensitive partial match)' })
+  @IsOptional()
+  @IsString()
+  country?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by operational status', enum: ['ACTIVE', 'INACTIVE', 'MAINTENANCE', 'CLOSED'] })
+  @IsOptional()
+  @IsString()
+  status?: string;
 }
 
-export type FindHotelsByChainResponse = Hotel[];
+export type FindHotelsByChainResponse = HotelWithRoomCountDto[];
 export type FindHotelsByChainNatsResponse = NatsResponse<FindHotelsByChainResponse>;
+
+/**
+ * Paginated response wrapper for hotel list endpoints
+ * Used by REST API to return paginated hotel data
+ */
+export class HotelListResponseDto {
+  @ApiProperty({ description: 'Array of hotels with room counts', type: [HotelWithRoomCountDto] })
+  data: HotelWithRoomCountDto[];
+
+  @ApiProperty({ description: 'Total number of hotels in result set' })
+  total: number;
+
+  @ApiProperty({ description: 'Current page number' })
+  page: number;
+
+  @ApiProperty({ description: 'Number of items per page' })
+  limit: number;
+
+  @ApiPropertyOptional({ description: 'Total number of pages' })
+  totalPages?: number;
+}
 
 /**
  * Get Occupancy Analytics Request
@@ -421,5 +593,5 @@ export interface UpdateChainIdRequest {
   chainId: string;
 }
 
-export type UpdateChainIdResponse = Hotel;
+export type UpdateChainIdResponse = HotelDto;
 export type UpdateChainIdNatsResponse = NatsResponse<UpdateChainIdResponse>;
