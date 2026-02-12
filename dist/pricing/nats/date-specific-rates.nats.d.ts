@@ -3,35 +3,35 @@
  */
 import { NatsResponse } from '../../common/nats-response.interface';
 import { SpecificDateRate, SpecificDateRateCalendar, BulkCreateDateRatesResult } from '../types';
-export interface FindAllDateRatesRequest {
+/**
+ * Request to find all date-specific rates
+ */
+export declare class FindAllDateRatesRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId?: string;
 }
-export interface FindAllDateRatesResponse {
-    data: SpecificDateRate[];
-}
-export type FindAllDateRatesNatsResponse = NatsResponse<FindAllDateRatesResponse>;
-export interface FindDateRateByIdRequest {
+/**
+ * Request to find date-specific rate by ID
+ */
+export declare class FindDateRateByIdRequest {
     id: string;
     tenantId: string;
 }
-export interface FindDateRateByIdResponse {
-    data: SpecificDateRate;
-}
-export type FindDateRateByIdNatsResponse = NatsResponse<FindDateRateByIdResponse>;
-export interface FindDateRateCalendarRequest {
+/**
+ * Request to get calendar view of date rates
+ */
+export declare class FindDateRateCalendarRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId: string;
     startDate: string;
     endDate: string;
 }
-export interface FindDateRateCalendarResponse {
-    data: SpecificDateRateCalendar;
-}
-export type FindDateRateCalendarNatsResponse = NatsResponse<FindDateRateCalendarResponse>;
-export interface CreateSpecificDateRateRequest {
+/**
+ * Request to create a date-specific rate
+ */
+export declare class CreateSpecificDateRateRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId: string;
@@ -41,44 +41,96 @@ export interface CreateSpecificDateRateRequest {
     notes?: string;
     isActive?: boolean;
 }
-export interface CreateSpecificDateRateResponse {
-    data: SpecificDateRate;
-    message: string;
+/**
+ * Single date-rate entry for bulk create
+ */
+export declare class DateRateEntry {
+    date: string;
+    rate: number;
+    notes?: string;
 }
-export type CreateSpecificDateRateNatsResponse = NatsResponse<CreateSpecificDateRateResponse>;
-export interface BulkCreateSpecificDateRatesRequest {
+/**
+ * Request to bulk create date-specific rates
+ */
+export declare class BulkCreateSpecificDateRatesRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId: string;
-    rates: Array<{
-        date: string;
-        rate: number;
-        notes?: string;
-    }>;
+    rates: DateRateEntry[];
     currency?: string;
 }
-export interface BulkCreateSpecificDateRatesResponse {
-    data: BulkCreateDateRatesResult;
-    message: string;
-}
-export type BulkCreateSpecificDateRatesNatsResponse = NatsResponse<BulkCreateSpecificDateRatesResponse>;
-export interface UpdateDateRateRequest {
-    id: string;
-    tenantId: string;
+/**
+ * DTO for update body (partial fields only)
+ */
+export declare class UpdateDateRateDto {
     rate?: number;
     notes?: string;
     isActive?: boolean;
 }
-export interface UpdateDateRateResponse {
+/**
+ * Request to update a date-specific rate (NATS)
+ */
+export declare class UpdateDateRateRequest {
+    id: string;
+    tenantId: string;
+    dto: UpdateDateRateDto;
+}
+/**
+ * Request to delete a date-specific rate
+ */
+export declare class DeleteDateRateRequest {
+    id: string;
+    tenantId: string;
+}
+/**
+ * Response for finding all date-specific rates
+ */
+export declare class FindAllDateRatesResponse {
+    data: SpecificDateRate[];
+}
+export type FindAllDateRatesNatsResponse = NatsResponse<FindAllDateRatesResponse>;
+/**
+ * Response for finding date-specific rate by ID
+ */
+export declare class FindDateRateByIdResponse {
+    data: SpecificDateRate;
+}
+export type FindDateRateByIdNatsResponse = NatsResponse<FindDateRateByIdResponse>;
+/**
+ * Response for calendar view
+ */
+export declare class FindDateRateCalendarResponse {
+    data: SpecificDateRateCalendar;
+}
+export type FindDateRateCalendarNatsResponse = NatsResponse<FindDateRateCalendarResponse>;
+/**
+ * Response for creating a date-specific rate
+ */
+export declare class CreateSpecificDateRateResponse {
+    data: SpecificDateRate;
+    message: string;
+}
+export type CreateSpecificDateRateNatsResponse = NatsResponse<CreateSpecificDateRateResponse>;
+/**
+ * Response for bulk creating date-specific rates
+ */
+export declare class BulkCreateSpecificDateRatesResponse {
+    data: BulkCreateDateRatesResult;
+    message: string;
+}
+export type BulkCreateSpecificDateRatesNatsResponse = NatsResponse<BulkCreateSpecificDateRatesResponse>;
+/**
+ * Response for updating a date-specific rate
+ */
+export declare class UpdateDateRateResponse {
     data: SpecificDateRate;
     message: string;
 }
 export type UpdateDateRateNatsResponse = NatsResponse<UpdateDateRateResponse>;
-export interface DeleteDateRateRequest {
-    id: string;
-    tenantId: string;
-}
-export interface DeleteDateRateResponse {
+/**
+ * Response for deleting a date-specific rate
+ */
+export declare class DeleteDateRateResponse {
     message: string;
 }
 export type DeleteDateRateNatsResponse = NatsResponse<DeleteDateRateResponse>;

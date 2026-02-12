@@ -7,7 +7,7 @@
 /**
  * Date-specific rate entity
  */
-export interface SpecificDateRate {
+export declare class SpecificDateRate {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -21,18 +21,9 @@ export interface SpecificDateRate {
     updatedAt: string;
 }
 /**
- * Calendar view of date rates for a room type
- */
-export interface SpecificDateRateCalendar {
-    roomTypeId: string;
-    startDate: string;
-    endDate: string;
-    dates: SpecificDateRateCalendarDay[];
-}
-/**
  * Single day in calendar view
  */
-export interface SpecificDateRateCalendarDay {
+export declare class SpecificDateRateCalendarDay {
     date: string;
     rate?: number;
     currency?: string;
@@ -41,11 +32,21 @@ export interface SpecificDateRateCalendarDay {
     hasSpecialRate: boolean;
 }
 /**
+ * Calendar view of date rates for a room type
+ */
+export declare class SpecificDateRateCalendar {
+    roomTypeId: string;
+    startDate: string;
+    endDate: string;
+    dates: SpecificDateRateCalendarDay[];
+}
+/**
  * Bulk create result
  */
-export interface BulkCreateDateRatesResult {
+export declare class BulkCreateDateRatesResult {
     created: number;
-    skipped: number;
-    errors: string[];
+    dates: string[];
+    skipped?: number;
+    errors?: string[];
 }
 //# sourceMappingURL=date-specific-rates.types.d.ts.map
