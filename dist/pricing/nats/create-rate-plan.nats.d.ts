@@ -4,75 +4,54 @@
  * NATS Pattern: pricing.rate-plan.create
  * Handler: pricing-service
  * Called by: api-gateway
+ *
+ * @updated 2026-02-12 - Aligned with actual BASE/DERIVED implementation
  */
 import { NatsResponse } from '../../common/nats-response.interface';
-import { RatePlanType, RatePlanStatus } from '../enums';
-import { RatePlan } from '../types';
+/**
+ * Rate plan type enum - BASE or DERIVED
+ */
+export declare enum RatePlanTypeEnum {
+    BASE = "BASE",
+    DERIVED = "DERIVED"
+}
+/**
+ * Derivation type for DERIVED rate plans
+ */
+export declare enum DerivationTypeEnum {
+    PERCENTAGE = "PERCENTAGE",
+    AMOUNT = "AMOUNT"
+}
 /**
  * NATS request to create a rate plan
+ * Used for both NATS messages and REST API
  */
-export interface CreateRatePlanRequest {
-    /**
-     * Tenant ID (multi-tenant isolation)
-     */
+export declare class CreateRatePlanRequest {
     tenantId: string;
-    /**
-     * Hotel ID
-     */
     hotelId: string;
-    /**
-     * Rate plan name
-     */
     name: string;
-    /**
-     * Description (optional)
-     */
+    type: RatePlanTypeEnum;
+    parentRatePlanId?: string;
+    derivationType?: DerivationTypeEnum;
+    derivationValue?: number;
     description?: string;
-    /**
-     * Type of rate plan (NIGHTLY, HOURLY, DATE_RANGE, LOS, PACKAGE)
-     */
-    type: RatePlanType;
-    /**
-     * Base price for this rate plan
-     */
-    basePrice: number;
-    /**
-     * Currency code (e.g., VND, USD)
-     */
-    currency: string;
-    /**
-     * Room type ID this rate plan applies to
-     */
-    roomTypeId: string;
-    /**
-     * Valid from date (YYYY-MM-DD)
-     */
-    validFrom: string;
-    /**
-     * Valid to date (YYYY-MM-DD)
-     */
-    validTo: string;
-    /**
-     * Initial status (DRAFT or ACTIVE)
-     */
-    status?: RatePlanStatus;
-    /**
-     * Creator user ID
-     */
-    createdBy: string;
 }
 /**
  * NATS response after creating rate plan
  */
-export interface CreateRatePlanResponse {
-    /**
-     * Created rate plan ID
-     */
+export declare class CreateRatePlanResponse {
     id: string;
-    /**
-     * Full rate plan data
-     */
-    ratePlan: RatePlan;
+    tenantId: string;
+    hotelId: string;
+    name: string;
+    type: RatePlanTypeEnum;
+    parentRatePlanId?: string;
+    derivationType?: DerivationTypeEnum;
+    derivationValue?: number;
+    description?: string;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
 }
 /**
  * Type-safe NATS response wrapper

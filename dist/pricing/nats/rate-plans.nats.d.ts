@@ -3,138 +3,134 @@
  *
  * Handles rate plan management including creation, updates, channel mappings,
  * and price calculations.
+ *
+ * @updated 2026-02-12 - Converted to classes with @ApiProperty for dual use (NATS + REST)
  */
 import { NatsResponse } from '../../common/nats-response.interface';
-import { RatePlan } from '../types';
+import { CreateRatePlanRequest, CreateRatePlanResponse, CreateRatePlanNatsResponse, RatePlanTypeEnum, DerivationTypeEnum } from './create-rate-plan.nats';
 /**
- * NATS Pattern: pricing.rate-plan.create
- * Already exists in create-rate-plan.nats.ts
+ * Re-export create contracts
  */
-export * from './create-rate-plan.nats';
+export { CreateRatePlanRequest, CreateRatePlanResponse, CreateRatePlanNatsResponse, RatePlanTypeEnum, DerivationTypeEnum, };
 /**
  * NATS Pattern: pricing.rate-plan.update
  */
-export interface UpdateRatePlanRequest {
+export declare class UpdateRatePlanRequest {
     id: string;
-    dto: {
-        name?: string;
-        description?: string;
-        basePrice?: number;
-        validFrom?: string;
-        validTo?: string;
-        status?: string;
-    };
+    dto: UpdateRatePlanDto;
 }
-export interface UpdateRatePlanResponse {
-    data: RatePlan;
+export declare class UpdateRatePlanDto {
+    name?: string;
+    description?: string;
+    isActive?: boolean;
+}
+export declare class UpdateRatePlanResponse {
+    data: CreateRatePlanResponse;
 }
 export type UpdateRatePlanNatsResponse = NatsResponse<UpdateRatePlanResponse>;
 /**
  * NATS Pattern: pricing.rate-plan.get
  */
-export interface GetRatePlanRequest {
+export declare class GetRatePlanRequest {
     id: string;
 }
-export interface GetRatePlanResponse {
-    data: RatePlan;
+export declare class GetRatePlanResponse {
+    data: CreateRatePlanResponse;
 }
 export type GetRatePlanNatsResponse = NatsResponse<GetRatePlanResponse>;
 /**
  * NATS Pattern: pricing.rate-plan.list
  */
-export interface ListRatePlansRequest {
+export declare class ListRatePlansRequest {
     tenantId: string;
     hotelId: string;
 }
-export interface ListRatePlansResponse {
-    data: RatePlan[];
+export declare class ListRatePlansResponse {
+    data: CreateRatePlanResponse[];
 }
 export type ListRatePlansNatsResponse = NatsResponse<ListRatePlansResponse>;
 /**
  * NATS Pattern: pricing.rate-plan.calculate-price
  */
-export interface CalculateRatePlanPriceRequest {
+export declare class CalculateRatePlanPriceRequest {
     ratePlanId: string;
     basePrice: number;
 }
-export interface CalculateRatePlanPriceResponse {
-    data: {
-        finalPrice: number;
-        basePrice: number;
-        adjustments: Array<{
-            type: string;
-            amount: number;
-            description: string;
-        }>;
-    };
+export declare class CalculateRatePlanPriceResponse {
+    ratePlanId: string;
+    basePrice: number;
+    calculatedPrice: number;
+    derivationType?: DerivationTypeEnum;
+    derivationValue?: number;
+    currency: string;
 }
 export type CalculateRatePlanPriceNatsResponse = NatsResponse<CalculateRatePlanPriceResponse>;
 /**
  * NATS Pattern: pricing.rate-plan.get-channel-mappings
  */
-export interface GetChannelMappingsRequest {
+export declare class GetChannelMappingsRequest {
     ratePlanId: string;
 }
-export interface ChannelMapping {
+export declare class ChannelRateMappingResponse {
     id: string;
     ratePlanId: string;
-    channelProvider: string;
-    channelRatePlanId: string;
-    channelRatePlanName: string;
+    channelId: string;
+    externalRatePlanId?: string;
+    externalRatePlanName?: string;
     isActive: boolean;
     createdAt: string;
     updatedAt: string;
 }
-export interface GetChannelMappingsResponse {
-    data: ChannelMapping[];
+export declare class GetChannelMappingsResponse {
+    data: ChannelRateMappingResponse[];
 }
 export type GetChannelMappingsNatsResponse = NatsResponse<GetChannelMappingsResponse>;
 /**
  * NATS Pattern: pricing.rate-plan.add-channel-mapping
  */
-export interface AddChannelMappingRequest {
+export declare class AddChannelMappingRequest {
     ratePlanId: string;
-    dto: {
-        channelProvider: string;
-        channelRatePlanId: string;
-        channelRatePlanName: string;
-        isActive?: boolean;
-    };
+    dto: CreateChannelMappingDto;
 }
-export interface AddChannelMappingResponse {
-    data: ChannelMapping;
+export declare class CreateChannelMappingDto {
+    channelProvider: string;
+    channelName: string;
+    externalRateId?: string;
+}
+export declare class AddChannelMappingResponse {
+    data: ChannelRateMappingResponse;
 }
 export type AddChannelMappingNatsResponse = NatsResponse<AddChannelMappingResponse>;
 /**
  * NATS Pattern: pricing.rate-plan.remove-channel-mapping
  */
-export interface RemoveChannelMappingRequest {
+export declare class RemoveChannelMappingRequest {
     mappingId: string;
 }
-export interface RemoveChannelMappingResponse {
+export declare class RemoveChannelMappingResponse {
     message: string;
 }
 export type RemoveChannelMappingNatsResponse = NatsResponse<RemoveChannelMappingResponse>;
 /**
  * NATS Pattern: pricing.rate-plan.find-by-channel
  */
-export interface FindRatePlansByChannelRequest {
+export declare class FindRatePlansByChannelRequest {
     tenantId: string;
     hotelId: string;
     channelProvider: string;
     channelName: string;
 }
-export interface FindRatePlansByChannelResponse {
-    data: RatePlan[];
+export declare class FindRatePlansByChannelResponse {
+    data: CreateRatePlanResponse[];
 }
 export type FindRatePlansByChannelNatsResponse = NatsResponse<FindRatePlansByChannelResponse>;
 /**
  * NATS Pattern: pricing.rate-plan.delete
  */
-export interface DeleteRatePlanRequest {
+export declare class DeleteRatePlanRequest {
     id: string;
 }
-export interface DeleteRatePlanResponse {
+export declare class DeleteRatePlanResponse {
     message: string;
 }
 export type DeleteRatePlanNatsResponse = NatsResponse<DeleteRatePlanResponse>;
