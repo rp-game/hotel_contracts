@@ -1,26 +1,27 @@
 /**
  * LOS Discounts NATS Contracts (5 patterns)
+ * All classes with @ApiProperty for Swagger + NATS usage
  */
 import { NatsResponse } from '../../common/nats-response.interface';
 import { LosDiscount } from '../types';
-export interface FindAllLosDiscountsRequest {
+export declare class FindAllLosDiscountsRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId?: string;
 }
-export interface FindAllLosDiscountsResponse {
+export declare class FindAllLosDiscountsResponse {
     data: LosDiscount[];
 }
 export type FindAllLosDiscountsNatsResponse = NatsResponse<FindAllLosDiscountsResponse>;
-export interface FindLosDiscountByIdRequest {
+export declare class FindLosDiscountByIdRequest {
     id: string;
     tenantId: string;
 }
-export interface FindLosDiscountByIdResponse {
+export declare class FindLosDiscountByIdResponse {
     data: LosDiscount;
 }
 export type FindLosDiscountByIdNatsResponse = NatsResponse<FindLosDiscountByIdResponse>;
-export interface CreateLosDiscountRequest {
+export declare class CreateLosDiscountRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId?: string;
@@ -34,12 +35,12 @@ export interface CreateLosDiscountRequest {
     validTo?: string;
     isActive?: boolean;
 }
-export interface CreateLosDiscountResponse {
+export declare class CreateLosDiscountResponse {
     data: LosDiscount;
     message: string;
 }
 export type CreateLosDiscountNatsResponse = NatsResponse<CreateLosDiscountResponse>;
-export interface UpdateLosDiscountRequest {
+export declare class UpdateLosDiscountRequest {
     id: string;
     tenantId: string;
     minNights?: number;
@@ -47,20 +48,21 @@ export interface UpdateLosDiscountRequest {
     discountType?: 'PERCENTAGE' | 'FIXED';
     discountValue?: number;
     description?: string;
+    currency?: string;
     validFrom?: string;
     validTo?: string;
     isActive?: boolean;
 }
-export interface UpdateLosDiscountResponse {
+export declare class UpdateLosDiscountResponse {
     data: LosDiscount;
     message: string;
 }
 export type UpdateLosDiscountNatsResponse = NatsResponse<UpdateLosDiscountResponse>;
-export interface DeleteLosDiscountRequest {
+export declare class DeleteLosDiscountRequest {
     id: string;
     tenantId: string;
 }
-export interface DeleteLosDiscountResponse {
+export declare class DeleteLosDiscountResponse {
     message: string;
 }
 export type DeleteLosDiscountNatsResponse = NatsResponse<DeleteLosDiscountResponse>;

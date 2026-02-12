@@ -4,10 +4,7 @@
  * Shared types for LOS discount patterns.
  * Handles discounts based on number of nights booked.
  */
-/**
- * Length of stay discount configuration
- */
-export interface LosDiscount {
+export declare class LosDiscount {
     id: string;
     tenantId: string;
     hotelId: string;
