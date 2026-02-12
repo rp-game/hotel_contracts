@@ -88,14 +88,14 @@ export type GetChannelMappingsNatsResponse = NatsResponse<GetChannelMappingsResp
 /**
  * NATS Pattern: pricing.rate-plan.add-channel-mapping
  */
-export declare class AddChannelMappingRequest {
-    ratePlanId: string;
-    dto: CreateChannelMappingDto;
-}
 export declare class CreateChannelMappingDto {
     channelProvider: string;
     channelName: string;
     externalRateId?: string;
+}
+export declare class AddChannelMappingRequest {
+    ratePlanId: string;
+    dto: CreateChannelMappingDto;
 }
 export declare class AddChannelMappingResponse {
     data: ChannelRateMappingResponse;

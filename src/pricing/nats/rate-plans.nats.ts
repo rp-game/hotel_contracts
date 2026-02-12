@@ -268,34 +268,20 @@ export type GetChannelMappingsNatsResponse = NatsResponse<GetChannelMappingsResp
 /**
  * NATS Pattern: pricing.rate-plan.add-channel-mapping
  */
-export class AddChannelMappingRequest {
-  @ApiProperty({
-    description: 'Rate plan ID',
-    example: '123e4567-e89b-12d3-a456-426614174010',
-  })
-  @IsUUID()
-  ratePlanId: string;
-
-  @ApiProperty({
-    description: 'Channel mapping data',
-  })
-  dto: CreateChannelMappingDto;
-}
-
 export class CreateChannelMappingDto {
   @ApiProperty({
     description: 'Channel provider type',
     example: 'STAAH',
   })
   @IsString()
-  channelProvider: string;
+  channelProvider!: string;
 
   @ApiProperty({
     description: 'Channel name (OTA)',
     example: 'Booking.com',
   })
   @IsString()
-  channelName: string;
+  channelName!: string;
 
   @ApiPropertyOptional({
     description: 'External rate plan ID in the channel manager or OTA system',
@@ -304,6 +290,21 @@ export class CreateChannelMappingDto {
   @IsOptional()
   @IsString()
   externalRateId?: string;
+}
+
+export class AddChannelMappingRequest {
+  @ApiProperty({
+    description: 'Rate plan ID',
+    example: '123e4567-e89b-12d3-a456-426614174010',
+  })
+  @IsUUID()
+  ratePlanId!: string;
+
+  @ApiProperty({
+    description: 'Channel mapping data',
+    type: () => CreateChannelMappingDto,
+  })
+  dto!: CreateChannelMappingDto;
 }
 
 export class AddChannelMappingResponse {

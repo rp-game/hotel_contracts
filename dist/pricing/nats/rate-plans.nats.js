@@ -17,7 +17,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteRatePlanResponse = exports.DeleteRatePlanRequest = exports.FindRatePlansByChannelResponse = exports.FindRatePlansByChannelRequest = exports.RemoveChannelMappingResponse = exports.RemoveChannelMappingRequest = exports.AddChannelMappingResponse = exports.CreateChannelMappingDto = exports.AddChannelMappingRequest = exports.GetChannelMappingsResponse = exports.ChannelRateMappingResponse = exports.GetChannelMappingsRequest = exports.CalculateRatePlanPriceResponse = exports.CalculateRatePlanPriceRequest = exports.ListRatePlansResponse = exports.ListRatePlansRequest = exports.GetRatePlanResponse = exports.GetRatePlanRequest = exports.UpdateRatePlanResponse = exports.UpdateRatePlanRequest = exports.UpdateRatePlanDto = exports.DerivationTypeEnum = exports.RatePlanTypeEnum = exports.CreateRatePlanResponse = exports.CreateRatePlanRequest = void 0;
+exports.DeleteRatePlanResponse = exports.DeleteRatePlanRequest = exports.FindRatePlansByChannelResponse = exports.FindRatePlansByChannelRequest = exports.RemoveChannelMappingResponse = exports.RemoveChannelMappingRequest = exports.AddChannelMappingResponse = exports.AddChannelMappingRequest = exports.CreateChannelMappingDto = exports.GetChannelMappingsResponse = exports.ChannelRateMappingResponse = exports.GetChannelMappingsRequest = exports.CalculateRatePlanPriceResponse = exports.CalculateRatePlanPriceRequest = exports.ListRatePlansResponse = exports.ListRatePlansRequest = exports.GetRatePlanResponse = exports.GetRatePlanRequest = exports.UpdateRatePlanResponse = exports.UpdateRatePlanRequest = exports.UpdateRatePlanDto = exports.DerivationTypeEnum = exports.RatePlanTypeEnum = exports.CreateRatePlanResponse = exports.CreateRatePlanRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const create_rate_plan_nats_1 = require("./create-rate-plan.nats");
@@ -324,25 +324,6 @@ __decorate([
 /**
  * NATS Pattern: pricing.rate-plan.add-channel-mapping
  */
-class AddChannelMappingRequest {
-    ratePlanId;
-    dto;
-}
-exports.AddChannelMappingRequest = AddChannelMappingRequest;
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Rate plan ID',
-        example: '123e4567-e89b-12d3-a456-426614174010',
-    }),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], AddChannelMappingRequest.prototype, "ratePlanId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Channel mapping data',
-    }),
-    __metadata("design:type", CreateChannelMappingDto)
-], AddChannelMappingRequest.prototype, "dto", void 0);
 class CreateChannelMappingDto {
     channelProvider;
     channelName;
@@ -374,6 +355,26 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateChannelMappingDto.prototype, "externalRateId", void 0);
+class AddChannelMappingRequest {
+    ratePlanId;
+    dto;
+}
+exports.AddChannelMappingRequest = AddChannelMappingRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Rate plan ID',
+        example: '123e4567-e89b-12d3-a456-426614174010',
+    }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], AddChannelMappingRequest.prototype, "ratePlanId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Channel mapping data',
+        type: () => CreateChannelMappingDto,
+    }),
+    __metadata("design:type", CreateChannelMappingDto)
+], AddChannelMappingRequest.prototype, "dto", void 0);
 class AddChannelMappingResponse {
     data;
 }
