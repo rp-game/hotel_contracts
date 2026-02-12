@@ -32,20 +32,6 @@ export {
 /**
  * NATS Pattern: pricing.rate-plan.update
  */
-export class UpdateRatePlanRequest {
-  @ApiProperty({
-    description: 'Rate plan ID',
-    example: '123e4567-e89b-12d3-a456-426614174010',
-  })
-  @IsUUID()
-  id: string;
-
-  @ApiProperty({
-    description: 'Update data',
-  })
-  dto: UpdateRatePlanDto;
-}
-
 export class UpdateRatePlanDto {
   @ApiPropertyOptional({
     description: 'Rate plan name',
@@ -70,6 +56,21 @@ export class UpdateRatePlanDto {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+}
+
+export class UpdateRatePlanRequest {
+  @ApiProperty({
+    description: 'Rate plan ID',
+    example: '123e4567-e89b-12d3-a456-426614174010',
+  })
+  @IsUUID()
+  id!: string;
+
+  @ApiProperty({
+    description: 'Update data',
+    type: () => UpdateRatePlanDto,
+  })
+  dto!: UpdateRatePlanDto;
 }
 
 export class UpdateRatePlanResponse {

@@ -17,7 +17,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteRatePlanResponse = exports.DeleteRatePlanRequest = exports.FindRatePlansByChannelResponse = exports.FindRatePlansByChannelRequest = exports.RemoveChannelMappingResponse = exports.RemoveChannelMappingRequest = exports.AddChannelMappingResponse = exports.CreateChannelMappingDto = exports.AddChannelMappingRequest = exports.GetChannelMappingsResponse = exports.ChannelRateMappingResponse = exports.GetChannelMappingsRequest = exports.CalculateRatePlanPriceResponse = exports.CalculateRatePlanPriceRequest = exports.ListRatePlansResponse = exports.ListRatePlansRequest = exports.GetRatePlanResponse = exports.GetRatePlanRequest = exports.UpdateRatePlanResponse = exports.UpdateRatePlanDto = exports.UpdateRatePlanRequest = exports.DerivationTypeEnum = exports.RatePlanTypeEnum = exports.CreateRatePlanResponse = exports.CreateRatePlanRequest = void 0;
+exports.DeleteRatePlanResponse = exports.DeleteRatePlanRequest = exports.FindRatePlansByChannelResponse = exports.FindRatePlansByChannelRequest = exports.RemoveChannelMappingResponse = exports.RemoveChannelMappingRequest = exports.AddChannelMappingResponse = exports.CreateChannelMappingDto = exports.AddChannelMappingRequest = exports.GetChannelMappingsResponse = exports.ChannelRateMappingResponse = exports.GetChannelMappingsRequest = exports.CalculateRatePlanPriceResponse = exports.CalculateRatePlanPriceRequest = exports.ListRatePlansResponse = exports.ListRatePlansRequest = exports.GetRatePlanResponse = exports.GetRatePlanRequest = exports.UpdateRatePlanResponse = exports.UpdateRatePlanRequest = exports.UpdateRatePlanDto = exports.DerivationTypeEnum = exports.RatePlanTypeEnum = exports.CreateRatePlanResponse = exports.CreateRatePlanRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const create_rate_plan_nats_1 = require("./create-rate-plan.nats");
@@ -28,25 +28,6 @@ Object.defineProperty(exports, "DerivationTypeEnum", { enumerable: true, get: fu
 /**
  * NATS Pattern: pricing.rate-plan.update
  */
-class UpdateRatePlanRequest {
-    id;
-    dto;
-}
-exports.UpdateRatePlanRequest = UpdateRatePlanRequest;
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Rate plan ID',
-        example: '123e4567-e89b-12d3-a456-426614174010',
-    }),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], UpdateRatePlanRequest.prototype, "id", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Update data',
-    }),
-    __metadata("design:type", UpdateRatePlanDto)
-], UpdateRatePlanRequest.prototype, "dto", void 0);
 class UpdateRatePlanDto {
     name;
     description;
@@ -80,6 +61,26 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdateRatePlanDto.prototype, "isActive", void 0);
+class UpdateRatePlanRequest {
+    id;
+    dto;
+}
+exports.UpdateRatePlanRequest = UpdateRatePlanRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Rate plan ID',
+        example: '123e4567-e89b-12d3-a456-426614174010',
+    }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateRatePlanRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Update data',
+        type: () => UpdateRatePlanDto,
+    }),
+    __metadata("design:type", UpdateRatePlanDto)
+], UpdateRatePlanRequest.prototype, "dto", void 0);
 class UpdateRatePlanResponse {
     data;
 }

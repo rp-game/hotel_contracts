@@ -15,14 +15,14 @@ export { CreateRatePlanRequest, CreateRatePlanResponse, CreateRatePlanNatsRespon
 /**
  * NATS Pattern: pricing.rate-plan.update
  */
-export declare class UpdateRatePlanRequest {
-    id: string;
-    dto: UpdateRatePlanDto;
-}
 export declare class UpdateRatePlanDto {
     name?: string;
     description?: string;
     isActive?: boolean;
+}
+export declare class UpdateRatePlanRequest {
+    id: string;
+    dto: UpdateRatePlanDto;
 }
 export declare class UpdateRatePlanResponse {
     data: CreateRatePlanResponse;
