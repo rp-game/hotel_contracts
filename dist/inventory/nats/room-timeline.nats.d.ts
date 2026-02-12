@@ -44,7 +44,12 @@ export interface TimelineRoomType {
     name: string;
     capacity: number;
 }
-export interface TimelineEvent {
+/**
+ * Timeline Event/Block DTO
+ * Shared DTO for both NATS messages and REST API responses
+ * Used in room timeline to represent bookings, maintenance, cleaning, and blocked periods
+ */
+export declare class TimelineEvent {
     id: string;
     type: 'booking' | 'maintenance' | 'cleaning' | 'block';
     startTime: string;
@@ -53,6 +58,10 @@ export interface TimelineEvent {
     description?: string;
     guestName?: string;
     bookingId?: string;
+    status?: string;
+    guestCount?: number;
+    specialRequests?: string;
+    bookingType?: 'HOURLY' | 'OVERNIGHT';
 }
 export interface BookingTimelineItem {
     id: string;
@@ -80,18 +89,23 @@ export interface MaintenanceEvent {
     status: 'SCHEDULED' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
     assignedTechnician?: string;
 }
-export interface RoomTimelineItem {
+/**
+ * Room Timeline Item DTO
+ * Shared DTO for both NATS messages and REST API responses
+ * Represents a room with its timeline blocks and current status
+ */
+export declare class RoomTimelineItem {
     roomId: string;
     roomNumber: string;
     floor: number;
-    roomType: TimelineRoomType | string;
+    roomType: string;
     roomTypeId?: string;
     status: 'AVAILABLE' | 'OCCUPIED' | 'CLEANING' | 'MAINTENANCE' | 'OUT_OF_ORDER';
     timeBlocks: TimelineEvent[];
     cleaningTime: number;
-    lastCleaned: string | null;
-    nextMaintenance: string | null;
-    notes: string | null;
+    lastCleaned?: string | null;
+    nextMaintenance?: string | null;
+    notes?: string | null;
 }
 export interface TimelineData {
     rooms: RoomTimelineItem[];

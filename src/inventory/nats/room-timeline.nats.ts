@@ -49,15 +49,47 @@ export interface TimelineRoomType {
   capacity: number;
 }
 
-export interface TimelineEvent {
+/**
+ * Timeline Event/Block DTO
+ * Shared DTO for both NATS messages and REST API responses
+ * Used in room timeline to represent bookings, maintenance, cleaning, and blocked periods
+ */
+export class TimelineEvent {
+  @ApiProperty({ description: 'Block ID' })
   id: string;
+
+  @ApiProperty({ description: 'Block type', enum: ['booking', 'maintenance', 'cleaning', 'block'] })
   type: 'booking' | 'maintenance' | 'cleaning' | 'block';
+
+  @ApiProperty({ description: 'Start time (ISO datetime string)' })
   startTime: string;
+
+  @ApiProperty({ description: 'End time (ISO datetime string)' })
   endTime: string;
+
+  @ApiProperty({ description: 'Block title' })
   title: string;
+
+  @ApiPropertyOptional({ description: 'Block description' })
   description?: string;
+
+  @ApiPropertyOptional({ description: 'Guest name (for bookings)' })
   guestName?: string;
+
+  @ApiPropertyOptional({ description: 'Booking ID (for bookings)' })
   bookingId?: string;
+
+  @ApiPropertyOptional({ description: 'Booking status (for booking blocks)', example: 'CONFIRMED' })
+  status?: string;
+
+  @ApiPropertyOptional({ description: 'Number of guests (for booking blocks)' })
+  guestCount?: number;
+
+  @ApiPropertyOptional({ description: 'Special requests from guest (for booking blocks)', example: 'Late check-in, extra towels' })
+  specialRequests?: string;
+
+  @ApiPropertyOptional({ description: 'Booking type', enum: ['HOURLY', 'OVERNIGHT'] })
+  bookingType?: 'HOURLY' | 'OVERNIGHT';
 }
 
 export interface BookingTimelineItem {
@@ -88,18 +120,47 @@ export interface MaintenanceEvent {
   assignedTechnician?: string;
 }
 
-export interface RoomTimelineItem {
+/**
+ * Room Timeline Item DTO
+ * Shared DTO for both NATS messages and REST API responses
+ * Represents a room with its timeline blocks and current status
+ */
+export class RoomTimelineItem {
+  @ApiProperty({ description: 'Room ID' })
   roomId: string;
+
+  @ApiProperty({ description: 'Room number' })
   roomNumber: string;
+
+  @ApiProperty({ description: 'Floor number' })
   floor: number;
-  roomType: TimelineRoomType | string; // Can be object or string
+
+  @ApiProperty({ description: 'Room type (string or object)' })
+  roomType: string;
+
+  @ApiPropertyOptional({ description: 'Room type ID' })
   roomTypeId?: string;
+
+  @ApiProperty({
+    description: 'Room status',
+    enum: ['AVAILABLE', 'OCCUPIED', 'CLEANING', 'MAINTENANCE', 'OUT_OF_ORDER']
+  })
   status: 'AVAILABLE' | 'OCCUPIED' | 'CLEANING' | 'MAINTENANCE' | 'OUT_OF_ORDER';
-  timeBlocks: TimelineEvent[]; // Renamed from events to match handler implementation
-  cleaningTime: number; // Minutes required for cleaning
-  lastCleaned: string | null; // ISO datetime or null
-  nextMaintenance: string | null; // ISO datetime or null
-  notes: string | null; // Additional notes
+
+  @ApiProperty({ description: 'Time blocks for this room', type: [TimelineEvent] })
+  timeBlocks: TimelineEvent[];
+
+  @ApiProperty({ description: 'Cleaning time in minutes' })
+  cleaningTime: number;
+
+  @ApiPropertyOptional({ description: 'Last cleaned timestamp (ISO datetime or null)', type: String, nullable: true })
+  lastCleaned?: string | null;
+
+  @ApiPropertyOptional({ description: 'Next maintenance timestamp (ISO datetime or null)', type: String, nullable: true })
+  nextMaintenance?: string | null;
+
+  @ApiPropertyOptional({ description: 'Additional notes', type: String, nullable: true })
+  notes?: string | null;
 }
 
 export interface TimelineData {

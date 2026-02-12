@@ -37,8 +37,142 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnalyticsComparisonResponseDto = exports.ComprehensiveAnalyticsResponseDto = void 0;
+exports.AnalyticsComparisonResponseDto = exports.ComprehensiveAnalyticsResponseDto = exports.RoomTimelineItem = exports.TimelineEvent = void 0;
 const swagger_1 = require("@nestjs/swagger");
+/**
+ * Timeline Event/Block DTO
+ * Shared DTO for both NATS messages and REST API responses
+ * Used in room timeline to represent bookings, maintenance, cleaning, and blocked periods
+ */
+class TimelineEvent {
+    id;
+    type;
+    startTime;
+    endTime;
+    title;
+    description;
+    guestName;
+    bookingId;
+    status;
+    guestCount;
+    specialRequests;
+    bookingType;
+}
+exports.TimelineEvent = TimelineEvent;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Block ID' }),
+    __metadata("design:type", String)
+], TimelineEvent.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Block type', enum: ['booking', 'maintenance', 'cleaning', 'block'] }),
+    __metadata("design:type", String)
+], TimelineEvent.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Start time (ISO datetime string)' }),
+    __metadata("design:type", String)
+], TimelineEvent.prototype, "startTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'End time (ISO datetime string)' }),
+    __metadata("design:type", String)
+], TimelineEvent.prototype, "endTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Block title' }),
+    __metadata("design:type", String)
+], TimelineEvent.prototype, "title", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Block description' }),
+    __metadata("design:type", String)
+], TimelineEvent.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Guest name (for bookings)' }),
+    __metadata("design:type", String)
+], TimelineEvent.prototype, "guestName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking ID (for bookings)' }),
+    __metadata("design:type", String)
+], TimelineEvent.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking status (for booking blocks)', example: 'CONFIRMED' }),
+    __metadata("design:type", String)
+], TimelineEvent.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of guests (for booking blocks)' }),
+    __metadata("design:type", Number)
+], TimelineEvent.prototype, "guestCount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Special requests from guest (for booking blocks)', example: 'Late check-in, extra towels' }),
+    __metadata("design:type", String)
+], TimelineEvent.prototype, "specialRequests", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking type', enum: ['HOURLY', 'OVERNIGHT'] }),
+    __metadata("design:type", String)
+], TimelineEvent.prototype, "bookingType", void 0);
+/**
+ * Room Timeline Item DTO
+ * Shared DTO for both NATS messages and REST API responses
+ * Represents a room with its timeline blocks and current status
+ */
+class RoomTimelineItem {
+    roomId;
+    roomNumber;
+    floor;
+    roomType;
+    roomTypeId;
+    status;
+    timeBlocks;
+    cleaningTime;
+    lastCleaned;
+    nextMaintenance;
+    notes;
+}
+exports.RoomTimelineItem = RoomTimelineItem;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room ID' }),
+    __metadata("design:type", String)
+], RoomTimelineItem.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room number' }),
+    __metadata("design:type", String)
+], RoomTimelineItem.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Floor number' }),
+    __metadata("design:type", Number)
+], RoomTimelineItem.prototype, "floor", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type (string or object)' }),
+    __metadata("design:type", String)
+], RoomTimelineItem.prototype, "roomType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room type ID' }),
+    __metadata("design:type", String)
+], RoomTimelineItem.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Room status',
+        enum: ['AVAILABLE', 'OCCUPIED', 'CLEANING', 'MAINTENANCE', 'OUT_OF_ORDER']
+    }),
+    __metadata("design:type", String)
+], RoomTimelineItem.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Time blocks for this room', type: [TimelineEvent] }),
+    __metadata("design:type", Array)
+], RoomTimelineItem.prototype, "timeBlocks", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Cleaning time in minutes' }),
+    __metadata("design:type", Number)
+], RoomTimelineItem.prototype, "cleaningTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Last cleaned timestamp (ISO datetime or null)', type: String, nullable: true }),
+    __metadata("design:type", Object)
+], RoomTimelineItem.prototype, "lastCleaned", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Next maintenance timestamp (ISO datetime or null)', type: String, nullable: true }),
+    __metadata("design:type", Object)
+], RoomTimelineItem.prototype, "nextMaintenance", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional notes', type: String, nullable: true }),
+    __metadata("design:type", Object)
+], RoomTimelineItem.prototype, "notes", void 0);
 /**
  * Comprehensive Analytics Response DTO
  * REST API response for GET /api/rooms/analytics/comprehensive
