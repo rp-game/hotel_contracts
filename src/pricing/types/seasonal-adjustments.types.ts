@@ -5,22 +5,58 @@
  * Handles rate adjustments for different seasons/periods.
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+
 /**
  * Seasonal adjustment entity
  */
-export interface SeasonalAdjustment {
+export class SeasonalAdjustment {
+  @ApiProperty({ description: 'Unique identifier', example: '550e8400-e29b-41d4-a716-446655440050' })
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID', example: '550e8400-e29b-41d4-a716-446655440000' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID', example: '550e8400-e29b-41d4-a716-446655440002' })
   hotelId: string;
+
+  @ApiProperty({ description: 'Room Type ID', example: '550e8400-e29b-41d4-a716-446655440001' })
   roomTypeId: string;
+
+  @ApiProperty({ description: 'Season name', example: 'Summer 2025', maxLength: 100 })
   seasonName: string;
+
+  @ApiProperty({ description: 'Start date (YYYY-MM-DD)', example: '2025-06-01' })
   startDate: string;
+
+  @ApiProperty({ description: 'End date (YYYY-MM-DD)', example: '2025-08-31' })
   endDate: string;
+
+  @ApiProperty({
+    description: 'Adjustment type',
+    enum: ['PERCENTAGE', 'FIXED'],
+    example: 'PERCENTAGE'
+  })
   adjustmentType: 'PERCENTAGE' | 'FIXED';
+
+  @ApiProperty({
+    description: 'Adjustment value (percentage or fixed amount)',
+    example: 20,
+    minimum: -100,
+    maximum: 1000
+  })
   adjustmentValue: number;
+
+  @ApiPropertyOptional({ description: 'Description', example: 'Peak summer season pricing' })
   description?: string;
+
+  @ApiProperty({ description: 'Is active', example: true })
   isActive: boolean;
+
+  @ApiProperty({ description: 'Created at', example: '2025-01-01T00:00:00.000Z' })
   createdAt: string;
+
+  @ApiProperty({ description: 'Updated at', example: '2025-01-01T00:00:00.000Z' })
   updatedAt: string;
 }
 

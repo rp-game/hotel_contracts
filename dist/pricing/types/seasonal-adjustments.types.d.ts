@@ -7,7 +7,7 @@
 /**
  * Seasonal adjustment entity
  */
-export interface SeasonalAdjustment {
+export declare class SeasonalAdjustment {
     id: string;
     tenantId: string;
     hotelId: string;

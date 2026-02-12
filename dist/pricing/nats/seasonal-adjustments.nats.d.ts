@@ -3,24 +3,24 @@
  */
 import { NatsResponse } from '../../common/nats-response.interface';
 import { SeasonalAdjustment } from '../types';
-export interface FindAllSeasonalAdjustmentsRequest {
+export declare class FindAllSeasonalAdjustmentsRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId?: string;
 }
-export interface FindAllSeasonalAdjustmentsResponse {
+export declare class FindAllSeasonalAdjustmentsResponse {
     data: SeasonalAdjustment[];
 }
 export type FindAllSeasonalAdjustmentsNatsResponse = NatsResponse<FindAllSeasonalAdjustmentsResponse>;
-export interface FindSeasonalAdjustmentByIdRequest {
+export declare class FindSeasonalAdjustmentByIdRequest {
     id: string;
     tenantId: string;
 }
-export interface FindSeasonalAdjustmentByIdResponse {
+export declare class FindSeasonalAdjustmentByIdResponse {
     data: SeasonalAdjustment;
 }
 export type FindSeasonalAdjustmentByIdNatsResponse = NatsResponse<FindSeasonalAdjustmentByIdResponse>;
-export interface CreateSeasonalAdjustmentRequest {
+export declare class CreateSeasonalAdjustmentRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId: string;
@@ -32,34 +32,43 @@ export interface CreateSeasonalAdjustmentRequest {
     description?: string;
     isActive?: boolean;
 }
-export interface CreateSeasonalAdjustmentResponse {
+export declare class CreateSeasonalAdjustmentResponse {
     data: SeasonalAdjustment;
     message: string;
 }
 export type CreateSeasonalAdjustmentNatsResponse = NatsResponse<CreateSeasonalAdjustmentResponse>;
-export interface UpdateSeasonalAdjustmentRequest {
+/**
+ * Update DTO - nested structure for NATS message
+ * Contains only the fields that can be updated
+ */
+export declare class UpdateSeasonalAdjustmentDto {
+    seasonName?: string;
+    startDate?: string;
+    endDate?: string;
+    adjustmentType?: 'PERCENTAGE' | 'FIXED';
+    adjustmentValue?: number;
+    description?: string;
+    isActive?: boolean;
+}
+/**
+ * Update request - contains ID, tenantId, and nested dto
+ * This is the NATS message structure
+ */
+export declare class UpdateSeasonalAdjustmentRequest {
     id: string;
     tenantId: string;
-    dto: {
-        seasonName?: string;
-        startDate?: string;
-        endDate?: string;
-        adjustmentType?: 'PERCENTAGE' | 'FIXED';
-        adjustmentValue?: number;
-        description?: string;
-        isActive?: boolean;
-    };
+    dto: UpdateSeasonalAdjustmentDto;
 }
-export interface UpdateSeasonalAdjustmentResponse {
+export declare class UpdateSeasonalAdjustmentResponse {
     data: SeasonalAdjustment;
     message: string;
 }
 export type UpdateSeasonalAdjustmentNatsResponse = NatsResponse<UpdateSeasonalAdjustmentResponse>;
-export interface DeleteSeasonalAdjustmentRequest {
+export declare class DeleteSeasonalAdjustmentRequest {
     id: string;
     tenantId: string;
 }
-export interface DeleteSeasonalAdjustmentResponse {
+export declare class DeleteSeasonalAdjustmentResponse {
     message: string;
 }
 export type DeleteSeasonalAdjustmentNatsResponse = NatsResponse<DeleteSeasonalAdjustmentResponse>;
