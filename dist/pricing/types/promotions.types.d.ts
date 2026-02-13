@@ -1,13 +1,35 @@
 /**
- * Promotions Types
+ * Promotions Types - Centralized Contracts
  *
- * Shared types for promotion patterns.
- * Handles promotional codes and special offers.
+ * IMPORTANT: These contracts are the SINGLE SOURCE OF TRUTH
+ * - Based on database entity structure (promotion.entity.ts)
+ * - Used by NATS handlers for microservices communication
+ * - Used by API Gateway for REST endpoints
+ * - Swagger documentation generated from @ApiProperty decorators
+ *
+ * @verified_structure_matches services/pricing-service/src/database/entities/promotion.entity.ts
+ * @verified_date 2026-02-13
  */
 /**
- * Promotion entity
+ * Promotion status (computed field, not stored in entity)
  */
-export interface Promotion {
+export type PromotionStatus = 'ACTIVE' | 'INACTIVE' | 'EXPIRED' | 'UPCOMING';
+/**
+ * Promotion conditions structure
+ * Stored as JSONB in database
+ */
+export declare class PromotionConditionsDto {
+    minNights?: number;
+    minGuests?: number;
+    roomTypes?: string[];
+    channels?: string[];
+}
+/**
+ * Promotion DTO
+ * Matches database entity structure exactly
+ * PLUS computed 'status' field added by service layer
+ */
+export declare class PromotionDto {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -27,42 +49,23 @@ export interface Promotion {
     blackoutDates?: string[];
     usageLimit: number;
     usageCount: number;
-    conditions?: PromotionConditions;
+    conditions?: PromotionConditionsDto;
     isActive: boolean;
     status: PromotionStatus;
     createdAt: string;
     updatedAt: string;
 }
 /**
- * Promotion conditions
- */
-export interface PromotionConditions {
-    minNights?: number;
-    minGuests?: number;
-    roomTypes?: string[];
-    channels?: string[];
-}
-/**
- * Promotion code validation result
- */
-export interface PromotionCode {
-    code: string;
-    isValid: boolean;
-    promotion?: Promotion;
-    errorMessage?: string;
-}
-/**
- * Promotion status
- */
-export type PromotionStatus = 'ACTIVE' | 'INACTIVE' | 'EXPIRED' | 'UPCOMING';
-/**
  * Paginated promotions response
  */
-export interface PromotionsPaginatedResponse {
-    data: Promotion[];
+export declare class PromotionsPaginatedResponseDto {
+    data: PromotionDto[];
     total: number;
     page: number;
     limit: number;
     totalPages: number;
 }
+export type Promotion = PromotionDto;
+export type PromotionConditions = PromotionConditionsDto;
+export type PromotionsPaginatedResponse = PromotionsPaginatedResponseDto;
 //# sourceMappingURL=promotions.types.d.ts.map
