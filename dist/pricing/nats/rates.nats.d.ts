@@ -152,11 +152,11 @@ export type UpdateRateByIdNatsResponse = NatsResponse<UpdateRateByIdResponse>;
 /**
  * NATS Pattern: pricing.rates.delete
  */
-export interface DeleteRateRequest {
+export declare class DeleteRateRequest {
     id: string;
     tenantId: string;
 }
-export interface DeleteRateResponse {
+export declare class DeleteRateResponse {
     success: boolean;
     message: string;
 }

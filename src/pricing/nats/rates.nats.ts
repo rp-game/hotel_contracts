@@ -6,6 +6,7 @@
  */
 
 import { ApiProperty } from '@nestjs/swagger';
+import { IsUUID } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { Rate, DynamicRateCalculation, BulkCreateRatesResult, BulkUpdateRatesResult } from '../types';
 
@@ -214,13 +215,21 @@ export type UpdateRateByIdNatsResponse = NatsResponse<UpdateRateByIdResponse>;
 /**
  * NATS Pattern: pricing.rates.delete
  */
-export interface DeleteRateRequest {
+export class DeleteRateRequest {
+  @ApiProperty({ description: 'Rate ID' })
+  @IsUUID()
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
   tenantId: string;
 }
 
-export interface DeleteRateResponse {
+export class DeleteRateResponse {
+  @ApiProperty({ description: 'Whether deletion was successful' })
   success: boolean;
+
+  @ApiProperty({ description: 'Response message' })
   message: string;
 }
 

@@ -15,8 +15,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateRateResponse = exports.GetRateByIdResponse = exports.SyncRatesResponse = exports.SyncRatesData = exports.UpdateRateResponse = exports.CalculateRateResponse = exports.GetRatesResponse = exports.RoomRateResponse = exports.RateDetails = void 0;
+exports.DeleteRateResponse = exports.DeleteRateRequest = exports.CreateRateResponse = exports.GetRateByIdResponse = exports.SyncRatesResponse = exports.SyncRatesData = exports.UpdateRateResponse = exports.CalculateRateResponse = exports.GetRatesResponse = exports.RoomRateResponse = exports.RateDetails = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
 const types_1 = require("../types");
 class RateDetails {
     weekdayRate;
@@ -155,4 +156,35 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Created rate data', type: types_1.Rate }),
     __metadata("design:type", types_1.Rate)
 ], CreateRateResponse.prototype, "data", void 0);
+/**
+ * NATS Pattern: pricing.rates.delete
+ */
+class DeleteRateRequest {
+    id;
+    tenantId;
+}
+exports.DeleteRateRequest = DeleteRateRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Rate ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], DeleteRateRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], DeleteRateRequest.prototype, "tenantId", void 0);
+class DeleteRateResponse {
+    success;
+    message;
+}
+exports.DeleteRateResponse = DeleteRateResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether deletion was successful' }),
+    __metadata("design:type", Boolean)
+], DeleteRateResponse.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Response message' }),
+    __metadata("design:type", String)
+], DeleteRateResponse.prototype, "message", void 0);
 //# sourceMappingURL=rates.nats.js.map
