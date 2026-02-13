@@ -549,7 +549,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Days of week (0=Sunday, 1=Monday, ..., 6=Saturday)',
         example: [1, 2, 3, 4, 5],
-        isArray: true,
+        type: [Number],
     }),
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsInt)({ each: true }),
@@ -676,8 +676,9 @@ __decorate([
 ], UpdatePeakPeriodDto.prototype, "endTime", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'Days of week',
-        isArray: true,
+        description: 'Days of week (0=Sunday, 1=Monday, ..., 6=Saturday)',
+        type: [Number],
+        example: [1, 2, 3, 4, 5],
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),

@@ -321,7 +321,7 @@ export class FindHotelsByChainRequestDto {
   status?: string;
 }
 
-export type FindHotelsByChainResponse = HotelWithRoomCountDto[];
+export type FindHotelsByChainResponse = HotelWithStatsDto[];
 export type FindHotelsByChainNatsResponse = NatsResponse<FindHotelsByChainResponse>;
 
 /**

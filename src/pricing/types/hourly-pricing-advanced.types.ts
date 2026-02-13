@@ -170,7 +170,7 @@ export class PeakPeriod {
   @ApiProperty({
     description: 'Days of week (0=Sunday, 6=Saturday)',
     example: [1, 2, 3, 4, 5],
-    isArray: true,
+    type: [Number],
   })
   daysOfWeek: number[];
 

@@ -453,7 +453,7 @@ export class CreatePeakPeriodDto {
   @ApiProperty({
     description: 'Days of week (0=Sunday, 1=Monday, ..., 6=Saturday)',
     example: [1, 2, 3, 4, 5],
-    isArray: true,
+    type: [Number],
   })
   @IsArray()
   @IsInt({ each: true })
@@ -554,8 +554,9 @@ export class UpdatePeakPeriodDto {
   endTime?: string;
 
   @ApiPropertyOptional({
-    description: 'Days of week',
-    isArray: true,
+    description: 'Days of week (0=Sunday, 1=Monday, ..., 6=Saturday)',
+    type: [Number],
+    example: [1, 2, 3, 4, 5],
   })
   @IsOptional()
   @IsArray()

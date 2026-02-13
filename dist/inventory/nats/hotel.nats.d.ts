@@ -168,7 +168,7 @@ export declare class FindHotelsByChainRequestDto {
     country?: string;
     status?: string;
 }
-export type FindHotelsByChainResponse = HotelWithRoomCountDto[];
+export type FindHotelsByChainResponse = HotelWithStatsDto[];
 export type FindHotelsByChainNatsResponse = NatsResponse<FindHotelsByChainResponse>;
 /**
  * Paginated response wrapper for hotel list endpoints

@@ -257,7 +257,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Days of week (0=Sunday, 6=Saturday)',
         example: [1, 2, 3, 4, 5],
-        isArray: true,
+        type: [Number],
     }),
     __metadata("design:type", Array)
 ], PeakPeriod.prototype, "daysOfWeek", void 0);
