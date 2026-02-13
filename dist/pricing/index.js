@@ -29,7 +29,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // export * from './nats'; // Not exported to avoid conflicts
-// export * from './types'; // Not exported to avoid conflicts with ./rest
+__exportStar(require("./types"), exports); // Exported for type definitions
 __exportStar(require("./rest"), exports);
 __exportStar(require("./enums"), exports);
 //# sourceMappingURL=index.js.map

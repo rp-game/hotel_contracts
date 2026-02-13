@@ -91,22 +91,6 @@ export declare class CreateRatePlanDto {
     description?: string;
 }
 /**
- * Update rate plan request
- */
-export declare class UpdateRatePlanDto {
-    name?: string;
-    description?: string;
-    isActive?: boolean;
-}
-/**
- * Create channel rate mapping request
- */
-export declare class CreateChannelMappingDto {
-    channelProvider: string;
-    channelName: string;
-    externalRateId?: string;
-}
-/**
  * Rate plan response
  */
 export declare class RatePlanResponseDto {

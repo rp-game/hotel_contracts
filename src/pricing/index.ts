@@ -14,6 +14,6 @@
  */
 
 // export * from './nats'; // Not exported to avoid conflicts
-// export * from './types'; // Not exported to avoid conflicts with ./rest
+export * from './types'; // Exported for type definitions
 export * from './rest';
 export * from './enums';

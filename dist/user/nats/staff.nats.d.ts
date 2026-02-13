@@ -12,31 +12,7 @@ export interface FindStaffByHotelPayload {
     roles?: string[];
     status?: StaffStatus;
 }
-export interface CreateStaffPayload {
-    tenantId: string;
-    hotelId: string;
-    email: string;
-    fullName: string;
-    phoneNumber?: string;
-    roles: string[];
-    departmentId?: string;
-    position?: string;
-    staffStatus?: StaffStatus;
-}
-export interface UpdateStaffPayload {
-    id: string;
-    tenantId: string;
-    hotelId: string;
-    updateData: {
-        fullName?: string;
-        email?: string;
-        phoneNumber?: string;
-        roles?: string[];
-        departmentId?: string;
-        position?: string;
-        staffStatus?: StaffStatus;
-    };
-}
+export { CreateStaffDto, UpdateStaffStatusDto } from '../rest/staff.dto';
 export interface DeactivateStaffPayload {
     id: string;
     tenantId: string;

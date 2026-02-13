@@ -7,8 +7,8 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { UserRole } from '../enums';
 import { StaffStatus } from '../enums';
-// Import unified StaffDto from REST - used by both NATS and REST
-import { StaffDto } from '../rest/staff.dto';
+// Import unified DTOs from REST - used by both NATS and REST
+import { StaffDto, CreateStaffDto, UpdateStaffStatusDto } from '../rest/staff.dto';
 
 // ============= NATS Message Payloads (Requests) =============
 
@@ -22,32 +22,39 @@ export interface FindStaffByHotelPayload {
   status?: StaffStatus;
 }
 
-export interface CreateStaffPayload {
-  tenantId: string;
-  hotelId: string;
-  email: string;
-  fullName: string;
-  phoneNumber?: string;
-  roles: string[];
-  departmentId?: string;
-  position?: string;
-  staffStatus?: StaffStatus;
-}
+// ============= UNIFIED DTOs - Re-exported from REST =============
+// CreateStaffDto and UpdateStaffStatusDto are imported above and used for BOTH REST and NATS
+// This ensures ONE source of truth for staff creation/update operations
+export { CreateStaffDto, UpdateStaffStatusDto } from '../rest/staff.dto';
 
-export interface UpdateStaffPayload {
-  id: string;
-  tenantId: string;
-  hotelId: string;
-  updateData: {
-    fullName?: string;
-    email?: string;
-    phoneNumber?: string;
-    roles?: string[];
-    departmentId?: string;
-    position?: string;
-    staffStatus?: StaffStatus;
-  };
-}
+// DEPRECATED: Use CreateStaffDto instead
+// export interface CreateStaffPayload {
+//   tenantId: string;
+//   hotelId: string;
+//   email: string;
+//   fullName: string;
+//   phoneNumber?: string;
+//   roles: string[];
+//   departmentId?: string;
+//   position?: string;
+//   staffStatus?: StaffStatus;
+// }
+
+// DEPRECATED: Use UpdateStaffStatusDto instead
+// export interface UpdateStaffPayload {
+//   id: string;
+//   tenantId: string;
+//   hotelId: string;
+//   updateData: {
+//     fullName?: string;
+//     email?: string;
+//     phoneNumber?: string;
+//     roles?: string[];
+//     departmentId?: string;
+//     position?: string;
+//     staffStatus?: StaffStatus;
+//   };
+// }
 
 export interface DeactivateStaffPayload {
   id: string;

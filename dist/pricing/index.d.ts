@@ -12,6 +12,7 @@
  * import * as PricingContracts from '@hotel/contracts/pricing';
  * ```
  */
+export * from './types';
 export * from './rest';
 export * from './enums';
 //# sourceMappingURL=index.d.ts.map

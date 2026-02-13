@@ -14,16 +14,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = void 0;
+exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
+// ============= UNIFIED DTOs - Re-exported from REST =============
+// CreateStaffDto and UpdateStaffStatusDto are imported above and used for BOTH REST and NATS
+// This ensures ONE source of truth for staff creation/update operations
+var staff_dto_1 = require("../rest/staff.dto");
+Object.defineProperty(exports, "CreateStaffDto", { enumerable: true, get: function () { return staff_dto_1.CreateStaffDto; } });
+Object.defineProperty(exports, "UpdateStaffStatusDto", { enumerable: true, get: function () { return staff_dto_1.UpdateStaffStatusDto; } });
 // ============= NATS Response DTOs =============
 /**
  * Staff DTO - Re-exported from rest/staff.dto.ts
  * Single unified DTO used by BOTH NATS messages and REST API
  * This ensures consistency across all layers
  */
-var staff_dto_1 = require("../rest/staff.dto");
-Object.defineProperty(exports, "StaffDto", { enumerable: true, get: function () { return staff_dto_1.StaffDto; } });
+var staff_dto_2 = require("../rest/staff.dto");
+Object.defineProperty(exports, "StaffDto", { enumerable: true, get: function () { return staff_dto_2.StaffDto; } });
 class StaffPermissionsDto {
     staffId;
     permissions;

@@ -12,7 +12,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetRatePlansResponseDto = exports.CalculatePriceResponseDto = exports.ChannelRateMappingResponseDto = exports.RatePlanResponseDto = exports.CreateChannelMappingDto = exports.UpdateRatePlanDto = exports.CreateRatePlanDto = void 0;
+exports.GetRatePlansResponseDto = exports.CalculatePriceResponseDto = exports.ChannelRateMappingResponseDto = exports.RatePlanResponseDto = exports.CreateRatePlanDto = void 0;
 // ============================================================================
 // Request DTOs
 // ============================================================================
@@ -76,61 +76,10 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateRatePlanDto.prototype, "description", void 0);
-/**
- * Update rate plan request
- */
-class UpdateRatePlanDto {
-    name;
-    description;
-    isActive;
-}
-exports.UpdateRatePlanDto = UpdateRatePlanDto;
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Rate plan name', example: 'Updated Best Available Rate' }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdateRatePlanDto.prototype, "name", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Optional description of the rate plan', example: 'Updated description' }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdateRatePlanDto.prototype, "description", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether the rate plan is active', example: true }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
-], UpdateRatePlanDto.prototype, "isActive", void 0);
-/**
- * Create channel rate mapping request
- */
-class CreateChannelMappingDto {
-    channelProvider;
-    channelName;
-    externalRateId;
-}
-exports.CreateChannelMappingDto = CreateChannelMappingDto;
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Channel provider type', example: 'STAAH' }),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateChannelMappingDto.prototype, "channelProvider", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Channel name (OTA)', example: 'Booking.com' }),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateChannelMappingDto.prototype, "channelName", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'External rate plan ID in the channel manager or OTA system', example: 'STAAH194181' }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateChannelMappingDto.prototype, "externalRateId", void 0);
 // ============================================================================
 // Response DTOs
 // ============================================================================
+// Note: Request DTOs UpdateRatePlanDto and CreateChannelMappingDto are in nats/rate-plans.nats.ts
 /**
  * Rate plan response
  */

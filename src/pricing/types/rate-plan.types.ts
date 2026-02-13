@@ -88,7 +88,7 @@ export interface PriceModifier {
 // ============================================================================
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsEnum, IsOptional, IsNumber, IsUUID, IsBoolean } from 'class-validator';
+import { IsString, IsEnum, IsOptional, IsNumber, IsUUID } from 'class-validator';
 
 /**
  * Create rate plan request
@@ -131,47 +131,10 @@ export class CreateRatePlanDto {
   description?: string;
 }
 
-/**
- * Update rate plan request
- */
-export class UpdateRatePlanDto {
-  @ApiPropertyOptional({ description: 'Rate plan name', example: 'Updated Best Available Rate' })
-  @IsOptional()
-  @IsString()
-  name?: string;
-
-  @ApiPropertyOptional({ description: 'Optional description of the rate plan', example: 'Updated description' })
-  @IsOptional()
-  @IsString()
-  description?: string;
-
-  @ApiPropertyOptional({ description: 'Whether the rate plan is active', example: true })
-  @IsOptional()
-  @IsBoolean()
-  isActive?: boolean;
-}
-
-/**
- * Create channel rate mapping request
- */
-export class CreateChannelMappingDto {
-  @ApiProperty({ description: 'Channel provider type', example: 'STAAH' })
-  @IsString()
-  channelProvider: string;
-
-  @ApiProperty({ description: 'Channel name (OTA)', example: 'Booking.com' })
-  @IsString()
-  channelName: string;
-
-  @ApiPropertyOptional({ description: 'External rate plan ID in the channel manager or OTA system', example: 'STAAH194181' })
-  @IsOptional()
-  @IsString()
-  externalRateId?: string;
-}
-
 // ============================================================================
 // Response DTOs
 // ============================================================================
+// Note: Request DTOs UpdateRatePlanDto and CreateChannelMappingDto are in nats/rate-plans.nats.ts
 
 /**
  * Rate plan response
