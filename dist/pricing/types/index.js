@@ -25,6 +25,7 @@ __exportStar(require("./hourly-pricing-advanced.types"), exports);
 __exportStar(require("./los-discounts.types"), exports);
 __exportStar(require("./meal-plan-rates.types"), exports);
 __exportStar(require("./promotions.types"), exports);
+__exportStar(require("./rates.types"), exports);
 __exportStar(require("./rates-core.types"), exports);
 __exportStar(require("./room-type-base-rates.types"), exports);
 __exportStar(require("./seasonal-adjustments.types"), exports);

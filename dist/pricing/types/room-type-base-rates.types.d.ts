@@ -43,4 +43,48 @@ export interface BulkUpsertBaseRatesResult {
     errors: string[];
     rates: RoomTypeBaseRate[];
 }
+/**
+ * Get room type base rates response
+ */
+export declare class GetRoomTypeBaseRatesResponseDto {
+    data: RoomTypeBaseRate[];
+}
+/**
+ * Upsert room type base rate response
+ */
+export declare class UpsertRoomTypeBaseRateResponseDto {
+    data: RoomTypeBaseRate;
+}
+/**
+ * Bulk upsert room type base rates response
+ */
+export declare class BulkUpsertRoomTypeBaseRatesResponseDto {
+    data: RoomTypeBaseRate[];
+}
+/**
+ * Upsert room type base rate request
+ */
+export declare class UpsertRoomTypeBaseRateRequestDto {
+    baseRate?: number;
+    weekdayRate?: number;
+    weekendRate?: number;
+    useWeekdayWeekend?: boolean;
+    hourlyRate?: number;
+    currency?: string;
+    isActive?: boolean;
+}
+/**
+ * Room type base rate item for bulk operations
+ */
+export declare class RoomTypeBaseRateItemDto {
+    roomTypeId: string;
+    baseRate: number;
+    currency?: string;
+}
+/**
+ * Bulk upsert room type base rates request
+ */
+export declare class BulkUpsertRoomTypeBaseRatesRequestDto {
+    rates: RoomTypeBaseRateItemDto[];
+}
 //# sourceMappingURL=room-type-base-rates.types.d.ts.map
