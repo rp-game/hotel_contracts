@@ -3,7 +3,6 @@
  * Pricing Domain Contracts
  *
  * Includes:
- * - NATS message contracts (pricing.* patterns)
  * - REST API DTOs
  * - Domain types and enums
  *
@@ -29,8 +28,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./nats"), exports);
+// export * from './nats'; // Not exported to avoid conflicts
+// export * from './types'; // Not exported to avoid conflicts with ./rest
 __exportStar(require("./rest"), exports);
-__exportStar(require("./types"), exports);
 __exportStar(require("./enums"), exports);
 //# sourceMappingURL=index.js.map

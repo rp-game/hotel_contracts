@@ -3,7 +3,6 @@
  * All staff-related NATS message payloads and responses
  * Exported from user-service
  */
-import { UserRole } from '../enums';
 import { StaffStatus } from '../enums';
 export interface FindStaffByIdPayload {
     id: string;
@@ -85,33 +84,19 @@ export interface GetStaffTaskStatsPayload {
     endDate?: string;
 }
 /**
- * Staff DTO
- * Shared between NATS contracts and REST API
- * Single source of truth for staff data structure
+ * Staff DTO - Re-exported from rest/staff.dto.ts
+ * Single unified DTO used by BOTH NATS messages and REST API
+ * This ensures consistency across all layers
  */
-export declare class StaffDto {
-    id: string;
-    email: string;
-    fullName: string;
-    phoneNumber?: string;
-    roles: UserRole[] | string[];
-    departmentId?: string;
-    position?: string;
-    staffStatus?: StaffStatus | string;
-    isActive: boolean;
-    tenantId: string;
-    hotelId?: string;
-    createdAt: Date;
-    updatedAt: Date;
-}
-export interface StaffPermissionsDto {
+export { StaffDto } from '../rest/staff.dto';
+export declare class StaffPermissionsDto {
     staffId: string;
     permissions: string[];
     roles: string[];
     tenantId: string;
     hotelId: string;
 }
-export interface StaffActivityDetails {
+export declare class StaffActivityDetails {
     taskId?: string;
     roomNumber?: string;
     shiftType?: string;
@@ -120,13 +105,13 @@ export interface StaffActivityDetails {
     notes?: string;
     [key: string]: any;
 }
-export interface StaffActivityDto {
+export declare class StaffActivityDto {
     id: string;
     action: string;
     details: StaffActivityDetails;
     timestamp: string;
 }
-export interface StaffActivityLogDto {
+export declare class StaffActivityLogDto {
     staffId: string;
     activities: StaffActivityDto[];
     pagination: {
@@ -137,7 +122,7 @@ export interface StaffActivityLogDto {
     tenantId: string;
     hotelId: string;
 }
-export interface LogActivityResponseDto {
+export declare class LogActivityResponseDto {
     success: boolean;
     activityId: string;
     staffId: string;
@@ -147,7 +132,7 @@ export interface LogActivityResponseDto {
     tenantId: string;
     hotelId: string;
 }
-export interface StaffPerformanceMetrics {
+export declare class StaffPerformanceMetrics {
     tasksCompletedToday: number;
     averageTaskTime: number;
     qualityScore: number;
@@ -155,11 +140,11 @@ export interface StaffPerformanceMetrics {
     onTimeCompletionRate: number;
     customerRating: number;
 }
-export interface StaffPerformanceTrends {
+export declare class StaffPerformanceTrends {
     weeklyTasks: number[];
     weeklyQuality: number[];
 }
-export interface StaffPerformanceDto {
+export declare class StaffPerformanceDto {
     staffId: string;
     period: string;
     metrics: StaffPerformanceMetrics;
@@ -168,19 +153,19 @@ export interface StaffPerformanceDto {
     hotelId: string;
     calculatedAt: string;
 }
-export interface TaskStatsRoomTypes {
+export declare class TaskStatsRoomTypes {
     Standard: number;
     Deluxe: number;
     Suite: number;
     [key: string]: number;
 }
-export interface TaskStatsTaskTypes {
+export declare class TaskStatsTaskTypes {
     Cleaning: number;
     Maintenance: number;
     Inspection: number;
     [key: string]: number;
 }
-export interface StaffTaskStatsMetrics {
+export declare class StaffTaskStatsMetrics {
     totalTasks: number;
     completedTasks: number;
     pendingTasks: number;
@@ -191,7 +176,7 @@ export interface StaffTaskStatsMetrics {
     roomTypes: TaskStatsRoomTypes;
     taskTypes: TaskStatsTaskTypes;
 }
-export interface StaffTaskStatsDto {
+export declare class StaffTaskStatsDto {
     staffId: string;
     period: {
         startDate: string;
@@ -201,7 +186,7 @@ export interface StaffTaskStatsDto {
     tenantId: string;
     hotelId: string;
 }
-export interface StaffPermissionCheckDto {
+export declare class StaffPermissionCheckDto {
     staffId: string;
     permission: string;
     allowed: boolean;

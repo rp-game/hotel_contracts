@@ -2,7 +2,6 @@
  * Pricing Domain Contracts
  *
  * Includes:
- * - NATS message contracts (pricing.* patterns)
  * - REST API DTOs
  * - Domain types and enums
  *
@@ -14,7 +13,7 @@
  * ```
  */
 
-export * from './nats';
+// export * from './nats'; // Not exported to avoid conflicts
+// export * from './types'; // Not exported to avoid conflicts with ./rest
 export * from './rest';
-export * from './types';
 export * from './enums';

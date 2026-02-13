@@ -77,4 +77,83 @@ export interface PriceModifier {
     createdAt: string;
     updatedAt: string;
 }
+/**
+ * Create rate plan request
+ */
+export declare class CreateRatePlanDto {
+    tenantId: string;
+    hotelId: string;
+    name: string;
+    type: 'BASE' | 'DERIVED';
+    parentRatePlanId?: string;
+    derivationType?: 'PERCENTAGE' | 'AMOUNT';
+    derivationValue?: number;
+    description?: string;
+}
+/**
+ * Update rate plan request
+ */
+export declare class UpdateRatePlanDto {
+    name?: string;
+    description?: string;
+    isActive?: boolean;
+}
+/**
+ * Create channel rate mapping request
+ */
+export declare class CreateChannelMappingDto {
+    channelProvider: string;
+    channelName: string;
+    externalRateId?: string;
+}
+/**
+ * Rate plan response
+ */
+export declare class RatePlanResponseDto {
+    id: string;
+    tenantId: string;
+    hotelId: string;
+    name: string;
+    type: 'BASE' | 'DERIVED';
+    parentRatePlanId?: string;
+    derivationType?: 'PERCENTAGE' | 'AMOUNT';
+    derivationValue?: number;
+    description?: string;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+    parentRatePlan?: RatePlanResponseDto;
+    channelMappings?: ChannelRateMappingResponseDto[];
+}
+/**
+ * Channel rate mapping response
+ */
+export declare class ChannelRateMappingResponseDto {
+    id: string;
+    ratePlanId: string;
+    channelProvider: string;
+    channelName: string;
+    externalRateId?: string;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+}
+/**
+ * Calculate price response
+ */
+export declare class CalculatePriceResponseDto {
+    ratePlanId: string;
+    ratePlanName: string;
+    type: 'BASE' | 'DERIVED';
+    basePrice: number;
+    derivationType?: 'PERCENTAGE' | 'AMOUNT';
+    derivationValue?: number;
+    calculatedPrice: number;
+}
+/**
+ * Get rate plans response
+ */
+export declare class GetRatePlansResponseDto {
+    data: RatePlanResponseDto[];
+}
 //# sourceMappingURL=rate-plan.types.d.ts.map
