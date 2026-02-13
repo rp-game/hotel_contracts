@@ -241,7 +241,7 @@ __decorate([
     __metadata("design:type", String)
 ], StaffDto.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
     __metadata("design:type", String)
 ], StaffDto.prototype, "hotelId", void 0);
 __decorate([

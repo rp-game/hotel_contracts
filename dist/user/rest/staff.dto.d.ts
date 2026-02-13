@@ -53,7 +53,7 @@ export declare class StaffDto {
     lastName: string;
     roles: string[];
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
     employeeId?: string;
     position?: string;
     staffStatus?: StaffStatus;

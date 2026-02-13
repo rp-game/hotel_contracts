@@ -166,8 +166,8 @@ export class StaffDto {
   @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
 
-  @ApiProperty({ description: 'Hotel ID' })
-  hotelId: string;
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  hotelId?: string;
 
   @ApiPropertyOptional({ description: 'Employee ID' })
   employeeId?: string;
