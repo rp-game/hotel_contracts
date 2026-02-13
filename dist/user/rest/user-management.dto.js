@@ -61,8 +61,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'User roles - array to match database schema',
         type: [String],
-        example: ['HOTEL_MANAGER', 'FRONT_DESK'],
-        isArray: true
+        example: ['HOTEL_MANAGER', 'FRONT_DESK']
     }),
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsString)({ each: true }),
@@ -162,8 +161,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'User roles - array to match database schema',
-        type: [String],
-        isArray: true
+        type: [String]
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
@@ -257,8 +255,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'User roles - array matching database schema',
         type: [String],
-        example: ['HOTEL_MANAGER', 'FRONT_DESK'],
-        isArray: true
+        example: ['HOTEL_MANAGER', 'FRONT_DESK']
     }),
     __metadata("design:type", Array)
 ], UserDto.prototype, "roles", void 0);

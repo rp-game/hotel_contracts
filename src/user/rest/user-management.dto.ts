@@ -32,8 +32,7 @@ export class CreateUserDto {
   @ApiProperty({
     description: 'User roles - array to match database schema',
     type: [String],
-    example: ['HOTEL_MANAGER', 'FRONT_DESK'],
-    isArray: true
+    example: ['HOTEL_MANAGER', 'FRONT_DESK']
   })
   @IsArray()
   @IsString({ each: true })
@@ -107,8 +106,7 @@ export class UpdateUserDto {
 
   @ApiPropertyOptional({
     description: 'User roles - array to match database schema',
-    type: [String],
-    isArray: true
+    type: [String]
   })
   @IsOptional()
   @IsArray()
@@ -171,8 +169,7 @@ export class UserDto {
   @ApiProperty({
     description: 'User roles - array matching database schema',
     type: [String],
-    example: ['HOTEL_MANAGER', 'FRONT_DESK'],
-    isArray: true
+    example: ['HOTEL_MANAGER', 'FRONT_DESK']
   })
   roles: string[];
 
