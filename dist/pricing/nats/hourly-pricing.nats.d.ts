@@ -44,6 +44,7 @@ export declare class UpdateHourlyPricingRuleDto {
     pricingStrategy?: 'TIERED' | 'FLAT' | 'HYBRID';
     fallbackHourlyRate?: number;
     enableDynamicAdjustments?: boolean;
+    currency?: string;
     validFrom?: string;
     validTo?: string;
     priority?: number;

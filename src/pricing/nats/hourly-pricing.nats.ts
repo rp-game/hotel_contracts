@@ -291,6 +291,15 @@ export class UpdateHourlyPricingRuleDto {
   enableDynamicAdjustments?: boolean;
 
   @ApiPropertyOptional({
+    description: 'Currency code (e.g., VND, USD)',
+    minLength: 3,
+    maxLength: 3,
+  })
+  @IsOptional()
+  @IsString()
+  currency?: string;
+
+  @ApiPropertyOptional({
     description: 'Start date',
   })
   @IsOptional()

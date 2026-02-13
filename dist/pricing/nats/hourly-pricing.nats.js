@@ -277,6 +277,7 @@ class UpdateHourlyPricingRuleDto {
     pricingStrategy;
     fallbackHourlyRate;
     enableDynamicAdjustments;
+    currency;
     validFrom;
     validTo;
     priority;
@@ -346,6 +347,16 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdateHourlyPricingRuleDto.prototype, "enableDynamicAdjustments", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Currency code (e.g., VND, USD)',
+        minLength: 3,
+        maxLength: 3,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHourlyPricingRuleDto.prototype, "currency", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Start date',
