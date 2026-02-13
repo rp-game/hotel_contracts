@@ -9,5 +9,6 @@ var StaffStatus;
     StaffStatus["ACTIVE"] = "ACTIVE";
     StaffStatus["INACTIVE"] = "INACTIVE";
     StaffStatus["ON_LEAVE"] = "ON_LEAVE";
+    StaffStatus["TERMINATED"] = "TERMINATED";
 })(StaffStatus || (exports.StaffStatus = StaffStatus = {}));
 //# sourceMappingURL=staff-status.enum.js.map

@@ -17,4 +17,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Only export REST-specific DTOs, not NATS (to avoid conflicts)
 __exportStar(require("./find-staff-by-hotel.dto"), exports);
 __exportStar(require("./user-management.dto"), exports);
+__exportStar(require("./staff.dto"), exports);
 //# sourceMappingURL=index.js.map
