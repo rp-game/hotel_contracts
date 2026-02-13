@@ -217,7 +217,7 @@ export class UserDto {
 }
 
 export class UserListResponseDto {
-  @ApiProperty({ description: 'List of users', type: [UserDto], isArray: true })
+  @ApiProperty({ description: 'List of users', type: UserDto, isArray: true })
   data: UserDto[];
 
   @ApiProperty({ description: 'Total count of users' })

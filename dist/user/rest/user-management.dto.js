@@ -323,7 +323,7 @@ class UserListResponseDto {
 }
 exports.UserListResponseDto = UserListResponseDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'List of users', type: [UserDto], isArray: true }),
+    (0, swagger_1.ApiProperty)({ description: 'List of users', type: UserDto, isArray: true }),
     __metadata("design:type", Array)
 ], UserListResponseDto.prototype, "data", void 0);
 __decorate([
