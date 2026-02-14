@@ -281,7 +281,7 @@ class PromotionSyncDto {
     bookingEndDate;
     stayStartDate;
     stayEndDate;
-    discountPercentage;
+    discountPercent; // Fixed: was discountPercentage, now matches SyncPromotionNatsRequest
     targetRoomTypes;
     targetProviders;
 }
@@ -327,7 +327,7 @@ __decorate([
     (0, class_validator_1.Max)(100),
     (0, swagger_1.ApiProperty)({ description: 'Discount percentage (0-100)' }),
     __metadata("design:type", Number)
-], PromotionSyncDto.prototype, "discountPercentage", void 0);
+], PromotionSyncDto.prototype, "discountPercent", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),

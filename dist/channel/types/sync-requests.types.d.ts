@@ -89,7 +89,7 @@ export declare class PromotionSyncDto {
     bookingEndDate: string;
     stayStartDate: string;
     stayEndDate: string;
-    discountPercentage: number;
+    discountPercent: number;
     targetRoomTypes?: string[];
     targetProviders?: string[];
 }

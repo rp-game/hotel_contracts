@@ -236,7 +236,7 @@ export class PromotionSyncDto {
   @Min(0)
   @Max(100)
   @ApiProperty({ description: 'Discount percentage (0-100)' })
-  discountPercentage: number;
+  discountPercent: number; // Fixed: was discountPercentage, now matches SyncPromotionNatsRequest
 
   @IsOptional()
   @IsArray()
