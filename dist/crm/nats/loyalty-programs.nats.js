@@ -28,10 +28,73 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IndividualProgramStats = exports.LoyaltyProgramNatsResponse = void 0;
+exports.LoyaltyProgramNatsResponse = exports.IndividualProgramStats = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const loyalty_tiers_nats_1 = require("./loyalty-tiers.nats");
+/**
+ * Individual Loyalty Program Stats
+ * Statistics for a single loyalty program - can be used in both NATS responses and REST API
+ * Calculated from loyalty_members and loyalty_transactions tables
+ */
+class IndividualProgramStats {
+    totalMembers;
+    activeMembers;
+    totalPointsIssued;
+    totalPointsRedeemed;
+    averagePointsPerMember;
+}
+exports.IndividualProgramStats = IndividualProgramStats;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Total members enrolled in this program',
+        example: 1250,
+        type: Number
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], IndividualProgramStats.prototype, "totalMembers", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Active members (with activity in last 90 days)',
+        example: 980,
+        type: Number
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], IndividualProgramStats.prototype, "activeMembers", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Total points issued to date (sum of all positive transactions)',
+        example: 2500000,
+        type: Number
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], IndividualProgramStats.prototype, "totalPointsIssued", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Total points redeemed to date (sum of all negative transactions)',
+        example: 750000,
+        type: Number
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], IndividualProgramStats.prototype, "totalPointsRedeemed", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Average points per member (totalPointsIssued / totalMembers)',
+        example: 2040.8,
+        type: Number
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], IndividualProgramStats.prototype, "averagePointsPerMember", void 0);
 /**
  * Loyalty Program Response
  */
@@ -113,67 +176,4 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Deletion timestamp' }),
     __metadata("design:type", Object)
 ], LoyaltyProgramNatsResponse.prototype, "deletedAt", void 0);
-/**
- * Individual Loyalty Program Stats
- * Statistics for a single loyalty program - can be used in both NATS responses and REST API
- * Calculated from loyalty_members and loyalty_transactions tables
- */
-class IndividualProgramStats {
-    totalMembers;
-    activeMembers;
-    totalPointsIssued;
-    totalPointsRedeemed;
-    averagePointsPerMember;
-}
-exports.IndividualProgramStats = IndividualProgramStats;
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Total members enrolled in this program',
-        example: 1250,
-        type: Number
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], IndividualProgramStats.prototype, "totalMembers", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Active members (with activity in last 90 days)',
-        example: 980,
-        type: Number
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], IndividualProgramStats.prototype, "activeMembers", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Total points issued to date (sum of all positive transactions)',
-        example: 2500000,
-        type: Number
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], IndividualProgramStats.prototype, "totalPointsIssued", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Total points redeemed to date (sum of all negative transactions)',
-        example: 750000,
-        type: Number
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], IndividualProgramStats.prototype, "totalPointsRedeemed", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Average points per member (totalPointsIssued / totalMembers)',
-        example: 2040.8,
-        type: Number
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], IndividualProgramStats.prototype, "averagePointsPerMember", void 0);
 //# sourceMappingURL=loyalty-programs.nats.js.map

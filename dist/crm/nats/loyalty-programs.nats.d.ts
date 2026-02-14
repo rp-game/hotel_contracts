@@ -82,6 +82,18 @@ export interface CreateLoyaltyTierNatsRequest {
     isActive?: boolean;
 }
 /**
+ * Individual Loyalty Program Stats
+ * Statistics for a single loyalty program - can be used in both NATS responses and REST API
+ * Calculated from loyalty_members and loyalty_transactions tables
+ */
+export declare class IndividualProgramStats {
+    totalMembers?: number;
+    activeMembers?: number;
+    totalPointsIssued?: number;
+    totalPointsRedeemed?: number;
+    averagePointsPerMember?: number;
+}
+/**
  * Loyalty Program Response
  */
 export declare class LoyaltyProgramNatsResponse {
@@ -215,18 +227,6 @@ export interface FindAllTiersNatsRequest {
  * Find All Tiers Response
  */
 export type FindAllTiersNatsResponse = NatsResponse<FindAllLoyaltyTiersDto>;
-/**
- * Individual Loyalty Program Stats
- * Statistics for a single loyalty program - can be used in both NATS responses and REST API
- * Calculated from loyalty_members and loyalty_transactions tables
- */
-export declare class IndividualProgramStats {
-    totalMembers?: number;
-    activeMembers?: number;
-    totalPointsIssued?: number;
-    totalPointsRedeemed?: number;
-    averagePointsPerMember?: number;
-}
 /**
  * Aggregate Loyalty Program Stats
  * Statistics for all loyalty programs combined (used in crm.loyalty_program.stats endpoint)
