@@ -5,6 +5,7 @@
  */
 import { UserRole } from '../enums';
 import { StaffStatus } from '../enums';
+import { Department } from '../enums';
 export interface CreateUserRequestDto {
     email: string;
     password: string;
@@ -62,6 +63,10 @@ export interface AssignStaffToHotelRequestDto {
 export interface CreateStaffRequestDto extends CreateUserRequestDto {
     hotelId: string;
     staffStatus?: StaffStatus;
+    employeeId?: string;
+    position?: string;
+    phone?: string;
+    department?: Department;
 }
 export interface SearchUsersRequestDto {
     query: string;

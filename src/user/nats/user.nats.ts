@@ -6,6 +6,7 @@
 
 import { UserRole } from '../enums';
 import { StaffStatus } from '../enums';
+import { Department } from '../enums';
 
 // ============= NATS Request DTOs =============
 
@@ -79,6 +80,11 @@ export interface AssignStaffToHotelRequestDto {
 export interface CreateStaffRequestDto extends CreateUserRequestDto {
   hotelId: string;
   staffStatus?: StaffStatus;
+  // Additional staff fields (to match CreateStaffDto from REST)
+  employeeId?: string;
+  position?: string;
+  phone?: string;
+  department?: Department;
 }
 
 // ============= User Search and Stats Request DTOs =============
