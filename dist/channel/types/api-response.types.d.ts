@@ -194,7 +194,7 @@ export interface ABTestConfigurationDto {
  * Sync History DTO
  * Individual sync history record
  */
-export interface SyncHistoryDto {
+export declare class SyncHistoryDto {
     id: string;
     providerId: string;
     providerName: string;
@@ -214,7 +214,7 @@ export interface SyncHistoryDto {
  * Sync History List Response DTO
  * Returned by getSyncHistory operation
  */
-export interface SyncHistoryListResponseDto {
+export declare class SyncHistoryListResponseDto {
     history: SyncHistoryDto[];
     total: number;
     page: number;

@@ -10,6 +10,7 @@
  */
 
 import { SyncStatus, SyncOperation, SyncDirection } from '../enums';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 /**
  * Sync Response DTO
@@ -192,20 +193,47 @@ export interface ABTestConfigurationDto {
  * Sync History DTO
  * Individual sync history record
  */
-export interface SyncHistoryDto {
+export class SyncHistoryDto {
+  @ApiProperty({ description: 'Sync history ID' })
   id: string;
+
+  @ApiProperty({ description: 'Provider ID' })
   providerId: string;
+
+  @ApiProperty({ description: 'Provider name' })
   providerName: string;
+
+  @ApiProperty({ description: 'Sync operation type', enum: SyncOperation })
   operation: string;
+
+  @ApiProperty({ description: 'Sync direction', enum: SyncDirection })
   direction: string;
+
+  @ApiProperty({ description: 'Sync status', enum: SyncStatus })
   status: string;
+
+  @ApiProperty({ description: 'Sync start timestamp', type: Date })
   startedAt: Date;
+
+  @ApiPropertyOptional({ description: 'Sync completion timestamp', type: Date })
   completedAt?: Date;
+
+  @ApiPropertyOptional({ description: 'Sync duration in milliseconds', type: Number })
   durationMs?: number;
+
+  @ApiProperty({ description: 'Total records processed', type: Number })
   recordsProcessed: number;
+
+  @ApiProperty({ description: 'Successfully processed records', type: Number })
   recordsSuccessful: number;
+
+  @ApiProperty({ description: 'Failed records', type: Number })
   recordsFailed: number;
+
+  @ApiPropertyOptional({ description: 'Error message if sync failed', type: String })
   errorMessage?: string;
+
+  @ApiPropertyOptional({ description: 'Additional sync metadata', type: Object })
   metadata?: Record<string, any>;
 }
 
@@ -213,11 +241,20 @@ export interface SyncHistoryDto {
  * Sync History List Response DTO
  * Returned by getSyncHistory operation
  */
-export interface SyncHistoryListResponseDto {
+export class SyncHistoryListResponseDto {
+  @ApiProperty({ description: 'List of sync history records', type: [SyncHistoryDto] })
   history: SyncHistoryDto[];
+
+  @ApiProperty({ description: 'Total number of records', type: Number })
   total: number;
+
+  @ApiProperty({ description: 'Current page number', type: Number })
   page: number;
+
+  @ApiProperty({ description: 'Records per page', type: Number })
   limit: number;
+
+  @ApiProperty({ description: 'Total number of pages', type: Number })
   totalPages: number;
 }
 
