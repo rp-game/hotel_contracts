@@ -49,19 +49,10 @@ export interface TenantSettings {
     requireApprovalForHighValueBookings?: boolean;
     highValueThreshold?: number;
 }
-export declare class HotelOperationSettingsDto {
-    checkInTime?: string;
-    checkOutTime?: string;
-    timezone?: string;
-    currency?: string;
-    defaultCleaningDuration?: number;
-    gracePeriodMinutes?: number;
-    autoAssignRooms?: boolean;
-    hourlyBooking?: boolean;
-    preferBookingMode?: 'hourly' | 'daily';
-    businessHours?: {
-        start: string;
-        end: string;
-    };
-}
+/**
+ * Hotel Operation Settings DTO - Re-exported from inventory
+ * The canonical definition is in inventory/rest/hotel-settings.dto.ts
+ * Re-exported here for backward compatibility
+ */
+export { HotelOperationSettingsDto } from '../../inventory/rest/hotel-settings.dto';
 //# sourceMappingURL=tenant-settings.d.ts.map
