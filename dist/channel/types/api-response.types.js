@@ -19,9 +19,194 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MetricType = exports.TimeRange = exports.RecoveryAction = exports.ErrorSeverity = exports.ErrorType = exports.SyncHistoryListResponseDto = exports.SyncHistoryDto = exports.ABTestStatus = exports.FailoverStatus = exports.FailoverTrigger = void 0;
+exports.MetricType = exports.TimeRange = exports.RecoveryAction = exports.ErrorSeverity = exports.ErrorType = exports.SyncHistoryListResponseDto = exports.SyncHistoryDto = exports.ABTestStatus = exports.FailoverStatus = exports.FailoverTrigger = exports.SyncStatusDto = exports.SyncResponseDto = void 0;
 const enums_1 = require("../enums");
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
+/**
+ * Sync Response DTO
+ * Returned by inventory/rate sync operations
+ */
+class SyncResponseDto {
+    syncId;
+    status;
+    message;
+    messageVi;
+    startedAt;
+    completedAt;
+    totalRecords;
+    processedRecords;
+    failedRecords;
+    errors;
+    metadata;
+}
+exports.SyncResponseDto = SyncResponseDto;
+__decorate([
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiProperty)({ description: 'Sync operation ID' }),
+    __metadata("design:type", String)
+], SyncResponseDto.prototype, "syncId", void 0);
+__decorate([
+    (0, class_validator_1.IsEnum)(enums_1.SyncStatus),
+    (0, swagger_1.ApiProperty)({ description: 'Sync status', enum: enums_1.SyncStatus }),
+    __metadata("design:type", String)
+], SyncResponseDto.prototype, "status", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ description: 'Response message (English)' }),
+    __metadata("design:type", String)
+], SyncResponseDto.prototype, "message", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Response message (Vietnamese)' }),
+    __metadata("design:type", String)
+], SyncResponseDto.prototype, "messageVi", void 0);
+__decorate([
+    (0, class_transformer_1.Type)(() => Date),
+    (0, swagger_1.ApiProperty)({ description: 'Sync start timestamp', type: Date }),
+    __metadata("design:type", Date)
+], SyncResponseDto.prototype, "startedAt", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Type)(() => Date),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sync completion timestamp', type: Date }),
+    __metadata("design:type", Date)
+], SyncResponseDto.prototype, "completedAt", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Total records to process', type: Number }),
+    __metadata("design:type", Number)
+], SyncResponseDto.prototype, "totalRecords", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Records processed', type: Number }),
+    __metadata("design:type", Number)
+], SyncResponseDto.prototype, "processedRecords", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Failed records count', type: Number }),
+    __metadata("design:type", Number)
+], SyncResponseDto.prototype, "failedRecords", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Error messages', type: [String] }),
+    __metadata("design:type", Array)
+], SyncResponseDto.prototype, "errors", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional metadata', type: Object }),
+    __metadata("design:type", Object)
+], SyncResponseDto.prototype, "metadata", void 0);
+/**
+ * Sync Status DTO
+ * Returned by getSyncStatus operation
+ */
+class SyncStatusDto {
+    syncId;
+    status;
+    operation;
+    direction;
+    startedAt;
+    completedAt;
+    progressPercentage;
+    totalRecords;
+    processedRecords;
+    failedRecords;
+    providers;
+    errors;
+    currentStep;
+    metadata;
+}
+exports.SyncStatusDto = SyncStatusDto;
+__decorate([
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiProperty)({ description: 'Sync operation ID' }),
+    __metadata("design:type", String)
+], SyncStatusDto.prototype, "syncId", void 0);
+__decorate([
+    (0, class_validator_1.IsEnum)(enums_1.SyncStatus),
+    (0, swagger_1.ApiProperty)({ description: 'Sync status', enum: enums_1.SyncStatus }),
+    __metadata("design:type", String)
+], SyncStatusDto.prototype, "status", void 0);
+__decorate([
+    (0, class_validator_1.IsEnum)(enums_1.SyncOperation),
+    (0, swagger_1.ApiProperty)({ description: 'Sync operation type', enum: enums_1.SyncOperation }),
+    __metadata("design:type", String)
+], SyncStatusDto.prototype, "operation", void 0);
+__decorate([
+    (0, class_validator_1.IsEnum)(enums_1.SyncDirection),
+    (0, swagger_1.ApiProperty)({ description: 'Sync direction', enum: enums_1.SyncDirection }),
+    __metadata("design:type", String)
+], SyncStatusDto.prototype, "direction", void 0);
+__decorate([
+    (0, class_transformer_1.Type)(() => Date),
+    (0, swagger_1.ApiProperty)({ description: 'Sync start timestamp', type: Date }),
+    __metadata("design:type", Date)
+], SyncStatusDto.prototype, "startedAt", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Type)(() => Date),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sync completion timestamp', type: Date }),
+    __metadata("design:type", Date)
+], SyncStatusDto.prototype, "completedAt", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Progress percentage (0-100)', type: Number }),
+    __metadata("design:type", Number)
+], SyncStatusDto.prototype, "progressPercentage", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Total records to process', type: Number }),
+    __metadata("design:type", Number)
+], SyncStatusDto.prototype, "totalRecords", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Records processed so far', type: Number }),
+    __metadata("design:type", Number)
+], SyncStatusDto.prototype, "processedRecords", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Failed records count', type: Number }),
+    __metadata("design:type", Number)
+], SyncStatusDto.prototype, "failedRecords", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Provider IDs involved in sync', type: [String] }),
+    __metadata("design:type", Array)
+], SyncStatusDto.prototype, "providers", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Error messages', type: [String] }),
+    __metadata("design:type", Array)
+], SyncStatusDto.prototype, "errors", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Current step description' }),
+    __metadata("design:type", String)
+], SyncStatusDto.prototype, "currentStep", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional metadata', type: Object }),
+    __metadata("design:type", Object)
+], SyncStatusDto.prototype, "metadata", void 0);
 /**
  * Failover Trigger Enum
  */

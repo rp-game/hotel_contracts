@@ -13,7 +13,7 @@ import { SyncStatus, SyncOperation, SyncDirection } from '../enums';
  * Sync Response DTO
  * Returned by inventory/rate sync operations
  */
-export interface SyncResponseDto {
+export declare class SyncResponseDto {
     syncId: string;
     status: SyncStatus;
     message: string;
@@ -30,7 +30,7 @@ export interface SyncResponseDto {
  * Sync Status DTO
  * Returned by getSyncStatus operation
  */
-export interface SyncStatusDto {
+export declare class SyncStatusDto {
     syncId: string;
     status: SyncStatus;
     operation: SyncOperation;

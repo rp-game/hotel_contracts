@@ -19,6 +19,7 @@ __exportStar(require("./credentials.types"), exports);
 __exportStar(require("./provider-configuration.types"), exports);
 __exportStar(require("./mapping.types"), exports);
 __exportStar(require("./sync-history.types"), exports);
+__exportStar(require("./sync-requests.types"), exports);
 __exportStar(require("./ota-accounts.types"), exports);
 __exportStar(require("./chain-config.types"), exports);
 __exportStar(require("./channel-data.types"), exports);

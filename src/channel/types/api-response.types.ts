@@ -11,22 +11,64 @@
 
 import { SyncStatus, SyncOperation, SyncDirection } from '../enums';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsUUID, IsOptional, IsNumber, IsArray, IsEnum, IsObject, IsBoolean, IsDateString } from 'class-validator';
+import { Type } from 'class-transformer';
 
 /**
  * Sync Response DTO
  * Returned by inventory/rate sync operations
  */
-export interface SyncResponseDto {
+export class SyncResponseDto {
+  @IsUUID()
+  @ApiProperty({ description: 'Sync operation ID' })
   syncId: string;
+
+  @IsEnum(SyncStatus)
+  @ApiProperty({ description: 'Sync status', enum: SyncStatus })
   status: SyncStatus;
+
+  @IsString()
+  @ApiProperty({ description: 'Response message (English)' })
   message: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiPropertyOptional({ description: 'Response message (Vietnamese)' })
   messageVi?: string;
+
+  @Type(() => Date)
+  @ApiProperty({ description: 'Sync start timestamp', type: Date })
   startedAt: Date;
+
+  @IsOptional()
+  @Type(() => Date)
+  @ApiPropertyOptional({ description: 'Sync completion timestamp', type: Date })
   completedAt?: Date;
+
+  @IsOptional()
+  @IsNumber()
+  @ApiPropertyOptional({ description: 'Total records to process', type: Number })
   totalRecords?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @ApiPropertyOptional({ description: 'Records processed', type: Number })
   processedRecords?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @ApiPropertyOptional({ description: 'Failed records count', type: Number })
   failedRecords?: number;
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  @ApiPropertyOptional({ description: 'Error messages', type: [String] })
   errors?: string[];
+
+  @IsOptional()
+  @IsObject()
+  @ApiPropertyOptional({ description: 'Additional metadata', type: Object })
   metadata?: Record<string, any>;
 }
 
@@ -34,20 +76,72 @@ export interface SyncResponseDto {
  * Sync Status DTO
  * Returned by getSyncStatus operation
  */
-export interface SyncStatusDto {
+export class SyncStatusDto {
+  @IsUUID()
+  @ApiProperty({ description: 'Sync operation ID' })
   syncId: string;
+
+  @IsEnum(SyncStatus)
+  @ApiProperty({ description: 'Sync status', enum: SyncStatus })
   status: SyncStatus;
+
+  @IsEnum(SyncOperation)
+  @ApiProperty({ description: 'Sync operation type', enum: SyncOperation })
   operation: SyncOperation;
+
+  @IsEnum(SyncDirection)
+  @ApiProperty({ description: 'Sync direction', enum: SyncDirection })
   direction: SyncDirection;
+
+  @Type(() => Date)
+  @ApiProperty({ description: 'Sync start timestamp', type: Date })
   startedAt: Date;
+
+  @IsOptional()
+  @Type(() => Date)
+  @ApiPropertyOptional({ description: 'Sync completion timestamp', type: Date })
   completedAt?: Date;
+
+  @IsOptional()
+  @IsNumber()
+  @ApiPropertyOptional({ description: 'Progress percentage (0-100)', type: Number })
   progressPercentage?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @ApiPropertyOptional({ description: 'Total records to process', type: Number })
   totalRecords?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @ApiPropertyOptional({ description: 'Records processed so far', type: Number })
   processedRecords?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @ApiPropertyOptional({ description: 'Failed records count', type: Number })
   failedRecords?: number;
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  @ApiPropertyOptional({ description: 'Provider IDs involved in sync', type: [String] })
   providers?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  @ApiPropertyOptional({ description: 'Error messages', type: [String] })
   errors?: string[];
+
+  @IsOptional()
+  @IsString()
+  @ApiPropertyOptional({ description: 'Current step description' })
   currentStep?: string;
+
+  @IsOptional()
+  @IsObject()
+  @ApiPropertyOptional({ description: 'Additional metadata', type: Object })
   metadata?: Record<string, any>;
 }
 
