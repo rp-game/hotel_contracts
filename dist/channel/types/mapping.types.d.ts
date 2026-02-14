@@ -5,8 +5,9 @@
  */
 /**
  * Room mapping configuration (JSONB field)
+ * Matches database entity structure (CMSRoomMapping.mappingConfiguration)
  */
-export interface RoomMappingConfiguration {
+export declare class RoomMappingConfiguration {
     roomType?: string;
     maxOccupancy?: number;
     amenities?: string[];
@@ -20,8 +21,9 @@ export interface RoomMappingConfiguration {
 }
 /**
  * Room mapping entity
+ * Maps internal rooms to external provider room IDs
  */
-export interface RoomMapping {
+export declare class RoomMapping {
     id: string;
     providerId: string;
     tenantId: string;
@@ -32,32 +34,37 @@ export interface RoomMapping {
     externalRoomName: string;
     mappingConfiguration?: RoomMappingConfiguration;
     isActive: boolean;
-    lastSyncedAt?: string | Date;
-    createdAt: string | Date;
-    updatedAt: string | Date;
+    lastSyncedAt?: string;
+    createdAt: string;
+    updatedAt: string;
+}
+/**
+ * Rate mapping restrictions sub-object
+ */
+export declare class RateMappingRestrictions {
+    minStay?: number;
+    maxStay?: number;
+    advanceBookingDays?: number;
+    closedToArrival?: boolean;
+    closedToDeparture?: boolean;
 }
 /**
  * Rate mapping configuration (JSONB field)
  */
-export interface RateMappingConfiguration {
+export declare class RateMappingConfiguration {
     rateBasis?: 'PER_NIGHT' | 'PER_PERSON' | 'PER_ROOM';
     mealPlan?: string;
     cancellationPolicy?: string;
     rateType?: 'BAR' | 'CORPORATE' | 'PROMOTIONAL' | 'PACKAGE';
     inclusions?: string[];
-    restrictions?: {
-        minStay?: number;
-        maxStay?: number;
-        advanceBookingDays?: number;
-        closedToArrival?: boolean;
-        closedToDeparture?: boolean;
-    };
+    restrictions?: RateMappingRestrictions;
     [key: string]: any;
 }
 /**
  * Rate mapping entity
+ * Maps internal rate plans to external provider rate IDs
  */
-export interface RateMapping {
+export declare class RateMapping {
     id: string;
     providerId: string;
     tenantId: string;
@@ -69,14 +76,14 @@ export interface RateMapping {
     externalRateName: string;
     mappingConfiguration?: RateMappingConfiguration;
     isActive: boolean;
-    lastSyncedAt?: string | Date;
-    createdAt: string | Date;
-    updatedAt: string | Date;
+    lastSyncedAt?: string;
+    createdAt: string;
+    updatedAt: string;
 }
 /**
  * Create room mapping request
  */
-export interface CreateRoomMappingRequest {
+export declare class CreateRoomMappingRequest {
     providerId?: string;
     tenantId?: string;
     hotelId?: string;
@@ -90,7 +97,7 @@ export interface CreateRoomMappingRequest {
 /**
  * Update room mapping request
  */
-export interface UpdateRoomMappingRequest {
+export declare class UpdateRoomMappingRequest {
     internalRoomName?: string;
     externalRoomId?: string;
     externalRoomName?: string;
@@ -100,7 +107,7 @@ export interface UpdateRoomMappingRequest {
 /**
  * Create rate mapping request
  */
-export interface CreateRateMappingRequest {
+export declare class CreateRateMappingRequest {
     providerId?: string;
     tenantId?: string;
     hotelId?: string;
@@ -115,7 +122,7 @@ export interface CreateRateMappingRequest {
 /**
  * Update rate mapping request
  */
-export interface UpdateRateMappingRequest {
+export declare class UpdateRateMappingRequest {
     internalRateName?: string;
     externalRateId?: string;
     externalRateName?: string;
@@ -124,6 +131,7 @@ export interface UpdateRateMappingRequest {
 }
 /**
  * Mappings list response (for paginated queries)
+ * Generic type - not used directly in Swagger
  */
 export interface MappingsListResponse<T> {
     data: T[];
@@ -142,7 +150,7 @@ export type GetRateMappingsResponse = RateMapping[];
 /**
  * Delete mapping response
  */
-export interface DeleteMappingResponse {
+export declare class DeleteMappingResponse {
     message: string;
     deletedAt?: string;
 }
