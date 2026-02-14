@@ -11,8 +11,8 @@
 
 import { SyncStatus, SyncOperation, SyncDirection } from '../enums';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsUUID, IsOptional, IsNumber, IsArray, IsEnum, IsObject, IsBoolean, IsDateString } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsString, IsUUID, IsOptional, IsNumber, IsArray, IsEnum, IsObject, IsBoolean, IsDateString, Min, Max, ValidateNested } from 'class-validator';
+import { Type, Transform } from 'class-transformer';
 
 /**
  * Sync Response DTO
@@ -356,68 +356,187 @@ export class SyncHistoryListResponseDto {
  * Provider Performance DTO
  * For analytics dashboard
  */
-export interface ProviderPerformanceDto {
+export class ProviderPerformanceDto {
+  @IsUUID()
+  @ApiProperty({ description: 'Provider ID' })
   providerId: string;
+
+  @IsString()
+  @ApiProperty({ description: 'Provider name' })
   providerName: string;
+
+  @IsNumber()
+  @ApiProperty({ description: 'Total bookings in period' })
   bookingVolume: number;
+
+  @IsNumber()
+  @Transform(({ value }) => parseFloat(value))
+  @ApiProperty({ description: 'Total revenue generated' })
   revenue: number;
+
+  @IsNumber()
+  @Transform(({ value }) => parseFloat(value))
+  @ApiProperty({ description: 'Average daily rate' })
   averageDailyRate: number;
+
+  @IsNumber()
+  @ApiProperty({ description: 'Average response time in milliseconds' })
   responseTime: number;
+
+  @IsNumber()
+  @Min(0)
+  @Max(1)
+  @Transform(({ value }) => parseFloat(value))
+  @ApiProperty({ description: 'Error rate (0-1)' })
   errorRate: number;
+
+  @IsNumber()
+  @Min(0)
+  @Max(1)
+  @Transform(({ value }) => parseFloat(value))
+  @ApiProperty({ description: 'Sync success rate (0-1)' })
   syncSuccessRate: number;
+
+  @IsArray()
+  @ApiProperty({ description: 'Top performing channels', type: [String] })
   topChannels: string[];
+
+  @IsOptional()
+  @IsObject()
+  @ApiPropertyOptional({ description: 'Additional performance metrics' })
   additionalMetrics?: Record<string, any>;
 }
 
 /**
- * Analytics Dashboard DTO
- * Returned by getAnalyticsDashboard operation
+ * Real-time Metrics Summary for Analytics Dashboard
  */
-export interface AnalyticsDashboardDto {
-  realtimeMetrics: {
-    totalBookingsToday: number;
-    totalRevenueToday: number;
-    averageResponseTime: number;
-    overallSyncSuccessRate: number;
-  };
-  providerPerformance: ProviderPerformanceDto[];
-  recentSyncs: SyncHistoryDto[];
-  activeAlerts: Array<{
-    id: string;
-    severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
-    message: string;
-    messageVi?: string;
-    providerId?: string;
-    providerName?: string;
-    category: string;
-    createdAt: Date;
-    resolvedAt?: Date;
-    acknowledged: boolean;
-    context?: Record<string, any>;
-  }>;
-  chartData?: {
-    bookingTrends: Array<{ date: string; bookings: number; revenue: number }>;
-    providerComparison: Array<{ providerId: string; bookings: number; revenue: number }>;
-    syncStatusDistribution: Array<{ status: string; count: number }>;
-  };
+export class RealTimeMetricsSummary {
+  @IsNumber()
+  @ApiProperty({ description: 'Total bookings processed today' })
+  totalBookingsToday: number;
+
+  @IsNumber()
+  @Transform(({ value }) => parseFloat(value))
+  @ApiProperty({ description: 'Total revenue processed today' })
+  totalRevenueToday: number;
+
+  @IsNumber()
+  @ApiProperty({ description: 'Average system response time in ms' })
+  averageResponseTime: number;
+
+  @IsNumber()
+  @Min(0)
+  @Max(1)
+  @Transform(({ value }) => parseFloat(value))
+  @ApiProperty({ description: 'Overall sync success rate (0-1)' })
+  overallSyncSuccessRate: number;
+}
+
+/**
+ * Chart Data for Analytics Dashboard
+ */
+export class ChartDataDto {
+  @IsArray()
+  @ApiProperty({ description: 'Booking trends over time' })
+  bookingTrends: Array<{ date: string; bookings: number; revenue: number }>;
+
+  @IsArray()
+  @ApiProperty({ description: 'Provider comparison data' })
+  providerComparison: Array<{ providerId: string; bookings: number; revenue: number }>;
+
+  @IsArray()
+  @ApiProperty({ description: 'Sync status distribution' })
+  syncStatusDistribution: Array<{ status: string; count: number }>;
 }
 
 /**
  * Alert DTO
  * Returned by listAlerts operation
  */
-export interface AlertDto {
+export class AlertDto {
+  @IsUUID()
+  @ApiProperty({ description: 'Alert ID' })
   id: string;
+
+  @IsEnum(['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'])
+  @ApiProperty({ description: 'Alert severity level', enum: ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'] })
   severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+
+  @IsString()
+  @ApiProperty({ description: 'Alert message' })
   message: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiPropertyOptional({ description: 'Alert message in Vietnamese' })
   messageVi?: string;
+
+  @IsOptional()
+  @IsUUID()
+  @ApiPropertyOptional({ description: 'Related provider ID' })
   providerId?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiPropertyOptional({ description: 'Related provider name' })
   providerName?: string;
+
+  @IsString()
+  @ApiProperty({ description: 'Alert category' })
   category: string;
+
+  @ApiProperty({ description: 'Alert creation timestamp', type: Date })
   createdAt: Date;
+
+  @IsOptional()
+  @ApiPropertyOptional({ description: 'Alert resolution timestamp', type: Date })
   resolvedAt?: Date;
+
+  @IsBoolean()
+  @ApiProperty({ description: 'Whether alert is acknowledged' })
   acknowledged: boolean;
+
+  @IsOptional()
+  @IsObject()
+  @ApiPropertyOptional({ description: 'Additional alert context' })
   context?: Record<string, any>;
+}
+
+/**
+ * Analytics Dashboard DTO
+ * Returned by getAnalyticsDashboard operation
+ */
+export class AnalyticsDashboardDto {
+  @IsObject()
+  @ValidateNested()
+  @Type(() => RealTimeMetricsSummary)
+  @ApiProperty({ description: 'Real-time metrics summary', type: RealTimeMetricsSummary })
+  realtimeMetrics: RealTimeMetricsSummary;
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ProviderPerformanceDto)
+  @ApiProperty({ description: 'Provider performance data', type: [ProviderPerformanceDto] })
+  providerPerformance: ProviderPerformanceDto[];
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => SyncHistoryDto)
+  @ApiProperty({ description: 'Recent sync history', type: [SyncHistoryDto] })
+  recentSyncs: SyncHistoryDto[];
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => AlertDto)
+  @ApiProperty({ description: 'Active alerts', type: [AlertDto] })
+  activeAlerts: AlertDto[];
+
+  @IsOptional()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => ChartDataDto)
+  @ApiPropertyOptional({ description: 'Chart data for dashboard visualizations', type: ChartDataDto })
+  chartData?: ChartDataDto;
 }
 
 /**
@@ -528,18 +647,63 @@ export enum MetricType {
  * Real-Time Metrics DTO
  * Returned by getRealTimeMetrics operation
  */
-export interface RealTimeMetricsDto {
+/**
+ * Provider Status Summary for Real-Time Metrics
+ */
+export class ProviderStatusSummary {
+  @IsUUID()
+  @ApiProperty({ description: 'Provider ID' })
+  providerId: string;
+
+  @IsString()
+  @ApiProperty({ description: 'Provider name' })
+  providerName: string;
+
+  @IsEnum(['HEALTHY', 'WARNING', 'ERROR'])
+  @ApiProperty({ description: 'Provider health status', enum: ['HEALTHY', 'WARNING', 'ERROR'] })
+  status: 'HEALTHY' | 'WARNING' | 'ERROR';
+
+  @ApiProperty({ description: 'Last sync timestamp', type: Date })
+  lastSyncAt: Date;
+}
+
+/**
+ * Real-Time Metrics DTO
+ * Returned by getRealTimeMetrics operation
+ */
+export class RealTimeMetricsDto {
+  @IsNumber()
+  @ApiProperty({ description: 'Total active sync operations' })
   activeSyncs: number;
+
+  @IsNumber()
+  @ApiProperty({ description: 'Total bookings processed today' })
   todayBookings: number;
+
+  @IsNumber()
+  @Transform(({ value }) => parseFloat(value))
+  @ApiProperty({ description: 'Total revenue processed today' })
   todayRevenue: number;
+
+  @IsNumber()
+  @ApiProperty({ description: 'Average system response time in ms' })
   averageResponseTime: number;
+
+  @IsNumber()
+  @Min(0)
+  @Max(1)
+  @Transform(({ value }) => parseFloat(value))
+  @ApiProperty({ description: 'Overall system health score (0-1)' })
   systemHealthScore: number;
-  providerStatuses: Array<{
-    providerId: string;
-    providerName: string;
-    status: 'HEALTHY' | 'WARNING' | 'ERROR';
-    lastSyncAt: Date;
-  }>;
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ProviderStatusSummary)
+  @ApiProperty({ description: 'Provider status summary', type: [ProviderStatusSummary] })
+  providerStatuses: ProviderStatusSummary[];
+
+  @IsNumber()
+  @ApiProperty({ description: 'Total unresolved alerts' })
   unresolvedAlerts: number;
 }
 
@@ -547,14 +711,42 @@ export interface RealTimeMetricsDto {
  * Get Analytics Query DTO
  * Request parameters for getAnalyticsDashboard
  */
-export interface GetAnalyticsQueryDto {
+export class GetAnalyticsQueryDto {
+  @IsOptional()
+  @IsEnum(TimeRange)
+  @ApiPropertyOptional({ description: 'Time range for analytics', enum: TimeRange, default: TimeRange.LAST_7_DAYS })
   timeRange?: TimeRange;
+
+  @IsOptional()
+  @IsDateString()
+  @ApiPropertyOptional({ description: 'Custom start date (required if timeRange is CUSTOM)' })
   startDate?: string;
+
+  @IsOptional()
+  @IsDateString()
+  @ApiPropertyOptional({ description: 'Custom end date (required if timeRange is CUSTOM)' })
   endDate?: string;
-  providerId?: string;
+
+  @IsOptional()
+  @IsArray()
+  @IsUUID(4, { each: true })
+  @ApiPropertyOptional({ description: 'Filter by specific providers' })
   providerIds?: string[];
+
+  @IsOptional()
+  @IsUUID()
+  @ApiPropertyOptional({ description: 'Filter by tenant ID' })
   tenantId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  @ApiPropertyOptional({ description: 'Filter by hotel ID' })
   hotelId?: string;
+
+  @IsOptional()
+  @IsArray()
+  @IsEnum(MetricType, { each: true })
+  @ApiPropertyOptional({ description: 'Specific metrics to include', enum: MetricType })
   metrics?: MetricType[];
 }
 
@@ -562,15 +754,55 @@ export interface GetAnalyticsQueryDto {
  * Get Sync History Query DTO
  * Request parameters for getSyncHistory
  */
-export interface GetSyncHistoryQueryDto {
+export class GetSyncHistoryQueryDto {
+  @IsOptional()
+  @IsUUID()
+  @ApiPropertyOptional({ description: 'Filter by provider ID' })
   providerId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  @ApiPropertyOptional({ description: 'Filter by tenant ID' })
   tenantId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  @ApiPropertyOptional({ description: 'Filter by hotel ID' })
   hotelId?: string;
-  status?: string;
-  operation?: string;
+
+  @IsOptional()
+  @IsEnum(SyncStatus)
+  @ApiPropertyOptional({ description: 'Filter by sync status', enum: SyncStatus })
+  status?: SyncStatus;
+
+  @IsOptional()
+  @IsEnum(SyncOperation)
+  @ApiPropertyOptional({ description: 'Filter by operation type', enum: SyncOperation })
+  operation?: SyncOperation;
+
+  @IsOptional()
+  @IsDateString()
+  @ApiPropertyOptional({ description: 'Filter by start date (YYYY-MM-DD)' })
   startDate?: string;
+
+  @IsOptional()
+  @IsDateString()
+  @ApiPropertyOptional({ description: 'Filter by end date (YYYY-MM-DD)' })
   endDate?: string;
+
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  @Max(100)
+  @Transform(({ value }) => parseInt(value) || 20)
+  @ApiPropertyOptional({ description: 'Number of records to return', default: 20 })
   limit?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Transform(({ value }) => parseInt(value) || 0)
+  @ApiPropertyOptional({ description: 'Number of records to skip', default: 0 })
   offset?: number;
 }
 

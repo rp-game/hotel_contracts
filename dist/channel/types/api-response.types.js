@@ -19,7 +19,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MetricType = exports.TimeRange = exports.RecoveryAction = exports.ErrorSeverity = exports.ErrorType = exports.SyncHistoryListResponseDto = exports.SyncHistoryDto = exports.ABTestStatus = exports.FailoverStatus = exports.FailoverTrigger = exports.SyncStatusDto = exports.SyncResponseDto = void 0;
+exports.GetSyncHistoryQueryDto = exports.GetAnalyticsQueryDto = exports.RealTimeMetricsDto = exports.ProviderStatusSummary = exports.MetricType = exports.TimeRange = exports.RecoveryAction = exports.ErrorSeverity = exports.ErrorType = exports.AnalyticsDashboardDto = exports.AlertDto = exports.ChartDataDto = exports.RealTimeMetricsSummary = exports.ProviderPerformanceDto = exports.SyncHistoryListResponseDto = exports.SyncHistoryDto = exports.ABTestStatus = exports.FailoverStatus = exports.FailoverTrigger = exports.SyncStatusDto = exports.SyncResponseDto = void 0;
 const enums_1 = require("../enums");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
@@ -350,6 +350,264 @@ __decorate([
     __metadata("design:type", Number)
 ], SyncHistoryListResponseDto.prototype, "totalPages", void 0);
 /**
+ * Provider Performance DTO
+ * For analytics dashboard
+ */
+class ProviderPerformanceDto {
+    providerId;
+    providerName;
+    bookingVolume;
+    revenue;
+    averageDailyRate;
+    responseTime;
+    errorRate;
+    syncSuccessRate;
+    topChannels;
+    additionalMetrics;
+}
+exports.ProviderPerformanceDto = ProviderPerformanceDto;
+__decorate([
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiProperty)({ description: 'Provider ID' }),
+    __metadata("design:type", String)
+], ProviderPerformanceDto.prototype, "providerId", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ description: 'Provider name' }),
+    __metadata("design:type", String)
+], ProviderPerformanceDto.prototype, "providerName", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiProperty)({ description: 'Total bookings in period' }),
+    __metadata("design:type", Number)
+], ProviderPerformanceDto.prototype, "bookingVolume", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_transformer_1.Transform)(({ value }) => parseFloat(value)),
+    (0, swagger_1.ApiProperty)({ description: 'Total revenue generated' }),
+    __metadata("design:type", Number)
+], ProviderPerformanceDto.prototype, "revenue", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_transformer_1.Transform)(({ value }) => parseFloat(value)),
+    (0, swagger_1.ApiProperty)({ description: 'Average daily rate' }),
+    __metadata("design:type", Number)
+], ProviderPerformanceDto.prototype, "averageDailyRate", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiProperty)({ description: 'Average response time in milliseconds' }),
+    __metadata("design:type", Number)
+], ProviderPerformanceDto.prototype, "responseTime", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(1),
+    (0, class_transformer_1.Transform)(({ value }) => parseFloat(value)),
+    (0, swagger_1.ApiProperty)({ description: 'Error rate (0-1)' }),
+    __metadata("design:type", Number)
+], ProviderPerformanceDto.prototype, "errorRate", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(1),
+    (0, class_transformer_1.Transform)(({ value }) => parseFloat(value)),
+    (0, swagger_1.ApiProperty)({ description: 'Sync success rate (0-1)' }),
+    __metadata("design:type", Number)
+], ProviderPerformanceDto.prototype, "syncSuccessRate", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, swagger_1.ApiProperty)({ description: 'Top performing channels', type: [String] }),
+    __metadata("design:type", Array)
+], ProviderPerformanceDto.prototype, "topChannels", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional performance metrics' }),
+    __metadata("design:type", Object)
+], ProviderPerformanceDto.prototype, "additionalMetrics", void 0);
+/**
+ * Real-time Metrics Summary for Analytics Dashboard
+ */
+class RealTimeMetricsSummary {
+    totalBookingsToday;
+    totalRevenueToday;
+    averageResponseTime;
+    overallSyncSuccessRate;
+}
+exports.RealTimeMetricsSummary = RealTimeMetricsSummary;
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiProperty)({ description: 'Total bookings processed today' }),
+    __metadata("design:type", Number)
+], RealTimeMetricsSummary.prototype, "totalBookingsToday", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_transformer_1.Transform)(({ value }) => parseFloat(value)),
+    (0, swagger_1.ApiProperty)({ description: 'Total revenue processed today' }),
+    __metadata("design:type", Number)
+], RealTimeMetricsSummary.prototype, "totalRevenueToday", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiProperty)({ description: 'Average system response time in ms' }),
+    __metadata("design:type", Number)
+], RealTimeMetricsSummary.prototype, "averageResponseTime", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(1),
+    (0, class_transformer_1.Transform)(({ value }) => parseFloat(value)),
+    (0, swagger_1.ApiProperty)({ description: 'Overall sync success rate (0-1)' }),
+    __metadata("design:type", Number)
+], RealTimeMetricsSummary.prototype, "overallSyncSuccessRate", void 0);
+/**
+ * Chart Data for Analytics Dashboard
+ */
+class ChartDataDto {
+    bookingTrends;
+    providerComparison;
+    syncStatusDistribution;
+}
+exports.ChartDataDto = ChartDataDto;
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, swagger_1.ApiProperty)({ description: 'Booking trends over time' }),
+    __metadata("design:type", Array)
+], ChartDataDto.prototype, "bookingTrends", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, swagger_1.ApiProperty)({ description: 'Provider comparison data' }),
+    __metadata("design:type", Array)
+], ChartDataDto.prototype, "providerComparison", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, swagger_1.ApiProperty)({ description: 'Sync status distribution' }),
+    __metadata("design:type", Array)
+], ChartDataDto.prototype, "syncStatusDistribution", void 0);
+/**
+ * Alert DTO
+ * Returned by listAlerts operation
+ */
+class AlertDto {
+    id;
+    severity;
+    message;
+    messageVi;
+    providerId;
+    providerName;
+    category;
+    createdAt;
+    resolvedAt;
+    acknowledged;
+    context;
+}
+exports.AlertDto = AlertDto;
+__decorate([
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiProperty)({ description: 'Alert ID' }),
+    __metadata("design:type", String)
+], AlertDto.prototype, "id", void 0);
+__decorate([
+    (0, class_validator_1.IsEnum)(['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']),
+    (0, swagger_1.ApiProperty)({ description: 'Alert severity level', enum: ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'] }),
+    __metadata("design:type", String)
+], AlertDto.prototype, "severity", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ description: 'Alert message' }),
+    __metadata("design:type", String)
+], AlertDto.prototype, "message", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Alert message in Vietnamese' }),
+    __metadata("design:type", String)
+], AlertDto.prototype, "messageVi", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Related provider ID' }),
+    __metadata("design:type", String)
+], AlertDto.prototype, "providerId", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Related provider name' }),
+    __metadata("design:type", String)
+], AlertDto.prototype, "providerName", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ description: 'Alert category' }),
+    __metadata("design:type", String)
+], AlertDto.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Alert creation timestamp', type: Date }),
+    __metadata("design:type", Date)
+], AlertDto.prototype, "createdAt", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Alert resolution timestamp', type: Date }),
+    __metadata("design:type", Date)
+], AlertDto.prototype, "resolvedAt", void 0);
+__decorate([
+    (0, class_validator_1.IsBoolean)(),
+    (0, swagger_1.ApiProperty)({ description: 'Whether alert is acknowledged' }),
+    __metadata("design:type", Boolean)
+], AlertDto.prototype, "acknowledged", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional alert context' }),
+    __metadata("design:type", Object)
+], AlertDto.prototype, "context", void 0);
+/**
+ * Analytics Dashboard DTO
+ * Returned by getAnalyticsDashboard operation
+ */
+class AnalyticsDashboardDto {
+    realtimeMetrics;
+    providerPerformance;
+    recentSyncs;
+    activeAlerts;
+    chartData;
+}
+exports.AnalyticsDashboardDto = AnalyticsDashboardDto;
+__decorate([
+    (0, class_validator_1.IsObject)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => RealTimeMetricsSummary),
+    (0, swagger_1.ApiProperty)({ description: 'Real-time metrics summary', type: RealTimeMetricsSummary }),
+    __metadata("design:type", RealTimeMetricsSummary)
+], AnalyticsDashboardDto.prototype, "realtimeMetrics", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => ProviderPerformanceDto),
+    (0, swagger_1.ApiProperty)({ description: 'Provider performance data', type: [ProviderPerformanceDto] }),
+    __metadata("design:type", Array)
+], AnalyticsDashboardDto.prototype, "providerPerformance", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => SyncHistoryDto),
+    (0, swagger_1.ApiProperty)({ description: 'Recent sync history', type: [SyncHistoryDto] }),
+    __metadata("design:type", Array)
+], AnalyticsDashboardDto.prototype, "recentSyncs", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => AlertDto),
+    (0, swagger_1.ApiProperty)({ description: 'Active alerts', type: [AlertDto] }),
+    __metadata("design:type", Array)
+], AnalyticsDashboardDto.prototype, "activeAlerts", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => ChartDataDto),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Chart data for dashboard visualizations', type: ChartDataDto }),
+    __metadata("design:type", ChartDataDto)
+], AnalyticsDashboardDto.prototype, "chartData", void 0);
+/**
  * Error Type Enum
  */
 var ErrorType;
@@ -409,4 +667,225 @@ var MetricType;
     MetricType["ERROR_RATE"] = "ERROR_RATE";
     MetricType["SYNC_SUCCESS_RATE"] = "SYNC_SUCCESS_RATE";
 })(MetricType || (exports.MetricType = MetricType = {}));
+/**
+ * Real-Time Metrics DTO
+ * Returned by getRealTimeMetrics operation
+ */
+/**
+ * Provider Status Summary for Real-Time Metrics
+ */
+class ProviderStatusSummary {
+    providerId;
+    providerName;
+    status;
+    lastSyncAt;
+}
+exports.ProviderStatusSummary = ProviderStatusSummary;
+__decorate([
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiProperty)({ description: 'Provider ID' }),
+    __metadata("design:type", String)
+], ProviderStatusSummary.prototype, "providerId", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ description: 'Provider name' }),
+    __metadata("design:type", String)
+], ProviderStatusSummary.prototype, "providerName", void 0);
+__decorate([
+    (0, class_validator_1.IsEnum)(['HEALTHY', 'WARNING', 'ERROR']),
+    (0, swagger_1.ApiProperty)({ description: 'Provider health status', enum: ['HEALTHY', 'WARNING', 'ERROR'] }),
+    __metadata("design:type", String)
+], ProviderStatusSummary.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Last sync timestamp', type: Date }),
+    __metadata("design:type", Date)
+], ProviderStatusSummary.prototype, "lastSyncAt", void 0);
+/**
+ * Real-Time Metrics DTO
+ * Returned by getRealTimeMetrics operation
+ */
+class RealTimeMetricsDto {
+    activeSyncs;
+    todayBookings;
+    todayRevenue;
+    averageResponseTime;
+    systemHealthScore;
+    providerStatuses;
+    unresolvedAlerts;
+}
+exports.RealTimeMetricsDto = RealTimeMetricsDto;
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiProperty)({ description: 'Total active sync operations' }),
+    __metadata("design:type", Number)
+], RealTimeMetricsDto.prototype, "activeSyncs", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiProperty)({ description: 'Total bookings processed today' }),
+    __metadata("design:type", Number)
+], RealTimeMetricsDto.prototype, "todayBookings", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_transformer_1.Transform)(({ value }) => parseFloat(value)),
+    (0, swagger_1.ApiProperty)({ description: 'Total revenue processed today' }),
+    __metadata("design:type", Number)
+], RealTimeMetricsDto.prototype, "todayRevenue", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiProperty)({ description: 'Average system response time in ms' }),
+    __metadata("design:type", Number)
+], RealTimeMetricsDto.prototype, "averageResponseTime", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(1),
+    (0, class_transformer_1.Transform)(({ value }) => parseFloat(value)),
+    (0, swagger_1.ApiProperty)({ description: 'Overall system health score (0-1)' }),
+    __metadata("design:type", Number)
+], RealTimeMetricsDto.prototype, "systemHealthScore", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => ProviderStatusSummary),
+    (0, swagger_1.ApiProperty)({ description: 'Provider status summary', type: [ProviderStatusSummary] }),
+    __metadata("design:type", Array)
+], RealTimeMetricsDto.prototype, "providerStatuses", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiProperty)({ description: 'Total unresolved alerts' }),
+    __metadata("design:type", Number)
+], RealTimeMetricsDto.prototype, "unresolvedAlerts", void 0);
+/**
+ * Get Analytics Query DTO
+ * Request parameters for getAnalyticsDashboard
+ */
+class GetAnalyticsQueryDto {
+    timeRange;
+    startDate;
+    endDate;
+    providerIds;
+    tenantId;
+    hotelId;
+    metrics;
+}
+exports.GetAnalyticsQueryDto = GetAnalyticsQueryDto;
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(TimeRange),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Time range for analytics', enum: TimeRange, default: TimeRange.LAST_7_DAYS }),
+    __metadata("design:type", String)
+], GetAnalyticsQueryDto.prototype, "timeRange", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Custom start date (required if timeRange is CUSTOM)' }),
+    __metadata("design:type", String)
+], GetAnalyticsQueryDto.prototype, "startDate", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Custom end date (required if timeRange is CUSTOM)' }),
+    __metadata("design:type", String)
+], GetAnalyticsQueryDto.prototype, "endDate", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsUUID)(4, { each: true }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by specific providers' }),
+    __metadata("design:type", Array)
+], GetAnalyticsQueryDto.prototype, "providerIds", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by tenant ID' }),
+    __metadata("design:type", String)
+], GetAnalyticsQueryDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by hotel ID' }),
+    __metadata("design:type", String)
+], GetAnalyticsQueryDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsEnum)(MetricType, { each: true }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Specific metrics to include', enum: MetricType }),
+    __metadata("design:type", Array)
+], GetAnalyticsQueryDto.prototype, "metrics", void 0);
+/**
+ * Get Sync History Query DTO
+ * Request parameters for getSyncHistory
+ */
+class GetSyncHistoryQueryDto {
+    providerId;
+    tenantId;
+    hotelId;
+    status;
+    operation;
+    startDate;
+    endDate;
+    limit;
+    offset;
+}
+exports.GetSyncHistoryQueryDto = GetSyncHistoryQueryDto;
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by provider ID' }),
+    __metadata("design:type", String)
+], GetSyncHistoryQueryDto.prototype, "providerId", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by tenant ID' }),
+    __metadata("design:type", String)
+], GetSyncHistoryQueryDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by hotel ID' }),
+    __metadata("design:type", String)
+], GetSyncHistoryQueryDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(enums_1.SyncStatus),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by sync status', enum: enums_1.SyncStatus }),
+    __metadata("design:type", String)
+], GetSyncHistoryQueryDto.prototype, "status", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(enums_1.SyncOperation),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by operation type', enum: enums_1.SyncOperation }),
+    __metadata("design:type", String)
+], GetSyncHistoryQueryDto.prototype, "operation", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by start date (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], GetSyncHistoryQueryDto.prototype, "startDate", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by end date (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], GetSyncHistoryQueryDto.prototype, "endDate", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.Max)(100),
+    (0, class_transformer_1.Transform)(({ value }) => parseInt(value) || 20),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of records to return', default: 20 }),
+    __metadata("design:type", Number)
+], GetSyncHistoryQueryDto.prototype, "limit", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_transformer_1.Transform)(({ value }) => parseInt(value) || 0),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of records to skip', default: 0 }),
+    __metadata("design:type", Number)
+], GetSyncHistoryQueryDto.prototype, "offset", void 0);
 //# sourceMappingURL=api-response.types.js.map

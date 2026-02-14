@@ -225,7 +225,7 @@ export declare class SyncHistoryListResponseDto {
  * Provider Performance DTO
  * For analytics dashboard
  */
-export interface ProviderPerformanceDto {
+export declare class ProviderPerformanceDto {
     providerId: string;
     providerName: string;
     bookingVolume: number;
@@ -238,53 +238,38 @@ export interface ProviderPerformanceDto {
     additionalMetrics?: Record<string, any>;
 }
 /**
- * Analytics Dashboard DTO
- * Returned by getAnalyticsDashboard operation
+ * Real-time Metrics Summary for Analytics Dashboard
  */
-export interface AnalyticsDashboardDto {
-    realtimeMetrics: {
-        totalBookingsToday: number;
-        totalRevenueToday: number;
-        averageResponseTime: number;
-        overallSyncSuccessRate: number;
-    };
-    providerPerformance: ProviderPerformanceDto[];
-    recentSyncs: SyncHistoryDto[];
-    activeAlerts: Array<{
-        id: string;
-        severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
-        message: string;
-        messageVi?: string;
-        providerId?: string;
-        providerName?: string;
-        category: string;
-        createdAt: Date;
-        resolvedAt?: Date;
-        acknowledged: boolean;
-        context?: Record<string, any>;
+export declare class RealTimeMetricsSummary {
+    totalBookingsToday: number;
+    totalRevenueToday: number;
+    averageResponseTime: number;
+    overallSyncSuccessRate: number;
+}
+/**
+ * Chart Data for Analytics Dashboard
+ */
+export declare class ChartDataDto {
+    bookingTrends: Array<{
+        date: string;
+        bookings: number;
+        revenue: number;
     }>;
-    chartData?: {
-        bookingTrends: Array<{
-            date: string;
-            bookings: number;
-            revenue: number;
-        }>;
-        providerComparison: Array<{
-            providerId: string;
-            bookings: number;
-            revenue: number;
-        }>;
-        syncStatusDistribution: Array<{
-            status: string;
-            count: number;
-        }>;
-    };
+    providerComparison: Array<{
+        providerId: string;
+        bookings: number;
+        revenue: number;
+    }>;
+    syncStatusDistribution: Array<{
+        status: string;
+        count: number;
+    }>;
 }
 /**
  * Alert DTO
  * Returned by listAlerts operation
  */
-export interface AlertDto {
+export declare class AlertDto {
     id: string;
     severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
     message: string;
@@ -296,6 +281,17 @@ export interface AlertDto {
     resolvedAt?: Date;
     acknowledged: boolean;
     context?: Record<string, any>;
+}
+/**
+ * Analytics Dashboard DTO
+ * Returned by getAnalyticsDashboard operation
+ */
+export declare class AnalyticsDashboardDto {
+    realtimeMetrics: RealTimeMetricsSummary;
+    providerPerformance: ProviderPerformanceDto[];
+    recentSyncs: SyncHistoryDto[];
+    activeAlerts: AlertDto[];
+    chartData?: ChartDataDto;
 }
 /**
  * Error Type Enum
@@ -398,29 +394,36 @@ export declare enum MetricType {
  * Real-Time Metrics DTO
  * Returned by getRealTimeMetrics operation
  */
-export interface RealTimeMetricsDto {
+/**
+ * Provider Status Summary for Real-Time Metrics
+ */
+export declare class ProviderStatusSummary {
+    providerId: string;
+    providerName: string;
+    status: 'HEALTHY' | 'WARNING' | 'ERROR';
+    lastSyncAt: Date;
+}
+/**
+ * Real-Time Metrics DTO
+ * Returned by getRealTimeMetrics operation
+ */
+export declare class RealTimeMetricsDto {
     activeSyncs: number;
     todayBookings: number;
     todayRevenue: number;
     averageResponseTime: number;
     systemHealthScore: number;
-    providerStatuses: Array<{
-        providerId: string;
-        providerName: string;
-        status: 'HEALTHY' | 'WARNING' | 'ERROR';
-        lastSyncAt: Date;
-    }>;
+    providerStatuses: ProviderStatusSummary[];
     unresolvedAlerts: number;
 }
 /**
  * Get Analytics Query DTO
  * Request parameters for getAnalyticsDashboard
  */
-export interface GetAnalyticsQueryDto {
+export declare class GetAnalyticsQueryDto {
     timeRange?: TimeRange;
     startDate?: string;
     endDate?: string;
-    providerId?: string;
     providerIds?: string[];
     tenantId?: string;
     hotelId?: string;
@@ -430,12 +433,12 @@ export interface GetAnalyticsQueryDto {
  * Get Sync History Query DTO
  * Request parameters for getSyncHistory
  */
-export interface GetSyncHistoryQueryDto {
+export declare class GetSyncHistoryQueryDto {
     providerId?: string;
     tenantId?: string;
     hotelId?: string;
-    status?: string;
-    operation?: string;
+    status?: SyncStatus;
+    operation?: SyncOperation;
     startDate?: string;
     endDate?: string;
     limit?: number;
