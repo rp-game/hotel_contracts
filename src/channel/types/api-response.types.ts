@@ -42,7 +42,7 @@ export class SyncResponseDto {
 
   @IsOptional()
   @Type(() => Date)
-  @ApiPropertyOptional({ description: 'Sync completion timestamp', type: Date })
+  @ApiPropertyOptional({ description: 'Sync completion timestamp', type: Date, required: false })
   completedAt?: Date;
 
   @IsOptional()

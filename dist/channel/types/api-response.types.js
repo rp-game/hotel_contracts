@@ -71,7 +71,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_transformer_1.Type)(() => Date),
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Sync completion timestamp', type: Date }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sync completion timestamp', type: Date, required: false }),
     __metadata("design:type", Date)
 ], SyncResponseDto.prototype, "completedAt", void 0);
 __decorate([
