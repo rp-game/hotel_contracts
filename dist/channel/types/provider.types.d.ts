@@ -9,10 +9,11 @@ import { ProviderConfiguration } from './provider-configuration.types';
 import { SyncErrorDetails } from './sync-history.types';
 import { ChainConfigurationDto } from './chain-config.types';
 /**
- * Main ChannelProvider type
+ * Main ChannelProvider class
  * Represents a provider configuration for channel/PMS integration
+ * Used for both NATS messages and REST API responses
  */
-export interface ChannelProvider {
+export declare class ChannelProvider {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -20,15 +21,16 @@ export interface ChannelProvider {
     providerType: ProviderType;
     name: string;
     description?: string;
-    configuration: ProviderConfiguration;
-    credentials?: ProviderCredentials;
+    configuration: ProviderConfiguration | Record<string, any>;
+    credentials?: ProviderCredentials | Record<string, any>;
     isActive: boolean;
     isSandbox: boolean;
-    lastSyncAt?: string | Date;
+    lastSyncAt?: string;
     syncStatus: SyncStatus | string;
-    syncErrors?: SyncErrorDetails;
-    createdAt: string | Date;
-    updatedAt: string | Date;
+    syncErrors?: SyncErrorDetails | Record<string, any>;
+    createdAt: string;
+    updatedAt: string;
+    otaAccounts?: Record<string, any>;
 }
 /**
  * Provider creation request

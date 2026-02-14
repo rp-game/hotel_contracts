@@ -16,6 +16,7 @@
  * Called by: api-gateway
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 import { ProviderType, ProviderStatus } from '../enums';
 import {
@@ -98,9 +99,16 @@ export interface DeleteProviderNatsRequest {
   tenantId?: string;  // Optional - API Gateway may not have access
 }
 
-export interface DeleteProviderResponse {
+/**
+ * Delete Provider Response
+ * Used for both NATS response and REST API response
+ */
+export class DeleteProviderResponse {
+  @ApiProperty({ description: 'Success message' })
   message: string;
-  deletedAt: string;
+
+  @ApiPropertyOptional({ description: 'Deletion timestamp (ISO format)' })
+  deletedAt?: string;
 }
 
 export type DeleteProviderNatsResponse = NatsResponse<DeleteProviderResponse>;

@@ -4,6 +4,7 @@
  * Matches the ChannelProvider entity structure
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { ProviderType, ProviderStatus, SyncStatus } from '../enums';
 import { ProviderCredentials } from './credentials.types';
 import { ProviderConfiguration } from './provider-configuration.types';
@@ -11,26 +12,77 @@ import { SyncErrorDetails } from './sync-history.types';
 import { ChainConfigurationDto } from './chain-config.types';
 
 /**
- * Main ChannelProvider type
+ * Main ChannelProvider class
  * Represents a provider configuration for channel/PMS integration
+ * Used for both NATS messages and REST API responses
  */
-export interface ChannelProvider {
+export class ChannelProvider {
+  @ApiProperty({ description: 'Provider ID', format: 'uuid' })
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID', format: 'uuid' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID', format: 'uuid' })
   hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Chain ID for multi-hotel configurations', format: 'uuid' })
   chainId?: string;
+
+  @ApiProperty({ description: 'Provider type', enum: ProviderType })
   providerType: ProviderType;
+
+  @ApiProperty({ description: 'Provider name' })
   name: string;
+
+  @ApiPropertyOptional({ description: 'Provider description' })
   description?: string;
-  configuration: ProviderConfiguration;
-  credentials?: ProviderCredentials;
+
+  @ApiProperty({
+    description: 'Provider configuration object containing all settings',
+    type: 'object',
+    additionalProperties: true
+  })
+  configuration: ProviderConfiguration | Record<string, any>;
+
+  @ApiPropertyOptional({
+    description: 'Provider credentials (encrypted)',
+    type: 'object',
+    additionalProperties: true
+  })
+  credentials?: ProviderCredentials | Record<string, any>;
+
+  @ApiProperty({ description: 'Whether provider is active' })
   isActive: boolean;
+
+  @ApiProperty({ description: 'Whether provider is in sandbox/test mode' })
   isSandbox: boolean;
-  lastSyncAt?: string | Date;
+
+  @ApiPropertyOptional({ description: 'Last sync timestamp (ISO format)' })
+  lastSyncAt?: string;
+
+  @ApiProperty({ description: 'Current sync status' })
   syncStatus: SyncStatus | string;
-  syncErrors?: SyncErrorDetails;
-  createdAt: string | Date;
-  updatedAt: string | Date;
+
+  @ApiPropertyOptional({
+    description: 'Sync error details if any',
+    type: 'object',
+    additionalProperties: true
+  })
+  syncErrors?: SyncErrorDetails | Record<string, any>;
+
+  @ApiProperty({ description: 'Creation timestamp (ISO format)' })
+  createdAt: string;
+
+  @ApiProperty({ description: 'Last update timestamp (ISO format)' })
+  updatedAt: string;
+
+  @ApiPropertyOptional({
+    description: 'OTA accounts mapped from configuration.ota_accounts',
+    type: 'object',
+    additionalProperties: true
+  })
+  otaAccounts?: Record<string, any>;
 }
 
 /**

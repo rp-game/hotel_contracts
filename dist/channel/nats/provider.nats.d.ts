@@ -77,9 +77,13 @@ export interface DeleteProviderNatsRequest {
     providerId: string;
     tenantId?: string;
 }
-export interface DeleteProviderResponse {
+/**
+ * Delete Provider Response
+ * Used for both NATS response and REST API response
+ */
+export declare class DeleteProviderResponse {
     message: string;
-    deletedAt: string;
+    deletedAt?: string;
 }
 export type DeleteProviderNatsResponse = NatsResponse<DeleteProviderResponse>;
 /**
