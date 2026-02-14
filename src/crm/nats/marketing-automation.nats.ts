@@ -18,6 +18,7 @@
  */
 
 import { NatsResponse } from '../../common';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 /**
  * Automation Status Enum
@@ -78,28 +79,55 @@ export interface UpdateAutomationNatsRequest {
 /**
  * Marketing Automation Response
  */
-export interface MarketingAutomationNatsResponse {
-  id: string;
-  tenantId: string;
-  name: string;
+export class MarketingAutomationNatsResponse {
+  @ApiProperty({ description: 'Automation ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Automation name' })
+  name!: string;
+
+  @ApiPropertyOptional({ description: 'Automation description' })
   description?: string;
-  status: AutomationStatus;
-  trigger: {
+
+  @ApiProperty({ enum: AutomationStatus, description: 'Automation status' })
+  status!: AutomationStatus;
+
+  @ApiProperty({ description: 'Trigger configuration' })
+  trigger!: {
     type: string;
     condition: Record<string, any>;
   };
-  actions: Array<{
+
+  @ApiProperty({ description: 'Automation actions', type: 'array' })
+  actions!: Array<{
     type: ActionType;
     config: Record<string, any>;
     delay?: number;
   }>;
+
+  @ApiPropertyOptional({ description: 'Target customer segments', type: [String] })
   targetSegments?: string[];
-  totalExecutions: number;
-  successfulExecutions: number;
-  failedExecutions: number;
-  createdBy: string;
-  createdAt: string | Date;
-  updatedAt: string | Date;
+
+  @ApiProperty({ description: 'Total execution count' })
+  totalExecutions!: number;
+
+  @ApiProperty({ description: 'Successful execution count' })
+  successfulExecutions!: number;
+
+  @ApiProperty({ description: 'Failed execution count' })
+  failedExecutions!: number;
+
+  @ApiProperty({ description: 'User ID who created automation' })
+  createdBy!: string;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt!: string | Date;
+
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt!: string | Date;
 }
 
 /**

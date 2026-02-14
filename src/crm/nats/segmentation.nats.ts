@@ -20,6 +20,7 @@
  */
 
 import { NatsResponse } from '../../common';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 /**
  * Segment Type Enum
@@ -70,19 +71,44 @@ export interface UpdateSegmentNatsRequest {
 /**
  * Customer Segment Response
  */
-export interface CustomerSegmentNatsResponse {
-  id: string;
-  tenantId: string;
-  name: string;
+export class CustomerSegmentNatsResponse {
+  @ApiProperty({ description: 'Segment ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Segment name' })
+  name!: string;
+
+  @ApiPropertyOptional({ description: 'Segment description' })
   description?: string;
-  type: string;
-  status: SegmentStatus;
-  criteria: Record<string, any>;
+
+  @ApiProperty({ description: 'Segment type' })
+  type!: string;
+
+  @ApiProperty({ enum: SegmentStatus, description: 'Segment status' })
+  status!: SegmentStatus;
+
+  @ApiProperty({ description: 'Segmentation criteria' })
+  criteria!: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Whether to auto-update members' })
   autoUpdate?: boolean;
-  memberCount: number;
-  createdAt: string | Date;
-  updatedAt: string | Date;
+
+  @ApiProperty({ description: 'Number of members in segment' })
+  memberCount!: number;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt!: string | Date;
+
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt!: string | Date;
+
+  @ApiPropertyOptional({ description: 'User ID who created segment' })
   createdBy?: string;
+
+  // Index signature for additional dynamic properties (cannot have decorators)
   [key: string]: any;
 }
 

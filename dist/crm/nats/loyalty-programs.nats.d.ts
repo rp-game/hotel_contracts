@@ -18,8 +18,7 @@
  * Called by: api-gateway (CrmController)
  */
 import { NatsResponse } from '../../common';
-import type { LoyaltyTierNatsResponse } from './loyalty-tiers.nats';
-import { FindAllLoyaltyTiersDto } from './loyalty-tiers.nats';
+import { LoyaltyTierNatsResponse, FindAllLoyaltyTiersDto } from './loyalty-tiers.nats';
 /**
  * Earning Rules
  */
@@ -85,7 +84,7 @@ export interface CreateLoyaltyTierNatsRequest {
 /**
  * Loyalty Program Response
  */
-export interface LoyaltyProgramNatsResponse {
+export declare class LoyaltyProgramNatsResponse {
     id: string;
     tenantId: string;
     hotelId?: string;

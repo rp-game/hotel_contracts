@@ -72,7 +72,7 @@ export interface UpdateAutomationNatsRequest {
 /**
  * Marketing Automation Response
  */
-export interface MarketingAutomationNatsResponse {
+export declare class MarketingAutomationNatsResponse {
     id: string;
     tenantId: string;
     name: string;

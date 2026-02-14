@@ -59,7 +59,7 @@ export interface UpdateEmailCampaignNatsRequest {
 /**
  * Email Campaign Response
  */
-export interface EmailCampaignNatsResponse {
+export declare class EmailCampaignNatsResponse {
     id: string;
     tenantId: string;
     name: string;

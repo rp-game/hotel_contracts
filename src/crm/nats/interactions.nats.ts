@@ -13,6 +13,7 @@
  */
 
 import { NatsResponse } from '../../common';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 /**
  * Interaction Type Enum
@@ -60,20 +61,47 @@ export interface UpdateInteractionNatsRequest {
 /**
  * Customer Interaction Response
  */
-export interface CustomerInteractionNatsResponse {
-  id: string;
-  tenantId: string;
-  customerId: string;
-  type: InteractionType;
+export class CustomerInteractionNatsResponse {
+  @ApiProperty({ description: 'Interaction ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Customer ID' })
+  customerId!: string;
+
+  @ApiProperty({ enum: InteractionType, description: 'Interaction type' })
+  type!: InteractionType;
+
+  @ApiPropertyOptional({ description: 'Subject' })
   subject?: string;
-  description: string;
-  channel: string;
-  status: string;
+
+  @ApiProperty({ description: 'Description' })
+  description!: string;
+
+  @ApiProperty({ description: 'Communication channel' })
+  channel!: string;
+
+  @ApiProperty({ description: 'Status' })
+  status!: string;
+
+  @ApiPropertyOptional({ description: 'Priority level' })
   priority?: string;
+
+  @ApiPropertyOptional({ description: 'Assigned to user ID' })
   assignedTo?: string;
+
+  @ApiPropertyOptional({ description: 'Metadata' })
   metadata?: Record<string, any>;
-  createdAt: string | Date;
-  updatedAt: string | Date;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt!: string | Date;
+
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt!: string | Date;
+
+  @ApiPropertyOptional({ description: 'Additional notes' })
   notes?: string;
 }
 

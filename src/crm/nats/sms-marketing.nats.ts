@@ -18,6 +18,7 @@
  */
 
 import { NatsResponse } from '../../common';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 /**
  * SMS Campaign Status Enum
@@ -63,26 +64,63 @@ export interface UpdateSmsCampaignNatsRequest {
 /**
  * SMS Campaign Response
  */
-export interface SmsCampaignNatsResponse {
-  id: string;
-  tenantId: string;
-  name: string;
+export class SmsCampaignNatsResponse {
+  @ApiProperty({ description: 'Campaign ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Campaign name' })
+  name!: string;
+
+  @ApiPropertyOptional({ description: 'Campaign description' })
   description?: string;
-  templateId: string;
-  content: string;
+
+  @ApiProperty({ description: 'SMS template ID' })
+  templateId!: string;
+
+  @ApiProperty({ description: 'SMS message content' })
+  content!: string;
+
+  @ApiPropertyOptional({ description: 'Sender phone number' })
   fromPhoneNumber?: string;
-  status: SmsCampaignStatus;
-  targetSegments: string[];
-  targetAudience: number;
-  sentCount: number;
-  deliveredCount: number;
-  failedCount: number;
-  bounceCount: number;
+
+  @ApiProperty({ enum: SmsCampaignStatus, description: 'Campaign status' })
+  status!: SmsCampaignStatus;
+
+  @ApiProperty({ description: 'Target customer segments', type: [String] })
+  targetSegments!: string[];
+
+  @ApiProperty({ description: 'Total target audience size' })
+  targetAudience!: number;
+
+  @ApiProperty({ description: 'Number of SMS sent' })
+  sentCount!: number;
+
+  @ApiProperty({ description: 'Number of SMS delivered' })
+  deliveredCount!: number;
+
+  @ApiProperty({ description: 'Number of failed SMS' })
+  failedCount!: number;
+
+  @ApiProperty({ description: 'Number of bounced SMS' })
+  bounceCount!: number;
+
+  @ApiPropertyOptional({ description: 'Scheduled send time' })
   scheduledAt?: string | Date;
+
+  @ApiPropertyOptional({ description: 'Actual send time' })
   sentAt?: string | Date;
-  createdBy: string;
-  createdAt: string | Date;
-  updatedAt: string | Date;
+
+  @ApiProperty({ description: 'User ID who created campaign' })
+  createdBy!: string;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt!: string | Date;
+
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt!: string | Date;
 }
 
 /**

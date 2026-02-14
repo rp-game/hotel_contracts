@@ -21,8 +21,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNumber, IsOptional } from 'class-validator';
 import { NatsResponse } from '../../common';
-import type { LoyaltyTierNatsResponse } from './loyalty-tiers.nats';
-import { FindAllLoyaltyTiersDto } from './loyalty-tiers.nats';
+import { LoyaltyTierNatsResponse, FindAllLoyaltyTiersDto } from './loyalty-tiers.nats';
 
 /**
  * Earning Rules
@@ -97,21 +96,50 @@ export interface CreateLoyaltyTierNatsRequest {
 /**
  * Loyalty Program Response
  */
-export interface LoyaltyProgramNatsResponse {
-  id: string;
-  tenantId: string;
+export class LoyaltyProgramNatsResponse {
+  @ApiProperty({ description: 'Program ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
   hotelId?: string;
-  name: string;
+
+  @ApiProperty({ description: 'Program name' })
+  name!: string;
+
+  @ApiPropertyOptional({ description: 'Program description' })
   description?: string;
+
+  @ApiPropertyOptional({ description: 'Program start date' })
   startDate?: string | Date;
+
+  @ApiPropertyOptional({ description: 'Program end date' })
   endDate?: string | Date;
-  isActive: boolean;
+
+  @ApiProperty({ description: 'Whether program is active' })
+  isActive!: boolean;
+
+  @ApiPropertyOptional({ description: 'Earning rules configuration' })
   earningRules?: EarningRulesResponse;
+
+  @ApiPropertyOptional({ description: 'Redemption rules configuration' })
   redemptionRules?: RedemptionRulesResponse;
+
+  @ApiPropertyOptional({ description: 'Program tiers', type: [LoyaltyTierNatsResponse] })
   tiers?: LoyaltyTierNatsResponse[];
+
+  @ApiPropertyOptional({ description: 'Program statistics' })
   stats?: IndividualProgramStats;
-  createdAt: string | Date;
-  updatedAt: string | Date;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt!: string | Date;
+
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt!: string | Date;
+
+  @ApiPropertyOptional({ description: 'Deletion timestamp' })
   deletedAt?: string | Date;
 }
 

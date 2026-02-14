@@ -55,7 +55,7 @@ export interface UpdateInteractionNatsRequest {
 /**
  * Customer Interaction Response
  */
-export interface CustomerInteractionNatsResponse {
+export declare class CustomerInteractionNatsResponse {
     id: string;
     tenantId: string;
     customerId: string;

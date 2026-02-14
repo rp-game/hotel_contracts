@@ -64,7 +64,7 @@ export interface UpdateSegmentNatsRequest {
 /**
  * Customer Segment Response
  */
-export interface CustomerSegmentNatsResponse {
+export declare class CustomerSegmentNatsResponse {
     id: string;
     tenantId: string;
     name: string;

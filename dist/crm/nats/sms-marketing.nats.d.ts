@@ -58,7 +58,7 @@ export interface UpdateSmsCampaignNatsRequest {
 /**
  * SMS Campaign Response
  */
-export interface SmsCampaignNatsResponse {
+export declare class SmsCampaignNatsResponse {
     id: string;
     tenantId: string;
     name: string;

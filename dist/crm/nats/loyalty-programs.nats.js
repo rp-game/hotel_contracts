@@ -28,9 +28,91 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IndividualProgramStats = void 0;
+exports.IndividualProgramStats = exports.LoyaltyProgramNatsResponse = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const loyalty_tiers_nats_1 = require("./loyalty-tiers.nats");
+/**
+ * Loyalty Program Response
+ */
+class LoyaltyProgramNatsResponse {
+    id;
+    tenantId;
+    hotelId;
+    name;
+    description;
+    startDate;
+    endDate;
+    isActive;
+    earningRules;
+    redemptionRules;
+    tiers;
+    stats;
+    createdAt;
+    updatedAt;
+    deletedAt;
+}
+exports.LoyaltyProgramNatsResponse = LoyaltyProgramNatsResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Program ID' }),
+    __metadata("design:type", String)
+], LoyaltyProgramNatsResponse.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], LoyaltyProgramNatsResponse.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], LoyaltyProgramNatsResponse.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Program name' }),
+    __metadata("design:type", String)
+], LoyaltyProgramNatsResponse.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Program description' }),
+    __metadata("design:type", String)
+], LoyaltyProgramNatsResponse.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Program start date' }),
+    __metadata("design:type", Object)
+], LoyaltyProgramNatsResponse.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Program end date' }),
+    __metadata("design:type", Object)
+], LoyaltyProgramNatsResponse.prototype, "endDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether program is active' }),
+    __metadata("design:type", Boolean)
+], LoyaltyProgramNatsResponse.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Earning rules configuration' }),
+    __metadata("design:type", Object)
+], LoyaltyProgramNatsResponse.prototype, "earningRules", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Redemption rules configuration' }),
+    __metadata("design:type", Object)
+], LoyaltyProgramNatsResponse.prototype, "redemptionRules", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Program tiers', type: [loyalty_tiers_nats_1.LoyaltyTierNatsResponse] }),
+    __metadata("design:type", Array)
+], LoyaltyProgramNatsResponse.prototype, "tiers", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Program statistics' }),
+    __metadata("design:type", IndividualProgramStats)
+], LoyaltyProgramNatsResponse.prototype, "stats", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp' }),
+    __metadata("design:type", Object)
+], LoyaltyProgramNatsResponse.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp' }),
+    __metadata("design:type", Object)
+], LoyaltyProgramNatsResponse.prototype, "updatedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Deletion timestamp' }),
+    __metadata("design:type", Object)
+], LoyaltyProgramNatsResponse.prototype, "deletedAt", void 0);
 /**
  * Individual Loyalty Program Stats
  * Statistics for a single loyalty program - can be used in both NATS responses and REST API

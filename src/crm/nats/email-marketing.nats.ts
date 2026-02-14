@@ -18,6 +18,7 @@
  */
 
 import { NatsResponse } from '../../common';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 /**
  * Campaign Status Enum
@@ -64,27 +65,66 @@ export interface UpdateEmailCampaignNatsRequest {
 /**
  * Email Campaign Response
  */
-export interface EmailCampaignNatsResponse {
-  id: string;
-  tenantId: string;
-  name: string;
+export class EmailCampaignNatsResponse {
+  @ApiProperty({ description: 'Campaign ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Campaign name' })
+  name!: string;
+
+  @ApiPropertyOptional({ description: 'Campaign description' })
   description?: string;
-  templateId: string;
-  subject: string;
-  fromEmail: string;
+
+  @ApiProperty({ description: 'Email template ID' })
+  templateId!: string;
+
+  @ApiProperty({ description: 'Email subject line' })
+  subject!: string;
+
+  @ApiProperty({ description: 'Sender email address' })
+  fromEmail!: string;
+
+  @ApiPropertyOptional({ description: 'Sender display name' })
   fromName?: string;
-  status: EmailCampaignStatus;
-  targetSegments: string[];
-  targetAudience: number;
-  sentCount: number;
-  openCount: number;
-  clickCount: number;
-  bounceCount: number;
+
+  @ApiProperty({ enum: EmailCampaignStatus, description: 'Campaign status' })
+  status!: EmailCampaignStatus;
+
+  @ApiProperty({ description: 'Target customer segments', type: [String] })
+  targetSegments!: string[];
+
+  @ApiProperty({ description: 'Total target audience size' })
+  targetAudience!: number;
+
+  @ApiProperty({ description: 'Number of emails sent' })
+  sentCount!: number;
+
+  @ApiProperty({ description: 'Number of emails opened' })
+  openCount!: number;
+
+  @ApiProperty({ description: 'Number of links clicked' })
+  clickCount!: number;
+
+  @ApiProperty({ description: 'Number of bounced emails' })
+  bounceCount!: number;
+
+  @ApiPropertyOptional({ description: 'Scheduled send time' })
   scheduledAt?: string | Date;
+
+  @ApiPropertyOptional({ description: 'Actual send time' })
   sentAt?: string | Date;
-  createdBy: string;
-  createdAt: string | Date;
-  updatedAt: string | Date;
+
+  @ApiProperty({ description: 'User ID who created campaign' })
+  createdBy!: string;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt!: string | Date;
+
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt!: string | Date;
 }
 
 /**
