@@ -2,4 +2,5 @@ export { SyncHistoryDto, SyncHistoryListResponseDto, SyncResponseDto, SyncStatus
 export { InventoryUpdateDto, BulkInventoryUpdateDto, RateUpdateDto, SyncRequestDto, SyncFromProviderDto, PromotionSyncDto, } from '../types/sync-requests.types';
 export { GetAnalyticsQueryDto, GetSyncHistoryQueryDto, } from '../types/api-response.types';
 export { TimeRange, MetricType, } from '../types/api-response.types';
+export { CreateProviderConfigDto, ValidateProviderConfigDto, ValidationResponseDto, TestConnectionRequestDto, TestConnectionResponseDto, TestResultDto, } from './provider.rest';
 //# sourceMappingURL=index.d.ts.map

@@ -1,7 +1,7 @@
 "use strict";
 // Re-export REST DTOs from types for convenience
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MetricType = exports.TimeRange = exports.GetSyncHistoryQueryDto = exports.GetAnalyticsQueryDto = exports.PromotionSyncDto = exports.SyncFromProviderDto = exports.SyncRequestDto = exports.RateUpdateDto = exports.BulkInventoryUpdateDto = exports.InventoryUpdateDto = exports.ChartDataDto = exports.ProviderStatusSummary = exports.ProviderPerformanceDto = exports.AlertDto = exports.RealTimeMetricsSummary = exports.RealTimeMetricsDto = exports.AnalyticsDashboardDto = exports.SyncStatusDto = exports.SyncResponseDto = exports.SyncHistoryListResponseDto = exports.SyncHistoryDto = void 0;
+exports.TestResultDto = exports.TestConnectionResponseDto = exports.TestConnectionRequestDto = exports.ValidationResponseDto = exports.ValidateProviderConfigDto = exports.CreateProviderConfigDto = exports.MetricType = exports.TimeRange = exports.GetSyncHistoryQueryDto = exports.GetAnalyticsQueryDto = exports.PromotionSyncDto = exports.SyncFromProviderDto = exports.SyncRequestDto = exports.RateUpdateDto = exports.BulkInventoryUpdateDto = exports.InventoryUpdateDto = exports.ChartDataDto = exports.ProviderStatusSummary = exports.ProviderPerformanceDto = exports.AlertDto = exports.RealTimeMetricsSummary = exports.RealTimeMetricsDto = exports.AnalyticsDashboardDto = exports.SyncStatusDto = exports.SyncResponseDto = exports.SyncHistoryListResponseDto = exports.SyncHistoryDto = void 0;
 // Response DTO classes (export as values)
 var api_response_types_1 = require("../types/api-response.types");
 Object.defineProperty(exports, "SyncHistoryDto", { enumerable: true, get: function () { return api_response_types_1.SyncHistoryDto; } });
@@ -32,4 +32,12 @@ Object.defineProperty(exports, "GetSyncHistoryQueryDto", { enumerable: true, get
 var api_response_types_3 = require("../types/api-response.types");
 Object.defineProperty(exports, "TimeRange", { enumerable: true, get: function () { return api_response_types_3.TimeRange; } });
 Object.defineProperty(exports, "MetricType", { enumerable: true, get: function () { return api_response_types_3.MetricType; } });
+// Provider REST DTOs
+var provider_rest_1 = require("./provider.rest");
+Object.defineProperty(exports, "CreateProviderConfigDto", { enumerable: true, get: function () { return provider_rest_1.CreateProviderConfigDto; } });
+Object.defineProperty(exports, "ValidateProviderConfigDto", { enumerable: true, get: function () { return provider_rest_1.ValidateProviderConfigDto; } });
+Object.defineProperty(exports, "ValidationResponseDto", { enumerable: true, get: function () { return provider_rest_1.ValidationResponseDto; } });
+Object.defineProperty(exports, "TestConnectionRequestDto", { enumerable: true, get: function () { return provider_rest_1.TestConnectionRequestDto; } });
+Object.defineProperty(exports, "TestConnectionResponseDto", { enumerable: true, get: function () { return provider_rest_1.TestConnectionResponseDto; } });
+Object.defineProperty(exports, "TestResultDto", { enumerable: true, get: function () { return provider_rest_1.TestResultDto; } });
 //# sourceMappingURL=index.js.map

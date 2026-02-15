@@ -37,3 +37,13 @@ export {
   TimeRange,
   MetricType,
 } from '../types/api-response.types';
+
+// Provider REST DTOs
+export {
+  CreateProviderConfigDto,
+  ValidateProviderConfigDto,
+  ValidationResponseDto,
+  TestConnectionRequestDto,
+  TestConnectionResponseDto,
+  TestResultDto,
+} from './provider.rest';
