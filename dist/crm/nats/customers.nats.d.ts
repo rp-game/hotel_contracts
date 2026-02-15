@@ -113,8 +113,8 @@ export declare class CustomerNatsResponse {
     tags?: string[];
     notes?: string;
     isAnonymized: boolean;
-    createdAt: string | Date;
-    updatedAt: string | Date;
+    createdAt: string;
+    updatedAt: string;
     firstSeenAt?: string | Date;
     lastSeenAt?: string | Date;
     totalBookings: number;

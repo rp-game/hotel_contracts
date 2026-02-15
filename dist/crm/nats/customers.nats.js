@@ -272,12 +272,12 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CustomerNatsResponse.prototype, "isAnonymized", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp', type: String }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp' }),
+    __metadata("design:type", String)
 ], CustomerNatsResponse.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp', type: String }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp' }),
+    __metadata("design:type", String)
 ], CustomerNatsResponse.prototype, "updatedAt", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'First seen timestamp' }),
