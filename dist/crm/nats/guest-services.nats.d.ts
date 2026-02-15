@@ -245,7 +245,7 @@ export declare class ServiceBookingNatsResponse {
     specialRequests?: string;
     notes?: string;
     confirmationCode?: string;
-    paymentStatus: string;
+    paymentStatus?: string;
     staffAssigned?: string;
     createdAt: string;
     updatedAt: string;

@@ -404,8 +404,8 @@ export class ServiceBookingNatsResponse {
   @ApiPropertyOptional({ description: 'Confirmation code' })
   confirmationCode?: string;
 
-  @ApiProperty({ description: 'Payment status' })
-  paymentStatus!: string;
+  @ApiPropertyOptional({ description: 'Payment status' })
+  paymentStatus?: string;
 
   @ApiPropertyOptional({ description: 'Assigned staff ID' })
   staffAssigned?: string;

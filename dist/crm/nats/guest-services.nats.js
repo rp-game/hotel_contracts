@@ -336,7 +336,7 @@ __decorate([
     __metadata("design:type", String)
 ], ServiceBookingNatsResponse.prototype, "confirmationCode", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Payment status' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payment status' }),
     __metadata("design:type", String)
 ], ServiceBookingNatsResponse.prototype, "paymentStatus", void 0);
 __decorate([
