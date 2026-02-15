@@ -51,15 +51,18 @@ export type UpdateChainConfigNatsResponse = NatsResponse<GetChainConfigResponse>
 /**
  * Apply Chain to Hotel Request
  * Pattern: channel.chains.apply
+ * Now uses unified ApplyChainConfigDto structure
  */
-export interface ApplyChainToHotelNatsRequest extends ApplyChainToHotelRequest {
+export interface ApplyChainToHotelNatsRequest {
   chainId: string;
-  hotelId: string;
   tenantId: string;
-  inheritSettings: boolean;
+  hotel_id: string;
+  inherit_settings: string[];  // Fixed: was boolean, now matches REST DTO
+  override_settings?: Record<string, any>;
+  force_apply?: boolean;
 }
 
-export type ApplyChainToHotelNatsResponse = NatsResponse<ApplyChainResponse>;
+export type ApplyChainToHotelNatsResponse = NatsResponse<import('../types').ChainHotelConfigurationDto>;
 
 /**
  * List Chain Hotels Request
@@ -77,12 +80,15 @@ export type ListChainHotelsNatsResponse = NatsResponse<ListChainHotelsResponse>;
 /**
  * Sync Chain to Hotels Request
  * Pattern: channel.chains.sync
+ * Now uses unified SyncChainConfigDto structure
  */
-export interface SyncChainNatsRequest extends SyncChainRequest {
+export interface SyncChainNatsRequest {
   chainId: string;
   tenantId: string;
-  hotelIds?: string[];
-  dryRun?: boolean;
+  hotel_ids?: string[];  // Renamed from hotelIds to match REST DTO
+  settings_to_sync?: string[];
+  force_override?: boolean;
+  only_unconfigured_hotels?: boolean;
 }
 
-export type SyncChainNatsResponse = NatsResponse<ChainSyncResult>;
+export type SyncChainNatsResponse = NatsResponse<import('../types').ChainSyncResponseDto>;

@@ -1,8 +1,9 @@
 /**
  * Chain Configuration Type Definitions
  *
- * Handles multi-property configuration and settings inheritance from chain level
- * NOTE: NATS contracts use camelCase only. REST API DTOs handle snake_case conversion.
+ * Unified contracts for both NATS messaging and REST API
+ * Uses snake_case to match database entities and REST API conventions
+ * Converted to classes with @ApiProperty for Swagger documentation
  */
 /**
  * Chain configuration settings (snake_case - for database entity)
@@ -21,6 +22,65 @@ export interface ChainConfigurationDto {
     chainId?: string;
     overrideSettings?: string[];
     hotelSpecificOtaAccounts?: any;
+}
+/**
+ * Apply chain configuration to hotel request DTO
+ * Used for both REST API and NATS messaging
+ */
+export declare class ApplyChainConfigDto {
+    hotel_id: string;
+    inherit_settings: string[];
+    override_settings?: Record<string, any>;
+    force_apply?: boolean;
+}
+/**
+ * Chain hotel configuration response DTO
+ * Used for both REST API and NATS messaging
+ */
+export declare class ChainHotelConfigurationDto {
+    hotel_id: string;
+    hotel_name: string;
+    inherits_from_chain: boolean;
+    inherited_settings: string[];
+    hotel_overrides: Record<string, any>;
+    active_providers: string[];
+    status: string;
+    last_chain_sync: string;
+}
+/**
+ * Sync chain configuration to hotels request DTO
+ * Used for both REST API and NATS messaging
+ */
+export declare class SyncChainConfigDto {
+    hotel_ids?: string[];
+    settings_to_sync?: string[];
+    force_override?: boolean;
+    only_unconfigured_hotels?: boolean;
+}
+/**
+ * Chain sync result for individual hotel
+ */
+export declare class ChainSyncResultDto {
+    hotel_id: string;
+    hotel_name: string;
+    success: boolean;
+    error?: string;
+    synced_settings: string[];
+    skipped_settings: string[];
+}
+/**
+ * Chain sync response DTO
+ * Used for both REST API and NATS messaging
+ */
+export declare class ChainSyncResponseDto {
+    chain_id: string;
+    sync_id: string;
+    success: boolean;
+    total_hotels: number;
+    successful_syncs: number;
+    failed_syncs: number;
+    results: ChainSyncResultDto[];
+    timestamp: string;
 }
 /**
  * Get chain configuration request
