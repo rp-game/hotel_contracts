@@ -213,10 +213,15 @@ export class HotelWithStatsDto extends HotelDto {
  * Extends HotelDto with roomCount field
  */
 export class HotelWithRoomCountDto extends HotelDto {
-  @ApiPropertyOptional({ description: 'Total number of rooms in the hotel' })
+  @ApiPropertyOptional({ description: 'Total number of rooms in the hotel', type: Number })
   @IsOptional()
   @IsNumber()
   roomCount?: number;
+
+  @ApiPropertyOptional({ description: 'Number of currently occupied rooms', type: Number })
+  @IsOptional()
+  @IsNumber()
+  occupiedRooms?: number;
 }
 
 // Type aliases for backward compatibility during migration

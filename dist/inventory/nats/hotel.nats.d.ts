@@ -92,6 +92,7 @@ export declare class HotelWithStatsDto extends HotelDto {
  */
 export declare class HotelWithRoomCountDto extends HotelDto {
     roomCount?: number;
+    occupiedRooms?: number;
 }
 export type HotelWithStats = HotelWithStatsDto;
 export type HotelWithRoomCount = HotelWithRoomCountDto;

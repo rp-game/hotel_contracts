@@ -267,14 +267,21 @@ __decorate([
  */
 class HotelWithRoomCountDto extends HotelDto {
     roomCount;
+    occupiedRooms;
 }
 exports.HotelWithRoomCountDto = HotelWithRoomCountDto;
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Total number of rooms in the hotel' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Total number of rooms in the hotel', type: Number }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], HotelWithRoomCountDto.prototype, "roomCount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of currently occupied rooms', type: Number }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], HotelWithRoomCountDto.prototype, "occupiedRooms", void 0);
 /**
  * Find Hotels By Chain Request
  * Pattern: hotels.findByChain
