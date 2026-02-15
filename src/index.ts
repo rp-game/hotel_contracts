@@ -63,3 +63,4 @@ export * from './report';
 export * from './platform';
 export * from './room-move';
 export * from './cms';
+export * from './tenants';

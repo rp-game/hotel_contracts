@@ -77,4 +77,5 @@ __exportStar(require("./report"), exports);
 __exportStar(require("./platform"), exports);
 __exportStar(require("./room-move"), exports);
 __exportStar(require("./cms"), exports);
+__exportStar(require("./tenants"), exports);
 //# sourceMappingURL=index.js.map
