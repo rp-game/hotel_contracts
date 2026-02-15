@@ -16,6 +16,7 @@ import {
   IsObject,
   IsNumber,
   IsUUID,
+  IsEmail,
   Min
 } from 'class-validator';
 
@@ -287,4 +288,92 @@ export class CreateHotelDto {
   @IsOptional()
   @IsObject()
   analytics?: Record<string, any>;
+}
+
+/**
+ * Update hotel DTO
+ * (Unique to tenants - not duplicated elsewhere)
+ */
+export class UpdateHotelDto {
+  @ApiPropertyOptional({ description: 'Hotel name' })
+  @IsOptional()
+  @IsString()
+  name?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel chain ID' })
+  @IsOptional()
+  @IsUUID()
+  chainId?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel description' })
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel address' })
+  @IsOptional()
+  @IsString()
+  address?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel city' })
+  @IsOptional()
+  @IsString()
+  city?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel country' })
+  @IsOptional()
+  @IsString()
+  country?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel phone number' })
+  @IsOptional()
+  @IsString()
+  phone?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel email address' })
+  @IsOptional()
+  @IsEmail()
+  email?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel website' })
+  @IsOptional()
+  @IsString()
+  website?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel star rating (1-5)' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  stars?: number;
+
+  @ApiPropertyOptional({ description: 'Hotel status' })
+  @IsOptional()
+  @IsEnum(['ACTIVE', 'INACTIVE', 'MAINTENANCE'])
+  status?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel amenities' })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  amenities?: string[];
+
+  @ApiPropertyOptional({ description: 'Check-in time (HH:mm format)' })
+  @IsOptional()
+  @IsString()
+  checkInTime?: string;
+
+  @ApiPropertyOptional({ description: 'Check-out time (HH:mm format)' })
+  @IsOptional()
+  @IsString()
+  checkOutTime?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel timezone' })
+  @IsOptional()
+  @IsString()
+  timezone?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel currency code' })
+  @IsOptional()
+  @IsString()
+  currency?: string;
 }

@@ -94,4 +94,26 @@ export declare class CreateHotelDto {
     roomCount?: number;
     analytics?: Record<string, any>;
 }
+/**
+ * Update hotel DTO
+ * (Unique to tenants - not duplicated elsewhere)
+ */
+export declare class UpdateHotelDto {
+    name?: string;
+    chainId?: string;
+    description?: string;
+    address?: string;
+    city?: string;
+    country?: string;
+    phone?: string;
+    email?: string;
+    website?: string;
+    stars?: number;
+    status?: string;
+    amenities?: string[];
+    checkInTime?: string;
+    checkOutTime?: string;
+    timezone?: string;
+    currency?: string;
+}
 //# sourceMappingURL=hotel-chains.types.d.ts.map

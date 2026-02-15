@@ -17,7 +17,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateHotelDto = exports.HotelChainListResponseDto = exports.HotelChainResponseDto = exports.CreateHotelChainDto = exports.HotelListResponseDto = exports.HotelDto = exports.UpdateHotelChainDto = exports.ChainType = exports.HotelChainStatus = void 0;
+exports.UpdateHotelDto = exports.CreateHotelDto = exports.HotelChainListResponseDto = exports.HotelChainResponseDto = exports.CreateHotelChainDto = exports.HotelListResponseDto = exports.HotelDto = exports.UpdateHotelChainDto = exports.ChainType = exports.HotelChainStatus = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 // Import enums for validation decorators
@@ -419,4 +419,125 @@ __decorate([
     (0, class_validator_1.IsObject)(),
     __metadata("design:type", Object)
 ], CreateHotelDto.prototype, "analytics", void 0);
+/**
+ * Update hotel DTO
+ * (Unique to tenants - not duplicated elsewhere)
+ */
+class UpdateHotelDto {
+    name;
+    chainId;
+    description;
+    address;
+    city;
+    country;
+    phone;
+    email;
+    website;
+    stars;
+    status;
+    amenities;
+    checkInTime;
+    checkOutTime;
+    timezone;
+    currency;
+}
+exports.UpdateHotelDto = UpdateHotelDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel name' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel chain ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "chainId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel description' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel address' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "address", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel city' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "city", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel country' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "country", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel phone number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "phone", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel email address' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEmail)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel website' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "website", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel star rating (1-5)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], UpdateHotelDto.prototype, "stars", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel status' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(['ACTIVE', 'INACTIVE', 'MAINTENANCE']),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel amenities' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], UpdateHotelDto.prototype, "amenities", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Check-in time (HH:mm format)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "checkInTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Check-out time (HH:mm format)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "checkOutTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel timezone' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "timezone", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel currency code' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "currency", void 0);
 //# sourceMappingURL=hotel-chains.types.js.map
