@@ -16,7 +16,7 @@ export interface RevenueStatsQuery {
 /**
  * Revenue Data Point
  */
-export interface RevenueDataPoint {
+export declare class RevenueDataPoint {
     period: string;
     totalRevenue: number;
     invoiceCount: number;
@@ -27,28 +27,36 @@ export interface RevenueDataPoint {
     refundAmount: number;
 }
 /**
+ * Revenue Stats Summary
+ */
+export declare class RevenueStatsSummary {
+    totalRevenue: number;
+    totalInvoices: number;
+    totalPayments: number;
+    totalRefunds: number;
+    averageRevenue: number;
+    growthRate: number;
+}
+/**
+ * Top Tenant Item
+ */
+export declare class TopTenantItem {
+    tenantId: string;
+    tenantName: string;
+    revenue: number;
+    invoiceCount: number;
+}
+/**
  * Revenue Stats Response
  */
-export interface RevenueStatsResponse {
+export declare class RevenueStatsResponse {
     currency: string;
     startDate: string;
     endDate: string;
     groupBy: string;
-    summary: {
-        totalRevenue: number;
-        totalInvoices: number;
-        totalPayments: number;
-        totalRefunds: number;
-        averageRevenue: number;
-        growthRate: number;
-    };
+    summary: RevenueStatsSummary;
     data: RevenueDataPoint[];
-    topTenants?: Array<{
-        tenantId: string;
-        tenantName: string;
-        revenue: number;
-        invoiceCount: number;
-    }>;
+    topTenants?: TopTenantItem[];
 }
 /**
  * Tenant Billing Summary
