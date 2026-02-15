@@ -77,39 +77,68 @@ export interface UpdateAutomationNatsRequest {
 }
 
 /**
- * Marketing Automation Response
+ * Marketing Automation Response (matches AutomationRule entity)
+ *
+ * @matches_entity AutomationRule (services/crm-service/src/marketing/automation/entities/automation-rule.entity.ts)
+ * @standardized 2026-02-15
  */
 export class MarketingAutomationNatsResponse {
-  @ApiProperty({ description: 'Automation ID' })
+  @ApiProperty({ description: 'Automation rule ID' })
   id!: string;
 
   @ApiProperty({ description: 'Tenant ID' })
   tenantId!: string;
 
-  @ApiProperty({ description: 'Automation name' })
+  @ApiProperty({ description: 'Rule name' })
   name!: string;
 
-  @ApiPropertyOptional({ description: 'Automation description' })
+  @ApiPropertyOptional({ description: 'Rule description' })
   description?: string;
 
-  @ApiProperty({ enum: AutomationStatus, description: 'Automation status' })
-  status!: AutomationStatus;
+  @ApiProperty({ description: 'Rule type', example: 'WELCOME_SERIES' })
+  ruleType!: string;
 
-  @ApiProperty({ description: 'Trigger configuration' })
-  trigger!: {
-    type: string;
-    condition: Record<string, any>;
-  };
+  @ApiProperty({ description: 'Rule status', example: 'ACTIVE' })
+  status!: string;
 
-  @ApiProperty({ description: 'Automation actions', type: 'array' })
-  actions!: Array<{
-    type: ActionType;
-    config: Record<string, any>;
-    delay?: number;
-  }>;
+  @ApiProperty({ description: 'Whether rule is active' })
+  isActive!: boolean;
 
-  @ApiPropertyOptional({ description: 'Target customer segments', type: [String] })
-  targetSegments?: string[];
+  @ApiProperty({ description: 'Trigger event configuration' })
+  triggerEvent!: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Trigger conditions that must be met' })
+  triggerConditions?: Record<string, any>;
+
+  @ApiProperty({ description: 'Action type', example: 'SEND_EMAIL' })
+  actionType!: string;
+
+  @ApiProperty({ description: 'Action configuration' })
+  actionConfig!: Record<string, any>;
+
+  @ApiProperty({ description: 'Delay in minutes before executing action' })
+  delayMinutes!: number;
+
+  @ApiPropertyOptional({ description: 'Schedule configuration for recurring rules' })
+  scheduleConfig?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Target customer segmentation criteria' })
+  targetSegmentation?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Maximum executions per customer' })
+  maxExecutionsPerCustomer?: number;
+
+  @ApiPropertyOptional({ description: 'Cooldown hours between executions' })
+  cooldownHours?: number;
+
+  @ApiPropertyOptional({ description: 'Rule active from timestamp (ISO string)' })
+  activeFrom?: string;
+
+  @ApiPropertyOptional({ description: 'Rule active to timestamp (ISO string)' })
+  activeTo?: string;
+
+  @ApiProperty({ description: 'Total trigger count' })
+  totalTriggers!: number;
 
   @ApiProperty({ description: 'Total execution count' })
   totalExecutions!: number;
@@ -120,36 +149,68 @@ export class MarketingAutomationNatsResponse {
   @ApiProperty({ description: 'Failed execution count' })
   failedExecutions!: number;
 
-  @ApiProperty({ description: 'User ID who created automation' })
-  createdBy!: string;
+  @ApiPropertyOptional({ description: 'Last executed timestamp (ISO string)' })
+  lastExecutedAt?: string;
 
-  @ApiProperty({ description: 'Creation timestamp' })
-  createdAt!: string | Date;
+  @ApiPropertyOptional({ description: 'Additional metadata' })
+  metadata?: Record<string, any>;
 
-  @ApiProperty({ description: 'Last update timestamp' })
-  updatedAt!: string | Date;
+  @ApiProperty({ description: 'Creation timestamp (ISO string)' })
+  createdAt!: string;
+
+  @ApiProperty({ description: 'Last update timestamp (ISO string)' })
+  updatedAt!: string;
+
+  @ApiPropertyOptional({ description: 'Created by user ID' })
+  createdBy?: string;
+
+  @ApiPropertyOptional({ description: 'Updated by user ID' })
+  updatedBy?: string;
 }
 
 /**
- * Find All Automations Request
+ * Find All Automation Rules Request
  * Pattern: crm.marketing.automation.findAll
+ *
+ * @standardized 2026-02-15
  */
-export interface FindAllAutomationsNatsRequest {
-  tenantId: string;
-  status?: AutomationStatus;
+export class FindAllAutomationRulesNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiPropertyOptional({ description: 'Filter by status' })
+  status?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by rule type' })
+  ruleType?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by active status' })
+  isActive?: boolean;
+
+  @ApiPropertyOptional({ description: 'Page number' })
   page?: number;
+
+  @ApiPropertyOptional({ description: 'Items per page' })
   limit?: number;
 }
 
 /**
- * Find All Automations Response
+ * Automation Rules List Response DTO
+ *
+ * @standardized 2026-02-15
  */
-export type FindAllAutomationsNatsResponse = NatsResponse<{
-  data: MarketingAutomationNatsResponse[];
-  total: number;
-  page: number;
-  limit: number;
-}>;
+export class AutomationRulesListResponseDto {
+  @ApiProperty({ description: 'List of automation rules', type: [MarketingAutomationNatsResponse] })
+  rules!: MarketingAutomationNatsResponse[];
+
+  @ApiProperty({ description: 'Total count' })
+  total!: number;
+}
+
+/**
+ * Find All Automation Rules Response
+ */
+export type FindAllAutomationRulesNatsResponse = NatsResponse<AutomationRulesListResponseDto>;
 
 /**
  * Create Automation Response

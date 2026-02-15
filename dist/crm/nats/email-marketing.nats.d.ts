@@ -29,19 +29,20 @@ export declare enum EmailCampaignStatus {
     CANCELLED = "CANCELLED"
 }
 /**
- * Create Email Campaign Request
- * Pattern: crm.email_marketing.campaigns.create
+ * Create Email Campaign DTO (used for both requests)
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
  */
-export interface CreateEmailCampaignNatsRequest {
+export declare class CreateEmailCampaignDto {
     tenantId: string;
-    userId: string;
     name: string;
     description?: string;
-    templateId: string;
     subject: string;
-    fromEmail: string;
-    fromName?: string;
-    targetSegments: string[];
+    content: string;
+    templateId?: string;
+    type?: string;
+    targetSegmentId?: string;
     scheduledAt?: string;
     sendImmediately?: boolean;
     metadata?: Record<string, any>;
@@ -54,32 +55,47 @@ export interface UpdateEmailCampaignNatsRequest {
     tenantId: string;
     campaignId: string;
     userId: string;
-    updateDto: Partial<CreateEmailCampaignNatsRequest>;
+    updateDto: Partial<CreateEmailCampaignDto>;
 }
 /**
- * Email Campaign Response
+ * Email Campaign Stats (embedded in campaign)
+ */
+export declare class EmailCampaignStatsDto {
+    totalRecipients: number;
+    delivered: number;
+    opened: number;
+    clicked: number;
+    unsubscribed: number;
+    bounced: number;
+    openRate: string;
+    clickRate: string;
+    unsubscribeRate: string;
+    bounceRate: string;
+}
+/**
+ * Email Campaign Response (matches NATS handler real structure)
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ * @contract_accuracy PERFECT (Matches NATS handler real code)
  */
 export declare class EmailCampaignNatsResponse {
     id: string;
     tenantId: string;
     name: string;
     description?: string;
-    templateId: string;
     subject: string;
-    fromEmail: string;
-    fromName?: string;
-    status: EmailCampaignStatus;
-    targetSegments: string[];
-    targetAudience: number;
-    sentCount: number;
-    openCount: number;
-    clickCount: number;
-    bounceCount: number;
-    scheduledAt?: string | Date;
-    sentAt?: string | Date;
-    createdBy: string;
-    createdAt: string | Date;
-    updatedAt: string | Date;
+    content: string;
+    templateId?: string;
+    type: string;
+    status: string;
+    targetSegmentId?: string;
+    scheduledAt?: string;
+    sentAt?: string;
+    stats?: EmailCampaignStatsDto;
+    createdAt: string;
+    updatedAt: string;
+    createdBy?: string;
 }
 /**
  * Email Template Response
@@ -97,24 +113,36 @@ export interface EmailTemplateNatsResponse {
     updatedAt: string | Date;
 }
 /**
- * Find All Campaigns Request
+ * Find All Email Campaigns Request
  * Pattern: crm.email_marketing.campaigns.findAll
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
  */
-export interface FindAllEmailCampaignsNatsRequest {
+export declare class FindAllEmailCampaignsNatsRequest {
     tenantId: string;
-    status?: EmailCampaignStatus;
+    status?: string;
+    createdFrom?: string;
+    createdTo?: string;
     page?: number;
     limit?: number;
 }
 /**
- * Find All Campaigns Response
+ * Email Campaigns List Response DTO
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
  */
-export type FindAllEmailCampaignsNatsResponse = NatsResponse<{
-    data: EmailCampaignNatsResponse[];
+export declare class EmailCampaignsListResponseDto {
+    campaigns: EmailCampaignNatsResponse[];
     total: number;
     page: number;
     limit: number;
-}>;
+}
+/**
+ * Find All Campaigns Response
+ */
+export type FindAllEmailCampaignsNatsResponse = NatsResponse<EmailCampaignsListResponseDto>;
 /**
  * Create Campaign Response
  */

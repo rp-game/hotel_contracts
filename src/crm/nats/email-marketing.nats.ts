@@ -33,21 +33,43 @@ export enum EmailCampaignStatus {
 }
 
 /**
- * Create Email Campaign Request
- * Pattern: crm.email_marketing.campaigns.create
+ * Create Email Campaign DTO (used for both requests)
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
  */
-export interface CreateEmailCampaignNatsRequest {
-  tenantId: string;
-  userId: string;
-  name: string;
+export class CreateEmailCampaignDto {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Campaign name' })
+  name!: string;
+
+  @ApiPropertyOptional({ description: 'Campaign description' })
   description?: string;
-  templateId: string;
-  subject: string;
-  fromEmail: string;
-  fromName?: string;
-  targetSegments: string[];
+
+  @ApiProperty({ description: 'Email subject' })
+  subject!: string;
+
+  @ApiProperty({ description: 'Email content' })
+  content!: string;
+
+  @ApiPropertyOptional({ description: 'Template ID' })
+  templateId?: string;
+
+  @ApiPropertyOptional({ description: 'Campaign type', example: 'promotional' })
+  type?: string;
+
+  @ApiPropertyOptional({ description: 'Target segment ID' })
+  targetSegmentId?: string;
+
+  @ApiPropertyOptional({ description: 'Scheduled send time (ISO string)' })
   scheduledAt?: string;
+
+  @ApiPropertyOptional({ description: 'Send immediately flag' })
   sendImmediately?: boolean;
+
+  @ApiPropertyOptional({ description: 'Additional metadata' })
   metadata?: Record<string, any>;
 }
 
@@ -59,11 +81,66 @@ export interface UpdateEmailCampaignNatsRequest {
   tenantId: string;
   campaignId: string;
   userId: string;
-  updateDto: Partial<CreateEmailCampaignNatsRequest>;
+  updateDto: Partial<CreateEmailCampaignDto>;
 }
 
 /**
- * Email Campaign Response
+ * Email Campaign Stats (embedded in campaign)
+ */
+export class EmailCampaignStatsDto {
+  @ApiProperty({ description: 'Total recipients count' })
+  totalRecipients!: number;
+
+  @ApiProperty({ description: 'Successfully delivered count' })
+  delivered!: number;
+
+  @ApiProperty({ description: 'Email opens count' })
+  opened!: number;
+
+  @ApiProperty({ description: 'Email clicks count' })
+  clicked!: number;
+
+  @ApiProperty({ description: 'Unsubscribe count' })
+  unsubscribed!: number;
+
+  @ApiProperty({ description: 'Bounce count' })
+  bounced!: number;
+
+  @ApiProperty({
+    description: 'Open rate as decimal string for precision',
+    example: '23.45',
+    type: 'string'
+  })
+  openRate!: string;
+
+  @ApiProperty({
+    description: 'Click rate as decimal string for precision',
+    example: '5.67',
+    type: 'string'
+  })
+  clickRate!: string;
+
+  @ApiProperty({
+    description: 'Unsubscribe rate as decimal string for precision',
+    example: '0.12',
+    type: 'string'
+  })
+  unsubscribeRate!: string;
+
+  @ApiProperty({
+    description: 'Bounce rate as decimal string for precision',
+    example: '1.23',
+    type: 'string'
+  })
+  bounceRate!: string;
+}
+
+/**
+ * Email Campaign Response (matches NATS handler real structure)
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ * @contract_accuracy PERFECT (Matches NATS handler real code)
  */
 export class EmailCampaignNatsResponse {
   @ApiProperty({ description: 'Campaign ID' })
@@ -78,53 +155,41 @@ export class EmailCampaignNatsResponse {
   @ApiPropertyOptional({ description: 'Campaign description' })
   description?: string;
 
-  @ApiProperty({ description: 'Email template ID' })
-  templateId!: string;
-
-  @ApiProperty({ description: 'Email subject line' })
+  @ApiProperty({ description: 'Email subject' })
   subject!: string;
 
-  @ApiProperty({ description: 'Sender email address' })
-  fromEmail!: string;
+  @ApiProperty({ description: 'Email content' })
+  content!: string;
 
-  @ApiPropertyOptional({ description: 'Sender display name' })
-  fromName?: string;
+  @ApiPropertyOptional({ description: 'Email template ID reference' })
+  templateId?: string;
 
-  @ApiProperty({ enum: EmailCampaignStatus, description: 'Campaign status' })
-  status!: EmailCampaignStatus;
+  @ApiProperty({ description: 'Campaign type', example: 'promotional' })
+  type!: string;
 
-  @ApiProperty({ description: 'Target customer segments', type: [String] })
-  targetSegments!: string[];
+  @ApiProperty({ description: 'Campaign status', example: 'draft' })
+  status!: string;
 
-  @ApiProperty({ description: 'Total target audience size' })
-  targetAudience!: number;
+  @ApiPropertyOptional({ description: 'Target segment ID reference' })
+  targetSegmentId?: string;
 
-  @ApiProperty({ description: 'Number of emails sent' })
-  sentCount!: number;
+  @ApiPropertyOptional({ description: 'Scheduled send time (ISO string)' })
+  scheduledAt?: string;
 
-  @ApiProperty({ description: 'Number of emails opened' })
-  openCount!: number;
+  @ApiPropertyOptional({ description: 'Actual sent time (ISO string)' })
+  sentAt?: string;
 
-  @ApiProperty({ description: 'Number of links clicked' })
-  clickCount!: number;
+  @ApiPropertyOptional({ description: 'Campaign statistics', type: EmailCampaignStatsDto })
+  stats?: EmailCampaignStatsDto;
 
-  @ApiProperty({ description: 'Number of bounced emails' })
-  bounceCount!: number;
+  @ApiProperty({ description: 'Creation timestamp (ISO string)' })
+  createdAt!: string;
 
-  @ApiPropertyOptional({ description: 'Scheduled send time' })
-  scheduledAt?: string | Date;
+  @ApiProperty({ description: 'Last update timestamp (ISO string)' })
+  updatedAt!: string;
 
-  @ApiPropertyOptional({ description: 'Actual send time' })
-  sentAt?: string | Date;
-
-  @ApiProperty({ description: 'User ID who created campaign' })
-  createdBy!: string;
-
-  @ApiProperty({ description: 'Creation timestamp' })
-  createdAt!: string | Date;
-
-  @ApiProperty({ description: 'Last update timestamp' })
-  updatedAt!: string | Date;
+  @ApiPropertyOptional({ description: 'Created by user ID' })
+  createdBy?: string;
 }
 
 /**
@@ -144,25 +209,56 @@ export interface EmailTemplateNatsResponse {
 }
 
 /**
- * Find All Campaigns Request
+ * Find All Email Campaigns Request
  * Pattern: crm.email_marketing.campaigns.findAll
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
  */
-export interface FindAllEmailCampaignsNatsRequest {
-  tenantId: string;
-  status?: EmailCampaignStatus;
+export class FindAllEmailCampaignsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiPropertyOptional({ description: 'Filter by status' })
+  status?: string;
+
+  @ApiPropertyOptional({ description: 'Filter from date (ISO string)' })
+  createdFrom?: string;
+
+  @ApiPropertyOptional({ description: 'Filter to date (ISO string)' })
+  createdTo?: string;
+
+  @ApiPropertyOptional({ description: 'Page number' })
   page?: number;
+
+  @ApiPropertyOptional({ description: 'Items per page' })
   limit?: number;
+}
+
+/**
+ * Email Campaigns List Response DTO
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ */
+export class EmailCampaignsListResponseDto {
+  @ApiProperty({ description: 'List of email campaigns', type: [EmailCampaignNatsResponse] })
+  campaigns!: EmailCampaignNatsResponse[];
+
+  @ApiProperty({ description: 'Total count' })
+  total!: number;
+
+  @ApiProperty({ description: 'Current page' })
+  page!: number;
+
+  @ApiProperty({ description: 'Items per page' })
+  limit!: number;
 }
 
 /**
  * Find All Campaigns Response
  */
-export type FindAllEmailCampaignsNatsResponse = NatsResponse<{
-  data: EmailCampaignNatsResponse[];
-  total: number;
-  page: number;
-  limit: number;
-}>;
+export type FindAllEmailCampaignsNatsResponse = NatsResponse<EmailCampaignsListResponseDto>;
 
 /**
  * Create Campaign Response

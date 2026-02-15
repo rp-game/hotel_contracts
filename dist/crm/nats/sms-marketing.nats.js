@@ -8,11 +8,6 @@
  * - crm.sms_marketing.campaigns.findOne
  * - crm.sms_marketing.campaigns.update
  * - crm.sms_marketing.campaigns.delete
- * - crm.sms_marketing.templates.findAll
- * - crm.sms_marketing.templates.create
- * - crm.sms_marketing.send.single
- * - crm.sms_marketing.send.campaign
- * - crm.sms_marketing.analytics
  *
  * Handler: crm-service (SmsMarketingController)
  * Called by: api-gateway (CrmController)
@@ -27,43 +22,107 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SmsCampaignNatsResponse = exports.SmsCampaignStatus = void 0;
+exports.SMSCampaignsListResponseDto = exports.FindAllSmsCampaignsNatsRequest = exports.SmsCampaignNatsResponse = exports.CreateSMSCampaignDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
 /**
- * SMS Campaign Status Enum
+ * Create SMS Campaign DTO
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ * @matches_entity SmsCampaign (services/crm-service/src/marketing/sms/entities/sms-campaign.entity.ts)
  */
-var SmsCampaignStatus;
-(function (SmsCampaignStatus) {
-    SmsCampaignStatus["DRAFT"] = "DRAFT";
-    SmsCampaignStatus["SCHEDULED"] = "SCHEDULED";
-    SmsCampaignStatus["SENDING"] = "SENDING";
-    SmsCampaignStatus["SENT"] = "SENT";
-    SmsCampaignStatus["PAUSED"] = "PAUSED";
-    SmsCampaignStatus["CANCELLED"] = "CANCELLED";
-})(SmsCampaignStatus || (exports.SmsCampaignStatus = SmsCampaignStatus = {}));
+class CreateSMSCampaignDto {
+    tenantId;
+    name;
+    templateId;
+    campaignType;
+    recipientSegmentation;
+    personalizationData;
+    scheduledAt;
+    notes;
+    metadata;
+}
+exports.CreateSMSCampaignDto = CreateSMSCampaignDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSMSCampaignDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Campaign name' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSMSCampaignDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'SMS template ID reference' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSMSCampaignDto.prototype, "templateId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Campaign type', enum: ['ONE_TIME', 'RECURRING', 'AUTOMATED'] }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSMSCampaignDto.prototype, "campaignType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Recipient segmentation criteria' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], CreateSMSCampaignDto.prototype, "recipientSegmentation", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Personalization data for template variables' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], CreateSMSCampaignDto.prototype, "personalizationData", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Scheduled send time (ISO string)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSMSCampaignDto.prototype, "scheduledAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Campaign notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSMSCampaignDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional metadata' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], CreateSMSCampaignDto.prototype, "metadata", void 0);
 /**
- * SMS Campaign Response
+ * SMS Campaign Response (matches entity structure with template join)
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ * @matches_entity SmsCampaign (services/crm-service/src/marketing/sms/entities/sms-campaign.entity.ts)
+ * @note message and description populated from joined template relation
  */
 class SmsCampaignNatsResponse {
     id;
     tenantId;
     name;
-    description;
     templateId;
-    content;
-    fromPhoneNumber;
+    campaignType;
     status;
-    targetSegments;
-    targetAudience;
+    message;
+    description;
+    templateName;
+    scheduledAt;
+    sentAt;
+    totalRecipients;
     sentCount;
     deliveredCount;
     failedCount;
-    bounceCount;
-    scheduledAt;
-    sentAt;
-    createdBy;
+    optOutCount;
+    deliveryRate;
+    notes;
+    metadata;
     createdAt;
     updatedAt;
+    createdBy;
+    updatedBy;
 }
 exports.SmsCampaignNatsResponse = SmsCampaignNatsResponse;
 __decorate([
@@ -79,67 +138,161 @@ __decorate([
     __metadata("design:type", String)
 ], SmsCampaignNatsResponse.prototype, "name", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Campaign description' }),
-    __metadata("design:type", String)
-], SmsCampaignNatsResponse.prototype, "description", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'SMS template ID' }),
+    (0, swagger_1.ApiProperty)({ description: 'SMS template ID reference' }),
     __metadata("design:type", String)
 ], SmsCampaignNatsResponse.prototype, "templateId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'SMS message content' }),
+    (0, swagger_1.ApiProperty)({ description: 'Campaign type', example: 'ONE_TIME' }),
     __metadata("design:type", String)
-], SmsCampaignNatsResponse.prototype, "content", void 0);
+], SmsCampaignNatsResponse.prototype, "campaignType", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Sender phone number' }),
-    __metadata("design:type", String)
-], SmsCampaignNatsResponse.prototype, "fromPhoneNumber", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ enum: SmsCampaignStatus, description: 'Campaign status' }),
+    (0, swagger_1.ApiProperty)({ description: 'Campaign status', example: 'DRAFT' }),
     __metadata("design:type", String)
 ], SmsCampaignNatsResponse.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Target customer segments', type: [String] }),
-    __metadata("design:type", Array)
-], SmsCampaignNatsResponse.prototype, "targetSegments", void 0);
+    (0, swagger_1.ApiPropertyOptional)({ description: 'SMS message (from template.content)' }),
+    __metadata("design:type", String)
+], SmsCampaignNatsResponse.prototype, "message", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Total target audience size' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Campaign description (from template.description)' }),
+    __metadata("design:type", String)
+], SmsCampaignNatsResponse.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Template name (from template.name)' }),
+    __metadata("design:type", String)
+], SmsCampaignNatsResponse.prototype, "templateName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Scheduled send time (ISO string)' }),
+    __metadata("design:type", String)
+], SmsCampaignNatsResponse.prototype, "scheduledAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Actual sent time (ISO string)' }),
+    __metadata("design:type", String)
+], SmsCampaignNatsResponse.prototype, "sentAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total recipients count' }),
     __metadata("design:type", Number)
-], SmsCampaignNatsResponse.prototype, "targetAudience", void 0);
+], SmsCampaignNatsResponse.prototype, "totalRecipients", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Number of SMS sent' }),
+    (0, swagger_1.ApiProperty)({ description: 'Successfully sent count' }),
     __metadata("design:type", Number)
 ], SmsCampaignNatsResponse.prototype, "sentCount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Number of SMS delivered' }),
+    (0, swagger_1.ApiProperty)({ description: 'Successfully delivered count' }),
     __metadata("design:type", Number)
 ], SmsCampaignNatsResponse.prototype, "deliveredCount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Number of failed SMS' }),
+    (0, swagger_1.ApiProperty)({ description: 'Failed delivery count' }),
     __metadata("design:type", Number)
 ], SmsCampaignNatsResponse.prototype, "failedCount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Number of bounced SMS' }),
+    (0, swagger_1.ApiProperty)({ description: 'Opt-out count' }),
     __metadata("design:type", Number)
-], SmsCampaignNatsResponse.prototype, "bounceCount", void 0);
+], SmsCampaignNatsResponse.prototype, "optOutCount", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Scheduled send time' }),
+    (0, swagger_1.ApiProperty)({ description: 'Delivery rate percentage', example: 98.5 }),
+    __metadata("design:type", Number)
+], SmsCampaignNatsResponse.prototype, "deliveryRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Campaign notes' }),
+    __metadata("design:type", String)
+], SmsCampaignNatsResponse.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional metadata' }),
     __metadata("design:type", Object)
-], SmsCampaignNatsResponse.prototype, "scheduledAt", void 0);
+], SmsCampaignNatsResponse.prototype, "metadata", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Actual send time' }),
-    __metadata("design:type", Object)
-], SmsCampaignNatsResponse.prototype, "sentAt", void 0);
+    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp (ISO string)' }),
+    __metadata("design:type", String)
+], SmsCampaignNatsResponse.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'User ID who created campaign' }),
+    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp (ISO string)' }),
+    __metadata("design:type", String)
+], SmsCampaignNatsResponse.prototype, "updatedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Created by user ID' }),
     __metadata("design:type", String)
 ], SmsCampaignNatsResponse.prototype, "createdBy", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp' }),
-    __metadata("design:type", Object)
-], SmsCampaignNatsResponse.prototype, "createdAt", void 0);
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Updated by user ID' }),
+    __metadata("design:type", String)
+], SmsCampaignNatsResponse.prototype, "updatedBy", void 0);
+/**
+ * Find All SMS Campaigns Request
+ * Pattern: crm.sms_marketing.campaigns.findAll
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ */
+class FindAllSmsCampaignsNatsRequest {
+    tenantId;
+    status;
+    createdFrom;
+    createdTo;
+    page;
+    limit;
+}
+exports.FindAllSmsCampaignsNatsRequest = FindAllSmsCampaignsNatsRequest;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp' }),
-    __metadata("design:type", Object)
-], SmsCampaignNatsResponse.prototype, "updatedAt", void 0);
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindAllSmsCampaignsNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by status' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindAllSmsCampaignsNatsRequest.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter from date (ISO string)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindAllSmsCampaignsNatsRequest.prototype, "createdFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter to date (ISO string)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindAllSmsCampaignsNatsRequest.prototype, "createdTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Page number' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], FindAllSmsCampaignsNatsRequest.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Items per page' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], FindAllSmsCampaignsNatsRequest.prototype, "limit", void 0);
+/**
+ * SMS Campaigns List Response DTO
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ */
+class SMSCampaignsListResponseDto {
+    campaigns;
+    total;
+    page;
+    limit;
+}
+exports.SMSCampaignsListResponseDto = SMSCampaignsListResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'List of SMS campaigns', type: [SmsCampaignNatsResponse] }),
+    __metadata("design:type", Array)
+], SMSCampaignsListResponseDto.prototype, "campaigns", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total count' }),
+    __metadata("design:type", Number)
+], SMSCampaignsListResponseDto.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current page' }),
+    __metadata("design:type", Number)
+], SMSCampaignsListResponseDto.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Items per page' }),
+    __metadata("design:type", Number)
+], SMSCampaignsListResponseDto.prototype, "limit", void 0);
 //# sourceMappingURL=sms-marketing.nats.js.map

@@ -7,242 +7,95 @@
  * - crm.sms_marketing.campaigns.findOne
  * - crm.sms_marketing.campaigns.update
  * - crm.sms_marketing.campaigns.delete
- * - crm.sms_marketing.templates.findAll
- * - crm.sms_marketing.templates.create
- * - crm.sms_marketing.send.single
- * - crm.sms_marketing.send.campaign
- * - crm.sms_marketing.analytics
  *
  * Handler: crm-service (SmsMarketingController)
  * Called by: api-gateway (CrmController)
  */
 import { NatsResponse } from '../../common';
 /**
- * SMS Campaign Status Enum
+ * Create SMS Campaign DTO
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ * @matches_entity SmsCampaign (services/crm-service/src/marketing/sms/entities/sms-campaign.entity.ts)
  */
-export declare enum SmsCampaignStatus {
-    DRAFT = "DRAFT",
-    SCHEDULED = "SCHEDULED",
-    SENDING = "SENDING",
-    SENT = "SENT",
-    PAUSED = "PAUSED",
-    CANCELLED = "CANCELLED"
-}
-/**
- * Create SMS Campaign Request
- * Pattern: crm.sms_marketing.campaigns.create
- */
-export interface CreateSmsCampaignNatsRequest {
+export declare class CreateSMSCampaignDto {
     tenantId: string;
-    userId: string;
     name: string;
-    description?: string;
     templateId: string;
-    content: string;
-    fromPhoneNumber?: string;
-    targetSegments: string[];
+    campaignType: string;
+    recipientSegmentation?: Record<string, any>;
+    personalizationData?: Record<string, any>;
     scheduledAt?: string;
-    sendImmediately?: boolean;
+    notes?: string;
     metadata?: Record<string, any>;
 }
 /**
- * Update SMS Campaign Request
- * Pattern: crm.sms_marketing.campaigns.update
- */
-export interface UpdateSmsCampaignNatsRequest {
-    tenantId: string;
-    campaignId: string;
-    userId: string;
-    updateDto: Partial<CreateSmsCampaignNatsRequest>;
-}
-/**
- * SMS Campaign Response
+ * SMS Campaign Response (matches entity structure with template join)
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ * @matches_entity SmsCampaign (services/crm-service/src/marketing/sms/entities/sms-campaign.entity.ts)
+ * @note message and description populated from joined template relation
  */
 export declare class SmsCampaignNatsResponse {
     id: string;
     tenantId: string;
     name: string;
-    description?: string;
     templateId: string;
-    content: string;
-    fromPhoneNumber?: string;
-    status: SmsCampaignStatus;
-    targetSegments: string[];
-    targetAudience: number;
+    campaignType: string;
+    status: string;
+    message?: string;
+    description?: string;
+    templateName?: string;
+    scheduledAt?: string;
+    sentAt?: string;
+    totalRecipients: number;
     sentCount: number;
     deliveredCount: number;
     failedCount: number;
-    bounceCount: number;
-    scheduledAt?: string | Date;
-    sentAt?: string | Date;
-    createdBy: string;
-    createdAt: string | Date;
-    updatedAt: string | Date;
+    optOutCount: number;
+    deliveryRate: number;
+    notes?: string;
+    metadata?: Record<string, any>;
+    createdAt: string;
+    updatedAt: string;
+    createdBy?: string;
+    updatedBy?: string;
 }
 /**
- * SMS Template Response
- */
-export interface SmsTemplateNatsResponse {
-    id: string;
-    tenantId: string;
-    name: string;
-    content: string;
-    variables: string[];
-    characterCount: number;
-    createdBy: string;
-    createdAt: string | Date;
-    updatedAt: string | Date;
-}
-/**
- * Find All Campaigns Request
+ * Find All SMS Campaigns Request
  * Pattern: crm.sms_marketing.campaigns.findAll
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
  */
-export interface FindAllSmsCampaignsNatsRequest {
+export declare class FindAllSmsCampaignsNatsRequest {
     tenantId: string;
-    status?: SmsCampaignStatus;
+    status?: string;
+    createdFrom?: string;
+    createdTo?: string;
     page?: number;
     limit?: number;
 }
 /**
- * Find All Campaigns Response
+ * SMS Campaigns List Response DTO
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
  */
-export type FindAllSmsCampaignsNatsResponse = NatsResponse<{
-    data: SmsCampaignNatsResponse[];
+export declare class SMSCampaignsListResponseDto {
+    campaigns: SmsCampaignNatsResponse[];
     total: number;
     page: number;
     limit: number;
-}>;
+}
 /**
- * Create Campaign Response
+ * Find All SMS Campaigns Response
+ */
+export type FindAllSmsCampaignsNatsResponse = NatsResponse<SMSCampaignsListResponseDto>;
+/**
+ * Create SMS Campaign Response
  */
 export type CreateSmsCampaignNatsResponse = NatsResponse<SmsCampaignNatsResponse>;
-/**
- * Find One Campaign Request
- * Pattern: crm.sms_marketing.campaigns.findOne
- */
-export interface FindOneSmsCampaignNatsRequest {
-    tenantId: string;
-    campaignId: string;
-}
-/**
- * Find One Campaign Response
- */
-export type FindOneSmsCampaignNatsResponse = NatsResponse<SmsCampaignNatsResponse>;
-/**
- * Update Campaign Response
- */
-export type UpdateSmsCampaignNatsResponse = NatsResponse<SmsCampaignNatsResponse>;
-/**
- * Delete Campaign Request
- * Pattern: crm.sms_marketing.campaigns.delete
- */
-export interface DeleteSmsCampaignNatsRequest {
-    tenantId: string;
-    campaignId: string;
-}
-/**
- * Delete Campaign Response
- */
-export type DeleteSmsCampaignNatsResponse = NatsResponse<{
-    success: boolean;
-}>;
-/**
- * Find All Templates Request
- * Pattern: crm.sms_marketing.templates.findAll
- */
-export interface FindAllSmsTemplatesNatsRequest {
-    tenantId: string;
-    page?: number;
-    limit?: number;
-}
-/**
- * Find All Templates Response
- */
-export type FindAllSmsTemplatesNatsResponse = NatsResponse<{
-    data: SmsTemplateNatsResponse[];
-    total: number;
-    page: number;
-    limit: number;
-}>;
-/**
- * Create Template Request
- * Pattern: crm.sms_marketing.templates.create
- */
-export interface CreateSmsTemplateNatsRequest {
-    tenantId: string;
-    userId: string;
-    name: string;
-    content: string;
-    variables?: string[];
-}
-/**
- * Create Template Response
- */
-export type CreateSmsTemplateNatsResponse = NatsResponse<SmsTemplateNatsResponse>;
-/**
- * Send Single SMS Request
- * Pattern: crm.sms_marketing.send.single
- */
-export interface SendSingleSmsNatsRequest {
-    tenantId: string;
-    recipientPhone: string;
-    templateId: string;
-    content: string;
-    variables?: Record<string, any>;
-    metadata?: Record<string, any>;
-}
-/**
- * Send Single SMS Response
- */
-export type SendSingleSmsNatsResponse = NatsResponse<{
-    messageId: string;
-    status: string;
-    message: string;
-}>;
-/**
- * Send Campaign SMS Request
- * Pattern: crm.sms_marketing.send.campaign
- */
-export interface SendCampaignSmsNatsRequest {
-    tenantId: string;
-    campaignId: string;
-}
-/**
- * Send Campaign SMS Response
- */
-export type SendCampaignSmsNatsResponse = NatsResponse<{
-    campaignId: string;
-    totalRecipients: number;
-    sentCount: number;
-    failedCount: number;
-    status: string;
-}>;
-/**
- * SMS Analytics Response
- */
-export interface SmsAnalyticsNatsResponse {
-    campaignId?: string;
-    campaignName?: string;
-    totalSent: number;
-    totalDelivered: number;
-    totalFailed: number;
-    totalBounced: number;
-    deliveryRate: number;
-    failureRate: number;
-    conversionRate?: number;
-    roi?: number;
-}
-/**
- * Analytics Request
- * Pattern: crm.sms_marketing.analytics
- */
-export interface GetSmsAnalyticsNatsRequest {
-    tenantId: string;
-    campaignId?: string;
-    period?: string;
-}
-/**
- * Analytics Response
- */
-export type GetSmsAnalyticsNatsResponse = NatsResponse<SmsAnalyticsNatsResponse | SmsAnalyticsNatsResponse[]>;
 //# sourceMappingURL=sms-marketing.nats.d.ts.map

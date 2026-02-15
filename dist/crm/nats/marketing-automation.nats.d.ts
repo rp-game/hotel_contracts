@@ -70,50 +70,68 @@ export interface UpdateAutomationNatsRequest {
     updateDto: Partial<CreateAutomationNatsRequest>;
 }
 /**
- * Marketing Automation Response
+ * Marketing Automation Response (matches AutomationRule entity)
+ *
+ * @matches_entity AutomationRule (services/crm-service/src/marketing/automation/entities/automation-rule.entity.ts)
+ * @standardized 2026-02-15
  */
 export declare class MarketingAutomationNatsResponse {
     id: string;
     tenantId: string;
     name: string;
     description?: string;
-    status: AutomationStatus;
-    trigger: {
-        type: string;
-        condition: Record<string, any>;
-    };
-    actions: Array<{
-        type: ActionType;
-        config: Record<string, any>;
-        delay?: number;
-    }>;
-    targetSegments?: string[];
+    ruleType: string;
+    status: string;
+    isActive: boolean;
+    triggerEvent: Record<string, any>;
+    triggerConditions?: Record<string, any>;
+    actionType: string;
+    actionConfig: Record<string, any>;
+    delayMinutes: number;
+    scheduleConfig?: Record<string, any>;
+    targetSegmentation?: Record<string, any>;
+    maxExecutionsPerCustomer?: number;
+    cooldownHours?: number;
+    activeFrom?: string;
+    activeTo?: string;
+    totalTriggers: number;
     totalExecutions: number;
     successfulExecutions: number;
     failedExecutions: number;
-    createdBy: string;
-    createdAt: string | Date;
-    updatedAt: string | Date;
+    lastExecutedAt?: string;
+    metadata?: Record<string, any>;
+    createdAt: string;
+    updatedAt: string;
+    createdBy?: string;
+    updatedBy?: string;
 }
 /**
- * Find All Automations Request
+ * Find All Automation Rules Request
  * Pattern: crm.marketing.automation.findAll
+ *
+ * @standardized 2026-02-15
  */
-export interface FindAllAutomationsNatsRequest {
+export declare class FindAllAutomationRulesNatsRequest {
     tenantId: string;
-    status?: AutomationStatus;
+    status?: string;
+    ruleType?: string;
+    isActive?: boolean;
     page?: number;
     limit?: number;
 }
 /**
- * Find All Automations Response
+ * Automation Rules List Response DTO
+ *
+ * @standardized 2026-02-15
  */
-export type FindAllAutomationsNatsResponse = NatsResponse<{
-    data: MarketingAutomationNatsResponse[];
+export declare class AutomationRulesListResponseDto {
+    rules: MarketingAutomationNatsResponse[];
     total: number;
-    page: number;
-    limit: number;
-}>;
+}
+/**
+ * Find All Automation Rules Response
+ */
+export type FindAllAutomationRulesNatsResponse = NatsResponse<AutomationRulesListResponseDto>;
 /**
  * Create Automation Response
  */

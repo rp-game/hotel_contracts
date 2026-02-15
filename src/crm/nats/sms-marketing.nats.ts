@@ -7,11 +7,6 @@
  * - crm.sms_marketing.campaigns.findOne
  * - crm.sms_marketing.campaigns.update
  * - crm.sms_marketing.campaigns.delete
- * - crm.sms_marketing.templates.findAll
- * - crm.sms_marketing.templates.create
- * - crm.sms_marketing.send.single
- * - crm.sms_marketing.send.campaign
- * - crm.sms_marketing.analytics
  *
  * Handler: crm-service (SmsMarketingController)
  * Called by: api-gateway (CrmController)
@@ -19,50 +14,62 @@
 
 import { NatsResponse } from '../../common';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 
 /**
- * SMS Campaign Status Enum
+ * Create SMS Campaign DTO
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ * @matches_entity SmsCampaign (services/crm-service/src/marketing/sms/entities/sms-campaign.entity.ts)
  */
-export enum SmsCampaignStatus {
-  DRAFT = 'DRAFT',
-  SCHEDULED = 'SCHEDULED',
-  SENDING = 'SENDING',
-  SENT = 'SENT',
-  PAUSED = 'PAUSED',
-  CANCELLED = 'CANCELLED',
-}
+export class CreateSMSCampaignDto {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId!: string;
 
-/**
- * Create SMS Campaign Request
- * Pattern: crm.sms_marketing.campaigns.create
- */
-export interface CreateSmsCampaignNatsRequest {
-  tenantId: string;
-  userId: string;
-  name: string;
-  description?: string;
-  templateId: string;
-  content: string;
-  fromPhoneNumber?: string;
-  targetSegments: string[];
+  @ApiProperty({ description: 'Campaign name' })
+  @IsString()
+  name!: string;
+
+  @ApiProperty({ description: 'SMS template ID reference' })
+  @IsString()
+  templateId!: string;
+
+  @ApiProperty({ description: 'Campaign type', enum: ['ONE_TIME', 'RECURRING', 'AUTOMATED'] })
+  @IsString()
+  campaignType!: string;
+
+  @ApiPropertyOptional({ description: 'Recipient segmentation criteria' })
+  @IsOptional()
+  recipientSegmentation?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Personalization data for template variables' })
+  @IsOptional()
+  personalizationData?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Scheduled send time (ISO string)' })
+  @IsOptional()
+  @IsString()
   scheduledAt?: string;
-  sendImmediately?: boolean;
+
+  @ApiPropertyOptional({ description: 'Campaign notes' })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+
+  @ApiPropertyOptional({ description: 'Additional metadata' })
+  @IsOptional()
   metadata?: Record<string, any>;
 }
 
 /**
- * Update SMS Campaign Request
- * Pattern: crm.sms_marketing.campaigns.update
- */
-export interface UpdateSmsCampaignNatsRequest {
-  tenantId: string;
-  campaignId: string;
-  userId: string;
-  updateDto: Partial<CreateSmsCampaignNatsRequest>;
-}
-
-/**
- * SMS Campaign Response
+ * SMS Campaign Response (matches entity structure with template join)
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ * @matches_entity SmsCampaign (services/crm-service/src/marketing/sms/entities/sms-campaign.entity.ts)
+ * @note message and description populated from joined template relation
  */
 export class SmsCampaignNatsResponse {
   @ApiProperty({ description: 'Campaign ID' })
@@ -74,237 +81,129 @@ export class SmsCampaignNatsResponse {
   @ApiProperty({ description: 'Campaign name' })
   name!: string;
 
-  @ApiPropertyOptional({ description: 'Campaign description' })
-  description?: string;
-
-  @ApiProperty({ description: 'SMS template ID' })
+  @ApiProperty({ description: 'SMS template ID reference' })
   templateId!: string;
 
-  @ApiProperty({ description: 'SMS message content' })
-  content!: string;
+  @ApiProperty({ description: 'Campaign type', example: 'ONE_TIME' })
+  campaignType!: string;
 
-  @ApiPropertyOptional({ description: 'Sender phone number' })
-  fromPhoneNumber?: string;
+  @ApiProperty({ description: 'Campaign status', example: 'DRAFT' })
+  status!: string;
 
-  @ApiProperty({ enum: SmsCampaignStatus, description: 'Campaign status' })
-  status!: SmsCampaignStatus;
+  @ApiPropertyOptional({ description: 'SMS message (from template.content)' })
+  message?: string;
 
-  @ApiProperty({ description: 'Target customer segments', type: [String] })
-  targetSegments!: string[];
+  @ApiPropertyOptional({ description: 'Campaign description (from template.description)' })
+  description?: string;
 
-  @ApiProperty({ description: 'Total target audience size' })
-  targetAudience!: number;
+  @ApiPropertyOptional({ description: 'Template name (from template.name)' })
+  templateName?: string;
 
-  @ApiProperty({ description: 'Number of SMS sent' })
+  @ApiPropertyOptional({ description: 'Scheduled send time (ISO string)' })
+  scheduledAt?: string;
+
+  @ApiPropertyOptional({ description: 'Actual sent time (ISO string)' })
+  sentAt?: string;
+
+  @ApiProperty({ description: 'Total recipients count' })
+  totalRecipients!: number;
+
+  @ApiProperty({ description: 'Successfully sent count' })
   sentCount!: number;
 
-  @ApiProperty({ description: 'Number of SMS delivered' })
+  @ApiProperty({ description: 'Successfully delivered count' })
   deliveredCount!: number;
 
-  @ApiProperty({ description: 'Number of failed SMS' })
+  @ApiProperty({ description: 'Failed delivery count' })
   failedCount!: number;
 
-  @ApiProperty({ description: 'Number of bounced SMS' })
-  bounceCount!: number;
+  @ApiProperty({ description: 'Opt-out count' })
+  optOutCount!: number;
 
-  @ApiPropertyOptional({ description: 'Scheduled send time' })
-  scheduledAt?: string | Date;
+  @ApiProperty({ description: 'Delivery rate percentage', example: 98.5 })
+  deliveryRate!: number;
 
-  @ApiPropertyOptional({ description: 'Actual send time' })
-  sentAt?: string | Date;
+  @ApiPropertyOptional({ description: 'Campaign notes' })
+  notes?: string;
 
-  @ApiProperty({ description: 'User ID who created campaign' })
-  createdBy!: string;
+  @ApiPropertyOptional({ description: 'Additional metadata' })
+  metadata?: Record<string, any>;
 
-  @ApiProperty({ description: 'Creation timestamp' })
-  createdAt!: string | Date;
+  @ApiProperty({ description: 'Creation timestamp (ISO string)' })
+  createdAt!: string;
 
-  @ApiProperty({ description: 'Last update timestamp' })
-  updatedAt!: string | Date;
+  @ApiProperty({ description: 'Last update timestamp (ISO string)' })
+  updatedAt!: string;
+
+  @ApiPropertyOptional({ description: 'Created by user ID' })
+  createdBy?: string;
+
+  @ApiPropertyOptional({ description: 'Updated by user ID' })
+  updatedBy?: string;
 }
 
 /**
- * SMS Template Response
- */
-export interface SmsTemplateNatsResponse {
-  id: string;
-  tenantId: string;
-  name: string;
-  content: string;
-  variables: string[];
-  characterCount: number;
-  createdBy: string;
-  createdAt: string | Date;
-  updatedAt: string | Date;
-}
-
-/**
- * Find All Campaigns Request
+ * Find All SMS Campaigns Request
  * Pattern: crm.sms_marketing.campaigns.findAll
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
  */
-export interface FindAllSmsCampaignsNatsRequest {
-  tenantId: string;
-  status?: SmsCampaignStatus;
+export class FindAllSmsCampaignsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId!: string;
+
+  @ApiPropertyOptional({ description: 'Filter by status' })
+  @IsOptional()
+  @IsString()
+  status?: string;
+
+  @ApiPropertyOptional({ description: 'Filter from date (ISO string)' })
+  @IsOptional()
+  @IsString()
+  createdFrom?: string;
+
+  @ApiPropertyOptional({ description: 'Filter to date (ISO string)' })
+  @IsOptional()
+  @IsString()
+  createdTo?: string;
+
+  @ApiPropertyOptional({ description: 'Page number' })
+  @IsOptional()
   page?: number;
+
+  @ApiPropertyOptional({ description: 'Items per page' })
+  @IsOptional()
   limit?: number;
 }
 
 /**
- * Find All Campaigns Response
+ * SMS Campaigns List Response DTO
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
  */
-export type FindAllSmsCampaignsNatsResponse = NatsResponse<{
-  data: SmsCampaignNatsResponse[];
-  total: number;
-  page: number;
-  limit: number;
-}>;
+export class SMSCampaignsListResponseDto {
+  @ApiProperty({ description: 'List of SMS campaigns', type: [SmsCampaignNatsResponse] })
+  campaigns!: SmsCampaignNatsResponse[];
+
+  @ApiProperty({ description: 'Total count' })
+  total!: number;
+
+  @ApiProperty({ description: 'Current page' })
+  page!: number;
+
+  @ApiProperty({ description: 'Items per page' })
+  limit!: number;
+}
 
 /**
- * Create Campaign Response
+ * Find All SMS Campaigns Response
+ */
+export type FindAllSmsCampaignsNatsResponse = NatsResponse<SMSCampaignsListResponseDto>;
+
+/**
+ * Create SMS Campaign Response
  */
 export type CreateSmsCampaignNatsResponse = NatsResponse<SmsCampaignNatsResponse>;
-
-/**
- * Find One Campaign Request
- * Pattern: crm.sms_marketing.campaigns.findOne
- */
-export interface FindOneSmsCampaignNatsRequest {
-  tenantId: string;
-  campaignId: string;
-}
-
-/**
- * Find One Campaign Response
- */
-export type FindOneSmsCampaignNatsResponse = NatsResponse<SmsCampaignNatsResponse>;
-
-/**
- * Update Campaign Response
- */
-export type UpdateSmsCampaignNatsResponse = NatsResponse<SmsCampaignNatsResponse>;
-
-/**
- * Delete Campaign Request
- * Pattern: crm.sms_marketing.campaigns.delete
- */
-export interface DeleteSmsCampaignNatsRequest {
-  tenantId: string;
-  campaignId: string;
-}
-
-/**
- * Delete Campaign Response
- */
-export type DeleteSmsCampaignNatsResponse = NatsResponse<{ success: boolean }>;
-
-/**
- * Find All Templates Request
- * Pattern: crm.sms_marketing.templates.findAll
- */
-export interface FindAllSmsTemplatesNatsRequest {
-  tenantId: string;
-  page?: number;
-  limit?: number;
-}
-
-/**
- * Find All Templates Response
- */
-export type FindAllSmsTemplatesNatsResponse = NatsResponse<{
-  data: SmsTemplateNatsResponse[];
-  total: number;
-  page: number;
-  limit: number;
-}>;
-
-/**
- * Create Template Request
- * Pattern: crm.sms_marketing.templates.create
- */
-export interface CreateSmsTemplateNatsRequest {
-  tenantId: string;
-  userId: string;
-  name: string;
-  content: string;
-  variables?: string[];
-}
-
-/**
- * Create Template Response
- */
-export type CreateSmsTemplateNatsResponse = NatsResponse<SmsTemplateNatsResponse>;
-
-/**
- * Send Single SMS Request
- * Pattern: crm.sms_marketing.send.single
- */
-export interface SendSingleSmsNatsRequest {
-  tenantId: string;
-  recipientPhone: string;
-  templateId: string;
-  content: string;
-  variables?: Record<string, any>;
-  metadata?: Record<string, any>;
-}
-
-/**
- * Send Single SMS Response
- */
-export type SendSingleSmsNatsResponse = NatsResponse<{
-  messageId: string;
-  status: string;
-  message: string;
-}>;
-
-/**
- * Send Campaign SMS Request
- * Pattern: crm.sms_marketing.send.campaign
- */
-export interface SendCampaignSmsNatsRequest {
-  tenantId: string;
-  campaignId: string;
-}
-
-/**
- * Send Campaign SMS Response
- */
-export type SendCampaignSmsNatsResponse = NatsResponse<{
-  campaignId: string;
-  totalRecipients: number;
-  sentCount: number;
-  failedCount: number;
-  status: string;
-}>;
-
-/**
- * SMS Analytics Response
- */
-export interface SmsAnalyticsNatsResponse {
-  campaignId?: string;
-  campaignName?: string;
-  totalSent: number;
-  totalDelivered: number;
-  totalFailed: number;
-  totalBounced: number;
-  deliveryRate: number;
-  failureRate: number;
-  conversionRate?: number;
-  roi?: number;
-}
-
-/**
- * Analytics Request
- * Pattern: crm.sms_marketing.analytics
- */
-export interface GetSmsAnalyticsNatsRequest {
-  tenantId: string;
-  campaignId?: string;
-  period?: string;
-}
-
-/**
- * Analytics Response
- */
-export type GetSmsAnalyticsNatsResponse = NatsResponse<
-  SmsAnalyticsNatsResponse | SmsAnalyticsNatsResponse[]
->;
