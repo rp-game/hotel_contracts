@@ -415,34 +415,34 @@ export class TenantResponseDto {
   @ApiProperty({ description: 'Tenant type', enum: TenantType })
   type: TenantType;
 
-  @ApiPropertyOptional({ description: 'Parent tenant ID' })
+  @ApiPropertyOptional({ description: 'Parent tenant ID', type: String })
   parentId: string | null;
 
   @ApiProperty({ description: 'Is tenant active' })
   isActive: boolean;
 
-  @ApiPropertyOptional({ description: 'Tenant description' })
+  @ApiPropertyOptional({ description: 'Tenant description', type: String })
   description: string | null;
 
   @ApiPropertyOptional({ description: 'List of hotel IDs (for chain type)', type: [String] })
   hotels: string[] | null;
 
-  @ApiPropertyOptional({ description: 'Chain ID (for individual hotels)' })
+  @ApiPropertyOptional({ description: 'Chain ID (for individual hotels)', type: String })
   chainId?: string;
 
-  @ApiPropertyOptional({ description: 'Physical address' })
+  @ApiPropertyOptional({ description: 'Physical address', type: String })
   address: string | null;
 
-  @ApiPropertyOptional({ description: 'City' })
+  @ApiPropertyOptional({ description: 'City', type: String })
   city: string | null;
 
-  @ApiPropertyOptional({ description: 'Country' })
+  @ApiPropertyOptional({ description: 'Country', type: String })
   country: string | null;
 
-  @ApiPropertyOptional({ description: 'Contact email' })
+  @ApiPropertyOptional({ description: 'Contact email', type: String })
   contactEmail: string | null;
 
-  @ApiPropertyOptional({ description: 'Contact phone' })
+  @ApiPropertyOptional({ description: 'Contact phone', type: String })
   contactPhone: string | null;
 
   @ApiPropertyOptional({ description: 'Hotel operation settings' })

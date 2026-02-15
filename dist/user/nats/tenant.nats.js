@@ -374,7 +374,7 @@ __decorate([
     __metadata("design:type", String)
 ], TenantResponseDto.prototype, "type", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Parent tenant ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Parent tenant ID', type: String }),
     __metadata("design:type", Object)
 ], TenantResponseDto.prototype, "parentId", void 0);
 __decorate([
@@ -382,7 +382,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], TenantResponseDto.prototype, "isActive", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant description' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant description', type: String }),
     __metadata("design:type", Object)
 ], TenantResponseDto.prototype, "description", void 0);
 __decorate([
@@ -390,27 +390,27 @@ __decorate([
     __metadata("design:type", Object)
 ], TenantResponseDto.prototype, "hotels", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Chain ID (for individual hotels)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Chain ID (for individual hotels)', type: String }),
     __metadata("design:type", String)
 ], TenantResponseDto.prototype, "chainId", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Physical address' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Physical address', type: String }),
     __metadata("design:type", Object)
 ], TenantResponseDto.prototype, "address", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'City' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'City', type: String }),
     __metadata("design:type", Object)
 ], TenantResponseDto.prototype, "city", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Country' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Country', type: String }),
     __metadata("design:type", Object)
 ], TenantResponseDto.prototype, "country", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Contact email' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contact email', type: String }),
     __metadata("design:type", Object)
 ], TenantResponseDto.prototype, "contactEmail", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Contact phone' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contact phone', type: String }),
     __metadata("design:type", Object)
 ], TenantResponseDto.prototype, "contactPhone", void 0);
 __decorate([
