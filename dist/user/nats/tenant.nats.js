@@ -374,55 +374,55 @@ __decorate([
     __metadata("design:type", String)
 ], TenantResponseDto.prototype, "type", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Parent tenant ID', type: String }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Parent tenant ID', type: String, nullable: true }),
+    __metadata("design:type", String)
 ], TenantResponseDto.prototype, "parentId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Is tenant active' }),
     __metadata("design:type", Boolean)
 ], TenantResponseDto.prototype, "isActive", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant description', type: String }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant description', type: String, nullable: true }),
+    __metadata("design:type", String)
 ], TenantResponseDto.prototype, "description", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'List of hotel IDs (for chain type)', type: [String] }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'List of hotel IDs (for chain type)', type: [String], nullable: true }),
+    __metadata("design:type", Array)
 ], TenantResponseDto.prototype, "hotels", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Chain ID (for individual hotels)', type: String }),
     __metadata("design:type", String)
 ], TenantResponseDto.prototype, "chainId", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Physical address', type: String }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Physical address', type: String, nullable: true }),
+    __metadata("design:type", String)
 ], TenantResponseDto.prototype, "address", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'City', type: String }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'City', type: String, nullable: true }),
+    __metadata("design:type", String)
 ], TenantResponseDto.prototype, "city", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Country', type: String }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Country', type: String, nullable: true }),
+    __metadata("design:type", String)
 ], TenantResponseDto.prototype, "country", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Contact email', type: String }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contact email', type: String, nullable: true }),
+    __metadata("design:type", String)
 ], TenantResponseDto.prototype, "contactEmail", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Contact phone', type: String }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contact phone', type: String, nullable: true }),
+    __metadata("design:type", String)
 ], TenantResponseDto.prototype, "contactPhone", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel operation settings' }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel operation settings', type: () => HotelOperationSettingsDto, nullable: true }),
+    __metadata("design:type", HotelOperationSettingsDto)
 ], TenantResponseDto.prototype, "operationSettings", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Created at' }),
-    __metadata("design:type", Date)
+    (0, swagger_1.ApiProperty)({ description: 'Created at', type: String }),
+    __metadata("design:type", String)
 ], TenantResponseDto.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Updated at' }),
-    __metadata("design:type", Date)
+    (0, swagger_1.ApiProperty)({ description: 'Updated at', type: String }),
+    __metadata("design:type", String)
 ], TenantResponseDto.prototype, "updatedAt", void 0);
 //# sourceMappingURL=tenant.nats.js.map

@@ -204,18 +204,18 @@ export declare class TenantResponseDto {
     name: string;
     slug: string;
     type: TenantType;
-    parentId: string | null;
+    parentId?: string;
     isActive: boolean;
-    description: string | null;
-    hotels: string[] | null;
+    description?: string;
+    hotels?: string[];
     chainId?: string;
-    address: string | null;
-    city: string | null;
-    country: string | null;
-    contactEmail: string | null;
-    contactPhone: string | null;
-    operationSettings: HotelOperationSettingsDto | null;
-    createdAt: Date;
-    updatedAt: Date;
+    address?: string;
+    city?: string;
+    country?: string;
+    contactEmail?: string;
+    contactPhone?: string;
+    operationSettings?: HotelOperationSettingsDto;
+    createdAt: string;
+    updatedAt: string;
 }
 //# sourceMappingURL=tenant.nats.d.ts.map

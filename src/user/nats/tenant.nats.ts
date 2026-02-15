@@ -415,42 +415,42 @@ export class TenantResponseDto {
   @ApiProperty({ description: 'Tenant type', enum: TenantType })
   type: TenantType;
 
-  @ApiPropertyOptional({ description: 'Parent tenant ID', type: String })
-  parentId: string | null;
+  @ApiPropertyOptional({ description: 'Parent tenant ID', type: String, nullable: true })
+  parentId?: string;
 
   @ApiProperty({ description: 'Is tenant active' })
   isActive: boolean;
 
-  @ApiPropertyOptional({ description: 'Tenant description', type: String })
-  description: string | null;
+  @ApiPropertyOptional({ description: 'Tenant description', type: String, nullable: true })
+  description?: string;
 
-  @ApiPropertyOptional({ description: 'List of hotel IDs (for chain type)', type: [String] })
-  hotels: string[] | null;
+  @ApiPropertyOptional({ description: 'List of hotel IDs (for chain type)', type: [String], nullable: true })
+  hotels?: string[];
 
   @ApiPropertyOptional({ description: 'Chain ID (for individual hotels)', type: String })
   chainId?: string;
 
-  @ApiPropertyOptional({ description: 'Physical address', type: String })
-  address: string | null;
+  @ApiPropertyOptional({ description: 'Physical address', type: String, nullable: true })
+  address?: string;
 
-  @ApiPropertyOptional({ description: 'City', type: String })
-  city: string | null;
+  @ApiPropertyOptional({ description: 'City', type: String, nullable: true })
+  city?: string;
 
-  @ApiPropertyOptional({ description: 'Country', type: String })
-  country: string | null;
+  @ApiPropertyOptional({ description: 'Country', type: String, nullable: true })
+  country?: string;
 
-  @ApiPropertyOptional({ description: 'Contact email', type: String })
-  contactEmail: string | null;
+  @ApiPropertyOptional({ description: 'Contact email', type: String, nullable: true })
+  contactEmail?: string;
 
-  @ApiPropertyOptional({ description: 'Contact phone', type: String })
-  contactPhone: string | null;
+  @ApiPropertyOptional({ description: 'Contact phone', type: String, nullable: true })
+  contactPhone?: string;
 
-  @ApiPropertyOptional({ description: 'Hotel operation settings' })
-  operationSettings: HotelOperationSettingsDto | null;
+  @ApiPropertyOptional({ description: 'Hotel operation settings', type: () => HotelOperationSettingsDto, nullable: true })
+  operationSettings?: HotelOperationSettingsDto;
 
-  @ApiProperty({ description: 'Created at' })
-  createdAt: Date;
+  @ApiProperty({ description: 'Created at', type: String })
+  createdAt: string;
 
-  @ApiProperty({ description: 'Updated at' })
-  updatedAt: Date;
+  @ApiProperty({ description: 'Updated at', type: String })
+  updatedAt: string;
 }
