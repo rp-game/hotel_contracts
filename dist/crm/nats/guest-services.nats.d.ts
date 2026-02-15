@@ -229,7 +229,7 @@ export declare class ServiceBookingNatsResponse {
     tenantId: string;
     hotelId: string;
     serviceId: string;
-    guestId: string;
+    guestId?: string;
     serviceName?: string;
     guestName?: string;
     roomBookingId?: string;

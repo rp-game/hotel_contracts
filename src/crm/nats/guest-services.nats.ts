@@ -356,8 +356,8 @@ export class ServiceBookingNatsResponse {
   @ApiProperty({ description: 'Service ID' })
   serviceId!: string;
 
-  @ApiProperty({ description: 'Guest/Customer ID' })
-  guestId!: string; // FIXED: Use guestId (frontend expectation) instead of customerId
+  @ApiPropertyOptional({ description: 'Guest/Customer ID' })
+  guestId?: string; // FIXED: Use guestId (frontend expectation) instead of customerId
 
   @ApiPropertyOptional({ description: 'Service name' })
   serviceName?: string;

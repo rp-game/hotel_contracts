@@ -272,7 +272,7 @@ __decorate([
     __metadata("design:type", String)
 ], ServiceBookingNatsResponse.prototype, "serviceId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Guest/Customer ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Guest/Customer ID' }),
     __metadata("design:type", String)
 ], ServiceBookingNatsResponse.prototype, "guestId", void 0);
 __decorate([
