@@ -298,7 +298,11 @@ export type ApplyBrandStandardsNatsResponse = NatsResponse<ApplyBrandStandardsRe
 export interface FindRoomsByHotelRequest {
     hotelId: string;
 }
-export interface RoomData {
+/**
+ * Room Data DTO
+ * Used in hotels.findRooms response and room-related operations
+ */
+export declare class RoomData {
     id: string;
     roomNumber: string;
     floor?: number;

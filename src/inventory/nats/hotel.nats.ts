@@ -484,19 +484,68 @@ export interface FindRoomsByHotelRequest {
   hotelId: string;
 }
 
-export interface RoomData {
+/**
+ * Room Data DTO
+ * Used in hotels.findRooms response and room-related operations
+ */
+export class RoomData {
+  @ApiProperty({ description: 'Room ID' })
+  @IsUUID()
   id: string;
+
+  @ApiProperty({ description: 'Room number' })
+  @IsString()
   roomNumber: string;
+
+  @ApiPropertyOptional({ description: 'Floor number' })
+  @IsOptional()
+  @IsNumber()
   floor?: number;
+
+  @ApiProperty({ description: 'Room type ID' })
+  @IsUUID()
   roomTypeId: string;
+
+  @ApiProperty({ description: 'Room status' })
+  @IsString()
   status: string;
+
+  @ApiPropertyOptional({ description: 'Current status (additional status field)' })
+  @IsOptional()
+  @IsString()
   currentStatus?: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsUUID()
   hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Last cleaned timestamp' })
+  @IsOptional()
+  @IsString()
   lastCleanedAt?: string;
+
+  @ApiPropertyOptional({ description: 'Room features' })
+  @IsOptional()
+  @IsObject()
   features?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Room notes' })
+  @IsOptional()
+  @IsString()
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Created at timestamp' })
+  @IsOptional()
+  @IsString()
   createdAt?: string;
+
+  @ApiPropertyOptional({ description: 'Updated at timestamp' })
+  @IsOptional()
+  @IsString()
   updatedAt?: string;
 }
 

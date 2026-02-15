@@ -38,7 +38,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HotelListResponseDto = exports.FindHotelsByChainRequestDto = exports.HotelWithRoomCountDto = exports.HotelWithStatsDto = exports.HotelDto = void 0;
+exports.RoomData = exports.HotelListResponseDto = exports.FindHotelsByChainRequestDto = exports.HotelWithRoomCountDto = exports.HotelWithStatsDto = exports.HotelDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 /**
@@ -342,4 +342,96 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Total number of pages' }),
     __metadata("design:type", Number)
 ], HotelListResponseDto.prototype, "totalPages", void 0);
+/**
+ * Room Data DTO
+ * Used in hotels.findRooms response and room-related operations
+ */
+class RoomData {
+    id;
+    roomNumber;
+    floor;
+    roomTypeId;
+    status;
+    currentStatus;
+    tenantId;
+    hotelId;
+    lastCleanedAt;
+    features;
+    notes;
+    createdAt;
+    updatedAt;
+}
+exports.RoomData = RoomData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], RoomData.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room number' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomData.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Floor number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], RoomData.prototype, "floor", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], RoomData.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room status' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomData.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Current status (additional status field)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomData.prototype, "currentStatus", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], RoomData.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], RoomData.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Last cleaned timestamp' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomData.prototype, "lastCleanedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room features' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], RoomData.prototype, "features", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomData.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Created at timestamp' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomData.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Updated at timestamp' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomData.prototype, "updatedAt", void 0);
 //# sourceMappingURL=hotel.nats.js.map
