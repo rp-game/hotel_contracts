@@ -31,6 +31,7 @@ export * from './customer-preferences.nats';
 export * from './guest-preferences.nats';
 
 // Marketing
+export * from './marketing-stats.nats';
 export * from './marketing-automation.nats';
 export * from './email-marketing.nats';
 export * from './sms-marketing.nats';

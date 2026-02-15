@@ -40,6 +40,7 @@ __exportStar(require("./interactions.nats"), exports);
 __exportStar(require("./customer-preferences.nats"), exports);
 __exportStar(require("./guest-preferences.nats"), exports);
 // Marketing
+__exportStar(require("./marketing-stats.nats"), exports);
 __exportStar(require("./marketing-automation.nats"), exports);
 __exportStar(require("./email-marketing.nats"), exports);
 __exportStar(require("./sms-marketing.nats"), exports);
