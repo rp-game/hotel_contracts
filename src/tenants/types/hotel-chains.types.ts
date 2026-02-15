@@ -295,6 +295,11 @@ export class CreateHotelDto {
  * (Unique to tenants - not duplicated elsewhere)
  */
 export class UpdateHotelDto {
+  @ApiPropertyOptional({ description: 'Hotel ID (required for NATS, optional for REST)' })
+  @IsOptional()
+  @IsUUID()
+  id?: string;
+
   @ApiPropertyOptional({ description: 'Hotel name' })
   @IsOptional()
   @IsString()

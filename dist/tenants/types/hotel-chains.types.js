@@ -424,6 +424,7 @@ __decorate([
  * (Unique to tenants - not duplicated elsewhere)
  */
 class UpdateHotelDto {
+    id;
     name;
     chainId;
     description;
@@ -442,6 +443,12 @@ class UpdateHotelDto {
     currency;
 }
 exports.UpdateHotelDto = UpdateHotelDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (required for NATS, optional for REST)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateHotelDto.prototype, "id", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel name' }),
     (0, class_validator_1.IsOptional)(),

@@ -99,6 +99,7 @@ export declare class CreateHotelDto {
  * (Unique to tenants - not duplicated elsewhere)
  */
 export declare class UpdateHotelDto {
+    id?: string;
     name?: string;
     chainId?: string;
     description?: string;
