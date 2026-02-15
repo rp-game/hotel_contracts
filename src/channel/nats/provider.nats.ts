@@ -41,11 +41,21 @@ export interface CreateProviderNatsRequest extends CreateProviderRequest {
 export type CreateProviderNatsResponse = NatsResponse<ChannelProvider>;
 
 /**
- * Get Provider Request
+ * Get Provider Request (Class-based for both REST and NATS)
  * Pattern: channel.providers.get
+ * Used by: REST API (@ApiParam) and NATS messages
  */
-export interface GetProviderNatsRequest {
+export class GetProviderNatsRequest {
+  @ApiProperty({
+    description: 'Provider ID',
+    example: '123e4567-e89b-12d3-a456-426614174000'
+  })
   providerId: string;
+
+  @ApiPropertyOptional({
+    description: 'Tenant ID (optional for multi-tenant contexts)',
+    example: '123e4567-e89b-12d3-a456-426614174001'
+  })
   tenantId?: string;
 }
 

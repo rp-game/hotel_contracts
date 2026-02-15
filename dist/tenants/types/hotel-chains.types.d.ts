@@ -38,10 +38,14 @@ export declare class HotelChainResponseDto {
     tenantId: string;
     name: string;
     brandName: string;
+    brand?: string;
+    type?: ChainType;
     description?: string;
     headquartersCountry?: string;
     headquartersCity?: string;
     headquartersAddress?: string;
+    websiteUrl?: string;
+    logoUrl?: string;
     phone: string;
     email: string;
     status: HotelChainStatus;
@@ -50,6 +54,7 @@ export declare class HotelChainResponseDto {
     marketSegments: string[];
     targetMarkets: string[];
     amenities: string[];
+    loyaltyProgram?: string;
     totalProperties?: number;
     totalRooms?: number;
     createdAt: string;
@@ -68,6 +73,43 @@ export declare class HotelChainListResponseDto {
     page: number;
     limit: number;
     totalPages: number;
+}
+/**
+ * Brand standards DTO
+ * (Unique to tenants - used for setting chain-wide standards)
+ */
+export declare class BrandStandardsDto {
+    serviceStandards?: {
+        checkInTime?: string;
+        checkOutTime?: string;
+        housekeepingSchedule?: string;
+        guestServiceRequirements?: string[];
+        qualityStandards?: string[];
+    };
+    designStandards?: {
+        colorScheme?: string[];
+        furniture?: string[];
+        amenities?: string[];
+        branding?: Record<string, any>;
+    };
+    operationalStandards?: {
+        staffing?: Record<string, any>;
+        training?: string[];
+        procedures?: Record<string, any>;
+        compliance?: string[];
+    };
+    technologyStandards?: {
+        pmsRequirements?: string[];
+        wifiStandards?: Record<string, any>;
+        digitalServices?: string[];
+        integrations?: string[];
+    };
+    foodBeverageStandards?: {
+        menuRequirements?: string[];
+        serviceStyle?: string;
+        qualityStandards?: string[];
+        suppliers?: string[];
+    };
 }
 /**
  * Create hotel DTO

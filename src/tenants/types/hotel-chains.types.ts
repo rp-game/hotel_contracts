@@ -118,6 +118,12 @@ export class HotelChainResponseDto {
   @ApiProperty()
   brandName: string;
 
+  @ApiPropertyOptional({ description: 'Brand name (same as brandName, for compatibility)' })
+  brand?: string;
+
+  @ApiPropertyOptional({ description: 'Chain type', enum: ChainType })
+  type?: ChainType;
+
   @ApiPropertyOptional()
   description?: string;
 
@@ -129,6 +135,12 @@ export class HotelChainResponseDto {
 
   @ApiPropertyOptional()
   headquartersAddress?: string;
+
+  @ApiPropertyOptional({ description: 'Website URL' })
+  websiteUrl?: string;
+
+  @ApiPropertyOptional({ description: 'Logo URL' })
+  logoUrl?: string;
 
   @ApiProperty()
   phone: string;
@@ -153,6 +165,9 @@ export class HotelChainResponseDto {
 
   @ApiProperty({ type: [String] })
   amenities: string[];
+
+  @ApiPropertyOptional({ description: 'Loyalty program name' })
+  loyaltyProgram?: string;
 
   @ApiPropertyOptional()
   totalProperties?: number;
@@ -195,6 +210,63 @@ export class HotelChainListResponseDto {
 
   @ApiProperty()
   totalPages: number;
+}
+
+/**
+ * Brand standards DTO
+ * (Unique to tenants - used for setting chain-wide standards)
+ */
+export class BrandStandardsDto {
+  @ApiPropertyOptional({ description: 'Service standards' })
+  @IsOptional()
+  @IsObject()
+  serviceStandards?: {
+    checkInTime?: string;
+    checkOutTime?: string;
+    housekeepingSchedule?: string;
+    guestServiceRequirements?: string[];
+    qualityStandards?: string[];
+  };
+
+  @ApiPropertyOptional({ description: 'Design standards' })
+  @IsOptional()
+  @IsObject()
+  designStandards?: {
+    colorScheme?: string[];
+    furniture?: string[];
+    amenities?: string[];
+    branding?: Record<string, any>;
+  };
+
+  @ApiPropertyOptional({ description: 'Operational standards' })
+  @IsOptional()
+  @IsObject()
+  operationalStandards?: {
+    staffing?: Record<string, any>;
+    training?: string[];
+    procedures?: Record<string, any>;
+    compliance?: string[];
+  };
+
+  @ApiPropertyOptional({ description: 'Technology standards' })
+  @IsOptional()
+  @IsObject()
+  technologyStandards?: {
+    pmsRequirements?: string[];
+    wifiStandards?: Record<string, any>;
+    digitalServices?: string[];
+    integrations?: string[];
+  };
+
+  @ApiPropertyOptional({ description: 'Food and beverage standards' })
+  @IsOptional()
+  @IsObject()
+  foodBeverageStandards?: {
+    menuRequirements?: string[];
+    serviceStyle?: string;
+    qualityStandards?: string[];
+    suppliers?: string[];
+  };
 }
 
 /**

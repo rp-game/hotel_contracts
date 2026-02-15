@@ -17,7 +17,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateHotelDto = exports.CreateHotelDto = exports.HotelChainListResponseDto = exports.HotelChainResponseDto = exports.CreateHotelChainDto = exports.HotelListResponseDto = exports.HotelDto = exports.UpdateHotelChainDto = exports.ChainType = exports.HotelChainStatus = void 0;
+exports.UpdateHotelDto = exports.CreateHotelDto = exports.BrandStandardsDto = exports.HotelChainListResponseDto = exports.HotelChainResponseDto = exports.CreateHotelChainDto = exports.HotelListResponseDto = exports.HotelDto = exports.UpdateHotelChainDto = exports.ChainType = exports.HotelChainStatus = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 // Import enums for validation decorators
@@ -142,10 +142,14 @@ class HotelChainResponseDto {
     tenantId;
     name;
     brandName;
+    brand;
+    type;
     description;
     headquartersCountry;
     headquartersCity;
     headquartersAddress;
+    websiteUrl;
+    logoUrl;
     phone;
     email;
     status;
@@ -154,6 +158,7 @@ class HotelChainResponseDto {
     marketSegments;
     targetMarkets;
     amenities;
+    loyaltyProgram;
     totalProperties;
     totalRooms;
     createdAt;
@@ -180,6 +185,14 @@ __decorate([
     __metadata("design:type", String)
 ], HotelChainResponseDto.prototype, "brandName", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Brand name (same as brandName, for compatibility)' }),
+    __metadata("design:type", String)
+], HotelChainResponseDto.prototype, "brand", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Chain type', enum: hotel_chain_types_1.ChainType }),
+    __metadata("design:type", String)
+], HotelChainResponseDto.prototype, "type", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", String)
 ], HotelChainResponseDto.prototype, "description", void 0);
@@ -195,6 +208,14 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", String)
 ], HotelChainResponseDto.prototype, "headquartersAddress", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Website URL' }),
+    __metadata("design:type", String)
+], HotelChainResponseDto.prototype, "websiteUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Logo URL' }),
+    __metadata("design:type", String)
+], HotelChainResponseDto.prototype, "logoUrl", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
@@ -227,6 +248,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ type: [String] }),
     __metadata("design:type", Array)
 ], HotelChainResponseDto.prototype, "amenities", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Loyalty program name' }),
+    __metadata("design:type", String)
+], HotelChainResponseDto.prototype, "loyaltyProgram", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", Number)
@@ -287,6 +312,48 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], HotelChainListResponseDto.prototype, "totalPages", void 0);
+/**
+ * Brand standards DTO
+ * (Unique to tenants - used for setting chain-wide standards)
+ */
+class BrandStandardsDto {
+    serviceStandards;
+    designStandards;
+    operationalStandards;
+    technologyStandards;
+    foodBeverageStandards;
+}
+exports.BrandStandardsDto = BrandStandardsDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service standards' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], BrandStandardsDto.prototype, "serviceStandards", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Design standards' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], BrandStandardsDto.prototype, "designStandards", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Operational standards' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], BrandStandardsDto.prototype, "operationalStandards", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Technology standards' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], BrandStandardsDto.prototype, "technologyStandards", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Food and beverage standards' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], BrandStandardsDto.prototype, "foodBeverageStandards", void 0);
 /**
  * Create hotel DTO
  * (Unique to tenants - not duplicated elsewhere)

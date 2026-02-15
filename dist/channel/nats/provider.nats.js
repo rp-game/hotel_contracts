@@ -26,8 +26,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteProviderResponse = void 0;
+exports.DeleteProviderResponse = exports.GetProviderNatsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
+/**
+ * Get Provider Request (Class-based for both REST and NATS)
+ * Pattern: channel.providers.get
+ * Used by: REST API (@ApiParam) and NATS messages
+ */
+class GetProviderNatsRequest {
+    providerId;
+    tenantId;
+}
+exports.GetProviderNatsRequest = GetProviderNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Provider ID',
+        example: '123e4567-e89b-12d3-a456-426614174000'
+    }),
+    __metadata("design:type", String)
+], GetProviderNatsRequest.prototype, "providerId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Tenant ID (optional for multi-tenant contexts)',
+        example: '123e4567-e89b-12d3-a456-426614174001'
+    }),
+    __metadata("design:type", String)
+], GetProviderNatsRequest.prototype, "tenantId", void 0);
 /**
  * Delete Provider Response
  * Used for both NATS response and REST API response
