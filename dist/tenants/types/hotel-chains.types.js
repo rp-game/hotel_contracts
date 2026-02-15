@@ -17,7 +17,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateHotelDto = exports.HotelChainListResponseDto = exports.HotelChainResponseDto = exports.CreateHotelChainDto = exports.HotelListResponseDto = exports.HotelDto = exports.ChainType = exports.HotelChainStatus = void 0;
+exports.CreateHotelDto = exports.HotelChainListResponseDto = exports.HotelChainResponseDto = exports.CreateHotelChainDto = exports.HotelListResponseDto = exports.HotelDto = exports.UpdateHotelChainDto = exports.ChainType = exports.HotelChainStatus = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 // Import enums for validation decorators
@@ -26,6 +26,7 @@ const hotel_chain_types_1 = require("../../user/types/hotel-chain.types");
 var hotel_chain_types_2 = require("../../user/types/hotel-chain.types");
 Object.defineProperty(exports, "HotelChainStatus", { enumerable: true, get: function () { return hotel_chain_types_2.HotelChainStatus; } });
 Object.defineProperty(exports, "ChainType", { enumerable: true, get: function () { return hotel_chain_types_2.ChainType; } });
+Object.defineProperty(exports, "UpdateHotelChainDto", { enumerable: true, get: function () { return hotel_chain_types_2.UpdateHotelChainDto; } });
 var hotel_nats_1 = require("../../inventory/nats/hotel.nats");
 Object.defineProperty(exports, "HotelDto", { enumerable: true, get: function () { return hotel_nats_1.HotelDto; } });
 Object.defineProperty(exports, "HotelListResponseDto", { enumerable: true, get: function () { return hotel_nats_1.HotelListResponseDto; } });

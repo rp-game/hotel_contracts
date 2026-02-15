@@ -25,7 +25,7 @@ export declare enum HotelChainStatus {
  * Update Hotel Chain DTO
  * All fields are optional for partial updates
  */
-export interface UpdateHotelChainDto {
+export declare class UpdateHotelChainDto {
     name?: string;
     brand?: string;
     type?: ChainType;

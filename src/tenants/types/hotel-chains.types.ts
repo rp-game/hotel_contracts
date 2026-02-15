@@ -23,7 +23,7 @@ import {
 import { HotelChainStatus, ChainType } from '../../user/types/hotel-chain.types';
 
 // Re-export existing types from other modules to avoid duplication
-export { HotelChainStatus, ChainType } from '../../user/types/hotel-chain.types';
+export { HotelChainStatus, ChainType, UpdateHotelChainDto } from '../../user/types/hotel-chain.types';
 export { HotelDto, HotelListResponseDto } from '../../inventory/nats/hotel.nats';
 
 /**
