@@ -1,6 +1,7 @@
 /**
  * OTA Account Type Definitions
  *
+ * Centralized OTA account DTOs for both REST API and NATS messages
  * Handles configuration for multiple OTA (Online Travel Agency) accounts
  */
 /**
@@ -138,26 +139,63 @@ export interface OTAAccountsListResponse {
     testedAt?: string;
 }
 /**
+ * OTA Credentials DTO
+ * Credentials for OTA account authentication
+ * Used in OTA account configuration
+ */
+export declare class OTACredentialsDto {
+    username?: string;
+    password?: string;
+    property_id?: string;
+    hotel_id?: string;
+    api_key?: string;
+    client_id?: string;
+}
+/**
  * OTA Account Configuration DTO
  * Represents a single OTA account configuration
  * Returned by API Gateway endpoints
+ * Used for both REST API responses and NATS messages
  */
-export interface OTAAccountConfigurationDto {
+export declare class OTAAccountConfigurationDto {
     ota_name: string;
     provider_id: string;
     tenant_id: string;
     hotel_id: string;
     enabled: boolean;
-    credentials: Record<string, any>;
+    credentials: OTACredentialsDto;
     last_verified?: string;
     ota_config?: Record<string, any>;
 }
 /**
+ * Configure OTA Account DTO
+ * Request DTO for configuring OTA account
+ * Used by API Gateway PUT /ota-accounts/:otaName endpoint
+ */
+export declare class ConfigureOTAAccountDto {
+    provider_id: string;
+    tenant_id?: string;
+    hotel_id?: string;
+    enabled: boolean;
+    credentials: OTACredentialsDto;
+    ota_config?: Record<string, any>;
+}
+/**
+ * Test OTA Connection DTO
+ * Request DTO for testing OTA connection
+ * Used by API Gateway POST /ota-accounts/:otaName/test endpoint
+ */
+export declare class TestOTAConnectionDto {
+    provider_id: string;
+    tenant_id?: string;
+    hotel_id?: string;
+}
+/**
  * OTA Connection Test DTO
- * Results from OTA connection testing
+ * Response DTO for OTA connection test results
  * Returned by API Gateway test endpoint
  */
-export interface OTAConnectionTestDto {
+export declare class OTAConnectionTestDto {
     connected: boolean;
     last_verified?: string;
     error?: string;
