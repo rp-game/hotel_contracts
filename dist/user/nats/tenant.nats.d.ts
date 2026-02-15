@@ -135,38 +135,53 @@ export interface FindTenantBySlugNatsRequest {
 }
 export type FindTenantBySlugNatsResponse = NatsResponse<Tenant>;
 /**
- * Create Tenant Request
+ * Create Tenant Request (Class-based for both REST and NATS)
  * Pattern: tenants.create
+ * Used by: REST API (@ApiBody) and NATS messages
  */
-export interface CreateTenantRequestDto {
+export declare class CreateTenantRequestDto {
     name: string;
-    slug: string;
     type: TenantType;
+    slug?: string;
     description?: string;
     parentId?: string;
+    hotels?: string[];
+    chainId?: string;
+    address?: string;
+    city?: string;
+    country?: string;
+    contactEmail?: string;
+    contactPhone?: string;
     operationSettings?: HotelOperationSettings;
 }
 /**
- * Update Tenant Request
+ * Update Tenant Request (Class-based for both REST and NATS)
  * Pattern: tenants.update
+ * Used by: REST API (@ApiBody) and NATS messages
  */
-export interface UpdateTenantRequestDto {
+export declare class UpdateTenantRequestDto {
     id: string;
     name?: string;
     description?: string;
+    contactEmail?: string;
+    contactPhone?: string;
+    address?: string;
+    city?: string;
+    country?: string;
     operationSettings?: Partial<HotelOperationSettings>;
 }
 /**
- * Delete Tenant Request
+ * Delete Tenant Request (Class-based for both REST and NATS)
  * Pattern: tenants.delete
+ * Used by: REST API and NATS messages
  */
-export interface DeleteTenantRequestDto {
+export declare class DeleteTenantRequestDto {
     id: string;
 }
 /**
- * Hotel Operation Settings DTO
+ * Hotel Operation Settings DTO (Class-based for Swagger)
  */
-export interface HotelOperationSettingsDto {
+export declare class HotelOperationSettingsDto {
     checkInTime?: string;
     checkOutTime?: string;
     timezone?: string;
@@ -182,9 +197,9 @@ export interface HotelOperationSettingsDto {
     };
 }
 /**
- * Tenant Response DTO
+ * Tenant Response DTO (Class-based for Swagger and type safety)
  */
-export interface TenantResponseDto {
+export declare class TenantResponseDto {
     id: string;
     name: string;
     slug: string;
