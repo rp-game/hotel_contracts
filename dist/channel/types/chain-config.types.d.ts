@@ -193,4 +193,45 @@ export interface ChainSyncResult {
         error: string;
     }>;
 }
+/**
+ * Chain provider template for multi-hotel configuration
+ */
+export declare class ChainProviderTemplateDto {
+    provider_type: string;
+    provider_name: string;
+    api_credentials_template: Record<string, any>;
+    endpoints: Record<string, any>;
+    default_settings: Record<string, any>;
+    ota_account_templates: Record<string, any>;
+    active: boolean;
+}
+/**
+ * Chain inheritance rules configuration
+ */
+export declare class ChainInheritanceRulesDto {
+    required_settings: string[];
+    optional_settings: string[];
+    hotel_overrides_allowed: string[];
+    force_inheritance: boolean;
+}
+/**
+ * Complete chain channel configuration
+ */
+export declare class ChainChannelConfigurationDto {
+    chain_id: string;
+    chain_name: string;
+    provider_templates: ChainProviderTemplateDto[];
+    inheritance_rules: ChainInheritanceRulesDto;
+    global_settings?: Record<string, any>;
+    created_at: string;
+    updated_at: string;
+}
+/**
+ * Update chain configuration request DTO
+ */
+export declare class UpdateChainConfigurationDto {
+    provider_templates?: ChainProviderTemplateDto[];
+    inheritance_rules?: ChainInheritanceRulesDto;
+    global_settings?: Record<string, any>;
+}
 //# sourceMappingURL=chain-config.types.d.ts.map

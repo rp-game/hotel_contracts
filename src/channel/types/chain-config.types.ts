@@ -312,3 +312,112 @@ export interface ChainSyncResult {
     error: string;
   }>;
 }
+
+/**
+ * Chain provider template for multi-hotel configuration
+ */
+export class ChainProviderTemplateDto {
+  @ApiProperty({ description: 'Provider type' })
+  @IsString()
+  provider_type: string;
+
+  @ApiProperty({ description: 'Provider name' })
+  @IsString()
+  provider_name: string;
+
+  @ApiProperty({ description: 'API credentials template' })
+  @IsObject()
+  api_credentials_template: Record<string, any>;
+
+  @ApiProperty({ description: 'Endpoints configuration' })
+  @IsObject()
+  endpoints: Record<string, any>;
+
+  @ApiProperty({ description: 'Default settings for chain hotels' })
+  @IsObject()
+  default_settings: Record<string, any>;
+
+  @ApiProperty({ description: 'OTA account templates' })
+  @IsObject()
+  ota_account_templates: Record<string, any>;
+
+  @ApiProperty({ description: 'Whether this template is active' })
+  @IsBoolean()
+  active: boolean;
+}
+
+/**
+ * Chain inheritance rules configuration
+ */
+export class ChainInheritanceRulesDto {
+  @ApiProperty({ description: 'Settings that must be inherited from chain', type: [String] })
+  @IsArray()
+  @IsString({ each: true })
+  required_settings: string[];
+
+  @ApiProperty({ description: 'Optional settings that can be inherited', type: [String] })
+  @IsArray()
+  @IsString({ each: true })
+  optional_settings: string[];
+
+  @ApiProperty({ description: 'Settings that hotels can override', type: [String] })
+  @IsArray()
+  @IsString({ each: true })
+  hotel_overrides_allowed: string[];
+
+  @ApiProperty({ description: 'Whether to force inheritance for all hotels' })
+  @IsBoolean()
+  force_inheritance: boolean;
+}
+
+/**
+ * Complete chain channel configuration
+ */
+export class ChainChannelConfigurationDto {
+  @ApiProperty({ description: 'Chain ID' })
+  @IsUUID()
+  chain_id: string;
+
+  @ApiProperty({ description: 'Chain name' })
+  @IsString()
+  chain_name: string;
+
+  @ApiProperty({ description: 'Provider configuration templates', type: [ChainProviderTemplateDto] })
+  @IsArray()
+  provider_templates: ChainProviderTemplateDto[];
+
+  @ApiProperty({ description: 'Inheritance rules', type: ChainInheritanceRulesDto })
+  inheritance_rules: ChainInheritanceRulesDto;
+
+  @ApiPropertyOptional({ description: 'Global chain settings for channel management' })
+  @IsOptional()
+  @IsObject()
+  global_settings?: Record<string, any>;
+
+  @ApiProperty({ description: 'Configuration created timestamp' })
+  @IsString()
+  created_at: string;
+
+  @ApiProperty({ description: 'Configuration last updated timestamp' })
+  @IsString()
+  updated_at: string;
+}
+
+/**
+ * Update chain configuration request DTO
+ */
+export class UpdateChainConfigurationDto {
+  @ApiPropertyOptional({ description: 'Provider configuration templates', type: [ChainProviderTemplateDto] })
+  @IsOptional()
+  @IsArray()
+  provider_templates?: ChainProviderTemplateDto[];
+
+  @ApiPropertyOptional({ description: 'Inheritance rules', type: ChainInheritanceRulesDto })
+  @IsOptional()
+  inheritance_rules?: ChainInheritanceRulesDto;
+
+  @ApiPropertyOptional({ description: 'Global chain settings for channel management' })
+  @IsOptional()
+  @IsObject()
+  global_settings?: Record<string, any>;
+}

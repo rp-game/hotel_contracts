@@ -16,7 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChainSyncResponseDto = exports.ChainSyncResultDto = exports.SyncChainConfigDto = exports.ChainHotelConfigurationDto = exports.ApplyChainConfigDto = void 0;
+exports.UpdateChainConfigurationDto = exports.ChainChannelConfigurationDto = exports.ChainInheritanceRulesDto = exports.ChainProviderTemplateDto = exports.ChainSyncResponseDto = exports.ChainSyncResultDto = exports.SyncChainConfigDto = exports.ChainHotelConfigurationDto = exports.ApplyChainConfigDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 /**
@@ -246,4 +246,159 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ChainSyncResponseDto.prototype, "timestamp", void 0);
+/**
+ * Chain provider template for multi-hotel configuration
+ */
+class ChainProviderTemplateDto {
+    provider_type;
+    provider_name;
+    api_credentials_template;
+    endpoints;
+    default_settings;
+    ota_account_templates;
+    active;
+}
+exports.ChainProviderTemplateDto = ChainProviderTemplateDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Provider type' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ChainProviderTemplateDto.prototype, "provider_type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Provider name' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ChainProviderTemplateDto.prototype, "provider_name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'API credentials template' }),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], ChainProviderTemplateDto.prototype, "api_credentials_template", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Endpoints configuration' }),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], ChainProviderTemplateDto.prototype, "endpoints", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Default settings for chain hotels' }),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], ChainProviderTemplateDto.prototype, "default_settings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'OTA account templates' }),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], ChainProviderTemplateDto.prototype, "ota_account_templates", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether this template is active' }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], ChainProviderTemplateDto.prototype, "active", void 0);
+/**
+ * Chain inheritance rules configuration
+ */
+class ChainInheritanceRulesDto {
+    required_settings;
+    optional_settings;
+    hotel_overrides_allowed;
+    force_inheritance;
+}
+exports.ChainInheritanceRulesDto = ChainInheritanceRulesDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Settings that must be inherited from chain', type: [String] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], ChainInheritanceRulesDto.prototype, "required_settings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Optional settings that can be inherited', type: [String] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], ChainInheritanceRulesDto.prototype, "optional_settings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Settings that hotels can override', type: [String] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], ChainInheritanceRulesDto.prototype, "hotel_overrides_allowed", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether to force inheritance for all hotels' }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], ChainInheritanceRulesDto.prototype, "force_inheritance", void 0);
+/**
+ * Complete chain channel configuration
+ */
+class ChainChannelConfigurationDto {
+    chain_id;
+    chain_name;
+    provider_templates;
+    inheritance_rules;
+    global_settings;
+    created_at;
+    updated_at;
+}
+exports.ChainChannelConfigurationDto = ChainChannelConfigurationDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Chain ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], ChainChannelConfigurationDto.prototype, "chain_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Chain name' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ChainChannelConfigurationDto.prototype, "chain_name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Provider configuration templates', type: [ChainProviderTemplateDto] }),
+    (0, class_validator_1.IsArray)(),
+    __metadata("design:type", Array)
+], ChainChannelConfigurationDto.prototype, "provider_templates", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Inheritance rules', type: ChainInheritanceRulesDto }),
+    __metadata("design:type", ChainInheritanceRulesDto)
+], ChainChannelConfigurationDto.prototype, "inheritance_rules", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Global chain settings for channel management' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], ChainChannelConfigurationDto.prototype, "global_settings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Configuration created timestamp' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ChainChannelConfigurationDto.prototype, "created_at", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Configuration last updated timestamp' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ChainChannelConfigurationDto.prototype, "updated_at", void 0);
+/**
+ * Update chain configuration request DTO
+ */
+class UpdateChainConfigurationDto {
+    provider_templates;
+    inheritance_rules;
+    global_settings;
+}
+exports.UpdateChainConfigurationDto = UpdateChainConfigurationDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Provider configuration templates', type: [ChainProviderTemplateDto] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    __metadata("design:type", Array)
+], UpdateChainConfigurationDto.prototype, "provider_templates", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Inheritance rules', type: ChainInheritanceRulesDto }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", ChainInheritanceRulesDto)
+], UpdateChainConfigurationDto.prototype, "inheritance_rules", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Global chain settings for channel management' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], UpdateChainConfigurationDto.prototype, "global_settings", void 0);
 //# sourceMappingURL=chain-config.types.js.map
