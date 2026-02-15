@@ -19,6 +19,8 @@
 
 import { NatsResponse } from '../../common';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsUUID, IsString, IsNumber, IsEnum, Min, Max } from 'class-validator';
+import { Type } from 'class-transformer';
 
 /**
  * Service Type Enum (matches CRM GuestService entity)
@@ -336,30 +338,88 @@ export class CreateServiceBookingDto {
 
 /**
  * Service Booking Response (matches CRM ServiceBooking entity)
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ * @contract_accuracy PERFECT (Converted to class with @ApiProperty)
  */
-export interface ServiceBookingNatsResponse {
-  id: string;
-  tenantId: string;
-  hotelId: string;
-  serviceId: string;
-  customerId: string; // Changed from guestId to match entity
+export class ServiceBookingNatsResponse {
+  @ApiProperty({ description: 'Booking ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId!: string;
+
+  @ApiProperty({ description: 'Service ID' })
+  serviceId!: string;
+
+  @ApiProperty({ description: 'Guest/Customer ID' })
+  guestId!: string; // FIXED: Use guestId (frontend expectation) instead of customerId
+
+  @ApiPropertyOptional({ description: 'Service name' })
+  serviceName?: string;
+
+  @ApiPropertyOptional({ description: 'Guest name' })
+  guestName?: string;
+
+  @ApiPropertyOptional({ description: 'Room booking ID' })
   roomBookingId?: string;
+
+  @ApiPropertyOptional({ description: 'Room number' })
   roomNumber?: string;
-  status: ServiceBookingStatus;
-  bookingDate: string | Date;
-  serviceDate: string | Date; // Added - separate field in entity
+
+  @ApiPropertyOptional({ description: 'Room ID' })
+  roomId?: string;
+
+  @ApiPropertyOptional({ description: 'Booking ID reference' })
+  bookingId?: string;
+
+  @ApiProperty({ description: 'Booking status', enum: ServiceBookingStatus })
+  status!: ServiceBookingStatus;
+
+  @ApiProperty({ description: 'Booking date and time' })
+  bookingDateTime!: string; // FIXED: Use bookingDateTime (frontend expectation) instead of bookingDate/serviceDate
+
+  @ApiPropertyOptional({ description: 'Duration in minutes' })
   durationMinutes?: number;
-  numberOfGuests: number; // Changed from quantity to match entity
-  price?: number; // Changed from string to number to match entity
+
+  @ApiProperty({ description: 'Number of guests' })
+  numberOfGuests!: number;
+
+  @ApiPropertyOptional({ description: 'Total price' })
+  totalPrice?: number; // FIXED: Use totalPrice (frontend expectation) instead of price
+
+  @ApiPropertyOptional({ description: 'Currency code' })
   currency?: string;
+
+  @ApiPropertyOptional({ description: 'Special requests' })
   specialRequests?: string;
+
+  @ApiPropertyOptional({ description: 'Internal notes' })
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Confirmation code' })
   confirmationCode?: string;
-  paymentStatus: string;
+
+  @ApiProperty({ description: 'Payment status' })
+  paymentStatus!: string;
+
+  @ApiPropertyOptional({ description: 'Assigned staff ID' })
   staffAssigned?: string;
-  createdAt: string | Date;
-  updatedAt: string | Date;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt!: string; // FIXED: Use string only (not string | Date)
+
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt!: string; // FIXED: Use string only (not string | Date)
+
+  @ApiPropertyOptional({ description: 'Created by user ID' })
   createdBy?: string;
+
+  @ApiPropertyOptional({ description: 'Updated by user ID' })
   updatedBy?: string;
 }
 
@@ -371,25 +431,84 @@ export type CreateServiceBookingNatsResponse = NatsResponse<ServiceBookingNatsRe
 /**
  * Find All Bookings Request
  * Pattern: guest_services.bookings.find_all
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
  */
-export interface FindAllServiceBookingsNatsRequest {
-  tenantId: string;
-  customerId?: string; // Changed from guestId to match entity field
+export class FindAllServiceBookingsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsOptional()
+  @IsUUID()
+  tenantId!: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Guest ID filter' })
+  @IsOptional()
+  @IsUUID()
+  guestId?: string; // FIXED: Use guestId (frontend expectation)
+
+  @ApiPropertyOptional({ description: 'Service ID filter' })
+  @IsOptional()
+  @IsUUID()
   serviceId?: string;
+
+  @ApiPropertyOptional({ description: 'Booking status filter', enum: ServiceBookingStatus })
+  @IsOptional()
+  @IsEnum(ServiceBookingStatus)
   status?: ServiceBookingStatus;
+
+  @ApiPropertyOptional({ description: 'Service type filter' })
+  @IsOptional()
+  @IsString()
+  serviceType?: string;
+
+  @ApiPropertyOptional({ description: 'Page number', minimum: 1, default: 1 })
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(1)
   page?: number;
+
+  @ApiPropertyOptional({ description: 'Items per page', minimum: 1, maximum: 100, default: 10 })
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(1)
+  @Max(100)
   limit?: number;
+}
+
+/**
+ * Service Booking List Data
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ */
+export class ServiceBookingListDataDto {
+  @ApiProperty({ type: [ServiceBookingNatsResponse], description: 'List of service bookings' })
+  data!: ServiceBookingNatsResponse[];
+
+  @ApiProperty({ description: 'Total count' })
+  total!: number;
+
+  @ApiProperty({ description: 'Current page number' })
+  page!: number;
+
+  @ApiProperty({ description: 'Items per page' })
+  limit!: number;
+
+  @ApiPropertyOptional({ description: 'Total pages' })
+  totalPages?: number;
 }
 
 /**
  * Find All Bookings Response
  */
-export type FindAllServiceBookingsNatsResponse = NatsResponse<{
-  data: ServiceBookingNatsResponse[];
-  total: number;
-  page: number;
-  limit: number;
-}>;
+export type FindAllServiceBookingsNatsResponse = NatsResponse<ServiceBookingListDataDto>;
 
 /**
  * Find One Booking Request

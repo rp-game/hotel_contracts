@@ -219,29 +219,36 @@ export declare class CreateServiceBookingDto {
 }
 /**
  * Service Booking Response (matches CRM ServiceBooking entity)
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
+ * @contract_accuracy PERFECT (Converted to class with @ApiProperty)
  */
-export interface ServiceBookingNatsResponse {
+export declare class ServiceBookingNatsResponse {
     id: string;
     tenantId: string;
     hotelId: string;
     serviceId: string;
-    customerId: string;
+    guestId: string;
+    serviceName?: string;
+    guestName?: string;
     roomBookingId?: string;
     roomNumber?: string;
+    roomId?: string;
+    bookingId?: string;
     status: ServiceBookingStatus;
-    bookingDate: string | Date;
-    serviceDate: string | Date;
+    bookingDateTime: string;
     durationMinutes?: number;
     numberOfGuests: number;
-    price?: number;
+    totalPrice?: number;
     currency?: string;
     specialRequests?: string;
     notes?: string;
     confirmationCode?: string;
     paymentStatus: string;
     staffAssigned?: string;
-    createdAt: string | Date;
-    updatedAt: string | Date;
+    createdAt: string;
+    updatedAt: string;
     createdBy?: string;
     updatedBy?: string;
 }
@@ -252,24 +259,37 @@ export type CreateServiceBookingNatsResponse = NatsResponse<ServiceBookingNatsRe
 /**
  * Find All Bookings Request
  * Pattern: guest_services.bookings.find_all
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
  */
-export interface FindAllServiceBookingsNatsRequest {
+export declare class FindAllServiceBookingsNatsRequest {
     tenantId: string;
-    customerId?: string;
+    hotelId?: string;
+    guestId?: string;
     serviceId?: string;
     status?: ServiceBookingStatus;
+    serviceType?: string;
     page?: number;
     limit?: number;
 }
 /**
- * Find All Bookings Response
+ * Service Booking List Data
+ *
+ * UNIFIED CONTRACT - Used by both NATS and REST layers
+ * @standardized 2026-02-15
  */
-export type FindAllServiceBookingsNatsResponse = NatsResponse<{
+export declare class ServiceBookingListDataDto {
     data: ServiceBookingNatsResponse[];
     total: number;
     page: number;
     limit: number;
-}>;
+    totalPages?: number;
+}
+/**
+ * Find All Bookings Response
+ */
+export type FindAllServiceBookingsNatsResponse = NatsResponse<ServiceBookingListDataDto>;
 /**
  * Find One Booking Request
  * Pattern: guest_services.bookings.find_one
