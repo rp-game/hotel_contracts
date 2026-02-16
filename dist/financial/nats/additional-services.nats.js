@@ -623,7 +623,7 @@ __decorate([
     __metadata("design:type", service_bookings_nats_1.FinancialServiceStatsResponseDto)
 ], ServiceDashboardResponseDto.prototype, "stats", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Recent bookings', type: [service_bookings_nats_1.ServiceBookingResponseDto] }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Recent bookings', type: () => [service_bookings_nats_1.ServiceBookingResponseDto] }),
     __metadata("design:type", Array)
 ], ServiceDashboardResponseDto.prototype, "recentBookings", void 0);
 __decorate([

@@ -9,7 +9,6 @@
  * Database Entity: ServiceBooking (service_bookings table)
  */
 import { NatsResponse } from '../../common';
-import { AdditionalServiceResponseDto } from './additional-services.nats';
 /**
  * Financial Service Booking Status Enum
  */
@@ -30,7 +29,6 @@ export declare class ServiceBookingResponseDto {
     tenantId: string;
     hotelId: string;
     serviceId: string;
-    service?: AdditionalServiceResponseDto;
     customerName: string;
     customerEmail: string;
     customerPhone?: string;

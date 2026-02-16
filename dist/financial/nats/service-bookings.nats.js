@@ -22,7 +22,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FinancialServiceStatsResponseDto = exports.DeleteServiceBookingRequestDto = exports.UpdateFinancialServiceBookingRequestDto = exports.FindOneServiceBookingRequestDto = exports.FindAllServiceBookingsRequestDto = exports.FinancialServiceBookingListResponseDto = exports.UpdateFinancialServiceBookingDto = exports.CreateFinancialServiceBookingDto = exports.ServiceBookingResponseDto = exports.FinancialServiceBookingStatus = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
-const additional_services_nats_1 = require("./additional-services.nats");
 /**
  * Financial Service Booking Status Enum
  */
@@ -44,7 +43,8 @@ class ServiceBookingResponseDto {
     tenantId;
     hotelId;
     serviceId;
-    service;
+    // NOTE: Removed 'service' property to avoid circular dependency with AdditionalServiceResponseDto
+    // Use serviceId to fetch service details if needed
     customerName;
     customerEmail;
     customerPhone;
@@ -80,11 +80,6 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], ServiceBookingResponseDto.prototype, "serviceId", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Service details (populated)' }),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", additional_services_nats_1.AdditionalServiceResponseDto)
-], ServiceBookingResponseDto.prototype, "service", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Customer name' }),
     (0, class_validator_1.IsString)(),

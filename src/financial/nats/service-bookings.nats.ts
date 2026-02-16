@@ -12,7 +12,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsNumber, IsBoolean, IsOptional, IsEnum, IsUUID, IsDateString, IsEmail, Min } from 'class-validator';
 import { NatsResponse } from '../../common';
-import { AdditionalServiceResponseDto } from './additional-services.nats';
 
 /**
  * Financial Service Booking Status Enum
@@ -47,9 +46,8 @@ export class ServiceBookingResponseDto {
   @IsUUID()
   serviceId: string;
 
-  @ApiPropertyOptional({ description: 'Service details (populated)' })
-  @IsOptional()
-  service?: AdditionalServiceResponseDto;
+  // NOTE: Removed 'service' property to avoid circular dependency with AdditionalServiceResponseDto
+  // Use serviceId to fetch service details if needed
 
   @ApiProperty({ description: 'Customer name' })
   @IsString()

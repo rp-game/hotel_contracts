@@ -449,7 +449,7 @@ export class ServiceDashboardResponseDto {
   @ApiProperty({ description: 'Service statistics', type: () => FinancialServiceStatsResponseDto })
   stats: FinancialServiceStatsResponseDto;
 
-  @ApiPropertyOptional({ description: 'Recent bookings', type: [ServiceBookingResponseDto] })
+  @ApiPropertyOptional({ description: 'Recent bookings', type: () => [ServiceBookingResponseDto] })
   recentBookings?: ServiceBookingResponseDto[];
 
   @ApiPropertyOptional({ description: 'Top services by revenue' })
