@@ -485,10 +485,14 @@ export class AlertDto {
   @ApiProperty({ description: 'Alert category' })
   category: string;
 
+  @Type(() => Date)
+  @Transform(({ value }) => value instanceof Date ? value : new Date(value))
   @ApiProperty({ description: 'Alert creation timestamp', type: Date })
   createdAt: Date;
 
   @IsOptional()
+  @Type(() => Date)
+  @Transform(({ value }) => value instanceof Date ? value : new Date(value))
   @ApiPropertyOptional({ description: 'Alert resolution timestamp', type: Date })
   resolvedAt?: Date;
 

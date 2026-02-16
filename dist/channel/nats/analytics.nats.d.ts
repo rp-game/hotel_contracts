@@ -83,6 +83,21 @@ export interface ListAlertsNatsRequest {
 }
 export type ListAlertsNatsResponse = NatsResponse<AlertDto[]>;
 /**
+ * Acknowledge Alert Request
+ * Pattern: channel.alerts.acknowledge
+ *
+ * Marks an alert as acknowledged by the user.
+ *
+ * Request fields:
+ * - alertId: string (required) - UUID of alert to acknowledge
+ *
+ * Response: Updated AlertDto with acknowledged: true
+ */
+export interface AcknowledgeAlertNatsRequest {
+    alertId: string;
+}
+export type AcknowledgeAlertNatsResponse = NatsResponse<AlertDto>;
+/**
  * Create A/B Test Request
  * Pattern: channel.abtest.create
  *
