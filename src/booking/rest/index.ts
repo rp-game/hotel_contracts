@@ -2,11 +2,9 @@
  * Booking Domain - REST API DTOs
  *
  * These classes define the request/response shapes for REST API endpoints.
- * They include class-validator decorators for input validation.
+ * They include class-validator decorators for input validation and @ApiProperty for Swagger.
  *
- * Routes: /bookings, /bookings/:id, etc.
+ * Routes: /bookings, /bookings/:id, /bookings/unassigned, etc.
  */
 
-// Re-export NATS contracts as REST DTOs for now
-// (can be customized if REST contracts differ from NATS)
-export * from '../nats';
+export * from './unassigned-bookings.rest';

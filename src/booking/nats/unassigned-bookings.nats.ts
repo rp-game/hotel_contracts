@@ -18,8 +18,8 @@ export interface UnassignedBookingItem {
   guestName: string;
   roomType: string;
   roomTypeId: string;
-  checkIn: string | Date;
-  checkOut: string | Date;
+  checkIn: string;
+  checkOut: string;
   duration: number;
   guestCount: number;
   specialRequests?: string;
