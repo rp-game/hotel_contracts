@@ -72,7 +72,7 @@ export declare class CampaignConditionsNatsRequest {
  * Create Campaign Request
  * Pattern: crm.loyalty.campaigns.create
  */
-export interface CreateCampaignNatsRequest {
+export declare class CreateCampaignNatsRequest {
     tenantId: string;
     userId: string;
     programId: string;
@@ -90,7 +90,7 @@ export interface CreateCampaignNatsRequest {
  * Update Campaign Request
  * Pattern: crm.loyalty.campaigns.update
  */
-export interface UpdateCampaignNatsRequest {
+export declare class UpdateCampaignNatsRequest {
     tenantId: string;
     campaignId: string;
     userId: string;
@@ -137,7 +137,7 @@ export declare class LoyaltyCampaignNatsResponse {
  * Find All Campaigns Request
  * Pattern: crm.loyalty.campaigns.findAll
  */
-export interface FindAllCampaignsNatsRequest {
+export declare class FindAllCampaignsNatsRequest {
     tenantId: string;
     programId?: string;
     status?: string;
@@ -157,7 +157,7 @@ export type FindAllCampaignsNatsResponse = NatsResponse<{
  * Find Active Campaigns Request
  * Pattern: crm.loyalty.campaigns.findActive
  */
-export interface FindActiveCampaignsNatsRequest {
+export declare class FindActiveCampaignsNatsRequest {
     tenantId: string;
     programId?: string;
 }
@@ -192,7 +192,7 @@ export declare class CampaignStatsNatsResponse {
  * Stats Request
  * Pattern: crm.loyalty.campaigns.stats
  */
-export interface GetCampaignStatsNatsRequest {
+export declare class GetCampaignStatsNatsRequest {
     tenantId: string;
 }
 /**
@@ -222,7 +222,7 @@ export declare class CampaignDashboardNatsResponse {
  * Dashboard Request
  * Pattern: crm.loyalty.campaigns.dashboard
  */
-export interface GetCampaignDashboardNatsRequest {
+export declare class GetCampaignDashboardNatsRequest {
     tenantId: string;
 }
 /**
@@ -233,7 +233,7 @@ export type GetCampaignDashboardNatsResponse = NatsResponse<CampaignDashboardNat
  * Find Campaign By Id Request
  * Pattern: crm.loyalty.campaigns.findById
  */
-export interface FindCampaignByIdNatsRequest {
+export declare class FindCampaignByIdNatsRequest {
     tenantId: string;
     campaignId: string;
 }
@@ -259,7 +259,7 @@ export declare class CampaignAnalyticsNatsResponse {
  * Analytics Request
  * Pattern: crm.loyalty.campaigns.analytics
  */
-export interface GetCampaignAnalyticsNatsRequest {
+export declare class GetCampaignAnalyticsNatsRequest {
     tenantId: string;
     campaignId: string;
 }
@@ -279,7 +279,7 @@ export type UpdateCampaignNatsResponse = NatsResponse<LoyaltyCampaignNatsRespons
  * Manage Campaign Status Request
  * Pattern: crm.loyalty.campaigns.manage_status
  */
-export interface ManageCampaignStatusNatsRequest {
+export declare class ManageCampaignStatusNatsRequest {
     tenantId: string;
     campaignId: string;
     status: CampaignStatus;
@@ -293,7 +293,7 @@ export type ManageCampaignStatusNatsResponse = NatsResponse<LoyaltyCampaignNatsR
  * Apply Campaign Request
  * Pattern: crm.loyalty.campaigns.apply
  */
-export interface ApplyCampaignNatsRequest {
+export declare class ApplyCampaignNatsRequest {
     tenantId: string;
     campaignId: string;
     memberId: string;
@@ -322,7 +322,7 @@ export declare class CampaignTemplateNatsResponse {
  * Templates Request
  * Pattern: crm.loyalty.campaigns.templates
  */
-export interface GetCampaignTemplatesNatsRequest {
+export declare class GetCampaignTemplatesNatsRequest {
     tenantId?: string;
 }
 /**

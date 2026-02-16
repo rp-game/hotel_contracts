@@ -27,7 +27,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ActiveCampaignsListData = exports.LoyaltyCampaignsListData = exports.CampaignTemplateNatsResponse = exports.CampaignAnalyticsNatsResponse = exports.CampaignDashboardNatsResponse = exports.CampaignPerformanceItem = exports.CampaignStatsNatsResponse = exports.CampaignTopPerformerItem = exports.LoyaltyCampaignNatsResponse = exports.CampaignTracking = exports.CampaignConditionsNatsRequest = exports.CampaignRulesNatsRequest = exports.CampaignStatus = exports.CampaignType = void 0;
+exports.ActiveCampaignsListData = exports.LoyaltyCampaignsListData = exports.GetCampaignTemplatesNatsRequest = exports.CampaignTemplateNatsResponse = exports.ApplyCampaignNatsRequest = exports.ManageCampaignStatusNatsRequest = exports.GetCampaignAnalyticsNatsRequest = exports.CampaignAnalyticsNatsResponse = exports.FindCampaignByIdNatsRequest = exports.GetCampaignDashboardNatsRequest = exports.CampaignDashboardNatsResponse = exports.CampaignPerformanceItem = exports.GetCampaignStatsNatsRequest = exports.CampaignStatsNatsResponse = exports.CampaignTopPerformerItem = exports.FindActiveCampaignsNatsRequest = exports.FindAllCampaignsNatsRequest = exports.LoyaltyCampaignNatsResponse = exports.CampaignTracking = exports.UpdateCampaignNatsRequest = exports.CreateCampaignNatsRequest = exports.CampaignConditionsNatsRequest = exports.CampaignRulesNatsRequest = exports.CampaignStatus = exports.CampaignType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -142,6 +142,100 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Exclude corporate bookings' }),
     __metadata("design:type", Boolean)
 ], CampaignConditionsNatsRequest.prototype, "exclude_corporate", void 0);
+/**
+ * Create Campaign Request
+ * Pattern: crm.loyalty.campaigns.create
+ */
+class CreateCampaignNatsRequest {
+    tenantId;
+    userId;
+    programId;
+    name;
+    description;
+    campaignType;
+    startDate;
+    endDate;
+    rules;
+    conditions;
+    isAutoApply;
+    promotionCode;
+}
+exports.CreateCampaignNatsRequest = CreateCampaignNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], CreateCampaignNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User ID creating the campaign' }),
+    __metadata("design:type", String)
+], CreateCampaignNatsRequest.prototype, "userId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Loyalty program ID' }),
+    __metadata("design:type", String)
+], CreateCampaignNatsRequest.prototype, "programId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Campaign name' }),
+    __metadata("design:type", String)
+], CreateCampaignNatsRequest.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Campaign description' }),
+    __metadata("design:type", String)
+], CreateCampaignNatsRequest.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Campaign type', enum: CampaignType }),
+    __metadata("design:type", String)
+], CreateCampaignNatsRequest.prototype, "campaignType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Campaign start date (ISO 8601)' }),
+    __metadata("design:type", String)
+], CreateCampaignNatsRequest.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Campaign end date (ISO 8601)' }),
+    __metadata("design:type", String)
+], CreateCampaignNatsRequest.prototype, "endDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Campaign rules', type: () => CampaignRulesNatsRequest }),
+    __metadata("design:type", CampaignRulesNatsRequest)
+], CreateCampaignNatsRequest.prototype, "rules", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Campaign conditions - apply to all customers if not specified', type: () => CampaignConditionsNatsRequest }),
+    __metadata("design:type", CampaignConditionsNatsRequest)
+], CreateCampaignNatsRequest.prototype, "conditions", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Auto-apply campaign - manual apply if false/undefined', default: false }),
+    __metadata("design:type", Boolean)
+], CreateCampaignNatsRequest.prototype, "isAutoApply", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Promotion code for customer use' }),
+    __metadata("design:type", String)
+], CreateCampaignNatsRequest.prototype, "promotionCode", void 0);
+/**
+ * Update Campaign Request
+ * Pattern: crm.loyalty.campaigns.update
+ */
+class UpdateCampaignNatsRequest {
+    tenantId;
+    campaignId;
+    userId;
+    updateDto;
+}
+exports.UpdateCampaignNatsRequest = UpdateCampaignNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], UpdateCampaignNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Campaign ID to update' }),
+    __metadata("design:type", String)
+], UpdateCampaignNatsRequest.prototype, "campaignId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User ID performing the update' }),
+    __metadata("design:type", String)
+], UpdateCampaignNatsRequest.prototype, "userId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Partial campaign data to update' }),
+    __metadata("design:type", Object)
+], UpdateCampaignNatsRequest.prototype, "updateDto", void 0);
 /**
  * Campaign Tracking Metrics
  */
@@ -296,6 +390,55 @@ __decorate([
     __metadata("design:type", String)
 ], LoyaltyCampaignNatsResponse.prototype, "updatedAt", void 0);
 /**
+ * Find All Campaigns Request
+ * Pattern: crm.loyalty.campaigns.findAll
+ */
+class FindAllCampaignsNatsRequest {
+    tenantId;
+    programId;
+    status;
+    page;
+    limit;
+}
+exports.FindAllCampaignsNatsRequest = FindAllCampaignsNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], FindAllCampaignsNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by loyalty program ID' }),
+    __metadata("design:type", String)
+], FindAllCampaignsNatsRequest.prototype, "programId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by campaign status' }),
+    __metadata("design:type", String)
+], FindAllCampaignsNatsRequest.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Page number for pagination', default: 1 }),
+    __metadata("design:type", Number)
+], FindAllCampaignsNatsRequest.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of items per page', default: 10 }),
+    __metadata("design:type", Number)
+], FindAllCampaignsNatsRequest.prototype, "limit", void 0);
+/**
+ * Find Active Campaigns Request
+ * Pattern: crm.loyalty.campaigns.findActive
+ */
+class FindActiveCampaignsNatsRequest {
+    tenantId;
+    programId;
+}
+exports.FindActiveCampaignsNatsRequest = FindActiveCampaignsNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], FindActiveCampaignsNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by loyalty program ID' }),
+    __metadata("design:type", String)
+], FindActiveCampaignsNatsRequest.prototype, "programId", void 0);
+/**
  * Top Campaign Performer Item (for Stats.topCampaigns array)
  */
 class CampaignTopPerformerItem {
@@ -359,6 +502,18 @@ __decorate([
     __metadata("design:type", Array)
 ], CampaignStatsNatsResponse.prototype, "topCampaigns", void 0);
 /**
+ * Stats Request
+ * Pattern: crm.loyalty.campaigns.stats
+ */
+class GetCampaignStatsNatsRequest {
+    tenantId;
+}
+exports.GetCampaignStatsNatsRequest = GetCampaignStatsNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetCampaignStatsNatsRequest.prototype, "tenantId", void 0);
+/**
  * Campaign Performance Item (for Dashboard.campaignPerformance array)
  */
 class CampaignPerformanceItem {
@@ -417,6 +572,35 @@ __decorate([
     __metadata("design:type", Array)
 ], CampaignDashboardNatsResponse.prototype, "campaignPerformance", void 0);
 /**
+ * Dashboard Request
+ * Pattern: crm.loyalty.campaigns.dashboard
+ */
+class GetCampaignDashboardNatsRequest {
+    tenantId;
+}
+exports.GetCampaignDashboardNatsRequest = GetCampaignDashboardNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetCampaignDashboardNatsRequest.prototype, "tenantId", void 0);
+/**
+ * Find Campaign By Id Request
+ * Pattern: crm.loyalty.campaigns.findById
+ */
+class FindCampaignByIdNatsRequest {
+    tenantId;
+    campaignId;
+}
+exports.FindCampaignByIdNatsRequest = FindCampaignByIdNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], FindCampaignByIdNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Campaign ID to find' }),
+    __metadata("design:type", String)
+], FindCampaignByIdNatsRequest.prototype, "campaignId", void 0);
+/**
  * Campaign Analytics Response
  */
 class CampaignAnalyticsNatsResponse {
@@ -468,6 +652,77 @@ __decorate([
     __metadata("design:type", Number)
 ], CampaignAnalyticsNatsResponse.prototype, "engagement", void 0);
 /**
+ * Analytics Request
+ * Pattern: crm.loyalty.campaigns.analytics
+ */
+class GetCampaignAnalyticsNatsRequest {
+    tenantId;
+    campaignId;
+}
+exports.GetCampaignAnalyticsNatsRequest = GetCampaignAnalyticsNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetCampaignAnalyticsNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Campaign ID for analytics' }),
+    __metadata("design:type", String)
+], GetCampaignAnalyticsNatsRequest.prototype, "campaignId", void 0);
+/**
+ * Manage Campaign Status Request
+ * Pattern: crm.loyalty.campaigns.manage_status
+ */
+class ManageCampaignStatusNatsRequest {
+    tenantId;
+    campaignId;
+    status;
+    userId;
+}
+exports.ManageCampaignStatusNatsRequest = ManageCampaignStatusNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], ManageCampaignStatusNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Campaign ID to manage' }),
+    __metadata("design:type", String)
+], ManageCampaignStatusNatsRequest.prototype, "campaignId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'New campaign status', enum: CampaignStatus }),
+    __metadata("design:type", String)
+], ManageCampaignStatusNatsRequest.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User ID performing the action' }),
+    __metadata("design:type", String)
+], ManageCampaignStatusNatsRequest.prototype, "userId", void 0);
+/**
+ * Apply Campaign Request
+ * Pattern: crm.loyalty.campaigns.apply
+ */
+class ApplyCampaignNatsRequest {
+    tenantId;
+    campaignId;
+    memberId;
+    transactionAmount;
+}
+exports.ApplyCampaignNatsRequest = ApplyCampaignNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], ApplyCampaignNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Campaign ID to apply' }),
+    __metadata("design:type", String)
+], ApplyCampaignNatsRequest.prototype, "campaignId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Member ID receiving the campaign benefits' }),
+    __metadata("design:type", String)
+], ApplyCampaignNatsRequest.prototype, "memberId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Transaction amount for calculation' }),
+    __metadata("design:type", Number)
+], ApplyCampaignNatsRequest.prototype, "transactionAmount", void 0);
+/**
  * Campaign Template Response
  */
 class CampaignTemplateNatsResponse {
@@ -507,6 +762,18 @@ __decorate([
     (0, class_transformer_1.Type)(() => CampaignConditionsNatsRequest),
     __metadata("design:type", CampaignConditionsNatsRequest)
 ], CampaignTemplateNatsResponse.prototype, "conditions", void 0);
+/**
+ * Templates Request
+ * Pattern: crm.loyalty.campaigns.templates
+ */
+class GetCampaignTemplatesNatsRequest {
+    tenantId;
+}
+exports.GetCampaignTemplatesNatsRequest = GetCampaignTemplatesNatsRequest;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID for filtering templates' }),
+    __metadata("design:type", String)
+], GetCampaignTemplatesNatsRequest.prototype, "tenantId", void 0);
 /**
  * Loyalty Campaigns List Data (wrapper for paginated list)
  */

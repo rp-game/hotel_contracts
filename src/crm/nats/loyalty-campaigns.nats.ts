@@ -107,18 +107,41 @@ export class CampaignConditionsNatsRequest {
  * Create Campaign Request
  * Pattern: crm.loyalty.campaigns.create
  */
-export interface CreateCampaignNatsRequest {
+export class CreateCampaignNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'User ID creating the campaign' })
   userId: string;
+
+  @ApiProperty({ description: 'Loyalty program ID' })
   programId: string;
+
+  @ApiProperty({ description: 'Campaign name' })
   name: string;
+
+  @ApiPropertyOptional({ description: 'Campaign description' })
   description?: string;
+
+  @ApiProperty({ description: 'Campaign type', enum: CampaignType })
   campaignType: CampaignType;
+
+  @ApiProperty({ description: 'Campaign start date (ISO 8601)' })
   startDate: string;
+
+  @ApiProperty({ description: 'Campaign end date (ISO 8601)' })
   endDate: string;
+
+  @ApiProperty({ description: 'Campaign rules', type: () => CampaignRulesNatsRequest })
   rules: CampaignRulesNatsRequest;
-  conditions?: CampaignConditionsNatsRequest;  // Optional - apply to all customers if not specified
-  isAutoApply?: boolean;  // Optional - manual apply if false/undefined
+
+  @ApiPropertyOptional({ description: 'Campaign conditions - apply to all customers if not specified', type: () => CampaignConditionsNatsRequest })
+  conditions?: CampaignConditionsNatsRequest;
+
+  @ApiPropertyOptional({ description: 'Auto-apply campaign - manual apply if false/undefined', default: false })
+  isAutoApply?: boolean;
+
+  @ApiPropertyOptional({ description: 'Promotion code for customer use' })
   promotionCode?: string;
 }
 
@@ -126,10 +149,17 @@ export interface CreateCampaignNatsRequest {
  * Update Campaign Request
  * Pattern: crm.loyalty.campaigns.update
  */
-export interface UpdateCampaignNatsRequest {
+export class UpdateCampaignNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Campaign ID to update' })
   campaignId: string;
+
+  @ApiProperty({ description: 'User ID performing the update' })
   userId: string;
+
+  @ApiProperty({ description: 'Partial campaign data to update' })
   updateDto: Partial<CreateCampaignNatsRequest>;
 }
 
@@ -234,11 +264,20 @@ export class LoyaltyCampaignNatsResponse {
  * Find All Campaigns Request
  * Pattern: crm.loyalty.campaigns.findAll
  */
-export interface FindAllCampaignsNatsRequest {
+export class FindAllCampaignsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Filter by loyalty program ID' })
   programId?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by campaign status' })
   status?: string;
+
+  @ApiPropertyOptional({ description: 'Page number for pagination', default: 1 })
   page?: number;
+
+  @ApiPropertyOptional({ description: 'Number of items per page', default: 10 })
   limit?: number;
 }
 
@@ -256,8 +295,11 @@ export type FindAllCampaignsNatsResponse = NatsResponse<{
  * Find Active Campaigns Request
  * Pattern: crm.loyalty.campaigns.findActive
  */
-export interface FindActiveCampaignsNatsRequest {
+export class FindActiveCampaignsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Filter by loyalty program ID' })
   programId?: string;
 }
 
@@ -314,7 +356,8 @@ export class CampaignStatsNatsResponse {
  * Stats Request
  * Pattern: crm.loyalty.campaigns.stats
  */
-export interface GetCampaignStatsNatsRequest {
+export class GetCampaignStatsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
 }
 
@@ -365,7 +408,8 @@ export class CampaignDashboardNatsResponse {
  * Dashboard Request
  * Pattern: crm.loyalty.campaigns.dashboard
  */
-export interface GetCampaignDashboardNatsRequest {
+export class GetCampaignDashboardNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
 }
 
@@ -378,8 +422,11 @@ export type GetCampaignDashboardNatsResponse = NatsResponse<CampaignDashboardNat
  * Find Campaign By Id Request
  * Pattern: crm.loyalty.campaigns.findById
  */
-export interface FindCampaignByIdNatsRequest {
+export class FindCampaignByIdNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Campaign ID to find' })
   campaignId: string;
 }
 
@@ -424,8 +471,11 @@ export class CampaignAnalyticsNatsResponse {
  * Analytics Request
  * Pattern: crm.loyalty.campaigns.analytics
  */
-export interface GetCampaignAnalyticsNatsRequest {
+export class GetCampaignAnalyticsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Campaign ID for analytics' })
   campaignId: string;
 }
 
@@ -448,10 +498,17 @@ export type UpdateCampaignNatsResponse = NatsResponse<LoyaltyCampaignNatsRespons
  * Manage Campaign Status Request
  * Pattern: crm.loyalty.campaigns.manage_status
  */
-export interface ManageCampaignStatusNatsRequest {
+export class ManageCampaignStatusNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Campaign ID to manage' })
   campaignId: string;
+
+  @ApiProperty({ description: 'New campaign status', enum: CampaignStatus })
   status: CampaignStatus;
+
+  @ApiProperty({ description: 'User ID performing the action' })
   userId: string;
 }
 
@@ -464,10 +521,17 @@ export type ManageCampaignStatusNatsResponse = NatsResponse<LoyaltyCampaignNatsR
  * Apply Campaign Request
  * Pattern: crm.loyalty.campaigns.apply
  */
-export interface ApplyCampaignNatsRequest {
+export class ApplyCampaignNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Campaign ID to apply' })
   campaignId: string;
+
+  @ApiProperty({ description: 'Member ID receiving the campaign benefits' })
   memberId: string;
+
+  @ApiProperty({ description: 'Transaction amount for calculation' })
   transactionAmount: number;
 }
 
@@ -511,7 +575,8 @@ export class CampaignTemplateNatsResponse {
  * Templates Request
  * Pattern: crm.loyalty.campaigns.templates
  */
-export interface GetCampaignTemplatesNatsRequest {
+export class GetCampaignTemplatesNatsRequest {
+  @ApiPropertyOptional({ description: 'Tenant ID for filtering templates' })
   tenantId?: string;
 }
 
