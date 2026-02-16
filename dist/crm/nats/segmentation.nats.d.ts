@@ -157,9 +157,10 @@ export interface FindAllSegmentsNatsRequest {
 export type FindAllSegmentsNatsResponse = NatsResponse<SegmentsNatsResponse>;
 /**
  * Find One Segment Request
+ * Unified for both NATS messages and REST API requests
  * Pattern: crm.segmentation.segments.findOne
  */
-export interface FindSegmentByIdNatsRequest {
+export declare class FindSegmentByIdNatsRequest {
     tenantId: string;
     segmentId: string;
 }
@@ -177,18 +178,17 @@ export type CreateSegmentNatsResponse = NatsResponse<CustomerSegmentNatsResponse
 export type UpdateSegmentNatsResponse = NatsResponse<CustomerSegmentNatsResponse>;
 /**
  * Delete Segment Request
+ * Unified for both NATS messages and REST API requests
  * Pattern: crm.segmentation.segments.delete
  */
-export interface DeleteSegmentNatsRequest {
+export declare class DeleteSegmentNatsRequest {
     tenantId: string;
     segmentId: string;
 }
 /**
  * Delete Segment Response
  */
-export type DeleteSegmentNatsResponse = NatsResponse<{
-    message: string;
-}>;
+export type DeleteSegmentNatsResponse = NatsResponse<MessageResponseDto>;
 /**
  * Recalculate Segment Request
  * Unified for both NATS messages and REST API requests
@@ -263,9 +263,10 @@ export interface SegmentAnalysisNatsResponse {
 }
 /**
  * Get Segment Analysis Request
+ * Unified for both NATS messages and REST API requests
  * Pattern: crm.segmentation.analysis
  */
-export interface GetSegmentAnalysisNatsRequest {
+export declare class GetSegmentAnalysisNatsRequest {
     tenantId: string;
 }
 /**
@@ -332,9 +333,10 @@ export interface RfmAnalysisNatsResponse {
 }
 /**
  * Get RFM Analysis Request
+ * Unified for both NATS messages and REST API requests
  * Pattern: crm.segmentation.rfm.analysis
  */
-export interface GetRfmAnalysisNatsRequest {
+export declare class GetRfmAnalysisNatsRequest {
     tenantId: string;
 }
 /**
@@ -343,9 +345,10 @@ export interface GetRfmAnalysisNatsRequest {
 export type GetRfmAnalysisNatsResponse = NatsResponse<RfmAnalysisNatsResponse>;
 /**
  * Create Predefined Segments Request
+ * Unified for both NATS messages and REST API requests
  * Pattern: crm.segmentation.predefined.create
  */
-export interface CreatePredefinedSegmentsNatsRequest {
+export declare class CreatePredefinedSegmentsNatsRequest {
     tenantId: string;
 }
 /**
@@ -354,15 +357,14 @@ export interface CreatePredefinedSegmentsNatsRequest {
 export type CreatePredefinedSegmentsNatsResponse = NatsResponse<CustomerSegmentNatsResponse[]>;
 /**
  * Bulk Update Segments Request
+ * Unified for both NATS messages and REST API requests
  * Pattern: crm.segmentation.bulk-update
  */
-export interface BulkUpdateSegmentsNatsRequest {
+export declare class BulkUpdateSegmentsNatsRequest {
     tenantId: string;
 }
 /**
  * Bulk Update Segments Response
  */
-export type BulkUpdateSegmentsNatsResponse = NatsResponse<{
-    message: string;
-}>;
+export type BulkUpdateSegmentsNatsResponse = NatsResponse<MessageResponseDto>;
 //# sourceMappingURL=segmentation.nats.d.ts.map

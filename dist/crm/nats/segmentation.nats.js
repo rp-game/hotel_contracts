@@ -29,7 +29,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SegmentMembersNatsResponse = exports.MessageResponseDto = exports.RecalculateSegmentNatsRequest = exports.SegmentationStatsDto = exports.SegmentPerformanceItemDto = exports.SegmentsNatsResponse = exports.CustomerSegmentNatsResponse = exports.UpdateSegmentNatsRequest = exports.CreateSegmentNatsRequest = exports.SegmentStatus = exports.SegmentType = void 0;
+exports.BulkUpdateSegmentsNatsRequest = exports.CreatePredefinedSegmentsNatsRequest = exports.GetRfmAnalysisNatsRequest = exports.GetSegmentAnalysisNatsRequest = exports.SegmentMembersNatsResponse = exports.MessageResponseDto = exports.RecalculateSegmentNatsRequest = exports.DeleteSegmentNatsRequest = exports.FindSegmentByIdNatsRequest = exports.SegmentationStatsDto = exports.SegmentPerformanceItemDto = exports.SegmentsNatsResponse = exports.CustomerSegmentNatsResponse = exports.UpdateSegmentNatsRequest = exports.CreateSegmentNatsRequest = exports.SegmentStatus = exports.SegmentType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const customers_nats_1 = require("./customers.nats");
 /**
@@ -310,6 +310,42 @@ __decorate([
     __metadata("design:type", Array)
 ], SegmentationStatsDto.prototype, "segmentPerformance", void 0);
 /**
+ * Find One Segment Request
+ * Unified for both NATS messages and REST API requests
+ * Pattern: crm.segmentation.segments.findOne
+ */
+class FindSegmentByIdNatsRequest {
+    tenantId;
+    segmentId;
+}
+exports.FindSegmentByIdNatsRequest = FindSegmentByIdNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], FindSegmentByIdNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Segment ID' }),
+    __metadata("design:type", String)
+], FindSegmentByIdNatsRequest.prototype, "segmentId", void 0);
+/**
+ * Delete Segment Request
+ * Unified for both NATS messages and REST API requests
+ * Pattern: crm.segmentation.segments.delete
+ */
+class DeleteSegmentNatsRequest {
+    tenantId;
+    segmentId;
+}
+exports.DeleteSegmentNatsRequest = DeleteSegmentNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], DeleteSegmentNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Segment ID to delete' }),
+    __metadata("design:type", String)
+], DeleteSegmentNatsRequest.prototype, "segmentId", void 0);
+/**
  * Recalculate Segment Request
  * Unified for both NATS messages and REST API requests
  * Used by: NATS handler (crm-service), API Gateway REST endpoint
@@ -375,4 +411,56 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Number of items per page' }),
     __metadata("design:type", Number)
 ], SegmentMembersNatsResponse.prototype, "limit", void 0);
+/**
+ * Get Segment Analysis Request
+ * Unified for both NATS messages and REST API requests
+ * Pattern: crm.segmentation.analysis
+ */
+class GetSegmentAnalysisNatsRequest {
+    tenantId;
+}
+exports.GetSegmentAnalysisNatsRequest = GetSegmentAnalysisNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetSegmentAnalysisNatsRequest.prototype, "tenantId", void 0);
+/**
+ * Get RFM Analysis Request
+ * Unified for both NATS messages and REST API requests
+ * Pattern: crm.segmentation.rfm.analysis
+ */
+class GetRfmAnalysisNatsRequest {
+    tenantId;
+}
+exports.GetRfmAnalysisNatsRequest = GetRfmAnalysisNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetRfmAnalysisNatsRequest.prototype, "tenantId", void 0);
+/**
+ * Create Predefined Segments Request
+ * Unified for both NATS messages and REST API requests
+ * Pattern: crm.segmentation.predefined.create
+ */
+class CreatePredefinedSegmentsNatsRequest {
+    tenantId;
+}
+exports.CreatePredefinedSegmentsNatsRequest = CreatePredefinedSegmentsNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], CreatePredefinedSegmentsNatsRequest.prototype, "tenantId", void 0);
+/**
+ * Bulk Update Segments Request
+ * Unified for both NATS messages and REST API requests
+ * Pattern: crm.segmentation.bulk-update
+ */
+class BulkUpdateSegmentsNatsRequest {
+    tenantId;
+}
+exports.BulkUpdateSegmentsNatsRequest = BulkUpdateSegmentsNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], BulkUpdateSegmentsNatsRequest.prototype, "tenantId", void 0);
 //# sourceMappingURL=segmentation.nats.js.map

@@ -358,19 +358,26 @@ __decorate([
 /**
  * Find All Service Bookings Request DTO
  */
+/**
+ * Find All Service Bookings Request DTO
+ * Used for findAll, findByCustomer, findByStatus queries
+ */
 class FindAllServiceBookingsRequestDto {
     tenantId;
     hotelId;
     serviceId;
+    customerId;
+    bookingId;
     status;
-    dateFrom;
-    dateTo;
+    serviceDateFrom;
+    serviceDateTo;
     page;
     limit;
 }
 exports.FindAllServiceBookingsRequestDto = FindAllServiceBookingsRequestDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], FindAllServiceBookingsRequestDto.prototype, "tenantId", void 0);
@@ -387,6 +394,18 @@ __decorate([
     __metadata("design:type", String)
 ], FindAllServiceBookingsRequestDto.prototype, "serviceId", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by customer ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindAllServiceBookingsRequestDto.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by booking ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindAllServiceBookingsRequestDto.prototype, "bookingId", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by status', enum: FinancialServiceBookingStatus }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(FinancialServiceBookingStatus),
@@ -397,13 +416,13 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
-], FindAllServiceBookingsRequestDto.prototype, "dateFrom", void 0);
+], FindAllServiceBookingsRequestDto.prototype, "serviceDateFrom", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by date to (ISO 8601 date)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
-], FindAllServiceBookingsRequestDto.prototype, "dateTo", void 0);
+], FindAllServiceBookingsRequestDto.prototype, "serviceDateTo", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Page number', default: 1 }),
     (0, class_validator_1.IsOptional)(),

@@ -89,13 +89,19 @@ export declare class FinancialServiceBookingListResponseDto {
 /**
  * Find All Service Bookings Request DTO
  */
+/**
+ * Find All Service Bookings Request DTO
+ * Used for findAll, findByCustomer, findByStatus queries
+ */
 export declare class FindAllServiceBookingsRequestDto {
-    tenantId: string;
+    tenantId?: string;
     hotelId?: string;
     serviceId?: string;
+    customerId?: string;
+    bookingId?: string;
     status?: string;
-    dateFrom?: string;
-    dateTo?: string;
+    serviceDateFrom?: string;
+    serviceDateTo?: string;
     page?: number;
     limit?: number;
 }

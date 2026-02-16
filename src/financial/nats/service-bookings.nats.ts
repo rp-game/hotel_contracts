@@ -256,10 +256,15 @@ export class FinancialServiceBookingListResponseDto {
 /**
  * Find All Service Bookings Request DTO
  */
+/**
+ * Find All Service Bookings Request DTO
+ * Used for findAll, findByCustomer, findByStatus queries
+ */
 export class FindAllServiceBookingsRequestDto {
-  @ApiProperty({ description: 'Tenant ID' })
+  @ApiPropertyOptional({ description: 'Tenant ID' })
+  @IsOptional()
   @IsUUID()
-  tenantId: string;
+  tenantId?: string;
 
   @ApiPropertyOptional({ description: 'Hotel ID' })
   @IsOptional()
@@ -271,6 +276,16 @@ export class FindAllServiceBookingsRequestDto {
   @IsUUID()
   serviceId?: string;
 
+  @ApiPropertyOptional({ description: 'Filter by customer ID' })
+  @IsOptional()
+  @IsUUID()
+  customerId?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by booking ID' })
+  @IsOptional()
+  @IsUUID()
+  bookingId?: string;
+
   @ApiPropertyOptional({ description: 'Filter by status', enum: FinancialServiceBookingStatus })
   @IsOptional()
   @IsEnum(FinancialServiceBookingStatus)
@@ -279,12 +294,12 @@ export class FindAllServiceBookingsRequestDto {
   @ApiPropertyOptional({ description: 'Filter by date from (ISO 8601 date)' })
   @IsOptional()
   @IsDateString()
-  dateFrom?: string;
+  serviceDateFrom?: string;
 
   @ApiPropertyOptional({ description: 'Filter by date to (ISO 8601 date)' })
   @IsOptional()
   @IsDateString()
-  dateTo?: string;
+  serviceDateTo?: string;
 
   @ApiPropertyOptional({ description: 'Page number', default: 1 })
   @IsOptional()

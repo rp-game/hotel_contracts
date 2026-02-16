@@ -305,16 +305,23 @@ export class ServiceListResponseDto {
 
 /**
  * Find All Additional Services Request DTO
+ * Used for findAll, findByType, findByCategory queries
  */
 export class FindAllAdditionalServicesRequestDto {
-  @ApiProperty({ description: 'Tenant ID' })
+  @ApiPropertyOptional({ description: 'Tenant ID' })
+  @IsOptional()
   @IsUUID()
-  tenantId: string;
+  tenantId?: string;
 
   @ApiPropertyOptional({ description: 'Hotel ID' })
   @IsOptional()
   @IsUUID()
   hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by service type', enum: FinancialServiceType })
+  @IsOptional()
+  @IsEnum(FinancialServiceType)
+  serviceType?: string;
 
   @ApiPropertyOptional({ description: 'Filter by category', enum: FinancialServiceCategory })
   @IsOptional()
@@ -325,6 +332,11 @@ export class FindAllAdditionalServicesRequestDto {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional({ description: 'Filter by available status' })
+  @IsOptional()
+  @IsBoolean()
+  isAvailable?: boolean;
 
   @ApiPropertyOptional({ description: 'Page number', default: 1 })
   @IsOptional()
@@ -464,7 +476,7 @@ export class ServiceDashboardResponseDto {
 /**
  * NATS Response Types
  */
-export type FindAllAdditionalServicesNatsResponse = NatsResponse<ServiceListResponseDto>;
+export type FindAllAdditionalServicesNatsResponse = NatsResponse<AdditionalServiceResponseDto[]>;
 export type FindOneAdditionalServiceNatsResponse = NatsResponse<AdditionalServiceResponseDto>;
 export type CreateAdditionalServiceNatsResponse = NatsResponse<AdditionalServiceResponseDto>;
 export type UpdateAdditionalServiceNatsResponse = NatsResponse<AdditionalServiceResponseDto>;

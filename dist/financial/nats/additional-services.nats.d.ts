@@ -117,12 +117,15 @@ export declare class ServiceListResponseDto {
 }
 /**
  * Find All Additional Services Request DTO
+ * Used for findAll, findByType, findByCategory queries
  */
 export declare class FindAllAdditionalServicesRequestDto {
-    tenantId: string;
+    tenantId?: string;
     hotelId?: string;
+    serviceType?: string;
     category?: string;
     isActive?: boolean;
+    isAvailable?: boolean;
     page?: number;
     limit?: number;
 }
@@ -194,7 +197,7 @@ export declare class ServiceDashboardResponseDto {
 /**
  * NATS Response Types
  */
-export type FindAllAdditionalServicesNatsResponse = NatsResponse<ServiceListResponseDto>;
+export type FindAllAdditionalServicesNatsResponse = NatsResponse<AdditionalServiceResponseDto[]>;
 export type FindOneAdditionalServiceNatsResponse = NatsResponse<AdditionalServiceResponseDto>;
 export type CreateAdditionalServiceNatsResponse = NatsResponse<AdditionalServiceResponseDto>;
 export type UpdateAdditionalServiceNatsResponse = NatsResponse<AdditionalServiceResponseDto>;

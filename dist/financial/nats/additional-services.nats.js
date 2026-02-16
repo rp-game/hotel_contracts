@@ -420,18 +420,22 @@ __decorate([
 ], ServiceListResponseDto.prototype, "limit", void 0);
 /**
  * Find All Additional Services Request DTO
+ * Used for findAll, findByType, findByCategory queries
  */
 class FindAllAdditionalServicesRequestDto {
     tenantId;
     hotelId;
+    serviceType;
     category;
     isActive;
+    isAvailable;
     page;
     limit;
 }
 exports.FindAllAdditionalServicesRequestDto = FindAllAdditionalServicesRequestDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], FindAllAdditionalServicesRequestDto.prototype, "tenantId", void 0);
@@ -441,6 +445,12 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], FindAllAdditionalServicesRequestDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by service type', enum: FinancialServiceType }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(FinancialServiceType),
+    __metadata("design:type", String)
+], FindAllAdditionalServicesRequestDto.prototype, "serviceType", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by category', enum: FinancialServiceCategory }),
     (0, class_validator_1.IsOptional)(),
@@ -453,6 +463,12 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], FindAllAdditionalServicesRequestDto.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by available status' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], FindAllAdditionalServicesRequestDto.prototype, "isAvailable", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Page number', default: 1 }),
     (0, class_validator_1.IsOptional)(),
