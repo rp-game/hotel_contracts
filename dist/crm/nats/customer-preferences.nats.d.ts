@@ -150,11 +150,11 @@ export interface GetCustomerInteractionsNatsRequest {
     customerId: string;
     filters?: CustomerInteractionFiltersNatsRequest;
 }
-export interface CustomerInteractionsListNatsResponse {
+export interface CustomerPreferenceInteractionsListNatsResponse {
     data: CustomerInteractionNatsData[];
     total: number;
     page: number;
     limit: number;
 }
-export type GetCustomerInteractionsNatsResponse = NatsResponse<CustomerInteractionsListNatsResponse>;
+export type GetCustomerInteractionsNatsResponse = NatsResponse<CustomerPreferenceInteractionsListNatsResponse>;
 //# sourceMappingURL=customer-preferences.nats.d.ts.map

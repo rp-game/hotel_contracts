@@ -11,6 +11,7 @@
 export * from './create-booking.nats';
 export * from './find-bookings.nats';
 export * from './find-one-booking.nats';
+export * from './customer-bookings.nats';
 export * from './unassigned-bookings.nats';
 export * from './smart-search.nats';
 export * from './bookings-timeline.nats';

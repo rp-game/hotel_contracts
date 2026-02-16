@@ -53,23 +53,58 @@ export interface UpdateInteractionNatsRequest {
     updateDto: Partial<CreateInteractionNatsRequest>;
 }
 /**
- * Customer Interaction Response
+ * Attachment Response
+ */
+export declare class AttachmentNatsResponse {
+    id: string;
+    filename: string;
+    url: string;
+    mimeType: string;
+    size: number;
+    description?: string;
+    uploadedAt: string;
+}
+/**
+ * Customer Interaction Response (Extended for API Gateway compatibility)
  */
 export declare class CustomerInteractionNatsResponse {
     id: string;
     tenantId: string;
+    hotelId?: string;
     customerId: string;
-    type: InteractionType;
-    subject?: string;
-    description: string;
+    interactionType: string;
     channel: string;
+    interactionDate: string;
+    subject: string;
+    notes?: string;
+    staffId?: string;
+    staffName?: string;
+    satisfactionRating?: number;
+    followUpRequired: boolean;
+    followUpDate?: string;
+    resolutionStatus: string;
+    resolutionNotes?: string;
+    tags?: string[];
+    attachments?: AttachmentNatsResponse[];
+    createdAt: string | Date;
+    updatedAt: string | Date;
+    createdBy?: string;
+    updatedBy?: string;
+    type: InteractionType;
+    description?: string;
     status: string;
     priority?: string;
     assignedTo?: string;
     metadata?: Record<string, any>;
-    createdAt: string | Date;
-    updatedAt: string | Date;
-    notes?: string;
+}
+/**
+ * Interactions List Response (for CRM customer interactions endpoint)
+ */
+export declare class InteractionsListNatsResponse {
+    data: CustomerInteractionNatsResponse[];
+    total: number;
+    page: number;
+    limit: number;
 }
 /**
  * Create Interaction Response

@@ -59,7 +59,33 @@ export interface UpdateInteractionNatsRequest {
 }
 
 /**
- * Customer Interaction Response
+ * Attachment Response
+ */
+export class AttachmentNatsResponse {
+  @ApiProperty({ description: 'Attachment ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Original filename' })
+  filename!: string;
+
+  @ApiProperty({ description: 'File URL or path' })
+  url!: string;
+
+  @ApiProperty({ description: 'File MIME type' })
+  mimeType!: string;
+
+  @ApiProperty({ description: 'File size in bytes' })
+  size!: number;
+
+  @ApiPropertyOptional({ description: 'File description' })
+  description?: string;
+
+  @ApiProperty({ description: 'Upload timestamp' })
+  uploadedAt!: string;
+}
+
+/**
+ * Customer Interaction Response (Extended for API Gateway compatibility)
  */
 export class CustomerInteractionNatsResponse {
   @ApiProperty({ description: 'Interaction ID' })
@@ -68,41 +94,115 @@ export class CustomerInteractionNatsResponse {
   @ApiProperty({ description: 'Tenant ID' })
   tenantId!: string;
 
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  hotelId?: string;
+
   @ApiProperty({ description: 'Customer ID' })
   customerId!: string;
 
-  @ApiProperty({ enum: InteractionType, description: 'Interaction type' })
-  type!: InteractionType;
+  @ApiProperty({
+    description: 'Interaction type',
+    enum: ['INQUIRY', 'COMPLAINT', 'COMPLIMENT', 'BOOKING', 'CANCELLATION', 'SUPPORT', 'FEEDBACK', 'FOLLOW_UP']
+  })
+  interactionType!: string;
 
-  @ApiPropertyOptional({ description: 'Subject' })
-  subject?: string;
-
-  @ApiProperty({ description: 'Description' })
-  description!: string;
-
-  @ApiProperty({ description: 'Communication channel' })
+  @ApiProperty({
+    description: 'Interaction channel',
+    enum: ['EMAIL', 'PHONE', 'IN_PERSON', 'WEBSITE', 'SOCIAL_MEDIA', 'CHAT', 'MOBILE_APP']
+  })
   channel!: string;
 
-  @ApiProperty({ description: 'Status' })
-  status!: string;
+  @ApiProperty({ description: 'Interaction date (ISO string)' })
+  interactionDate!: string;
 
-  @ApiPropertyOptional({ description: 'Priority level' })
-  priority?: string;
+  @ApiProperty({ description: 'Interaction subject' })
+  subject!: string;
 
-  @ApiPropertyOptional({ description: 'Assigned to user ID' })
-  assignedTo?: string;
+  @ApiPropertyOptional({ description: 'Detailed notes about the interaction' })
+  notes?: string;
 
-  @ApiPropertyOptional({ description: 'Metadata' })
-  metadata?: Record<string, any>;
+  @ApiPropertyOptional({ description: 'Staff member ID who handled the interaction' })
+  staffId?: string;
 
-  @ApiProperty({ description: 'Creation timestamp' })
+  @ApiPropertyOptional({ description: 'Staff member name' })
+  staffName?: string;
+
+  @ApiPropertyOptional({
+    description: 'Customer satisfaction rating (1-5 scale)',
+    minimum: 1,
+    maximum: 5
+  })
+  satisfactionRating?: number;
+
+  @ApiProperty({ description: 'Whether follow-up is required' })
+  followUpRequired!: boolean;
+
+  @ApiPropertyOptional({ description: 'Follow-up date (ISO string)' })
+  followUpDate?: string;
+
+  @ApiProperty({
+    description: 'Resolution status',
+    enum: ['OPEN', 'IN_PROGRESS', 'RESOLVED', 'CLOSED'],
+    default: 'OPEN'
+  })
+  resolutionStatus!: string;
+
+  @ApiPropertyOptional({ description: 'Resolution notes' })
+  resolutionNotes?: string;
+
+  @ApiPropertyOptional({ description: 'Tags associated with the interaction', type: [String] })
+  tags?: string[];
+
+  @ApiPropertyOptional({ description: 'File attachments', type: [AttachmentNatsResponse] })
+  attachments?: AttachmentNatsResponse[];
+
+  @ApiProperty({ description: 'Creation timestamp (ISO string)' })
   createdAt!: string | Date;
 
-  @ApiProperty({ description: 'Last update timestamp' })
+  @ApiProperty({ description: 'Last update timestamp (ISO string)' })
   updatedAt!: string | Date;
 
-  @ApiPropertyOptional({ description: 'Additional notes' })
-  notes?: string;
+  @ApiPropertyOptional({ description: 'Created by user ID' })
+  createdBy?: string;
+
+  @ApiPropertyOptional({ description: 'Updated by user ID' })
+  updatedBy?: string;
+
+  // Legacy fields for backward compatibility
+  @ApiProperty({ enum: InteractionType, description: 'Interaction type (legacy)' })
+  type!: InteractionType;
+
+  @ApiPropertyOptional({ description: 'Description (legacy)' })
+  description?: string;
+
+  @ApiProperty({ description: 'Status (legacy)' })
+  status!: string;
+
+  @ApiPropertyOptional({ description: 'Priority level (legacy)' })
+  priority?: string;
+
+  @ApiPropertyOptional({ description: 'Assigned to user ID (legacy)' })
+  assignedTo?: string;
+
+  @ApiPropertyOptional({ description: 'Metadata (legacy)' })
+  metadata?: Record<string, any>;
+}
+
+/**
+ * Interactions List Response (for CRM customer interactions endpoint)
+ */
+export class InteractionsListNatsResponse {
+  @ApiProperty({ description: 'List of customer interactions', type: [CustomerInteractionNatsResponse] })
+  data!: CustomerInteractionNatsResponse[];
+
+  @ApiProperty({ description: 'Total number of interactions' })
+  total!: number;
+
+  @ApiProperty({ description: 'Current page number' })
+  page!: number;
+
+  @ApiProperty({ description: 'Number of items per page' })
+  limit!: number;
 }
 
 /**

@@ -188,11 +188,11 @@ export interface GetCustomerInteractionsNatsRequest {
   filters?: CustomerInteractionFiltersNatsRequest;
 }
 
-export interface CustomerInteractionsListNatsResponse {
+export interface CustomerPreferenceInteractionsListNatsResponse {
   data: CustomerInteractionNatsData[];
   total: number;
   page: number;
   limit: number;
 }
 
-export type GetCustomerInteractionsNatsResponse = NatsResponse<CustomerInteractionsListNatsResponse>;
+export type GetCustomerInteractionsNatsResponse = NatsResponse<CustomerPreferenceInteractionsListNatsResponse>;

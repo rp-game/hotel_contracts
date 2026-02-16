@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./create-booking.nats"), exports);
 __exportStar(require("./find-bookings.nats"), exports);
 __exportStar(require("./find-one-booking.nats"), exports);
+__exportStar(require("./customer-bookings.nats"), exports);
 __exportStar(require("./unassigned-bookings.nats"), exports);
 __exportStar(require("./smart-search.nats"), exports);
 __exportStar(require("./bookings-timeline.nats"), exports);
