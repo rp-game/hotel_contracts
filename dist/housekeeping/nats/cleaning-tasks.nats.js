@@ -18,7 +18,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CleaningTasksListNatsResponse = exports.FindAllCleaningTasksNatsRequest = exports.CleaningTaskNatsResponse = exports.AssignedStaffNatsDto = exports.CleaningTaskPriority = exports.CleaningTaskType = exports.CleaningTaskStatus = void 0;
+exports.CleaningTasksListNatsResponse = exports.FindAllCleaningTasksNatsRequest = exports.UpdateCleaningTaskNatsRequest = exports.UpdateCleaningTaskFieldsDto = exports.CreateCleaningTaskNatsRequest = exports.CleaningTaskNatsResponse = exports.AssignedStaffNatsDto = exports.CleaningTaskPriority = exports.CleaningTaskType = exports.CleaningTaskStatus = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Cleaning Task Status Enum
@@ -180,6 +180,161 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Actual duration in minutes' }),
     __metadata("design:type", Number)
 ], CleaningTaskNatsResponse.prototype, "actualDuration", void 0);
+/**
+ * Create Cleaning Task Request
+ * Pattern: housekeeping.cleaning-tasks.create
+ */
+class CreateCleaningTaskNatsRequest {
+    tenantId;
+    hotelId;
+    roomId;
+    roomNumber;
+    taskType;
+    priority;
+    description;
+    estimatedDuration;
+    scheduledFor;
+    assignedToId;
+}
+exports.CreateCleaningTaskNatsRequest = CreateCleaningTaskNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], CreateCleaningTaskNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], CreateCleaningTaskNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room ID' }),
+    __metadata("design:type", String)
+], CreateCleaningTaskNatsRequest.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room number' }),
+    __metadata("design:type", String)
+], CreateCleaningTaskNatsRequest.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Task type',
+        enum: CleaningTaskType
+    }),
+    __metadata("design:type", String)
+], CreateCleaningTaskNatsRequest.prototype, "taskType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Task priority',
+        enum: CleaningTaskPriority
+    }),
+    __metadata("design:type", String)
+], CreateCleaningTaskNatsRequest.prototype, "priority", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Task description' }),
+    __metadata("design:type", String)
+], CreateCleaningTaskNatsRequest.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Estimated duration in minutes' }),
+    __metadata("design:type", Number)
+], CreateCleaningTaskNatsRequest.prototype, "estimatedDuration", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Scheduled start time (ISO datetime)' }),
+    __metadata("design:type", String)
+], CreateCleaningTaskNatsRequest.prototype, "scheduledFor", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Assigned staff ID' }),
+    __metadata("design:type", String)
+], CreateCleaningTaskNatsRequest.prototype, "assignedToId", void 0);
+/**
+ * Update fields for Cleaning Task
+ */
+class UpdateCleaningTaskFieldsDto {
+    taskType;
+    status;
+    priority;
+    description;
+    notes;
+    estimatedDuration;
+    scheduledFor;
+    assignedToId;
+    completedAt;
+    actualDuration;
+}
+exports.UpdateCleaningTaskFieldsDto = UpdateCleaningTaskFieldsDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Task type',
+        enum: CleaningTaskType
+    }),
+    __metadata("design:type", String)
+], UpdateCleaningTaskFieldsDto.prototype, "taskType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Task status',
+        enum: CleaningTaskStatus
+    }),
+    __metadata("design:type", String)
+], UpdateCleaningTaskFieldsDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Task priority',
+        enum: CleaningTaskPriority
+    }),
+    __metadata("design:type", String)
+], UpdateCleaningTaskFieldsDto.prototype, "priority", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Task description' }),
+    __metadata("design:type", String)
+], UpdateCleaningTaskFieldsDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Task completion notes' }),
+    __metadata("design:type", String)
+], UpdateCleaningTaskFieldsDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated duration in minutes' }),
+    __metadata("design:type", Number)
+], UpdateCleaningTaskFieldsDto.prototype, "estimatedDuration", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Scheduled start time (ISO datetime)' }),
+    __metadata("design:type", String)
+], UpdateCleaningTaskFieldsDto.prototype, "scheduledFor", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Assigned staff ID' }),
+    __metadata("design:type", String)
+], UpdateCleaningTaskFieldsDto.prototype, "assignedToId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Completion timestamp (ISO datetime)' }),
+    __metadata("design:type", String)
+], UpdateCleaningTaskFieldsDto.prototype, "completedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Actual duration in minutes' }),
+    __metadata("design:type", Number)
+], UpdateCleaningTaskFieldsDto.prototype, "actualDuration", void 0);
+/**
+ * Update Cleaning Task Request
+ * Pattern: housekeeping.cleaning-tasks.update
+ */
+class UpdateCleaningTaskNatsRequest {
+    id;
+    tenantId;
+    hotelId;
+    updates;
+}
+exports.UpdateCleaningTaskNatsRequest = UpdateCleaningTaskNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Task ID' }),
+    __metadata("design:type", String)
+], UpdateCleaningTaskNatsRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], UpdateCleaningTaskNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], UpdateCleaningTaskNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Update fields', type: UpdateCleaningTaskFieldsDto }),
+    __metadata("design:type", UpdateCleaningTaskFieldsDto)
+], UpdateCleaningTaskNatsRequest.prototype, "updates", void 0);
 /**
  * Find All Cleaning Tasks Request (Query Parameters)
  * @unified Used by both NATS requests and REST API query params

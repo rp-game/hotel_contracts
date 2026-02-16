@@ -128,6 +128,110 @@ export class CleaningTaskNatsResponse {
 }
 
 /**
+ * Create Cleaning Task Request
+ * Pattern: housekeeping.cleaning-tasks.create
+ */
+export class CreateCleaningTaskNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId!: string;
+
+  @ApiProperty({ description: 'Room ID' })
+  roomId!: string;
+
+  @ApiPropertyOptional({ description: 'Room number' })
+  roomNumber?: string;
+
+  @ApiProperty({
+    description: 'Task type',
+    enum: CleaningTaskType
+  })
+  taskType!: CleaningTaskType;
+
+  @ApiProperty({
+    description: 'Task priority',
+    enum: CleaningTaskPriority
+  })
+  priority!: CleaningTaskPriority;
+
+  @ApiProperty({ description: 'Task description' })
+  description!: string;
+
+  @ApiProperty({ description: 'Estimated duration in minutes' })
+  estimatedDuration!: number;
+
+  @ApiProperty({ description: 'Scheduled start time (ISO datetime)' })
+  scheduledFor!: string;
+
+  @ApiPropertyOptional({ description: 'Assigned staff ID' })
+  assignedToId?: string;
+}
+
+/**
+ * Update fields for Cleaning Task
+ */
+export class UpdateCleaningTaskFieldsDto {
+  @ApiPropertyOptional({
+    description: 'Task type',
+    enum: CleaningTaskType
+  })
+  taskType?: CleaningTaskType;
+
+  @ApiPropertyOptional({
+    description: 'Task status',
+    enum: CleaningTaskStatus
+  })
+  status?: CleaningTaskStatus;
+
+  @ApiPropertyOptional({
+    description: 'Task priority',
+    enum: CleaningTaskPriority
+  })
+  priority?: CleaningTaskPriority;
+
+  @ApiPropertyOptional({ description: 'Task description' })
+  description?: string;
+
+  @ApiPropertyOptional({ description: 'Task completion notes' })
+  notes?: string;
+
+  @ApiPropertyOptional({ description: 'Estimated duration in minutes' })
+  estimatedDuration?: number;
+
+  @ApiPropertyOptional({ description: 'Scheduled start time (ISO datetime)' })
+  scheduledFor?: string;
+
+  @ApiPropertyOptional({ description: 'Assigned staff ID' })
+  assignedToId?: string;
+
+  @ApiPropertyOptional({ description: 'Completion timestamp (ISO datetime)' })
+  completedAt?: string;
+
+  @ApiPropertyOptional({ description: 'Actual duration in minutes' })
+  actualDuration?: number;
+}
+
+/**
+ * Update Cleaning Task Request
+ * Pattern: housekeeping.cleaning-tasks.update
+ */
+export class UpdateCleaningTaskNatsRequest {
+  @ApiProperty({ description: 'Task ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId!: string;
+
+  @ApiProperty({ description: 'Update fields', type: UpdateCleaningTaskFieldsDto })
+  updates!: UpdateCleaningTaskFieldsDto;
+}
+
+/**
  * Find All Cleaning Tasks Request (Query Parameters)
  * @unified Used by both NATS requests and REST API query params
  */

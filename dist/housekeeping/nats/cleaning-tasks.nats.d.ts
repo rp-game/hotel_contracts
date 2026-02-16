@@ -68,6 +68,47 @@ export declare class CleaningTaskNatsResponse {
     actualDuration?: number;
 }
 /**
+ * Create Cleaning Task Request
+ * Pattern: housekeeping.cleaning-tasks.create
+ */
+export declare class CreateCleaningTaskNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    roomId: string;
+    roomNumber?: string;
+    taskType: CleaningTaskType;
+    priority: CleaningTaskPriority;
+    description: string;
+    estimatedDuration: number;
+    scheduledFor: string;
+    assignedToId?: string;
+}
+/**
+ * Update fields for Cleaning Task
+ */
+export declare class UpdateCleaningTaskFieldsDto {
+    taskType?: CleaningTaskType;
+    status?: CleaningTaskStatus;
+    priority?: CleaningTaskPriority;
+    description?: string;
+    notes?: string;
+    estimatedDuration?: number;
+    scheduledFor?: string;
+    assignedToId?: string;
+    completedAt?: string;
+    actualDuration?: number;
+}
+/**
+ * Update Cleaning Task Request
+ * Pattern: housekeeping.cleaning-tasks.update
+ */
+export declare class UpdateCleaningTaskNatsRequest {
+    id: string;
+    tenantId: string;
+    hotelId: string;
+    updates: UpdateCleaningTaskFieldsDto;
+}
+/**
  * Find All Cleaning Tasks Request (Query Parameters)
  * @unified Used by both NATS requests and REST API query params
  */
