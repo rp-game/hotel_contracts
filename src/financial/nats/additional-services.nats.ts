@@ -12,6 +12,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsNumber, IsBoolean, IsOptional, IsEnum, IsUUID, IsDateString, Min } from 'class-validator';
 import { NatsResponse } from '../../common';
+import { FinancialServiceStatsResponseDto, ServiceBookingResponseDto } from './service-bookings.nats';
 
 /**
  * Financial Service Type Enum
@@ -373,6 +374,75 @@ export class DeleteAdditionalServiceRequestDto {
 }
 
 /**
+ * Get Service Categories Request DTO
+ */
+export class GetServiceCategoriesRequestDto {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+}
+
+/**
+ * Service Categories Response DTO
+ */
+export class ServiceCategoriesResponseDto {
+  @ApiProperty({ description: 'Available service categories', enum: FinancialServiceCategory, isArray: true })
+  categories: string[];
+}
+
+/**
+ * Get Service Stats Request DTO
+ */
+export class GetServiceStatsRequestDto {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+}
+
+/**
+ * Get Service Dashboard Request DTO
+ */
+export class GetServiceDashboardRequestDto {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+}
+
+/**
+ * Service Dashboard Response DTO
+ */
+export class ServiceDashboardResponseDto {
+  @ApiProperty({ description: 'Service statistics', type: () => FinancialServiceStatsResponseDto })
+  stats: FinancialServiceStatsResponseDto;
+
+  @ApiPropertyOptional({ description: 'Recent bookings', type: [ServiceBookingResponseDto] })
+  recentBookings?: ServiceBookingResponseDto[];
+
+  @ApiPropertyOptional({ description: 'Top services by revenue' })
+  topServices?: Array<{
+    serviceId: string;
+    serviceName: string;
+    revenue: number;
+    bookingCount: number;
+  }>;
+}
+
+/**
  * NATS Response Types
  */
 export type FindAllAdditionalServicesNatsResponse = NatsResponse<ServiceListResponseDto>;
@@ -380,3 +450,6 @@ export type FindOneAdditionalServiceNatsResponse = NatsResponse<AdditionalServic
 export type CreateAdditionalServiceNatsResponse = NatsResponse<AdditionalServiceResponseDto>;
 export type UpdateAdditionalServiceNatsResponse = NatsResponse<AdditionalServiceResponseDto>;
 export type DeleteAdditionalServiceNatsResponse = NatsResponse<{ message: string; serviceId: string }>;
+export type GetServiceCategoriesNatsResponse = NatsResponse<ServiceCategoriesResponseDto>;
+export type GetServiceStatsNatsResponse = NatsResponse<FinancialServiceStatsResponseDto>;
+export type GetServiceDashboardNatsResponse = NatsResponse<ServiceDashboardResponseDto>;

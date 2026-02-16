@@ -9,6 +9,7 @@
  * Database Entity: AdditionalService (additional_services table)
  */
 import { NatsResponse } from '../../common';
+import { FinancialServiceStatsResponseDto, ServiceBookingResponseDto } from './service-bookings.nats';
 /**
  * Financial Service Type Enum
  */
@@ -142,6 +143,46 @@ export declare class DeleteAdditionalServiceRequestDto {
     hotelId?: string;
 }
 /**
+ * Get Service Categories Request DTO
+ */
+export declare class GetServiceCategoriesRequestDto {
+    tenantId: string;
+    hotelId?: string;
+}
+/**
+ * Service Categories Response DTO
+ */
+export declare class ServiceCategoriesResponseDto {
+    categories: string[];
+}
+/**
+ * Get Service Stats Request DTO
+ */
+export declare class GetServiceStatsRequestDto {
+    tenantId: string;
+    hotelId?: string;
+}
+/**
+ * Get Service Dashboard Request DTO
+ */
+export declare class GetServiceDashboardRequestDto {
+    tenantId: string;
+    hotelId?: string;
+}
+/**
+ * Service Dashboard Response DTO
+ */
+export declare class ServiceDashboardResponseDto {
+    stats: FinancialServiceStatsResponseDto;
+    recentBookings?: ServiceBookingResponseDto[];
+    topServices?: Array<{
+        serviceId: string;
+        serviceName: string;
+        revenue: number;
+        bookingCount: number;
+    }>;
+}
+/**
  * NATS Response Types
  */
 export type FindAllAdditionalServicesNatsResponse = NatsResponse<ServiceListResponseDto>;
@@ -152,4 +193,7 @@ export type DeleteAdditionalServiceNatsResponse = NatsResponse<{
     message: string;
     serviceId: string;
 }>;
+export type GetServiceCategoriesNatsResponse = NatsResponse<ServiceCategoriesResponseDto>;
+export type GetServiceStatsNatsResponse = NatsResponse<FinancialServiceStatsResponseDto>;
+export type GetServiceDashboardNatsResponse = NatsResponse<ServiceDashboardResponseDto>;
 //# sourceMappingURL=additional-services.nats.d.ts.map

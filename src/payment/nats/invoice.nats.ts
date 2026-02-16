@@ -239,14 +239,27 @@ export type PaymentCreateInvoiceNatsResponse = NatsResponse<CreateInvoiceData>;
 // CREATE MANUAL INVOICE (POST /invoices/manual)
 // ============================================================================
 
-export interface PaymentCreateManualInvoiceNatsRequest {
+export class PaymentCreateManualInvoiceNatsRequest {
+  @ApiProperty({ description: 'Tenant ID', example: '123e4567-e89b-12d3-a456-426614174001' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID', example: '123e4567-e89b-12d3-a456-426614174002' })
   hotelId: string;
+
+  @ApiProperty({ description: 'Invoice number', example: 'INV-2024-001' })
   invoiceNumber: string;
+
+  @ApiProperty({ description: 'Invoice total amount', example: 1500000 })
   amount: number;
+
+  @ApiProperty({ description: 'Currency code', example: 'VND' })
   currency: string;
+
+  @ApiProperty({ description: 'Invoice due date', example: '2024-02-15' })
   dueDate: string;
-  items: PaymentInvoiceItem[];
+
+  @ApiProperty({ description: 'Invoice line items', type: [InvoiceItemData] })
+  items: InvoiceItemData[];
 }
 
 export type PaymentCreateManualInvoiceNatsResponse = NatsResponse<CreateInvoiceData>;

@@ -126,14 +126,14 @@ export interface CreateInvoiceData {
     createdAt: string;
 }
 export type PaymentCreateInvoiceNatsResponse = NatsResponse<CreateInvoiceData>;
-export interface PaymentCreateManualInvoiceNatsRequest {
+export declare class PaymentCreateManualInvoiceNatsRequest {
     tenantId: string;
     hotelId: string;
     invoiceNumber: string;
     amount: number;
     currency: string;
     dueDate: string;
-    items: PaymentInvoiceItem[];
+    items: InvoiceItemData[];
 }
 export type PaymentCreateManualInvoiceNatsResponse = NatsResponse<CreateInvoiceData>;
 export interface GetInvoicesNatsRequest {
@@ -203,13 +203,13 @@ export declare class DownloadInvoicePdfData {
     generatedAt: string;
 }
 export type DownloadInvoicePdfNatsResponse = NatsResponse<DownloadInvoicePdfData>;
-export interface UpdateInvoiceStatusNatsRequest {
+export declare class UpdateInvoiceStatusNatsRequest {
     id: string;
     status: PaymentInvoiceStatus | string;
     tenantId: string;
     hotelId?: string;
 }
-export interface UpdateInvoiceStatusData {
+export declare class UpdateInvoiceStatusData {
     id: string;
     invoiceNumber: string;
     status: string;

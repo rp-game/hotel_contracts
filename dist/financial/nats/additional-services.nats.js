@@ -19,9 +19,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteAdditionalServiceRequestDto = exports.FindOneAdditionalServiceRequestDto = exports.FindAllAdditionalServicesRequestDto = exports.ServiceListResponseDto = exports.UpdateAdditionalServiceDto = exports.CreateAdditionalServiceDto = exports.AdditionalServiceResponseDto = exports.FinancialServiceCategory = exports.PricingType = exports.FinancialServiceType = void 0;
+exports.ServiceDashboardResponseDto = exports.GetServiceDashboardRequestDto = exports.GetServiceStatsRequestDto = exports.ServiceCategoriesResponseDto = exports.GetServiceCategoriesRequestDto = exports.DeleteAdditionalServiceRequestDto = exports.FindOneAdditionalServiceRequestDto = exports.FindAllAdditionalServicesRequestDto = exports.ServiceListResponseDto = exports.UpdateAdditionalServiceDto = exports.CreateAdditionalServiceDto = exports.AdditionalServiceResponseDto = exports.FinancialServiceCategory = exports.PricingType = exports.FinancialServiceType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const service_bookings_nats_1 = require("./service-bookings.nats");
 /**
  * Financial Service Type Enum
  */
@@ -514,4 +515,93 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeleteAdditionalServiceRequestDto.prototype, "hotelId", void 0);
+/**
+ * Get Service Categories Request DTO
+ */
+class GetServiceCategoriesRequestDto {
+    tenantId;
+    hotelId;
+}
+exports.GetServiceCategoriesRequestDto = GetServiceCategoriesRequestDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetServiceCategoriesRequestDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetServiceCategoriesRequestDto.prototype, "hotelId", void 0);
+/**
+ * Service Categories Response DTO
+ */
+class ServiceCategoriesResponseDto {
+    categories;
+}
+exports.ServiceCategoriesResponseDto = ServiceCategoriesResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Available service categories', enum: FinancialServiceCategory, isArray: true }),
+    __metadata("design:type", Array)
+], ServiceCategoriesResponseDto.prototype, "categories", void 0);
+/**
+ * Get Service Stats Request DTO
+ */
+class GetServiceStatsRequestDto {
+    tenantId;
+    hotelId;
+}
+exports.GetServiceStatsRequestDto = GetServiceStatsRequestDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetServiceStatsRequestDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetServiceStatsRequestDto.prototype, "hotelId", void 0);
+/**
+ * Get Service Dashboard Request DTO
+ */
+class GetServiceDashboardRequestDto {
+    tenantId;
+    hotelId;
+}
+exports.GetServiceDashboardRequestDto = GetServiceDashboardRequestDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetServiceDashboardRequestDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetServiceDashboardRequestDto.prototype, "hotelId", void 0);
+/**
+ * Service Dashboard Response DTO
+ */
+class ServiceDashboardResponseDto {
+    stats;
+    recentBookings;
+    topServices;
+}
+exports.ServiceDashboardResponseDto = ServiceDashboardResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service statistics', type: () => service_bookings_nats_1.FinancialServiceStatsResponseDto }),
+    __metadata("design:type", service_bookings_nats_1.FinancialServiceStatsResponseDto)
+], ServiceDashboardResponseDto.prototype, "stats", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Recent bookings', type: [service_bookings_nats_1.ServiceBookingResponseDto] }),
+    __metadata("design:type", Array)
+], ServiceDashboardResponseDto.prototype, "recentBookings", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Top services by revenue' }),
+    __metadata("design:type", Array)
+], ServiceDashboardResponseDto.prototype, "topServices", void 0);
 //# sourceMappingURL=additional-services.nats.js.map
