@@ -16,7 +16,7 @@
  * Handler: payment-service (invoices module)
  */
 
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 // ============================================================================
@@ -319,18 +319,34 @@ export type GetInvoiceNatsResponse = NatsResponse<GetInvoiceData>;
 // SEND INVOICE (POST /invoices/:id/send)
 // ============================================================================
 
-export interface SendInvoiceNatsRequest {
+export class SendInvoiceNatsRequest {
+  @ApiProperty({ description: 'Invoice ID', example: '123e4567-e89b-12d3-a456-426614174000' })
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID', example: '123e4567-e89b-12d3-a456-426614174001' })
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID', example: '123e4567-e89b-12d3-a456-426614174002' })
   hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Email address to send invoice to (optional, uses guest email if not provided)', example: 'customer@example.com' })
   sendToEmail?: string;
 }
 
-export interface SendInvoiceData {
+export class SendInvoiceData {
+  @ApiProperty({ description: 'Operation success status', example: true })
   success: boolean;
+
+  @ApiProperty({ description: 'Timestamp when invoice was sent', example: '2024-01-15T10:30:00.000Z' })
   sentAt: string;
+
+  @ApiProperty({ description: 'Confirmation message', example: 'Invoice sent successfully' })
   message: string;
+
+  @ApiProperty({ description: 'Invoice ID that was sent', example: '123e4567-e89b-12d3-a456-426614174000' })
   invoiceId: string;
+
+  @ApiPropertyOptional({ description: 'Email address where invoice was sent', example: 'customer@example.com' })
   recipientEmail?: string;
 }
 
@@ -340,16 +356,28 @@ export type SendInvoiceNatsResponse = NatsResponse<SendInvoiceData>;
 // DOWNLOAD INVOICE PDF (GET /invoices/:id/pdf)
 // ============================================================================
 
-export interface DownloadInvoicePdfNatsRequest {
+export class DownloadInvoicePdfNatsRequest {
+  @ApiProperty({ description: 'Invoice ID', example: '123e4567-e89b-12d3-a456-426614174000' })
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID', example: '123e4567-e89b-12d3-a456-426614174001' })
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID', example: '123e4567-e89b-12d3-a456-426614174002' })
   hotelId?: string;
 }
 
-export interface DownloadInvoicePdfData {
+export class DownloadInvoicePdfData {
+  @ApiProperty({ description: 'PDF file URL or base64 data', example: 'https://storage.example.com/invoices/invoice-123.pdf' })
   pdfUrl: string;
+
+  @ApiProperty({ description: 'Suggested filename for download', example: 'invoice-INV-2024-001.pdf' })
   filename: string;
+
+  @ApiProperty({ description: 'Invoice ID', example: '123e4567-e89b-12d3-a456-426614174000' })
   invoiceId: string;
+
+  @ApiProperty({ description: 'Timestamp when PDF was generated', example: '2024-01-15T10:30:00.000Z' })
   generatedAt: string;
 }
 
@@ -359,18 +387,34 @@ export type DownloadInvoicePdfNatsResponse = NatsResponse<DownloadInvoicePdfData
 // UPDATE INVOICE STATUS (PUT /invoices/:id/status)
 // ============================================================================
 
-export interface UpdateInvoiceStatusNatsRequest {
+export class UpdateInvoiceStatusNatsRequest {
+  @ApiProperty({ description: 'Invoice ID', example: '123e4567-e89b-12d3-a456-426614174000' })
   id: string;
+
+  @ApiProperty({ description: 'New invoice status', example: 'PAID' })
   status: PaymentInvoiceStatus | string;
+
+  @ApiProperty({ description: 'Tenant ID', example: '123e4567-e89b-12d3-a456-426614174001' })
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID', example: '123e4567-e89b-12d3-a456-426614174002' })
   hotelId?: string;
 }
 
-export interface UpdateInvoiceStatusData {
+export class UpdateInvoiceStatusData {
+  @ApiProperty({ description: 'Invoice ID', example: '123e4567-e89b-12d3-a456-426614174000' })
   id: string;
+
+  @ApiProperty({ description: 'Invoice number', example: 'INV-2024-001' })
   invoiceNumber: string;
+
+  @ApiProperty({ description: 'New invoice status', example: 'PAID' })
   status: string;
+
+  @ApiProperty({ description: 'Previous invoice status', example: 'SENT' })
   previousStatus: string;
+
+  @ApiProperty({ description: 'Update timestamp', example: '2024-01-15T10:30:00.000Z' })
   updatedAt: string;
 }
 

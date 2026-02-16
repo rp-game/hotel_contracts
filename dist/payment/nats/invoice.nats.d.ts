@@ -177,13 +177,13 @@ export interface GetInvoiceData {
     updatedAt: string;
 }
 export type GetInvoiceNatsResponse = NatsResponse<GetInvoiceData>;
-export interface SendInvoiceNatsRequest {
+export declare class SendInvoiceNatsRequest {
     id: string;
     tenantId: string;
     hotelId?: string;
     sendToEmail?: string;
 }
-export interface SendInvoiceData {
+export declare class SendInvoiceData {
     success: boolean;
     sentAt: string;
     message: string;
@@ -191,12 +191,12 @@ export interface SendInvoiceData {
     recipientEmail?: string;
 }
 export type SendInvoiceNatsResponse = NatsResponse<SendInvoiceData>;
-export interface DownloadInvoicePdfNatsRequest {
+export declare class DownloadInvoicePdfNatsRequest {
     id: string;
     tenantId: string;
     hotelId?: string;
 }
-export interface DownloadInvoicePdfData {
+export declare class DownloadInvoicePdfData {
     pdfUrl: string;
     filename: string;
     invoiceId: string;

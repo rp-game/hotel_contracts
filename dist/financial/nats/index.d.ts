@@ -11,6 +11,6 @@
  *
  * Handler: financial-service
  */
-export * from './services.nats';
+export * from './additional-services.nats';
 export * from './service-bookings.nats';
 //# sourceMappingURL=index.d.ts.map

@@ -1,0 +1,517 @@
+"use strict";
+/**
+ * Additional Services NATS Contracts
+ *
+ * Unified contracts for both NATS messages and REST DTOs
+ * Matches database entity structure (camelCase)
+ *
+ * Pattern: additional-services.service.*
+ * Handler: financial-service
+ * Database Entity: AdditionalService (additional_services table)
+ */
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DeleteAdditionalServiceRequestDto = exports.FindOneAdditionalServiceRequestDto = exports.FindAllAdditionalServicesRequestDto = exports.ServiceListResponseDto = exports.UpdateAdditionalServiceDto = exports.CreateAdditionalServiceDto = exports.AdditionalServiceResponseDto = exports.FinancialServiceCategory = exports.PricingType = exports.FinancialServiceType = void 0;
+const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
+/**
+ * Financial Service Type Enum
+ */
+var FinancialServiceType;
+(function (FinancialServiceType) {
+    FinancialServiceType["ONE_TIME"] = "ONE_TIME";
+    FinancialServiceType["RECURRING"] = "RECURRING";
+    FinancialServiceType["ON_DEMAND"] = "ON_DEMAND";
+})(FinancialServiceType || (exports.FinancialServiceType = FinancialServiceType = {}));
+/**
+ * Pricing Type Enum
+ */
+var PricingType;
+(function (PricingType) {
+    PricingType["FIXED"] = "FIXED";
+    PricingType["HOURLY"] = "HOURLY";
+    PricingType["DAILY"] = "DAILY";
+    PricingType["PACKAGE"] = "PACKAGE";
+})(PricingType || (exports.PricingType = PricingType = {}));
+/**
+ * Financial Service Category Enum
+ */
+var FinancialServiceCategory;
+(function (FinancialServiceCategory) {
+    FinancialServiceCategory["ROOM_SERVICE"] = "ROOM_SERVICE";
+    FinancialServiceCategory["SPA_WELLNESS"] = "SPA_WELLNESS";
+    FinancialServiceCategory["TRANSPORTATION"] = "TRANSPORTATION";
+    FinancialServiceCategory["FOOD_BEVERAGE"] = "FOOD_BEVERAGE";
+    FinancialServiceCategory["LAUNDRY_CLEANING"] = "LAUNDRY_CLEANING";
+    FinancialServiceCategory["BUSINESS_SERVICES"] = "BUSINESS_SERVICES";
+    FinancialServiceCategory["ENTERTAINMENT"] = "ENTERTAINMENT";
+    FinancialServiceCategory["CONCIERGE"] = "CONCIERGE";
+    FinancialServiceCategory["PET_SERVICES"] = "PET_SERVICES";
+    FinancialServiceCategory["OTHER"] = "OTHER";
+})(FinancialServiceCategory || (exports.FinancialServiceCategory = FinancialServiceCategory = {}));
+/**
+ * Additional Service Response DTO
+ * Used in both NATS responses and REST API responses
+ * Matches AdditionalService entity structure
+ */
+class AdditionalServiceResponseDto {
+    id;
+    tenantId;
+    hotelId;
+    name;
+    description;
+    serviceType;
+    category;
+    basePrice;
+    taxRate;
+    finalPrice;
+    pricingType;
+    requiresBooking;
+    isActive;
+    isAvailable;
+    maxQuantity;
+    availableFrom;
+    availableTo;
+    createdAt;
+    updatedAt;
+}
+exports.AdditionalServiceResponseDto = AdditionalServiceResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], AdditionalServiceResponseDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], AdditionalServiceResponseDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], AdditionalServiceResponseDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service name' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AdditionalServiceResponseDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service description' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AdditionalServiceResponseDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service type', enum: FinancialServiceType }),
+    (0, class_validator_1.IsEnum)(FinancialServiceType),
+    __metadata("design:type", String)
+], AdditionalServiceResponseDto.prototype, "serviceType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service category', enum: FinancialServiceCategory }),
+    (0, class_validator_1.IsEnum)(FinancialServiceCategory),
+    __metadata("design:type", String)
+], AdditionalServiceResponseDto.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Base price (before tax)' }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], AdditionalServiceResponseDto.prototype, "basePrice", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tax rate (decimal, e.g., 0.1 for 10%)' }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], AdditionalServiceResponseDto.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Final price (including tax)' }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], AdditionalServiceResponseDto.prototype, "finalPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Pricing type', enum: PricingType }),
+    (0, class_validator_1.IsEnum)(PricingType),
+    __metadata("design:type", String)
+], AdditionalServiceResponseDto.prototype, "pricingType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether booking is required' }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], AdditionalServiceResponseDto.prototype, "requiresBooking", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether service is active' }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], AdditionalServiceResponseDto.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether service is currently available' }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], AdditionalServiceResponseDto.prototype, "isAvailable", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Maximum quantity per booking' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Object)
+], AdditionalServiceResponseDto.prototype, "maxQuantity", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Available from date (ISO 8601 date)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", Object)
+], AdditionalServiceResponseDto.prototype, "availableFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Available to date (ISO 8601 date)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", Object)
+], AdditionalServiceResponseDto.prototype, "availableTo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Created at timestamp' }),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], AdditionalServiceResponseDto.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Updated at timestamp' }),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], AdditionalServiceResponseDto.prototype, "updatedAt", void 0);
+/**
+ * Create Additional Service DTO
+ */
+class CreateAdditionalServiceDto {
+    tenantId;
+    hotelId;
+    name;
+    description;
+    serviceType;
+    category;
+    basePrice;
+    taxRate;
+    pricingType;
+    requiresBooking;
+    isActive;
+    isAvailable;
+    maxQuantity;
+    availableFrom;
+    availableTo;
+}
+exports.CreateAdditionalServiceDto = CreateAdditionalServiceDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service name' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service description' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service type', enum: FinancialServiceType }),
+    (0, class_validator_1.IsEnum)(FinancialServiceType),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "serviceType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service category', enum: FinancialServiceCategory }),
+    (0, class_validator_1.IsEnum)(FinancialServiceCategory),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Base price (before tax)' }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], CreateAdditionalServiceDto.prototype, "basePrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax rate (decimal)', default: 0.1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], CreateAdditionalServiceDto.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Pricing type', enum: PricingType }),
+    (0, class_validator_1.IsEnum)(PricingType),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "pricingType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether booking is required', default: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreateAdditionalServiceDto.prototype, "requiresBooking", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether service is active', default: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreateAdditionalServiceDto.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether service is available', default: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreateAdditionalServiceDto.prototype, "isAvailable", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Maximum quantity per booking' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateAdditionalServiceDto.prototype, "maxQuantity", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Available from date (ISO 8601 date)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "availableFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Available to date (ISO 8601 date)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "availableTo", void 0);
+/**
+ * Update Additional Service DTO
+ */
+class UpdateAdditionalServiceDto {
+    name;
+    description;
+    serviceType;
+    category;
+    basePrice;
+    taxRate;
+    pricingType;
+    requiresBooking;
+    isActive;
+    isAvailable;
+    maxQuantity;
+    availableFrom;
+    availableTo;
+}
+exports.UpdateAdditionalServiceDto = UpdateAdditionalServiceDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service name' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service description' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service type', enum: FinancialServiceType }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(FinancialServiceType),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "serviceType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service category', enum: FinancialServiceCategory }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(FinancialServiceCategory),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Base price (before tax)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], UpdateAdditionalServiceDto.prototype, "basePrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax rate (decimal)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], UpdateAdditionalServiceDto.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Pricing type', enum: PricingType }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(PricingType),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "pricingType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether booking is required' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdateAdditionalServiceDto.prototype, "requiresBooking", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether service is active' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdateAdditionalServiceDto.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether service is available' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdateAdditionalServiceDto.prototype, "isAvailable", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Maximum quantity per booking' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateAdditionalServiceDto.prototype, "maxQuantity", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Available from date (ISO 8601 date)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "availableFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Available to date (ISO 8601 date)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "availableTo", void 0);
+/**
+ * Service List Response DTO
+ */
+class ServiceListResponseDto {
+    data;
+    total;
+    page;
+    limit;
+}
+exports.ServiceListResponseDto = ServiceListResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Array of services', type: [AdditionalServiceResponseDto] }),
+    __metadata("design:type", Array)
+], ServiceListResponseDto.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of services' }),
+    __metadata("design:type", Number)
+], ServiceListResponseDto.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current page number' }),
+    __metadata("design:type", Number)
+], ServiceListResponseDto.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Items per page' }),
+    __metadata("design:type", Number)
+], ServiceListResponseDto.prototype, "limit", void 0);
+/**
+ * Find All Additional Services Request DTO
+ */
+class FindAllAdditionalServicesRequestDto {
+    tenantId;
+    hotelId;
+    category;
+    isActive;
+    page;
+    limit;
+}
+exports.FindAllAdditionalServicesRequestDto = FindAllAdditionalServicesRequestDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindAllAdditionalServicesRequestDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindAllAdditionalServicesRequestDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by category', enum: FinancialServiceCategory }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(FinancialServiceCategory),
+    __metadata("design:type", String)
+], FindAllAdditionalServicesRequestDto.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by active status' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], FindAllAdditionalServicesRequestDto.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Page number', default: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], FindAllAdditionalServicesRequestDto.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Items per page', default: 10 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], FindAllAdditionalServicesRequestDto.prototype, "limit", void 0);
+/**
+ * Find One Additional Service Request DTO
+ */
+class FindOneAdditionalServiceRequestDto {
+    id;
+    tenantId;
+    hotelId;
+}
+exports.FindOneAdditionalServiceRequestDto = FindOneAdditionalServiceRequestDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindOneAdditionalServiceRequestDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindOneAdditionalServiceRequestDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindOneAdditionalServiceRequestDto.prototype, "hotelId", void 0);
+/**
+ * Delete Additional Service Request DTO
+ */
+class DeleteAdditionalServiceRequestDto {
+    id;
+    tenantId;
+    hotelId;
+}
+exports.DeleteAdditionalServiceRequestDto = DeleteAdditionalServiceRequestDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], DeleteAdditionalServiceRequestDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], DeleteAdditionalServiceRequestDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], DeleteAdditionalServiceRequestDto.prototype, "hotelId", void 0);
+//# sourceMappingURL=additional-services.nats.js.map

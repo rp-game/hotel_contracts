@@ -26,7 +26,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetPaymentInvoicesData = exports.InvoiceDataItem = exports.InvoiceItemData = exports.PaymentInvoiceStatus = void 0;
+exports.DownloadInvoicePdfData = exports.DownloadInvoicePdfNatsRequest = exports.SendInvoiceData = exports.SendInvoiceNatsRequest = exports.GetPaymentInvoicesData = exports.InvoiceDataItem = exports.InvoiceItemData = exports.PaymentInvoiceStatus = void 0;
 const swagger_1 = require("@nestjs/swagger");
 var PaymentInvoiceStatus;
 (function (PaymentInvoiceStatus) {
@@ -302,4 +302,102 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total number of pages', required: false }),
     __metadata("design:type", Number)
 ], GetPaymentInvoicesData.prototype, "totalPages", void 0);
+// ============================================================================
+// SEND INVOICE (POST /invoices/:id/send)
+// ============================================================================
+class SendInvoiceNatsRequest {
+    id;
+    tenantId;
+    hotelId;
+    sendToEmail;
+}
+exports.SendInvoiceNatsRequest = SendInvoiceNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice ID', example: '123e4567-e89b-12d3-a456-426614174000' }),
+    __metadata("design:type", String)
+], SendInvoiceNatsRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID', example: '123e4567-e89b-12d3-a456-426614174001' }),
+    __metadata("design:type", String)
+], SendInvoiceNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID', example: '123e4567-e89b-12d3-a456-426614174002' }),
+    __metadata("design:type", String)
+], SendInvoiceNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Email address to send invoice to (optional, uses guest email if not provided)', example: 'customer@example.com' }),
+    __metadata("design:type", String)
+], SendInvoiceNatsRequest.prototype, "sendToEmail", void 0);
+class SendInvoiceData {
+    success;
+    sentAt;
+    message;
+    invoiceId;
+    recipientEmail;
+}
+exports.SendInvoiceData = SendInvoiceData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Operation success status', example: true }),
+    __metadata("design:type", Boolean)
+], SendInvoiceData.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Timestamp when invoice was sent', example: '2024-01-15T10:30:00.000Z' }),
+    __metadata("design:type", String)
+], SendInvoiceData.prototype, "sentAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Confirmation message', example: 'Invoice sent successfully' }),
+    __metadata("design:type", String)
+], SendInvoiceData.prototype, "message", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice ID that was sent', example: '123e4567-e89b-12d3-a456-426614174000' }),
+    __metadata("design:type", String)
+], SendInvoiceData.prototype, "invoiceId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Email address where invoice was sent', example: 'customer@example.com' }),
+    __metadata("design:type", String)
+], SendInvoiceData.prototype, "recipientEmail", void 0);
+// ============================================================================
+// DOWNLOAD INVOICE PDF (GET /invoices/:id/pdf)
+// ============================================================================
+class DownloadInvoicePdfNatsRequest {
+    id;
+    tenantId;
+    hotelId;
+}
+exports.DownloadInvoicePdfNatsRequest = DownloadInvoicePdfNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice ID', example: '123e4567-e89b-12d3-a456-426614174000' }),
+    __metadata("design:type", String)
+], DownloadInvoicePdfNatsRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID', example: '123e4567-e89b-12d3-a456-426614174001' }),
+    __metadata("design:type", String)
+], DownloadInvoicePdfNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID', example: '123e4567-e89b-12d3-a456-426614174002' }),
+    __metadata("design:type", String)
+], DownloadInvoicePdfNatsRequest.prototype, "hotelId", void 0);
+class DownloadInvoicePdfData {
+    pdfUrl;
+    filename;
+    invoiceId;
+    generatedAt;
+}
+exports.DownloadInvoicePdfData = DownloadInvoicePdfData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'PDF file URL or base64 data', example: 'https://storage.example.com/invoices/invoice-123.pdf' }),
+    __metadata("design:type", String)
+], DownloadInvoicePdfData.prototype, "pdfUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Suggested filename for download', example: 'invoice-INV-2024-001.pdf' }),
+    __metadata("design:type", String)
+], DownloadInvoicePdfData.prototype, "filename", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice ID', example: '123e4567-e89b-12d3-a456-426614174000' }),
+    __metadata("design:type", String)
+], DownloadInvoicePdfData.prototype, "invoiceId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Timestamp when PDF was generated', example: '2024-01-15T10:30:00.000Z' }),
+    __metadata("design:type", String)
+], DownloadInvoicePdfData.prototype, "generatedAt", void 0);
 //# sourceMappingURL=invoice.nats.js.map

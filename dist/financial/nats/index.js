@@ -28,6 +28,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // Financial-specific types only (not re-exporting payment types to avoid conflicts in root index)
-__exportStar(require("./services.nats"), exports);
+__exportStar(require("./additional-services.nats"), exports);
 __exportStar(require("./service-bookings.nats"), exports);
 //# sourceMappingURL=index.js.map

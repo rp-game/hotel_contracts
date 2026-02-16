@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/financial/nats/index.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;;GAYG;AAGH,cAAc,iBAAiB,CAAC;AAChC,cAAc,yBAAyB,CAAC"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/financial/nats/index.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;;GAYG;AAGH,cAAc,4BAA4B,CAAC;AAC3C,cAAc,yBAAyB,CAAC"}

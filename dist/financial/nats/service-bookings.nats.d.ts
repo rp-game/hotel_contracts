@@ -1,100 +1,148 @@
-import { NatsResponse } from '../../common/nats-response.interface';
 /**
- * =============================================================================
- * ADDITIONAL SERVICE BOOKINGS NATS CONTRACTS
- * Pattern: service-bookings.*
- * Handler: financial-service
+ * Service Bookings NATS Contracts
  *
- * NOTE: These types are namespaced as "AdditionalServiceBooking*" to avoid conflicts
- * with other domains (crm.guest-services, booking.add-service)
- * =============================================================================
+ * Unified contracts for both NATS messages and REST DTOs
+ * Matches database entity structure (camelCase)
+ *
+ * Pattern: additional-services.booking.*
+ * Handler: financial-service
+ * Database Entity: ServiceBooking (service_bookings table)
  */
-export interface CreateAdditionalServiceBookingNatsRequest {
-    tenantId: string;
-    hotelId: string;
-    serviceId: string;
-    customerId?: string;
-    bookingId?: string;
-    quantity: number;
-    unitPrice: number;
-    totalPrice: number;
-    requestedDate: string;
-    serviceTime?: string;
-    specialRequests?: string;
-    status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+import { NatsResponse } from '../../common';
+import { AdditionalServiceResponseDto } from './additional-services.nats';
+/**
+ * Financial Service Booking Status Enum
+ */
+export declare enum FinancialServiceBookingStatus {
+    PENDING = "PENDING",
+    CONFIRMED = "CONFIRMED",
+    IN_PROGRESS = "IN_PROGRESS",
+    COMPLETED = "COMPLETED",
+    CANCELLED = "CANCELLED"
 }
-export interface AdditionalServiceBookingData {
+/**
+ * Service Booking Response DTO
+ * Used in both NATS responses and REST API responses
+ * Matches ServiceBooking entity structure
+ */
+export declare class ServiceBookingResponseDto {
     id: string;
     tenantId: string;
     hotelId: string;
     serviceId: string;
-    customerId?: string;
-    bookingId?: string;
-    roomNumber?: string;
+    service?: AdditionalServiceResponseDto;
+    customerName: string;
+    customerEmail: string;
+    customerPhone?: string;
+    bookingId?: string | null;
+    roomNumber?: string | null;
+    serviceDate: string;
     quantity: number;
     unitPrice: number;
-    totalPrice: number;
-    status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
-    requestedDate: string;
-    completedDate?: string;
-    notes?: string;
+    totalAmount: number;
+    status: string;
+    notes?: string | null;
     createdAt: string;
     updatedAt: string;
 }
-export type CreateAdditionalServiceBookingNatsResponse = NatsResponse<AdditionalServiceBookingData>;
-export interface GetAdditionalServiceBookingsNatsRequest {
+/**
+ * Create Financial Service Booking DTO
+ */
+export declare class CreateFinancialServiceBookingDto {
     tenantId: string;
-    hotelId?: string;
-    serviceId?: string;
-    customerId?: string;
-    status?: 'pending' | 'confirmed' | 'completed' | 'cancelled';
-    serviceDateFrom?: string;
-    serviceDateTo?: string;
-    page?: number;
-    limit?: number;
+    hotelId: string;
+    serviceId: string;
+    customerName: string;
+    customerEmail: string;
+    customerPhone?: string;
+    bookingId?: string;
+    roomNumber?: string;
+    serviceDate: string;
+    quantity: number;
+    unitPrice: number;
+    totalAmount: number;
+    status?: string;
+    notes?: string;
 }
-export interface GetAdditionalServiceBookingsData {
-    bookings: AdditionalServiceBookingData[];
+/**
+ * Update Financial Service Booking DTO
+ */
+export declare class UpdateFinancialServiceBookingDto {
+    customerName?: string;
+    customerEmail?: string;
+    customerPhone?: string;
+    roomNumber?: string;
+    serviceDate?: string;
+    quantity?: number;
+    unitPrice?: number;
+    totalAmount?: number;
+    status?: string;
+    notes?: string;
+}
+/**
+ * Service Booking List Response DTO
+ */
+export declare class FinancialServiceBookingListResponseDto {
+    data: ServiceBookingResponseDto[];
     total: number;
     page: number;
     limit: number;
 }
-export type GetAdditionalServiceBookingsNatsResponse = NatsResponse<GetAdditionalServiceBookingsData>;
-export interface GetAdditionalServiceBookingNatsRequest {
+/**
+ * Find All Service Bookings Request DTO
+ */
+export declare class FindAllServiceBookingsRequestDto {
+    tenantId: string;
+    hotelId?: string;
+    serviceId?: string;
+    status?: string;
+    dateFrom?: string;
+    dateTo?: string;
+    page?: number;
+    limit?: number;
+}
+/**
+ * Find One Service Booking Request DTO
+ */
+export declare class FindOneServiceBookingRequestDto {
     id: string;
     tenantId: string;
     hotelId?: string;
 }
-export type GetAdditionalServiceBookingNatsResponse = NatsResponse<AdditionalServiceBookingData>;
-export interface UpdateAdditionalServiceBookingNatsRequest {
-    id: string;
-    tenantId: string;
-    hotelId?: string;
-    quantity?: number;
-    unitPrice?: number;
-    totalPrice?: number;
-    requestedDate?: string;
-    serviceTime?: string;
-    specialRequests?: string;
-    status?: 'pending' | 'confirmed' | 'completed' | 'cancelled';
-}
-export type UpdateAdditionalServiceBookingNatsResponse = NatsResponse<AdditionalServiceBookingData>;
-export interface DeleteAdditionalServiceBookingNatsRequest {
+/**
+ * Delete Service Booking Request DTO
+ */
+export declare class DeleteServiceBookingRequestDto {
     id: string;
     tenantId: string;
     hotelId?: string;
 }
-export interface DeleteAdditionalServiceBookingData {
-    success: boolean;
+/**
+ * Financial Service Stats Response DTO
+ */
+export declare class FinancialServiceStatsResponseDto {
+    totalServices: number;
+    activeServices: number;
+    totalBookings: number;
+    totalRevenue: number;
+    revenueByCategory?: Record<string, number>;
+    popularServices?: Array<{
+        serviceId: string;
+        serviceName: string;
+        bookingCount: number;
+        revenue: number;
+    }>;
+}
+/**
+ * NATS Response Types
+ */
+export type FindAllFinancialServiceBookingsNatsResponse = NatsResponse<FinancialServiceBookingListResponseDto>;
+export type FindOneFinancialServiceBookingNatsResponse = NatsResponse<ServiceBookingResponseDto>;
+export type CreateFinancialServiceBookingNatsResponse = NatsResponse<ServiceBookingResponseDto>;
+export type UpdateFinancialServiceBookingNatsResponse = NatsResponse<ServiceBookingResponseDto>;
+export type DeleteFinancialServiceBookingNatsResponse = NatsResponse<{
     message: string;
-    bookingId?: string;
-}
-export type DeleteAdditionalServiceBookingNatsResponse = NatsResponse<DeleteAdditionalServiceBookingData>;
-export interface CancelAdditionalServiceBookingNatsRequest {
-    id: string;
-    tenantId: string;
-    hotelId?: string;
-    reason?: string;
-}
-export type CancelAdditionalServiceBookingNatsResponse = NatsResponse<AdditionalServiceBookingData>;
+    bookingId: string;
+}>;
+export type GetFinancialServiceStatsNatsResponse = NatsResponse<FinancialServiceStatsResponseDto>;
 //# sourceMappingURL=service-bookings.nats.d.ts.map
