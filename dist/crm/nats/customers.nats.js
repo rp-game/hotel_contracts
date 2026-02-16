@@ -33,7 +33,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ExportDownloadData = exports.ExportStatusData = exports.ExportJobData = exports.CustomerStatsData = exports.RecentCustomerInfo = exports.TopCustomerInfo = exports.MembershipDistribution = exports.CustomerStatsOverview = exports.RecalculateAllBookingStatsData = exports.RecalculateAllBookingStatsResultItem = exports.RecalculateBookingStatsData = exports.CustomersListData = exports.CustomerNatsResponse = exports.UpdateCustomerNatsRequest = exports.CreateCustomerNatsRequest = exports.CommunicationChannel = exports.NationalIdType = exports.Gender = void 0;
+exports.ExportDownloadData = exports.ExportStatusData = exports.ExportJobData = exports.CustomerStatsData = exports.RecentCustomerInfo = exports.TopCustomerInfo = exports.MembershipDistribution = exports.CustomerStatsOverview = exports.RecalculateAllBookingStatsData = exports.RecalculateAllBookingStatsResultItem = exports.RecalculateBookingStatsData = exports.FindOneCustomerNatsRequest = exports.CustomersListData = exports.CustomerNatsResponse = exports.UpdateCustomerNatsRequest = exports.CreateCustomerNatsRequest = exports.LoyaltyMemberInfo = exports.LoyaltyTierInfo = exports.EmergencyContact = exports.CustomerPreferences = exports.IdentificationInfo = exports.AddressInfo = exports.CommunicationChannel = exports.NationalIdType = exports.IdentificationType = exports.CustomerType = exports.Gender = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Enums
@@ -44,6 +44,19 @@ var Gender;
     Gender["FEMALE"] = "FEMALE";
     Gender["OTHER"] = "OTHER";
 })(Gender || (exports.Gender = Gender = {}));
+var CustomerType;
+(function (CustomerType) {
+    CustomerType["BOOKING_USER"] = "BOOKING_USER";
+    CustomerType["GUEST_USER"] = "GUEST_USER";
+    CustomerType["CORPORATE"] = "CORPORATE";
+    CustomerType["GROUP"] = "GROUP";
+})(CustomerType || (exports.CustomerType = CustomerType = {}));
+var IdentificationType;
+(function (IdentificationType) {
+    IdentificationType["PASSPORT"] = "PASSPORT";
+    IdentificationType["ID_CARD"] = "ID_CARD";
+    IdentificationType["DRIVING_LICENSE"] = "DRIVING_LICENSE";
+})(IdentificationType || (exports.IdentificationType = IdentificationType = {}));
 var NationalIdType;
 (function (NationalIdType) {
     NationalIdType["PASSPORT"] = "PASSPORT";
@@ -56,6 +69,167 @@ var CommunicationChannel;
     CommunicationChannel["SMS"] = "SMS";
     CommunicationChannel["APP_NOTIFICATION"] = "APP_NOTIFICATION";
 })(CommunicationChannel || (exports.CommunicationChannel = CommunicationChannel = {}));
+/**
+ * Nested DTOs
+ */
+class AddressInfo {
+    street;
+    city;
+    state;
+    stateProvince;
+    postalCode;
+    country;
+}
+exports.AddressInfo = AddressInfo;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Street address' }),
+    __metadata("design:type", String)
+], AddressInfo.prototype, "street", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'City' }),
+    __metadata("design:type", String)
+], AddressInfo.prototype, "city", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'State/Province' }),
+    __metadata("design:type", String)
+], AddressInfo.prototype, "state", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'State/Province (alias)' }),
+    __metadata("design:type", String)
+], AddressInfo.prototype, "stateProvince", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Postal code' }),
+    __metadata("design:type", String)
+], AddressInfo.prototype, "postalCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Country' }),
+    __metadata("design:type", String)
+], AddressInfo.prototype, "country", void 0);
+class IdentificationInfo {
+    type;
+    number;
+    issueDate;
+    expiryDate;
+    issuePlace;
+}
+exports.IdentificationInfo = IdentificationInfo;
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: IdentificationType, description: 'Identification document type' }),
+    __metadata("design:type", String)
+], IdentificationInfo.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Identification document number' }),
+    __metadata("design:type", String)
+], IdentificationInfo.prototype, "number", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Issue date (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], IdentificationInfo.prototype, "issueDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Expiry date (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], IdentificationInfo.prototype, "expiryDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Place of issue' }),
+    __metadata("design:type", String)
+], IdentificationInfo.prototype, "issuePlace", void 0);
+class CustomerPreferences {
+    roomType;
+    floor;
+    bedType;
+    smoking;
+    specialRequests;
+}
+exports.CustomerPreferences = CustomerPreferences;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Preferred room type' }),
+    __metadata("design:type", String)
+], CustomerPreferences.prototype, "roomType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Preferred floor' }),
+    __metadata("design:type", String)
+], CustomerPreferences.prototype, "floor", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Preferred bed type' }),
+    __metadata("design:type", String)
+], CustomerPreferences.prototype, "bedType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Smoking preference' }),
+    __metadata("design:type", Boolean)
+], CustomerPreferences.prototype, "smoking", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [String], description: 'Special requests' }),
+    __metadata("design:type", Array)
+], CustomerPreferences.prototype, "specialRequests", void 0);
+class EmergencyContact {
+    name;
+    phone;
+    relationship;
+}
+exports.EmergencyContact = EmergencyContact;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Emergency contact name' }),
+    __metadata("design:type", String)
+], EmergencyContact.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Emergency contact phone' }),
+    __metadata("design:type", String)
+], EmergencyContact.prototype, "phone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Relationship to customer' }),
+    __metadata("design:type", String)
+], EmergencyContact.prototype, "relationship", void 0);
+class LoyaltyTierInfo {
+    name;
+    level;
+    color;
+}
+exports.LoyaltyTierInfo = LoyaltyTierInfo;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tier name' }),
+    __metadata("design:type", String)
+], LoyaltyTierInfo.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tier level' }),
+    __metadata("design:type", Number)
+], LoyaltyTierInfo.prototype, "level", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tier color (hex or name)' }),
+    __metadata("design:type", String)
+], LoyaltyTierInfo.prototype, "color", void 0);
+class LoyaltyMemberInfo {
+    id;
+    membershipId;
+    currentPoints;
+    lifetimePoints;
+    tier;
+    status;
+}
+exports.LoyaltyMemberInfo = LoyaltyMemberInfo;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Loyalty member ID' }),
+    __metadata("design:type", String)
+], LoyaltyMemberInfo.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Membership ID/Number' }),
+    __metadata("design:type", String)
+], LoyaltyMemberInfo.prototype, "membershipId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current points balance' }),
+    __metadata("design:type", Number)
+], LoyaltyMemberInfo.prototype, "currentPoints", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Lifetime points earned' }),
+    __metadata("design:type", Number)
+], LoyaltyMemberInfo.prototype, "lifetimePoints", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Membership tier information' }),
+    __metadata("design:type", LoyaltyTierInfo)
+], LoyaltyMemberInfo.prototype, "tier", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Membership status' }),
+    __metadata("design:type", String)
+], LoyaltyMemberInfo.prototype, "status", void 0);
 /**
  * Create Customer Request
  * Pattern: crm.customer.create
@@ -167,6 +341,7 @@ class CustomerNatsResponse {
     id;
     tenantId;
     platformCustomerId;
+    type;
     firstName;
     lastName;
     fullName;
@@ -174,10 +349,15 @@ class CustomerNatsResponse {
     dateOfBirth;
     email;
     phoneNumber;
+    phone;
+    language;
     nationalIdType;
     nationalIdNumber;
+    identification;
     nationality;
     address;
+    preferences;
+    emergencyContact;
     languagePreferences;
     communicationPreferences;
     tags;
@@ -190,8 +370,11 @@ class CustomerNatsResponse {
     totalBookings;
     totalSpent;
     lastBookingDate;
+    averageStayDuration;
+    satisfactionScore;
     membershipLevel;
     loyaltyPoints;
+    loyaltyMember;
     loyaltyMembers;
 }
 exports.CustomerNatsResponse = CustomerNatsResponse;
@@ -207,6 +390,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Platform Customer ID' }),
     __metadata("design:type", String)
 ], CustomerNatsResponse.prototype, "platformCustomerId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: CustomerType, description: 'Customer type' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "type", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'First name' }),
     __metadata("design:type", String)
@@ -224,7 +411,7 @@ __decorate([
     __metadata("design:type", String)
 ], CustomerNatsResponse.prototype, "gender", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Date of birth' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Date of birth (YYYY-MM-DD)' }),
     __metadata("design:type", String)
 ], CustomerNatsResponse.prototype, "dateOfBirth", void 0);
 __decorate([
@@ -236,23 +423,43 @@ __decorate([
     __metadata("design:type", String)
 ], CustomerNatsResponse.prototype, "phoneNumber", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ enum: NationalIdType, description: 'National ID type' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Phone number (alias for phoneNumber)' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "phone", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Primary language preference' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "language", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: NationalIdType, description: 'National ID type (legacy)' }),
     __metadata("design:type", String)
 ], CustomerNatsResponse.prototype, "nationalIdType", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'National ID number' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'National ID number (legacy)' }),
     __metadata("design:type", String)
 ], CustomerNatsResponse.prototype, "nationalIdNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Identification document information' }),
+    __metadata("design:type", IdentificationInfo)
+], CustomerNatsResponse.prototype, "identification", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Nationality' }),
     __metadata("design:type", String)
 ], CustomerNatsResponse.prototype, "nationality", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Address information' }),
-    __metadata("design:type", Object)
+    __metadata("design:type", AddressInfo)
 ], CustomerNatsResponse.prototype, "address", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ type: [String], description: 'Language preferences' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer preferences (room, floor, bed, smoking)' }),
+    __metadata("design:type", CustomerPreferences)
+], CustomerNatsResponse.prototype, "preferences", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Emergency contact information' }),
+    __metadata("design:type", EmergencyContact)
+], CustomerNatsResponse.prototype, "emergencyContact", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [String], description: 'Language preferences (multiple)' }),
     __metadata("design:type", Array)
 ], CustomerNatsResponse.prototype, "languagePreferences", void 0);
 __decorate([
@@ -300,15 +507,27 @@ __decorate([
     __metadata("design:type", Object)
 ], CustomerNatsResponse.prototype, "lastBookingDate", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ enum: ['BRONZE', 'SILVER', 'GOLD', 'PLATINUM'], description: 'Membership level' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Average stay duration in nights' }),
+    __metadata("design:type", Number)
+], CustomerNatsResponse.prototype, "averageStayDuration", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer satisfaction score (0-5)', example: 4.5 }),
+    __metadata("design:type", Number)
+], CustomerNatsResponse.prototype, "satisfactionScore", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: ['BRONZE', 'SILVER', 'GOLD', 'PLATINUM'], description: 'Membership level (legacy)' }),
     __metadata("design:type", String)
 ], CustomerNatsResponse.prototype, "membershipLevel", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Loyalty points balance' }),
+    (0, swagger_1.ApiProperty)({ description: 'Loyalty points balance (legacy - use loyaltyMember.currentPoints)' }),
     __metadata("design:type", Number)
 ], CustomerNatsResponse.prototype, "loyaltyPoints", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ type: 'array', description: 'Loyalty program memberships' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Loyalty member information (single active membership)' }),
+    __metadata("design:type", LoyaltyMemberInfo)
+], CustomerNatsResponse.prototype, "loyaltyMember", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: 'array', description: 'Loyalty program memberships (legacy - multiple memberships)' }),
     __metadata("design:type", Array)
 ], CustomerNatsResponse.prototype, "loyaltyMembers", void 0);
 /**
@@ -337,6 +556,23 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Number of items per page' }),
     __metadata("design:type", Number)
 ], CustomersListData.prototype, "limit", void 0);
+/**
+ * Find One Customer Request
+ * Pattern: crm.customer.findOne
+ */
+class FindOneCustomerNatsRequest {
+    tenantId;
+    customerId;
+}
+exports.FindOneCustomerNatsRequest = FindOneCustomerNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], FindOneCustomerNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], FindOneCustomerNatsRequest.prototype, "customerId", void 0);
 /**
  * Recalculate Booking Stats Data
  */

@@ -35,6 +35,19 @@ export enum Gender {
   OTHER = 'OTHER',
 }
 
+export enum CustomerType {
+  BOOKING_USER = 'BOOKING_USER',
+  GUEST_USER = 'GUEST_USER',
+  CORPORATE = 'CORPORATE',
+  GROUP = 'GROUP',
+}
+
+export enum IdentificationType {
+  PASSPORT = 'PASSPORT',
+  ID_CARD = 'ID_CARD',
+  DRIVING_LICENSE = 'DRIVING_LICENSE',
+}
+
 export enum NationalIdType {
   PASSPORT = 'PASSPORT',
   CITIZEN_ID = 'CITIZEN_ID',
@@ -50,12 +63,108 @@ export enum CommunicationChannel {
 /**
  * Nested DTOs
  */
+export class AddressInfo {
+  @ApiPropertyOptional({ description: 'Street address' })
+  street?: string;
+
+  @ApiPropertyOptional({ description: 'City' })
+  city?: string;
+
+  @ApiPropertyOptional({ description: 'State/Province' })
+  state?: string;
+
+  @ApiPropertyOptional({ description: 'State/Province (alias)' })
+  stateProvince?: string;
+
+  @ApiPropertyOptional({ description: 'Postal code' })
+  postalCode?: string;
+
+  @ApiPropertyOptional({ description: 'Country' })
+  country?: string;
+}
+
 export interface AddressRequest {
   street?: string;
   city?: string;
   stateProvince?: string;
   postalCode?: string;
   country?: string;
+}
+
+export class IdentificationInfo {
+  @ApiProperty({ enum: IdentificationType, description: 'Identification document type' })
+  type!: IdentificationType;
+
+  @ApiProperty({ description: 'Identification document number' })
+  number!: string;
+
+  @ApiPropertyOptional({ description: 'Issue date (YYYY-MM-DD)' })
+  issueDate?: string;
+
+  @ApiPropertyOptional({ description: 'Expiry date (YYYY-MM-DD)' })
+  expiryDate?: string;
+
+  @ApiPropertyOptional({ description: 'Place of issue' })
+  issuePlace?: string;
+}
+
+export class CustomerPreferences {
+  @ApiPropertyOptional({ description: 'Preferred room type' })
+  roomType?: string;
+
+  @ApiPropertyOptional({ description: 'Preferred floor' })
+  floor?: string;
+
+  @ApiPropertyOptional({ description: 'Preferred bed type' })
+  bedType?: string;
+
+  @ApiPropertyOptional({ description: 'Smoking preference' })
+  smoking?: boolean;
+
+  @ApiPropertyOptional({ type: [String], description: 'Special requests' })
+  specialRequests?: string[];
+}
+
+export class EmergencyContact {
+  @ApiProperty({ description: 'Emergency contact name' })
+  name!: string;
+
+  @ApiProperty({ description: 'Emergency contact phone' })
+  phone!: string;
+
+  @ApiProperty({ description: 'Relationship to customer' })
+  relationship!: string;
+}
+
+export class LoyaltyTierInfo {
+  @ApiProperty({ description: 'Tier name' })
+  name!: string;
+
+  @ApiProperty({ description: 'Tier level' })
+  level!: number;
+
+  @ApiProperty({ description: 'Tier color (hex or name)' })
+  color!: string;
+}
+
+export class LoyaltyMemberInfo {
+  @ApiProperty({ description: 'Loyalty member ID' })
+  id!: string;
+
+  @ApiProperty({ description: 'Membership ID/Number' })
+  membershipId!: string;
+
+  @ApiProperty({ description: 'Current points balance' })
+  currentPoints!: number;
+
+  @ApiProperty({ description: 'Lifetime points earned' })
+  lifetimePoints!: number;
+
+  @ApiProperty({ description: 'Membership tier information' })
+  tier!: LoyaltyTierInfo;
+
+  @ApiProperty({ description: 'Membership status' })
+  status!: string;
 }
 
 export interface CommunicationPreferencesRequest {
@@ -148,6 +257,9 @@ export class CustomerNatsResponse {
   @ApiPropertyOptional({ description: 'Platform Customer ID' })
   platformCustomerId?: string;
 
+  @ApiPropertyOptional({ enum: CustomerType, description: 'Customer type' })
+  type?: CustomerType;
+
   @ApiProperty({ description: 'First name' })
   firstName!: string;
 
@@ -160,7 +272,7 @@ export class CustomerNatsResponse {
   @ApiPropertyOptional({ enum: Gender, description: 'Gender' })
   gender?: Gender;
 
-  @ApiPropertyOptional({ description: 'Date of birth' })
+  @ApiPropertyOptional({ description: 'Date of birth (YYYY-MM-DD)' })
   dateOfBirth?: string;
 
   @ApiPropertyOptional({ description: 'Email address' })
@@ -169,19 +281,34 @@ export class CustomerNatsResponse {
   @ApiPropertyOptional({ description: 'Phone number' })
   phoneNumber?: string;
 
-  @ApiPropertyOptional({ enum: NationalIdType, description: 'National ID type' })
+  @ApiPropertyOptional({ description: 'Phone number (alias for phoneNumber)' })
+  phone?: string;
+
+  @ApiPropertyOptional({ description: 'Primary language preference' })
+  language?: string;
+
+  @ApiPropertyOptional({ enum: NationalIdType, description: 'National ID type (legacy)' })
   nationalIdType?: NationalIdType;
 
-  @ApiPropertyOptional({ description: 'National ID number' })
+  @ApiPropertyOptional({ description: 'National ID number (legacy)' })
   nationalIdNumber?: string;
+
+  @ApiPropertyOptional({ description: 'Identification document information' })
+  identification?: IdentificationInfo;
 
   @ApiPropertyOptional({ description: 'Nationality' })
   nationality?: string;
 
   @ApiPropertyOptional({ description: 'Address information' })
-  address?: AddressRequest;
+  address?: AddressInfo;
 
-  @ApiPropertyOptional({ type: [String], description: 'Language preferences' })
+  @ApiPropertyOptional({ description: 'Customer preferences (room, floor, bed, smoking)' })
+  preferences?: CustomerPreferences;
+
+  @ApiPropertyOptional({ description: 'Emergency contact information' })
+  emergencyContact?: EmergencyContact;
+
+  @ApiPropertyOptional({ type: [String], description: 'Language preferences (multiple)' })
   languagePreferences?: string[];
 
   @ApiPropertyOptional({ description: 'Communication preferences' })
@@ -217,13 +344,22 @@ export class CustomerNatsResponse {
   @ApiPropertyOptional({ description: 'Last booking date' })
   lastBookingDate?: string | Date;
 
-  @ApiPropertyOptional({ enum: ['BRONZE', 'SILVER', 'GOLD', 'PLATINUM'], description: 'Membership level' })
+  @ApiPropertyOptional({ description: 'Average stay duration in nights' })
+  averageStayDuration?: number;
+
+  @ApiPropertyOptional({ description: 'Customer satisfaction score (0-5)', example: 4.5 })
+  satisfactionScore?: number;
+
+  @ApiPropertyOptional({ enum: ['BRONZE', 'SILVER', 'GOLD', 'PLATINUM'], description: 'Membership level (legacy)' })
   membershipLevel?: 'BRONZE' | 'SILVER' | 'GOLD' | 'PLATINUM';
 
-  @ApiProperty({ description: 'Loyalty points balance' })
+  @ApiProperty({ description: 'Loyalty points balance (legacy - use loyaltyMember.currentPoints)' })
   loyaltyPoints!: number;
 
-  @ApiPropertyOptional({ type: 'array', description: 'Loyalty program memberships' })
+  @ApiPropertyOptional({ description: 'Loyalty member information (single active membership)' })
+  loyaltyMember?: LoyaltyMemberInfo;
+
+  @ApiPropertyOptional({ type: 'array', description: 'Loyalty program memberships (legacy - multiple memberships)' })
   loyaltyMembers?: any[];
 }
 
@@ -271,9 +407,12 @@ export type FindAllCustomersNatsResponse = NatsResponse<CustomersListData>;
  * Find One Customer Request
  * Pattern: crm.customer.findOne
  */
-export interface FindOneCustomerNatsRequest {
-  tenantId: string;
-  customerId: string;
+export class FindOneCustomerNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Customer ID' })
+  customerId!: string;
 }
 
 /**

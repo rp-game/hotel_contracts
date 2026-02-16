@@ -31,6 +31,17 @@ export declare enum Gender {
     FEMALE = "FEMALE",
     OTHER = "OTHER"
 }
+export declare enum CustomerType {
+    BOOKING_USER = "BOOKING_USER",
+    GUEST_USER = "GUEST_USER",
+    CORPORATE = "CORPORATE",
+    GROUP = "GROUP"
+}
+export declare enum IdentificationType {
+    PASSPORT = "PASSPORT",
+    ID_CARD = "ID_CARD",
+    DRIVING_LICENSE = "DRIVING_LICENSE"
+}
 export declare enum NationalIdType {
     PASSPORT = "PASSPORT",
     CITIZEN_ID = "CITIZEN_ID",
@@ -44,12 +55,52 @@ export declare enum CommunicationChannel {
 /**
  * Nested DTOs
  */
+export declare class AddressInfo {
+    street?: string;
+    city?: string;
+    state?: string;
+    stateProvince?: string;
+    postalCode?: string;
+    country?: string;
+}
 export interface AddressRequest {
     street?: string;
     city?: string;
     stateProvince?: string;
     postalCode?: string;
     country?: string;
+}
+export declare class IdentificationInfo {
+    type: IdentificationType;
+    number: string;
+    issueDate?: string;
+    expiryDate?: string;
+    issuePlace?: string;
+}
+export declare class CustomerPreferences {
+    roomType?: string;
+    floor?: string;
+    bedType?: string;
+    smoking?: boolean;
+    specialRequests?: string[];
+}
+export declare class EmergencyContact {
+    name: string;
+    phone: string;
+    relationship: string;
+}
+export declare class LoyaltyTierInfo {
+    name: string;
+    level: number;
+    color: string;
+}
+export declare class LoyaltyMemberInfo {
+    id: string;
+    membershipId: string;
+    currentPoints: number;
+    lifetimePoints: number;
+    tier: LoyaltyTierInfo;
+    status: string;
 }
 export interface CommunicationPreferencesRequest {
     allowEmailMarketing?: boolean;
@@ -97,6 +148,7 @@ export declare class CustomerNatsResponse {
     id: string;
     tenantId?: string;
     platformCustomerId?: string;
+    type?: CustomerType;
     firstName: string;
     lastName: string;
     fullName?: string;
@@ -104,10 +156,15 @@ export declare class CustomerNatsResponse {
     dateOfBirth?: string;
     email?: string;
     phoneNumber?: string;
+    phone?: string;
+    language?: string;
     nationalIdType?: NationalIdType;
     nationalIdNumber?: string;
+    identification?: IdentificationInfo;
     nationality?: string;
-    address?: AddressRequest;
+    address?: AddressInfo;
+    preferences?: CustomerPreferences;
+    emergencyContact?: EmergencyContact;
     languagePreferences?: string[];
     communicationPreferences?: CommunicationPreferencesRequest;
     tags?: string[];
@@ -120,8 +177,11 @@ export declare class CustomerNatsResponse {
     totalBookings: number;
     totalSpent: string;
     lastBookingDate?: string | Date;
+    averageStayDuration?: number;
+    satisfactionScore?: number;
     membershipLevel?: 'BRONZE' | 'SILVER' | 'GOLD' | 'PLATINUM';
     loyaltyPoints: number;
+    loyaltyMember?: LoyaltyMemberInfo;
     loyaltyMembers?: any[];
 }
 /**
@@ -157,7 +217,7 @@ export type FindAllCustomersNatsResponse = NatsResponse<CustomersListData>;
  * Find One Customer Request
  * Pattern: crm.customer.findOne
  */
-export interface FindOneCustomerNatsRequest {
+export declare class FindOneCustomerNatsRequest {
     tenantId: string;
     customerId: string;
 }
