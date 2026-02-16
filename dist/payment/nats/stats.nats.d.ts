@@ -2,9 +2,9 @@ import { NatsResponse } from '../../common/nats-response.interface';
 /**
  * Get Payment Statistics NATS Contract
  * Pattern: payment.stats
- * Retrieves aggregated payment statistics for a tenant/hotel
+ * Retrieves aggregated payment statistics for a tenant/hotel/chain
  */
-export interface GetPaymentStatsNatsRequest {
+export declare class GetPaymentStatsNatsRequest {
     tenantId: string;
     hotelId?: string;
     chainId?: string;
@@ -12,18 +12,19 @@ export interface GetPaymentStatsNatsRequest {
     endDate?: string;
     groupBy?: string;
 }
-export interface PaymentStatsData {
+export declare class PaymentStatsPeriodData {
+    startDate: string;
+    endDate: string;
+}
+export declare class PaymentStatsDataNatsResponse {
     totalRevenue: number;
     successfulTransactions: number;
     failedTransactions: number;
-    pendingTransactions: number;
+    pendingTransactions?: number;
     refundedAmount: number;
     averageTransactionAmount: number;
     currencyCode?: string;
-    period?: {
-        startDate: string;
-        endDate: string;
-    };
+    period?: PaymentStatsPeriodData;
 }
-export type GetPaymentStatsNatsResponse = NatsResponse<PaymentStatsData>;
+export type GetPaymentStatsNatsResponse = NatsResponse<PaymentStatsDataNatsResponse>;
 //# sourceMappingURL=stats.nats.d.ts.map

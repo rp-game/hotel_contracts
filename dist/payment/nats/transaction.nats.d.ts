@@ -1,8 +1,10 @@
 /**
  * Transaction Domain NATS Message Contracts
  *
- * These interfaces define the request/response shapes for payment transaction operations
- * via NATS messaging between API Gateway and Payment Service
+ * These contracts are used for:
+ * - NATS message payloads in payment-service
+ * - REST API responses in api-gateway
+ * - TypeScript client types in frontend
  *
  * Patterns:
  * - transaction.findAll
@@ -24,21 +26,32 @@ export declare enum TransactionType {
     REFUND = "REFUND",
     ADJUSTMENT = "ADJUSTMENT"
 }
-export interface PaymentTransaction {
+/**
+ * Payment Transaction entity - used in both NATS and REST responses
+ * Fields match the payment_transactions database table schema
+ */
+export declare class PaymentTransactionNatsResponse {
     id: string;
     tenantId: string;
     hotelId: string;
+    paymentId?: string;
     invoiceId?: string;
     amount: number;
     currency: string;
+    type: TransactionType | string;
+    method: string;
     status: TransactionStatus | string;
     gatewayTransactionId?: string;
-    paymentMethod: string;
+    gatewayResponse?: Record<string, any>;
+    transactionReference?: string;
+    processedBy?: string;
+    notes?: string;
+    metadata?: Record<string, any>;
     createdAt: string;
     completedAt?: string;
     updatedAt?: string;
 }
-export interface GetTransactionsNatsRequest {
+export declare class GetTransactionsNatsRequest {
     tenantId: string;
     hotelId?: string;
     status?: string;
@@ -50,19 +63,19 @@ export interface GetTransactionsNatsRequest {
     page?: number;
     limit?: number;
 }
-export interface GetTransactionsData {
-    transactions: PaymentTransaction[];
+export declare class GetTransactionsDataNatsResponse {
+    transactions: PaymentTransactionNatsResponse[];
     total: number;
     page: number;
     limit: number;
 }
-export type GetTransactionsNatsResponse = NatsResponse<GetTransactionsData>;
-export interface RetryTransactionNatsRequest {
+export type GetTransactionsNatsResponse = NatsResponse<GetTransactionsDataNatsResponse>;
+export declare class RetryTransactionNatsRequest {
     id: string;
     tenantId: string;
     hotelId?: string;
 }
-export interface RetryTransactionData {
+export declare class RetryTransactionDataNatsResponse {
     id: string;
     status: string;
     previousStatus: string;
@@ -70,18 +83,18 @@ export interface RetryTransactionData {
     nextRetryAt?: string;
     message: string;
 }
-export type RetryTransactionNatsResponse = NatsResponse<RetryTransactionData>;
-export interface RefundTransactionNatsRequest {
+export type RetryTransactionNatsResponse = NatsResponse<RetryTransactionDataNatsResponse>;
+export declare class RefundTransactionNatsRequest {
     id: string;
     amount?: number;
     reason?: string;
     tenantId: string;
     hotelId?: string;
 }
-export interface RefundTransactionData {
-    refundTransaction: PaymentTransaction;
-    originalTransaction: PaymentTransaction;
+export declare class RefundTransactionDataNatsResponse {
+    refundTransaction: PaymentTransactionNatsResponse;
+    originalTransaction: PaymentTransactionNatsResponse;
     message: string;
 }
-export type RefundTransactionNatsResponse = NatsResponse<RefundTransactionData>;
+export type RefundTransactionNatsResponse = NatsResponse<RefundTransactionDataNatsResponse>;
 //# sourceMappingURL=transaction.nats.d.ts.map
