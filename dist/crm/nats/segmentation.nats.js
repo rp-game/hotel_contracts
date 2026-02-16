@@ -29,8 +29,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SegmentationStatsDto = exports.SegmentPerformanceItemDto = exports.CustomerSegmentNatsResponse = exports.SegmentStatus = exports.SegmentType = void 0;
+exports.SegmentMembersNatsResponse = exports.SegmentationStatsDto = exports.SegmentPerformanceItemDto = exports.SegmentsNatsResponse = exports.CustomerSegmentNatsResponse = exports.CreateSegmentNatsRequest = exports.SegmentStatus = exports.SegmentType = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const customers_nats_1 = require("./customers.nats");
 /**
  * Segment Type Enum
  */
@@ -51,6 +52,55 @@ var SegmentStatus;
     SegmentStatus["INACTIVE"] = "INACTIVE";
     SegmentStatus["ARCHIVED"] = "ARCHIVED";
 })(SegmentStatus || (exports.SegmentStatus = SegmentStatus = {}));
+/**
+ * Create Segment Request
+ * Unified for both NATS messages and REST API requests
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
+ * Pattern: crm.segmentation.segments.create
+ */
+class CreateSegmentNatsRequest {
+    tenantId;
+    userId;
+    name;
+    description;
+    type;
+    status;
+    criteria;
+    autoUpdate;
+}
+exports.CreateSegmentNatsRequest = CreateSegmentNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], CreateSegmentNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User ID who creates the segment' }),
+    __metadata("design:type", String)
+], CreateSegmentNatsRequest.prototype, "userId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Segment name' }),
+    __metadata("design:type", String)
+], CreateSegmentNatsRequest.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Segment description' }),
+    __metadata("design:type", String)
+], CreateSegmentNatsRequest.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Segment type', enum: SegmentType }),
+    __metadata("design:type", String)
+], CreateSegmentNatsRequest.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Segment status', enum: SegmentStatus }),
+    __metadata("design:type", String)
+], CreateSegmentNatsRequest.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Segmentation criteria' }),
+    __metadata("design:type", Object)
+], CreateSegmentNatsRequest.prototype, "criteria", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether to auto-update members' }),
+    __metadata("design:type", Boolean)
+], CreateSegmentNatsRequest.prototype, "autoUpdate", void 0);
 /**
  * Customer Segment Response
  */
@@ -118,6 +168,38 @@ __decorate([
     __metadata("design:type", String)
 ], CustomerSegmentNatsResponse.prototype, "createdBy", void 0);
 /**
+ * Segments Response (Paginated list)
+ * Unified for both NATS messages and REST API responses
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
+ * Pattern: crm.segmentation.segments.findAll
+ */
+class SegmentsNatsResponse {
+    data;
+    total;
+    page;
+    limit;
+}
+exports.SegmentsNatsResponse = SegmentsNatsResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'List of customer segments',
+        type: [CustomerSegmentNatsResponse]
+    }),
+    __metadata("design:type", Array)
+], SegmentsNatsResponse.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of segments' }),
+    __metadata("design:type", Number)
+], SegmentsNatsResponse.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current page number' }),
+    __metadata("design:type", Number)
+], SegmentsNatsResponse.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of items per page' }),
+    __metadata("design:type", Number)
+], SegmentsNatsResponse.prototype, "limit", void 0);
+/**
  * Segment Performance Item
  * Used within SegmentationStatsDto
  */
@@ -171,4 +253,39 @@ __decorate([
     }),
     __metadata("design:type", Array)
 ], SegmentationStatsDto.prototype, "segmentPerformance", void 0);
+/**
+ * Segment Members Response (Paginated list of customers in a segment)
+ * Unified for both NATS messages and REST API responses
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
+ * Pattern: crm.segmentation.segments.members
+ *
+ * Note: Returns full customer objects, not just membership metadata
+ */
+class SegmentMembersNatsResponse {
+    data; // Will be CustomerNatsResponse[] - using any to avoid circular dependency
+    total;
+    page;
+    limit;
+}
+exports.SegmentMembersNatsResponse = SegmentMembersNatsResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'List of customers in the segment',
+        type: () => customers_nats_1.CustomerNatsResponse,
+        isArray: true
+    }),
+    __metadata("design:type", Array)
+], SegmentMembersNatsResponse.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of members' }),
+    __metadata("design:type", Number)
+], SegmentMembersNatsResponse.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current page number' }),
+    __metadata("design:type", Number)
+], SegmentMembersNatsResponse.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of items per page' }),
+    __metadata("design:type", Number)
+], SegmentMembersNatsResponse.prototype, "limit", void 0);
 //# sourceMappingURL=segmentation.nats.js.map

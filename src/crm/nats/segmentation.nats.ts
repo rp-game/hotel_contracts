@@ -21,6 +21,7 @@
 
 import { NatsResponse } from '../../common';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { CustomerNatsResponse } from './customers.nats';
 
 /**
  * Segment Type Enum
@@ -44,17 +45,37 @@ export enum SegmentStatus {
 
 /**
  * Create Segment Request
+ * Unified for both NATS messages and REST API requests
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
  * Pattern: crm.segmentation.segments.create
  */
-export interface CreateSegmentNatsRequest {
+export class CreateSegmentNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'User ID who creates the segment' })
   userId: string;
+
+  @ApiProperty({ description: 'Segment name' })
   name: string;
+
+  @ApiPropertyOptional({ description: 'Segment description' })
   description?: string;
+
+  @ApiProperty({ description: 'Segment type', enum: SegmentType })
   type: string;
+
+  @ApiProperty({ description: 'Segment status', enum: SegmentStatus })
   status: SegmentStatus;
+
+  @ApiProperty({ description: 'Segmentation criteria' })
   criteria: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Whether to auto-update members' })
   autoUpdate?: boolean;
+
+  // Index signature for additional dynamic properties (expanded rules, etc.)
+  [key: string]: any;
 }
 
 /**
@@ -113,12 +134,25 @@ export class CustomerSegmentNatsResponse {
 }
 
 /**
- * Segments Response
+ * Segments Response (Paginated list)
+ * Unified for both NATS messages and REST API responses
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
+ * Pattern: crm.segmentation.segments.findAll
  */
-export interface SegmentsNatsResponse {
+export class SegmentsNatsResponse {
+  @ApiProperty({
+    description: 'List of customer segments',
+    type: [CustomerSegmentNatsResponse]
+  })
   data: CustomerSegmentNatsResponse[];
+
+  @ApiProperty({ description: 'Total number of segments' })
   total: number;
+
+  @ApiProperty({ description: 'Current page number' })
   page: number;
+
+  @ApiProperty({ description: 'Number of items per page' })
   limit: number;
 }
 
@@ -259,13 +293,29 @@ export interface SegmentMembershipNatsResponse {
 }
 
 /**
- * Segment Members Response
+ * Segment Members Response (Paginated list of customers in a segment)
+ * Unified for both NATS messages and REST API responses
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
+ * Pattern: crm.segmentation.segments.members
+ *
+ * Note: Returns full customer objects, not just membership metadata
  */
-export interface SegmentMembersNatsResponse {
-  data: SegmentMembershipNatsResponse[];
+export class SegmentMembersNatsResponse {
+  @ApiProperty({
+    description: 'List of customers in the segment',
+    type: () => CustomerNatsResponse,
+    isArray: true
+  })
+  data: any[]; // Will be CustomerNatsResponse[] - using any to avoid circular dependency
+
+  @ApiProperty({ description: 'Total number of members' })
   total: number;
-  page?: number;
-  limit?: number;
+
+  @ApiProperty({ description: 'Current page number' })
+  page: number;
+
+  @ApiProperty({ description: 'Number of items per page' })
+  limit: number;
 }
 
 /**

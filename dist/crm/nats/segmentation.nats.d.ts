@@ -39,9 +39,11 @@ export declare enum SegmentStatus {
 }
 /**
  * Create Segment Request
+ * Unified for both NATS messages and REST API requests
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
  * Pattern: crm.segmentation.segments.create
  */
-export interface CreateSegmentNatsRequest {
+export declare class CreateSegmentNatsRequest {
     tenantId: string;
     userId: string;
     name: string;
@@ -50,6 +52,7 @@ export interface CreateSegmentNatsRequest {
     status: SegmentStatus;
     criteria: Record<string, any>;
     autoUpdate?: boolean;
+    [key: string]: any;
 }
 /**
  * Update Segment Request
@@ -80,9 +83,12 @@ export declare class CustomerSegmentNatsResponse {
     [key: string]: any;
 }
 /**
- * Segments Response
+ * Segments Response (Paginated list)
+ * Unified for both NATS messages and REST API responses
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
+ * Pattern: crm.segmentation.segments.findAll
  */
-export interface SegmentsNatsResponse {
+export declare class SegmentsNatsResponse {
     data: CustomerSegmentNatsResponse[];
     total: number;
     page: number;
@@ -198,13 +204,18 @@ export interface SegmentMembershipNatsResponse {
     lastEvaluatedAt?: string | Date;
 }
 /**
- * Segment Members Response
+ * Segment Members Response (Paginated list of customers in a segment)
+ * Unified for both NATS messages and REST API responses
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
+ * Pattern: crm.segmentation.segments.members
+ *
+ * Note: Returns full customer objects, not just membership metadata
  */
-export interface SegmentMembersNatsResponse {
-    data: SegmentMembershipNatsResponse[];
+export declare class SegmentMembersNatsResponse {
+    data: any[];
     total: number;
-    page?: number;
-    limit?: number;
+    page: number;
+    limit: number;
 }
 /**
  * Get Segment Members Request
