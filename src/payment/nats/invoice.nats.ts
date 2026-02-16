@@ -73,20 +73,47 @@ export enum PaymentInvoiceStatus {
   CANCELLED = 'cancelled',
 }
 
-export interface PaymentInvoice {
+export class PaymentInvoice {
+  @ApiProperty({ description: 'Invoice ID' })
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Booking ID' })
   bookingId?: string;
+
+  @ApiPropertyOptional({ description: 'Customer ID' })
   customerId?: string;
+
+  @ApiProperty({ description: 'Invoice number' })
   invoiceNumber: string;
+
+  @ApiProperty({ description: 'Total invoice amount' })
   amount: number;
+
+  @ApiProperty({ description: 'Currency code' })
   currency: string;
+
+  @ApiProperty({ description: 'Invoice status', enum: PaymentInvoiceStatus })
   status: PaymentInvoiceStatus | string;
+
+  @ApiProperty({ description: 'Invoice due date' })
   dueDate: string;
+
+  @ApiPropertyOptional({ description: 'Paid timestamp' })
   paidAt?: string;
+
+  @ApiProperty({ description: 'Invoice line items', type: [PaymentInvoiceItem] })
   items: PaymentInvoiceItem[];
+
+  @ApiPropertyOptional({ description: 'Created timestamp' })
   createdAt?: string;
+
+  @ApiPropertyOptional({ description: 'Updated timestamp' })
   updatedAt?: string;
 }
 
@@ -243,28 +270,64 @@ export class InvoiceDataItem {
 // CREATE INVOICE (POST /invoices)
 // ============================================================================
 
-export interface PaymentCreateInvoiceNatsRequest {
+export class PaymentCreateInvoiceNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Booking ID' })
   bookingId?: string;
+
+  @ApiPropertyOptional({ description: 'Customer ID' })
   customerId?: string;
+
+  @ApiProperty({ description: 'Invoice number' })
   invoiceNumber: string;
+
+  @ApiProperty({ description: 'Total invoice amount' })
   amount: number;
+
+  @ApiProperty({ description: 'Currency code', default: 'VND' })
   currency: string;
+
+  @ApiProperty({ description: 'Invoice due date (YYYY-MM-DD)' })
   dueDate: string;
+
+  @ApiProperty({ description: 'Invoice line items', type: [PaymentInvoiceItem] })
   items: PaymentInvoiceItem[];
 }
 
-export interface CreateInvoiceData {
+export class CreateInvoiceData {
+  @ApiProperty({ description: 'Invoice ID' })
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiProperty({ description: 'Invoice number' })
   invoiceNumber: string;
+
+  @ApiProperty({ description: 'Total invoice amount' })
   amount: number;
+
+  @ApiProperty({ description: 'Currency code' })
   currency: string;
+
+  @ApiProperty({ description: 'Invoice status' })
   status: string;
+
+  @ApiProperty({ description: 'Invoice due date' })
   dueDate: string;
+
+  @ApiProperty({ description: 'Invoice line items', type: [PaymentInvoiceItem] })
   items: PaymentInvoiceItem[];
+
+  @ApiProperty({ description: 'Created timestamp' })
   createdAt: string;
 }
 
@@ -303,15 +366,32 @@ export type PaymentCreateManualInvoiceNatsResponse = NatsResponse<CreateInvoiceD
 // GET INVOICES (GET /invoices)
 // ============================================================================
 
-export interface GetInvoicesNatsRequest {
+export class GetInvoicesNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
   hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by invoice status' })
   status?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by customer ID' })
   customerId?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by guest name' })
   guestName?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by date from (YYYY-MM-DD)' })
   dateFrom?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by date to (YYYY-MM-DD)' })
   dateTo?: string;
+
+  @ApiPropertyOptional({ description: 'Page number for pagination', default: 1 })
   page?: number;
+
+  @ApiPropertyOptional({ description: 'Number of items per page', default: 10 })
   limit?: number;
 }
 
@@ -338,26 +418,58 @@ export type GetInvoicesNatsResponse = NatsResponse<GetPaymentInvoicesData>;
 // GET INVOICE (GET /invoices/:id)
 // ============================================================================
 
-export interface GetInvoiceNatsRequest {
+export class GetInvoiceNatsRequest {
+  @ApiProperty({ description: 'Invoice ID' })
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
   hotelId?: string;
 }
 
-export interface GetInvoiceData {
+export class GetInvoiceData {
+  @ApiProperty({ description: 'Invoice ID' })
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Booking ID' })
   bookingId?: string;
+
+  @ApiPropertyOptional({ description: 'Customer ID' })
   customerId?: string;
+
+  @ApiProperty({ description: 'Invoice number' })
   invoiceNumber: string;
+
+  @ApiProperty({ description: 'Total invoice amount' })
   amount: number;
+
+  @ApiProperty({ description: 'Currency code' })
   currency: string;
+
+  @ApiProperty({ description: 'Invoice status' })
   status: string;
+
+  @ApiProperty({ description: 'Invoice due date' })
   dueDate: string;
+
+  @ApiPropertyOptional({ description: 'Paid timestamp' })
   paidAt?: string;
+
+  @ApiProperty({ description: 'Invoice line items', type: [PaymentInvoiceItem] })
   items: PaymentInvoiceItem[];
+
+  @ApiProperty({ description: 'Created timestamp' })
   createdAt: string;
+
+  @ApiProperty({ description: 'Updated timestamp' })
   updatedAt: string;
 }
 

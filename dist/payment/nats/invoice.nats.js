@@ -26,7 +26,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateInvoiceStatusData = exports.UpdateInvoiceStatusNatsRequest = exports.DownloadInvoicePdfData = exports.DownloadInvoicePdfNatsRequest = exports.SendInvoiceData = exports.SendInvoiceNatsRequest = exports.GetPaymentInvoicesData = exports.PaymentCreateManualInvoiceNatsRequest = exports.InvoiceDataItem = exports.InvoiceItemData = exports.PaymentInvoiceStatus = exports.CreateInvoiceItemRequest = exports.PaymentInvoiceItem = void 0;
+exports.UpdateInvoiceStatusData = exports.UpdateInvoiceStatusNatsRequest = exports.DownloadInvoicePdfData = exports.DownloadInvoicePdfNatsRequest = exports.SendInvoiceData = exports.SendInvoiceNatsRequest = exports.GetInvoiceData = exports.GetInvoiceNatsRequest = exports.GetPaymentInvoicesData = exports.GetInvoicesNatsRequest = exports.PaymentCreateManualInvoiceNatsRequest = exports.CreateInvoiceData = exports.PaymentCreateInvoiceNatsRequest = exports.InvoiceDataItem = exports.InvoiceItemData = exports.PaymentInvoice = exports.PaymentInvoiceStatus = exports.CreateInvoiceItemRequest = exports.PaymentInvoiceItem = void 0;
 const swagger_1 = require("@nestjs/swagger");
 // ============================================================================
 // SHARED TYPES
@@ -104,6 +104,79 @@ var PaymentInvoiceStatus;
     PaymentInvoiceStatus["OVERDUE"] = "overdue";
     PaymentInvoiceStatus["CANCELLED"] = "cancelled";
 })(PaymentInvoiceStatus || (exports.PaymentInvoiceStatus = PaymentInvoiceStatus = {}));
+class PaymentInvoice {
+    id;
+    tenantId;
+    hotelId;
+    bookingId;
+    customerId;
+    invoiceNumber;
+    amount;
+    currency;
+    status;
+    dueDate;
+    paidAt;
+    items;
+    createdAt;
+    updatedAt;
+}
+exports.PaymentInvoice = PaymentInvoice;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice ID' }),
+    __metadata("design:type", String)
+], PaymentInvoice.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], PaymentInvoice.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], PaymentInvoice.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking ID' }),
+    __metadata("design:type", String)
+], PaymentInvoice.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], PaymentInvoice.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice number' }),
+    __metadata("design:type", String)
+], PaymentInvoice.prototype, "invoiceNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total invoice amount' }),
+    __metadata("design:type", Number)
+], PaymentInvoice.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Currency code' }),
+    __metadata("design:type", String)
+], PaymentInvoice.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice status', enum: PaymentInvoiceStatus }),
+    __metadata("design:type", String)
+], PaymentInvoice.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice due date' }),
+    __metadata("design:type", String)
+], PaymentInvoice.prototype, "dueDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Paid timestamp' }),
+    __metadata("design:type", String)
+], PaymentInvoice.prototype, "paidAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [PaymentInvoiceItem] }),
+    __metadata("design:type", Array)
+], PaymentInvoice.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Created timestamp' }),
+    __metadata("design:type", String)
+], PaymentInvoice.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Updated timestamp' }),
+    __metadata("design:type", String)
+], PaymentInvoice.prototype, "updatedAt", void 0);
 // ============================================================================
 // ENRICHED INVOICE TYPES (from NATS handler - matches actual response)
 // ============================================================================
@@ -343,6 +416,110 @@ __decorate([
     __metadata("design:type", Array)
 ], InvoiceDataItem.prototype, "items", void 0);
 // ============================================================================
+// CREATE INVOICE (POST /invoices)
+// ============================================================================
+class PaymentCreateInvoiceNatsRequest {
+    tenantId;
+    hotelId;
+    bookingId;
+    customerId;
+    invoiceNumber;
+    amount;
+    currency;
+    dueDate;
+    items;
+}
+exports.PaymentCreateInvoiceNatsRequest = PaymentCreateInvoiceNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], PaymentCreateInvoiceNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], PaymentCreateInvoiceNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking ID' }),
+    __metadata("design:type", String)
+], PaymentCreateInvoiceNatsRequest.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], PaymentCreateInvoiceNatsRequest.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice number' }),
+    __metadata("design:type", String)
+], PaymentCreateInvoiceNatsRequest.prototype, "invoiceNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total invoice amount' }),
+    __metadata("design:type", Number)
+], PaymentCreateInvoiceNatsRequest.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Currency code', default: 'VND' }),
+    __metadata("design:type", String)
+], PaymentCreateInvoiceNatsRequest.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice due date (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], PaymentCreateInvoiceNatsRequest.prototype, "dueDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [PaymentInvoiceItem] }),
+    __metadata("design:type", Array)
+], PaymentCreateInvoiceNatsRequest.prototype, "items", void 0);
+class CreateInvoiceData {
+    id;
+    tenantId;
+    hotelId;
+    invoiceNumber;
+    amount;
+    currency;
+    status;
+    dueDate;
+    items;
+    createdAt;
+}
+exports.CreateInvoiceData = CreateInvoiceData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice ID' }),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice number' }),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "invoiceNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total invoice amount' }),
+    __metadata("design:type", Number)
+], CreateInvoiceData.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Currency code' }),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice status' }),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice due date' }),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "dueDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [PaymentInvoiceItem] }),
+    __metadata("design:type", Array)
+], CreateInvoiceData.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Created timestamp' }),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "createdAt", void 0);
+// ============================================================================
 // CREATE MANUAL INVOICE (POST /invoices/manual)
 // ============================================================================
 class PaymentCreateManualInvoiceNatsRequest {
@@ -383,6 +560,57 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] }),
     __metadata("design:type", Array)
 ], PaymentCreateManualInvoiceNatsRequest.prototype, "items", void 0);
+// ============================================================================
+// GET INVOICES (GET /invoices)
+// ============================================================================
+class GetInvoicesNatsRequest {
+    tenantId;
+    hotelId;
+    status;
+    customerId;
+    guestName;
+    dateFrom;
+    dateTo;
+    page;
+    limit;
+}
+exports.GetInvoicesNatsRequest = GetInvoicesNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetInvoicesNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], GetInvoicesNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by invoice status' }),
+    __metadata("design:type", String)
+], GetInvoicesNatsRequest.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by customer ID' }),
+    __metadata("design:type", String)
+], GetInvoicesNatsRequest.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by guest name' }),
+    __metadata("design:type", String)
+], GetInvoicesNatsRequest.prototype, "guestName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by date from (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], GetInvoicesNatsRequest.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by date to (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], GetInvoicesNatsRequest.prototype, "dateTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Page number for pagination', default: 1 }),
+    __metadata("design:type", Number)
+], GetInvoicesNatsRequest.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of items per page', default: 10 }),
+    __metadata("design:type", Number)
+], GetInvoicesNatsRequest.prototype, "limit", void 0);
 class GetPaymentInvoicesData {
     data;
     total;
@@ -411,6 +639,100 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total number of pages', required: false }),
     __metadata("design:type", Number)
 ], GetPaymentInvoicesData.prototype, "totalPages", void 0);
+// ============================================================================
+// GET INVOICE (GET /invoices/:id)
+// ============================================================================
+class GetInvoiceNatsRequest {
+    id;
+    tenantId;
+    hotelId;
+}
+exports.GetInvoiceNatsRequest = GetInvoiceNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice ID' }),
+    __metadata("design:type", String)
+], GetInvoiceNatsRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetInvoiceNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], GetInvoiceNatsRequest.prototype, "hotelId", void 0);
+class GetInvoiceData {
+    id;
+    tenantId;
+    hotelId;
+    bookingId;
+    customerId;
+    invoiceNumber;
+    amount;
+    currency;
+    status;
+    dueDate;
+    paidAt;
+    items;
+    createdAt;
+    updatedAt;
+}
+exports.GetInvoiceData = GetInvoiceData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice ID' }),
+    __metadata("design:type", String)
+], GetInvoiceData.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetInvoiceData.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], GetInvoiceData.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking ID' }),
+    __metadata("design:type", String)
+], GetInvoiceData.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], GetInvoiceData.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice number' }),
+    __metadata("design:type", String)
+], GetInvoiceData.prototype, "invoiceNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total invoice amount' }),
+    __metadata("design:type", Number)
+], GetInvoiceData.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Currency code' }),
+    __metadata("design:type", String)
+], GetInvoiceData.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice status' }),
+    __metadata("design:type", String)
+], GetInvoiceData.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice due date' }),
+    __metadata("design:type", String)
+], GetInvoiceData.prototype, "dueDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Paid timestamp' }),
+    __metadata("design:type", String)
+], GetInvoiceData.prototype, "paidAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [PaymentInvoiceItem] }),
+    __metadata("design:type", Array)
+], GetInvoiceData.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Created timestamp' }),
+    __metadata("design:type", String)
+], GetInvoiceData.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Updated timestamp' }),
+    __metadata("design:type", String)
+], GetInvoiceData.prototype, "updatedAt", void 0);
 // ============================================================================
 // SEND INVOICE (POST /invoices/:id/send)
 // ============================================================================

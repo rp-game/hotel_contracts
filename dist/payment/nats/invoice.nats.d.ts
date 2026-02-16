@@ -42,7 +42,7 @@ export declare enum PaymentInvoiceStatus {
     OVERDUE = "overdue",
     CANCELLED = "cancelled"
 }
-export interface PaymentInvoice {
+export declare class PaymentInvoice {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -115,7 +115,7 @@ export declare class InvoiceDataItem {
     updatedAt: string;
     items?: InvoiceItemData[];
 }
-export interface PaymentCreateInvoiceNatsRequest {
+export declare class PaymentCreateInvoiceNatsRequest {
     tenantId: string;
     hotelId: string;
     bookingId?: string;
@@ -126,7 +126,7 @@ export interface PaymentCreateInvoiceNatsRequest {
     dueDate: string;
     items: PaymentInvoiceItem[];
 }
-export interface CreateInvoiceData {
+export declare class CreateInvoiceData {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -149,7 +149,7 @@ export declare class PaymentCreateManualInvoiceNatsRequest {
     items: CreateInvoiceItemRequest[];
 }
 export type PaymentCreateManualInvoiceNatsResponse = NatsResponse<CreateInvoiceData>;
-export interface GetInvoicesNatsRequest {
+export declare class GetInvoicesNatsRequest {
     tenantId: string;
     hotelId?: string;
     status?: string;
@@ -168,12 +168,12 @@ export declare class GetPaymentInvoicesData {
     totalPages?: number;
 }
 export type GetInvoicesNatsResponse = NatsResponse<GetPaymentInvoicesData>;
-export interface GetInvoiceNatsRequest {
+export declare class GetInvoiceNatsRequest {
     id: string;
     tenantId: string;
     hotelId?: string;
 }
-export interface GetInvoiceData {
+export declare class GetInvoiceData {
     id: string;
     tenantId: string;
     hotelId: string;
