@@ -484,10 +484,21 @@ export interface UpdateStatsNatsRequest {
 /**
  * Update Stats Response
  */
-export type UpdateStatsNatsResponse = NatsResponse<{
-  success: boolean;
-  auditId: string;
-}>;
+/**
+ * Update Stats Response Data
+ */
+export class UpdateCustomerStatsResponseData {
+  @ApiProperty({ description: 'Operation success status' })
+  success!: boolean;
+
+  @ApiProperty({ description: 'Audit log ID for this update' })
+  auditId!: string;
+}
+
+/**
+ * Update Stats Response wrapped in NatsResponse (for NATS communication)
+ */
+export type UpdateStatsNatsResponse = NatsResponse<UpdateCustomerStatsResponseData>;
 
 /**
  * Recalculate Booking Stats Data

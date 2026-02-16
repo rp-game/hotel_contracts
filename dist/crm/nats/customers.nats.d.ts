@@ -284,10 +284,17 @@ export interface UpdateStatsNatsRequest {
 /**
  * Update Stats Response
  */
-export type UpdateStatsNatsResponse = NatsResponse<{
+/**
+ * Update Stats Response Data
+ */
+export declare class UpdateCustomerStatsResponseData {
     success: boolean;
     auditId: string;
-}>;
+}
+/**
+ * Update Stats Response wrapped in NatsResponse (for NATS communication)
+ */
+export type UpdateStatsNatsResponse = NatsResponse<UpdateCustomerStatsResponseData>;
 /**
  * Recalculate Booking Stats Data
  */
