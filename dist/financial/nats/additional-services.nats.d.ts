@@ -12,11 +12,20 @@ import { NatsResponse } from '../../common';
 import { FinancialServiceStatsResponseDto, ServiceBookingResponseDto } from './service-bookings.nats';
 /**
  * Financial Service Type Enum
+ * Represents actual hotel service types
  */
 export declare enum FinancialServiceType {
-    ONE_TIME = "ONE_TIME",
-    RECURRING = "RECURRING",
-    ON_DEMAND = "ON_DEMAND"
+    SPA = "SPA",
+    RESTAURANT = "RESTAURANT",
+    LAUNDRY = "LAUNDRY",
+    PARKING = "PARKING",
+    TRANSPORT = "TRANSPORT",
+    CONFERENCE = "CONFERENCE",
+    ENTERTAINMENT = "ENTERTAINMENT",
+    INTERNET = "INTERNET",
+    PHONE = "PHONE",
+    MINIBAR = "MINIBAR",
+    OTHER = "OTHER"
 }
 /**
  * Pricing Type Enum
@@ -25,22 +34,18 @@ export declare enum PricingType {
     FIXED = "FIXED",
     HOURLY = "HOURLY",
     DAILY = "DAILY",
-    PACKAGE = "PACKAGE"
+    PER_PERSON = "PER_PERSON",
+    VARIABLE = "VARIABLE"
 }
 /**
  * Financial Service Category Enum
+ * Represents hotel service categories
  */
 export declare enum FinancialServiceCategory {
     ROOM_SERVICE = "ROOM_SERVICE",
-    SPA_WELLNESS = "SPA_WELLNESS",
-    TRANSPORTATION = "TRANSPORTATION",
-    FOOD_BEVERAGE = "FOOD_BEVERAGE",
-    LAUNDRY_CLEANING = "LAUNDRY_CLEANING",
-    BUSINESS_SERVICES = "BUSINESS_SERVICES",
-    ENTERTAINMENT = "ENTERTAINMENT",
-    CONCIERGE = "CONCIERGE",
-    PET_SERVICES = "PET_SERVICES",
-    OTHER = "OTHER"
+    FACILITY = "FACILITY",
+    AMENITY = "AMENITY",
+    EXTERNAL = "EXTERNAL"
 }
 /**
  * Additional Service Response DTO

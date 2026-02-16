@@ -25,12 +25,21 @@ const class_validator_1 = require("class-validator");
 const service_bookings_nats_1 = require("./service-bookings.nats");
 /**
  * Financial Service Type Enum
+ * Represents actual hotel service types
  */
 var FinancialServiceType;
 (function (FinancialServiceType) {
-    FinancialServiceType["ONE_TIME"] = "ONE_TIME";
-    FinancialServiceType["RECURRING"] = "RECURRING";
-    FinancialServiceType["ON_DEMAND"] = "ON_DEMAND";
+    FinancialServiceType["SPA"] = "SPA";
+    FinancialServiceType["RESTAURANT"] = "RESTAURANT";
+    FinancialServiceType["LAUNDRY"] = "LAUNDRY";
+    FinancialServiceType["PARKING"] = "PARKING";
+    FinancialServiceType["TRANSPORT"] = "TRANSPORT";
+    FinancialServiceType["CONFERENCE"] = "CONFERENCE";
+    FinancialServiceType["ENTERTAINMENT"] = "ENTERTAINMENT";
+    FinancialServiceType["INTERNET"] = "INTERNET";
+    FinancialServiceType["PHONE"] = "PHONE";
+    FinancialServiceType["MINIBAR"] = "MINIBAR";
+    FinancialServiceType["OTHER"] = "OTHER";
 })(FinancialServiceType || (exports.FinancialServiceType = FinancialServiceType = {}));
 /**
  * Pricing Type Enum
@@ -40,23 +49,19 @@ var PricingType;
     PricingType["FIXED"] = "FIXED";
     PricingType["HOURLY"] = "HOURLY";
     PricingType["DAILY"] = "DAILY";
-    PricingType["PACKAGE"] = "PACKAGE";
+    PricingType["PER_PERSON"] = "PER_PERSON";
+    PricingType["VARIABLE"] = "VARIABLE";
 })(PricingType || (exports.PricingType = PricingType = {}));
 /**
  * Financial Service Category Enum
+ * Represents hotel service categories
  */
 var FinancialServiceCategory;
 (function (FinancialServiceCategory) {
     FinancialServiceCategory["ROOM_SERVICE"] = "ROOM_SERVICE";
-    FinancialServiceCategory["SPA_WELLNESS"] = "SPA_WELLNESS";
-    FinancialServiceCategory["TRANSPORTATION"] = "TRANSPORTATION";
-    FinancialServiceCategory["FOOD_BEVERAGE"] = "FOOD_BEVERAGE";
-    FinancialServiceCategory["LAUNDRY_CLEANING"] = "LAUNDRY_CLEANING";
-    FinancialServiceCategory["BUSINESS_SERVICES"] = "BUSINESS_SERVICES";
-    FinancialServiceCategory["ENTERTAINMENT"] = "ENTERTAINMENT";
-    FinancialServiceCategory["CONCIERGE"] = "CONCIERGE";
-    FinancialServiceCategory["PET_SERVICES"] = "PET_SERVICES";
-    FinancialServiceCategory["OTHER"] = "OTHER";
+    FinancialServiceCategory["FACILITY"] = "FACILITY";
+    FinancialServiceCategory["AMENITY"] = "AMENITY";
+    FinancialServiceCategory["EXTERNAL"] = "EXTERNAL";
 })(FinancialServiceCategory || (exports.FinancialServiceCategory = FinancialServiceCategory = {}));
 /**
  * Additional Service Response DTO
