@@ -80,13 +80,42 @@ export class CreateSegmentNatsRequest {
 
 /**
  * Update Segment Request
+ * Unified for both NATS messages and REST API requests
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
  * Pattern: crm.segmentation.segments.update
+ *
+ * Note: All fields are optional except tenantId, segmentId, userId
  */
-export interface UpdateSegmentNatsRequest {
+export class UpdateSegmentNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Segment ID to update' })
   segmentId: string;
+
+  @ApiProperty({ description: 'User ID who updates the segment' })
   userId: string;
-  updateDto: Partial<CreateSegmentNatsRequest>;
+
+  @ApiPropertyOptional({ description: 'Segment name' })
+  name?: string;
+
+  @ApiPropertyOptional({ description: 'Segment description' })
+  description?: string;
+
+  @ApiPropertyOptional({ description: 'Segment type', enum: SegmentType })
+  type?: string;
+
+  @ApiPropertyOptional({ description: 'Segment status', enum: SegmentStatus })
+  status?: SegmentStatus;
+
+  @ApiPropertyOptional({ description: 'Segmentation criteria' })
+  criteria?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Whether to auto-update members' })
+  autoUpdate?: boolean;
+
+  // Index signature for additional dynamic properties (expanded rules, etc.)
+  [key: string]: any;
 }
 
 /**
@@ -269,17 +298,31 @@ export type DeleteSegmentNatsResponse = NatsResponse<{ message: string }>;
 
 /**
  * Recalculate Segment Request
+ * Unified for both NATS messages and REST API requests
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
  * Pattern: crm.segmentation.segments.recalculate
  */
-export interface RecalculateSegmentNatsRequest {
+export class RecalculateSegmentNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Segment ID to recalculate' })
   segmentId: string;
+}
+
+/**
+ * Message Response DTO
+ * Generic message response used by various operations
+ */
+export class MessageResponseDto {
+  @ApiProperty({ description: 'Response message' })
+  message: string;
 }
 
 /**
  * Recalculate Segment Response
  */
-export type RecalculateSegmentNatsResponse = NatsResponse<{ message: string }>;
+export type RecalculateSegmentNatsResponse = NatsResponse<MessageResponseDto>;
 
 /**
  * Segment Membership Response

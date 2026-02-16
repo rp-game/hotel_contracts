@@ -56,13 +56,23 @@ export declare class CreateSegmentNatsRequest {
 }
 /**
  * Update Segment Request
+ * Unified for both NATS messages and REST API requests
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
  * Pattern: crm.segmentation.segments.update
+ *
+ * Note: All fields are optional except tenantId, segmentId, userId
  */
-export interface UpdateSegmentNatsRequest {
+export declare class UpdateSegmentNatsRequest {
     tenantId: string;
     segmentId: string;
     userId: string;
-    updateDto: Partial<CreateSegmentNatsRequest>;
+    name?: string;
+    description?: string;
+    type?: string;
+    status?: SegmentStatus;
+    criteria?: Record<string, any>;
+    autoUpdate?: boolean;
+    [key: string]: any;
 }
 /**
  * Customer Segment Response
@@ -181,18 +191,25 @@ export type DeleteSegmentNatsResponse = NatsResponse<{
 }>;
 /**
  * Recalculate Segment Request
+ * Unified for both NATS messages and REST API requests
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
  * Pattern: crm.segmentation.segments.recalculate
  */
-export interface RecalculateSegmentNatsRequest {
+export declare class RecalculateSegmentNatsRequest {
     tenantId: string;
     segmentId: string;
 }
 /**
+ * Message Response DTO
+ * Generic message response used by various operations
+ */
+export declare class MessageResponseDto {
+    message: string;
+}
+/**
  * Recalculate Segment Response
  */
-export type RecalculateSegmentNatsResponse = NatsResponse<{
-    message: string;
-}>;
+export type RecalculateSegmentNatsResponse = NatsResponse<MessageResponseDto>;
 /**
  * Segment Membership Response
  */

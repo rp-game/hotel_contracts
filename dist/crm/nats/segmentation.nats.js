@@ -29,7 +29,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SegmentMembersNatsResponse = exports.SegmentationStatsDto = exports.SegmentPerformanceItemDto = exports.SegmentsNatsResponse = exports.CustomerSegmentNatsResponse = exports.CreateSegmentNatsRequest = exports.SegmentStatus = exports.SegmentType = void 0;
+exports.SegmentMembersNatsResponse = exports.MessageResponseDto = exports.RecalculateSegmentNatsRequest = exports.SegmentationStatsDto = exports.SegmentPerformanceItemDto = exports.SegmentsNatsResponse = exports.CustomerSegmentNatsResponse = exports.UpdateSegmentNatsRequest = exports.CreateSegmentNatsRequest = exports.SegmentStatus = exports.SegmentType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const customers_nats_1 = require("./customers.nats");
 /**
@@ -101,6 +101,62 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Whether to auto-update members' }),
     __metadata("design:type", Boolean)
 ], CreateSegmentNatsRequest.prototype, "autoUpdate", void 0);
+/**
+ * Update Segment Request
+ * Unified for both NATS messages and REST API requests
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
+ * Pattern: crm.segmentation.segments.update
+ *
+ * Note: All fields are optional except tenantId, segmentId, userId
+ */
+class UpdateSegmentNatsRequest {
+    tenantId;
+    segmentId;
+    userId;
+    name;
+    description;
+    type;
+    status;
+    criteria;
+    autoUpdate;
+}
+exports.UpdateSegmentNatsRequest = UpdateSegmentNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], UpdateSegmentNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Segment ID to update' }),
+    __metadata("design:type", String)
+], UpdateSegmentNatsRequest.prototype, "segmentId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User ID who updates the segment' }),
+    __metadata("design:type", String)
+], UpdateSegmentNatsRequest.prototype, "userId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Segment name' }),
+    __metadata("design:type", String)
+], UpdateSegmentNatsRequest.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Segment description' }),
+    __metadata("design:type", String)
+], UpdateSegmentNatsRequest.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Segment type', enum: SegmentType }),
+    __metadata("design:type", String)
+], UpdateSegmentNatsRequest.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Segment status', enum: SegmentStatus }),
+    __metadata("design:type", String)
+], UpdateSegmentNatsRequest.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Segmentation criteria' }),
+    __metadata("design:type", Object)
+], UpdateSegmentNatsRequest.prototype, "criteria", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether to auto-update members' }),
+    __metadata("design:type", Boolean)
+], UpdateSegmentNatsRequest.prototype, "autoUpdate", void 0);
 /**
  * Customer Segment Response
  */
@@ -253,6 +309,37 @@ __decorate([
     }),
     __metadata("design:type", Array)
 ], SegmentationStatsDto.prototype, "segmentPerformance", void 0);
+/**
+ * Recalculate Segment Request
+ * Unified for both NATS messages and REST API requests
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
+ * Pattern: crm.segmentation.segments.recalculate
+ */
+class RecalculateSegmentNatsRequest {
+    tenantId;
+    segmentId;
+}
+exports.RecalculateSegmentNatsRequest = RecalculateSegmentNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], RecalculateSegmentNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Segment ID to recalculate' }),
+    __metadata("design:type", String)
+], RecalculateSegmentNatsRequest.prototype, "segmentId", void 0);
+/**
+ * Message Response DTO
+ * Generic message response used by various operations
+ */
+class MessageResponseDto {
+    message;
+}
+exports.MessageResponseDto = MessageResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Response message' }),
+    __metadata("design:type", String)
+], MessageResponseDto.prototype, "message", void 0);
 /**
  * Segment Members Response (Paginated list of customers in a segment)
  * Unified for both NATS messages and REST API responses
