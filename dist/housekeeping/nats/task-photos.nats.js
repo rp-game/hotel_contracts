@@ -18,7 +18,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PhotoStatisticsNatsResponse = exports.GetPhotoStatisticsNatsRequest = exports.DeletePhotoMessageNatsResponse = exports.DeletePhotoNatsRequest = exports.ReviewPhotoNatsRequest = exports.ReviewPhotoDataDto = exports.UpdatePhotoNatsRequest = exports.UpdatePhotoDataDto = exports.GetPhotoByIdNatsRequest = exports.GetTaskPhotosNatsRequest = exports.UploadPhotosMessageNatsResponse = exports.UploadTaskPhotosNatsRequest = exports.TaskPhotoNatsResponse = exports.PhotoReviewStatus = exports.PhotoCategory = void 0;
+exports.PhotoStatisticsNatsResponse = exports.GetPhotoStatisticsNatsRequest = exports.DeletePhotoMessageNatsResponse = exports.DeletePhotoNatsRequest = exports.ReviewPhotoNatsRequest = exports.ReviewPhotoDataDto = exports.UpdatePhotoNatsRequest = exports.UpdatePhotoDataDto = exports.GetPhotoByIdNatsRequest = exports.GetTaskPhotosNatsRequest = exports.UploadPhotosMessageNatsResponse = exports.UploadTaskPhotosNatsRequest = exports.PhotoDataDto = exports.TaskPhotoNatsResponse = exports.PhotoReviewStatus = exports.PhotoCategory = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Photo Category Enum
@@ -107,6 +107,31 @@ __decorate([
     __metadata("design:type", String)
 ], TaskPhotoNatsResponse.prototype, "hotelId", void 0);
 /**
+ * Photo Data for Upload
+ */
+class PhotoDataDto {
+    file;
+    type;
+    description;
+}
+exports.PhotoDataDto = PhotoDataDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Photo file (base64 or file object)' }),
+    __metadata("design:type", Object)
+], PhotoDataDto.prototype, "file", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Photo category',
+        enum: PhotoCategory,
+        example: PhotoCategory.AFTER
+    }),
+    __metadata("design:type", String)
+], PhotoDataDto.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Photo description' }),
+    __metadata("design:type", String)
+], PhotoDataDto.prototype, "description", void 0);
+/**
  * Upload Task Photos Request
  * @unified Used by both NATS requests and REST API body
  */
@@ -122,7 +147,10 @@ __decorate([
     __metadata("design:type", String)
 ], UploadTaskPhotosNatsRequest.prototype, "taskId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Array of photo data', type: [Object] }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Array of photo data',
+        type: [PhotoDataDto]
+    }),
     __metadata("design:type", Array)
 ], UploadTaskPhotosNatsRequest.prototype, "photos", void 0);
 __decorate([

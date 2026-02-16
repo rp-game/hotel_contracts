@@ -44,12 +44,20 @@ export declare class TaskPhotoNatsResponse {
     hotelId: string;
 }
 /**
+ * Photo Data for Upload
+ */
+export declare class PhotoDataDto {
+    file: any;
+    type: PhotoCategory;
+    description?: string;
+}
+/**
  * Upload Task Photos Request
  * @unified Used by both NATS requests and REST API body
  */
 export declare class UploadTaskPhotosNatsRequest {
     taskId: string;
-    photos: object[];
+    photos: PhotoDataDto[];
     tenantId: string;
     hotelId: string;
 }

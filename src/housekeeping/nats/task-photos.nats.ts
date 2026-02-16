@@ -73,6 +73,24 @@ export class TaskPhotoNatsResponse {
 }
 
 /**
+ * Photo Data for Upload
+ */
+export class PhotoDataDto {
+  @ApiProperty({ description: 'Photo file (base64 or file object)' })
+  file: any;
+
+  @ApiProperty({
+    description: 'Photo category',
+    enum: PhotoCategory,
+    example: PhotoCategory.AFTER
+  })
+  type: PhotoCategory;
+
+  @ApiPropertyOptional({ description: 'Photo description' })
+  description?: string;
+}
+
+/**
  * Upload Task Photos Request
  * @unified Used by both NATS requests and REST API body
  */
@@ -80,8 +98,11 @@ export class UploadTaskPhotosNatsRequest {
   @ApiProperty({ description: 'Task ID' })
   taskId: string;
 
-  @ApiProperty({ description: 'Array of photo data', type: [Object] })
-  photos: object[];
+  @ApiProperty({
+    description: 'Array of photo data',
+    type: [PhotoDataDto]
+  })
+  photos: PhotoDataDto[];
 
   @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
