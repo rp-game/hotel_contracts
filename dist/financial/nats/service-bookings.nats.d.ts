@@ -100,8 +100,8 @@ export declare class FindAllServiceBookingsRequestDto {
     customerId?: string;
     bookingId?: string;
     status?: string;
-    serviceDateFrom?: string;
-    serviceDateTo?: string;
+    dateFrom?: string;
+    dateTo?: string;
     page?: number;
     limit?: number;
 }

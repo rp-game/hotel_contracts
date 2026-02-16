@@ -369,8 +369,8 @@ class FindAllServiceBookingsRequestDto {
     customerId;
     bookingId;
     status;
-    serviceDateFrom;
-    serviceDateTo;
+    dateFrom;
+    dateTo;
     page;
     limit;
 }
@@ -412,17 +412,17 @@ __decorate([
     __metadata("design:type", String)
 ], FindAllServiceBookingsRequestDto.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by date from (ISO 8601 date)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by service date from (ISO 8601 date)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
-], FindAllServiceBookingsRequestDto.prototype, "serviceDateFrom", void 0);
+], FindAllServiceBookingsRequestDto.prototype, "dateFrom", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by date to (ISO 8601 date)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by service date to (ISO 8601 date)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
-], FindAllServiceBookingsRequestDto.prototype, "serviceDateTo", void 0);
+], FindAllServiceBookingsRequestDto.prototype, "dateTo", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Page number', default: 1 }),
     (0, class_validator_1.IsOptional)(),

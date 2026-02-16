@@ -291,15 +291,15 @@ export class FindAllServiceBookingsRequestDto {
   @IsEnum(FinancialServiceBookingStatus)
   status?: string;
 
-  @ApiPropertyOptional({ description: 'Filter by date from (ISO 8601 date)' })
+  @ApiPropertyOptional({ description: 'Filter by service date from (ISO 8601 date)' })
   @IsOptional()
   @IsDateString()
-  serviceDateFrom?: string;
+  dateFrom?: string;
 
-  @ApiPropertyOptional({ description: 'Filter by date to (ISO 8601 date)' })
+  @ApiPropertyOptional({ description: 'Filter by service date to (ISO 8601 date)' })
   @IsOptional()
   @IsDateString()
-  serviceDateTo?: string;
+  dateTo?: string;
 
   @ApiPropertyOptional({ description: 'Page number', default: 1 })
   @IsOptional()
