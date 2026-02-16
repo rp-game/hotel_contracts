@@ -19,7 +19,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ServiceDashboardResponseDto = exports.GetServiceDashboardRequestDto = exports.GetServiceStatsRequestDto = exports.ServiceCategoriesResponseDto = exports.GetServiceCategoriesRequestDto = exports.DeleteAdditionalServiceRequestDto = exports.FindOneAdditionalServiceRequestDto = exports.FindAllAdditionalServicesRequestDto = exports.ServiceListResponseDto = exports.UpdateAdditionalServiceDto = exports.CreateAdditionalServiceDto = exports.AdditionalServiceResponseDto = exports.FinancialServiceCategory = exports.PricingType = exports.FinancialServiceType = void 0;
+exports.ServiceDashboardResponseDto = exports.GetServiceDashboardRequestDto = exports.GetServiceStatsRequestDto = exports.ServiceCategoriesResponseDto = exports.GetServiceCategoriesRequestDto = exports.DeleteAdditionalServiceRequestDto = exports.UpdateAdditionalServiceRequestDto = exports.FindOneAdditionalServiceRequestDto = exports.FindAllAdditionalServicesRequestDto = exports.ServiceListResponseDto = exports.UpdateAdditionalServiceDto = exports.CreateAdditionalServiceDto = exports.AdditionalServiceResponseDto = exports.FinancialServiceCategory = exports.PricingType = exports.FinancialServiceType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const service_bookings_nats_1 = require("./service-bookings.nats");
@@ -490,6 +490,32 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], FindOneAdditionalServiceRequestDto.prototype, "hotelId", void 0);
+/**
+ * Update Additional Service Request DTO (for NATS)
+ * Combines routing info (id, tenantId, hotelId) with update fields
+ */
+class UpdateAdditionalServiceRequestDto extends UpdateAdditionalServiceDto {
+    id;
+    tenantId;
+    hotelId;
+}
+exports.UpdateAdditionalServiceRequestDto = UpdateAdditionalServiceRequestDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceRequestDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceRequestDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceRequestDto.prototype, "hotelId", void 0);
 /**
  * Delete Additional Service Request DTO
  */

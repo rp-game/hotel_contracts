@@ -318,6 +318,25 @@ export class FindOneServiceBookingRequestDto {
 }
 
 /**
+ * Update Service Booking Request DTO (for NATS)
+ * Combines routing info (id, tenantId, hotelId) with update fields
+ */
+export class UpdateFinancialServiceBookingRequestDto extends UpdateFinancialServiceBookingDto {
+  @ApiProperty({ description: 'Booking ID' })
+  @IsUUID()
+  id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+}
+
+/**
  * Delete Service Booking Request DTO
  */
 export class DeleteServiceBookingRequestDto {

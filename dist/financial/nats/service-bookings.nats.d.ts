@@ -110,6 +110,15 @@ export declare class FindOneServiceBookingRequestDto {
     hotelId?: string;
 }
 /**
+ * Update Service Booking Request DTO (for NATS)
+ * Combines routing info (id, tenantId, hotelId) with update fields
+ */
+export declare class UpdateFinancialServiceBookingRequestDto extends UpdateFinancialServiceBookingDto {
+    id: string;
+    tenantId: string;
+    hotelId?: string;
+}
+/**
  * Delete Service Booking Request DTO
  */
 export declare class DeleteServiceBookingRequestDto {

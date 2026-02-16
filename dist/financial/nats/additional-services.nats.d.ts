@@ -135,6 +135,15 @@ export declare class FindOneAdditionalServiceRequestDto {
     hotelId?: string;
 }
 /**
+ * Update Additional Service Request DTO (for NATS)
+ * Combines routing info (id, tenantId, hotelId) with update fields
+ */
+export declare class UpdateAdditionalServiceRequestDto extends UpdateAdditionalServiceDto {
+    id: string;
+    tenantId: string;
+    hotelId?: string;
+}
+/**
  * Delete Additional Service Request DTO
  */
 export declare class DeleteAdditionalServiceRequestDto {

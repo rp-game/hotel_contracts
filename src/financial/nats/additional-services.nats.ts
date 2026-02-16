@@ -356,6 +356,25 @@ export class FindOneAdditionalServiceRequestDto {
 }
 
 /**
+ * Update Additional Service Request DTO (for NATS)
+ * Combines routing info (id, tenantId, hotelId) with update fields
+ */
+export class UpdateAdditionalServiceRequestDto extends UpdateAdditionalServiceDto {
+  @ApiProperty({ description: 'Service ID' })
+  @IsUUID()
+  id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+}
+
+/**
  * Delete Additional Service Request DTO
  */
 export class DeleteAdditionalServiceRequestDto {

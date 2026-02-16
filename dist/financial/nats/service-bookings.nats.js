@@ -19,7 +19,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FinancialServiceStatsResponseDto = exports.DeleteServiceBookingRequestDto = exports.FindOneServiceBookingRequestDto = exports.FindAllServiceBookingsRequestDto = exports.FinancialServiceBookingListResponseDto = exports.UpdateFinancialServiceBookingDto = exports.CreateFinancialServiceBookingDto = exports.ServiceBookingResponseDto = exports.FinancialServiceBookingStatus = void 0;
+exports.FinancialServiceStatsResponseDto = exports.DeleteServiceBookingRequestDto = exports.UpdateFinancialServiceBookingRequestDto = exports.FindOneServiceBookingRequestDto = exports.FindAllServiceBookingsRequestDto = exports.FinancialServiceBookingListResponseDto = exports.UpdateFinancialServiceBookingDto = exports.CreateFinancialServiceBookingDto = exports.ServiceBookingResponseDto = exports.FinancialServiceBookingStatus = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const additional_services_nats_1 = require("./additional-services.nats");
@@ -446,6 +446,32 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], FindOneServiceBookingRequestDto.prototype, "hotelId", void 0);
+/**
+ * Update Service Booking Request DTO (for NATS)
+ * Combines routing info (id, tenantId, hotelId) with update fields
+ */
+class UpdateFinancialServiceBookingRequestDto extends UpdateFinancialServiceBookingDto {
+    id;
+    tenantId;
+    hotelId;
+}
+exports.UpdateFinancialServiceBookingRequestDto = UpdateFinancialServiceBookingRequestDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Booking ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateFinancialServiceBookingRequestDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateFinancialServiceBookingRequestDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateFinancialServiceBookingRequestDto.prototype, "hotelId", void 0);
 /**
  * Delete Service Booking Request DTO
  */
