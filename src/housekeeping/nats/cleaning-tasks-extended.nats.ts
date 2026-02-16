@@ -3,6 +3,7 @@
  * Patterns: housekeeping.tasks.* (mobile and extended patterns)
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 
 // RECENT TASKS (Mobile)
@@ -182,28 +183,54 @@ export type GetHousekeepingTasksNatsResponse = NatsResponse<EnhancedCleaningTask
 /**
  * Staff Performance Metrics (from getPerformanceMetrics)
  * This is what the service ACTUALLY returns - NOT the PerformanceMetric entity
+ * @unified Used by both NATS responses and REST API responses
  */
-export interface StaffPerformanceMetrics {
+export class StaffPerformanceMetricsNatsResponse {
+  @ApiProperty({ description: 'Staff ID' })
   staffId: string;
+
+  @ApiProperty({ description: 'Staff name' })
   staffName: string;
+
+  @ApiProperty({ description: 'Number of tasks completed' })
   tasksCompleted: number;
+
+  @ApiProperty({ description: 'Average completion time in minutes' })
   averageTime: number;
+
+  @ApiProperty({ description: 'Average quality rating (0-5)' })
   averageRating: number;
+
+  @ApiProperty({ description: 'On-time completion rate (0-100)' })
   onTimeRate: number;
+
+  @ApiProperty({ description: 'Efficiency score (0-100)' })
   efficiencyScore: number;
+
+  @ApiProperty({ description: 'Total tasks assigned' })
   totalTasks: number;
+
+  @ApiProperty({ description: 'Pending tasks count' })
   pendingTasks: number;
+
+  @ApiProperty({ description: 'In-progress tasks count' })
   inProgressTasks: number;
 }
 
 /**
  * Get Performance Metrics Request
  * Pattern: housekeeping.performance
+ * @unified Used by both NATS requests and REST API query params
  */
-export interface GetPerformanceMetricsPayload {
+export class GetPerformanceMetricsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
-  date?: string;
+
+  @ApiPropertyOptional({ description: 'Date filter (ISO format or YYYY-MM-DD)' })
+  startDate?: string;
 }
 
-export type GetPerformanceMetricsNatsResponse = NatsResponse<StaffPerformanceMetrics[]>;
+export type GetPerformanceMetricsNatsResponse = NatsResponse<StaffPerformanceMetricsNatsResponse[]>;

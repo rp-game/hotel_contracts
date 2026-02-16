@@ -162,8 +162,9 @@ export type GetHousekeepingTasksNatsResponse = NatsResponse<EnhancedCleaningTask
 /**
  * Staff Performance Metrics (from getPerformanceMetrics)
  * This is what the service ACTUALLY returns - NOT the PerformanceMetric entity
+ * @unified Used by both NATS responses and REST API responses
  */
-export interface StaffPerformanceMetrics {
+export declare class StaffPerformanceMetricsNatsResponse {
     staffId: string;
     staffName: string;
     tasksCompleted: number;
@@ -178,11 +179,12 @@ export interface StaffPerformanceMetrics {
 /**
  * Get Performance Metrics Request
  * Pattern: housekeeping.performance
+ * @unified Used by both NATS requests and REST API query params
  */
-export interface GetPerformanceMetricsPayload {
+export declare class GetPerformanceMetricsNatsRequest {
     tenantId: string;
     hotelId: string;
-    date?: string;
+    startDate?: string;
 }
-export type GetPerformanceMetricsNatsResponse = NatsResponse<StaffPerformanceMetrics[]>;
+export type GetPerformanceMetricsNatsResponse = NatsResponse<StaffPerformanceMetricsNatsResponse[]>;
 //# sourceMappingURL=cleaning-tasks-extended.nats.d.ts.map

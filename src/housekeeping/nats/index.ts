@@ -1,5 +1,6 @@
 export * from './automation.nats';
 export * from './cleaning-stats.nats';
+export * from './cleaning-tasks.nats';
 export * from './create-task.nats';
 export * from './quality-standards.nats';
 export * from './amenities.nats';
