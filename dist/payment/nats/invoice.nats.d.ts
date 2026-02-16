@@ -16,11 +16,24 @@
  * Handler: payment-service (invoices module)
  */
 import { NatsResponse } from '../../common/nats-response.interface';
-export interface PaymentInvoiceItem {
+export declare class PaymentInvoiceItem {
     description: string;
     quantity: number;
     unitPrice: number;
     amount: number;
+}
+/**
+ * Invoice item for create/update requests
+ * Matches payment service CreateInvoiceItemDto
+ */
+export declare class CreateInvoiceItemRequest {
+    description: string;
+    quantity: number;
+    unitPrice: number;
+    discount?: number;
+    taxRate?: number;
+    type?: string;
+    referenceId?: string;
 }
 export declare enum PaymentInvoiceStatus {
     DRAFT = "draft",
@@ -133,7 +146,7 @@ export declare class PaymentCreateManualInvoiceNatsRequest {
     amount: number;
     currency: string;
     dueDate: string;
-    items: InvoiceItemData[];
+    items: CreateInvoiceItemRequest[];
 }
 export type PaymentCreateManualInvoiceNatsResponse = NatsResponse<CreateInvoiceData>;
 export interface GetInvoicesNatsRequest {

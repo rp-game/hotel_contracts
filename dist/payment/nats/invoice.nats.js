@@ -26,8 +26,76 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateInvoiceStatusData = exports.UpdateInvoiceStatusNatsRequest = exports.DownloadInvoicePdfData = exports.DownloadInvoicePdfNatsRequest = exports.SendInvoiceData = exports.SendInvoiceNatsRequest = exports.GetPaymentInvoicesData = exports.PaymentCreateManualInvoiceNatsRequest = exports.InvoiceDataItem = exports.InvoiceItemData = exports.PaymentInvoiceStatus = void 0;
+exports.UpdateInvoiceStatusData = exports.UpdateInvoiceStatusNatsRequest = exports.DownloadInvoicePdfData = exports.DownloadInvoicePdfNatsRequest = exports.SendInvoiceData = exports.SendInvoiceNatsRequest = exports.GetPaymentInvoicesData = exports.PaymentCreateManualInvoiceNatsRequest = exports.InvoiceDataItem = exports.InvoiceItemData = exports.PaymentInvoiceStatus = exports.CreateInvoiceItemRequest = exports.PaymentInvoiceItem = void 0;
 const swagger_1 = require("@nestjs/swagger");
+// ============================================================================
+// SHARED TYPES
+// ============================================================================
+class PaymentInvoiceItem {
+    description;
+    quantity;
+    unitPrice;
+    amount;
+}
+exports.PaymentInvoiceItem = PaymentInvoiceItem;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Item description' }),
+    __metadata("design:type", String)
+], PaymentInvoiceItem.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Item quantity' }),
+    __metadata("design:type", Number)
+], PaymentInvoiceItem.prototype, "quantity", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Unit price' }),
+    __metadata("design:type", Number)
+], PaymentInvoiceItem.prototype, "unitPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total amount for this item' }),
+    __metadata("design:type", Number)
+], PaymentInvoiceItem.prototype, "amount", void 0);
+/**
+ * Invoice item for create/update requests
+ * Matches payment service CreateInvoiceItemDto
+ */
+class CreateInvoiceItemRequest {
+    description;
+    quantity;
+    unitPrice;
+    discount;
+    taxRate;
+    type;
+    referenceId;
+}
+exports.CreateInvoiceItemRequest = CreateInvoiceItemRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Item description' }),
+    __metadata("design:type", String)
+], CreateInvoiceItemRequest.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Item quantity', default: 1 }),
+    __metadata("design:type", Number)
+], CreateInvoiceItemRequest.prototype, "quantity", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Unit price' }),
+    __metadata("design:type", Number)
+], CreateInvoiceItemRequest.prototype, "unitPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Discount amount for this item', default: 0 }),
+    __metadata("design:type", Number)
+], CreateInvoiceItemRequest.prototype, "discount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax rate percentage for this item', default: 0 }),
+    __metadata("design:type", Number)
+], CreateInvoiceItemRequest.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Type of the item (e.g., ROOM, SERVICE, OTHER)' }),
+    __metadata("design:type", String)
+], CreateInvoiceItemRequest.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Reference ID (e.g., room ID, service ID)' }),
+    __metadata("design:type", String)
+], CreateInvoiceItemRequest.prototype, "referenceId", void 0);
 var PaymentInvoiceStatus;
 (function (PaymentInvoiceStatus) {
     PaymentInvoiceStatus["DRAFT"] = "draft";
@@ -312,7 +380,7 @@ __decorate([
     __metadata("design:type", String)
 ], PaymentCreateManualInvoiceNatsRequest.prototype, "dueDate", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [InvoiceItemData] }),
+    (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] }),
     __metadata("design:type", Array)
 ], PaymentCreateManualInvoiceNatsRequest.prototype, "items", void 0);
 class GetPaymentInvoicesData {

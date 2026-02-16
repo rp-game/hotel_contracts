@@ -23,11 +23,46 @@ import { NatsResponse } from '../../common/nats-response.interface';
 // SHARED TYPES
 // ============================================================================
 
-export interface PaymentInvoiceItem {
+export class PaymentInvoiceItem {
+  @ApiProperty({ description: 'Item description' })
   description: string;
+
+  @ApiProperty({ description: 'Item quantity' })
   quantity: number;
+
+  @ApiProperty({ description: 'Unit price' })
   unitPrice: number;
+
+  @ApiProperty({ description: 'Total amount for this item' })
   amount: number;
+}
+
+
+/**
+ * Invoice item for create/update requests
+ * Matches payment service CreateInvoiceItemDto
+ */
+export class CreateInvoiceItemRequest {
+  @ApiProperty({ description: 'Item description' })
+  description: string;
+
+  @ApiProperty({ description: 'Item quantity', default: 1 })
+  quantity: number;
+
+  @ApiProperty({ description: 'Unit price' })
+  unitPrice: number;
+
+  @ApiPropertyOptional({ description: 'Discount amount for this item', default: 0 })
+  discount?: number;
+
+  @ApiPropertyOptional({ description: 'Tax rate percentage for this item', default: 0 })
+  taxRate?: number;
+
+  @ApiPropertyOptional({ description: 'Type of the item (e.g., ROOM, SERVICE, OTHER)' })
+  type?: string;
+
+  @ApiPropertyOptional({ description: 'Reference ID (e.g., room ID, service ID)' })
+  referenceId?: string;
 }
 
 export enum PaymentInvoiceStatus {
@@ -258,8 +293,8 @@ export class PaymentCreateManualInvoiceNatsRequest {
   @ApiProperty({ description: 'Invoice due date', example: '2024-02-15' })
   dueDate: string;
 
-  @ApiProperty({ description: 'Invoice line items', type: [InvoiceItemData] })
-  items: InvoiceItemData[];
+  @ApiProperty({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] })
+  items: CreateInvoiceItemRequest[];
 }
 
 export type PaymentCreateManualInvoiceNatsResponse = NatsResponse<CreateInvoiceData>;
