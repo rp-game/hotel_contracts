@@ -15,13 +15,18 @@ import { NatsResponse } from '../../common';
 
 /**
  * Financial Service Booking Status Enum
+ * For additional services bookings (spa, restaurant, laundry, etc.)
+ * Different from:
+ * - BookingStatus (room bookings): has CHECKED_IN/CHECKED_OUT
+ * - FinancialServiceBookingStatus (CRM service bookings): different domain
  */
 export enum FinancialServiceBookingStatus {
   PENDING = 'PENDING',
   CONFIRMED = 'CONFIRMED',
   IN_PROGRESS = 'IN_PROGRESS',
   COMPLETED = 'COMPLETED',
-  CANCELLED = 'CANCELLED'
+  CANCELLED = 'CANCELLED',
+  NO_SHOW = 'NO_SHOW'
 }
 
 /**
@@ -93,7 +98,7 @@ export class ServiceBookingResponseDto {
 
   @ApiProperty({ description: 'Booking status', enum: FinancialServiceBookingStatus })
   @IsEnum(FinancialServiceBookingStatus)
-  status: string;
+  status: FinancialServiceBookingStatus;
 
   @ApiPropertyOptional({ description: 'Additional notes' })
   @IsOptional()
@@ -124,6 +129,11 @@ export class CreateFinancialServiceBookingDto {
   @ApiProperty({ description: 'Service ID' })
   @IsUUID()
   serviceId: string;
+
+  @ApiPropertyOptional({ description: 'Customer ID (if linked to a customer record)' })
+  @IsOptional()
+  @IsUUID()
+  customerId?: string;
 
   @ApiProperty({ description: 'Customer name' })
   @IsString()
@@ -170,7 +180,7 @@ export class CreateFinancialServiceBookingDto {
   @ApiPropertyOptional({ description: 'Initial status', enum: FinancialServiceBookingStatus, default: FinancialServiceBookingStatus.PENDING })
   @IsOptional()
   @IsEnum(FinancialServiceBookingStatus)
-  status?: string;
+  status?: FinancialServiceBookingStatus;
 
   @ApiPropertyOptional({ description: 'Additional notes' })
   @IsOptional()
@@ -228,7 +238,7 @@ export class UpdateFinancialServiceBookingDto {
   @ApiPropertyOptional({ description: 'Booking status', enum: FinancialServiceBookingStatus })
   @IsOptional()
   @IsEnum(FinancialServiceBookingStatus)
-  status?: string;
+  status?: FinancialServiceBookingStatus;
 
   @ApiPropertyOptional({ description: 'Additional notes' })
   @IsOptional()
@@ -289,7 +299,7 @@ export class FindAllServiceBookingsRequestDto {
   @ApiPropertyOptional({ description: 'Filter by status', enum: FinancialServiceBookingStatus })
   @IsOptional()
   @IsEnum(FinancialServiceBookingStatus)
-  status?: string;
+  status?: FinancialServiceBookingStatus;
 
   @ApiPropertyOptional({ description: 'Filter by service date from (ISO 8601 date)' })
   @IsOptional()

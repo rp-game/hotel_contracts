@@ -75,41 +75,63 @@ export declare class AdditionalServiceResponseDto {
 }
 /**
  * Create Additional Service DTO
+ * All fields use camelCase (API convention)
  */
 export declare class CreateAdditionalServiceDto {
-    tenantId: string;
-    hotelId: string;
     name: string;
+    code: string;
     description?: string;
-    serviceType: string;
-    category: string;
+    serviceType: FinancialServiceType;
+    category: FinancialServiceCategory;
+    pricingType: PricingType;
     basePrice: number;
+    currency?: string;
     taxRate?: number;
-    pricingType: string;
-    requiresBooking?: boolean;
+    isTaxable?: boolean;
     isActive?: boolean;
     isAvailable?: boolean;
+    requiresBooking?: boolean;
+    requiresApproval?: boolean;
     maxQuantity?: number;
+    minAdvanceHours?: number;
+    maxAdvanceDays?: number;
     availableFrom?: string;
     availableTo?: string;
+    availableDays?: string[];
+    termsConditions?: string;
+    cancellationPolicy?: string;
+    tenantId: string;
+    hotelId?: string;
+    createdBy?: string;
 }
 /**
  * Update Additional Service DTO
+ * All fields use camelCase (API convention)
  */
 export declare class UpdateAdditionalServiceDto {
     name?: string;
+    code?: string;
     description?: string;
-    serviceType?: string;
-    category?: string;
+    serviceType?: FinancialServiceType;
+    category?: FinancialServiceCategory;
+    pricingType?: PricingType;
     basePrice?: number;
+    currency?: string;
     taxRate?: number;
-    pricingType?: string;
-    requiresBooking?: boolean;
+    isTaxable?: boolean;
     isActive?: boolean;
     isAvailable?: boolean;
+    requiresBooking?: boolean;
+    requiresApproval?: boolean;
     maxQuantity?: number;
+    minAdvanceHours?: number;
+    maxAdvanceDays?: number;
     availableFrom?: string;
     availableTo?: string;
+    availableDays?: string[];
+    termsConditions?: string;
+    cancellationPolicy?: string;
+    updatedBy?: string;
 }
 /**
  * Service List Response DTO
@@ -127,8 +149,8 @@ export declare class ServiceListResponseDto {
 export declare class FindAllAdditionalServicesRequestDto {
     tenantId?: string;
     hotelId?: string;
-    serviceType?: string;
-    category?: string;
+    serviceType?: FinancialServiceType;
+    category?: FinancialServiceCategory;
     isActive?: boolean;
     isAvailable?: boolean;
     page?: number;

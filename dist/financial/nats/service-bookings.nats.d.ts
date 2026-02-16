@@ -11,13 +11,18 @@
 import { NatsResponse } from '../../common';
 /**
  * Financial Service Booking Status Enum
+ * For additional services bookings (spa, restaurant, laundry, etc.)
+ * Different from:
+ * - BookingStatus (room bookings): has CHECKED_IN/CHECKED_OUT
+ * - FinancialServiceBookingStatus (CRM service bookings): different domain
  */
 export declare enum FinancialServiceBookingStatus {
     PENDING = "PENDING",
     CONFIRMED = "CONFIRMED",
     IN_PROGRESS = "IN_PROGRESS",
     COMPLETED = "COMPLETED",
-    CANCELLED = "CANCELLED"
+    CANCELLED = "CANCELLED",
+    NO_SHOW = "NO_SHOW"
 }
 /**
  * Service Booking Response DTO
@@ -38,7 +43,7 @@ export declare class ServiceBookingResponseDto {
     quantity: number;
     unitPrice: number;
     totalAmount: number;
-    status: string;
+    status: FinancialServiceBookingStatus;
     notes?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -50,6 +55,7 @@ export declare class CreateFinancialServiceBookingDto {
     tenantId: string;
     hotelId: string;
     serviceId: string;
+    customerId?: string;
     customerName: string;
     customerEmail: string;
     customerPhone?: string;
@@ -59,7 +65,7 @@ export declare class CreateFinancialServiceBookingDto {
     quantity: number;
     unitPrice: number;
     totalAmount: number;
-    status?: string;
+    status?: FinancialServiceBookingStatus;
     notes?: string;
 }
 /**
@@ -74,7 +80,7 @@ export declare class UpdateFinancialServiceBookingDto {
     quantity?: number;
     unitPrice?: number;
     totalAmount?: number;
-    status?: string;
+    status?: FinancialServiceBookingStatus;
     notes?: string;
 }
 /**
@@ -99,7 +105,7 @@ export declare class FindAllServiceBookingsRequestDto {
     serviceId?: string;
     customerId?: string;
     bookingId?: string;
-    status?: string;
+    status?: FinancialServiceBookingStatus;
     dateFrom?: string;
     dateTo?: string;
     page?: number;

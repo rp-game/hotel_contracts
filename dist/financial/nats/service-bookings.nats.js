@@ -24,6 +24,10 @@ const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 /**
  * Financial Service Booking Status Enum
+ * For additional services bookings (spa, restaurant, laundry, etc.)
+ * Different from:
+ * - BookingStatus (room bookings): has CHECKED_IN/CHECKED_OUT
+ * - FinancialServiceBookingStatus (CRM service bookings): different domain
  */
 var FinancialServiceBookingStatus;
 (function (FinancialServiceBookingStatus) {
@@ -32,6 +36,7 @@ var FinancialServiceBookingStatus;
     FinancialServiceBookingStatus["IN_PROGRESS"] = "IN_PROGRESS";
     FinancialServiceBookingStatus["COMPLETED"] = "COMPLETED";
     FinancialServiceBookingStatus["CANCELLED"] = "CANCELLED";
+    FinancialServiceBookingStatus["NO_SHOW"] = "NO_SHOW";
 })(FinancialServiceBookingStatus || (exports.FinancialServiceBookingStatus = FinancialServiceBookingStatus = {}));
 /**
  * Service Booking Response DTO
@@ -159,6 +164,7 @@ class CreateFinancialServiceBookingDto {
     tenantId;
     hotelId;
     serviceId;
+    customerId;
     customerName;
     customerEmail;
     customerPhone;
@@ -187,6 +193,12 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateFinancialServiceBookingDto.prototype, "serviceId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer ID (if linked to a customer record)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateFinancialServiceBookingDto.prototype, "customerId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Customer name' }),
     (0, class_validator_1.IsString)(),

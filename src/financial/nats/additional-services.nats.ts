@@ -10,7 +10,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNumber, IsBoolean, IsOptional, IsEnum, IsUUID, IsDateString, Min } from 'class-validator';
+import { IsString, IsNumber, IsBoolean, IsOptional, IsEnum, IsUUID, IsDateString, IsArray, Min, Max } from 'class-validator';
 import { NatsResponse } from '../../common';
 import { FinancialServiceStatsResponseDto, ServiceBookingResponseDto } from './service-bookings.nats';
 
@@ -146,19 +146,16 @@ export class AdditionalServiceResponseDto {
 
 /**
  * Create Additional Service DTO
+ * All fields use camelCase (API convention)
  */
 export class CreateAdditionalServiceDto {
-  @ApiProperty({ description: 'Tenant ID' })
-  @IsUUID()
-  tenantId: string;
-
-  @ApiProperty({ description: 'Hotel ID' })
-  @IsUUID()
-  hotelId: string;
-
   @ApiProperty({ description: 'Service name' })
   @IsString()
   name: string;
+
+  @ApiProperty({ description: 'Service code (unique identifier)' })
+  @IsString()
+  code: string;
 
   @ApiPropertyOptional({ description: 'Service description' })
   @IsOptional()
@@ -167,31 +164,37 @@ export class CreateAdditionalServiceDto {
 
   @ApiProperty({ description: 'Service type', enum: FinancialServiceType })
   @IsEnum(FinancialServiceType)
-  serviceType: string;
+  serviceType: FinancialServiceType;
 
   @ApiProperty({ description: 'Service category', enum: FinancialServiceCategory })
   @IsEnum(FinancialServiceCategory)
-  category: string;
+  category: FinancialServiceCategory;
+
+  @ApiProperty({ description: 'Pricing type', enum: PricingType })
+  @IsEnum(PricingType)
+  pricingType: PricingType;
 
   @ApiProperty({ description: 'Base price (before tax)' })
   @IsNumber()
   @Min(0)
   basePrice: number;
 
-  @ApiPropertyOptional({ description: 'Tax rate (decimal)', default: 0.1 })
+  @ApiPropertyOptional({ description: 'Currency code', default: 'VND' })
+  @IsOptional()
+  @IsString()
+  currency?: string;
+
+  @ApiPropertyOptional({ description: 'Tax rate (0-100)', default: 0 })
   @IsOptional()
   @IsNumber()
   @Min(0)
+  @Max(100)
   taxRate?: number;
 
-  @ApiProperty({ description: 'Pricing type', enum: PricingType })
-  @IsEnum(PricingType)
-  pricingType: string;
-
-  @ApiPropertyOptional({ description: 'Whether booking is required', default: false })
+  @ApiPropertyOptional({ description: 'Whether service is taxable', default: true })
   @IsOptional()
   @IsBoolean()
-  requiresBooking?: boolean;
+  isTaxable?: boolean;
 
   @ApiPropertyOptional({ description: 'Whether service is active', default: true })
   @IsOptional()
@@ -203,10 +206,33 @@ export class CreateAdditionalServiceDto {
   @IsBoolean()
   isAvailable?: boolean;
 
+  @ApiPropertyOptional({ description: 'Whether booking is required', default: false })
+  @IsOptional()
+  @IsBoolean()
+  requiresBooking?: boolean;
+
+  @ApiPropertyOptional({ description: 'Whether approval is required', default: false })
+  @IsOptional()
+  @IsBoolean()
+  requiresApproval?: boolean;
+
   @ApiPropertyOptional({ description: 'Maximum quantity per booking' })
   @IsOptional()
   @IsNumber()
+  @Min(1)
   maxQuantity?: number;
+
+  @ApiPropertyOptional({ description: 'Minimum advance hours for booking' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  minAdvanceHours?: number;
+
+  @ApiPropertyOptional({ description: 'Maximum advance days for booking' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  maxAdvanceDays?: number;
 
   @ApiPropertyOptional({ description: 'Available from date (ISO 8601 date)' })
   @IsOptional()
@@ -217,16 +243,52 @@ export class CreateAdditionalServiceDto {
   @IsOptional()
   @IsDateString()
   availableTo?: string;
+
+  @ApiPropertyOptional({ description: 'Available days of week', type: [String] })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  availableDays?: string[];
+
+  @ApiPropertyOptional({ description: 'Terms and conditions' })
+  @IsOptional()
+  @IsString()
+  termsConditions?: string;
+
+  @ApiPropertyOptional({ description: 'Cancellation policy' })
+  @IsOptional()
+  @IsString()
+  cancellationPolicy?: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Created by user ID' })
+  @IsOptional()
+  @IsUUID()
+  createdBy?: string;
 }
 
 /**
  * Update Additional Service DTO
+ * All fields use camelCase (API convention)
  */
 export class UpdateAdditionalServiceDto {
   @ApiPropertyOptional({ description: 'Service name' })
   @IsOptional()
   @IsString()
   name?: string;
+
+  @ApiPropertyOptional({ description: 'Service code' })
+  @IsOptional()
+  @IsString()
+  code?: string;
 
   @ApiPropertyOptional({ description: 'Service description' })
   @IsOptional()
@@ -236,12 +298,17 @@ export class UpdateAdditionalServiceDto {
   @ApiPropertyOptional({ description: 'Service type', enum: FinancialServiceType })
   @IsOptional()
   @IsEnum(FinancialServiceType)
-  serviceType?: string;
+  serviceType?: FinancialServiceType;
 
   @ApiPropertyOptional({ description: 'Service category', enum: FinancialServiceCategory })
   @IsOptional()
   @IsEnum(FinancialServiceCategory)
-  category?: string;
+  category?: FinancialServiceCategory;
+
+  @ApiPropertyOptional({ description: 'Pricing type', enum: PricingType })
+  @IsOptional()
+  @IsEnum(PricingType)
+  pricingType?: PricingType;
 
   @ApiPropertyOptional({ description: 'Base price (before tax)' })
   @IsOptional()
@@ -249,21 +316,22 @@ export class UpdateAdditionalServiceDto {
   @Min(0)
   basePrice?: number;
 
-  @ApiPropertyOptional({ description: 'Tax rate (decimal)' })
+  @ApiPropertyOptional({ description: 'Currency code' })
+  @IsOptional()
+  @IsString()
+  currency?: string;
+
+  @ApiPropertyOptional({ description: 'Tax rate (0-100)' })
   @IsOptional()
   @IsNumber()
   @Min(0)
+  @Max(100)
   taxRate?: number;
 
-  @ApiPropertyOptional({ description: 'Pricing type', enum: PricingType })
-  @IsOptional()
-  @IsEnum(PricingType)
-  pricingType?: string;
-
-  @ApiPropertyOptional({ description: 'Whether booking is required' })
+  @ApiPropertyOptional({ description: 'Whether service is taxable' })
   @IsOptional()
   @IsBoolean()
-  requiresBooking?: boolean;
+  isTaxable?: boolean;
 
   @ApiPropertyOptional({ description: 'Whether service is active' })
   @IsOptional()
@@ -275,20 +343,64 @@ export class UpdateAdditionalServiceDto {
   @IsBoolean()
   isAvailable?: boolean;
 
+  @ApiPropertyOptional({ description: 'Whether booking is required' })
+  @IsOptional()
+  @IsBoolean()
+  requiresBooking?: boolean;
+
+  @ApiPropertyOptional({ description: 'Whether approval is required' })
+  @IsOptional()
+  @IsBoolean()
+  requiresApproval?: boolean;
+
   @ApiPropertyOptional({ description: 'Maximum quantity per booking' })
   @IsOptional()
   @IsNumber()
+  @Min(1)
   maxQuantity?: number;
 
-  @ApiPropertyOptional({ description: 'Available from date (ISO 8601 date)' })
+  @ApiPropertyOptional({ description: 'Minimum advance hours' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  minAdvanceHours?: number;
+
+  @ApiPropertyOptional({ description: 'Maximum advance days' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  maxAdvanceDays?: number;
+
+  @ApiPropertyOptional({ description: 'Available from date (ISO 8601)' })
   @IsOptional()
   @IsDateString()
   availableFrom?: string;
 
-  @ApiPropertyOptional({ description: 'Available to date (ISO 8601 date)' })
+  @ApiPropertyOptional({ description: 'Available to date (ISO 8601)' })
   @IsOptional()
   @IsDateString()
   availableTo?: string;
+
+  @ApiPropertyOptional({ description: 'Available days', type: [String] })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  availableDays?: string[];
+
+  @ApiPropertyOptional({ description: 'Terms and conditions' })
+  @IsOptional()
+  @IsString()
+  termsConditions?: string;
+
+  @ApiPropertyOptional({ description: 'Cancellation policy' })
+  @IsOptional()
+  @IsString()
+  cancellationPolicy?: string;
+
+  @ApiPropertyOptional({ description: 'Updated by user ID' })
+  @IsOptional()
+  @IsUUID()
+  updatedBy?: string;
 }
 
 /**
@@ -326,12 +438,12 @@ export class FindAllAdditionalServicesRequestDto {
   @ApiPropertyOptional({ description: 'Filter by service type', enum: FinancialServiceType })
   @IsOptional()
   @IsEnum(FinancialServiceType)
-  serviceType?: string;
+  serviceType?: FinancialServiceType;
 
   @ApiPropertyOptional({ description: 'Filter by category', enum: FinancialServiceCategory })
   @IsOptional()
   @IsEnum(FinancialServiceCategory)
-  category?: string;
+  category?: FinancialServiceCategory;
 
   @ApiPropertyOptional({ description: 'Filter by active status' })
   @IsOptional()

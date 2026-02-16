@@ -194,40 +194,46 @@ __decorate([
 ], AdditionalServiceResponseDto.prototype, "updatedAt", void 0);
 /**
  * Create Additional Service DTO
+ * All fields use camelCase (API convention)
  */
 class CreateAdditionalServiceDto {
-    tenantId;
-    hotelId;
     name;
+    code;
     description;
     serviceType;
     category;
-    basePrice;
-    taxRate;
     pricingType;
-    requiresBooking;
+    basePrice;
+    currency;
+    taxRate;
+    isTaxable;
     isActive;
     isAvailable;
+    requiresBooking;
+    requiresApproval;
     maxQuantity;
+    minAdvanceHours;
+    maxAdvanceDays;
     availableFrom;
     availableTo;
+    availableDays;
+    termsConditions;
+    cancellationPolicy;
+    tenantId;
+    hotelId;
+    createdBy;
 }
 exports.CreateAdditionalServiceDto = CreateAdditionalServiceDto;
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], CreateAdditionalServiceDto.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], CreateAdditionalServiceDto.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Service name' }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateAdditionalServiceDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service code (unique identifier)' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "code", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Service description' }),
     (0, class_validator_1.IsOptional)(),
@@ -245,29 +251,36 @@ __decorate([
     __metadata("design:type", String)
 ], CreateAdditionalServiceDto.prototype, "category", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Pricing type', enum: PricingType }),
+    (0, class_validator_1.IsEnum)(PricingType),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "pricingType", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Base price (before tax)' }),
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.Min)(0),
     __metadata("design:type", Number)
 ], CreateAdditionalServiceDto.prototype, "basePrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax rate (decimal)', default: 0.1 }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Currency code', default: 'VND' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax rate (0-100)', default: 0 }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(100),
     __metadata("design:type", Number)
 ], CreateAdditionalServiceDto.prototype, "taxRate", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Pricing type', enum: PricingType }),
-    (0, class_validator_1.IsEnum)(PricingType),
-    __metadata("design:type", String)
-], CreateAdditionalServiceDto.prototype, "pricingType", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether booking is required', default: false }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether service is taxable', default: true }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
-], CreateAdditionalServiceDto.prototype, "requiresBooking", void 0);
+], CreateAdditionalServiceDto.prototype, "isTaxable", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Whether service is active', default: true }),
     (0, class_validator_1.IsOptional)(),
@@ -281,11 +294,38 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CreateAdditionalServiceDto.prototype, "isAvailable", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether booking is required', default: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreateAdditionalServiceDto.prototype, "requiresBooking", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether approval is required', default: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreateAdditionalServiceDto.prototype, "requiresApproval", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Maximum quantity per booking' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
     __metadata("design:type", Number)
 ], CreateAdditionalServiceDto.prototype, "maxQuantity", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Minimum advance hours for booking' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], CreateAdditionalServiceDto.prototype, "minAdvanceHours", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Maximum advance days for booking' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], CreateAdditionalServiceDto.prototype, "maxAdvanceDays", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Available from date (ISO 8601 date)' }),
     (0, class_validator_1.IsOptional)(),
@@ -298,23 +338,70 @@ __decorate([
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], CreateAdditionalServiceDto.prototype, "availableTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Available days of week', type: [String] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], CreateAdditionalServiceDto.prototype, "availableDays", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Terms and conditions' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "termsConditions", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Cancellation policy' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "cancellationPolicy", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Created by user ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateAdditionalServiceDto.prototype, "createdBy", void 0);
 /**
  * Update Additional Service DTO
+ * All fields use camelCase (API convention)
  */
 class UpdateAdditionalServiceDto {
     name;
+    code;
     description;
     serviceType;
     category;
-    basePrice;
-    taxRate;
     pricingType;
-    requiresBooking;
+    basePrice;
+    currency;
+    taxRate;
+    isTaxable;
     isActive;
     isAvailable;
+    requiresBooking;
+    requiresApproval;
     maxQuantity;
+    minAdvanceHours;
+    maxAdvanceDays;
     availableFrom;
     availableTo;
+    availableDays;
+    termsConditions;
+    cancellationPolicy;
+    updatedBy;
 }
 exports.UpdateAdditionalServiceDto = UpdateAdditionalServiceDto;
 __decorate([
@@ -323,6 +410,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateAdditionalServiceDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service code' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "code", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Service description' }),
     (0, class_validator_1.IsOptional)(),
@@ -342,6 +435,12 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateAdditionalServiceDto.prototype, "category", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Pricing type', enum: PricingType }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(PricingType),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "pricingType", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Base price (before tax)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
@@ -349,24 +448,25 @@ __decorate([
     __metadata("design:type", Number)
 ], UpdateAdditionalServiceDto.prototype, "basePrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax rate (decimal)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Currency code' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax rate (0-100)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(100),
     __metadata("design:type", Number)
 ], UpdateAdditionalServiceDto.prototype, "taxRate", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Pricing type', enum: PricingType }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(PricingType),
-    __metadata("design:type", String)
-], UpdateAdditionalServiceDto.prototype, "pricingType", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether booking is required' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether service is taxable' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
-], UpdateAdditionalServiceDto.prototype, "requiresBooking", void 0);
+], UpdateAdditionalServiceDto.prototype, "isTaxable", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Whether service is active' }),
     (0, class_validator_1.IsOptional)(),
@@ -380,23 +480,75 @@ __decorate([
     __metadata("design:type", Boolean)
 ], UpdateAdditionalServiceDto.prototype, "isAvailable", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether booking is required' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdateAdditionalServiceDto.prototype, "requiresBooking", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether approval is required' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdateAdditionalServiceDto.prototype, "requiresApproval", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Maximum quantity per booking' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
     __metadata("design:type", Number)
 ], UpdateAdditionalServiceDto.prototype, "maxQuantity", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Available from date (ISO 8601 date)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Minimum advance hours' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], UpdateAdditionalServiceDto.prototype, "minAdvanceHours", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Maximum advance days' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], UpdateAdditionalServiceDto.prototype, "maxAdvanceDays", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Available from date (ISO 8601)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], UpdateAdditionalServiceDto.prototype, "availableFrom", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Available to date (ISO 8601 date)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Available to date (ISO 8601)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], UpdateAdditionalServiceDto.prototype, "availableTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Available days', type: [String] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], UpdateAdditionalServiceDto.prototype, "availableDays", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Terms and conditions' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "termsConditions", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Cancellation policy' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "cancellationPolicy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Updated by user ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateAdditionalServiceDto.prototype, "updatedBy", void 0);
 /**
  * Service List Response DTO
  */
