@@ -123,18 +123,47 @@ export interface SegmentsNatsResponse {
 }
 
 /**
- * Segmentation Stats Response
+ * Segment Performance Item
+ * Used within SegmentationStatsDto
  */
-export interface SegmentationStatsNatsResponse {
-  totalSegments: number;
-  activeSegments: number;
-  totalSegmentedCustomers: number;
-  averageSegmentSize: number;
-  segmentPerformance: Array<{
-    name: string;
-    customerCount: number;
-  }>;
+export class SegmentPerformanceItemDto {
+  @ApiProperty({ description: 'Segment name' })
+  name: string;
+
+  @ApiProperty({ description: 'Customer count in segment' })
+  customerCount: number;
 }
+
+/**
+ * Segmentation Stats DTO
+ * Unified for both NATS messages and REST API responses
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
+ * Pattern: crm.segmentation.stats
+ */
+export class SegmentationStatsDto {
+  @ApiProperty({ description: 'Total number of customer segments' })
+  totalSegments: number;
+
+  @ApiProperty({ description: 'Number of active segments' })
+  activeSegments: number;
+
+  @ApiProperty({ description: 'Total customers across all segments' })
+  totalSegmentedCustomers: number;
+
+  @ApiProperty({ description: 'Average segment size' })
+  averageSegmentSize: number;
+
+  @ApiProperty({
+    description: 'Top segment performance metrics',
+    type: [SegmentPerformanceItemDto]
+  })
+  segmentPerformance: SegmentPerformanceItemDto[];
+}
+
+/**
+ * @deprecated Use SegmentationStatsDto directly
+ */
+export type SegmentationStatsNatsResponse = SegmentationStatsDto;
 
 /**
  * Stats Request
@@ -147,7 +176,7 @@ export interface GetSegmentationStatsNatsRequest {
 /**
  * Stats Response
  */
-export type GetSegmentationStatsNatsResponse = NatsResponse<SegmentationStatsNatsResponse>;
+export type GetSegmentationStatsNatsResponse = NatsResponse<SegmentationStatsDto>;
 
 /**
  * Find All Segments Request

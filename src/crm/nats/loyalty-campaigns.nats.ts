@@ -536,13 +536,23 @@ export class ApplyCampaignNatsRequest {
 }
 
 /**
+ * Apply Campaign Response Data
+ */
+export class ApplyCampaignData {
+  @ApiProperty({ description: 'Whether campaign was applied successfully' })
+  success: boolean;
+
+  @ApiProperty({ description: 'Number of points awarded' })
+  pointsAwarded: number;
+
+  @ApiProperty({ description: 'Result message' })
+  message: string;
+}
+
+/**
  * Apply Campaign Response
  */
-export type ApplyCampaignNatsResponse = NatsResponse<{
-  success: boolean;
-  pointsAwarded: number;
-  message: string;
-}>;
+export type ApplyCampaignNatsResponse = NatsResponse<ApplyCampaignData>;
 
 /**
  * Campaign Template Response

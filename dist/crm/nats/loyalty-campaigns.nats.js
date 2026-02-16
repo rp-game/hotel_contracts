@@ -27,7 +27,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ActiveCampaignsListData = exports.LoyaltyCampaignsListData = exports.GetCampaignTemplatesNatsRequest = exports.CampaignTemplateNatsResponse = exports.ApplyCampaignNatsRequest = exports.ManageCampaignStatusNatsRequest = exports.GetCampaignAnalyticsNatsRequest = exports.CampaignAnalyticsNatsResponse = exports.FindCampaignByIdNatsRequest = exports.GetCampaignDashboardNatsRequest = exports.CampaignDashboardNatsResponse = exports.CampaignPerformanceItem = exports.GetCampaignStatsNatsRequest = exports.CampaignStatsNatsResponse = exports.CampaignTopPerformerItem = exports.FindActiveCampaignsNatsRequest = exports.FindAllCampaignsNatsRequest = exports.LoyaltyCampaignNatsResponse = exports.CampaignTracking = exports.UpdateCampaignNatsRequest = exports.CreateCampaignNatsRequest = exports.CampaignConditionsNatsRequest = exports.CampaignRulesNatsRequest = exports.CampaignStatus = exports.CampaignType = void 0;
+exports.ActiveCampaignsListData = exports.LoyaltyCampaignsListData = exports.GetCampaignTemplatesNatsRequest = exports.CampaignTemplateNatsResponse = exports.ApplyCampaignData = exports.ApplyCampaignNatsRequest = exports.ManageCampaignStatusNatsRequest = exports.GetCampaignAnalyticsNatsRequest = exports.CampaignAnalyticsNatsResponse = exports.FindCampaignByIdNatsRequest = exports.GetCampaignDashboardNatsRequest = exports.CampaignDashboardNatsResponse = exports.CampaignPerformanceItem = exports.GetCampaignStatsNatsRequest = exports.CampaignStatsNatsResponse = exports.CampaignTopPerformerItem = exports.FindActiveCampaignsNatsRequest = exports.FindAllCampaignsNatsRequest = exports.LoyaltyCampaignNatsResponse = exports.CampaignTracking = exports.UpdateCampaignNatsRequest = exports.CreateCampaignNatsRequest = exports.CampaignConditionsNatsRequest = exports.CampaignRulesNatsRequest = exports.CampaignStatus = exports.CampaignType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -722,6 +722,27 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Transaction amount for calculation' }),
     __metadata("design:type", Number)
 ], ApplyCampaignNatsRequest.prototype, "transactionAmount", void 0);
+/**
+ * Apply Campaign Response Data
+ */
+class ApplyCampaignData {
+    success;
+    pointsAwarded;
+    message;
+}
+exports.ApplyCampaignData = ApplyCampaignData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether campaign was applied successfully' }),
+    __metadata("design:type", Boolean)
+], ApplyCampaignData.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of points awarded' }),
+    __metadata("design:type", Number)
+], ApplyCampaignData.prototype, "pointsAwarded", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Result message' }),
+    __metadata("design:type", String)
+], ApplyCampaignData.prototype, "message", void 0);
 /**
  * Campaign Template Response
  */

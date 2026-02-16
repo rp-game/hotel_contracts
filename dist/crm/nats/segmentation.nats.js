@@ -29,7 +29,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CustomerSegmentNatsResponse = exports.SegmentStatus = exports.SegmentType = void 0;
+exports.SegmentationStatsDto = exports.SegmentPerformanceItemDto = exports.CustomerSegmentNatsResponse = exports.SegmentStatus = exports.SegmentType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Segment Type Enum
@@ -117,4 +117,58 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'User ID who created segment' }),
     __metadata("design:type", String)
 ], CustomerSegmentNatsResponse.prototype, "createdBy", void 0);
+/**
+ * Segment Performance Item
+ * Used within SegmentationStatsDto
+ */
+class SegmentPerformanceItemDto {
+    name;
+    customerCount;
+}
+exports.SegmentPerformanceItemDto = SegmentPerformanceItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Segment name' }),
+    __metadata("design:type", String)
+], SegmentPerformanceItemDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer count in segment' }),
+    __metadata("design:type", Number)
+], SegmentPerformanceItemDto.prototype, "customerCount", void 0);
+/**
+ * Segmentation Stats DTO
+ * Unified for both NATS messages and REST API responses
+ * Used by: NATS handler (crm-service), API Gateway REST endpoint
+ * Pattern: crm.segmentation.stats
+ */
+class SegmentationStatsDto {
+    totalSegments;
+    activeSegments;
+    totalSegmentedCustomers;
+    averageSegmentSize;
+    segmentPerformance;
+}
+exports.SegmentationStatsDto = SegmentationStatsDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of customer segments' }),
+    __metadata("design:type", Number)
+], SegmentationStatsDto.prototype, "totalSegments", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of active segments' }),
+    __metadata("design:type", Number)
+], SegmentationStatsDto.prototype, "activeSegments", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total customers across all segments' }),
+    __metadata("design:type", Number)
+], SegmentationStatsDto.prototype, "totalSegmentedCustomers", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Average segment size' }),
+    __metadata("design:type", Number)
+], SegmentationStatsDto.prototype, "averageSegmentSize", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Top segment performance metrics',
+        type: [SegmentPerformanceItemDto]
+    }),
+    __metadata("design:type", Array)
+], SegmentationStatsDto.prototype, "segmentPerformance", void 0);
 //# sourceMappingURL=segmentation.nats.js.map

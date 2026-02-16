@@ -300,13 +300,17 @@ export declare class ApplyCampaignNatsRequest {
     transactionAmount: number;
 }
 /**
- * Apply Campaign Response
+ * Apply Campaign Response Data
  */
-export type ApplyCampaignNatsResponse = NatsResponse<{
+export declare class ApplyCampaignData {
     success: boolean;
     pointsAwarded: number;
     message: string;
-}>;
+}
+/**
+ * Apply Campaign Response
+ */
+export type ApplyCampaignNatsResponse = NatsResponse<ApplyCampaignData>;
 /**
  * Campaign Template Response
  */
