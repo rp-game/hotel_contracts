@@ -37,7 +37,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnalyticsComparisonResponseDto = exports.ComprehensiveAnalyticsResponseDto = exports.RoomSuggestionDto = exports.RoomSuggestionNextBookingDto = exports.RoomSuggestionFeaturesDto = exports.GetOptimizedRoomAssignmentRequest = exports.RoomTimelineItem = exports.TimelineEvent = void 0;
+exports.AnalyticsComparisonResponseDto = exports.ComprehensiveAnalyticsResponseDto = exports.RoomSuggestionDto = exports.RoomSuggestionNextBookingDto = exports.RoomSuggestionFeaturesDto = exports.GetOptimizedRoomAssignmentRequest = exports.RoomBookingAvailability = exports.ConflictInfo = exports.RoomTimelineItem = exports.TimelineEvent = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -175,6 +175,52 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Additional notes', type: String, nullable: true }),
     __metadata("design:type", Object)
 ], RoomTimelineItem.prototype, "notes", void 0);
+class ConflictInfo {
+    type;
+    startDate;
+    endDate;
+    description;
+    bookingId;
+}
+exports.ConflictInfo = ConflictInfo;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Conflict type (booking, maintenance, cleaning, block)', example: 'booking' }),
+    __metadata("design:type", String)
+], ConflictInfo.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Conflict start date (ISO datetime)', example: '2026-02-20T15:00:00.000Z' }),
+    __metadata("design:type", String)
+], ConflictInfo.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Conflict end date (ISO datetime)', example: '2026-02-22T11:00:00.000Z' }),
+    __metadata("design:type", String)
+], ConflictInfo.prototype, "endDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Human-readable conflict description', example: 'Room already booked' }),
+    __metadata("design:type", String)
+], ConflictInfo.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking ID causing the conflict', example: 'uuid-booking-456' }),
+    __metadata("design:type", String)
+], ConflictInfo.prototype, "bookingId", void 0);
+class RoomBookingAvailability {
+    roomId;
+    available;
+    conflicts;
+}
+exports.RoomBookingAvailability = RoomBookingAvailability;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room ID', example: 'uuid-room-123' }),
+    __metadata("design:type", String)
+], RoomBookingAvailability.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether the room is available for the requested period', example: true }),
+    __metadata("design:type", Boolean)
+], RoomBookingAvailability.prototype, "available", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'List of conflicts preventing availability', type: [ConflictInfo] }),
+    __metadata("design:type", Array)
+], RoomBookingAvailability.prototype, "conflicts", void 0);
 /**
  * Get Optimized Room Assignment Request
  * Pattern: rooms.assignment.optimize

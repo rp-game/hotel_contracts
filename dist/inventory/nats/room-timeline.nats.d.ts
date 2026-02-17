@@ -231,13 +231,14 @@ export interface CheckRoomAvailabilityTimelineRequest {
     checkIn: string;
     checkOut: string;
 }
-export interface ConflictInfo {
+export declare class ConflictInfo {
     type: string;
     startDate: string;
     endDate: string;
     description: string;
+    bookingId?: string;
 }
-export interface RoomBookingAvailability {
+export declare class RoomBookingAvailability {
     roomId: string;
     available: boolean;
     conflicts: ConflictInfo[];

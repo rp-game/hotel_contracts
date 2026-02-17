@@ -299,16 +299,31 @@ export interface CheckRoomAvailabilityTimelineRequest {
   checkOut: string; // YYYY-MM-DD
 }
 
-export interface ConflictInfo {
+export class ConflictInfo {
+  @ApiProperty({ description: 'Conflict type (booking, maintenance, cleaning, block)', example: 'booking' })
   type: string;
+
+  @ApiProperty({ description: 'Conflict start date (ISO datetime)', example: '2026-02-20T15:00:00.000Z' })
   startDate: string;
+
+  @ApiProperty({ description: 'Conflict end date (ISO datetime)', example: '2026-02-22T11:00:00.000Z' })
   endDate: string;
+
+  @ApiProperty({ description: 'Human-readable conflict description', example: 'Room already booked' })
   description: string;
+
+  @ApiPropertyOptional({ description: 'Booking ID causing the conflict', example: 'uuid-booking-456' })
+  bookingId?: string;
 }
 
-export interface RoomBookingAvailability {
+export class RoomBookingAvailability {
+  @ApiProperty({ description: 'Room ID', example: 'uuid-room-123' })
   roomId: string;
+
+  @ApiProperty({ description: 'Whether the room is available for the requested period', example: true })
   available: boolean;
+
+  @ApiProperty({ description: 'List of conflicts preventing availability', type: [ConflictInfo] })
   conflicts: ConflictInfo[];
 }
 
