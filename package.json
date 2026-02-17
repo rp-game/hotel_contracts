@@ -1,6 +1,6 @@
 {
   "name": "@hotel/contracts",
-  "version": "0.1.330",
+  "version": "0.1.331",
   "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -221,6 +221,10 @@
       "types": "./dist/report/index.d.ts",
       "default": "./dist/report/index.js"
     },
+    "./report/nats": {
+      "types": "./dist/report/nats/index.d.ts",
+      "default": "./dist/report/nats/index.js"
+    },
     "./platform": {
       "types": "./dist/platform/index.d.ts",
       "default": "./dist/platform/index.js"
@@ -428,6 +432,9 @@
       ],
       "report": [
         "dist/report/index.d.ts"
+      ],
+      "report/nats": [
+        "dist/report/nats/index.d.ts"
       ],
       "platform": [
         "dist/platform/index.d.ts"
