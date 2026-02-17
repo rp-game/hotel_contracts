@@ -9,55 +9,35 @@ import { NatsResponse } from '../../common/nats-response.interface';
  * Request payload for payment.onepay.create pattern
  * Used to initiate a OnePay payment and get payment URL
  */
-export interface CreateOnePayPaymentRequest {
-    /** Tenant ID (required) */
-    tenantId: string;
-    /** Hotel ID (required) */
-    hotelId: string;
-    /** Chain ID - for multi-level gateway config resolution */
+export declare class CreateOnePayPaymentRequest {
+    tenantId?: string;
+    hotelId?: string;
     chainId?: string;
-    /** Booking ID reference (optional) */
     bookingId?: string;
-    /** Payment amount in smallest unit (e.g., VND) */
     amount: number;
-    /** Currency code (default: VND) */
     currency: string;
-    /** Customer information */
-    customerInfo: {
-        /** Customer email (required) */
-        email: string;
-        /** Customer full name (required) */
-        name: string;
-        /** Customer phone number (optional) */
-        phone?: string;
-    };
-    /** Order description/invoice info */
+    customerInfo: CustomerInfo;
     orderInfo: string;
-    /** URL where customer is redirected after payment */
     returnUrl: string;
-    /** Client IP address for fraud detection */
     ipAddress?: string;
-    /** Additional metadata to store with payment */
     metadata?: Record<string, any>;
+}
+declare class CustomerInfo {
+    email: string;
+    name: string;
+    phone?: string;
 }
 /**
  * Response payload for payment.onepay.create pattern
  * Contains payment URL and transaction details
  */
-export interface CreateOnePayPaymentResponse {
-    /** Internal payment ID for tracking */
+export declare class CreateOnePayPaymentResponse {
     paymentId: string;
-    /** OnePay transaction reference */
     transactionId: string;
-    /** OnePay payment gateway URL - redirect customer to this */
     paymentUrl: string;
-    /** Payment amount */
     amount: number;
-    /** Currency code */
     currency: string;
-    /** When this payment URL expires (ISO 8601) */
     expiresAt: string;
-    /** When payment record was created (ISO 8601) */
     createdAt: string;
 }
 /**
@@ -275,4 +255,5 @@ export declare class GetOnePayPaymentStatusData {
  * Pattern: payment.onepay.paymentStatus
  */
 export type GetOnePayPaymentStatusNatsResponse = NatsResponse<GetOnePayPaymentStatusData>;
+export {};
 //# sourceMappingURL=onepay.nats.d.ts.map

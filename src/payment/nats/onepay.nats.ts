@@ -6,81 +6,122 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNumber, IsOptional, IsObject } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsObject, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 /**
  * Request payload for payment.onepay.create pattern
  * Used to initiate a OnePay payment and get payment URL
  */
-export interface CreateOnePayPaymentRequest {
-  /** Tenant ID (required) */
-  tenantId: string;
+export class CreateOnePayPaymentRequest {
+  @ApiPropertyOptional({ description: 'Tenant ID (resolved from JWT if omitted)', example: 'tenant-uuid' })
+  @IsOptional()
+  @IsString()
+  tenantId?: string;
 
-  /** Hotel ID (required) */
-  hotelId: string;
+  @ApiPropertyOptional({ description: 'Hotel ID (resolved from JWT if omitted)', example: 'hotel-uuid' })
+  @IsOptional()
+  @IsString()
+  hotelId?: string;
 
-  /** Chain ID - for multi-level gateway config resolution */
+  @ApiPropertyOptional({ description: 'Chain ID for multi-level gateway config', example: 'chain-uuid' })
+  @IsOptional()
+  @IsString()
   chainId?: string;
 
-  /** Booking ID reference (optional) */
+  @ApiPropertyOptional({ description: 'Booking ID reference', example: 'booking-uuid' })
+  @IsOptional()
+  @IsString()
   bookingId?: string;
 
-  /** Payment amount in smallest unit (e.g., VND) */
+  @ApiProperty({ description: 'Payment amount in VND', example: 5000000 })
+  @IsNumber()
   amount: number;
 
-  /** Currency code (default: VND) */
+  @ApiProperty({ description: 'Currency code', example: 'VND' })
+  @IsString()
   currency: string;
 
-  /** Customer information */
-  customerInfo: {
-    /** Customer email (required) */
-    email: string;
+  @ApiProperty({
+    description: 'Customer information',
+    type: 'object',
+    properties: {
+      email: { type: 'string', example: 'customer@example.com' },
+      name: { type: 'string', example: 'John Doe' },
+      phone: { type: 'string', example: '+84912345678' },
+    },
+  })
+  @IsObject()
+  @ValidateNested()
+  @Type(() => CustomerInfo)
+  customerInfo: CustomerInfo;
 
-    /** Customer full name (required) */
-    name: string;
-
-    /** Customer phone number (optional) */
-    phone?: string;
-  };
-
-  /** Order description/invoice info */
+  @ApiProperty({ description: 'Order/Invoice description', example: 'Thanh toán phòng khách sạn' })
+  @IsString()
   orderInfo: string;
 
-  /** URL where customer is redirected after payment */
+  @ApiProperty({ description: 'URL to redirect customer after payment', example: 'https://app.example.com/callback' })
+  @IsString()
   returnUrl: string;
 
-  /** Client IP address for fraud detection */
+  @ApiPropertyOptional({ description: 'Client IP address for fraud detection', example: '192.168.1.1' })
+  @IsOptional()
+  @IsString()
   ipAddress?: string;
 
-  /** Additional metadata to store with payment */
+  @ApiPropertyOptional({ description: 'Additional metadata to store with payment', type: 'object', additionalProperties: true })
+  @IsOptional()
+  @IsObject()
   metadata?: Record<string, any>;
+}
+
+class CustomerInfo {
+  @ApiProperty({ description: 'Customer email', example: 'customer@example.com' })
+  @IsString()
+  email: string;
+
+  @ApiProperty({ description: 'Customer full name', example: 'John Doe' })
+  @IsString()
+  name: string;
+
+  @ApiPropertyOptional({ description: 'Customer phone number', example: '+84912345678' })
+  @IsOptional()
+  @IsString()
+  phone?: string;
 }
 
 /**
  * Response payload for payment.onepay.create pattern
  * Contains payment URL and transaction details
  */
-export interface CreateOnePayPaymentResponse {
-  /** Internal payment ID for tracking */
+export class CreateOnePayPaymentResponse {
+  @ApiProperty({ description: 'Internal payment ID for tracking', example: 'pay-uuid' })
+  @IsString()
   paymentId: string;
 
-  /** OnePay transaction reference */
+  @ApiProperty({ description: 'OnePay transaction reference', example: 'txn-123456' })
+  @IsString()
   transactionId: string;
 
-  /** OnePay payment gateway URL - redirect customer to this */
+  @ApiProperty({ description: 'OnePay payment gateway URL - redirect customer to this', example: 'https://onepay.vn/pay?...' })
+  @IsString()
   paymentUrl: string;
 
-  /** Payment amount */
+  @ApiProperty({ description: 'Payment amount', example: 5000000 })
+  @IsNumber()
   amount: number;
 
-  /** Currency code */
+  @ApiProperty({ description: 'Currency code', example: 'VND' })
+  @IsString()
   currency: string;
 
-  /** When this payment URL expires (ISO 8601) */
+  @ApiProperty({ description: 'When this payment URL expires (ISO 8601)', example: '2026-02-17T10:15:00Z' })
+  @IsString()
   expiresAt: string;
 
-  /** When payment record was created (ISO 8601) */
+  @ApiProperty({ description: 'When payment record was created (ISO 8601)', example: '2026-02-17T10:00:00Z' })
+  @IsString()
   createdAt: string;
 }
 

@@ -15,9 +15,169 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetOnePayPaymentStatusData = exports.GetOnePayPaymentStatusNatsRequest = exports.VerifyOnePayPaymentResponse = exports.VerifyOnePayPaymentRequest = void 0;
+exports.GetOnePayPaymentStatusData = exports.GetOnePayPaymentStatusNatsRequest = exports.VerifyOnePayPaymentResponse = exports.VerifyOnePayPaymentRequest = exports.CreateOnePayPaymentResponse = exports.CreateOnePayPaymentRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
+/**
+ * Request payload for payment.onepay.create pattern
+ * Used to initiate a OnePay payment and get payment URL
+ */
+class CreateOnePayPaymentRequest {
+    tenantId;
+    hotelId;
+    chainId;
+    bookingId;
+    amount;
+    currency;
+    customerInfo;
+    orderInfo;
+    returnUrl;
+    ipAddress;
+    metadata;
+}
+exports.CreateOnePayPaymentRequest = CreateOnePayPaymentRequest;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID (resolved from JWT if omitted)', example: 'tenant-uuid' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (resolved from JWT if omitted)', example: 'hotel-uuid' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Chain ID for multi-level gateway config', example: 'chain-uuid' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentRequest.prototype, "chainId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking ID reference', example: 'booking-uuid' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentRequest.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Payment amount in VND', example: 5000000 }),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateOnePayPaymentRequest.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Currency code', example: 'VND' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentRequest.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Customer information',
+        type: 'object',
+        properties: {
+            email: { type: 'string', example: 'customer@example.com' },
+            name: { type: 'string', example: 'John Doe' },
+            phone: { type: 'string', example: '+84912345678' },
+        },
+    }),
+    (0, class_validator_1.IsObject)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => CustomerInfo),
+    __metadata("design:type", CustomerInfo)
+], CreateOnePayPaymentRequest.prototype, "customerInfo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Order/Invoice description', example: 'Thanh toán phòng khách sạn' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentRequest.prototype, "orderInfo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'URL to redirect customer after payment', example: 'https://app.example.com/callback' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentRequest.prototype, "returnUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Client IP address for fraud detection', example: '192.168.1.1' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentRequest.prototype, "ipAddress", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional metadata to store with payment', type: 'object', additionalProperties: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], CreateOnePayPaymentRequest.prototype, "metadata", void 0);
+class CustomerInfo {
+    email;
+    name;
+    phone;
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer email', example: 'customer@example.com' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CustomerInfo.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer full name', example: 'John Doe' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CustomerInfo.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer phone number', example: '+84912345678' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CustomerInfo.prototype, "phone", void 0);
+/**
+ * Response payload for payment.onepay.create pattern
+ * Contains payment URL and transaction details
+ */
+class CreateOnePayPaymentResponse {
+    paymentId;
+    transactionId;
+    paymentUrl;
+    amount;
+    currency;
+    expiresAt;
+    createdAt;
+}
+exports.CreateOnePayPaymentResponse = CreateOnePayPaymentResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Internal payment ID for tracking', example: 'pay-uuid' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentResponse.prototype, "paymentId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'OnePay transaction reference', example: 'txn-123456' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentResponse.prototype, "transactionId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'OnePay payment gateway URL - redirect customer to this', example: 'https://onepay.vn/pay?...' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentResponse.prototype, "paymentUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Payment amount', example: 5000000 }),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateOnePayPaymentResponse.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Currency code', example: 'VND' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentResponse.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'When this payment URL expires (ISO 8601)', example: '2026-02-17T10:15:00Z' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentResponse.prototype, "expiresAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'When payment record was created (ISO 8601)', example: '2026-02-17T10:00:00Z' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateOnePayPaymentResponse.prototype, "createdAt", void 0);
 /**
  * Request payload for payment.onepay.verify pattern
  * Used to verify OnePay callback parameters and update payment status
