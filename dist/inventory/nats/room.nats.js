@@ -121,11 +121,11 @@ __decorate([
     __metadata("design:type", Number)
 ], RoomStatusByDateResponse.prototype, "totalRooms", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Status breakdown by category', type: RoomStatusBreakdown }),
+    (0, swagger_1.ApiProperty)({ description: 'Status breakdown by category', type: () => RoomStatusBreakdown }),
     __metadata("design:type", RoomStatusBreakdown)
 ], RoomStatusByDateResponse.prototype, "statusBreakdown", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'List of rooms with their current status', type: [RoomStatusRoomItem] }),
+    (0, swagger_1.ApiProperty)({ description: 'List of rooms with their current status', type: () => [RoomStatusRoomItem] }),
     __metadata("design:type", Array)
 ], RoomStatusByDateResponse.prototype, "rooms", void 0);
 //# sourceMappingURL=room.nats.js.map

@@ -96,11 +96,11 @@ __decorate([
     __metadata("design:type", Number)
 ], ServiceBookingStatsData.prototype, "averageRating", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Booking count grouped by status', type: [BookingStatusCount] }),
+    (0, swagger_1.ApiProperty)({ description: 'Booking count grouped by status', type: () => [BookingStatusCount] }),
     __metadata("design:type", Array)
 ], ServiceBookingStatsData.prototype, "bookingsByStatus", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Booking count grouped by service name', type: [ServiceBookingCount] }),
+    (0, swagger_1.ApiProperty)({ description: 'Booking count grouped by service name', type: () => [ServiceBookingCount] }),
     __metadata("design:type", Array)
 ], ServiceBookingStatsData.prototype, "bookingsByService", void 0);
 //# sourceMappingURL=service-booking-stats.nats.js.map

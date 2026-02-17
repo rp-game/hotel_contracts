@@ -164,10 +164,10 @@ export class RoomStatusByDateResponse {
   @ApiProperty({ description: 'Total number of rooms', example: 20 })
   totalRooms: number;
 
-  @ApiProperty({ description: 'Status breakdown by category', type: RoomStatusBreakdown })
+  @ApiProperty({ description: 'Status breakdown by category', type: () => RoomStatusBreakdown })
   statusBreakdown: RoomStatusBreakdown;
 
-  @ApiProperty({ description: 'List of rooms with their current status', type: [RoomStatusRoomItem] })
+  @ApiProperty({ description: 'List of rooms with their current status', type: () => [RoomStatusRoomItem] })
   rooms: RoomStatusRoomItem[];
 }
 

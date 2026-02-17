@@ -60,10 +60,10 @@ export class ServiceBookingStatsData {
   @ApiProperty({ description: 'Average service rating (0-5)', example: 4.2 })
   averageRating: number;
 
-  @ApiProperty({ description: 'Booking count grouped by status', type: [BookingStatusCount] })
+  @ApiProperty({ description: 'Booking count grouped by status', type: () => [BookingStatusCount] })
   bookingsByStatus: BookingStatusCount[];
 
-  @ApiProperty({ description: 'Booking count grouped by service name', type: [ServiceBookingCount] })
+  @ApiProperty({ description: 'Booking count grouped by service name', type: () => [ServiceBookingCount] })
   bookingsByService: ServiceBookingCount[];
 }
 
