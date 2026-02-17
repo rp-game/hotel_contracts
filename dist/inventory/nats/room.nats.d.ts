@@ -109,27 +109,23 @@ export interface GetRoomStatusByDateRequest {
         limit?: number;
     };
 }
-export interface RoomStatusDetail {
-    roomId: string;
+export declare class RoomStatusBreakdown {
+    available: number;
+    occupied: number;
+    maintenance: number;
+    cleaning: number;
+}
+export declare class RoomStatusRoomItem {
+    id: string;
     roomNumber: string;
     status: string;
-    floor: number;
+    roomType: string;
 }
-export interface RoomStatusByDateResponse {
+export declare class RoomStatusByDateResponse {
     date: string;
     totalRooms: number;
-    statusBreakdown: {
-        available: number;
-        occupied: number;
-        maintenance: number;
-        cleaning: number;
-    };
-    rooms: {
-        id: string;
-        roomNumber: string;
-        status: string;
-        roomType: string;
-    }[];
+    statusBreakdown: RoomStatusBreakdown;
+    rooms: RoomStatusRoomItem[];
 }
 export type GetRoomStatusByDateResponse = RoomStatusByDateResponse;
 export type GetRoomStatusByDateNatsResponse = NatsResponse<GetRoomStatusByDateResponse>;

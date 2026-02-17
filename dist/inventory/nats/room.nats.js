@@ -27,7 +27,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FindAllRoomsResponse = exports.PaginatedRoomsResponse = void 0;
+exports.RoomStatusByDateResponse = exports.RoomStatusRoomItem = exports.RoomStatusBreakdown = exports.FindAllRoomsResponse = exports.PaginatedRoomsResponse = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const types_1 = require("../types");
 class PaginatedRoomsResponse {
@@ -59,4 +59,73 @@ __decorate([
 class FindAllRoomsResponse extends PaginatedRoomsResponse {
 }
 exports.FindAllRoomsResponse = FindAllRoomsResponse;
+class RoomStatusBreakdown {
+    available;
+    occupied;
+    maintenance;
+    cleaning;
+}
+exports.RoomStatusBreakdown = RoomStatusBreakdown;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of available rooms', example: 10 }),
+    __metadata("design:type", Number)
+], RoomStatusBreakdown.prototype, "available", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of occupied rooms', example: 5 }),
+    __metadata("design:type", Number)
+], RoomStatusBreakdown.prototype, "occupied", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of rooms under maintenance', example: 2 }),
+    __metadata("design:type", Number)
+], RoomStatusBreakdown.prototype, "maintenance", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of rooms being cleaned', example: 3 }),
+    __metadata("design:type", Number)
+], RoomStatusBreakdown.prototype, "cleaning", void 0);
+class RoomStatusRoomItem {
+    id;
+    roomNumber;
+    status;
+    roomType;
+}
+exports.RoomStatusRoomItem = RoomStatusRoomItem;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room ID (UUID)', example: 'uuid-room-123' }),
+    __metadata("design:type", String)
+], RoomStatusRoomItem.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room number', example: '101' }),
+    __metadata("design:type", String)
+], RoomStatusRoomItem.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room status', example: 'AVAILABLE' }),
+    __metadata("design:type", String)
+], RoomStatusRoomItem.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type name', example: 'Deluxe' }),
+    __metadata("design:type", String)
+], RoomStatusRoomItem.prototype, "roomType", void 0);
+class RoomStatusByDateResponse {
+    date;
+    totalRooms;
+    statusBreakdown;
+    rooms;
+}
+exports.RoomStatusByDateResponse = RoomStatusByDateResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Date for status report (YYYY-MM-DD)', example: '2026-02-17' }),
+    __metadata("design:type", String)
+], RoomStatusByDateResponse.prototype, "date", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of rooms', example: 20 }),
+    __metadata("design:type", Number)
+], RoomStatusByDateResponse.prototype, "totalRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Status breakdown by category', type: RoomStatusBreakdown }),
+    __metadata("design:type", RoomStatusBreakdown)
+], RoomStatusByDateResponse.prototype, "statusBreakdown", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'List of rooms with their current status', type: [RoomStatusRoomItem] }),
+    __metadata("design:type", Array)
+], RoomStatusByDateResponse.prototype, "rooms", void 0);
 //# sourceMappingURL=room.nats.js.map

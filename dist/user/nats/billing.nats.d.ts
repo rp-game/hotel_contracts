@@ -1,9 +1,133 @@
 /**
  * Billing Service NATS Message Types
- * All billing-related NATS message payloads
+ * All billing-related NATS message payloads and response DTOs
  * Exported from user-service
+ *
+ * Conventions:
+ * - *Payload classes: NATS request messages
+ * - *ResponseDto classes: NATS response data (also used as REST response DTOs)
+ * - All classes use @ApiProperty for Swagger + OpenAPI generation
  */
-export interface CreateSubscriptionPayload {
+export declare enum SubscriptionPlan {
+    BASIC = "BASIC",
+    PREMIUM = "PREMIUM",
+    ENTERPRISE = "ENTERPRISE"
+}
+export declare enum SubscriptionStatus {
+    ACTIVE = "ACTIVE",
+    PAST_DUE = "PAST_DUE",
+    CANCELED = "CANCELED",
+    TRIALING = "TRIALING",
+    PAUSED = "PAUSED",
+    INCOMPLETE = "INCOMPLETE",
+    INCOMPLETE_EXPIRED = "INCOMPLETE_EXPIRED",
+    UNPAID = "UNPAID"
+}
+export declare enum BillingCycle {
+    MONTHLY = "MONTHLY",
+    ANNUAL = "ANNUAL"
+}
+export declare enum PlanTemplateStatus {
+    ACTIVE = "ACTIVE",
+    INACTIVE = "INACTIVE",
+    ARCHIVED = "ARCHIVED"
+}
+export declare class SubscriptionTenantDto {
+    id: string;
+    name: string;
+    domain?: string;
+}
+export declare class SubscriptionResponseDto {
+    id: string;
+    tenantId: string;
+    tenant?: SubscriptionTenantDto;
+    plan: SubscriptionPlan;
+    status: SubscriptionStatus;
+    billingCycle: BillingCycle;
+    monthlyPrice: number;
+    annualPrice: number;
+    currentPrice: number;
+    hotelLimit: number;
+    roomLimit: number;
+    userLimit: number;
+    advancedReporting: boolean;
+    apiAccess: boolean;
+    whiteLabel: boolean;
+    emailSupport: boolean;
+    phoneSupport: boolean;
+    prioritySupport: boolean;
+    currentPeriodStart?: string;
+    currentPeriodEnd?: string;
+    trialEndsAt?: string;
+    canceledAt?: string;
+    cancelAtPeriodEnd?: boolean;
+    createdAt: string;
+    updatedAt: string;
+}
+export declare class SubscriptionListResponseDto {
+    subscriptions: SubscriptionResponseDto[];
+    total: number;
+    page: number;
+    limit: number;
+}
+export declare class PlanTemplateResponseDto {
+    id: string;
+    planType: string;
+    name: string;
+    description?: string;
+    monthlyPrice: number;
+    annualPrice: number;
+    hotelLimit: number;
+    roomLimit: number;
+    userLimit: number;
+    advancedReporting: boolean;
+    apiAccess: boolean;
+    whiteLabel: boolean;
+    emailSupport: boolean;
+    phoneSupport: boolean;
+    prioritySupport: boolean;
+    features?: string;
+    displayOrder: number;
+    isPopular?: boolean;
+    status: PlanTemplateStatus;
+    createdAt: string;
+    updatedAt: string;
+}
+export declare class SubscriptionAnalyticsOverviewDto {
+    totalSubscriptions: number;
+    activeSubscriptions: number;
+    cancelledSubscriptions: number;
+    pastDueSubscriptions: number;
+    trialingSubscriptions: number;
+}
+export declare class PlanDistributionDto {
+    plan: string;
+    count: number;
+}
+export declare class SubscriptionRevenueDto {
+    monthlyRecurring: number;
+    annualRecurring: number;
+    totalMRR: number;
+}
+export declare class SubscriptionAnalyticsDto {
+    overview: SubscriptionAnalyticsOverviewDto;
+    planDistribution: PlanDistributionDto[];
+    revenue: SubscriptionRevenueDto;
+}
+export declare class RevenueDataPointDto {
+    totalRevenue: string;
+    subscriptionCount: string;
+    billingCycle: string;
+}
+export declare class RevenueAnalyticsDto {
+    period: {
+        startDate?: string;
+        endDate?: string;
+        groupBy: string;
+    };
+    revenue: RevenueDataPointDto[];
+}
+export declare class CreateSubscriptionPayload {
     tenantId: string;
     plan: string;
     billingCycle: string;
@@ -11,69 +135,82 @@ export interface CreateSubscriptionPayload {
     stripePriceId?: string;
     trialEndsAt?: string;
 }
-export interface GetSubscriptionPayload {
+export declare class GetSubscriptionPayload {
     tenantId?: string;
     subscriptionId?: string;
 }
-export interface UpdateSubscriptionPayload {
+export declare class UpdateSubscriptionPayload {
     subscriptionId: string;
-    [key: string]: any;
+    status?: SubscriptionStatus;
+    plan?: SubscriptionPlan;
+    billingCycle?: BillingCycle;
+    hotelLimit?: number;
+    roomLimit?: number;
+    userLimit?: number;
+    advancedReporting?: boolean;
+    apiAccess?: boolean;
+    whiteLabel?: boolean;
+    cancelAtPeriodEnd?: boolean;
 }
-export interface ChangePlanPayload {
+export declare class ChangePlanPayload {
     subscriptionId: string;
     newPlan: string;
     newBillingCycle?: string;
     immediate?: boolean;
 }
-export interface CancelSubscriptionPayload {
+export declare class CancelSubscriptionPayload {
     subscriptionId: string;
     cancelAtPeriodEnd?: boolean;
     reason?: string;
 }
-export interface ReactivateSubscriptionPayload {
+export declare class ReactivateSubscriptionPayload {
     subscriptionId: string;
 }
-export interface ListSubscriptionsPayload {
+export declare class ListSubscriptionsPayload {
+    tenantId?: string;
     status?: string;
+    plan?: string;
+    page?: number;
+    limit?: number;
 }
-export interface TrackUsagePayload {
+export declare class TrackUsagePayload {
     tenantId: string;
     metric: string;
     quantity: number;
     metadata?: object;
 }
-export interface GetUsagePayload {
+export declare class GetUsagePayload {
     tenantId: string;
     metric?: string;
     period?: string;
 }
-export interface CheckLimitsPayload {
+export declare class CheckLimitsPayload {
     tenantId: string;
     metric: string;
 }
-export interface EnforceLimitsPayload {
+export declare class EnforceLimitsPayload {
     tenantId: string;
     metric: string;
     currentUsage: number;
 }
-export interface CreatePaymentMethodPayload {
+export declare class CreatePaymentMethodPayload {
     subscriptionId: string;
     type: string;
     stripePaymentMethodId?: string;
     isDefault?: boolean;
     billingInfo?: object;
 }
-export interface GetPaymentMethodsPayload {
+export declare class GetPaymentMethodsPayload {
     subscriptionId: string;
 }
-export interface SetDefaultPaymentMethodPayload {
+export declare class SetDefaultPaymentMethodPayload {
     subscriptionId: string;
     paymentMethodId: string;
 }
-export interface DeletePaymentMethodPayload {
+export declare class DeletePaymentMethodPayload {
     paymentMethodId: string;
 }
-export interface CreateInvoicePayload {
+export declare class CreateInvoicePayload {
     subscriptionId: string;
     type: string;
     periodStart: string;
@@ -82,10 +219,10 @@ export interface CreateInvoicePayload {
     dueDate?: string;
     taxRate?: number;
 }
-export interface GetInvoicePayload {
+export declare class GetInvoicePayload {
     invoiceId: string;
 }
-export interface ListInvoicesPayload {
+export declare class ListInvoicesPayload {
     subscriptionId?: string;
     status?: string;
     type?: string;
@@ -94,38 +231,38 @@ export interface ListInvoicesPayload {
     page?: number;
     limit?: number;
 }
-export interface PayInvoicePayload {
+export declare class PayInvoicePayload {
     invoiceId: string;
     paymentMethod: string;
     amountPaid: number;
 }
-export interface InvoicePaymentFailedPayload {
+export declare class InvoicePaymentFailedPayload {
     invoiceId: string;
     failureReason: string;
 }
-export interface StripeSubscriptionUpdatedPayload {
+export declare class StripeSubscriptionUpdatedPayload {
     stripeSubscriptionId: string;
     status: string;
     currentPeriodStart: string;
     currentPeriodEnd: string;
 }
-export interface StripeInvoicePaymentSucceededPayload {
+export declare class StripeInvoicePaymentSucceededPayload {
     stripeInvoiceId: string;
     amountPaid: number;
     paymentMethod: string;
 }
-export interface StripeInvoicePaymentFailedPayload {
+export declare class StripeInvoicePaymentFailedPayload {
     stripeInvoiceId: string;
     failureReason: string;
 }
-export interface ResourceEventPayload {
+export declare class ResourceEventPayload {
     tenantId: string;
     hotelId?: string;
     roomId?: string;
     userId?: string;
     bookingId?: string;
 }
-export interface ApiCallPayload {
+export declare class ApiCallPayload {
     tenantId: string;
     endpoint: string;
     method: string;
