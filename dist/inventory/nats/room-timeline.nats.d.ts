@@ -318,6 +318,7 @@ export declare class RoomSuggestionNextBookingDto {
 export declare class RoomSuggestionDto {
     roomId: string;
     roomNumber: string;
+    roomTypeId: string;
     roomType: string;
     floor: number;
     features: RoomSuggestionFeaturesDto;

@@ -472,6 +472,10 @@ export class RoomSuggestionDto {
   @IsString()
   roomNumber: string;
 
+  @ApiProperty({ description: 'Room type ID (UUID) — required for booking creation', example: 'uuid-roomtype-456' })
+  @IsString()
+  roomTypeId: string;
+
   @ApiProperty({ description: 'Room type name', example: 'Deluxe Ocean View' })
   @IsString()
   roomType: string;

@@ -11,21 +11,21 @@ import { NatsResponse } from '../../common';
 /**
  * Booking status breakdown
  */
-export interface BookingStatusCount {
+export declare class BookingStatusCount {
     status: string;
     count: number;
 }
 /**
  * Service booking count
  */
-export interface ServiceBookingCount {
+export declare class ServiceBookingCount {
     serviceName: string;
     count: number;
 }
 /**
  * Service booking statistics data
  */
-export interface ServiceBookingStatsData {
+export declare class ServiceBookingStatsData {
     totalBookings: number;
     confirmedBookings: number;
     completedBookings: number;

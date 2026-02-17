@@ -358,6 +358,7 @@ __decorate([
 class RoomSuggestionDto {
     roomId;
     roomNumber;
+    roomTypeId;
     roomType;
     floor;
     features;
@@ -381,6 +382,11 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], RoomSuggestionDto.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type ID (UUID) — required for booking creation', example: 'uuid-roomtype-456' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomSuggestionDto.prototype, "roomTypeId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Room type name', example: 'Deluxe Ocean View' }),
     (0, class_validator_1.IsString)(),

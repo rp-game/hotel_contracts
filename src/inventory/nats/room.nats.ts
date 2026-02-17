@@ -129,28 +129,46 @@ export interface GetRoomStatusByDateRequest {
   pagination?: { page?: number; limit?: number };
 }
 
-export interface RoomStatusDetail {
-  roomId: string;
-  roomNumber: string;
-  status: string;
-  floor: number;
+export class RoomStatusBreakdown {
+  @ApiProperty({ description: 'Number of available rooms', example: 10 })
+  available: number;
+
+  @ApiProperty({ description: 'Number of occupied rooms', example: 5 })
+  occupied: number;
+
+  @ApiProperty({ description: 'Number of rooms under maintenance', example: 2 })
+  maintenance: number;
+
+  @ApiProperty({ description: 'Number of rooms being cleaned', example: 3 })
+  cleaning: number;
 }
 
-export interface RoomStatusByDateResponse {
+export class RoomStatusRoomItem {
+  @ApiProperty({ description: 'Room ID (UUID)', example: 'uuid-room-123' })
+  id: string;
+
+  @ApiProperty({ description: 'Room number', example: '101' })
+  roomNumber: string;
+
+  @ApiProperty({ description: 'Room status', example: 'AVAILABLE' })
+  status: string;
+
+  @ApiProperty({ description: 'Room type name', example: 'Deluxe' })
+  roomType: string;
+}
+
+export class RoomStatusByDateResponse {
+  @ApiProperty({ description: 'Date for status report (YYYY-MM-DD)', example: '2026-02-17' })
   date: string;
+
+  @ApiProperty({ description: 'Total number of rooms', example: 20 })
   totalRooms: number;
-  statusBreakdown: {
-    available: number;
-    occupied: number;
-    maintenance: number;
-    cleaning: number;
-  };
-  rooms: {
-    id: string;
-    roomNumber: string;
-    status: string;
-    roomType: string;
-  }[];
+
+  @ApiProperty({ description: 'Status breakdown by category', type: RoomStatusBreakdown })
+  statusBreakdown: RoomStatusBreakdown;
+
+  @ApiProperty({ description: 'List of rooms with their current status', type: [RoomStatusRoomItem] })
+  rooms: RoomStatusRoomItem[];
 }
 
 export type GetRoomStatusByDateResponse = RoomStatusByDateResponse;
