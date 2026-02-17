@@ -274,25 +274,62 @@ export type UpdateCleaningConfigNatsResponse = NatsResponse<UpdateCleaningConfig
 /**
  * Get Optimized Room Assignment Request
  * Pattern: rooms.assignment.optimize
+ * Used for optimizing room assignments during new booking creation
  */
-export interface GetOptimizedRoomAssignmentRequest {
+export declare class GetOptimizedRoomAssignmentRequest {
     hotelId: string;
-    criteria: any;
+    checkIn: string;
+    checkOut: string;
+    guestCount: number;
+    guestPreferences?: string[];
+    roomType?: string;
 }
-export interface OptimizedAssignment {
-    recommendations: {
-        bookingId: string;
-        recommendedRoomId: string;
-        score: number;
-        reasons: string[];
-    }[];
-    summary: {
-        totalBookings: number;
-        optimizedAssignments: number;
-        improvementPercentage: number;
-    };
+/**
+ * Room physical features - typed object (replaces loose Record<string, any>)
+ * Used inside RoomSuggestionDto
+ */
+export declare class RoomSuggestionFeaturesDto {
+    view: string;
+    smoking: boolean;
+    accessibility: boolean;
+    wifi: boolean;
+    minibar: boolean;
+    balcony: boolean;
 }
-export type GetOptimizedRoomAssignmentResponse = OptimizedAssignment;
+/**
+ * Next booking info on the room - helps assess scheduling pressure
+ */
+export declare class RoomSuggestionNextBookingDto {
+    checkIn: string;
+    checkOut: string;
+    guestName: string;
+}
+/**
+ * Room suggestion item - response for rooms.assignment.optimize pattern
+ *
+ * Single source of truth for:
+ * - NATS handler (inventory-service) response
+ * - API Gateway REST @ApiResponse type → Swagger doc
+ * - OpenAPI generated TypeScript client (frontend)
+ *
+ * DO NOT define local RoomSuggestion in frontend — use generated type.
+ */
+export declare class RoomSuggestionDto {
+    roomId: string;
+    roomNumber: string;
+    roomType: string;
+    floor: number;
+    features: RoomSuggestionFeaturesDto;
+    basePrice: number;
+    discountedPrice?: number;
+    availabilityScore: number;
+    preferenceMatch: number;
+    revenueScore: number;
+    conflictRisk: 'NONE' | 'LOW' | 'MEDIUM' | 'HIGH';
+    reasons: string[];
+    nextBooking?: RoomSuggestionNextBookingDto;
+}
+export type GetOptimizedRoomAssignmentResponse = RoomSuggestionDto[];
 export type GetOptimizedRoomAssignmentNatsResponse = NatsResponse<GetOptimizedRoomAssignmentResponse>;
 /**
  * Get Room Maintenance Request

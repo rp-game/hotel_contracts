@@ -37,8 +37,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnalyticsComparisonResponseDto = exports.ComprehensiveAnalyticsResponseDto = exports.RoomTimelineItem = exports.TimelineEvent = void 0;
+exports.AnalyticsComparisonResponseDto = exports.ComprehensiveAnalyticsResponseDto = exports.RoomSuggestionDto = exports.RoomSuggestionNextBookingDto = exports.RoomSuggestionFeaturesDto = exports.GetOptimizedRoomAssignmentRequest = exports.RoomTimelineItem = exports.TimelineEvent = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
 /**
  * Timeline Event/Block DTO
  * Shared DTO for both NATS messages and REST API responses
@@ -173,6 +175,237 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Additional notes', type: String, nullable: true }),
     __metadata("design:type", Object)
 ], RoomTimelineItem.prototype, "notes", void 0);
+/**
+ * Get Optimized Room Assignment Request
+ * Pattern: rooms.assignment.optimize
+ * Used for optimizing room assignments during new booking creation
+ */
+class GetOptimizedRoomAssignmentRequest {
+    hotelId;
+    checkIn;
+    checkOut;
+    guestCount;
+    guestPreferences;
+    roomType;
+}
+exports.GetOptimizedRoomAssignmentRequest = GetOptimizedRoomAssignmentRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Hotel ID',
+        example: 'hotel-123',
+    }),
+    __metadata("design:type", String)
+], GetOptimizedRoomAssignmentRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Check-in date (ISO 8601 format)',
+        example: '2026-02-20',
+    }),
+    __metadata("design:type", String)
+], GetOptimizedRoomAssignmentRequest.prototype, "checkIn", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Check-out date (ISO 8601 format)',
+        example: '2026-02-25',
+    }),
+    __metadata("design:type", String)
+], GetOptimizedRoomAssignmentRequest.prototype, "checkOut", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Number of guests',
+        example: 2,
+    }),
+    __metadata("design:type", Number)
+], GetOptimizedRoomAssignmentRequest.prototype, "guestCount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Guest preferences for room assignment',
+        example: ['high_floor', 'view'],
+        type: [String],
+    }),
+    __metadata("design:type", Array)
+], GetOptimizedRoomAssignmentRequest.prototype, "guestPreferences", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Preferred room type',
+        example: 'DELUXE',
+    }),
+    __metadata("design:type", String)
+], GetOptimizedRoomAssignmentRequest.prototype, "roomType", void 0);
+/**
+ * Room physical features - typed object (replaces loose Record<string, any>)
+ * Used inside RoomSuggestionDto
+ */
+class RoomSuggestionFeaturesDto {
+    view;
+    smoking;
+    accessibility;
+    wifi;
+    minibar;
+    balcony;
+}
+exports.RoomSuggestionFeaturesDto = RoomSuggestionFeaturesDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room view type (e.g. sea, city, garden)', example: 'sea' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomSuggestionFeaturesDto.prototype, "view", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether room allows smoking', example: false }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], RoomSuggestionFeaturesDto.prototype, "smoking", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether room has accessibility features', example: false }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], RoomSuggestionFeaturesDto.prototype, "accessibility", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether room has WiFi', example: true }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], RoomSuggestionFeaturesDto.prototype, "wifi", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether room has minibar', example: true }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], RoomSuggestionFeaturesDto.prototype, "minibar", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether room has balcony', example: false }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], RoomSuggestionFeaturesDto.prototype, "balcony", void 0);
+/**
+ * Next booking info on the room - helps assess scheduling pressure
+ */
+class RoomSuggestionNextBookingDto {
+    checkIn;
+    checkOut;
+    guestName;
+}
+exports.RoomSuggestionNextBookingDto = RoomSuggestionNextBookingDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Next booking check-in (ISO datetime)', example: '2026-02-25T15:00:00.000Z' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomSuggestionNextBookingDto.prototype, "checkIn", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Next booking check-out (ISO datetime)', example: '2026-02-27T11:00:00.000Z' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomSuggestionNextBookingDto.prototype, "checkOut", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Guest name for next booking', example: 'Nguyen Van A' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomSuggestionNextBookingDto.prototype, "guestName", void 0);
+/**
+ * Room suggestion item - response for rooms.assignment.optimize pattern
+ *
+ * Single source of truth for:
+ * - NATS handler (inventory-service) response
+ * - API Gateway REST @ApiResponse type → Swagger doc
+ * - OpenAPI generated TypeScript client (frontend)
+ *
+ * DO NOT define local RoomSuggestion in frontend — use generated type.
+ */
+class RoomSuggestionDto {
+    roomId;
+    roomNumber;
+    roomType;
+    floor;
+    features;
+    basePrice;
+    discountedPrice;
+    availabilityScore;
+    preferenceMatch;
+    revenueScore;
+    conflictRisk;
+    reasons;
+    nextBooking;
+}
+exports.RoomSuggestionDto = RoomSuggestionDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room ID (UUID)', example: 'uuid-room-123' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomSuggestionDto.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room number displayed to user', example: '101' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomSuggestionDto.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type name', example: 'Deluxe Ocean View' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RoomSuggestionDto.prototype, "roomType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Floor number', example: 3 }),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], RoomSuggestionDto.prototype, "floor", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room physical features and amenities', type: RoomSuggestionFeaturesDto }),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => RoomSuggestionFeaturesDto),
+    __metadata("design:type", RoomSuggestionFeaturesDto)
+], RoomSuggestionDto.prototype, "features", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Base price per night (VND)', example: 1500000 }),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], RoomSuggestionDto.prototype, "basePrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Discounted price per night when promotion applies (VND)', example: 1200000 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], RoomSuggestionDto.prototype, "discountedPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Availability score 0–100 (100 = no conflicts)', example: 95 }),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], RoomSuggestionDto.prototype, "availabilityScore", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Guest preference match score 0–100 (100 = perfect match)', example: 80 }),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], RoomSuggestionDto.prototype, "preferenceMatch", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Revenue optimization score 0–100 (100 = maximizes hotel revenue)', example: 70 }),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], RoomSuggestionDto.prototype, "revenueScore", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Conflict risk level for this room in the requested period',
+        enum: ['NONE', 'LOW', 'MEDIUM', 'HIGH'],
+        example: 'NONE',
+    }),
+    (0, class_validator_1.IsEnum)(['NONE', 'LOW', 'MEDIUM', 'HIGH']),
+    __metadata("design:type", String)
+], RoomSuggestionDto.prototype, "conflictRisk", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Reasons explaining why this room is suggested',
+        type: [String],
+        example: ['Matches sea view preference', 'High availability', 'Competitive price'],
+    }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], RoomSuggestionDto.prototype, "reasons", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Next booking after requested checkout (to assess scheduling pressure)',
+        type: RoomSuggestionNextBookingDto,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => RoomSuggestionNextBookingDto),
+    __metadata("design:type", RoomSuggestionNextBookingDto)
+], RoomSuggestionDto.prototype, "nextBooking", void 0);
 /**
  * Comprehensive Analytics Response DTO
  * REST API response for GET /api/rooms/analytics/comprehensive

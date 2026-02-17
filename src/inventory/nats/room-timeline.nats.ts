@@ -28,6 +28,8 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsNumber, IsBoolean, IsOptional, IsEnum, IsArray, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common';
 
 /**
@@ -348,27 +350,175 @@ export type UpdateCleaningConfigNatsResponse = NatsResponse<UpdateCleaningConfig
 /**
  * Get Optimized Room Assignment Request
  * Pattern: rooms.assignment.optimize
+ * Used for optimizing room assignments during new booking creation
  */
-export interface GetOptimizedRoomAssignmentRequest {
+export class GetOptimizedRoomAssignmentRequest {
+  @ApiProperty({
+    description: 'Hotel ID',
+    example: 'hotel-123',
+  })
   hotelId: string;
-  criteria: any; // Assignment optimization criteria
+
+  @ApiProperty({
+    description: 'Check-in date (ISO 8601 format)',
+    example: '2026-02-20',
+  })
+  checkIn: string;
+
+  @ApiProperty({
+    description: 'Check-out date (ISO 8601 format)',
+    example: '2026-02-25',
+  })
+  checkOut: string;
+
+  @ApiProperty({
+    description: 'Number of guests',
+    example: 2,
+  })
+  guestCount: number;
+
+  @ApiPropertyOptional({
+    description: 'Guest preferences for room assignment',
+    example: ['high_floor', 'view'],
+    type: [String],
+  })
+  guestPreferences?: string[];
+
+  @ApiPropertyOptional({
+    description: 'Preferred room type',
+    example: 'DELUXE',
+  })
+  roomType?: string;
 }
 
-export interface OptimizedAssignment {
-  recommendations: {
-    bookingId: string;
-    recommendedRoomId: string;
-    score: number;
-    reasons: string[];
-  }[];
-  summary: {
-    totalBookings: number;
-    optimizedAssignments: number;
-    improvementPercentage: number;
-  };
+/**
+ * Room physical features - typed object (replaces loose Record<string, any>)
+ * Used inside RoomSuggestionDto
+ */
+export class RoomSuggestionFeaturesDto {
+  @ApiProperty({ description: 'Room view type (e.g. sea, city, garden)', example: 'sea' })
+  @IsString()
+  view: string;
+
+  @ApiProperty({ description: 'Whether room allows smoking', example: false })
+  @IsBoolean()
+  smoking: boolean;
+
+  @ApiProperty({ description: 'Whether room has accessibility features', example: false })
+  @IsBoolean()
+  accessibility: boolean;
+
+  @ApiProperty({ description: 'Whether room has WiFi', example: true })
+  @IsBoolean()
+  wifi: boolean;
+
+  @ApiProperty({ description: 'Whether room has minibar', example: true })
+  @IsBoolean()
+  minibar: boolean;
+
+  @ApiProperty({ description: 'Whether room has balcony', example: false })
+  @IsBoolean()
+  balcony: boolean;
 }
 
-export type GetOptimizedRoomAssignmentResponse = OptimizedAssignment;
+/**
+ * Next booking info on the room - helps assess scheduling pressure
+ */
+export class RoomSuggestionNextBookingDto {
+  @ApiProperty({ description: 'Next booking check-in (ISO datetime)', example: '2026-02-25T15:00:00.000Z' })
+  @IsString()
+  checkIn: string;
+
+  @ApiProperty({ description: 'Next booking check-out (ISO datetime)', example: '2026-02-27T11:00:00.000Z' })
+  @IsString()
+  checkOut: string;
+
+  @ApiProperty({ description: 'Guest name for next booking', example: 'Nguyen Van A' })
+  @IsString()
+  guestName: string;
+}
+
+/**
+ * Room suggestion item - response for rooms.assignment.optimize pattern
+ *
+ * Single source of truth for:
+ * - NATS handler (inventory-service) response
+ * - API Gateway REST @ApiResponse type → Swagger doc
+ * - OpenAPI generated TypeScript client (frontend)
+ *
+ * DO NOT define local RoomSuggestion in frontend — use generated type.
+ */
+export class RoomSuggestionDto {
+  @ApiProperty({ description: 'Room ID (UUID)', example: 'uuid-room-123' })
+  @IsString()
+  roomId: string;
+
+  @ApiProperty({ description: 'Room number displayed to user', example: '101' })
+  @IsString()
+  roomNumber: string;
+
+  @ApiProperty({ description: 'Room type name', example: 'Deluxe Ocean View' })
+  @IsString()
+  roomType: string;
+
+  @ApiProperty({ description: 'Floor number', example: 3 })
+  @IsNumber()
+  floor: number;
+
+  @ApiProperty({ description: 'Room physical features and amenities', type: RoomSuggestionFeaturesDto })
+  @ValidateNested()
+  @Type(() => RoomSuggestionFeaturesDto)
+  features: RoomSuggestionFeaturesDto;
+
+  @ApiProperty({ description: 'Base price per night (VND)', example: 1500000 })
+  @IsNumber()
+  basePrice: number;
+
+  @ApiPropertyOptional({ description: 'Discounted price per night when promotion applies (VND)', example: 1200000 })
+  @IsOptional()
+  @IsNumber()
+  discountedPrice?: number;
+
+  @ApiProperty({ description: 'Availability score 0–100 (100 = no conflicts)', example: 95 })
+  @IsNumber()
+  availabilityScore: number;
+
+  @ApiProperty({ description: 'Guest preference match score 0–100 (100 = perfect match)', example: 80 })
+  @IsNumber()
+  preferenceMatch: number;
+
+  @ApiProperty({ description: 'Revenue optimization score 0–100 (100 = maximizes hotel revenue)', example: 70 })
+  @IsNumber()
+  revenueScore: number;
+
+  @ApiProperty({
+    description: 'Conflict risk level for this room in the requested period',
+    enum: ['NONE', 'LOW', 'MEDIUM', 'HIGH'],
+    example: 'NONE',
+  })
+  @IsEnum(['NONE', 'LOW', 'MEDIUM', 'HIGH'])
+  conflictRisk: 'NONE' | 'LOW' | 'MEDIUM' | 'HIGH';
+
+  @ApiProperty({
+    description: 'Reasons explaining why this room is suggested',
+    type: [String],
+    example: ['Matches sea view preference', 'High availability', 'Competitive price'],
+  })
+  @IsArray()
+  @IsString({ each: true })
+  reasons: string[];
+
+  @ApiPropertyOptional({
+    description: 'Next booking after requested checkout (to assess scheduling pressure)',
+    type: RoomSuggestionNextBookingDto,
+  })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => RoomSuggestionNextBookingDto)
+  nextBooking?: RoomSuggestionNextBookingDto;
+}
+
+export type GetOptimizedRoomAssignmentResponse = RoomSuggestionDto[];
 export type GetOptimizedRoomAssignmentNatsResponse = NatsResponse<GetOptimizedRoomAssignmentResponse>;
 
 /**
