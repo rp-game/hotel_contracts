@@ -5,6 +5,8 @@
  * including payment creation, verification, refunds, and status queries.
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsNumber, IsOptional, IsObject } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 /**
@@ -86,17 +88,21 @@ export interface CreateOnePayPaymentResponse {
  * Request payload for payment.onepay.verify pattern
  * Used to verify OnePay callback parameters and update payment status
  */
-export interface VerifyOnePayPaymentRequest {
-  /** Tenant ID (required) */
+export class VerifyOnePayPaymentRequest {
+  @ApiProperty({ description: 'Tenant ID', example: 'tenant-uuid' })
+  @IsString()
   tenantId: string;
 
-  /** Hotel ID (required) */
+  @ApiProperty({ description: 'Hotel ID', example: 'hotel-uuid' })
+  @IsString()
   hotelId: string;
 
-  /** Payment ID to verify */
+  @ApiProperty({ description: 'Payment ID to verify', example: 'pay-uuid' })
+  @IsString()
   paymentId: string;
 
-  /** VPC parameters from OnePay callback (all vpc_* parameters) */
+  @ApiProperty({ description: 'VPC parameters from OnePay callback', type: 'object', additionalProperties: { type: 'string' } })
+  @IsObject()
   gatewayParams: Record<string, any>;
 }
 
@@ -104,29 +110,40 @@ export interface VerifyOnePayPaymentRequest {
  * Response payload for payment.onepay.verify pattern
  * Confirms payment status after verification
  */
-export interface VerifyOnePayPaymentResponse {
-  /** Payment ID */
+export class VerifyOnePayPaymentResponse {
+  @ApiProperty({ description: 'Payment ID', example: 'pay-uuid' })
+  @IsString()
   paymentId: string;
 
-  /** Payment status (COMPLETED, FAILED, PENDING) */
+  @ApiProperty({ description: 'Payment status', enum: ['COMPLETED', 'FAILED', 'PENDING'], example: 'COMPLETED' })
+  @IsString()
   status: string;
 
-  /** Internal transaction ID */
+  @ApiProperty({ description: 'Internal transaction ID', example: 'txn-uuid' })
+  @IsString()
   transactionId: string;
 
-  /** Payment amount */
+  @ApiProperty({ description: 'Payment amount', example: 500000 })
+  @IsNumber()
   amount: number;
 
-  /** OnePay gateway transaction number (vpc_TransactionNo) */
+  @ApiPropertyOptional({ description: 'OnePay gateway transaction number', example: '123456' })
+  @IsOptional()
+  @IsString()
   gatewayTransactionId?: string;
 
-  /** Card information from OnePay (last 4 digits, card type) */
+  @ApiPropertyOptional({ description: 'Card information (last 4 digits, card type)', example: '4111' })
+  @IsOptional()
+  @IsString()
   card?: string;
 
-  /** Bank authorization code */
+  @ApiPropertyOptional({ description: 'Bank authorization code', example: 'AUTH123' })
+  @IsOptional()
+  @IsString()
   authCode?: string;
 
-  /** When payment was verified (ISO 8601) */
+  @ApiProperty({ description: 'When payment was verified (ISO 8601)', example: '2026-02-17T10:00:00Z' })
+  @IsString()
   verifiedAt: string;
 }
 
@@ -350,14 +367,17 @@ export type RefundOnePayPaymentNatsResponse = NatsResponse<RefundOnePayPaymentRe
  * Request payload for payment.onepay.paymentStatus pattern
  * Used to retrieve payment status by internal payment ID (for polling)
  */
-export interface GetOnePayPaymentStatusNatsRequest {
-  /** Tenant ID (required) */
+export class GetOnePayPaymentStatusNatsRequest {
+  @ApiProperty({ description: 'Tenant ID', example: 'tenant-uuid' })
+  @IsString()
   tenantId: string;
 
-  /** Hotel ID (required) */
+  @ApiProperty({ description: 'Hotel ID', example: 'hotel-uuid' })
+  @IsString()
   hotelId: string;
 
-  /** Payment ID to look up */
+  @ApiProperty({ description: 'Payment ID to look up', example: 'pay-uuid' })
+  @IsString()
   paymentId: string;
 }
 
@@ -365,35 +385,51 @@ export interface GetOnePayPaymentStatusNatsRequest {
  * Response payload for payment.onepay.paymentStatus pattern
  * Contains complete payment details for polling use case
  */
-export interface GetOnePayPaymentStatusData {
-  /** Payment ID */
+export class GetOnePayPaymentStatusData {
+  @ApiProperty({ description: 'Payment ID', example: 'pay-uuid' })
+  @IsString()
   paymentId: string;
 
-  /** Current payment status (PENDING, COMPLETED, FAILED) */
+  @ApiProperty({ description: 'Current payment status', enum: ['PENDING', 'COMPLETED', 'FAILED'], example: 'PENDING' })
+  @IsString()
   status: string;
 
-  /** Payment amount */
+  @ApiProperty({ description: 'Payment amount', example: 500000 })
+  @IsNumber()
   amount: number;
 
-  /** Currency code */
+  @ApiProperty({ description: 'Currency code', example: 'VND' })
+  @IsString()
   currency: string;
 
-  /** Associated booking ID (if any) */
+  @ApiPropertyOptional({ description: 'Associated booking ID', example: 'booking-uuid' })
+  @IsOptional()
+  @IsString()
   bookingId?: string;
 
-  /** When payment was completed (ISO 8601) */
+  @ApiPropertyOptional({ description: 'When payment was completed (ISO 8601)', example: '2026-02-17T10:00:00Z' })
+  @IsOptional()
+  @IsString()
   paidAt?: string;
 
-  /** OnePay transaction ID */
+  @ApiPropertyOptional({ description: 'OnePay transaction ID', example: 'txn-uuid' })
+  @IsOptional()
+  @IsString()
   transactionId?: string;
 
-  /** Card information (if paid) */
+  @ApiPropertyOptional({ description: 'Card information', example: '4111' })
+  @IsOptional()
+  @IsString()
   card?: string;
 
-  /** When payment record was created (ISO 8601) */
+  @ApiPropertyOptional({ description: 'When payment record was created (ISO 8601)', example: '2026-02-17T09:00:00Z' })
+  @IsOptional()
+  @IsString()
   createdAt?: string;
 
-  /** When payment was last updated (ISO 8601) */
+  @ApiPropertyOptional({ description: 'When payment was last updated (ISO 8601)', example: '2026-02-17T09:30:00Z' })
+  @IsOptional()
+  @IsString()
   updatedAt?: string;
 }
 

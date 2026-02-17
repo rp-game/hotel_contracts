@@ -63,6 +63,7 @@ var ServiceBookingStatus;
 (function (ServiceBookingStatus) {
     ServiceBookingStatus["PENDING"] = "PENDING";
     ServiceBookingStatus["CONFIRMED"] = "CONFIRMED";
+    ServiceBookingStatus["IN_PROGRESS"] = "IN_PROGRESS";
     ServiceBookingStatus["COMPLETED"] = "COMPLETED";
     ServiceBookingStatus["CANCELLED"] = "CANCELLED";
     ServiceBookingStatus["NO_SHOW"] = "NO_SHOW";

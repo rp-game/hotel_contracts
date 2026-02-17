@@ -64,36 +64,24 @@ export interface CreateOnePayPaymentResponse {
  * Request payload for payment.onepay.verify pattern
  * Used to verify OnePay callback parameters and update payment status
  */
-export interface VerifyOnePayPaymentRequest {
-    /** Tenant ID (required) */
+export declare class VerifyOnePayPaymentRequest {
     tenantId: string;
-    /** Hotel ID (required) */
     hotelId: string;
-    /** Payment ID to verify */
     paymentId: string;
-    /** VPC parameters from OnePay callback (all vpc_* parameters) */
     gatewayParams: Record<string, any>;
 }
 /**
  * Response payload for payment.onepay.verify pattern
  * Confirms payment status after verification
  */
-export interface VerifyOnePayPaymentResponse {
-    /** Payment ID */
+export declare class VerifyOnePayPaymentResponse {
     paymentId: string;
-    /** Payment status (COMPLETED, FAILED, PENDING) */
     status: string;
-    /** Internal transaction ID */
     transactionId: string;
-    /** Payment amount */
     amount: number;
-    /** OnePay gateway transaction number (vpc_TransactionNo) */
     gatewayTransactionId?: string;
-    /** Card information from OnePay (last 4 digits, card type) */
     card?: string;
-    /** Bank authorization code */
     authCode?: string;
-    /** When payment was verified (ISO 8601) */
     verifiedAt: string;
 }
 /**
@@ -261,38 +249,25 @@ export type RefundOnePayPaymentNatsResponse = NatsResponse<RefundOnePayPaymentRe
  * Request payload for payment.onepay.paymentStatus pattern
  * Used to retrieve payment status by internal payment ID (for polling)
  */
-export interface GetOnePayPaymentStatusNatsRequest {
-    /** Tenant ID (required) */
+export declare class GetOnePayPaymentStatusNatsRequest {
     tenantId: string;
-    /** Hotel ID (required) */
     hotelId: string;
-    /** Payment ID to look up */
     paymentId: string;
 }
 /**
  * Response payload for payment.onepay.paymentStatus pattern
  * Contains complete payment details for polling use case
  */
-export interface GetOnePayPaymentStatusData {
-    /** Payment ID */
+export declare class GetOnePayPaymentStatusData {
     paymentId: string;
-    /** Current payment status (PENDING, COMPLETED, FAILED) */
     status: string;
-    /** Payment amount */
     amount: number;
-    /** Currency code */
     currency: string;
-    /** Associated booking ID (if any) */
     bookingId?: string;
-    /** When payment was completed (ISO 8601) */
     paidAt?: string;
-    /** OnePay transaction ID */
     transactionId?: string;
-    /** Card information (if paid) */
     card?: string;
-    /** When payment record was created (ISO 8601) */
     createdAt?: string;
-    /** When payment was last updated (ISO 8601) */
     updatedAt?: string;
 }
 /**
