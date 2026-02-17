@@ -30,12 +30,14 @@ class VerifyOnePayPaymentRequest {
 }
 exports.VerifyOnePayPaymentRequest = VerifyOnePayPaymentRequest;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Tenant ID', example: 'tenant-uuid' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID (resolved from JWT if omitted)', example: 'tenant-uuid' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], VerifyOnePayPaymentRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID', example: 'hotel-uuid' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (resolved from JWT if omitted)', example: 'hotel-uuid' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], VerifyOnePayPaymentRequest.prototype, "hotelId", void 0);
@@ -121,12 +123,14 @@ class GetOnePayPaymentStatusNatsRequest {
 }
 exports.GetOnePayPaymentStatusNatsRequest = GetOnePayPaymentStatusNatsRequest;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Tenant ID', example: 'tenant-uuid' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID (resolved from JWT if omitted)', example: 'tenant-uuid' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetOnePayPaymentStatusNatsRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID', example: 'hotel-uuid' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (resolved from JWT if omitted)', example: 'hotel-uuid' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetOnePayPaymentStatusNatsRequest.prototype, "hotelId", void 0);

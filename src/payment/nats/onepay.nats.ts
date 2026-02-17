@@ -89,13 +89,15 @@ export interface CreateOnePayPaymentResponse {
  * Used to verify OnePay callback parameters and update payment status
  */
 export class VerifyOnePayPaymentRequest {
-  @ApiProperty({ description: 'Tenant ID', example: 'tenant-uuid' })
+  @ApiPropertyOptional({ description: 'Tenant ID (resolved from JWT if omitted)', example: 'tenant-uuid' })
+  @IsOptional()
   @IsString()
-  tenantId: string;
+  tenantId?: string;
 
-  @ApiProperty({ description: 'Hotel ID', example: 'hotel-uuid' })
+  @ApiPropertyOptional({ description: 'Hotel ID (resolved from JWT if omitted)', example: 'hotel-uuid' })
+  @IsOptional()
   @IsString()
-  hotelId: string;
+  hotelId?: string;
 
   @ApiProperty({ description: 'Payment ID to verify', example: 'pay-uuid' })
   @IsString()
@@ -368,13 +370,15 @@ export type RefundOnePayPaymentNatsResponse = NatsResponse<RefundOnePayPaymentRe
  * Used to retrieve payment status by internal payment ID (for polling)
  */
 export class GetOnePayPaymentStatusNatsRequest {
-  @ApiProperty({ description: 'Tenant ID', example: 'tenant-uuid' })
+  @ApiPropertyOptional({ description: 'Tenant ID (resolved from JWT if omitted)', example: 'tenant-uuid' })
+  @IsOptional()
   @IsString()
-  tenantId: string;
+  tenantId?: string;
 
-  @ApiProperty({ description: 'Hotel ID', example: 'hotel-uuid' })
+  @ApiPropertyOptional({ description: 'Hotel ID (resolved from JWT if omitted)', example: 'hotel-uuid' })
+  @IsOptional()
   @IsString()
-  hotelId: string;
+  hotelId?: string;
 
   @ApiProperty({ description: 'Payment ID to look up', example: 'pay-uuid' })
   @IsString()

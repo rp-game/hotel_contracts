@@ -65,8 +65,8 @@ export interface CreateOnePayPaymentResponse {
  * Used to verify OnePay callback parameters and update payment status
  */
 export declare class VerifyOnePayPaymentRequest {
-    tenantId: string;
-    hotelId: string;
+    tenantId?: string;
+    hotelId?: string;
     paymentId: string;
     gatewayParams: Record<string, any>;
 }
@@ -250,8 +250,8 @@ export type RefundOnePayPaymentNatsResponse = NatsResponse<RefundOnePayPaymentRe
  * Used to retrieve payment status by internal payment ID (for polling)
  */
 export declare class GetOnePayPaymentStatusNatsRequest {
-    tenantId: string;
-    hotelId: string;
+    tenantId?: string;
+    hotelId?: string;
     paymentId: string;
 }
 /**
