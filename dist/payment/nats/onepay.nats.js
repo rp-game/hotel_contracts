@@ -20,6 +20,30 @@ const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 /**
+ * Customer information nested in payment requests
+ */
+class CustomerInfo {
+    email;
+    name;
+    phone;
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer email', example: 'customer@example.com' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CustomerInfo.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer full name', example: 'John Doe' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CustomerInfo.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer phone number', example: '+84912345678' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CustomerInfo.prototype, "phone", void 0);
+/**
  * Request payload for payment.onepay.create pattern
  * Used to initiate a OnePay payment and get payment URL
  */
@@ -108,27 +132,6 @@ __decorate([
     (0, class_validator_1.IsObject)(),
     __metadata("design:type", Object)
 ], CreateOnePayPaymentRequest.prototype, "metadata", void 0);
-class CustomerInfo {
-    email;
-    name;
-    phone;
-}
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Customer email', example: 'customer@example.com' }),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CustomerInfo.prototype, "email", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Customer full name', example: 'John Doe' }),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CustomerInfo.prototype, "name", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer phone number', example: '+84912345678' }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CustomerInfo.prototype, "phone", void 0);
 /**
  * Response payload for payment.onepay.create pattern
  * Contains payment URL and transaction details

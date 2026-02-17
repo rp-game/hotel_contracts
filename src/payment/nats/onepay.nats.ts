@@ -11,6 +11,24 @@ import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 /**
+ * Customer information nested in payment requests
+ */
+class CustomerInfo {
+  @ApiProperty({ description: 'Customer email', example: 'customer@example.com' })
+  @IsString()
+  email: string;
+
+  @ApiProperty({ description: 'Customer full name', example: 'John Doe' })
+  @IsString()
+  name: string;
+
+  @ApiPropertyOptional({ description: 'Customer phone number', example: '+84912345678' })
+  @IsOptional()
+  @IsString()
+  phone?: string;
+}
+
+/**
  * Request payload for payment.onepay.create pattern
  * Used to initiate a OnePay payment and get payment URL
  */
@@ -74,21 +92,6 @@ export class CreateOnePayPaymentRequest {
   @IsOptional()
   @IsObject()
   metadata?: Record<string, any>;
-}
-
-class CustomerInfo {
-  @ApiProperty({ description: 'Customer email', example: 'customer@example.com' })
-  @IsString()
-  email: string;
-
-  @ApiProperty({ description: 'Customer full name', example: 'John Doe' })
-  @IsString()
-  name: string;
-
-  @ApiPropertyOptional({ description: 'Customer phone number', example: '+84912345678' })
-  @IsOptional()
-  @IsString()
-  phone?: string;
 }
 
 /**

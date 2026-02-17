@@ -6,6 +6,14 @@
  */
 import { NatsResponse } from '../../common/nats-response.interface';
 /**
+ * Customer information nested in payment requests
+ */
+declare class CustomerInfo {
+    email: string;
+    name: string;
+    phone?: string;
+}
+/**
  * Request payload for payment.onepay.create pattern
  * Used to initiate a OnePay payment and get payment URL
  */
@@ -21,11 +29,6 @@ export declare class CreateOnePayPaymentRequest {
     returnUrl: string;
     ipAddress?: string;
     metadata?: Record<string, any>;
-}
-declare class CustomerInfo {
-    email: string;
-    name: string;
-    phone?: string;
 }
 /**
  * Response payload for payment.onepay.create pattern
