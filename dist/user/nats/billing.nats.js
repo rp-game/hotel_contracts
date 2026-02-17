@@ -398,7 +398,7 @@ __decorate([
     __metadata("design:type", SubscriptionAnalyticsOverviewDto)
 ], SubscriptionAnalyticsDto.prototype, "overview", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Distribution by plan', type: [PlanDistributionDto] }),
+    (0, swagger_1.ApiProperty)({ description: 'Distribution by plan', type: () => [PlanDistributionDto] }),
     __metadata("design:type", Array)
 ], SubscriptionAnalyticsDto.prototype, "planDistribution", void 0);
 __decorate([
@@ -433,7 +433,7 @@ __decorate([
     __metadata("design:type", Object)
 ], RevenueAnalyticsDto.prototype, "period", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Revenue data points', type: [RevenueDataPointDto] }),
+    (0, swagger_1.ApiProperty)({ description: 'Revenue data points', type: () => [RevenueDataPointDto] }),
     __metadata("design:type", Array)
 ], RevenueAnalyticsDto.prototype, "revenue", void 0);
 // ============= Subscription NATS Payload Classes =============

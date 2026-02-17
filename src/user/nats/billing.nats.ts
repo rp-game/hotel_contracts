@@ -250,7 +250,7 @@ export class SubscriptionAnalyticsDto {
   @ApiProperty({ description: 'Overview statistics', type: () => SubscriptionAnalyticsOverviewDto })
   overview: SubscriptionAnalyticsOverviewDto;
 
-  @ApiProperty({ description: 'Distribution by plan', type: [PlanDistributionDto] })
+  @ApiProperty({ description: 'Distribution by plan', type: () => [PlanDistributionDto] })
   planDistribution: PlanDistributionDto[];
 
   @ApiProperty({ description: 'Revenue metrics', type: () => SubscriptionRevenueDto })
@@ -276,7 +276,7 @@ export class RevenueAnalyticsDto {
     groupBy: string;
   };
 
-  @ApiProperty({ description: 'Revenue data points', type: [RevenueDataPointDto] })
+  @ApiProperty({ description: 'Revenue data points', type: () => [RevenueDataPointDto] })
   revenue: RevenueDataPointDto[];
 }
 
