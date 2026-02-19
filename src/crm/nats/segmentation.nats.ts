@@ -149,10 +149,10 @@ export class CustomerSegmentNatsResponse {
   @ApiProperty({ description: 'Number of members in segment' })
   memberCount!: number;
 
-  @ApiProperty({ description: 'Creation timestamp' })
+  @ApiProperty({ description: 'Creation timestamp', type: String })
   createdAt!: string | Date;
 
-  @ApiProperty({ description: 'Last update timestamp' })
+  @ApiProperty({ description: 'Last update timestamp', type: String })
   updatedAt!: string | Date;
 
   @ApiPropertyOptional({ description: 'User ID who created segment' })

@@ -156,10 +156,10 @@ export class CustomerInteractionNatsResponse {
   @ApiPropertyOptional({ description: 'File attachments', type: [AttachmentNatsResponse] })
   attachments?: AttachmentNatsResponse[];
 
-  @ApiProperty({ description: 'Creation timestamp (ISO string)' })
+  @ApiProperty({ description: 'Creation timestamp (ISO string)', type: String })
   createdAt!: string | Date;
 
-  @ApiProperty({ description: 'Last update timestamp (ISO string)' })
+  @ApiProperty({ description: 'Last update timestamp (ISO string)', type: String })
   updatedAt!: string | Date;
 
   @ApiPropertyOptional({ description: 'Created by user ID' })

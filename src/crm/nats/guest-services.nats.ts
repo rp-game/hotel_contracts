@@ -411,10 +411,10 @@ export class ServiceBookingNatsResponse {
   @ApiPropertyOptional({ description: 'Assigned staff ID' })
   staffAssigned?: string;
 
-  @ApiProperty({ description: 'Creation timestamp' })
+  @ApiProperty({ description: 'Creation timestamp', type: String })
   createdAt!: string; // FIXED: Use string only (not string | Date)
 
-  @ApiProperty({ description: 'Last update timestamp' })
+  @ApiProperty({ description: 'Last update timestamp', type: String })
   updatedAt!: string; // FIXED: Use string only (not string | Date)
 
   @ApiPropertyOptional({ description: 'Created by user ID' })

@@ -329,10 +329,10 @@ export class CustomerNatsResponse {
   @ApiProperty({ description: 'Last update timestamp' })
   updatedAt!: string;
 
-  @ApiPropertyOptional({ description: 'First seen timestamp' })
+  @ApiPropertyOptional({ description: 'First seen timestamp', type: String })
   firstSeenAt?: string | Date;
 
-  @ApiPropertyOptional({ description: 'Last seen timestamp' })
+  @ApiPropertyOptional({ description: 'Last seen timestamp', type: String })
   lastSeenAt?: string | Date;
 
   @ApiProperty({ description: 'Total number of bookings' })

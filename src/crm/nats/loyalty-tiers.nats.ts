@@ -74,10 +74,10 @@ export class LoyaltyTierNatsResponse {
   @ApiProperty({ description: 'Whether tier is active' })
   isActive!: boolean;
 
-  @ApiProperty({ description: 'Creation timestamp' })
+  @ApiProperty({ description: 'Creation timestamp', type: String })
   createdAt!: string | Date;
 
-  @ApiProperty({ description: 'Last update timestamp' })
+  @ApiProperty({ description: 'Last update timestamp', type: String })
   updatedAt!: string | Date;
 }
 

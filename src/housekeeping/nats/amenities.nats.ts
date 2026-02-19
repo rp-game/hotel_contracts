@@ -35,10 +35,10 @@ export class Amenity {
   @ApiProperty({ description: 'Hotel ID' })
   hotelId!: string;
 
-  @ApiProperty({ description: 'Creation timestamp' })
+  @ApiProperty({ description: 'Creation timestamp', type: String })
   createdAt!: string | Date;  // Accept both for compatibility during conversion
 
-  @ApiProperty({ description: 'Last update timestamp' })
+  @ApiProperty({ description: 'Last update timestamp', type: String })
   updatedAt!: string | Date;  // Accept both for compatibility during conversion
 }
 

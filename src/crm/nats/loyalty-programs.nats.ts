@@ -163,10 +163,10 @@ export class LoyaltyProgramNatsResponse {
   @ApiPropertyOptional({ description: 'Program description' })
   description?: string;
 
-  @ApiPropertyOptional({ description: 'Program start date' })
+  @ApiPropertyOptional({ description: 'Program start date', type: String })
   startDate?: string | Date;
 
-  @ApiPropertyOptional({ description: 'Program end date' })
+  @ApiPropertyOptional({ description: 'Program end date', type: String })
   endDate?: string | Date;
 
   @ApiProperty({ description: 'Whether program is active' })
@@ -184,13 +184,13 @@ export class LoyaltyProgramNatsResponse {
   @ApiPropertyOptional({ description: 'Program statistics' })
   stats?: IndividualProgramStats;
 
-  @ApiProperty({ description: 'Creation timestamp' })
+  @ApiProperty({ description: 'Creation timestamp', type: String })
   createdAt!: string | Date;
 
-  @ApiProperty({ description: 'Last update timestamp' })
+  @ApiProperty({ description: 'Last update timestamp', type: String })
   updatedAt!: string | Date;
 
-  @ApiPropertyOptional({ description: 'Deletion timestamp' })
+  @ApiPropertyOptional({ description: 'Deletion timestamp', type: String })
   deletedAt?: string | Date;
 }
 

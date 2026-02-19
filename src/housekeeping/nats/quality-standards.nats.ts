@@ -65,10 +65,10 @@ export class QualityStandard {
   @ApiPropertyOptional({ description: 'Additional configuration' })
   configuration?: Record<string, any>;
 
-  @ApiPropertyOptional({ description: 'Effective date (string or Date for compatibility)' })
+  @ApiPropertyOptional({ description: 'Effective date (string or Date for compatibility)', type: String })
   effectiveDate?: string | Date;
 
-  @ApiPropertyOptional({ description: 'Expiry date (string or Date for compatibility)' })
+  @ApiPropertyOptional({ description: 'Expiry date (string or Date for compatibility)', type: String })
   expiryDate?: string | Date;
 
   @ApiProperty({ description: 'User ID who created this standard' })
@@ -80,10 +80,10 @@ export class QualityStandard {
   @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 
-  @ApiProperty({ description: 'Creation timestamp (string or Date for compatibility)' })
+  @ApiProperty({ description: 'Creation timestamp (string or Date for compatibility)', type: String })
   createdAt: string | Date;
 
-  @ApiProperty({ description: 'Last update timestamp (string or Date for compatibility)' })
+  @ApiProperty({ description: 'Last update timestamp (string or Date for compatibility)', type: String })
   updatedAt: string | Date;
 }
 

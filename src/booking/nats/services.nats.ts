@@ -114,10 +114,10 @@ export class BookingServiceNatsResponse {
   specialInstructions?: string;
 
   // Timestamps
-  @ApiProperty({ description: 'Creation timestamp' })
+  @ApiProperty({ description: 'Creation timestamp', type: String })
   createdAt: string | Date;
 
-  @ApiProperty({ description: 'Last update timestamp' })
+  @ApiProperty({ description: 'Last update timestamp', type: String })
   updatedAt: string | Date;
 }
 
