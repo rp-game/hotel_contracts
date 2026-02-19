@@ -121,11 +121,11 @@ __decorate([
     __metadata("design:type", Object)
 ], QualityStandard.prototype, "configuration", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Effective date (string or Date for compatibility)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Effective date (string or Date for compatibility)', type: String }),
     __metadata("design:type", Object)
 ], QualityStandard.prototype, "effectiveDate", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Expiry date (string or Date for compatibility)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Expiry date (string or Date for compatibility)', type: String }),
     __metadata("design:type", Object)
 ], QualityStandard.prototype, "expiryDate", void 0);
 __decorate([
@@ -141,11 +141,11 @@ __decorate([
     __metadata("design:type", String)
 ], QualityStandard.prototype, "hotelId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp (string or Date for compatibility)' }),
+    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp (string or Date for compatibility)', type: String }),
     __metadata("design:type", Object)
 ], QualityStandard.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp (string or Date for compatibility)' }),
+    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp (string or Date for compatibility)', type: String }),
     __metadata("design:type", Object)
 ], QualityStandard.prototype, "updatedAt", void 0);
 class QualityStandardsStatistics {

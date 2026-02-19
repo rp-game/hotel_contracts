@@ -203,11 +203,11 @@ __decorate([
     __metadata("design:type", Array)
 ], CustomerInteractionNatsResponse.prototype, "attachments", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp (ISO string)' }),
+    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp (ISO string)', type: String }),
     __metadata("design:type", Object)
 ], CustomerInteractionNatsResponse.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp (ISO string)' }),
+    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp (ISO string)', type: String }),
     __metadata("design:type", Object)
 ], CustomerInteractionNatsResponse.prototype, "updatedAt", void 0);
 __decorate([

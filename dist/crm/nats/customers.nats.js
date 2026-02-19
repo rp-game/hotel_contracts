@@ -487,11 +487,11 @@ __decorate([
     __metadata("design:type", String)
 ], CustomerNatsResponse.prototype, "updatedAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'First seen timestamp' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'First seen timestamp', type: String }),
     __metadata("design:type", Object)
 ], CustomerNatsResponse.prototype, "firstSeenAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Last seen timestamp' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Last seen timestamp', type: String }),
     __metadata("design:type", Object)
 ], CustomerNatsResponse.prototype, "lastSeenAt", void 0);
 __decorate([

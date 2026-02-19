@@ -125,11 +125,11 @@ __decorate([
     __metadata("design:type", Boolean)
 ], LoyaltyTierNatsResponse.prototype, "isActive", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp' }),
+    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp', type: String }),
     __metadata("design:type", Object)
 ], LoyaltyTierNatsResponse.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp' }),
+    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp', type: String }),
     __metadata("design:type", Object)
 ], LoyaltyTierNatsResponse.prototype, "updatedAt", void 0);
 /**

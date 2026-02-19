@@ -137,11 +137,11 @@ __decorate([
     __metadata("design:type", String)
 ], LoyaltyProgramNatsResponse.prototype, "description", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Program start date' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Program start date', type: String }),
     __metadata("design:type", Object)
 ], LoyaltyProgramNatsResponse.prototype, "startDate", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Program end date' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Program end date', type: String }),
     __metadata("design:type", Object)
 ], LoyaltyProgramNatsResponse.prototype, "endDate", void 0);
 __decorate([
@@ -165,15 +165,15 @@ __decorate([
     __metadata("design:type", IndividualProgramStats)
 ], LoyaltyProgramNatsResponse.prototype, "stats", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp' }),
+    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp', type: String }),
     __metadata("design:type", Object)
 ], LoyaltyProgramNatsResponse.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp' }),
+    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp', type: String }),
     __metadata("design:type", Object)
 ], LoyaltyProgramNatsResponse.prototype, "updatedAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Deletion timestamp' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Deletion timestamp', type: String }),
     __metadata("design:type", Object)
 ], LoyaltyProgramNatsResponse.prototype, "deletedAt", void 0);
 //# sourceMappingURL=loyalty-programs.nats.js.map

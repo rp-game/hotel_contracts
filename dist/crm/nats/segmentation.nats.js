@@ -212,11 +212,11 @@ __decorate([
     __metadata("design:type", Number)
 ], CustomerSegmentNatsResponse.prototype, "memberCount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp' }),
+    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp', type: String }),
     __metadata("design:type", Object)
 ], CustomerSegmentNatsResponse.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp' }),
+    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp', type: String }),
     __metadata("design:type", Object)
 ], CustomerSegmentNatsResponse.prototype, "updatedAt", void 0);
 __decorate([
