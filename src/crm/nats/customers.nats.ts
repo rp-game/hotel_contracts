@@ -385,7 +385,7 @@ export interface FindAllCustomersNatsRequest {
  * Customers List Data (for paginated responses)
  */
 export class CustomersListData {
-  @ApiProperty({ description: 'List of customers', type: 'array' })
+  @ApiProperty({ description: 'List of customers', isArray: true, type: CustomerNatsResponse })
   data!: CustomerNatsResponse[];
 
   @ApiProperty({ description: 'Total number of customers' })
