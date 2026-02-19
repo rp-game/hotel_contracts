@@ -541,7 +541,7 @@ class CustomersListData {
 }
 exports.CustomersListData = CustomersListData;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'List of customers', isArray: true, type: CustomerNatsResponse }),
+    (0, swagger_1.ApiProperty)({ description: 'List of customers', type: [CustomerNatsResponse] }),
     __metadata("design:type", Array)
 ], CustomersListData.prototype, "data", void 0);
 __decorate([
