@@ -8,4 +8,5 @@ export declare enum PaymentStatus {
     REFUNDED = "REFUNDED",
     PARTIAL = "PARTIAL"
 }
+export { PaymentStatus as BookingPaymentStatus };
 //# sourceMappingURL=payment-status.enum.d.ts.map

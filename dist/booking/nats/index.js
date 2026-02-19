@@ -61,4 +61,10 @@ __exportStar(require("./reassign-room.nats"), exports);
 __exportStar(require("./add-service.nats"), exports);
 // Add payment NATS contracts
 __exportStar(require("./add-payment.nats"), exports);
+// Booking management NATS contracts
+__exportStar(require("./cancel-booking.nats"), exports);
+__exportStar(require("./booking-lookup.nats"), exports);
+__exportStar(require("./assign-room.nats"), exports);
+__exportStar(require("./payment-events.nats"), exports);
+__exportStar(require("./occupancy.nats"), exports);
 //# sourceMappingURL=index.js.map

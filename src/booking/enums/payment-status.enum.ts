@@ -8,3 +8,6 @@ export enum PaymentStatus {
   REFUNDED = 'REFUNDED',
   PARTIAL = 'PARTIAL',
 }
+
+// Re-export with domain-scoped name to avoid collision at root contracts level
+export { PaymentStatus as BookingPaymentStatus };
