@@ -37,14 +37,14 @@ export declare class ServiceBookingResponseDto {
     customerName: string;
     customerEmail: string;
     customerPhone?: string;
-    bookingId?: string | null;
-    roomNumber?: string | null;
+    bookingId?: string;
+    roomNumber?: string;
     serviceDate: string;
     quantity: number;
     unitPrice: number;
     totalAmount: number;
     status: FinancialServiceBookingStatus;
-    notes?: string | null;
+    notes?: string;
     createdAt: string;
     updatedAt: string;
 }

@@ -171,6 +171,16 @@ class BookingSummary {
      * Guest special requests
      */
     specialRequests;
+    /**
+     * Expected check-in time (ISO timestamp). Resolved by server: per-booking override → hotel default setting.
+     * For hourly bookings uses startTime on checkInDate.
+     */
+    expectedCheckInTime;
+    /**
+     * Expected check-out time (ISO timestamp). Resolved by server: per-booking override → hotel default setting.
+     * For hourly bookings uses endTime on checkOutDate.
+     */
+    expectedCheckOutTime;
 }
 exports.BookingSummary = BookingSummary;
 __decorate([
@@ -268,11 +278,11 @@ __decorate([
     __metadata("design:type", String)
 ], BookingSummary.prototype, "roomTypeId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Assigned room ID (null if unassigned)', required: false }),
+    (0, swagger_1.ApiProperty)({ type: String, nullable: true, description: 'Assigned room ID (null if unassigned)', required: false }),
     __metadata("design:type", Object)
 ], BookingSummary.prototype, "roomId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Assigned room number (null if unassigned)', required: false }),
+    (0, swagger_1.ApiProperty)({ type: String, nullable: true, description: 'Assigned room number (null if unassigned)', required: false }),
     __metadata("design:type", Object)
 ], BookingSummary.prototype, "roomNumber", void 0);
 __decorate([
@@ -303,6 +313,14 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Guest special requests', required: false }),
     __metadata("design:type", String)
 ], BookingSummary.prototype, "specialRequests", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, description: 'Expected check-in datetime (ISO 8601)' }),
+    __metadata("design:type", String)
+], BookingSummary.prototype, "expectedCheckInTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, description: 'Expected check-out datetime (ISO 8601)' }),
+    __metadata("design:type", String)
+], BookingSummary.prototype, "expectedCheckOutTime", void 0);
 /**
  * Bookings list response - shared between NATS and REST API
  * Used by:

@@ -146,6 +146,16 @@ export declare class BookingSummary {
      * Guest special requests
      */
     specialRequests?: string;
+    /**
+     * Expected check-in time (ISO timestamp). Resolved by server: per-booking override → hotel default setting.
+     * For hourly bookings uses startTime on checkInDate.
+     */
+    expectedCheckInTime?: string;
+    /**
+     * Expected check-out time (ISO timestamp). Resolved by server: per-booking override → hotel default setting.
+     * For hourly bookings uses endTime on checkOutDate.
+     */
+    expectedCheckOutTime?: string;
 }
 /**
  * NATS request to find/list bookings with filters and pagination

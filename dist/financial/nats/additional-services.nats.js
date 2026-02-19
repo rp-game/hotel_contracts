@@ -171,16 +171,16 @@ __decorate([
     __metadata("design:type", Object)
 ], AdditionalServiceResponseDto.prototype, "maxQuantity", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Available from date (ISO 8601 date)' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: String, description: 'Available from date (ISO 8601 date)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
-    __metadata("design:type", Object)
+    __metadata("design:type", String)
 ], AdditionalServiceResponseDto.prototype, "availableFrom", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Available to date (ISO 8601 date)' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: String, description: 'Available to date (ISO 8601 date)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
-    __metadata("design:type", Object)
+    __metadata("design:type", String)
 ], AdditionalServiceResponseDto.prototype, "availableTo", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Created at timestamp' }),

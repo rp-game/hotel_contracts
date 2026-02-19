@@ -210,9 +210,9 @@ export class BookingResponseDto {
   @ApiProperty({ description: 'Updated date' })
   updatedAt: Date;
 
-  @ApiPropertyOptional({ description: 'Created by user ID' })
-  createdBy?: string | null;
+  @ApiPropertyOptional({ type: String, description: 'Created by user ID' })
+  createdBy?: string;
 
-  @ApiPropertyOptional({ description: 'Updated by user ID' })
-  updatedBy?: string | null;
+  @ApiPropertyOptional({ type: String, description: 'Updated by user ID' })
+  updatedBy?: string;
 }

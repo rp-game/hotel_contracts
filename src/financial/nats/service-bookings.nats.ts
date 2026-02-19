@@ -67,15 +67,15 @@ export class ServiceBookingResponseDto {
   @IsString()
   customerPhone?: string;
 
-  @ApiPropertyOptional({ description: 'Related booking ID (if booking-related)' })
+  @ApiPropertyOptional({ type: String, description: 'Related booking ID (if booking-related)' })
   @IsOptional()
   @IsUUID()
-  bookingId?: string | null;
+  bookingId?: string;
 
-  @ApiPropertyOptional({ description: 'Room number (if applicable)' })
+  @ApiPropertyOptional({ type: String, description: 'Room number (if applicable)' })
   @IsOptional()
   @IsString()
-  roomNumber?: string | null;
+  roomNumber?: string;
 
   @ApiProperty({ description: 'Service date (ISO 8601 date)' })
   @IsDateString()
@@ -100,10 +100,10 @@ export class ServiceBookingResponseDto {
   @IsEnum(FinancialServiceBookingStatus)
   status: FinancialServiceBookingStatus;
 
-  @ApiPropertyOptional({ description: 'Additional notes' })
+  @ApiPropertyOptional({ type: String, description: 'Additional notes' })
   @IsOptional()
   @IsString()
-  notes?: string | null;
+  notes?: string;
 
   @ApiProperty({ description: 'Created at timestamp' })
   @IsDateString()

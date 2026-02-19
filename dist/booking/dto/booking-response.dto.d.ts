@@ -73,7 +73,7 @@ export declare class BookingResponseDto {
     services: BookingServiceResponseDto[];
     createdAt: Date;
     updatedAt: Date;
-    createdBy?: string | null;
-    updatedBy?: string | null;
+    createdBy?: string;
+    updatedBy?: string;
 }
 //# sourceMappingURL=booking-response.dto.d.ts.map

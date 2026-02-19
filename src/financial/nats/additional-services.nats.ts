@@ -125,15 +125,15 @@ export class AdditionalServiceResponseDto {
   @IsNumber()
   maxQuantity?: number | null;
 
-  @ApiPropertyOptional({ description: 'Available from date (ISO 8601 date)' })
+  @ApiPropertyOptional({ type: String, description: 'Available from date (ISO 8601 date)' })
   @IsOptional()
   @IsDateString()
-  availableFrom?: string | null;
+  availableFrom?: string;
 
-  @ApiPropertyOptional({ description: 'Available to date (ISO 8601 date)' })
+  @ApiPropertyOptional({ type: String, description: 'Available to date (ISO 8601 date)' })
   @IsOptional()
   @IsDateString()
-  availableTo?: string | null;
+  availableTo?: string;
 
   @ApiProperty({ description: 'Created at timestamp' })
   @IsDateString()

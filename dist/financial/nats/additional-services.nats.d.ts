@@ -68,8 +68,8 @@ export declare class AdditionalServiceResponseDto {
     isActive: boolean;
     isAvailable: boolean;
     maxQuantity?: number | null;
-    availableFrom?: string | null;
-    availableTo?: string | null;
+    availableFrom?: string;
+    availableTo?: string;
     createdAt: string;
     updatedAt: string;
 }

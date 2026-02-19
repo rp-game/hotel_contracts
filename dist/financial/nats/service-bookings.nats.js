@@ -102,16 +102,16 @@ __decorate([
     __metadata("design:type", String)
 ], ServiceBookingResponseDto.prototype, "customerPhone", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Related booking ID (if booking-related)' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: String, description: 'Related booking ID (if booking-related)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", Object)
+    __metadata("design:type", String)
 ], ServiceBookingResponseDto.prototype, "bookingId", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Room number (if applicable)' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: String, description: 'Room number (if applicable)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
-    __metadata("design:type", Object)
+    __metadata("design:type", String)
 ], ServiceBookingResponseDto.prototype, "roomNumber", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Service date (ISO 8601 date)' }),
@@ -142,10 +142,10 @@ __decorate([
     __metadata("design:type", String)
 ], ServiceBookingResponseDto.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional notes' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: String, description: 'Additional notes' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
-    __metadata("design:type", Object)
+    __metadata("design:type", String)
 ], ServiceBookingResponseDto.prototype, "notes", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Created at timestamp' }),

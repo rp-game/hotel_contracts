@@ -356,11 +356,11 @@ __decorate([
     __metadata("design:type", Date)
 ], BookingResponseDto.prototype, "updatedAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Created by user ID' }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ type: String, description: 'Created by user ID' }),
+    __metadata("design:type", String)
 ], BookingResponseDto.prototype, "createdBy", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Updated by user ID' }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ type: String, description: 'Updated by user ID' }),
+    __metadata("design:type", String)
 ], BookingResponseDto.prototype, "updatedBy", void 0);
 //# sourceMappingURL=booking-response.dto.js.map
