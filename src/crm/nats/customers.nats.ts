@@ -736,6 +736,89 @@ export interface SearchCustomersNatsRequest {
 export type SearchCustomersNatsResponse = NatsResponse<CustomersListData>;
 
 /**
+ * Customer Segment Summary (for advanced customer response)
+ */
+export class CustomerSegmentSummary {
+  @ApiProperty({ description: 'Segment name' })
+  name!: string;
+
+  @ApiProperty({ description: 'Segment type', enum: ['RFM', 'BEHAVIORAL', 'DEMOGRAPHIC', 'GEOGRAPHIC', 'VALUE_BASED', 'LIFECYCLE', 'CUSTOM'] })
+  type!: string;
+
+  @ApiPropertyOptional({ description: 'Segment display color' })
+  color?: string;
+}
+
+/**
+ * Segment Membership Summary (for advanced customer response)
+ */
+export class SegmentMembershipSummary {
+  @ApiProperty({ description: 'Segment information', type: () => CustomerSegmentSummary })
+  segment!: CustomerSegmentSummary;
+}
+
+/**
+ * Advanced Customer DTO - extends CustomerNatsResponse with enriched segment and VIP data
+ */
+export class AdvancedCustomerDto extends CustomerNatsResponse {
+  @ApiProperty({ description: 'Whether the customer is a VIP (tier GOLD or PLATINUM)' })
+  isVip!: boolean;
+
+  @ApiPropertyOptional({ description: 'Active segment memberships', type: [SegmentMembershipSummary] })
+  segmentMemberships?: SegmentMembershipSummary[];
+
+  @ApiProperty({ description: 'Number of relationships (currently always 0, reserved for future use)', default: 0 })
+  relationshipCount!: number;
+}
+
+/**
+ * Advanced Customers List Data (paginated)
+ */
+export class AdvancedCustomersListData {
+  @ApiProperty({ description: 'List of advanced customers', type: [AdvancedCustomerDto] })
+  data!: AdvancedCustomerDto[];
+
+  @ApiProperty({ description: 'Total number of customers' })
+  total!: number;
+
+  @ApiProperty({ description: 'Current page number' })
+  page!: number;
+
+  @ApiProperty({ description: 'Number of items per page' })
+  limit!: number;
+}
+
+/**
+ * Find All Advanced Customers Request
+ * Pattern: crm.customer.findAllAdvanced
+ */
+export class FindAdvancedCustomersNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiPropertyOptional({ description: 'Page number', default: 1 })
+  page?: number;
+
+  @ApiPropertyOptional({ description: 'Items per page', default: 25 })
+  limit?: number;
+
+  @ApiPropertyOptional({ description: 'Search text (name, email, phone)' })
+  search?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by nationality' })
+  nationality?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by membership level', enum: ['BRONZE', 'SILVER', 'GOLD', 'PLATINUM'] })
+  membershipLevel?: string;
+}
+
+/**
+ * Find All Advanced Customers Response
+ * Pattern: crm.customer.findAllAdvanced
+ */
+export type FindAdvancedCustomersNatsResponse = NatsResponse<AdvancedCustomersListData>;
+
+/**
  * Export Job Data
  */
 export class ExportJobData {

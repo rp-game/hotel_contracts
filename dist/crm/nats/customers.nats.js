@@ -33,7 +33,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ExportDownloadData = exports.ExportStatusData = exports.ExportJobData = exports.CustomerStatsData = exports.RecentCustomerInfo = exports.TopCustomerInfo = exports.MembershipDistribution = exports.CustomerStatsOverview = exports.RecalculateAllBookingStatsData = exports.RecalculateAllBookingStatsResultItem = exports.RecalculateBookingStatsData = exports.UpdateCustomerStatsResponseData = exports.FindOneCustomerNatsRequest = exports.CustomersListData = exports.CustomerNatsResponse = exports.UpdateCustomerNatsRequest = exports.CreateCustomerNatsRequest = exports.LoyaltyMemberInfo = exports.LoyaltyTierInfo = exports.EmergencyContact = exports.CustomerPreferences = exports.IdentificationInfo = exports.AddressInfo = exports.CommunicationChannel = exports.NationalIdType = exports.IdentificationType = exports.CustomerType = exports.Gender = void 0;
+exports.ExportDownloadData = exports.ExportStatusData = exports.ExportJobData = exports.FindAdvancedCustomersNatsRequest = exports.AdvancedCustomersListData = exports.AdvancedCustomerDto = exports.SegmentMembershipSummary = exports.CustomerSegmentSummary = exports.CustomerStatsData = exports.RecentCustomerInfo = exports.TopCustomerInfo = exports.MembershipDistribution = exports.CustomerStatsOverview = exports.RecalculateAllBookingStatsData = exports.RecalculateAllBookingStatsResultItem = exports.RecalculateBookingStatsData = exports.UpdateCustomerStatsResponseData = exports.FindOneCustomerNatsRequest = exports.CustomersListData = exports.CustomerNatsResponse = exports.UpdateCustomerNatsRequest = exports.CreateCustomerNatsRequest = exports.LoyaltyMemberInfo = exports.LoyaltyTierInfo = exports.EmergencyContact = exports.CustomerPreferences = exports.IdentificationInfo = exports.AddressInfo = exports.CommunicationChannel = exports.NationalIdType = exports.IdentificationType = exports.CustomerType = exports.Gender = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Enums
@@ -825,6 +825,122 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Recently registered customers', type: [RecentCustomerInfo] }),
     __metadata("design:type", Array)
 ], CustomerStatsData.prototype, "recentCustomers", void 0);
+/**
+ * Customer Segment Summary (for advanced customer response)
+ */
+class CustomerSegmentSummary {
+    name;
+    type;
+    color;
+}
+exports.CustomerSegmentSummary = CustomerSegmentSummary;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Segment name' }),
+    __metadata("design:type", String)
+], CustomerSegmentSummary.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Segment type', enum: ['RFM', 'BEHAVIORAL', 'DEMOGRAPHIC', 'GEOGRAPHIC', 'VALUE_BASED', 'LIFECYCLE', 'CUSTOM'] }),
+    __metadata("design:type", String)
+], CustomerSegmentSummary.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Segment display color' }),
+    __metadata("design:type", String)
+], CustomerSegmentSummary.prototype, "color", void 0);
+/**
+ * Segment Membership Summary (for advanced customer response)
+ */
+class SegmentMembershipSummary {
+    segment;
+}
+exports.SegmentMembershipSummary = SegmentMembershipSummary;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Segment information', type: () => CustomerSegmentSummary }),
+    __metadata("design:type", CustomerSegmentSummary)
+], SegmentMembershipSummary.prototype, "segment", void 0);
+/**
+ * Advanced Customer DTO - extends CustomerNatsResponse with enriched segment and VIP data
+ */
+class AdvancedCustomerDto extends CustomerNatsResponse {
+    isVip;
+    segmentMemberships;
+    relationshipCount;
+}
+exports.AdvancedCustomerDto = AdvancedCustomerDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether the customer is a VIP (tier GOLD or PLATINUM)' }),
+    __metadata("design:type", Boolean)
+], AdvancedCustomerDto.prototype, "isVip", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Active segment memberships', type: [SegmentMembershipSummary] }),
+    __metadata("design:type", Array)
+], AdvancedCustomerDto.prototype, "segmentMemberships", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of relationships (currently always 0, reserved for future use)', default: 0 }),
+    __metadata("design:type", Number)
+], AdvancedCustomerDto.prototype, "relationshipCount", void 0);
+/**
+ * Advanced Customers List Data (paginated)
+ */
+class AdvancedCustomersListData {
+    data;
+    total;
+    page;
+    limit;
+}
+exports.AdvancedCustomersListData = AdvancedCustomersListData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'List of advanced customers', type: [AdvancedCustomerDto] }),
+    __metadata("design:type", Array)
+], AdvancedCustomersListData.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of customers' }),
+    __metadata("design:type", Number)
+], AdvancedCustomersListData.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current page number' }),
+    __metadata("design:type", Number)
+], AdvancedCustomersListData.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of items per page' }),
+    __metadata("design:type", Number)
+], AdvancedCustomersListData.prototype, "limit", void 0);
+/**
+ * Find All Advanced Customers Request
+ * Pattern: crm.customer.findAllAdvanced
+ */
+class FindAdvancedCustomersNatsRequest {
+    tenantId;
+    page;
+    limit;
+    search;
+    nationality;
+    membershipLevel;
+}
+exports.FindAdvancedCustomersNatsRequest = FindAdvancedCustomersNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], FindAdvancedCustomersNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Page number', default: 1 }),
+    __metadata("design:type", Number)
+], FindAdvancedCustomersNatsRequest.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Items per page', default: 25 }),
+    __metadata("design:type", Number)
+], FindAdvancedCustomersNatsRequest.prototype, "limit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Search text (name, email, phone)' }),
+    __metadata("design:type", String)
+], FindAdvancedCustomersNatsRequest.prototype, "search", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by nationality' }),
+    __metadata("design:type", String)
+], FindAdvancedCustomersNatsRequest.prototype, "nationality", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by membership level', enum: ['BRONZE', 'SILVER', 'GOLD', 'PLATINUM'] }),
+    __metadata("design:type", String)
+], FindAdvancedCustomersNatsRequest.prototype, "membershipLevel", void 0);
 /**
  * Export Job Data
  */

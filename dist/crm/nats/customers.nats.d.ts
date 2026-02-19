@@ -446,6 +446,54 @@ export interface SearchCustomersNatsRequest {
  */
 export type SearchCustomersNatsResponse = NatsResponse<CustomersListData>;
 /**
+ * Customer Segment Summary (for advanced customer response)
+ */
+export declare class CustomerSegmentSummary {
+    name: string;
+    type: string;
+    color?: string;
+}
+/**
+ * Segment Membership Summary (for advanced customer response)
+ */
+export declare class SegmentMembershipSummary {
+    segment: CustomerSegmentSummary;
+}
+/**
+ * Advanced Customer DTO - extends CustomerNatsResponse with enriched segment and VIP data
+ */
+export declare class AdvancedCustomerDto extends CustomerNatsResponse {
+    isVip: boolean;
+    segmentMemberships?: SegmentMembershipSummary[];
+    relationshipCount: number;
+}
+/**
+ * Advanced Customers List Data (paginated)
+ */
+export declare class AdvancedCustomersListData {
+    data: AdvancedCustomerDto[];
+    total: number;
+    page: number;
+    limit: number;
+}
+/**
+ * Find All Advanced Customers Request
+ * Pattern: crm.customer.findAllAdvanced
+ */
+export declare class FindAdvancedCustomersNatsRequest {
+    tenantId: string;
+    page?: number;
+    limit?: number;
+    search?: string;
+    nationality?: string;
+    membershipLevel?: string;
+}
+/**
+ * Find All Advanced Customers Response
+ * Pattern: crm.customer.findAllAdvanced
+ */
+export type FindAdvancedCustomersNatsResponse = NatsResponse<AdvancedCustomersListData>;
+/**
  * Export Job Data
  */
 export declare class ExportJobData {
