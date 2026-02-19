@@ -20,12 +20,71 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SmartSearchResponseDto = exports.SmartRecommendation = void 0;
+exports.SmartSearchResponseDto = exports.SmartRecommendation = exports.PromotionSummaryDto = exports.AvailabilityInfoDto = exports.AlternativeDateDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Smart Recommendation - individual room recommendation with scoring
  * Used by: SmartSearchResponseDto (recommendations[] + suggestions[])
  */
+class AlternativeDateDto {
+    checkIn;
+    checkOut;
+    reason;
+}
+exports.AlternativeDateDto = AlternativeDateDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], AlternativeDateDto.prototype, "checkIn", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], AlternativeDateDto.prototype, "checkOut", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], AlternativeDateDto.prototype, "reason", void 0);
+class AvailabilityInfoDto {
+    isAvailable;
+    alternativeDates;
+}
+exports.AvailabilityInfoDto = AvailabilityInfoDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Boolean)
+], AvailabilityInfoDto.prototype, "isAvailable", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [AlternativeDateDto] }),
+    __metadata("design:type", Array)
+], AvailabilityInfoDto.prototype, "alternativeDates", void 0);
+class PromotionSummaryDto {
+    id;
+    name;
+    description;
+    discount;
+    applicable;
+}
+exports.PromotionSummaryDto = PromotionSummaryDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], PromotionSummaryDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], PromotionSummaryDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], PromotionSummaryDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], PromotionSummaryDto.prototype, "discount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Boolean)
+], PromotionSummaryDto.prototype, "applicable", void 0);
 class SmartRecommendation {
     /**
      * Unique recommendation ID
@@ -123,26 +182,8 @@ __decorate([
     __metadata("design:type", Object)
 ], SmartRecommendation.prototype, "pricing", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Availability information',
-        type: 'object',
-        properties: {
-            isAvailable: { type: 'boolean', description: 'Is room available for dates' },
-            alternativeDates: {
-                type: 'array',
-                description: 'Alternative date options if requested dates unavailable',
-                items: {
-                    type: 'object',
-                    properties: {
-                        checkIn: { type: 'string', description: 'Alternative check-in date' },
-                        checkOut: { type: 'string', description: 'Alternative check-out date' },
-                        reason: { type: 'string', description: 'Reason for alternative dates' }
-                    }
-                }
-            }
-        }
-    }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiProperty)({ description: 'Availability information', type: AvailabilityInfoDto }),
+    __metadata("design:type", AvailabilityInfoDto)
 ], SmartRecommendation.prototype, "availability", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Room features', type: [String] }),
@@ -169,20 +210,7 @@ __decorate([
     __metadata("design:type", Object)
 ], SmartRecommendation.prototype, "upgrade", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Available promotions',
-        type: 'array',
-        items: {
-            type: 'object',
-            properties: {
-                id: { type: 'string', description: 'Promotion ID' },
-                name: { type: 'string', description: 'Promotion name' },
-                description: { type: 'string', description: 'Promotion description' },
-                discount: { type: 'string', description: 'Discount amount/percentage' },
-                applicable: { type: 'boolean', description: 'Is applicable for this booking' }
-            }
-        }
-    }),
+    (0, swagger_1.ApiProperty)({ description: 'Available promotions', type: [PromotionSummaryDto] }),
     __metadata("design:type", Array)
 ], SmartRecommendation.prototype, "promotions", void 0);
 /**

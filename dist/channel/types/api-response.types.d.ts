@@ -246,24 +246,27 @@ export declare class RealTimeMetricsSummary {
     averageResponseTime: number;
     overallSyncSuccessRate: number;
 }
+export declare class BookingTrendItemDto {
+    date: string;
+    bookings: number;
+    revenue: number;
+}
+export declare class ProviderComparisonItemDto {
+    providerId: string;
+    bookings: number;
+    revenue: number;
+}
+export declare class SyncStatusItemDto {
+    status: string;
+    count: number;
+}
 /**
  * Chart Data for Analytics Dashboard
  */
 export declare class ChartDataDto {
-    bookingTrends: Array<{
-        date: string;
-        bookings: number;
-        revenue: number;
-    }>;
-    providerComparison: Array<{
-        providerId: string;
-        bookings: number;
-        revenue: number;
-    }>;
-    syncStatusDistribution: Array<{
-        status: string;
-        count: number;
-    }>;
+    bookingTrends: BookingTrendItemDto[];
+    providerComparison: ProviderComparisonItemDto[];
+    syncStatusDistribution: SyncStatusItemDto[];
 }
 /**
  * Alert DTO

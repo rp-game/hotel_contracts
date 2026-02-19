@@ -136,6 +136,12 @@ export declare class DeleteServiceBookingRequestDto {
     tenantId: string;
     hotelId?: string;
 }
+export declare class PopularServiceStatsDto {
+    serviceId: string;
+    serviceName: string;
+    bookingCount: number;
+    revenue: number;
+}
 /**
  * Financial Service Stats Response DTO
  */
@@ -145,12 +151,7 @@ export declare class FinancialServiceStatsResponseDto {
     totalBookings: number;
     totalRevenue: number;
     revenueByCategory?: Record<string, number>;
-    popularServices?: Array<{
-        serviceId: string;
-        serviceName: string;
-        bookingCount: number;
-        revenue: number;
-    }>;
+    popularServices?: PopularServiceStatsDto[];
 }
 /**
  * NATS Response Types

@@ -128,7 +128,7 @@ __decorate([
     __metadata("design:type", String)
 ], StaffActivityLogDto.prototype, "staffId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'List of activities', type: StaffActivityDto, isArray: true }),
+    (0, swagger_1.ApiProperty)({ description: 'List of activities', type: [StaffActivityDto] }),
     __metadata("design:type", Array)
 ], StaffActivityLogDto.prototype, "activities", void 0);
 __decorate([

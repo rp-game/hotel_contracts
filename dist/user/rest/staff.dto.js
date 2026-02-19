@@ -313,8 +313,7 @@ exports.StaffListResponseDto = StaffListResponseDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'List of staff members',
-        type: StaffDto,
-        isArray: true
+        type: [StaffDto],
     }),
     __metadata("design:type", Array)
 ], StaffListResponseDto.prototype, "data", void 0);

@@ -462,48 +462,11 @@ export interface ComprehensiveAnalytics {
         checkoutOnTime: number;
         cleaningEfficiency: number;
     };
-    trends: {
-        date: string;
-        occupancyRate: number;
-        adr: number;
-        revpar: number;
-        revenue: number;
-        availableRooms: number;
-        occupiedRooms: number;
-    }[];
-    roomTypePerformance: {
-        roomType: {
-            name: string;
-            id: string;
-        } | string;
-        totalRooms: number;
-        occupancyRate: number;
-        adr: number;
-        revpar: number;
-        revenue: number;
-        avgBookingValue: number;
-    }[];
-    hourlyOccupancy?: {
-        hour: number;
-        occupancyRate: number;
-        checkIns: number;
-        checkOuts: number;
-    }[];
-    revenueBreakdown?: {
-        source: string;
-        revenue: number;
-        percentage: number;
-        color: string;
-    }[];
-    topPerformingRooms?: {
-        roomNumber: string;
-        roomType: string;
-        revenue: number;
-        occupancyRate: number;
-        adr: number;
-        totalBookings: number;
-        avgRating: number;
-    }[];
+    trends: DailyTrendDto[];
+    roomTypePerformance: RoomTypePerformanceDto[];
+    hourlyOccupancy?: HourlyOccupancyDto[];
+    revenueBreakdown?: RevenueBreakdownItemDto[];
+    topPerformingRooms?: TopPerformingRoomDto[];
     cleaningMetrics?: {
         avgCleaningTime: number;
         onTimeCompletion: number;
@@ -511,12 +474,7 @@ export interface ComprehensiveAnalytics {
         staffEfficiency: number;
         totalTasksCompleted: number;
     };
-    forecast?: {
-        date: string;
-        predictedOccupancy: number;
-        predictedRevenue: number;
-        demandLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'PEAK';
-    }[];
+    forecast?: OccupancyForecastDto[];
 }
 export type GetComprehensiveAnalyticsResponse = ComprehensiveAnalytics;
 export type GetComprehensiveAnalyticsNatsResponse = NatsResponse<GetComprehensiveAnalyticsResponse>;
@@ -551,6 +509,54 @@ export interface AnalyticsComparison {
     };
 }
 export type GetAnalyticsComparisonResponse = AnalyticsComparison;
+export declare class DailyTrendDto {
+    date: string;
+    occupancyRate: number;
+    adr: number;
+    revpar: number;
+    revenue: number;
+    availableRooms: number;
+    occupiedRooms: number;
+}
+export declare class RoomTypePerformanceDto {
+    roomType: {
+        name: string;
+        id: string;
+    } | string;
+    totalRooms: number;
+    occupancyRate: number;
+    adr: number;
+    revpar: number;
+    revenue: number;
+    avgBookingValue: number;
+}
+export declare class HourlyOccupancyDto {
+    hour: number;
+    occupancyRate: number;
+    checkIns: number;
+    checkOuts: number;
+}
+export declare class RevenueBreakdownItemDto {
+    source: string;
+    revenue: number;
+    percentage: number;
+    color: string;
+}
+export declare class TopPerformingRoomDto {
+    roomNumber: string;
+    roomType: string;
+    revenue: number;
+    occupancyRate: number;
+    adr: number;
+    totalBookings: number;
+    avgRating: number;
+}
+export declare class OccupancyForecastDto {
+    date: string;
+    predictedOccupancy: number;
+    predictedRevenue: number;
+    demandLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'PEAK';
+}
 /**
  * Comprehensive Analytics Response DTO
  * REST API response for GET /api/rooms/analytics/comprehensive
@@ -570,48 +576,11 @@ export declare class ComprehensiveAnalyticsResponseDto {
         checkoutOnTime: number;
         cleaningEfficiency: number;
     };
-    trends: {
-        date: string;
-        occupancyRate: number;
-        adr: number;
-        revpar: number;
-        revenue: number;
-        availableRooms: number;
-        occupiedRooms: number;
-    }[];
-    roomTypePerformance: {
-        roomType: {
-            name: string;
-            id: string;
-        } | string;
-        totalRooms: number;
-        occupancyRate: number;
-        adr: number;
-        revpar: number;
-        revenue: number;
-        avgBookingValue: number;
-    }[];
-    hourlyOccupancy?: {
-        hour: number;
-        occupancyRate: number;
-        checkIns: number;
-        checkOuts: number;
-    }[];
-    revenueBreakdown?: {
-        source: string;
-        revenue: number;
-        percentage: number;
-        color: string;
-    }[];
-    topPerformingRooms?: {
-        roomNumber: string;
-        roomType: string;
-        revenue: number;
-        occupancyRate: number;
-        adr: number;
-        totalBookings: number;
-        avgRating: number;
-    }[];
+    trends: DailyTrendDto[];
+    roomTypePerformance: RoomTypePerformanceDto[];
+    hourlyOccupancy?: HourlyOccupancyDto[];
+    revenueBreakdown?: RevenueBreakdownItemDto[];
+    topPerformingRooms?: TopPerformingRoomDto[];
     cleaningMetrics?: {
         avgCleaningTime: number;
         onTimeCompletion: number;
@@ -619,12 +588,7 @@ export declare class ComprehensiveAnalyticsResponseDto {
         staffEfficiency: number;
         totalTasksCompleted: number;
     };
-    forecast?: {
-        date: string;
-        predictedOccupancy: number;
-        predictedRevenue: number;
-        demandLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'PEAK';
-    }[];
+    forecast?: OccupancyForecastDto[];
 }
 /**
  * Analytics Comparison Response DTO

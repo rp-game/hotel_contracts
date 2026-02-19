@@ -253,7 +253,7 @@ __decorate([
     __metadata("design:type", RateBreakdown)
 ], DynamicRateCalculation.prototype, "breakdown", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Adjustment details', isArray: true }),
+    (0, swagger_1.ApiProperty)({ description: 'Adjustment details', type: [String] }),
     __metadata("design:type", Array)
 ], DynamicRateCalculation.prototype, "adjustmentDetails", void 0);
 //# sourceMappingURL=rates-core.types.js.map

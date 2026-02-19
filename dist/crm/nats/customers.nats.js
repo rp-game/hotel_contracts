@@ -527,7 +527,7 @@ __decorate([
     __metadata("design:type", LoyaltyMemberInfo)
 ], CustomerNatsResponse.prototype, "loyaltyMember", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ type: 'array', description: 'Loyalty program memberships (legacy - multiple memberships)' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: [Object], description: 'Loyalty program memberships (legacy - multiple memberships)' }),
     __metadata("design:type", Array)
 ], CustomerNatsResponse.prototype, "loyaltyMembers", void 0);
 /**

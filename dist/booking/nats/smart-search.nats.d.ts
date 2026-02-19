@@ -85,6 +85,22 @@ export interface SmartSearchRequest {
  * Smart Recommendation - individual room recommendation with scoring
  * Used by: SmartSearchResponseDto (recommendations[] + suggestions[])
  */
+export declare class AlternativeDateDto {
+    checkIn: string;
+    checkOut: string;
+    reason: string;
+}
+export declare class AvailabilityInfoDto {
+    isAvailable: boolean;
+    alternativeDates?: AlternativeDateDto[];
+}
+export declare class PromotionSummaryDto {
+    id: string;
+    name: string;
+    description: string;
+    discount: string;
+    applicable: boolean;
+}
 export declare class SmartRecommendation {
     /**
      * Unique recommendation ID
@@ -125,14 +141,7 @@ export declare class SmartRecommendation {
     /**
      * Room availability status
      */
-    availability: {
-        isAvailable: boolean;
-        alternativeDates?: Array<{
-            checkIn: string;
-            checkOut: string;
-            reason: string;
-        }>;
-    };
+    availability: AvailabilityInfoDto;
     /**
      * Room features (e.g., ['King bed', 'Work desk', 'Mini bar'])
      */
@@ -157,13 +166,7 @@ export declare class SmartRecommendation {
     /**
      * Available promotions for this room
      */
-    promotions: Array<{
-        id: string;
-        name: string;
-        description: string;
-        discount: string;
-        applicable: boolean;
-    }>;
+    promotions: PromotionSummaryDto[];
 }
 /**
  * Smart search response - ranked recommendations with suggestions

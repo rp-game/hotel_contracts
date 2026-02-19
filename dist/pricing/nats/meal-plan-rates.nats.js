@@ -59,8 +59,7 @@ exports.FindAllMealPlanRatesResponse = FindAllMealPlanRatesResponse;
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'List of meal plan rates',
-        type: types_1.MealPlanRate,
-        isArray: true,
+        type: [types_1.MealPlanRate],
     }),
     __metadata("design:type", Array)
 ], FindAllMealPlanRatesResponse.prototype, "data", void 0);

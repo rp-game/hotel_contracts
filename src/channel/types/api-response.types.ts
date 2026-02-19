@@ -432,21 +432,38 @@ export class RealTimeMetricsSummary {
   overallSyncSuccessRate: number;
 }
 
+export class BookingTrendItemDto {
+  @ApiProperty({ type: String }) date!: string;
+  @ApiProperty() bookings!: number;
+  @ApiProperty() revenue!: number;
+}
+
+export class ProviderComparisonItemDto {
+  @ApiProperty({ type: String }) providerId!: string;
+  @ApiProperty() bookings!: number;
+  @ApiProperty() revenue!: number;
+}
+
+export class SyncStatusItemDto {
+  @ApiProperty({ type: String }) status!: string;
+  @ApiProperty() count!: number;
+}
+
 /**
  * Chart Data for Analytics Dashboard
  */
 export class ChartDataDto {
   @IsArray()
-  @ApiProperty({ description: 'Booking trends over time' })
-  bookingTrends: Array<{ date: string; bookings: number; revenue: number }>;
+  @ApiProperty({ description: 'Booking trends over time', type: [BookingTrendItemDto] })
+  bookingTrends: BookingTrendItemDto[];
 
   @IsArray()
-  @ApiProperty({ description: 'Provider comparison data' })
-  providerComparison: Array<{ providerId: string; bookings: number; revenue: number }>;
+  @ApiProperty({ description: 'Provider comparison data', type: [ProviderComparisonItemDto] })
+  providerComparison: ProviderComparisonItemDto[];
 
   @IsArray()
-  @ApiProperty({ description: 'Sync status distribution' })
-  syncStatusDistribution: Array<{ status: string; count: number }>;
+  @ApiProperty({ description: 'Sync status distribution', type: [SyncStatusItemDto] })
+  syncStatusDistribution: SyncStatusItemDto[];
 }
 
 /**

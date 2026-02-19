@@ -19,7 +19,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetSyncHistoryQueryDto = exports.GetAnalyticsQueryDto = exports.RealTimeMetricsDto = exports.ProviderStatusSummary = exports.MetricType = exports.TimeRange = exports.RecoveryAction = exports.ErrorSeverity = exports.ErrorType = exports.AnalyticsDashboardDto = exports.AlertDto = exports.ChartDataDto = exports.RealTimeMetricsSummary = exports.ProviderPerformanceDto = exports.SyncHistoryListResponseDto = exports.SyncHistoryDto = exports.ABTestStatus = exports.FailoverStatus = exports.FailoverTrigger = exports.SyncStatusDto = exports.SyncResponseDto = void 0;
+exports.GetSyncHistoryQueryDto = exports.GetAnalyticsQueryDto = exports.RealTimeMetricsDto = exports.ProviderStatusSummary = exports.MetricType = exports.TimeRange = exports.RecoveryAction = exports.ErrorSeverity = exports.ErrorType = exports.AnalyticsDashboardDto = exports.AlertDto = exports.ChartDataDto = exports.SyncStatusItemDto = exports.ProviderComparisonItemDto = exports.BookingTrendItemDto = exports.RealTimeMetricsSummary = exports.ProviderPerformanceDto = exports.SyncHistoryListResponseDto = exports.SyncHistoryDto = exports.ABTestStatus = exports.FailoverStatus = exports.FailoverTrigger = exports.SyncStatusDto = exports.SyncResponseDto = void 0;
 const enums_1 = require("../enums");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
@@ -459,6 +459,55 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Overall sync success rate (0-1)' }),
     __metadata("design:type", Number)
 ], RealTimeMetricsSummary.prototype, "overallSyncSuccessRate", void 0);
+class BookingTrendItemDto {
+    date;
+    bookings;
+    revenue;
+}
+exports.BookingTrendItemDto = BookingTrendItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], BookingTrendItemDto.prototype, "date", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], BookingTrendItemDto.prototype, "bookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], BookingTrendItemDto.prototype, "revenue", void 0);
+class ProviderComparisonItemDto {
+    providerId;
+    bookings;
+    revenue;
+}
+exports.ProviderComparisonItemDto = ProviderComparisonItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], ProviderComparisonItemDto.prototype, "providerId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ProviderComparisonItemDto.prototype, "bookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ProviderComparisonItemDto.prototype, "revenue", void 0);
+class SyncStatusItemDto {
+    status;
+    count;
+}
+exports.SyncStatusItemDto = SyncStatusItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], SyncStatusItemDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SyncStatusItemDto.prototype, "count", void 0);
 /**
  * Chart Data for Analytics Dashboard
  */
@@ -470,17 +519,17 @@ class ChartDataDto {
 exports.ChartDataDto = ChartDataDto;
 __decorate([
     (0, class_validator_1.IsArray)(),
-    (0, swagger_1.ApiProperty)({ description: 'Booking trends over time' }),
+    (0, swagger_1.ApiProperty)({ description: 'Booking trends over time', type: [BookingTrendItemDto] }),
     __metadata("design:type", Array)
 ], ChartDataDto.prototype, "bookingTrends", void 0);
 __decorate([
     (0, class_validator_1.IsArray)(),
-    (0, swagger_1.ApiProperty)({ description: 'Provider comparison data' }),
+    (0, swagger_1.ApiProperty)({ description: 'Provider comparison data', type: [ProviderComparisonItemDto] }),
     __metadata("design:type", Array)
 ], ChartDataDto.prototype, "providerComparison", void 0);
 __decorate([
     (0, class_validator_1.IsArray)(),
-    (0, swagger_1.ApiProperty)({ description: 'Sync status distribution' }),
+    (0, swagger_1.ApiProperty)({ description: 'Sync status distribution', type: [SyncStatusItemDto] }),
     __metadata("design:type", Array)
 ], ChartDataDto.prototype, "syncStatusDistribution", void 0);
 /**

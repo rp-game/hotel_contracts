@@ -145,7 +145,6 @@ __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'List of loyalty tiers with full details',
         type: [LoyaltyTierNatsResponse],
-        isArray: true
     }),
     __metadata("design:type", Array)
 ], FindAllLoyaltyTiersDto.prototype, "tiers", void 0);

@@ -394,8 +394,7 @@ exports.SegmentMembersNatsResponse = SegmentMembersNatsResponse;
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'List of customers in the segment',
-        type: () => customers_nats_1.CustomerNatsResponse,
-        isArray: true
+        type: () => [customers_nats_1.CustomerNatsResponse],
     }),
     __metadata("design:type", Array)
 ], SegmentMembersNatsResponse.prototype, "data", void 0);

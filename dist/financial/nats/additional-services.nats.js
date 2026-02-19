@@ -19,7 +19,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ServiceDashboardResponseDto = exports.GetServiceDashboardRequestDto = exports.GetServiceStatsRequestDto = exports.ServiceCategoriesResponseDto = exports.GetServiceCategoriesRequestDto = exports.DeleteAdditionalServiceRequestDto = exports.UpdateAdditionalServiceRequestDto = exports.FindOneAdditionalServiceRequestDto = exports.FindAllAdditionalServicesRequestDto = exports.ServiceListResponseDto = exports.UpdateAdditionalServiceDto = exports.CreateAdditionalServiceDto = exports.AdditionalServiceResponseDto = exports.FinancialServiceCategory = exports.PricingType = exports.FinancialServiceType = void 0;
+exports.ServiceDashboardResponseDto = exports.TopServiceStatsDto = exports.GetServiceDashboardRequestDto = exports.GetServiceStatsRequestDto = exports.ServiceCategoriesResponseDto = exports.GetServiceCategoriesRequestDto = exports.DeleteAdditionalServiceRequestDto = exports.UpdateAdditionalServiceRequestDto = exports.FindOneAdditionalServiceRequestDto = exports.FindAllAdditionalServicesRequestDto = exports.ServiceListResponseDto = exports.UpdateAdditionalServiceDto = exports.CreateAdditionalServiceDto = exports.AdditionalServiceResponseDto = exports.FinancialServiceCategory = exports.PricingType = exports.FinancialServiceType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const service_bookings_nats_1 = require("./service-bookings.nats");
@@ -782,6 +782,29 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], GetServiceDashboardRequestDto.prototype, "hotelId", void 0);
+class TopServiceStatsDto {
+    serviceId;
+    serviceName;
+    revenue;
+    bookingCount;
+}
+exports.TopServiceStatsDto = TopServiceStatsDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], TopServiceStatsDto.prototype, "serviceId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], TopServiceStatsDto.prototype, "serviceName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], TopServiceStatsDto.prototype, "revenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], TopServiceStatsDto.prototype, "bookingCount", void 0);
 /**
  * Service Dashboard Response DTO
  */
@@ -800,7 +823,7 @@ __decorate([
     __metadata("design:type", Array)
 ], ServiceDashboardResponseDto.prototype, "recentBookings", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Top services by revenue' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Top services by revenue', type: [TopServiceStatsDto] }),
     __metadata("design:type", Array)
 ], ServiceDashboardResponseDto.prototype, "topServices", void 0);
 //# sourceMappingURL=additional-services.nats.js.map

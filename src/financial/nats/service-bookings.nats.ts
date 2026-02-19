@@ -377,6 +377,13 @@ export class DeleteServiceBookingRequestDto {
   hotelId?: string;
 }
 
+export class PopularServiceStatsDto {
+  @ApiProperty({ type: String }) serviceId!: string;
+  @ApiProperty({ type: String }) serviceName!: string;
+  @ApiProperty() bookingCount!: number;
+  @ApiProperty() revenue!: number;
+}
+
 /**
  * Financial Service Stats Response DTO
  */
@@ -396,13 +403,8 @@ export class FinancialServiceStatsResponseDto {
   @ApiPropertyOptional({ description: 'Revenue by category' })
   revenueByCategory?: Record<string, number>;
 
-  @ApiPropertyOptional({ description: 'Popular services' })
-  popularServices?: Array<{
-    serviceId: string;
-    serviceName: string;
-    bookingCount: number;
-    revenue: number;
-  }>;
+  @ApiPropertyOptional({ description: 'Popular services', type: [PopularServiceStatsDto] })
+  popularServices?: PopularServiceStatsDto[];
 }
 
 /**

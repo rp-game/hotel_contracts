@@ -208,18 +208,19 @@ export declare class GetServiceDashboardRequestDto {
     tenantId: string;
     hotelId?: string;
 }
+export declare class TopServiceStatsDto {
+    serviceId: string;
+    serviceName: string;
+    revenue: number;
+    bookingCount: number;
+}
 /**
  * Service Dashboard Response DTO
  */
 export declare class ServiceDashboardResponseDto {
     stats: FinancialServiceStatsResponseDto;
     recentBookings?: ServiceBookingResponseDto[];
-    topServices?: Array<{
-        serviceId: string;
-        serviceName: string;
-        revenue: number;
-        bookingCount: number;
-    }>;
+    topServices?: TopServiceStatsDto[];
 }
 /**
  * NATS Response Types

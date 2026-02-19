@@ -50,8 +50,7 @@ exports.FindAllRoomTypeBaseRatesResponse = FindAllRoomTypeBaseRatesResponse;
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'List of room type base rates',
-        type: types_1.RoomTypeBaseRate,
-        isArray: true,
+        type: [types_1.RoomTypeBaseRate],
     }),
     __metadata("design:type", Array)
 ], FindAllRoomTypeBaseRatesResponse.prototype, "data", void 0);
@@ -338,8 +337,7 @@ exports.BulkUpsertRoomTypeBaseRatesResponse = BulkUpsertRoomTypeBaseRatesRespons
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'List of upserted room type base rates',
-        type: [Object], // RoomTypeBaseRate type
-        isArray: true,
+        type: [types_1.RoomTypeBaseRate],
     }),
     __metadata("design:type", Array)
 ], BulkUpsertRoomTypeBaseRatesResponse.prototype, "data", void 0);

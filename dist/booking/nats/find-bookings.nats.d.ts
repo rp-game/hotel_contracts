@@ -15,6 +15,11 @@ import { NatsResponse } from '../../common/nats-response.interface';
  * Booking summary for list operations
  * Contains essential fields for display without full booking details
  */
+export declare class RoomAssignmentSummaryDto {
+    id: string;
+    roomNumber: string;
+    roomTypeName: string;
+}
 export declare class BookingSummary {
     /**
      * Unique booking ID
@@ -87,11 +92,7 @@ export declare class BookingSummary {
     /**
      * Room assignments
      */
-    rooms?: Array<{
-        id: string;
-        roomNumber: string;
-        roomTypeName: string;
-    }>;
+    rooms?: RoomAssignmentSummaryDto[];
     /**
      * Tenant ID (multi-tenant isolation)
      */

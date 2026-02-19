@@ -17,7 +17,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookingListResponseDto = exports.BookingSummary = void 0;
+exports.BookingListResponseDto = exports.BookingSummary = exports.RoomAssignmentSummaryDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Booking summary for list operations
@@ -27,6 +27,24 @@ const swagger_1 = require("@nestjs/swagger");
  * Booking summary for list operations
  * Contains essential fields for display without full booking details
  */
+class RoomAssignmentSummaryDto {
+    id;
+    roomNumber;
+    roomTypeName;
+}
+exports.RoomAssignmentSummaryDto = RoomAssignmentSummaryDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], RoomAssignmentSummaryDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], RoomAssignmentSummaryDto.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], RoomAssignmentSummaryDto.prototype, "roomTypeName", void 0);
 class BookingSummary {
     /**
      * Unique booking ID
@@ -230,19 +248,7 @@ __decorate([
     __metadata("design:type", String)
 ], BookingSummary.prototype, "createdBy", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Room assignments',
-        type: 'array',
-        items: {
-            type: 'object',
-            properties: {
-                id: { type: 'string', description: 'Room ID' },
-                roomNumber: { type: 'string', description: 'Room number' },
-                roomTypeName: { type: 'string', description: 'Room type name' }
-            }
-        },
-        required: false
-    }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room assignments', type: [RoomAssignmentSummaryDto] }),
     __metadata("design:type", Array)
 ], BookingSummary.prototype, "rooms", void 0);
 __decorate([

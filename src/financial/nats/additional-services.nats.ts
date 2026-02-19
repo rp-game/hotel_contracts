@@ -571,6 +571,13 @@ export class GetServiceDashboardRequestDto {
   hotelId?: string;
 }
 
+export class TopServiceStatsDto {
+  @ApiProperty({ type: String }) serviceId!: string;
+  @ApiProperty({ type: String }) serviceName!: string;
+  @ApiProperty() revenue!: number;
+  @ApiProperty() bookingCount!: number;
+}
+
 /**
  * Service Dashboard Response DTO
  */
@@ -581,13 +588,8 @@ export class ServiceDashboardResponseDto {
   @ApiPropertyOptional({ description: 'Recent bookings', type: () => [ServiceBookingResponseDto] })
   recentBookings?: ServiceBookingResponseDto[];
 
-  @ApiPropertyOptional({ description: 'Top services by revenue' })
-  topServices?: Array<{
-    serviceId: string;
-    serviceName: string;
-    revenue: number;
-    bookingCount: number;
-  }>;
+  @ApiPropertyOptional({ description: 'Top services by revenue', type: [TopServiceStatsDto] })
+  topServices?: TopServiceStatsDto[];
 }
 
 /**

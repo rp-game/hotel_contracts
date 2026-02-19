@@ -92,11 +92,11 @@ __decorate([
     __metadata("design:type", Object)
 ], GuestPreferenceNatsData.prototype, "servicePreferences", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Dietary restrictions', type: 'array', items: { type: 'string' } }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Dietary restrictions', type: [String] }),
     __metadata("design:type", Array)
 ], GuestPreferenceNatsData.prototype, "dietaryRestrictions", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Special occasions', type: 'array', items: { type: 'string' } }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Special occasions', type: [String] }),
     __metadata("design:type", Array)
 ], GuestPreferenceNatsData.prototype, "specialOccasions", void 0);
 __decorate([
@@ -104,7 +104,7 @@ __decorate([
     __metadata("design:type", Object)
 ], GuestPreferenceNatsData.prototype, "communicationPreferences", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Accessibility requirements', type: 'array', items: { type: 'string' } }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Accessibility requirements', type: [String] }),
     __metadata("design:type", Array)
 ], GuestPreferenceNatsData.prototype, "accessibilityRequirements", void 0);
 __decorate([

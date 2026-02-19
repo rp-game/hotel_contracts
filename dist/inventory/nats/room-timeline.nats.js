@@ -37,7 +37,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnalyticsComparisonResponseDto = exports.ComprehensiveAnalyticsResponseDto = exports.RoomSuggestionDto = exports.RoomSuggestionNextBookingDto = exports.RoomSuggestionFeaturesDto = exports.GetOptimizedRoomAssignmentRequest = exports.RoomBookingAvailability = exports.ConflictInfo = exports.RoomTimelineItem = exports.TimelineEvent = void 0;
+exports.AnalyticsComparisonResponseDto = exports.ComprehensiveAnalyticsResponseDto = exports.OccupancyForecastDto = exports.TopPerformingRoomDto = exports.RevenueBreakdownItemDto = exports.HourlyOccupancyDto = exports.RoomTypePerformanceDto = exports.DailyTrendDto = exports.RoomSuggestionDto = exports.RoomSuggestionNextBookingDto = exports.RoomSuggestionFeaturesDto = exports.GetOptimizedRoomAssignmentRequest = exports.RoomBookingAvailability = exports.ConflictInfo = exports.RoomTimelineItem = exports.TimelineEvent = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -458,6 +458,189 @@ __decorate([
     (0, class_transformer_1.Type)(() => RoomSuggestionNextBookingDto),
     __metadata("design:type", RoomSuggestionNextBookingDto)
 ], RoomSuggestionDto.prototype, "nextBooking", void 0);
+class DailyTrendDto {
+    date;
+    occupancyRate;
+    adr;
+    revpar;
+    revenue;
+    availableRooms;
+    occupiedRooms;
+}
+exports.DailyTrendDto = DailyTrendDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], DailyTrendDto.prototype, "date", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyTrendDto.prototype, "occupancyRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyTrendDto.prototype, "adr", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyTrendDto.prototype, "revpar", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyTrendDto.prototype, "revenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyTrendDto.prototype, "availableRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyTrendDto.prototype, "occupiedRooms", void 0);
+class RoomTypePerformanceDto {
+    roomType;
+    totalRooms;
+    occupancyRate;
+    adr;
+    revpar;
+    revenue;
+    avgBookingValue;
+}
+exports.RoomTypePerformanceDto = RoomTypePerformanceDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: Object }),
+    __metadata("design:type", Object)
+], RoomTypePerformanceDto.prototype, "roomType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RoomTypePerformanceDto.prototype, "totalRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RoomTypePerformanceDto.prototype, "occupancyRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RoomTypePerformanceDto.prototype, "adr", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RoomTypePerformanceDto.prototype, "revpar", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RoomTypePerformanceDto.prototype, "revenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RoomTypePerformanceDto.prototype, "avgBookingValue", void 0);
+class HourlyOccupancyDto {
+    hour;
+    occupancyRate;
+    checkIns;
+    checkOuts;
+}
+exports.HourlyOccupancyDto = HourlyOccupancyDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HourlyOccupancyDto.prototype, "hour", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HourlyOccupancyDto.prototype, "occupancyRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HourlyOccupancyDto.prototype, "checkIns", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HourlyOccupancyDto.prototype, "checkOuts", void 0);
+class RevenueBreakdownItemDto {
+    source;
+    revenue;
+    percentage;
+    color;
+}
+exports.RevenueBreakdownItemDto = RevenueBreakdownItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], RevenueBreakdownItemDto.prototype, "source", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueBreakdownItemDto.prototype, "revenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueBreakdownItemDto.prototype, "percentage", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], RevenueBreakdownItemDto.prototype, "color", void 0);
+class TopPerformingRoomDto {
+    roomNumber;
+    roomType;
+    revenue;
+    occupancyRate;
+    adr;
+    totalBookings;
+    avgRating;
+}
+exports.TopPerformingRoomDto = TopPerformingRoomDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], TopPerformingRoomDto.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], TopPerformingRoomDto.prototype, "roomType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], TopPerformingRoomDto.prototype, "revenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], TopPerformingRoomDto.prototype, "occupancyRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], TopPerformingRoomDto.prototype, "adr", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], TopPerformingRoomDto.prototype, "totalBookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], TopPerformingRoomDto.prototype, "avgRating", void 0);
+class OccupancyForecastDto {
+    date;
+    predictedOccupancy;
+    predictedRevenue;
+    demandLevel;
+}
+exports.OccupancyForecastDto = OccupancyForecastDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: String }),
+    __metadata("design:type", String)
+], OccupancyForecastDto.prototype, "date", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyForecastDto.prototype, "predictedOccupancy", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyForecastDto.prototype, "predictedRevenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: ['LOW', 'MEDIUM', 'HIGH', 'PEAK'] }),
+    __metadata("design:type", String)
+], OccupancyForecastDto.prototype, "demandLevel", void 0);
 /**
  * Comprehensive Analytics Response DTO
  * REST API response for GET /api/rooms/analytics/comprehensive
@@ -495,62 +678,23 @@ __decorate([
     __metadata("design:type", Object)
 ], ComprehensiveAnalyticsResponseDto.prototype, "overview", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Daily trends data',
-        type: 'array',
-        items: {
-            type: 'object',
-            properties: {
-                date: { type: 'string' },
-                occupancyRate: { type: 'number' },
-                adr: { type: 'number' },
-                revpar: { type: 'number' },
-                revenue: { type: 'number' },
-                availableRooms: { type: 'number' },
-                occupiedRooms: { type: 'number' }
-            }
-        }
-    }),
+    (0, swagger_1.ApiProperty)({ description: 'Daily trends data', type: [DailyTrendDto] }),
     __metadata("design:type", Array)
 ], ComprehensiveAnalyticsResponseDto.prototype, "trends", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Room type performance metrics',
-        type: 'array',
-        items: {
-            type: 'object',
-            properties: {
-                roomType: { type: 'object' },
-                totalRooms: { type: 'number' },
-                occupancyRate: { type: 'number' },
-                adr: { type: 'number' },
-                revpar: { type: 'number' },
-                revenue: { type: 'number' },
-                avgBookingValue: { type: 'number' }
-            }
-        }
-    }),
+    (0, swagger_1.ApiProperty)({ description: 'Room type performance metrics', type: [RoomTypePerformanceDto] }),
     __metadata("design:type", Array)
 ], ComprehensiveAnalyticsResponseDto.prototype, "roomTypePerformance", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Hourly occupancy data',
-        type: 'array'
-    }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hourly occupancy data', type: [HourlyOccupancyDto] }),
     __metadata("design:type", Array)
 ], ComprehensiveAnalyticsResponseDto.prototype, "hourlyOccupancy", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Revenue breakdown by source',
-        type: 'array'
-    }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Revenue breakdown by source', type: [RevenueBreakdownItemDto] }),
     __metadata("design:type", Array)
 ], ComprehensiveAnalyticsResponseDto.prototype, "revenueBreakdown", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Top performing rooms',
-        type: 'array'
-    }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Top performing rooms', type: [TopPerformingRoomDto] }),
     __metadata("design:type", Array)
 ], ComprehensiveAnalyticsResponseDto.prototype, "topPerformingRooms", void 0);
 __decorate([
@@ -562,10 +706,7 @@ __decorate([
     __metadata("design:type", Object)
 ], ComprehensiveAnalyticsResponseDto.prototype, "cleaningMetrics", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Occupancy forecast',
-        type: 'array'
-    }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Occupancy forecast', type: [OccupancyForecastDto] }),
     __metadata("design:type", Array)
 ], ComprehensiveAnalyticsResponseDto.prototype, "forecast", void 0);
 /**
