@@ -341,7 +341,7 @@ export class CustomerNatsResponse {
   @ApiProperty({ description: 'Total amount spent', example: '2500000.50' })
   totalSpent!: string;
 
-  @ApiPropertyOptional({ description: 'Last booking date' })
+  @ApiPropertyOptional({ description: 'Last booking date', type: String })
   lastBookingDate?: string | Date;
 
   @ApiPropertyOptional({ description: 'Average stay duration in nights' })
@@ -510,7 +510,7 @@ export class RecalculateBookingStatsData {
   @ApiProperty({ description: 'Total amount spent', example: '2500000.50' })
   totalSpent: string;
 
-  @ApiPropertyOptional({ description: 'Last booking date' })
+  @ApiPropertyOptional({ description: 'Last booking date', type: String })
   lastBookingDate?: string | Date;
 
   @ApiPropertyOptional({ description: 'Current membership level' })

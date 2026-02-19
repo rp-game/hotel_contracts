@@ -503,7 +503,7 @@ __decorate([
     __metadata("design:type", String)
 ], CustomerNatsResponse.prototype, "totalSpent", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Last booking date' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Last booking date', type: String }),
     __metadata("design:type", Object)
 ], CustomerNatsResponse.prototype, "lastBookingDate", void 0);
 __decorate([
@@ -614,7 +614,7 @@ __decorate([
     __metadata("design:type", String)
 ], RecalculateBookingStatsData.prototype, "totalSpent", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Last booking date' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Last booking date', type: String }),
     __metadata("design:type", Object)
 ], RecalculateBookingStatsData.prototype, "lastBookingDate", void 0);
 __decorate([
