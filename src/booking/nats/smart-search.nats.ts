@@ -186,14 +186,7 @@ export class SmartRecommendation {
    * Room availability status
    */
   @ApiProperty({ description: 'Availability information', type: AvailabilityInfoDto })
-  availability: {
-    isAvailable: boolean;
-    alternativeDates?: Array<{
-      checkIn: string;
-      checkOut: string;
-      reason: string;
-    }>;
-  };
+  availability: AvailabilityInfoDto;
 
   /**
    * Room features (e.g., ['King bed', 'Work desk', 'Mini bar'])
@@ -236,13 +229,7 @@ export class SmartRecommendation {
    * Available promotions for this room
    */
   @ApiProperty({ description: 'Available promotions', type: [PromotionSummaryDto] })
-  promotions: Array<{
-    id: string;
-    name: string;
-    description: string;
-    discount: string;
-    applicable: boolean;
-  }>;
+  promotions: PromotionSummaryDto[];
 }
 
 /**

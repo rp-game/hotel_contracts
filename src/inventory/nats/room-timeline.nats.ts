@@ -683,45 +683,11 @@ export interface ComprehensiveAnalytics {
     checkoutOnTime: number;
     cleaningEfficiency: number;
   };
-  trends: {
-    date: string;
-    occupancyRate: number;
-    adr: number;
-    revpar: number;
-    revenue: number;
-    availableRooms: number;
-    occupiedRooms: number;
-  }[];
-  roomTypePerformance: {
-    roomType: { name: string; id: string } | string;
-    totalRooms: number;
-    occupancyRate: number;
-    adr: number;
-    revpar: number;
-    revenue: number;
-    avgBookingValue: number;
-  }[];
-  hourlyOccupancy?: {
-    hour: number;
-    occupancyRate: number;
-    checkIns: number;
-    checkOuts: number;
-  }[];
-  revenueBreakdown?: {
-    source: string;
-    revenue: number;
-    percentage: number;
-    color: string;
-  }[];
-  topPerformingRooms?: {
-    roomNumber: string;
-    roomType: string;
-    revenue: number;
-    occupancyRate: number;
-    adr: number;
-    totalBookings: number;
-    avgRating: number;
-  }[];
+  trends: DailyTrendDto[];
+  roomTypePerformance: RoomTypePerformanceDto[];
+  hourlyOccupancy?: HourlyOccupancyDto[];
+  revenueBreakdown?: RevenueBreakdownItemDto[];
+  topPerformingRooms?: TopPerformingRoomDto[];
   cleaningMetrics?: {
     avgCleaningTime: number;
     onTimeCompletion: number;
@@ -729,12 +695,7 @@ export interface ComprehensiveAnalytics {
     staffEfficiency: number;
     totalTasksCompleted: number;
   };
-  forecast?: {
-    date: string;
-    predictedOccupancy: number;
-    predictedRevenue: number;
-    demandLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'PEAK';
-  }[];
+  forecast?: OccupancyForecastDto[];
 }
 
 export type GetComprehensiveAnalyticsResponse = ComprehensiveAnalytics;
@@ -863,53 +824,19 @@ export class ComprehensiveAnalyticsResponseDto {
   };
 
   @ApiProperty({ description: 'Daily trends data', type: [DailyTrendDto] })
-  trends: {
-    date: string;
-    occupancyRate: number;
-    adr: number;
-    revpar: number;
-    revenue: number;
-    availableRooms: number;
-    occupiedRooms: number;
-  }[];
+  trends: DailyTrendDto[];
 
   @ApiProperty({ description: 'Room type performance metrics', type: [RoomTypePerformanceDto] })
-  roomTypePerformance: {
-    roomType: { name: string; id: string } | string;
-    totalRooms: number;
-    occupancyRate: number;
-    adr: number;
-    revpar: number;
-    revenue: number;
-    avgBookingValue: number;
-  }[];
+  roomTypePerformance: RoomTypePerformanceDto[];
 
   @ApiPropertyOptional({ description: 'Hourly occupancy data', type: [HourlyOccupancyDto] })
-  hourlyOccupancy?: {
-    hour: number;
-    occupancyRate: number;
-    checkIns: number;
-    checkOuts: number;
-  }[];
+  hourlyOccupancy?: HourlyOccupancyDto[];
 
   @ApiPropertyOptional({ description: 'Revenue breakdown by source', type: [RevenueBreakdownItemDto] })
-  revenueBreakdown?: {
-    source: string;
-    revenue: number;
-    percentage: number;
-    color: string;
-  }[];
+  revenueBreakdown?: RevenueBreakdownItemDto[];
 
   @ApiPropertyOptional({ description: 'Top performing rooms', type: [TopPerformingRoomDto] })
-  topPerformingRooms?: {
-    roomNumber: string;
-    roomType: string;
-    revenue: number;
-    occupancyRate: number;
-    adr: number;
-    totalBookings: number;
-    avgRating: number;
-  }[];
+  topPerformingRooms?: TopPerformingRoomDto[];
 
   @ApiPropertyOptional({
     description: 'Cleaning metrics and efficiency',
@@ -925,12 +852,7 @@ export class ComprehensiveAnalyticsResponseDto {
   };
 
   @ApiPropertyOptional({ description: 'Occupancy forecast', type: [OccupancyForecastDto] })
-  forecast?: {
-    date: string;
-    predictedOccupancy: number;
-    predictedRevenue: number;
-    demandLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'PEAK';
-  }[];
+  forecast?: OccupancyForecastDto[];
 }
 
 /**

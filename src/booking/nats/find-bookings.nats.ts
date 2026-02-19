@@ -137,11 +137,7 @@ export class BookingSummary {
    * Room assignments
    */
   @ApiPropertyOptional({ description: 'Room assignments', type: [RoomAssignmentSummaryDto] })
-  rooms?: Array<{
-    id: string;
-    roomNumber: string;
-    roomTypeName: string;
-  }>;
+  rooms?: RoomAssignmentSummaryDto[];
 
   /**
    * Tenant ID (multi-tenant isolation)
