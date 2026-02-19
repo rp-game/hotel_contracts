@@ -103,7 +103,6 @@ export class FindAllLoyaltyTiersDto {
   @ApiProperty({
     description: 'List of loyalty tiers with full details',
     type: [LoyaltyTierNatsResponse],
-    isArray: true
   })
   tiers!: LoyaltyTierNatsResponse[];
 

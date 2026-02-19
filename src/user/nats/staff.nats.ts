@@ -177,7 +177,7 @@ export class StaffActivityLogDto {
   @ApiProperty({ description: 'Staff ID' })
   staffId: string;
 
-  @ApiProperty({ description: 'List of activities', type: StaffActivityDto, isArray: true })
+  @ApiProperty({ description: 'List of activities', type: [StaffActivityDto] })
   activities: StaffActivityDto[];
 
   @ApiProperty({ description: 'Pagination info' })

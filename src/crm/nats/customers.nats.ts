@@ -359,7 +359,7 @@ export class CustomerNatsResponse {
   @ApiPropertyOptional({ description: 'Loyalty member information (single active membership)' })
   loyaltyMember?: LoyaltyMemberInfo;
 
-  @ApiPropertyOptional({ type: 'array', description: 'Loyalty program memberships (legacy - multiple memberships)' })
+  @ApiPropertyOptional({ type: [Object], description: 'Loyalty program memberships (legacy - multiple memberships)' })
   loyaltyMembers?: any[];
 }
 

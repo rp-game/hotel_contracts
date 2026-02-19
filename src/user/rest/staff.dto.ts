@@ -219,8 +219,7 @@ export class StaffDto {
 export class StaffListResponseDto {
   @ApiProperty({
     description: 'List of staff members',
-    type: StaffDto,
-    isArray: true
+    type: [StaffDto],
   })
   data: StaffDto[];
 

@@ -175,7 +175,7 @@ export class DynamicRateCalculation {
   @ApiProperty({ description: 'Rate breakdown details', type: RateBreakdown })
   breakdown: RateBreakdown;
 
-  @ApiProperty({ description: 'Adjustment details', isArray: true })
+  @ApiProperty({ description: 'Adjustment details', type: [String] })
   adjustmentDetails: string[];
 }
 

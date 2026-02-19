@@ -40,8 +40,7 @@ export class FindAllMealPlanRatesRequest {
 export class FindAllMealPlanRatesResponse {
   @ApiProperty({
     description: 'List of meal plan rates',
-    type: MealPlanRate,
-    isArray: true,
+    type: [MealPlanRate],
   })
   data: MealPlanRate[];
 }

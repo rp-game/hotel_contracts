@@ -52,13 +52,13 @@ export class GuestPreferenceNatsData {
   /**
    * Dietary restrictions array
    */
-  @ApiPropertyOptional({ description: 'Dietary restrictions', type: 'array', items: { type: 'string' } })
+  @ApiPropertyOptional({ description: 'Dietary restrictions', type: [String] })
   dietaryRestrictions?: string[];
 
   /**
    * Special occasions
    */
-  @ApiPropertyOptional({ description: 'Special occasions', type: 'array', items: { type: 'string' } })
+  @ApiPropertyOptional({ description: 'Special occasions', type: [String] })
   specialOccasions?: string[];
 
   /**
@@ -70,7 +70,7 @@ export class GuestPreferenceNatsData {
   /**
    * Accessibility requirements
    */
-  @ApiPropertyOptional({ description: 'Accessibility requirements', type: 'array', items: { type: 'string' } })
+  @ApiPropertyOptional({ description: 'Accessibility requirements', type: [String] })
   accessibilityRequirements?: string[];
 
   /**

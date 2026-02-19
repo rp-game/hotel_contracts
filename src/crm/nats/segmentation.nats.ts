@@ -354,8 +354,7 @@ export interface SegmentMembershipNatsResponse {
 export class SegmentMembersNatsResponse {
   @ApiProperty({
     description: 'List of customers in the segment',
-    type: () => CustomerNatsResponse,
-    isArray: true
+    type: () => [CustomerNatsResponse],
   })
   data: any[]; // Will be CustomerNatsResponse[] - using any to avoid circular dependency
 

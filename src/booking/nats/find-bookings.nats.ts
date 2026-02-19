@@ -7,7 +7,7 @@
  * Used by: dashboard bookings list with pagination and filtering
  */
 
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 /**
@@ -18,6 +18,12 @@ import { NatsResponse } from '../../common/nats-response.interface';
  * Booking summary for list operations
  * Contains essential fields for display without full booking details
  */
+export class RoomAssignmentSummaryDto {
+  @ApiProperty({ type: String }) id!: string;
+  @ApiProperty({ type: String }) roomNumber!: string;
+  @ApiProperty({ type: String }) roomTypeName!: string;
+}
+
 export class BookingSummary {
   /**
    * Unique booking ID
@@ -130,19 +136,7 @@ export class BookingSummary {
   /**
    * Room assignments
    */
-  @ApiProperty({ 
-    description: 'Room assignments',
-    type: 'array',
-    items: {
-      type: 'object',
-      properties: {
-        id: { type: 'string', description: 'Room ID' },
-        roomNumber: { type: 'string', description: 'Room number' },
-        roomTypeName: { type: 'string', description: 'Room type name' }
-      }
-    },
-    required: false
-  })
+  @ApiPropertyOptional({ description: 'Room assignments', type: [RoomAssignmentSummaryDto] })
   rooms?: Array<{
     id: string;
     roomNumber: string;

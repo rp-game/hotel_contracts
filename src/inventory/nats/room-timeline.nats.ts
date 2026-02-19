@@ -774,6 +774,57 @@ export interface AnalyticsComparison {
 
 export type GetAnalyticsComparisonResponse = AnalyticsComparison;
 
+export class DailyTrendDto {
+  @ApiProperty({ type: String }) date!: string;
+  @ApiProperty() occupancyRate!: number;
+  @ApiProperty() adr!: number;
+  @ApiProperty() revpar!: number;
+  @ApiProperty() revenue!: number;
+  @ApiProperty() availableRooms!: number;
+  @ApiProperty() occupiedRooms!: number;
+}
+
+export class RoomTypePerformanceDto {
+  @ApiProperty({ type: Object }) roomType!: { name: string; id: string } | string;
+  @ApiProperty() totalRooms!: number;
+  @ApiProperty() occupancyRate!: number;
+  @ApiProperty() adr!: number;
+  @ApiProperty() revpar!: number;
+  @ApiProperty() revenue!: number;
+  @ApiProperty() avgBookingValue!: number;
+}
+
+export class HourlyOccupancyDto {
+  @ApiProperty() hour!: number;
+  @ApiProperty() occupancyRate!: number;
+  @ApiProperty() checkIns!: number;
+  @ApiProperty() checkOuts!: number;
+}
+
+export class RevenueBreakdownItemDto {
+  @ApiProperty({ type: String }) source!: string;
+  @ApiProperty() revenue!: number;
+  @ApiProperty() percentage!: number;
+  @ApiProperty({ type: String }) color!: string;
+}
+
+export class TopPerformingRoomDto {
+  @ApiProperty({ type: String }) roomNumber!: string;
+  @ApiProperty({ type: String }) roomType!: string;
+  @ApiProperty() revenue!: number;
+  @ApiProperty() occupancyRate!: number;
+  @ApiProperty() adr!: number;
+  @ApiProperty() totalBookings!: number;
+  @ApiProperty() avgRating!: number;
+}
+
+export class OccupancyForecastDto {
+  @ApiProperty({ type: String }) date!: string;
+  @ApiProperty() predictedOccupancy!: number;
+  @ApiProperty() predictedRevenue!: number;
+  @ApiProperty({ enum: ['LOW', 'MEDIUM', 'HIGH', 'PEAK'] }) demandLevel!: 'LOW' | 'MEDIUM' | 'HIGH' | 'PEAK';
+}
+
 /**
  * Comprehensive Analytics Response DTO
  * REST API response for GET /api/rooms/analytics/comprehensive
@@ -811,22 +862,7 @@ export class ComprehensiveAnalyticsResponseDto {
     cleaningEfficiency: number;
   };
 
-  @ApiProperty({
-    description: 'Daily trends data',
-    type: 'array',
-    items: {
-      type: 'object',
-      properties: {
-        date: { type: 'string' },
-        occupancyRate: { type: 'number' },
-        adr: { type: 'number' },
-        revpar: { type: 'number' },
-        revenue: { type: 'number' },
-        availableRooms: { type: 'number' },
-        occupiedRooms: { type: 'number' }
-      }
-    }
-  })
+  @ApiProperty({ description: 'Daily trends data', type: [DailyTrendDto] })
   trends: {
     date: string;
     occupancyRate: number;
@@ -837,22 +873,7 @@ export class ComprehensiveAnalyticsResponseDto {
     occupiedRooms: number;
   }[];
 
-  @ApiProperty({
-    description: 'Room type performance metrics',
-    type: 'array',
-    items: {
-      type: 'object',
-      properties: {
-        roomType: { type: 'object' },
-        totalRooms: { type: 'number' },
-        occupancyRate: { type: 'number' },
-        adr: { type: 'number' },
-        revpar: { type: 'number' },
-        revenue: { type: 'number' },
-        avgBookingValue: { type: 'number' }
-      }
-    }
-  })
+  @ApiProperty({ description: 'Room type performance metrics', type: [RoomTypePerformanceDto] })
   roomTypePerformance: {
     roomType: { name: string; id: string } | string;
     totalRooms: number;
@@ -863,10 +884,7 @@ export class ComprehensiveAnalyticsResponseDto {
     avgBookingValue: number;
   }[];
 
-  @ApiPropertyOptional({
-    description: 'Hourly occupancy data',
-    type: 'array'
-  })
+  @ApiPropertyOptional({ description: 'Hourly occupancy data', type: [HourlyOccupancyDto] })
   hourlyOccupancy?: {
     hour: number;
     occupancyRate: number;
@@ -874,10 +892,7 @@ export class ComprehensiveAnalyticsResponseDto {
     checkOuts: number;
   }[];
 
-  @ApiPropertyOptional({
-    description: 'Revenue breakdown by source',
-    type: 'array'
-  })
+  @ApiPropertyOptional({ description: 'Revenue breakdown by source', type: [RevenueBreakdownItemDto] })
   revenueBreakdown?: {
     source: string;
     revenue: number;
@@ -885,10 +900,7 @@ export class ComprehensiveAnalyticsResponseDto {
     color: string;
   }[];
 
-  @ApiPropertyOptional({
-    description: 'Top performing rooms',
-    type: 'array'
-  })
+  @ApiPropertyOptional({ description: 'Top performing rooms', type: [TopPerformingRoomDto] })
   topPerformingRooms?: {
     roomNumber: string;
     roomType: string;
@@ -912,10 +924,7 @@ export class ComprehensiveAnalyticsResponseDto {
     totalTasksCompleted: number;
   };
 
-  @ApiPropertyOptional({
-    description: 'Occupancy forecast',
-    type: 'array'
-  })
+  @ApiPropertyOptional({ description: 'Occupancy forecast', type: [OccupancyForecastDto] })
   forecast?: {
     date: string;
     predictedOccupancy: number;

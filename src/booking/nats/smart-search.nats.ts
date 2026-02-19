@@ -11,6 +11,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+
 import { NatsResponse } from '../../common/nats-response.interface';
 
 /**
@@ -101,6 +102,25 @@ export interface SmartSearchRequest {
  * Smart Recommendation - individual room recommendation with scoring
  * Used by: SmartSearchResponseDto (recommendations[] + suggestions[])
  */
+export class AlternativeDateDto {
+  @ApiProperty({ type: String }) checkIn!: string;
+  @ApiProperty({ type: String }) checkOut!: string;
+  @ApiProperty({ type: String }) reason!: string;
+}
+
+export class AvailabilityInfoDto {
+  @ApiProperty() isAvailable!: boolean;
+  @ApiPropertyOptional({ type: [AlternativeDateDto] }) alternativeDates?: AlternativeDateDto[];
+}
+
+export class PromotionSummaryDto {
+  @ApiProperty({ type: String }) id!: string;
+  @ApiProperty({ type: String }) name!: string;
+  @ApiProperty({ type: String }) description!: string;
+  @ApiProperty({ type: String }) discount!: string;
+  @ApiProperty() applicable!: boolean;
+}
+
 export class SmartRecommendation {
   /**
    * Unique recommendation ID
@@ -165,25 +185,7 @@ export class SmartRecommendation {
   /**
    * Room availability status
    */
-  @ApiProperty({
-    description: 'Availability information',
-    type: 'object',
-    properties: {
-      isAvailable: { type: 'boolean', description: 'Is room available for dates' },
-      alternativeDates: {
-        type: 'array',
-        description: 'Alternative date options if requested dates unavailable',
-        items: {
-          type: 'object',
-          properties: {
-            checkIn: { type: 'string', description: 'Alternative check-in date' },
-            checkOut: { type: 'string', description: 'Alternative check-out date' },
-            reason: { type: 'string', description: 'Reason for alternative dates' }
-          }
-        }
-      }
-    }
-  })
+  @ApiProperty({ description: 'Availability information', type: AvailabilityInfoDto })
   availability: {
     isAvailable: boolean;
     alternativeDates?: Array<{
@@ -233,20 +235,7 @@ export class SmartRecommendation {
   /**
    * Available promotions for this room
    */
-  @ApiProperty({
-    description: 'Available promotions',
-    type: 'array',
-    items: {
-      type: 'object',
-      properties: {
-        id: { type: 'string', description: 'Promotion ID' },
-        name: { type: 'string', description: 'Promotion name' },
-        description: { type: 'string', description: 'Promotion description' },
-        discount: { type: 'string', description: 'Discount amount/percentage' },
-        applicable: { type: 'boolean', description: 'Is applicable for this booking' }
-      }
-    }
-  })
+  @ApiProperty({ description: 'Available promotions', type: [PromotionSummaryDto] })
   promotions: Array<{
     id: string;
     name: string;

@@ -33,8 +33,7 @@ export class FindAllRoomTypeBaseRatesRequest {
 export class FindAllRoomTypeBaseRatesResponse {
   @ApiProperty({
     description: 'List of room type base rates',
-    type: RoomTypeBaseRate,
-    isArray: true,
+    type: [RoomTypeBaseRate],
   })
   data: RoomTypeBaseRate[];
 }
@@ -269,8 +268,7 @@ export class BulkUpsertRoomTypeBaseRatesRequest {
 export class BulkUpsertRoomTypeBaseRatesResponse {
   @ApiProperty({
     description: 'List of upserted room type base rates',
-    type: [Object], // RoomTypeBaseRate type
-    isArray: true,
+    type: [RoomTypeBaseRate],
   })
   data: RoomTypeBaseRate[];
 
