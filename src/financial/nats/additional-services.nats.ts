@@ -595,7 +595,7 @@ export class ServiceDashboardResponseDto {
 /**
  * NATS Response Types
  */
-export type FindAllAdditionalServicesNatsResponse = NatsResponse<AdditionalServiceResponseDto[]>;
+export type FindAllAdditionalServicesNatsResponse = NatsResponse<ServiceListResponseDto>;
 export type FindOneAdditionalServiceNatsResponse = NatsResponse<AdditionalServiceResponseDto>;
 export type CreateAdditionalServiceNatsResponse = NatsResponse<AdditionalServiceResponseDto>;
 export type UpdateAdditionalServiceNatsResponse = NatsResponse<AdditionalServiceResponseDto>;
