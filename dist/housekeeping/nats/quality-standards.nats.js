@@ -69,7 +69,8 @@ class QualityStandard {
     id;
     name;
     description;
-    roomType;
+    roomTypeId;
+    roomTypeName;
     version;
     isActive;
     items;
@@ -97,9 +98,13 @@ __decorate([
     __metadata("design:type", String)
 ], QualityStandard.prototype, "description", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'RoomType enum value as string' }),
+    (0, swagger_1.ApiProperty)({ description: 'Room type ID from inventory service' }),
     __metadata("design:type", String)
-], QualityStandard.prototype, "roomType", void 0);
+], QualityStandard.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room type name (cached from inventory)' }),
+    __metadata("design:type", String)
+], QualityStandard.prototype, "roomTypeName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Version number' }),
     __metadata("design:type", Number)

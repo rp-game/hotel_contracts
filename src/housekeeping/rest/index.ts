@@ -33,5 +33,11 @@ export {
   TimerReportDataDto,
 } from './timers.rest';
 
+// Quality Standards REST Query DTOs
+export {
+  GetAllQualityStandardsQueryDto,
+  GetQualityStandardsStatisticsQueryDto,
+} from './quality-standards.rest';
+
 // Re-export NATS contracts for internal use
 export * from '../nats';

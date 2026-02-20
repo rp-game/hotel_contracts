@@ -47,8 +47,11 @@ export class QualityStandard {
   @ApiPropertyOptional({ description: 'Standard description' })
   description?: string;
 
-  @ApiProperty({ description: 'RoomType enum value as string' })
-  roomType: string;
+  @ApiProperty({ description: 'Room type ID from inventory service' })
+  roomTypeId: string;
+
+  @ApiPropertyOptional({ description: 'Room type name (cached from inventory)' })
+  roomTypeName?: string;
 
   @ApiProperty({ description: 'Version number' })
   version: number;
@@ -92,7 +95,7 @@ export interface CreateQualityStandardNatsRequest {
   createData: {
     name: string;
     description?: string;
-    roomType: string;  // RoomType enum value
+    roomTypeId: string;  // Room type ID from inventory service
     passingScore: number;
     createdBy: string;  // User ID creating this standard - REQUIRED
     items: QualityStandardItem[];
@@ -112,7 +115,7 @@ export interface FindAllQualityStandardsNatsRequest {
   filters?: {
     page?: number;
     limit?: number;
-    roomType?: string;
+    roomTypeId?: string;
     isActive?: boolean;
   };
 }
@@ -158,7 +161,7 @@ export type QualityStandardsStatisticsNatsResponse = NatsResponse<QualityStandar
 
 // FIND-BY-ROOM-TYPE
 export interface FindByRoomTypeNatsRequest {
-  roomType: string;
+  roomTypeId: string;
   tenantId: string;
   hotelId: string;
 }
@@ -178,7 +181,7 @@ export interface UpdateQualityStandardNatsRequest {
   updateData: {
     name?: string;
     description?: string;
-    roomType?: string;  // RoomType enum value
+    roomTypeId?: string;  // Room type ID from inventory service
     passingScore?: number;
     configuration?: Record<string, any>;
     effectiveDate?: string | Date;

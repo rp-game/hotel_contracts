@@ -18,7 +18,8 @@ export declare class QualityStandard {
     id: string;
     name: string;
     description?: string;
-    roomType: string;
+    roomTypeId: string;
+    roomTypeName?: string;
     version: number;
     isActive: boolean;
     items: QualityStandardItem[];
@@ -36,7 +37,7 @@ export interface CreateQualityStandardNatsRequest {
     createData: {
         name: string;
         description?: string;
-        roomType: string;
+        roomTypeId: string;
         passingScore: number;
         createdBy: string;
         items: QualityStandardItem[];
@@ -54,7 +55,7 @@ export interface FindAllQualityStandardsNatsRequest {
     filters?: {
         page?: number;
         limit?: number;
-        roomType?: string;
+        roomTypeId?: string;
         isActive?: boolean;
     };
 }
@@ -81,7 +82,7 @@ export declare class QualityStandardsStatistics {
 }
 export type QualityStandardsStatisticsNatsResponse = NatsResponse<QualityStandardsStatistics>;
 export interface FindByRoomTypeNatsRequest {
-    roomType: string;
+    roomTypeId: string;
     tenantId: string;
     hotelId: string;
 }
@@ -97,7 +98,7 @@ export interface UpdateQualityStandardNatsRequest {
     updateData: {
         name?: string;
         description?: string;
-        roomType?: string;
+        roomTypeId?: string;
         passingScore?: number;
         configuration?: Record<string, any>;
         effectiveDate?: string | Date;
