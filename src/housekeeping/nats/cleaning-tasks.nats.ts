@@ -16,9 +16,14 @@ import { NatsResponse } from '../../common';
  */
 export enum CleaningTaskStatus {
   PENDING = 'PENDING',
+  ASSIGNED = 'ASSIGNED',
   IN_PROGRESS = 'IN_PROGRESS',
+  PAUSED = 'PAUSED',
   COMPLETED = 'COMPLETED',
+  VERIFIED = 'VERIFIED',
+  REJECTED = 'REJECTED',
   CANCELLED = 'CANCELLED',
+  OVERDUE = 'OVERDUE',
 }
 
 /**

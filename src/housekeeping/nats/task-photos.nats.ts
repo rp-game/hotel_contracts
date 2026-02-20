@@ -19,6 +19,7 @@ export enum PhotoCategory {
   DURING = 'DURING',
   AFTER = 'AFTER',
   ISSUE = 'ISSUE',
+  MAINTENANCE = 'MAINTENANCE',
   COMPLETED = 'COMPLETED',
 }
 

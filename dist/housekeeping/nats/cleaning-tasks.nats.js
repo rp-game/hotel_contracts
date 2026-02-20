@@ -26,9 +26,14 @@ const swagger_1 = require("@nestjs/swagger");
 var CleaningTaskStatus;
 (function (CleaningTaskStatus) {
     CleaningTaskStatus["PENDING"] = "PENDING";
+    CleaningTaskStatus["ASSIGNED"] = "ASSIGNED";
     CleaningTaskStatus["IN_PROGRESS"] = "IN_PROGRESS";
+    CleaningTaskStatus["PAUSED"] = "PAUSED";
     CleaningTaskStatus["COMPLETED"] = "COMPLETED";
+    CleaningTaskStatus["VERIFIED"] = "VERIFIED";
+    CleaningTaskStatus["REJECTED"] = "REJECTED";
     CleaningTaskStatus["CANCELLED"] = "CANCELLED";
+    CleaningTaskStatus["OVERDUE"] = "OVERDUE";
 })(CleaningTaskStatus || (exports.CleaningTaskStatus = CleaningTaskStatus = {}));
 /**
  * Cleaning Task Type Enum

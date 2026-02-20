@@ -29,6 +29,7 @@ var PhotoCategory;
     PhotoCategory["DURING"] = "DURING";
     PhotoCategory["AFTER"] = "AFTER";
     PhotoCategory["ISSUE"] = "ISSUE";
+    PhotoCategory["MAINTENANCE"] = "MAINTENANCE";
     PhotoCategory["COMPLETED"] = "COMPLETED";
 })(PhotoCategory || (exports.PhotoCategory = PhotoCategory = {}));
 /**
