@@ -64,4 +64,11 @@ export declare class CustomerBookingsListNatsResponse {
  * Full NATS response for customer bookings
  */
 export type CustomerBookingsNatsResponseType = NatsResponse<CustomerBookingsListNatsResponse>;
+/**
+ * NATS Pattern: booking.customer.stats
+ */
+export interface GetCustomerBookingStatsNatsRequest {
+    tenantId: string;
+    customerId: string;
+}
 //# sourceMappingURL=customer-bookings.nats.d.ts.map

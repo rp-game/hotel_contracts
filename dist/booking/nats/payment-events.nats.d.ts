@@ -56,4 +56,29 @@ export interface FindByTransactionIdNatsResponseData {
     }>;
 }
 export type FindByTransactionIdNatsResponse = NatsResponse<FindByTransactionIdNatsResponseData>;
+/**
+ * NATS Pattern: payment.expired
+ * Sent by payment-service when a payment expires
+ */
+export interface PaymentExpiredNatsRequest {
+    bookingId: string;
+    paymentId: string;
+    tenantId: string;
+    hotelId: string;
+}
+/**
+ * NATS Pattern: payment.offline.confirmed
+ * Sent by payment-service when an offline payment is confirmed
+ */
+export interface OfflinePaymentConfirmedNatsRequest {
+    paymentId: string;
+    bookingId: string;
+    amount: number;
+    currency: string;
+    method: string;
+    reference?: string;
+    confirmedAt: string;
+    tenantId: string;
+    hotelId: string;
+}
 //# sourceMappingURL=payment-events.nats.d.ts.map

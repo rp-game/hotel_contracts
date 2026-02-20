@@ -36,3 +36,32 @@ export interface GetBookingByRoomAndGuestNatsRequest {
 }
 
 export type GetBookingByRoomAndGuestNatsResponse = NatsResponse<BookingResponseDto | null>;
+
+
+/**
+ * NATS Pattern: booking.bookings.findOne
+ * Lookup with tenant/hotel context validation
+ */
+export interface FindBookingByIdNatsRequest {
+  id: string;
+  tenantId: string;
+  hotelId: string;
+}
+
+/**
+ * NATS Pattern: booking.guests.findOne
+ */
+export interface FindGuestByIdNatsRequest {
+  id: string;
+  tenantId: string;
+  hotelId: string;
+}
+
+/**
+ * NATS Pattern: booking.rooms.byStatus
+ */
+export interface GetRoomsByStatusNatsRequest {
+  tenantId: string;
+  hotelId: string;
+  status: string;
+}

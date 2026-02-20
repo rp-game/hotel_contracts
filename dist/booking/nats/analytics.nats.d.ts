@@ -234,4 +234,27 @@ export interface ComprehensiveStatsResponse {
         customers: number;
     };
 }
+export type GetComprehensiveStatsNatsRequest = ComprehensiveStatsRequest;
+export type GetRoomTypePerformanceNatsRequest = RoomTypePerformanceRequest;
+/**
+ * NATS Pattern: bookings.analytics.room_type_stats
+ */
+export interface GetRoomTypeStatsNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    roomTypeId: string;
+    dateRange: {
+        from: string;
+        to: string;
+    };
+}
+/**
+ * NATS Pattern: bookings.analytics.top_performing_rooms
+ */
+export interface GetTopPerformingRoomsNatsRequest {
+    hotelId: string;
+    startDate: string;
+    endDate: string;
+    limit?: number;
+}
 //# sourceMappingURL=analytics.nats.d.ts.map

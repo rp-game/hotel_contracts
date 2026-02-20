@@ -206,4 +206,14 @@ export type UpdateBookingRequest = UpdateBookingDto;
  * Full NATS response type for update booking
  */
 export type UpdateBookingNatsResponse = NatsResponse<UpdateBookingResponse>;
+/**
+ * NATS Pattern: booking.modify
+ * Generic modification request — modificationData is an open record
+ */
+export interface ModifyBookingNatsRequest {
+    id: string;
+    modificationData: Record<string, unknown>;
+    tenantId?: string;
+    hotelId?: string;
+}
 //# sourceMappingURL=update-booking.nats.d.ts.map
