@@ -12,5 +12,8 @@ var RoomStatus;
     RoomStatus["BLOCKED"] = "BLOCKED";
     RoomStatus["DIRTY"] = "DIRTY";
     RoomStatus["OUT_OF_SERVICE"] = "OUT_OF_SERVICE";
+    RoomStatus["OUT_OF_ORDER"] = "OUT_OF_ORDER";
+    RoomStatus["CLEANING"] = "CLEANING";
+    RoomStatus["INACTIVE"] = "INACTIVE";
 })(RoomStatus || (exports.RoomStatus = RoomStatus = {}));
 //# sourceMappingURL=room-status.enum.js.map

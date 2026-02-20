@@ -20,6 +20,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 import { Room as RoomEntity } from '../types';
+import { RoomStatus } from '../enums';
 
 /**
  * Find All Rooms Request
@@ -92,8 +93,8 @@ export interface UpdateRoomRequest {
   roomNumber?: string;
   roomTypeId?: string;
   floor?: number;
-  status?: string;
-  currentStatus?: string; // String representation of status
+  status?: RoomStatus;
+  currentStatus?: RoomStatus; // String representation of status
   features?: Record<string, any>; // Room-specific features
   notes?: string; // Operational notes
   isActive?: boolean;

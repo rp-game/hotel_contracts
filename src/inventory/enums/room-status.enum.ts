@@ -9,4 +9,7 @@ export enum RoomStatus {
   BLOCKED = 'BLOCKED',
   DIRTY = 'DIRTY',
   OUT_OF_SERVICE = 'OUT_OF_SERVICE',
+  OUT_OF_ORDER = 'OUT_OF_ORDER',
+  CLEANING = 'CLEANING',
+  INACTIVE = 'INACTIVE',
 }

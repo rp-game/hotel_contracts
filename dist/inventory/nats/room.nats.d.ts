@@ -18,6 +18,7 @@
  */
 import { NatsResponse } from '../../common';
 import { Room as RoomEntity } from '../types';
+import { RoomStatus } from '../enums';
 /**
  * Find All Rooms Request
  * Pattern: inventory.rooms.findAll
@@ -75,8 +76,8 @@ export interface UpdateRoomRequest {
     roomNumber?: string;
     roomTypeId?: string;
     floor?: number;
-    status?: string;
-    currentStatus?: string;
+    status?: RoomStatus;
+    currentStatus?: RoomStatus;
     features?: Record<string, any>;
     notes?: string;
     isActive?: boolean;
