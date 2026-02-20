@@ -16,7 +16,8 @@ export interface UpdatePaymentStatusNatsRequest {
     timestamp?: string;
 }
 export interface PaymentStatusUpdateNatsResponseData {
-    bookingId: string;
+    success: boolean;
+    bookingId?: string;
     previousStatus?: string;
     newStatus?: string;
     paymentStatus?: string;

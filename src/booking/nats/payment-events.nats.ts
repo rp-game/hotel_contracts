@@ -19,7 +19,8 @@ export interface UpdatePaymentStatusNatsRequest {
 }
 
 export interface PaymentStatusUpdateNatsResponseData {
-  bookingId: string;
+  success: boolean;
+  bookingId?: string;
   previousStatus?: string;
   newStatus?: string;
   paymentStatus?: string;
