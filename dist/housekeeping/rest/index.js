@@ -21,7 +21,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetQualityStandardsStatisticsQueryDto = exports.GetAllQualityStandardsQueryDto = exports.TimerReportDataDto = exports.TimerReportTimerItemDto = exports.TimerReportTaskDto = exports.TimerReportStaffStatsDto = exports.TimerReportSummaryDto = exports.AutomationSettingsDto = exports.AutomationLastRunTimesDto = exports.OverdueMonitoringSettingsDto = exports.AutoAssignmentSettingsDto = exports.CheckinAutomationSettingsDto = exports.CheckoutAutomationSettingsDto = exports.LastRunTimesDto = exports.AutomationStatsDto = exports.ActiveRulesDto = exports.AutomationStatusDto = void 0;
+exports.GetQualityStandardsStatisticsQueryDto = exports.GetAllQualityStandardsQueryDto = exports.UpdateQualityStandardDto = exports.CreateQualityStandardDto = exports.TimerReportDataDto = exports.TimerReportTimerItemDto = exports.TimerReportTaskDto = exports.TimerReportStaffStatsDto = exports.TimerReportSummaryDto = exports.AutomationSettingsDto = exports.AutomationLastRunTimesDto = exports.OverdueMonitoringSettingsDto = exports.AutoAssignmentSettingsDto = exports.CheckinAutomationSettingsDto = exports.CheckoutAutomationSettingsDto = exports.LastRunTimesDto = exports.AutomationStatsDto = exports.ActiveRulesDto = exports.AutomationStatusDto = void 0;
 // Shared automation DTOs with @ApiProperty for Swagger documentation
 var automation_rest_1 = require("./automation.rest");
 Object.defineProperty(exports, "AutomationStatusDto", { enumerable: true, get: function () { return automation_rest_1.AutomationStatusDto; } });
@@ -45,6 +45,8 @@ Object.defineProperty(exports, "TimerReportTimerItemDto", { enumerable: true, ge
 Object.defineProperty(exports, "TimerReportDataDto", { enumerable: true, get: function () { return timers_rest_1.TimerReportDataDto; } });
 // Quality Standards REST Query DTOs
 var quality_standards_rest_1 = require("./quality-standards.rest");
+Object.defineProperty(exports, "CreateQualityStandardDto", { enumerable: true, get: function () { return quality_standards_rest_1.CreateQualityStandardDto; } });
+Object.defineProperty(exports, "UpdateQualityStandardDto", { enumerable: true, get: function () { return quality_standards_rest_1.UpdateQualityStandardDto; } });
 Object.defineProperty(exports, "GetAllQualityStandardsQueryDto", { enumerable: true, get: function () { return quality_standards_rest_1.GetAllQualityStandardsQueryDto; } });
 Object.defineProperty(exports, "GetQualityStandardsStatisticsQueryDto", { enumerable: true, get: function () { return quality_standards_rest_1.GetQualityStandardsStatisticsQueryDto; } });
 // Re-export NATS contracts for internal use

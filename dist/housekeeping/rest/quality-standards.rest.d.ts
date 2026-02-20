@@ -1,8 +1,29 @@
+import { QualityStandardItem } from '../nats/quality-standards.nats';
 export declare class GetAllQualityStandardsQueryDto {
     roomTypeId?: string;
     isActive?: boolean;
     page?: number;
     limit?: number;
+}
+export declare class CreateQualityStandardDto {
+    name: string;
+    description?: string;
+    roomTypeId: string;
+    items: QualityStandardItem[];
+    passingScore: number;
+    configuration?: Record<string, any>;
+    effectiveDate?: string;
+    expiryDate?: string;
+}
+export declare class UpdateQualityStandardDto {
+    name?: string;
+    description?: string;
+    roomTypeId?: string;
+    items?: QualityStandardItem[];
+    passingScore?: number;
+    configuration?: Record<string, any>;
+    effectiveDate?: string;
+    expiryDate?: string;
 }
 export declare class GetQualityStandardsStatisticsQueryDto {
     startDate?: string;

@@ -9,14 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetQualityStandardsStatisticsQueryDto = exports.GetAllQualityStandardsQueryDto = void 0;
+exports.GetQualityStandardsStatisticsQueryDto = exports.UpdateQualityStandardDto = exports.CreateQualityStandardDto = exports.GetAllQualityStandardsQueryDto = void 0;
 /**
- * Quality Standards REST Query DTOs
- * Single source of truth for API Gateway query params
+ * Quality Standards REST DTOs
+ * Single source of truth for API Gateway request/query params
  */
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
+const quality_standards_nats_1 = require("../nats/quality-standards.nats");
 class GetAllQualityStandardsQueryDto {
     roomTypeId;
     isActive;
@@ -53,6 +54,128 @@ __decorate([
     (0, class_validator_1.Max)(100),
     __metadata("design:type", Number)
 ], GetAllQualityStandardsQueryDto.prototype, "limit", void 0);
+class CreateQualityStandardDto {
+    name;
+    description;
+    roomTypeId;
+    items;
+    passingScore;
+    configuration;
+    effectiveDate;
+    expiryDate;
+}
+exports.CreateQualityStandardDto = CreateQualityStandardDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Quality standard name' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateQualityStandardDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Description of the standard' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateQualityStandardDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type ID from inventory service' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateQualityStandardDto.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Quality standard items', type: [quality_standards_nats_1.QualityStandardItem] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => quality_standards_nats_1.QualityStandardItem),
+    __metadata("design:type", Array)
+], CreateQualityStandardDto.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Minimum passing score (0-100)' }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(100),
+    __metadata("design:type", Number)
+], CreateQualityStandardDto.prototype, "passingScore", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional configuration' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], CreateQualityStandardDto.prototype, "configuration", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Effective date (ISO string)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], CreateQualityStandardDto.prototype, "effectiveDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Expiry date (ISO string)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], CreateQualityStandardDto.prototype, "expiryDate", void 0);
+class UpdateQualityStandardDto {
+    name;
+    description;
+    roomTypeId;
+    items;
+    passingScore;
+    configuration;
+    effectiveDate;
+    expiryDate;
+}
+exports.UpdateQualityStandardDto = UpdateQualityStandardDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Quality standard name' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateQualityStandardDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Description of the standard' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateQualityStandardDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room type ID from inventory service' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateQualityStandardDto.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Quality standard items', type: [quality_standards_nats_1.QualityStandardItem] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => quality_standards_nats_1.QualityStandardItem),
+    __metadata("design:type", Array)
+], UpdateQualityStandardDto.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Minimum passing score (0-100)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(100),
+    __metadata("design:type", Number)
+], UpdateQualityStandardDto.prototype, "passingScore", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional configuration' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], UpdateQualityStandardDto.prototype, "configuration", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Effective date (ISO string)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], UpdateQualityStandardDto.prototype, "effectiveDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Expiry date (ISO string)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], UpdateQualityStandardDto.prototype, "expiryDate", void 0);
 class GetQualityStandardsStatisticsQueryDto {
     startDate;
     endDate;

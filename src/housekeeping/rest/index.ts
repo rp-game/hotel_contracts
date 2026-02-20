@@ -35,6 +35,8 @@ export {
 
 // Quality Standards REST Query DTOs
 export {
+  CreateQualityStandardDto,
+  UpdateQualityStandardDto,
   GetAllQualityStandardsQueryDto,
   GetQualityStandardsStatisticsQueryDto,
 } from './quality-standards.rest';

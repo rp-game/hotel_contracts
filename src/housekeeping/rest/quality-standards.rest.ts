@@ -1,10 +1,11 @@
 /**
- * Quality Standards REST Query DTOs
- * Single source of truth for API Gateway query params
+ * Quality Standards REST DTOs
+ * Single source of truth for API Gateway request/query params
  */
-import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsUUID, IsBoolean, IsNumber, IsDateString, Min, Max } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsUUID, IsBoolean, IsNumber, IsDateString, IsString, IsArray, ValidateNested, IsObject, Min, Max } from 'class-validator';
 import { Type } from 'class-transformer';
+import { QualityStandardItem } from '../nats/quality-standards.nats';
 
 export class GetAllQualityStandardsQueryDto {
   @ApiPropertyOptional({ description: 'Filter by room type ID (UUID from inventory service)' })
@@ -31,6 +32,94 @@ export class GetAllQualityStandardsQueryDto {
   @Min(1)
   @Max(100)
   limit?: number;
+}
+
+export class CreateQualityStandardDto {
+  @ApiProperty({ description: 'Quality standard name' })
+  @IsString()
+  name: string;
+
+  @ApiPropertyOptional({ description: 'Description of the standard' })
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @ApiProperty({ description: 'Room type ID from inventory service' })
+  @IsUUID()
+  roomTypeId: string;
+
+  @ApiProperty({ description: 'Quality standard items', type: [QualityStandardItem] })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => QualityStandardItem)
+  items: QualityStandardItem[];
+
+  @ApiProperty({ description: 'Minimum passing score (0-100)' })
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  passingScore: number;
+
+  @ApiPropertyOptional({ description: 'Additional configuration' })
+  @IsOptional()
+  @IsObject()
+  configuration?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Effective date (ISO string)' })
+  @IsOptional()
+  @IsDateString()
+  effectiveDate?: string;
+
+  @ApiPropertyOptional({ description: 'Expiry date (ISO string)' })
+  @IsOptional()
+  @IsDateString()
+  expiryDate?: string;
+}
+
+export class UpdateQualityStandardDto {
+  @ApiPropertyOptional({ description: 'Quality standard name' })
+  @IsOptional()
+  @IsString()
+  name?: string;
+
+  @ApiPropertyOptional({ description: 'Description of the standard' })
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @ApiPropertyOptional({ description: 'Room type ID from inventory service' })
+  @IsOptional()
+  @IsUUID()
+  roomTypeId?: string;
+
+  @ApiPropertyOptional({ description: 'Quality standard items', type: [QualityStandardItem] })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => QualityStandardItem)
+  items?: QualityStandardItem[];
+
+  @ApiPropertyOptional({ description: 'Minimum passing score (0-100)' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  passingScore?: number;
+
+  @ApiPropertyOptional({ description: 'Additional configuration' })
+  @IsOptional()
+  @IsObject()
+  configuration?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Effective date (ISO string)' })
+  @IsOptional()
+  @IsDateString()
+  effectiveDate?: string;
+
+  @ApiPropertyOptional({ description: 'Expiry date (ISO string)' })
+  @IsOptional()
+  @IsDateString()
+  expiryDate?: string;
 }
 
 export class GetQualityStandardsStatisticsQueryDto {
