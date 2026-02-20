@@ -63,6 +63,8 @@ class CreateQualityStandardDto {
     configuration;
     effectiveDate;
     expiryDate;
+    isActive;
+    createdBy;
 }
 exports.CreateQualityStandardDto = CreateQualityStandardDto;
 __decorate([
@@ -113,6 +115,18 @@ __decorate([
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], CreateQualityStandardDto.prototype, "expiryDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether this standard is active', default: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreateQualityStandardDto.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'ID of user creating this standard' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateQualityStandardDto.prototype, "createdBy", void 0);
 class UpdateQualityStandardDto {
     name;
     description;
@@ -122,6 +136,7 @@ class UpdateQualityStandardDto {
     configuration;
     effectiveDate;
     expiryDate;
+    updatedBy;
 }
 exports.UpdateQualityStandardDto = UpdateQualityStandardDto;
 __decorate([
@@ -176,6 +191,12 @@ __decorate([
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], UpdateQualityStandardDto.prototype, "expiryDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'ID of user updating this standard' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateQualityStandardDto.prototype, "updatedBy", void 0);
 class GetQualityStandardsStatisticsQueryDto {
     startDate;
     endDate;

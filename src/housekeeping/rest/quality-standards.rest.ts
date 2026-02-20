@@ -74,6 +74,16 @@ export class CreateQualityStandardDto {
   @IsOptional()
   @IsDateString()
   expiryDate?: string;
+
+  @ApiPropertyOptional({ description: 'Whether this standard is active', default: true })
+  @IsOptional()
+  @IsBoolean()
+  isActive?: boolean;
+
+  @ApiPropertyOptional({ description: 'ID of user creating this standard' })
+  @IsOptional()
+  @IsString()
+  createdBy?: string;
 }
 
 export class UpdateQualityStandardDto {
@@ -120,6 +130,11 @@ export class UpdateQualityStandardDto {
   @IsOptional()
   @IsDateString()
   expiryDate?: string;
+
+  @ApiPropertyOptional({ description: 'ID of user updating this standard' })
+  @IsOptional()
+  @IsString()
+  updatedBy?: string;
 }
 
 export class GetQualityStandardsStatisticsQueryDto {

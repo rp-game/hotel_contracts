@@ -14,6 +14,8 @@ export declare class CreateQualityStandardDto {
     configuration?: Record<string, any>;
     effectiveDate?: string;
     expiryDate?: string;
+    isActive?: boolean;
+    createdBy?: string;
 }
 export declare class UpdateQualityStandardDto {
     name?: string;
@@ -24,6 +26,7 @@ export declare class UpdateQualityStandardDto {
     configuration?: Record<string, any>;
     effectiveDate?: string;
     expiryDate?: string;
+    updatedBy?: string;
 }
 export declare class GetQualityStandardsStatisticsQueryDto {
     startDate?: string;
