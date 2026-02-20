@@ -8,12 +8,22 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 /**
  * Revenue Stats Query
+ * Used for NATS request and REST query params
  */
-export interface RevenueStatsQuery {
+export class RevenueStatsQuery {
+  @ApiPropertyOptional({ description: 'Filter by tenant ID' })
   tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Start date' })
   startDate?: Date;
+
+  @ApiPropertyOptional({ description: 'End date' })
   endDate?: Date;
+
+  @ApiPropertyOptional({ description: 'Grouping period', enum: ['day', 'week', 'month', 'quarter', 'year'], default: 'month' })
   groupBy?: 'day' | 'week' | 'month' | 'quarter' | 'year';
+
+  @ApiPropertyOptional({ description: 'Currency code' })
   currency?: string;
 }
 
@@ -114,18 +124,42 @@ export class RevenueStatsResponse {
 
 /**
  * Tenant Billing Summary
+ * Used for both NATS response and REST API response
  */
-export interface TenantBillingSummary {
+export class TenantBillingSummary {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Tenant name' })
   tenantName: string;
+
+  @ApiProperty({ description: 'Current outstanding balance' })
   currentBalance: number;
+
+  @ApiProperty({ description: 'Total overdue amount' })
   overdueAmount: number;
+
+  @ApiProperty({ description: 'Total amount invoiced' })
   totalInvoiced: number;
+
+  @ApiProperty({ description: 'Total amount paid' })
   totalPaid: number;
+
+  @ApiProperty({ description: 'Number of active invoices' })
   activeInvoices: number;
+
+  @ApiProperty({ description: 'Number of overdue invoices' })
   overdueInvoices: number;
+
+  @ApiPropertyOptional({ description: 'Date of last payment' })
   lastPaymentDate?: Date;
+
+  @ApiPropertyOptional({ description: 'Date of last invoice' })
   lastInvoiceDate?: Date;
+
+  @ApiPropertyOptional({ description: 'Next billing date' })
   nextBillingDate?: Date;
+
+  @ApiProperty({ description: 'Currency code' })
   currency: string;
 }

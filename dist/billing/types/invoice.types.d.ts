@@ -1,13 +1,14 @@
 /**
  * Invoice Types
  *
- * Types for platform invoices and invoice items
+ * Unified contracts for both NATS messages and REST API.
+ * All types use class with @ApiProperty for single source of truth.
  */
 import { BillingCycle, PlatformInvoiceStatus, InvoiceItemType } from './enums';
 /**
  * Invoice Item
  */
-export interface InvoiceItem {
+export declare class InvoiceItem {
     id?: string;
     itemType: InvoiceItemType;
     description: string;
@@ -31,7 +32,7 @@ export interface InvoiceItem {
 /**
  * Platform Invoice
  */
-export interface PlatformInvoice {
+export declare class PlatformInvoice {
     id: string;
     invoiceNumber: string;
     tenantId: string;
@@ -75,8 +76,9 @@ export interface PlatformInvoice {
 }
 /**
  * Invoice List Query
+ * Used for NATS request and REST query params
  */
-export interface InvoiceListQuery {
+export declare class InvoiceListQuery {
     tenantId?: string;
     status?: PlatformInvoiceStatus;
     billingCycle?: BillingCycle;
@@ -94,18 +96,19 @@ export interface InvoiceListQuery {
 }
 /**
  * Invoice List Response
+ * Used for both NATS response and REST API response
  */
-export interface InvoiceListResponse {
-    invoices: PlatformInvoice[];
+export declare class InvoiceListResponse {
+    data: PlatformInvoice[];
     total: number;
     page: number;
     limit: number;
-    totalPages: number;
 }
 /**
  * Create Invoice Request
+ * Used for both NATS request and REST API request
  */
-export interface CreateInvoiceRequest {
+export declare class CreateInvoiceRequest {
     tenantId: string;
     subscriptionId: string;
     billingCycle: BillingCycle;
@@ -136,25 +139,6 @@ export interface CreateInvoiceRequest {
         additionalServices: Record<string, any>;
     };
     notes?: string;
-    items: Array<{
-        itemType: InvoiceItemType;
-        description: string;
-        unitPrice: number;
-        quantity: number;
-        totalAmount: number;
-        usagePeriodStart?: Date;
-        usagePeriodEnd?: Date;
-        usageDetails?: {
-            metricName: string;
-            unit: string;
-            includedQuantity: number;
-            overageRate: number;
-            totalUsage: number;
-            overageQuantity: number;
-        };
-        taxRate?: number;
-        taxAmount?: number;
-        isTaxable?: boolean;
-    }>;
+    items: InvoiceItem[];
 }
 //# sourceMappingURL=invoice.types.d.ts.map

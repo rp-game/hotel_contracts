@@ -5,8 +5,9 @@
  */
 /**
  * Revenue Stats Query
+ * Used for NATS request and REST query params
  */
-export interface RevenueStatsQuery {
+export declare class RevenueStatsQuery {
     tenantId?: string;
     startDate?: Date;
     endDate?: Date;
@@ -60,8 +61,9 @@ export declare class RevenueStatsResponse {
 }
 /**
  * Tenant Billing Summary
+ * Used for both NATS response and REST API response
  */
-export interface TenantBillingSummary {
+export declare class TenantBillingSummary {
     tenantId: string;
     tenantName: string;
     currentBalance: number;

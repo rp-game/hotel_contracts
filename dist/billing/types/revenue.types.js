@@ -14,8 +14,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RevenueStatsResponse = exports.TopTenantItem = exports.RevenueStatsSummary = exports.RevenueDataPoint = void 0;
+exports.TenantBillingSummary = exports.RevenueStatsResponse = exports.TopTenantItem = exports.RevenueStatsSummary = exports.RevenueDataPoint = exports.RevenueStatsQuery = void 0;
 const swagger_1 = require("@nestjs/swagger");
+/**
+ * Revenue Stats Query
+ * Used for NATS request and REST query params
+ */
+class RevenueStatsQuery {
+    tenantId;
+    startDate;
+    endDate;
+    groupBy;
+    currency;
+}
+exports.RevenueStatsQuery = RevenueStatsQuery;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by tenant ID' }),
+    __metadata("design:type", String)
+], RevenueStatsQuery.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Start date' }),
+    __metadata("design:type", Date)
+], RevenueStatsQuery.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'End date' }),
+    __metadata("design:type", Date)
+], RevenueStatsQuery.prototype, "endDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Grouping period', enum: ['day', 'week', 'month', 'quarter', 'year'], default: 'month' }),
+    __metadata("design:type", String)
+], RevenueStatsQuery.prototype, "groupBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Currency code' }),
+    __metadata("design:type", String)
+], RevenueStatsQuery.prototype, "currency", void 0);
 /**
  * Revenue Data Point
  */
@@ -165,4 +197,71 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Top tenants by revenue', type: [TopTenantItem] }),
     __metadata("design:type", Array)
 ], RevenueStatsResponse.prototype, "topTenants", void 0);
+/**
+ * Tenant Billing Summary
+ * Used for both NATS response and REST API response
+ */
+class TenantBillingSummary {
+    tenantId;
+    tenantName;
+    currentBalance;
+    overdueAmount;
+    totalInvoiced;
+    totalPaid;
+    activeInvoices;
+    overdueInvoices;
+    lastPaymentDate;
+    lastInvoiceDate;
+    nextBillingDate;
+    currency;
+}
+exports.TenantBillingSummary = TenantBillingSummary;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], TenantBillingSummary.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant name' }),
+    __metadata("design:type", String)
+], TenantBillingSummary.prototype, "tenantName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current outstanding balance' }),
+    __metadata("design:type", Number)
+], TenantBillingSummary.prototype, "currentBalance", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total overdue amount' }),
+    __metadata("design:type", Number)
+], TenantBillingSummary.prototype, "overdueAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total amount invoiced' }),
+    __metadata("design:type", Number)
+], TenantBillingSummary.prototype, "totalInvoiced", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total amount paid' }),
+    __metadata("design:type", Number)
+], TenantBillingSummary.prototype, "totalPaid", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of active invoices' }),
+    __metadata("design:type", Number)
+], TenantBillingSummary.prototype, "activeInvoices", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of overdue invoices' }),
+    __metadata("design:type", Number)
+], TenantBillingSummary.prototype, "overdueInvoices", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Date of last payment' }),
+    __metadata("design:type", Date)
+], TenantBillingSummary.prototype, "lastPaymentDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Date of last invoice' }),
+    __metadata("design:type", Date)
+], TenantBillingSummary.prototype, "lastInvoiceDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Next billing date' }),
+    __metadata("design:type", Date)
+], TenantBillingSummary.prototype, "nextBillingDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Currency code' }),
+    __metadata("design:type", String)
+], TenantBillingSummary.prototype, "currency", void 0);
 //# sourceMappingURL=revenue.types.js.map
