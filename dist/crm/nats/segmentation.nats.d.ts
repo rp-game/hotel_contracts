@@ -27,7 +27,9 @@ export declare enum SegmentType {
     BEHAVIORAL = "BEHAVIORAL",
     DEMOGRAPHIC = "DEMOGRAPHIC",
     GEOGRAPHIC = "GEOGRAPHIC",
-    VALUE_BASED = "VALUE_BASED"
+    VALUE_BASED = "VALUE_BASED",
+    LIFECYCLE = "LIFECYCLE",
+    CUSTOM = "CUSTOM"
 }
 /**
  * Segment Status Enum

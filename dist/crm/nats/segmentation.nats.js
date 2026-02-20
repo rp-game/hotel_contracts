@@ -42,6 +42,8 @@ var SegmentType;
     SegmentType["DEMOGRAPHIC"] = "DEMOGRAPHIC";
     SegmentType["GEOGRAPHIC"] = "GEOGRAPHIC";
     SegmentType["VALUE_BASED"] = "VALUE_BASED";
+    SegmentType["LIFECYCLE"] = "LIFECYCLE";
+    SegmentType["CUSTOM"] = "CUSTOM";
 })(SegmentType || (exports.SegmentType = SegmentType = {}));
 /**
  * Segment Status Enum
