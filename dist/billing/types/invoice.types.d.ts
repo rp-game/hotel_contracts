@@ -43,15 +43,13 @@ export declare class PlatformInvoice {
     billingPeriodEnd: Date;
     issueDate: Date;
     dueDate: Date;
-    paidDate?: Date;
+    paidAt?: Date;
     baseAmount: number;
     usageAmount: number;
     taxAmount: number;
     discountAmount: number;
     totalAmount: number;
-    amountPaid: number;
-    balanceDue: number;
-    currency: string;
+    paidAmount: number;
     tenantName: string;
     tenantEmail: string;
     billingAddress?: {

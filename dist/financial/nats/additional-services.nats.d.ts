@@ -25,7 +25,10 @@ export declare enum FinancialServiceType {
     INTERNET = "INTERNET",
     PHONE = "PHONE",
     MINIBAR = "MINIBAR",
-    OTHER = "OTHER"
+    OTHER = "OTHER",
+    ONE_TIME = "ONE_TIME",
+    RECURRING = "RECURRING",
+    ON_DEMAND = "ON_DEMAND"
 }
 /**
  * Pricing Type Enum
@@ -45,7 +48,16 @@ export declare enum FinancialServiceCategory {
     ROOM_SERVICE = "ROOM_SERVICE",
     FACILITY = "FACILITY",
     AMENITY = "AMENITY",
-    EXTERNAL = "EXTERNAL"
+    EXTERNAL = "EXTERNAL",
+    OTHER = "OTHER",
+    SPA_WELLNESS = "SPA_WELLNESS",
+    TRANSPORTATION = "TRANSPORTATION",
+    FOOD_BEVERAGE = "FOOD_BEVERAGE",
+    LAUNDRY_CLEANING = "LAUNDRY_CLEANING",
+    BUSINESS_SERVICES = "BUSINESS_SERVICES",
+    ENTERTAINMENT = "ENTERTAINMENT",
+    CONCIERGE = "CONCIERGE",
+    PET_SERVICES = "PET_SERVICES"
 }
 /**
  * Additional Service Response DTO

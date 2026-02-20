@@ -40,6 +40,10 @@ var FinancialServiceType;
     FinancialServiceType["PHONE"] = "PHONE";
     FinancialServiceType["MINIBAR"] = "MINIBAR";
     FinancialServiceType["OTHER"] = "OTHER";
+    // Legacy billing types (stored in DB)
+    FinancialServiceType["ONE_TIME"] = "ONE_TIME";
+    FinancialServiceType["RECURRING"] = "RECURRING";
+    FinancialServiceType["ON_DEMAND"] = "ON_DEMAND";
 })(FinancialServiceType || (exports.FinancialServiceType = FinancialServiceType = {}));
 /**
  * Pricing Type Enum
@@ -62,6 +66,16 @@ var FinancialServiceCategory;
     FinancialServiceCategory["FACILITY"] = "FACILITY";
     FinancialServiceCategory["AMENITY"] = "AMENITY";
     FinancialServiceCategory["EXTERNAL"] = "EXTERNAL";
+    FinancialServiceCategory["OTHER"] = "OTHER";
+    // Legacy entity categories (stored in DB)
+    FinancialServiceCategory["SPA_WELLNESS"] = "SPA_WELLNESS";
+    FinancialServiceCategory["TRANSPORTATION"] = "TRANSPORTATION";
+    FinancialServiceCategory["FOOD_BEVERAGE"] = "FOOD_BEVERAGE";
+    FinancialServiceCategory["LAUNDRY_CLEANING"] = "LAUNDRY_CLEANING";
+    FinancialServiceCategory["BUSINESS_SERVICES"] = "BUSINESS_SERVICES";
+    FinancialServiceCategory["ENTERTAINMENT"] = "ENTERTAINMENT";
+    FinancialServiceCategory["CONCIERGE"] = "CONCIERGE";
+    FinancialServiceCategory["PET_SERVICES"] = "PET_SERVICES";
 })(FinancialServiceCategory || (exports.FinancialServiceCategory = FinancialServiceCategory = {}));
 /**
  * Additional Service Response DTO

@@ -98,15 +98,13 @@ class PlatformInvoice {
     billingPeriodEnd;
     issueDate;
     dueDate;
-    paidDate;
+    paidAt;
     baseAmount;
     usageAmount;
     taxAmount;
     discountAmount;
     totalAmount;
-    amountPaid;
-    balanceDue;
-    currency;
+    paidAmount;
     tenantName;
     tenantEmail;
     billingAddress;
@@ -160,7 +158,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Paid date' }),
     __metadata("design:type", Date)
-], PlatformInvoice.prototype, "paidDate", void 0);
+], PlatformInvoice.prototype, "paidAt", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Base amount' }),
     __metadata("design:type", Number)
@@ -182,17 +180,9 @@ __decorate([
     __metadata("design:type", Number)
 ], PlatformInvoice.prototype, "totalAmount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Amount paid' }),
+    (0, swagger_1.ApiProperty)({ description: 'Amount paid so far' }),
     __metadata("design:type", Number)
-], PlatformInvoice.prototype, "amountPaid", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Balance due' }),
-    __metadata("design:type", Number)
-], PlatformInvoice.prototype, "balanceDue", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Currency code' }),
-    __metadata("design:type", String)
-], PlatformInvoice.prototype, "currency", void 0);
+], PlatformInvoice.prototype, "paidAmount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant name' }),
     __metadata("design:type", String)

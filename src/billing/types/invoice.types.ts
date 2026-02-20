@@ -91,7 +91,7 @@ export class PlatformInvoice {
   dueDate: Date;
 
   @ApiPropertyOptional({ description: 'Paid date' })
-  paidDate?: Date;
+  paidAt?: Date;
 
   @ApiProperty({ description: 'Base amount' })
   baseAmount: number;
@@ -108,14 +108,8 @@ export class PlatformInvoice {
   @ApiProperty({ description: 'Total amount' })
   totalAmount: number;
 
-  @ApiProperty({ description: 'Amount paid' })
-  amountPaid: number;
-
-  @ApiProperty({ description: 'Balance due' })
-  balanceDue: number;
-
-  @ApiProperty({ description: 'Currency code' })
-  currency: string;
+  @ApiProperty({ description: 'Amount paid so far' })
+  paidAmount: number;
 
   @ApiProperty({ description: 'Tenant name' })
   tenantName: string;
