@@ -31,6 +31,8 @@ export declare class UpdateQualityStandardDto {
     updatedBy?: string;
 }
 export declare class GetQualityStandardsStatisticsQueryDto {
+    tenantId?: string;
+    hotelId?: string;
     startDate?: string;
     endDate?: string;
     roomTypeId?: string;

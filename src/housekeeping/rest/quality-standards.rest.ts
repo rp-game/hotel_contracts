@@ -148,6 +148,16 @@ export class UpdateQualityStandardDto {
 }
 
 export class GetQualityStandardsStatisticsQueryDto {
+  @ApiPropertyOptional({ description: 'Tenant ID (defaults to user context)' })
+  @IsOptional()
+  @IsUUID()
+  tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID (defaults to user context)' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+
   @ApiPropertyOptional({ description: 'Start date for statistics period' })
   @IsOptional()
   @IsDateString()

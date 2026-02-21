@@ -212,11 +212,25 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateQualityStandardDto.prototype, "updatedBy", void 0);
 class GetQualityStandardsStatisticsQueryDto {
+    tenantId;
+    hotelId;
     startDate;
     endDate;
     roomTypeId;
 }
 exports.GetQualityStandardsStatisticsQueryDto = GetQualityStandardsStatisticsQueryDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID (defaults to user context)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetQualityStandardsStatisticsQueryDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (defaults to user context)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetQualityStandardsStatisticsQueryDto.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Start date for statistics period' }),
     (0, class_validator_1.IsOptional)(),
