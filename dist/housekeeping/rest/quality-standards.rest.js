@@ -19,12 +19,26 @@ const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 const quality_standards_nats_1 = require("../nats/quality-standards.nats");
 class GetAllQualityStandardsQueryDto {
+    tenantId;
+    hotelId;
     roomTypeId;
     isActive;
     page;
     limit;
 }
 exports.GetAllQualityStandardsQueryDto = GetAllQualityStandardsQueryDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID (defaults to user context)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetAllQualityStandardsQueryDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (defaults to user context)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetAllQualityStandardsQueryDto.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by room type ID (UUID from inventory service)' }),
     (0, class_validator_1.IsOptional)(),

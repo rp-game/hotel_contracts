@@ -8,6 +8,16 @@ import { Type } from 'class-transformer';
 import { QualityStandardItem } from '../nats/quality-standards.nats';
 
 export class GetAllQualityStandardsQueryDto {
+  @ApiPropertyOptional({ description: 'Tenant ID (defaults to user context)' })
+  @IsOptional()
+  @IsUUID()
+  tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID (defaults to user context)' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+
   @ApiPropertyOptional({ description: 'Filter by room type ID (UUID from inventory service)' })
   @IsOptional()
   @IsUUID()

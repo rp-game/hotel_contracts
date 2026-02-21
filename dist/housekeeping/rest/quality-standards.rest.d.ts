@@ -1,5 +1,7 @@
 import { QualityStandardItem } from '../nats/quality-standards.nats';
 export declare class GetAllQualityStandardsQueryDto {
+    tenantId?: string;
+    hotelId?: string;
     roomTypeId?: string;
     isActive?: boolean;
     page?: number;
