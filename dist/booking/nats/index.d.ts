@@ -24,6 +24,8 @@ export * from './update-booking.nats';
 export * from './move-booking.nats';
 export * from './get-booking-stats.nats';
 export * from './amenity-requests.nats';
+export * from './booking-lookup.nats';
+export * from './payment-events.nats';
 export * from './services.nats';
 export * from './get-conflicts.nats';
 export * from './detect-conflicts.nats';

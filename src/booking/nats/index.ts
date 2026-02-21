@@ -27,6 +27,8 @@ export * from './get-booking-stats.nats';
 
 // Amenity Request NATS contracts
 export * from './amenity-requests.nats';
+export * from './booking-lookup.nats';
+export * from './payment-events.nats';
 
 // Service NATS contracts
 export * from './services.nats';
