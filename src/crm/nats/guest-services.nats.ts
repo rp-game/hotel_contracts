@@ -236,48 +236,59 @@ export class CreateServiceBookingDto {
     description: 'Tenant ID',
     example: '550e8400-e29b-41d4-a716-446655440000',
   })
+  @IsString()
   tenantId: string;
 
   @ApiProperty({
     description: 'Hotel ID',
     example: '550e8400-e29b-41d4-a716-446655440001',
   })
+  @IsString()
   hotelId: string;
 
   @ApiProperty({
     description: 'Service ID to be booked',
     example: '550e8400-e29b-41d4-a716-446655440002',
   })
+  @IsUUID()
   serviceId: string;
 
   @ApiProperty({
     description: 'Guest/Customer ID who is booking the service',
     example: '550e8400-e29b-41d4-a716-446655440003',
   })
+  @IsString()
   guestId: string;
 
   @ApiPropertyOptional({
     description: 'Room booking ID (if service is for a hotel guest)',
     example: '550e8400-e29b-41d4-a716-446655440004',
   })
+  @IsOptional()
+  @IsString()
   roomBookingId?: string;
 
   @ApiPropertyOptional({
     description: 'Room number (if service is for a hotel guest)',
     example: '101',
   })
+  @IsOptional()
+  @IsString()
   roomNumber?: string;
 
   @ApiProperty({
     description: 'Booking date and time in ISO 8601 format',
     example: '2026-02-15T14:30:00Z',
   })
+  @IsString()
   bookingDateTime: string;
 
   @ApiPropertyOptional({
     description: 'Duration of the service in minutes',
     example: 60,
   })
+  @IsOptional()
+  @IsNumber()
   durationMinutes?: number;
 
   @ApiProperty({
@@ -285,48 +296,64 @@ export class CreateServiceBookingDto {
     example: 2,
     minimum: 1,
   })
+  @IsNumber()
+  @Min(1)
   numberOfGuests: number;
 
   @ApiPropertyOptional({
     description: 'Service price (if different from default service price)',
     example: 150.00,
   })
+  @IsOptional()
+  @IsNumber()
   price?: number;
 
   @ApiPropertyOptional({
     description: 'Currency code (ISO 4217)',
     example: 'USD',
   })
+  @IsOptional()
+  @IsString()
   currency?: string;
 
   @ApiPropertyOptional({
     description: 'Special requests from the guest',
     example: 'Need wheelchair accessible spa room',
   })
+  @IsOptional()
+  @IsString()
   specialRequests?: string;
 
   @ApiPropertyOptional({
     description: 'Internal notes for staff',
     example: 'VIP guest, prepare welcome amenity',
   })
+  @IsOptional()
+  @IsString()
   notes?: string;
 
   @ApiPropertyOptional({
     description: 'Confirmation code (auto-generated if not provided)',
     example: 'SPA-2026-001234',
   })
+  @IsOptional()
+  @IsString()
   confirmationCode?: string;
 
   @ApiPropertyOptional({
     description: 'Payment status',
     example: 'PENDING',
   })
+  @IsOptional()
+  @IsString()
   paymentStatus?: string;
 
   @ApiPropertyOptional({
     description: 'Staff member assigned to this service',
     example: '550e8400-e29b-41d4-a716-446655440005',
   })
+  @IsOptional()
+  @IsString()
   staffAssigned?: string;
 
   @ApiPropertyOptional({
@@ -334,6 +361,8 @@ export class CreateServiceBookingDto {
     enum: ServiceBookingStatus,
     example: ServiceBookingStatus.PENDING,
   })
+  @IsOptional()
+  @IsEnum(ServiceBookingStatus)
   status?: ServiceBookingStatus;
 }
 

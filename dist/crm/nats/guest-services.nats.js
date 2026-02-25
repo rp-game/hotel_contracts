@@ -104,6 +104,7 @@ __decorate([
         description: 'Tenant ID',
         example: '550e8400-e29b-41d4-a716-446655440000',
     }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "tenantId", void 0);
 __decorate([
@@ -111,6 +112,7 @@ __decorate([
         description: 'Hotel ID',
         example: '550e8400-e29b-41d4-a716-446655440001',
     }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "hotelId", void 0);
 __decorate([
@@ -118,6 +120,7 @@ __decorate([
         description: 'Service ID to be booked',
         example: '550e8400-e29b-41d4-a716-446655440002',
     }),
+    (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "serviceId", void 0);
 __decorate([
@@ -125,6 +128,7 @@ __decorate([
         description: 'Guest/Customer ID who is booking the service',
         example: '550e8400-e29b-41d4-a716-446655440003',
     }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "guestId", void 0);
 __decorate([
@@ -132,6 +136,8 @@ __decorate([
         description: 'Room booking ID (if service is for a hotel guest)',
         example: '550e8400-e29b-41d4-a716-446655440004',
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "roomBookingId", void 0);
 __decorate([
@@ -139,6 +145,8 @@ __decorate([
         description: 'Room number (if service is for a hotel guest)',
         example: '101',
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "roomNumber", void 0);
 __decorate([
@@ -146,6 +154,7 @@ __decorate([
         description: 'Booking date and time in ISO 8601 format',
         example: '2026-02-15T14:30:00Z',
     }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "bookingDateTime", void 0);
 __decorate([
@@ -153,6 +162,8 @@ __decorate([
         description: 'Duration of the service in minutes',
         example: 60,
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateServiceBookingDto.prototype, "durationMinutes", void 0);
 __decorate([
@@ -161,6 +172,8 @@ __decorate([
         example: 2,
         minimum: 1,
     }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
     __metadata("design:type", Number)
 ], CreateServiceBookingDto.prototype, "numberOfGuests", void 0);
 __decorate([
@@ -168,6 +181,8 @@ __decorate([
         description: 'Service price (if different from default service price)',
         example: 150.00,
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateServiceBookingDto.prototype, "price", void 0);
 __decorate([
@@ -175,6 +190,8 @@ __decorate([
         description: 'Currency code (ISO 4217)',
         example: 'USD',
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "currency", void 0);
 __decorate([
@@ -182,6 +199,8 @@ __decorate([
         description: 'Special requests from the guest',
         example: 'Need wheelchair accessible spa room',
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "specialRequests", void 0);
 __decorate([
@@ -189,6 +208,8 @@ __decorate([
         description: 'Internal notes for staff',
         example: 'VIP guest, prepare welcome amenity',
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "notes", void 0);
 __decorate([
@@ -196,6 +217,8 @@ __decorate([
         description: 'Confirmation code (auto-generated if not provided)',
         example: 'SPA-2026-001234',
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "confirmationCode", void 0);
 __decorate([
@@ -203,6 +226,8 @@ __decorate([
         description: 'Payment status',
         example: 'PENDING',
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "paymentStatus", void 0);
 __decorate([
@@ -210,6 +235,8 @@ __decorate([
         description: 'Staff member assigned to this service',
         example: '550e8400-e29b-41d4-a716-446655440005',
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "staffAssigned", void 0);
 __decorate([
@@ -218,6 +245,8 @@ __decorate([
         enum: ServiceBookingStatus,
         example: ServiceBookingStatus.PENDING,
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(ServiceBookingStatus),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "status", void 0);
 /**
