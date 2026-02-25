@@ -26,6 +26,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookingServiceStatsData = exports.FindAllServicesData = exports.CreateServiceNatsRequest = exports.BookingServiceNatsResponse = exports.BookingServiceStatus = exports.ServiceCategory = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
 /**
  * Service Category Enum
  */
@@ -200,78 +201,110 @@ class CreateServiceNatsRequest {
 exports.CreateServiceNatsRequest = CreateServiceNatsRequest;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Service name' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "name", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Service description' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "description", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Service category', enum: ServiceCategory }),
+    (0, class_validator_1.IsEnum)(ServiceCategory),
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "category", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Base price' }),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateServiceNatsRequest.prototype, "basePrice", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Currency code', default: 'USD' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "currency", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Duration in minutes', default: 60 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateServiceNatsRequest.prototype, "durationMinutes", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Maximum capacity', default: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateServiceNatsRequest.prototype, "maxCapacity", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Advance booking hours required', default: 24 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateServiceNatsRequest.prototype, "advanceBookingHours", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Cancellation hours before service', default: 2 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateServiceNatsRequest.prototype, "cancellationHours", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Whether service requires approval', default: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateServiceNatsRequest.prototype, "requiresApproval", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Available days (0-6 for Sunday-Saturday)', type: [Number] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
     __metadata("design:type", Array)
 ], CreateServiceNatsRequest.prototype, "availableDays", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Operating hours with start and end times (HH:mm format)' }),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Object)
 ], CreateServiceNatsRequest.prototype, "operatingHours", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Service location' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "location", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Number of staff required', default: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateServiceNatsRequest.prototype, "staffRequired", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Equipment needed for service' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "equipmentNeeded", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Special instructions for staff' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "specialInstructions", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Service status', enum: BookingServiceStatus, default: BookingServiceStatus.ACTIVE }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(BookingServiceStatus),
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "status", void 0);
 /**

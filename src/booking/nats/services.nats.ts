@@ -15,6 +15,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsNumber, IsOptional, IsEnum, IsBoolean, IsArray } from 'class-validator';
 import { NatsResponse } from '../../common';
 
 /**
@@ -127,63 +128,95 @@ export class BookingServiceNatsResponse {
  */
 export class CreateServiceNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
   tenantId: string;
 
   @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
   hotelId: string;
 
   @ApiProperty({ description: 'Service name' })
+  @IsString()
   name: string;
 
   @ApiPropertyOptional({ description: 'Service description' })
+  @IsOptional()
+  @IsString()
   description?: string;
 
   @ApiProperty({ description: 'Service category', enum: ServiceCategory })
+  @IsEnum(ServiceCategory)
   category: ServiceCategory;
 
   @ApiProperty({ description: 'Base price' })
+  @IsNumber()
   basePrice: number;
 
   @ApiPropertyOptional({ description: 'Currency code', default: 'USD' })
+  @IsOptional()
+  @IsString()
   currency?: string;
 
   @ApiPropertyOptional({ description: 'Duration in minutes', default: 60 })
+  @IsOptional()
+  @IsNumber()
   durationMinutes?: number;
 
   @ApiPropertyOptional({ description: 'Maximum capacity', default: 1 })
+  @IsOptional()
+  @IsNumber()
   maxCapacity?: number;
 
   @ApiPropertyOptional({ description: 'Advance booking hours required', default: 24 })
+  @IsOptional()
+  @IsNumber()
   advanceBookingHours?: number;
 
   @ApiPropertyOptional({ description: 'Cancellation hours before service', default: 2 })
+  @IsOptional()
+  @IsNumber()
   cancellationHours?: number;
 
   @ApiPropertyOptional({ description: 'Whether service requires approval', default: false })
+  @IsOptional()
+  @IsBoolean()
   requiresApproval?: boolean;
 
   @ApiPropertyOptional({ description: 'Available days (0-6 for Sunday-Saturday)', type: [Number] })
+  @IsOptional()
+  @IsArray()
   availableDays?: number[];
 
   @ApiPropertyOptional({ description: 'Operating hours with start and end times (HH:mm format)' })
+  @IsOptional()
   operatingHours?: {
     start: string;
     end: string;
   };
 
   @ApiPropertyOptional({ description: 'Service location' })
+  @IsOptional()
+  @IsString()
   location?: string;
 
   @ApiPropertyOptional({ description: 'Number of staff required', default: 1 })
+  @IsOptional()
+  @IsNumber()
   staffRequired?: number;
 
   @ApiPropertyOptional({ description: 'Equipment needed for service' })
+  @IsOptional()
+  @IsString()
   equipmentNeeded?: string;
 
   @ApiPropertyOptional({ description: 'Special instructions for staff' })
+  @IsOptional()
+  @IsString()
   specialInstructions?: string;
 
   @ApiPropertyOptional({ description: 'Service status', enum: BookingServiceStatus, default: BookingServiceStatus.ACTIVE })
+  @IsOptional()
+  @IsEnum(BookingServiceStatus)
   status?: BookingServiceStatus;
 }
 
