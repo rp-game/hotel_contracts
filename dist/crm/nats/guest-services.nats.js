@@ -139,6 +139,7 @@ class CreateServiceBookingDto {
     notes;
     confirmationCode;
     paymentStatus;
+    serviceName;
     staffAssigned;
     status;
 }
@@ -274,6 +275,15 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceBookingDto.prototype, "paymentStatus", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Service name (resolved from service catalog, stored for display)',
+        example: 'Spa Premium Package',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateServiceBookingDto.prototype, "serviceName", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Staff member assigned to this service',

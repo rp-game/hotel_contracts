@@ -386,6 +386,14 @@ export class CreateServiceBookingDto {
   paymentStatus?: string;
 
   @ApiPropertyOptional({
+    description: 'Service name (resolved from service catalog, stored for display)',
+    example: 'Spa Premium Package',
+  })
+  @IsOptional()
+  @IsString()
+  serviceName?: string;
+
+  @ApiPropertyOptional({
     description: 'Staff member assigned to this service',
     example: '550e8400-e29b-41d4-a716-446655440005',
   })

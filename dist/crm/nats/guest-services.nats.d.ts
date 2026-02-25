@@ -234,6 +234,7 @@ export declare class CreateServiceBookingDto {
     notes?: string;
     confirmationCode?: string;
     paymentStatus?: string;
+    serviceName?: string;
     staffAssigned?: string;
     status?: ServiceBookingStatus;
 }
