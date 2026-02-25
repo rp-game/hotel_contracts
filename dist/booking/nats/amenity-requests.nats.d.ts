@@ -20,7 +20,7 @@
  * Handler: booking-service (AmenityNatsController)
  * Called by: api-gateway (GuestServicesController)
  */
-import { NatsResponse } from '../../common';
+import { NatsResponse, TenantHotelQueryDto } from '../../common';
 /**
  * Amenity Priority Enum
  */
@@ -144,8 +144,11 @@ export type CreateAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRe
 /**
  * Find All Amenity Requests Request
  * Pattern: amenity_requests.find_all
+ *
+ * UNIFIED CONTRACT - Used by both NATS handlers and REST API (api-gateway @Query())
+ * @standardized 2026-02-25
  */
-export interface FindAllAmenityRequestsNatsRequest {
+export declare class FindAllAmenityRequestsNatsRequest {
     tenantId: string;
     hotelId: string;
     status?: AmenityStatus;
@@ -173,7 +176,7 @@ export type FindAllAmenityRequestsNatsResponse = NatsResponse<{
  * Find One Amenity Request Request
  * Pattern: amenity_requests.find_one
  */
-export interface FindOneAmenityRequestNatsRequest {
+export declare class FindOneAmenityRequestNatsRequest {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -202,7 +205,7 @@ export declare class UpdateAmenityRequestDto {
  * Update Amenity Request NATS Request
  * Pattern: amenity_requests.update
  */
-export interface UpdateAmenityRequestNatsRequest {
+export declare class UpdateAmenityRequestNatsRequest {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -216,7 +219,7 @@ export type UpdateAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRe
  * Assign Amenity Request Request
  * Pattern: amenity_requests.assign
  */
-export interface AssignAmenityRequestNatsRequest {
+export declare class AssignAmenityRequestNatsRequest {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -231,7 +234,7 @@ export type AssignAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRe
  * Start Amenity Request Request
  * Pattern: amenity_requests.start
  */
-export interface StartAmenityRequestNatsRequest {
+export declare class StartAmenityRequestNatsRequest {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -244,7 +247,7 @@ export type StartAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRes
  * Complete Amenity Request Request
  * Pattern: amenity_requests.complete
  */
-export interface CompleteAmenityRequestNatsRequest {
+export declare class CompleteAmenityRequestNatsRequest {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -260,7 +263,7 @@ export type CompleteAmenityRequestNatsResponse = NatsResponse<AmenityRequestNats
  * Cancel Amenity Request Request
  * Pattern: amenity_requests.cancel
  */
-export interface CancelAmenityRequestNatsRequest {
+export declare class CancelAmenityRequestNatsRequest {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -273,7 +276,7 @@ export type CancelAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRe
 /**
  * Amenity Request Stats Response
  */
-export interface AmenityRequestStatsNatsResponse {
+export declare class AmenityRequestStatsNatsResponse {
     total: number;
     byStatus: {
         PENDING: number;
@@ -298,9 +301,7 @@ export interface AmenityRequestStatsNatsResponse {
  * Get Amenity Request Stats Request
  * Pattern: amenity_requests.stats
  */
-export interface GetAmenityRequestStatsNatsRequest {
-    tenantId: string;
-    hotelId: string;
+export declare class GetAmenityRequestStatsNatsRequest extends TenantHotelQueryDto {
 }
 /**
  * Get Amenity Request Stats Response
@@ -310,7 +311,7 @@ export type GetAmenityRequestStatsNatsResponse = NatsResponse<AmenityRequestStat
  * Assess Feasibility Request
  * Pattern: amenity_requests.assess_feasibility
  */
-export interface AssessFeasibilityNatsRequest {
+export declare class AssessFeasibilityNatsRequest {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -327,7 +328,7 @@ export type AssessFeasibilityNatsResponse = NatsResponse<AmenityRequestNatsRespo
  * Perform Quality Check Request
  * Pattern: amenity_requests.quality_check
  */
-export interface PerformQualityCheckNatsRequest {
+export declare class PerformQualityCheckNatsRequest {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -343,7 +344,7 @@ export type PerformQualityCheckNatsResponse = NatsResponse<AmenityRequestNatsRes
  * Request Guest Approval Request
  * Pattern: amenity_requests.request_guest_approval
  */
-export interface RequestGuestApprovalNatsRequest {
+export declare class RequestGuestApprovalNatsRequest {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -357,7 +358,7 @@ export type RequestGuestApprovalNatsResponse = NatsResponse<AmenityRequestNatsRe
  * Coordinate Departments Request
  * Pattern: amenity_requests.coordinate_departments
  */
-export interface CoordinateDepartmentsNatsRequest {
+export declare class CoordinateDepartmentsNatsRequest {
     id: string;
     tenantId: string;
     hotelId: string;

@@ -41,7 +41,7 @@ export declare class ServiceBookingStatsData {
  *
  * Retrieves service booking statistics for a tenant within optional date range
  */
-export interface GetServiceBookingStatsNatsRequest {
+export declare class GetServiceBookingStatsNatsRequest {
     tenantId: string;
     hotelId?: string;
     startDate?: string;

@@ -13,7 +13,7 @@
  * Handler: booking-service (ServiceBookingController)
  * Called by: api-gateway (GuestServicesController)
  */
-import { NatsResponse } from '../../common';
+import { NatsResponse, TenantHotelQueryDto } from '../../common';
 /**
  * Service Category Enum
  */
@@ -98,11 +98,15 @@ export type CreateServiceNatsResponse = NatsResponse<BookingServiceNatsResponse>
 /**
  * Find All Services Request
  * Pattern: services.find_all
+ *
+ * UNIFIED CONTRACT - Used by both NATS handlers and REST API (api-gateway @Query())
+ * @standardized 2026-02-25
  */
-export interface FindAllServicesNatsRequest {
+export declare class FindAllServicesNatsRequest {
     tenantId: string;
     hotelId: string;
     category?: ServiceCategory;
+    available?: boolean;
     status?: BookingServiceStatus;
     page?: number;
     limit?: number;
@@ -122,7 +126,7 @@ export type FindAllServicesNatsResponse = NatsResponse<FindAllServicesData>;
  * Find One Service Request
  * Pattern: services.find_one
  */
-export interface FindOneServiceNatsRequest {
+export declare class FindOneServiceNatsRequest {
     tenantId: string;
     hotelId: string;
     serviceId: string;
@@ -132,7 +136,7 @@ export type FindOneServiceNatsResponse = NatsResponse<BookingServiceNatsResponse
  * Update Service Request
  * Pattern: services.update
  */
-export interface UpdateServiceNatsRequest {
+export declare class UpdateServiceNatsRequest {
     tenantId: string;
     hotelId: string;
     serviceId: string;
@@ -143,12 +147,12 @@ export type UpdateServiceNatsResponse = NatsResponse<BookingServiceNatsResponse>
  * Delete Service Request
  * Pattern: services.remove
  */
-export interface DeleteServiceNatsRequest {
+export declare class DeleteServiceNatsRequest {
     tenantId: string;
     hotelId: string;
     serviceId: string;
 }
-export interface DeleteServiceData {
+export declare class DeleteServiceData {
     success: boolean;
     message: string;
 }
@@ -170,16 +174,14 @@ export declare class BookingServiceStatsData {
  * Get Booking Service Stats Request
  * Pattern: services.stats
  */
-export interface GetBookingServiceStatsNatsRequest {
-    tenantId: string;
-    hotelId: string;
+export declare class GetBookingServiceStatsNatsRequest extends TenantHotelQueryDto {
 }
 export type GetBookingServiceStatsNatsResponse = NatsResponse<BookingServiceStatsData>;
 /**
  * Check Service Availability Request
  * Pattern: services.check_availability
  */
-export interface CheckServiceAvailabilityNatsRequest {
+export declare class CheckServiceAvailabilityNatsRequest {
     tenantId: string;
     hotelId: string;
     serviceId: string;
@@ -190,7 +192,7 @@ export interface CheckServiceAvailabilityNatsRequest {
 /**
  * Service Availability Response
  */
-export interface ServiceAvailabilityData {
+export declare class ServiceAvailabilityData {
     available: boolean;
     reason?: string;
     nextAvailableSlot?: {

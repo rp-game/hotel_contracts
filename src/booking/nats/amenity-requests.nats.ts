@@ -21,8 +21,10 @@
  * Called by: api-gateway (GuestServicesController)
  */
 
-import { NatsResponse } from '../../common';
+import { NatsResponse, TenantHotelQueryDto } from '../../common';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsNotEmpty, IsUUID, IsString, IsEnum, IsNumber, IsDateString, Min, Max } from 'class-validator';
+import { Type, Transform } from 'class-transformer';
 
 /**
  * Amenity Priority Enum
@@ -194,19 +196,78 @@ export type CreateAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRe
 /**
  * Find All Amenity Requests Request
  * Pattern: amenity_requests.find_all
+ *
+ * UNIFIED CONTRACT - Used by both NATS handlers and REST API (api-gateway @Query())
+ * @standardized 2026-02-25
  */
-export interface FindAllAmenityRequestsNatsRequest {
+export class FindAllAmenityRequestsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsNotEmpty()
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsNotEmpty()
+  @IsUUID()
   hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Filter by request status', enum: AmenityStatus })
+  @IsOptional()
+  @Transform(({ value }) => (value === '' ? undefined : value))
+  @IsEnum(AmenityStatus)
   status?: AmenityStatus;
+
+  @ApiPropertyOptional({ description: 'Filter by priority', enum: AmenityPriority })
+  @IsOptional()
+  @Transform(({ value }) => (value === '' ? undefined : value))
+  @IsEnum(AmenityPriority)
   priority?: AmenityPriority;
+
+  @ApiPropertyOptional({ description: 'Filter by amenity type' })
+  @IsOptional()
+  @IsString()
   amenityType?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by request category', enum: SpecialRequestCategory })
+  @IsOptional()
+  @Transform(({ value }) => (value === '' ? undefined : value))
+  @IsEnum(SpecialRequestCategory)
   requestCategory?: SpecialRequestCategory;
+
+  @ApiPropertyOptional({ description: 'Filter by start date (ISO 8601 format)' })
+  @IsOptional()
+  @IsDateString()
   startDate?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by end date (ISO 8601 format)' })
+  @IsOptional()
+  @IsDateString()
   endDate?: string;
+
+  @ApiPropertyOptional({ description: 'Page number', minimum: 1, default: 1 })
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(1)
   page?: number;
+
+  @ApiPropertyOptional({ description: 'Items per page', minimum: 1, maximum: 100, default: 10 })
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(1)
+  @Max(100)
   limit?: number;
+
+  @ApiPropertyOptional({ description: 'Sort field', enum: ['requestedAt', 'status', 'amenityType', 'roomNumber', 'createdAt'] })
+  @IsOptional()
+  @IsString()
   sortBy?: string;
+
+  @ApiPropertyOptional({ description: 'Sort order', enum: ['ASC', 'DESC'] })
+  @IsOptional()
+  @Transform(({ value }) => (value === '' ? undefined : value))
+  @IsEnum(['ASC', 'DESC'])
   sortOrder?: 'ASC' | 'DESC';
 }
 
@@ -225,9 +286,20 @@ export type FindAllAmenityRequestsNatsResponse = NatsResponse<{
  * Find One Amenity Request Request
  * Pattern: amenity_requests.find_one
  */
-export interface FindOneAmenityRequestNatsRequest {
+export class FindOneAmenityRequestNatsRequest {
+  @ApiProperty({ description: 'Amenity request ID' })
+  @IsNotEmpty()
+  @IsUUID()
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsNotEmpty()
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsNotEmpty()
+  @IsUUID()
   hotelId: string;
 }
 
@@ -276,10 +348,23 @@ export class UpdateAmenityRequestDto {
  * Update Amenity Request NATS Request
  * Pattern: amenity_requests.update
  */
-export interface UpdateAmenityRequestNatsRequest {
+export class UpdateAmenityRequestNatsRequest {
+  @ApiProperty({ description: 'Amenity request ID' })
+  @IsNotEmpty()
+  @IsUUID()
   id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsNotEmpty()
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsNotEmpty()
+  @IsUUID()
   hotelId: string;
+
+  @ApiProperty({ description: 'Update data' })
   updateDto: UpdateAmenityRequestDto;
 }
 
@@ -292,11 +377,16 @@ export type UpdateAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRe
  * Assign Amenity Request Request
  * Pattern: amenity_requests.assign
  */
-export interface AssignAmenityRequestNatsRequest {
+export class AssignAmenityRequestNatsRequest {
+  @ApiProperty({ description: 'Amenity request ID' })
   id: string;
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+  @ApiProperty({ description: 'Assigned staff ID' })
   assignedTo: string;
+  @ApiPropertyOptional({ description: 'Estimated time in minutes' })
   estimatedTime?: number;
 }
 
@@ -309,9 +399,12 @@ export type AssignAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRe
  * Start Amenity Request Request
  * Pattern: amenity_requests.start
  */
-export interface StartAmenityRequestNatsRequest {
+export class StartAmenityRequestNatsRequest {
+  @ApiProperty({ description: 'Amenity request ID' })
   id: string;
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 }
 
@@ -324,12 +417,18 @@ export type StartAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRes
  * Complete Amenity Request Request
  * Pattern: amenity_requests.complete
  */
-export interface CompleteAmenityRequestNatsRequest {
+export class CompleteAmenityRequestNatsRequest {
+  @ApiProperty({ description: 'Amenity request ID' })
   id: string;
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+  @ApiPropertyOptional({ description: 'Actual time spent in minutes' })
   actualTime?: number;
+  @ApiPropertyOptional({ description: 'Guest rating (1-5)' })
   guestRating?: number;
+  @ApiPropertyOptional({ description: 'Guest feedback' })
   guestFeedback?: string;
 }
 
@@ -342,10 +441,14 @@ export type CompleteAmenityRequestNatsResponse = NatsResponse<AmenityRequestNats
  * Cancel Amenity Request Request
  * Pattern: amenity_requests.cancel
  */
-export interface CancelAmenityRequestNatsRequest {
+export class CancelAmenityRequestNatsRequest {
+  @ApiProperty({ description: 'Amenity request ID' })
   id: string;
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+  @ApiPropertyOptional({ description: 'Cancellation reason' })
   reason?: string;
 }
 
@@ -357,8 +460,10 @@ export type CancelAmenityRequestNatsResponse = NatsResponse<AmenityRequestNatsRe
 /**
  * Amenity Request Stats Response
  */
-export interface AmenityRequestStatsNatsResponse {
+export class AmenityRequestStatsNatsResponse {
+  @ApiProperty({ description: 'Total requests' })
   total: number;
+  @ApiProperty({ description: 'Breakdown by status' })
   byStatus: {
     PENDING: number;
     ASSIGNED: number;
@@ -366,16 +471,22 @@ export interface AmenityRequestStatsNatsResponse {
     COMPLETED: number;
     CANCELLED: number;
   };
+  @ApiProperty({ description: 'Breakdown by priority' })
   byPriority: {
     LOW: number;
     MEDIUM: number;
     HIGH: number;
     URGENT: number;
   };
+  @ApiProperty({ description: 'Breakdown by amenity type' })
   byAmenityType: Record<string, number>;
+  @ApiPropertyOptional({ description: 'Average completion time in minutes' })
   averageCompletionTime?: number;
+  @ApiPropertyOptional({ description: 'Average guest rating' })
   averageRating?: number;
+  @ApiPropertyOptional({ description: 'Total estimated cost' })
   totalEstimatedCost?: number;
+  @ApiPropertyOptional({ description: 'Total actual cost' })
   totalActualCost?: number;
 }
 
@@ -383,10 +494,7 @@ export interface AmenityRequestStatsNatsResponse {
  * Get Amenity Request Stats Request
  * Pattern: amenity_requests.stats
  */
-export interface GetAmenityRequestStatsNatsRequest {
-  tenantId: string;
-  hotelId: string;
-}
+export class GetAmenityRequestStatsNatsRequest extends TenantHotelQueryDto {}
 
 /**
  * Get Amenity Request Stats Response
@@ -397,13 +505,20 @@ export type GetAmenityRequestStatsNatsResponse = NatsResponse<AmenityRequestStat
  * Assess Feasibility Request
  * Pattern: amenity_requests.assess_feasibility
  */
-export interface AssessFeasibilityNatsRequest {
+export class AssessFeasibilityNatsRequest {
+  @ApiProperty({ description: 'Amenity request ID' })
   id: string;
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+  @ApiProperty({ description: 'Feasibility status' })
   feasibilityStatus: string;
+  @ApiPropertyOptional({ description: 'Estimated cost' })
   estimatedCost?: number;
+  @ApiPropertyOptional({ description: 'Feasibility notes' })
   feasibilityNotes?: string;
+  @ApiPropertyOptional({ description: 'Assessed by staff ID' })
   assessedBy?: string;
 }
 
@@ -416,12 +531,18 @@ export type AssessFeasibilityNatsResponse = NatsResponse<AmenityRequestNatsRespo
  * Perform Quality Check Request
  * Pattern: amenity_requests.quality_check
  */
-export interface PerformQualityCheckNatsRequest {
+export class PerformQualityCheckNatsRequest {
+  @ApiProperty({ description: 'Amenity request ID' })
   id: string;
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+  @ApiProperty({ description: 'Quality check status' })
   qualityCheckStatus: string;
+  @ApiPropertyOptional({ description: 'Quality notes' })
   qualityNotes?: string;
+  @ApiPropertyOptional({ description: 'Checked by staff ID' })
   checkedBy?: string;
 }
 
@@ -434,10 +555,14 @@ export type PerformQualityCheckNatsResponse = NatsResponse<AmenityRequestNatsRes
  * Request Guest Approval Request
  * Pattern: amenity_requests.request_guest_approval
  */
-export interface RequestGuestApprovalNatsRequest {
+export class RequestGuestApprovalNatsRequest {
+  @ApiProperty({ description: 'Amenity request ID' })
   id: string;
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+  @ApiPropertyOptional({ description: 'Approval message' })
   approvalMessage?: string;
 }
 
@@ -450,11 +575,16 @@ export type RequestGuestApprovalNatsResponse = NatsResponse<AmenityRequestNatsRe
  * Coordinate Departments Request
  * Pattern: amenity_requests.coordinate_departments
  */
-export interface CoordinateDepartmentsNatsRequest {
+export class CoordinateDepartmentsNatsRequest {
+  @ApiProperty({ description: 'Amenity request ID' })
   id: string;
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+  @ApiProperty({ description: 'Department names to coordinate with', type: [String] })
   departments: string[];
+  @ApiPropertyOptional({ description: 'Coordination notes' })
   coordinationNotes?: string;
 }
 

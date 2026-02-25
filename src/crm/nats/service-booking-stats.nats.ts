@@ -8,8 +8,8 @@
  * Called by: api-gateway (GuestServicesController)
  */
 
-import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNumber } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsNumber, IsNotEmpty, IsOptional, IsUUID, IsDateString } from 'class-validator';
 import { NatsResponse } from '../../common';
 
 /**
@@ -73,11 +73,26 @@ export class ServiceBookingStatsData {
  *
  * Retrieves service booking statistics for a tenant within optional date range
  */
-export interface GetServiceBookingStatsNatsRequest {
+export class GetServiceBookingStatsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsNotEmpty()
+  @IsUUID()
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
   hotelId?: string;
-  startDate?: string; // YYYY-MM-DD format
-  endDate?: string; // YYYY-MM-DD format
+
+  @ApiPropertyOptional({ description: 'Start date (YYYY-MM-DD format)' })
+  @IsOptional()
+  @IsDateString()
+  startDate?: string;
+
+  @ApiPropertyOptional({ description: 'End date (YYYY-MM-DD format)' })
+  @IsOptional()
+  @IsDateString()
+  endDate?: string;
 }
 
 export type GetServiceBookingStatsNatsResponse = NatsResponse<ServiceBookingStatsData>;

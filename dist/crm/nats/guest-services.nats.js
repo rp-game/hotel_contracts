@@ -27,7 +27,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ServiceBookingListDataDto = exports.FindAllServiceBookingsNatsRequest = exports.ServiceBookingNatsResponse = exports.CreateServiceBookingDto = exports.OperatingHourSlot = exports.ServiceBookingPaymentStatus = exports.ServiceBookingStatus = exports.GuestServiceStatus = exports.ServiceType = void 0;
+exports.GetSpecialRequestCategoriesNatsRequest = exports.GetComplaintsMetricsNatsRequest = exports.ComplaintsMetricsNatsResponse = exports.FindOneServiceBookingNatsRequest = exports.ServiceBookingListDataDto = exports.FindAllServiceBookingsNatsRequest = exports.ServiceBookingNatsResponse = exports.CreateServiceBookingDto = exports.OperatingHourSlot = exports.ServiceBookingPaymentStatus = exports.ServiceBookingStatus = exports.GuestServiceStatus = exports.ServiceType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -482,6 +482,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Booking status filter', enum: ServiceBookingStatus }),
     (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => (value === '' ? undefined : value)),
     (0, class_validator_1.IsEnum)(ServiceBookingStatus),
     __metadata("design:type", String)
 ], FindAllServiceBookingsNatsRequest.prototype, "status", void 0);
@@ -542,4 +543,110 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Total pages' }),
     __metadata("design:type", Number)
 ], ServiceBookingListDataDto.prototype, "totalPages", void 0);
+/**
+ * Find One Booking Request
+ * Pattern: guest_services.bookings.find_one
+ */
+class FindOneServiceBookingNatsRequest {
+    tenantId;
+    bookingId;
+}
+exports.FindOneServiceBookingNatsRequest = FindOneServiceBookingNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindOneServiceBookingNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service booking ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindOneServiceBookingNatsRequest.prototype, "bookingId", void 0);
+/**
+ * Complaints Metrics Response
+ */
+class ComplaintsMetricsNatsResponse {
+    totalComplaints;
+    resolvedComplaints;
+    pendingComplaints;
+    resolutionRate;
+    averageResolutionTime;
+    topComplainedServices;
+}
+exports.ComplaintsMetricsNatsResponse = ComplaintsMetricsNatsResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total complaints' }),
+    __metadata("design:type", Number)
+], ComplaintsMetricsNatsResponse.prototype, "totalComplaints", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Resolved complaints' }),
+    __metadata("design:type", Number)
+], ComplaintsMetricsNatsResponse.prototype, "resolvedComplaints", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Pending complaints' }),
+    __metadata("design:type", Number)
+], ComplaintsMetricsNatsResponse.prototype, "pendingComplaints", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Resolution rate (0-1)' }),
+    __metadata("design:type", Number)
+], ComplaintsMetricsNatsResponse.prototype, "resolutionRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Average resolution time in minutes' }),
+    __metadata("design:type", Number)
+], ComplaintsMetricsNatsResponse.prototype, "averageResolutionTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Top complained services' }),
+    __metadata("design:type", Array)
+], ComplaintsMetricsNatsResponse.prototype, "topComplainedServices", void 0);
+/**
+ * Complaints Metrics Request
+ * Pattern: guest-services.complaints.metrics
+ */
+class GetComplaintsMetricsNatsRequest {
+    tenantId;
+    hotelId;
+    period;
+}
+exports.GetComplaintsMetricsNatsRequest = GetComplaintsMetricsNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetComplaintsMetricsNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetComplaintsMetricsNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Period filter (e.g. 7d, 30d, 90d)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetComplaintsMetricsNatsRequest.prototype, "period", void 0);
+/**
+ * Special Request Categories Query
+ * Pattern: amenity_requests.get_special_request_categories
+ */
+class GetSpecialRequestCategoriesNatsRequest {
+    tenantId;
+    hotelId;
+}
+exports.GetSpecialRequestCategoriesNatsRequest = GetSpecialRequestCategoriesNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetSpecialRequestCategoriesNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetSpecialRequestCategoriesNatsRequest.prototype, "hotelId", void 0);
 //# sourceMappingURL=guest-services.nats.js.map

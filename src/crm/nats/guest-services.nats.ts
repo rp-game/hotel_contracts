@@ -17,10 +17,10 @@
  * Called by: api-gateway (CrmController)
  */
 
-import { NatsResponse } from '../../common';
+import { NatsResponse, TenantHotelQueryDto, TenantRequiredHotelOptionalQueryDto, IdParamDto } from '../../common';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsUUID, IsString, IsNumber, IsEnum, Min, Max } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsOptional, IsUUID, IsString, IsNumber, IsEnum, IsDateString, IsNotEmpty, Min, Max } from 'class-validator';
+import { Type, Transform } from 'class-transformer';
 
 /**
  * Service Type Enum (matches CRM GuestService entity)
@@ -529,6 +529,7 @@ export class FindAllServiceBookingsNatsRequest {
 
   @ApiPropertyOptional({ description: 'Booking status filter', enum: ServiceBookingStatus })
   @IsOptional()
+  @Transform(({ value }) => (value === '' ? undefined : value))
   @IsEnum(ServiceBookingStatus)
   status?: ServiceBookingStatus;
 
@@ -585,8 +586,15 @@ export type FindAllServiceBookingsNatsResponse = NatsResponse<ServiceBookingList
  * Find One Booking Request
  * Pattern: guest_services.bookings.find_one
  */
-export interface FindOneServiceBookingNatsRequest {
+export class FindOneServiceBookingNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsNotEmpty()
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Service booking ID' })
+  @IsNotEmpty()
+  @IsUUID()
   bookingId: string;
 }
 
@@ -598,12 +606,18 @@ export type FindOneServiceBookingNatsResponse = NatsResponse<ServiceBookingNatsR
 /**
  * Complaints Metrics Response
  */
-export interface ComplaintsMetricsNatsResponse {
+export class ComplaintsMetricsNatsResponse {
+  @ApiProperty({ description: 'Total complaints' })
   totalComplaints: number;
+  @ApiProperty({ description: 'Resolved complaints' })
   resolvedComplaints: number;
+  @ApiProperty({ description: 'Pending complaints' })
   pendingComplaints: number;
+  @ApiProperty({ description: 'Resolution rate (0-1)' })
   resolutionRate: number;
+  @ApiProperty({ description: 'Average resolution time in minutes' })
   averageResolutionTime: number;
+  @ApiProperty({ description: 'Top complained services' })
   topComplainedServices: Array<{
     serviceId: string;
     serviceName: string;
@@ -615,9 +629,20 @@ export interface ComplaintsMetricsNatsResponse {
  * Complaints Metrics Request
  * Pattern: guest-services.complaints.metrics
  */
-export interface GetComplaintsMetricsNatsRequest {
+export class GetComplaintsMetricsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsNotEmpty()
+  @IsUUID()
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
   hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Period filter (e.g. 7d, 30d, 90d)' })
+  @IsOptional()
+  @IsString()
   period?: string;
 }
 
@@ -625,3 +650,19 @@ export interface GetComplaintsMetricsNatsRequest {
  * Complaints Metrics Response
  */
 export type GetComplaintsMetricsNatsResponse = NatsResponse<ComplaintsMetricsNatsResponse>;
+
+/**
+ * Special Request Categories Query
+ * Pattern: amenity_requests.get_special_request_categories
+ */
+export class GetSpecialRequestCategoriesNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsNotEmpty()
+  @IsUUID()
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+}

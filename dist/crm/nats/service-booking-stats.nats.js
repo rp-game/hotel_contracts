@@ -18,7 +18,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ServiceBookingStatsData = exports.ServiceBookingCount = exports.BookingStatusCount = void 0;
+exports.GetServiceBookingStatsNatsRequest = exports.ServiceBookingStatsData = exports.ServiceBookingCount = exports.BookingStatusCount = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 /**
@@ -103,4 +103,41 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Booking count grouped by service name', type: () => [ServiceBookingCount] }),
     __metadata("design:type", Array)
 ], ServiceBookingStatsData.prototype, "bookingsByService", void 0);
+/**
+ * Get Service Booking Stats Request
+ * Pattern: guest_services.bookings.stats
+ *
+ * Retrieves service booking statistics for a tenant within optional date range
+ */
+class GetServiceBookingStatsNatsRequest {
+    tenantId;
+    hotelId;
+    startDate;
+    endDate;
+}
+exports.GetServiceBookingStatsNatsRequest = GetServiceBookingStatsNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetServiceBookingStatsNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetServiceBookingStatsNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Start date (YYYY-MM-DD format)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], GetServiceBookingStatsNatsRequest.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'End date (YYYY-MM-DD format)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], GetServiceBookingStatsNatsRequest.prototype, "endDate", void 0);
 //# sourceMappingURL=service-booking-stats.nats.js.map

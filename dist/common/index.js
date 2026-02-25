@@ -22,4 +22,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./nats-response.interface"), exports);
 __exportStar(require("./pagination.interface"), exports);
 __exportStar(require("./error.interface"), exports);
+__exportStar(require("./query.dto"), exports);
 //# sourceMappingURL=index.js.map

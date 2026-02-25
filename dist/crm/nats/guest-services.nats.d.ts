@@ -314,7 +314,7 @@ export type FindAllServiceBookingsNatsResponse = NatsResponse<ServiceBookingList
  * Find One Booking Request
  * Pattern: guest_services.bookings.find_one
  */
-export interface FindOneServiceBookingNatsRequest {
+export declare class FindOneServiceBookingNatsRequest {
     tenantId: string;
     bookingId: string;
 }
@@ -325,7 +325,7 @@ export type FindOneServiceBookingNatsResponse = NatsResponse<ServiceBookingNatsR
 /**
  * Complaints Metrics Response
  */
-export interface ComplaintsMetricsNatsResponse {
+export declare class ComplaintsMetricsNatsResponse {
     totalComplaints: number;
     resolvedComplaints: number;
     pendingComplaints: number;
@@ -341,7 +341,7 @@ export interface ComplaintsMetricsNatsResponse {
  * Complaints Metrics Request
  * Pattern: guest-services.complaints.metrics
  */
-export interface GetComplaintsMetricsNatsRequest {
+export declare class GetComplaintsMetricsNatsRequest {
     tenantId: string;
     hotelId?: string;
     period?: string;
@@ -350,4 +350,12 @@ export interface GetComplaintsMetricsNatsRequest {
  * Complaints Metrics Response
  */
 export type GetComplaintsMetricsNatsResponse = NatsResponse<ComplaintsMetricsNatsResponse>;
+/**
+ * Special Request Categories Query
+ * Pattern: amenity_requests.get_special_request_categories
+ */
+export declare class GetSpecialRequestCategoriesNatsRequest {
+    tenantId: string;
+    hotelId?: string;
+}
 //# sourceMappingURL=guest-services.nats.d.ts.map

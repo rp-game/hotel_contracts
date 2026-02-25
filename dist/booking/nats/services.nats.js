@@ -24,9 +24,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookingServiceStatsData = exports.FindAllServicesData = exports.CreateServiceNatsRequest = exports.BookingServiceNatsResponse = exports.BookingServiceStatus = exports.ServiceCategory = void 0;
+exports.ServiceAvailabilityData = exports.CheckServiceAvailabilityNatsRequest = exports.GetBookingServiceStatsNatsRequest = exports.BookingServiceStatsData = exports.DeleteServiceData = exports.DeleteServiceNatsRequest = exports.UpdateServiceNatsRequest = exports.FindOneServiceNatsRequest = exports.FindAllServicesData = exports.FindAllServicesNatsRequest = exports.CreateServiceNatsRequest = exports.BookingServiceNatsResponse = exports.BookingServiceStatus = exports.ServiceCategory = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
+const common_1 = require("../../common");
 /**
  * Service Category Enum
  */
@@ -308,6 +310,77 @@ __decorate([
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "status", void 0);
 /**
+ * Find All Services Request
+ * Pattern: services.find_all
+ *
+ * UNIFIED CONTRACT - Used by both NATS handlers and REST API (api-gateway @Query())
+ * @standardized 2026-02-25
+ */
+class FindAllServicesNatsRequest {
+    tenantId;
+    hotelId;
+    category;
+    available;
+    status;
+    page;
+    limit;
+}
+exports.FindAllServicesNatsRequest = FindAllServicesNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindAllServicesNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindAllServicesNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by service category', enum: ServiceCategory }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => (value === '' ? undefined : value)),
+    (0, class_validator_1.IsEnum)(ServiceCategory),
+    __metadata("design:type", String)
+], FindAllServicesNatsRequest.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by availability' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => {
+        if (value === '' || value === undefined || value === null)
+            return undefined;
+        return value === 'true' || value === true;
+    }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], FindAllServicesNatsRequest.prototype, "available", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by service status', enum: BookingServiceStatus }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => (value === '' ? undefined : value)),
+    (0, class_validator_1.IsEnum)(BookingServiceStatus),
+    __metadata("design:type", String)
+], FindAllServicesNatsRequest.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Page number', minimum: 1, default: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Type)(() => Number),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], FindAllServicesNatsRequest.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Items per page', minimum: 1, maximum: 100, default: 10 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Type)(() => Number),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.Max)(100),
+    __metadata("design:type", Number)
+], FindAllServicesNatsRequest.prototype, "limit", void 0);
+/**
  * Find All Services Response (paginated)
  */
 class FindAllServicesData {
@@ -338,6 +411,108 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total number of pages' }),
     __metadata("design:type", Number)
 ], FindAllServicesData.prototype, "totalPages", void 0);
+/**
+ * Find One Service Request
+ * Pattern: services.find_one
+ */
+class FindOneServiceNatsRequest {
+    tenantId;
+    hotelId;
+    serviceId;
+}
+exports.FindOneServiceNatsRequest = FindOneServiceNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindOneServiceNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindOneServiceNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindOneServiceNatsRequest.prototype, "serviceId", void 0);
+/**
+ * Update Service Request
+ * Pattern: services.update
+ */
+class UpdateServiceNatsRequest {
+    tenantId;
+    hotelId;
+    serviceId;
+    updateData;
+}
+exports.UpdateServiceNatsRequest = UpdateServiceNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateServiceNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateServiceNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateServiceNatsRequest.prototype, "serviceId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Update data' }),
+    __metadata("design:type", Object)
+], UpdateServiceNatsRequest.prototype, "updateData", void 0);
+/**
+ * Delete Service Request
+ * Pattern: services.remove
+ */
+class DeleteServiceNatsRequest {
+    tenantId;
+    hotelId;
+    serviceId;
+}
+exports.DeleteServiceNatsRequest = DeleteServiceNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], DeleteServiceNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], DeleteServiceNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], DeleteServiceNatsRequest.prototype, "serviceId", void 0);
+class DeleteServiceData {
+    success;
+    message;
+}
+exports.DeleteServiceData = DeleteServiceData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether deletion was successful' }),
+    __metadata("design:type", Boolean)
+], DeleteServiceData.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Result message' }),
+    __metadata("design:type", String)
+], DeleteServiceData.prototype, "message", void 0);
 /**
  * Booking Service Statistics Response
  */
@@ -384,4 +559,87 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Average service rating' }),
     __metadata("design:type", Number)
 ], BookingServiceStatsData.prototype, "averageRating", void 0);
+/**
+ * Get Booking Service Stats Request
+ * Pattern: services.stats
+ */
+class GetBookingServiceStatsNatsRequest extends common_1.TenantHotelQueryDto {
+}
+exports.GetBookingServiceStatsNatsRequest = GetBookingServiceStatsNatsRequest;
+/**
+ * Check Service Availability Request
+ * Pattern: services.check_availability
+ */
+class CheckServiceAvailabilityNatsRequest {
+    tenantId;
+    hotelId;
+    serviceId;
+    date;
+    time;
+    numberOfGuests;
+}
+exports.CheckServiceAvailabilityNatsRequest = CheckServiceAvailabilityNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CheckServiceAvailabilityNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CheckServiceAvailabilityNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service ID' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CheckServiceAvailabilityNatsRequest.prototype, "serviceId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Date to check (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], CheckServiceAvailabilityNatsRequest.prototype, "date", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Time to check (HH:mm)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckServiceAvailabilityNatsRequest.prototype, "time", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of guests' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Type)(() => Number),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CheckServiceAvailabilityNatsRequest.prototype, "numberOfGuests", void 0);
+/**
+ * Service Availability Response
+ */
+class ServiceAvailabilityData {
+    available;
+    reason;
+    nextAvailableSlot;
+    capacityRemaining;
+}
+exports.ServiceAvailabilityData = ServiceAvailabilityData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether the service is available' }),
+    __metadata("design:type", Boolean)
+], ServiceAvailabilityData.prototype, "available", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Reason if not available' }),
+    __metadata("design:type", String)
+], ServiceAvailabilityData.prototype, "reason", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Next available time slot' }),
+    __metadata("design:type", Object)
+], ServiceAvailabilityData.prototype, "nextAvailableSlot", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Remaining capacity' }),
+    __metadata("design:type", Number)
+], ServiceAvailabilityData.prototype, "capacityRemaining", void 0);
 //# sourceMappingURL=services.nats.js.map

@@ -15,8 +15,9 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNumber, IsOptional, IsEnum, IsBoolean, IsArray } from 'class-validator';
-import { NatsResponse } from '../../common';
+import { IsString, IsNumber, IsOptional, IsEnum, IsBoolean, IsArray, IsNotEmpty, IsUUID, Min, Max, IsDateString } from 'class-validator';
+import { Type, Transform } from 'class-transformer';
+import { NatsResponse, TenantHotelQueryDto, IdParamDto, TenantRequiredHotelOptionalQueryDto } from '../../common';
 
 /**
  * Service Category Enum
@@ -225,13 +226,55 @@ export type CreateServiceNatsResponse = NatsResponse<BookingServiceNatsResponse>
 /**
  * Find All Services Request
  * Pattern: services.find_all
+ *
+ * UNIFIED CONTRACT - Used by both NATS handlers and REST API (api-gateway @Query())
+ * @standardized 2026-02-25
  */
-export interface FindAllServicesNatsRequest {
+export class FindAllServicesNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsNotEmpty()
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsNotEmpty()
+  @IsUUID()
   hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Filter by service category', enum: ServiceCategory })
+  @IsOptional()
+  @Transform(({ value }) => (value === '' ? undefined : value))
+  @IsEnum(ServiceCategory)
   category?: ServiceCategory;
+
+  @ApiPropertyOptional({ description: 'Filter by availability' })
+  @IsOptional()
+  @Transform(({ value }) => {
+    if (value === '' || value === undefined || value === null) return undefined;
+    return value === 'true' || value === true;
+  })
+  @IsBoolean()
+  available?: boolean;
+
+  @ApiPropertyOptional({ description: 'Filter by service status', enum: BookingServiceStatus })
+  @IsOptional()
+  @Transform(({ value }) => (value === '' ? undefined : value))
+  @IsEnum(BookingServiceStatus)
   status?: BookingServiceStatus;
+
+  @ApiPropertyOptional({ description: 'Page number', minimum: 1, default: 1 })
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(1)
   page?: number;
+
+  @ApiPropertyOptional({ description: 'Items per page', minimum: 1, maximum: 100, default: 10 })
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(1)
+  @Max(100)
   limit?: number;
 }
 
@@ -261,9 +304,20 @@ export type FindAllServicesNatsResponse = NatsResponse<FindAllServicesData>;
  * Find One Service Request
  * Pattern: services.find_one
  */
-export interface FindOneServiceNatsRequest {
+export class FindOneServiceNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsNotEmpty()
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsNotEmpty()
+  @IsUUID()
   hotelId: string;
+
+  @ApiProperty({ description: 'Service ID' })
+  @IsNotEmpty()
+  @IsUUID()
   serviceId: string;
 }
 
@@ -273,10 +327,23 @@ export type FindOneServiceNatsResponse = NatsResponse<BookingServiceNatsResponse
  * Update Service Request
  * Pattern: services.update
  */
-export interface UpdateServiceNatsRequest {
+export class UpdateServiceNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsNotEmpty()
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsNotEmpty()
+  @IsUUID()
   hotelId: string;
+
+  @ApiProperty({ description: 'Service ID' })
+  @IsNotEmpty()
+  @IsUUID()
   serviceId: string;
+
+  @ApiProperty({ description: 'Update data' })
   updateData: Partial<CreateServiceNatsRequest>;
 }
 
@@ -286,14 +353,28 @@ export type UpdateServiceNatsResponse = NatsResponse<BookingServiceNatsResponse>
  * Delete Service Request
  * Pattern: services.remove
  */
-export interface DeleteServiceNatsRequest {
+export class DeleteServiceNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsNotEmpty()
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsNotEmpty()
+  @IsUUID()
   hotelId: string;
+
+  @ApiProperty({ description: 'Service ID' })
+  @IsNotEmpty()
+  @IsUUID()
   serviceId: string;
 }
 
-export interface DeleteServiceData {
+export class DeleteServiceData {
+  @ApiProperty({ description: 'Whether deletion was successful' })
   success: boolean;
+
+  @ApiProperty({ description: 'Result message' })
   message: string;
 }
 
@@ -332,10 +413,7 @@ export class BookingServiceStatsData {
  * Get Booking Service Stats Request
  * Pattern: services.stats
  */
-export interface GetBookingServiceStatsNatsRequest {
-  tenantId: string;
-  hotelId: string;
-}
+export class GetBookingServiceStatsNatsRequest extends TenantHotelQueryDto {}
 
 export type GetBookingServiceStatsNatsResponse = NatsResponse<BookingServiceStatsData>;
 
@@ -343,25 +421,56 @@ export type GetBookingServiceStatsNatsResponse = NatsResponse<BookingServiceStat
  * Check Service Availability Request
  * Pattern: services.check_availability
  */
-export interface CheckServiceAvailabilityNatsRequest {
+export class CheckServiceAvailabilityNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsNotEmpty()
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsNotEmpty()
+  @IsUUID()
   hotelId: string;
+
+  @ApiProperty({ description: 'Service ID' })
+  @IsNotEmpty()
+  @IsUUID()
   serviceId: string;
-  date: string; // YYYY-MM-DD
-  time?: string; // HH:mm
+
+  @ApiProperty({ description: 'Date to check (YYYY-MM-DD)' })
+  @IsNotEmpty()
+  @IsDateString()
+  date: string;
+
+  @ApiPropertyOptional({ description: 'Time to check (HH:mm)' })
+  @IsOptional()
+  @IsString()
+  time?: string;
+
+  @ApiPropertyOptional({ description: 'Number of guests' })
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
   numberOfGuests?: number;
 }
 
 /**
  * Service Availability Response
  */
-export interface ServiceAvailabilityData {
+export class ServiceAvailabilityData {
+  @ApiProperty({ description: 'Whether the service is available' })
   available: boolean;
-  reason?: string; // If not available
+
+  @ApiPropertyOptional({ description: 'Reason if not available' })
+  reason?: string;
+
+  @ApiPropertyOptional({ description: 'Next available time slot' })
   nextAvailableSlot?: {
     date: string;
     time: string;
   };
+
+  @ApiPropertyOptional({ description: 'Remaining capacity' })
   capacityRemaining?: number;
 }
 
