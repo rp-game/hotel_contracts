@@ -52,6 +52,25 @@ export declare enum ServiceBookingStatus {
     NO_SHOW = "NO_SHOW"
 }
 /**
+ * Payment Status Constants for Service Bookings
+ */
+export declare enum ServiceBookingPaymentStatus {
+    PENDING = "PENDING",
+    PAID = "PAID",
+    CHARGED_TO_ROOM = "CHARGED_TO_ROOM",
+    REFUNDED = "REFUNDED",
+    CANCELLED = "CANCELLED"
+}
+/**
+ * Operating Hour Slot for service schedule validation
+ * Used to parse the operatingHours JSON field on GuestService
+ */
+export declare class OperatingHourSlot {
+    dayOfWeek: number;
+    openTime: string;
+    closeTime: string;
+}
+/**
  * Create Guest Service Request
  * Pattern: guest_services.services.create
  */
@@ -303,25 +322,6 @@ export interface FindOneServiceBookingNatsRequest {
  * Find One Booking Response
  */
 export type FindOneServiceBookingNatsResponse = NatsResponse<ServiceBookingNatsResponse>;
-/**
- * Payment Status Constants for Service Bookings
- */
-export declare enum ServiceBookingPaymentStatus {
-    PENDING = "PENDING",
-    PAID = "PAID",
-    CHARGED_TO_ROOM = "CHARGED_TO_ROOM",
-    REFUNDED = "REFUNDED",
-    CANCELLED = "CANCELLED"
-}
-/**
- * Operating Hour Slot for service schedule validation
- * Used to parse the operatingHours JSON field on GuestService
- */
-export declare class OperatingHourSlot {
-    dayOfWeek: number;
-    openTime: string;
-    closeTime: string;
-}
 /**
  * Complaints Metrics Response
  */

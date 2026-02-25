@@ -60,6 +60,43 @@ export enum ServiceBookingStatus {
 }
 
 /**
+ * Payment Status Constants for Service Bookings
+ */
+export enum ServiceBookingPaymentStatus {
+  PENDING = 'PENDING',
+  PAID = 'PAID',
+  CHARGED_TO_ROOM = 'CHARGED_TO_ROOM',
+  REFUNDED = 'REFUNDED',
+  CANCELLED = 'CANCELLED',
+}
+
+/**
+ * Operating Hour Slot for service schedule validation
+ * Used to parse the operatingHours JSON field on GuestService
+ */
+export class OperatingHourSlot {
+  @ApiProperty({
+    description: 'Day of the week (0=Sunday, 1=Monday, ..., 6=Saturday)',
+    example: 1,
+    minimum: 0,
+    maximum: 6,
+  })
+  dayOfWeek: number;
+
+  @ApiProperty({
+    description: 'Opening time in HH:mm format',
+    example: '09:00',
+  })
+  openTime: string;
+
+  @ApiProperty({
+    description: 'Closing time in HH:mm format',
+    example: '21:00',
+  })
+  closeTime: string;
+}
+
+/**
  * Create Guest Service Request
  * Pattern: guest_services.services.create
  */
@@ -434,7 +471,11 @@ export class ServiceBookingNatsResponse {
   @ApiPropertyOptional({ description: 'Confirmation code' })
   confirmationCode?: string;
 
-  @ApiPropertyOptional({ description: 'Payment status' })
+  @ApiPropertyOptional({
+    description: 'Payment status. Set to CHARGED_TO_ROOM when service is completed with a roomBookingId.',
+    enum: ServiceBookingPaymentStatus,
+    example: ServiceBookingPaymentStatus.PENDING,
+  })
   paymentStatus?: string;
 
   @ApiPropertyOptional({ description: 'Assigned staff ID' })
@@ -553,43 +594,6 @@ export interface FindOneServiceBookingNatsRequest {
  * Find One Booking Response
  */
 export type FindOneServiceBookingNatsResponse = NatsResponse<ServiceBookingNatsResponse>;
-
-/**
- * Payment Status Constants for Service Bookings
- */
-export enum ServiceBookingPaymentStatus {
-  PENDING = 'PENDING',
-  PAID = 'PAID',
-  CHARGED_TO_ROOM = 'CHARGED_TO_ROOM',
-  REFUNDED = 'REFUNDED',
-  CANCELLED = 'CANCELLED',
-}
-
-/**
- * Operating Hour Slot for service schedule validation
- * Used to parse the operatingHours JSON field on GuestService
- */
-export class OperatingHourSlot {
-  @ApiProperty({
-    description: 'Day of the week (0=Sunday, 1=Monday, ..., 6=Saturday)',
-    example: 1,
-    minimum: 0,
-    maximum: 6,
-  })
-  dayOfWeek: number;
-
-  @ApiProperty({
-    description: 'Opening time in HH:mm format',
-    example: '09:00',
-  })
-  openTime: string;
-
-  @ApiProperty({
-    description: 'Closing time in HH:mm format',
-    example: '21:00',
-  })
-  closeTime: string;
-}
 
 /**
  * Complaints Metrics Response
