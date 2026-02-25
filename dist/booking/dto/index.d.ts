@@ -3,4 +3,5 @@
  */
 export * from './booking-response.dto';
 export * from './conflict-responses.dto';
+export * from './pricing-breakdown.dto';
 //# sourceMappingURL=index.d.ts.map
