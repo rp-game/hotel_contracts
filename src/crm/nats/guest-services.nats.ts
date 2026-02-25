@@ -526,6 +526,43 @@ export interface FindOneServiceBookingNatsRequest {
 export type FindOneServiceBookingNatsResponse = NatsResponse<ServiceBookingNatsResponse>;
 
 /**
+ * Payment Status Constants for Service Bookings
+ */
+export enum ServiceBookingPaymentStatus {
+  PENDING = 'PENDING',
+  PAID = 'PAID',
+  CHARGED_TO_ROOM = 'CHARGED_TO_ROOM',
+  REFUNDED = 'REFUNDED',
+  CANCELLED = 'CANCELLED',
+}
+
+/**
+ * Operating Hour Slot for service schedule validation
+ * Used to parse the operatingHours JSON field on GuestService
+ */
+export class OperatingHourSlot {
+  @ApiProperty({
+    description: 'Day of the week (0=Sunday, 1=Monday, ..., 6=Saturday)',
+    example: 1,
+    minimum: 0,
+    maximum: 6,
+  })
+  dayOfWeek: number;
+
+  @ApiProperty({
+    description: 'Opening time in HH:mm format',
+    example: '09:00',
+  })
+  openTime: string;
+
+  @ApiProperty({
+    description: 'Closing time in HH:mm format',
+    example: '21:00',
+  })
+  closeTime: string;
+}
+
+/**
  * Complaints Metrics Response
  */
 export interface ComplaintsMetricsNatsResponse {

@@ -27,7 +27,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ServiceBookingListDataDto = exports.FindAllServiceBookingsNatsRequest = exports.ServiceBookingNatsResponse = exports.CreateServiceBookingDto = exports.ServiceBookingStatus = exports.GuestServiceStatus = exports.ServiceType = void 0;
+exports.OperatingHourSlot = exports.ServiceBookingPaymentStatus = exports.ServiceBookingListDataDto = exports.FindAllServiceBookingsNatsRequest = exports.ServiceBookingNatsResponse = exports.CreateServiceBookingDto = exports.ServiceBookingStatus = exports.GuestServiceStatus = exports.ServiceType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -465,4 +465,48 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Total pages' }),
     __metadata("design:type", Number)
 ], ServiceBookingListDataDto.prototype, "totalPages", void 0);
+/**
+ * Payment Status Constants for Service Bookings
+ */
+var ServiceBookingPaymentStatus;
+(function (ServiceBookingPaymentStatus) {
+    ServiceBookingPaymentStatus["PENDING"] = "PENDING";
+    ServiceBookingPaymentStatus["PAID"] = "PAID";
+    ServiceBookingPaymentStatus["CHARGED_TO_ROOM"] = "CHARGED_TO_ROOM";
+    ServiceBookingPaymentStatus["REFUNDED"] = "REFUNDED";
+    ServiceBookingPaymentStatus["CANCELLED"] = "CANCELLED";
+})(ServiceBookingPaymentStatus || (exports.ServiceBookingPaymentStatus = ServiceBookingPaymentStatus = {}));
+/**
+ * Operating Hour Slot for service schedule validation
+ * Used to parse the operatingHours JSON field on GuestService
+ */
+class OperatingHourSlot {
+    dayOfWeek;
+    openTime;
+    closeTime;
+}
+exports.OperatingHourSlot = OperatingHourSlot;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Day of the week (0=Sunday, 1=Monday, ..., 6=Saturday)',
+        example: 1,
+        minimum: 0,
+        maximum: 6,
+    }),
+    __metadata("design:type", Number)
+], OperatingHourSlot.prototype, "dayOfWeek", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Opening time in HH:mm format',
+        example: '09:00',
+    }),
+    __metadata("design:type", String)
+], OperatingHourSlot.prototype, "openTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Closing time in HH:mm format',
+        example: '21:00',
+    }),
+    __metadata("design:type", String)
+], OperatingHourSlot.prototype, "closeTime", void 0);
 //# sourceMappingURL=guest-services.nats.js.map
