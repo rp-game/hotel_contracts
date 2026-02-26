@@ -16,7 +16,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { ValidateNested } from 'class-validator';
+import { IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common';
 
@@ -673,140 +673,190 @@ export class ComparativeReportNatsResponse {
 
 export class GetRevenueReportNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
   tenantId: string;
 
   @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
   hotelId: string;
 
   @ApiProperty({ description: 'Start date (YYYY-MM-DD)' })
+  @IsString()
   startDate: string;
 
   @ApiProperty({ description: 'End date (YYYY-MM-DD)' })
+  @IsString()
   endDate: string;
 
   @ApiPropertyOptional({ description: 'Group by period (daily, monthly, yearly)' })
+  @IsOptional()
+  @IsString()
   groupBy?: string;
 }
 
 export class GetOccupancyReportNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
   tenantId: string;
 
   @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
   hotelId: string;
 
   @ApiProperty({ description: 'Start date (YYYY-MM-DD)' })
+  @IsString()
   startDate: string;
 
   @ApiProperty({ description: 'End date (YYYY-MM-DD)' })
+  @IsString()
   endDate: string;
 
   @ApiPropertyOptional({ description: 'Filter by room type ID' })
+  @IsOptional()
+  @IsString()
   roomTypeId?: string;
 }
 
 export class GetGuestAnalyticsReportNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
   tenantId: string;
 
   @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
   hotelId: string;
 
   @ApiProperty({ description: 'Start date (YYYY-MM-DD)' })
+  @IsString()
   startDate: string;
 
   @ApiProperty({ description: 'End date (YYYY-MM-DD)' })
+  @IsString()
   endDate: string;
 
   @ApiPropertyOptional({ description: 'Filter by guest type' })
+  @IsOptional()
+  @IsString()
   guestType?: string;
 }
 
 export class GetFinancialReportNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
   tenantId: string;
 
   @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
   hotelId: string;
 
   @ApiProperty({ description: 'Start date (YYYY-MM-DD)' })
+  @IsString()
   startDate: string;
 
   @ApiProperty({ description: 'End date (YYYY-MM-DD)' })
+  @IsString()
   endDate: string;
 
   @ApiPropertyOptional({ description: 'Report type' })
+  @IsOptional()
+  @IsString()
   reportType?: string;
 }
 
 export class GetPerformanceReportNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
   tenantId: string;
 
   @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
   hotelId: string;
 
   @ApiProperty({ description: 'Start date (YYYY-MM-DD)' })
+  @IsString()
   startDate: string;
 
   @ApiProperty({ description: 'End date (YYYY-MM-DD)' })
+  @IsString()
   endDate: string;
 
   @ApiPropertyOptional({ description: 'Metric to filter by' })
+  @IsOptional()
+  @IsString()
   metric?: string;
 }
 
 export class ExportReportNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
   tenantId: string;
 
   @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
   hotelId: string;
 
   @ApiProperty({ description: 'Report type' })
+  @IsString()
   reportType: string;
 
   @ApiProperty({ description: 'Export format (pdf, excel, csv)' })
+  @IsString()
   format: string;
 
   @ApiPropertyOptional({ description: 'Start date (YYYY-MM-DD)' })
+  @IsOptional()
+  @IsString()
   startDate?: string;
 
   @ApiPropertyOptional({ description: 'End date (YYYY-MM-DD)' })
+  @IsOptional()
+  @IsString()
   endDate?: string;
 }
 
 export class GetDashboardDataNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
   tenantId: string;
 
   @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
   hotelId: string;
 
   @ApiPropertyOptional({ description: 'Time period (week, month, quarter, year)' })
+  @IsOptional()
+  @IsString()
   period?: string;
 
   @ApiPropertyOptional({ description: 'Specific metrics to include', type: [String] })
+  @IsOptional()
+  @IsString({ each: true })
   metrics?: string[];
 }
 
 export class GetComparativeReportNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
   tenantId: string;
 
   @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
   hotelId: string;
 
   @ApiProperty({ description: 'Current period start date (YYYY-MM-DD)' })
+  @IsString()
   startDate: string;
 
   @ApiProperty({ description: 'Current period end date (YYYY-MM-DD)' })
+  @IsString()
   endDate: string;
 
   @ApiProperty({ description: 'Previous period start date (YYYY-MM-DD)' })
+  @IsString()
   compareStartDate: string;
 
   @ApiProperty({ description: 'Previous period end date (YYYY-MM-DD)' })
+  @IsString()
   compareEndDate: string;
 }
 

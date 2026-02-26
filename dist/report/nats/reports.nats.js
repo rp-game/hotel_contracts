@@ -1007,22 +1007,28 @@ class GetRevenueReportNatsRequest {
 exports.GetRevenueReportNatsRequest = GetRevenueReportNatsRequest;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetRevenueReportNatsRequest.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetRevenueReportNatsRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Start date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetRevenueReportNatsRequest.prototype, "startDate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'End date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetRevenueReportNatsRequest.prototype, "endDate", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Group by period (daily, monthly, yearly)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetRevenueReportNatsRequest.prototype, "groupBy", void 0);
 class GetOccupancyReportNatsRequest {
@@ -1035,22 +1041,28 @@ class GetOccupancyReportNatsRequest {
 exports.GetOccupancyReportNatsRequest = GetOccupancyReportNatsRequest;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetOccupancyReportNatsRequest.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetOccupancyReportNatsRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Start date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetOccupancyReportNatsRequest.prototype, "startDate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'End date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetOccupancyReportNatsRequest.prototype, "endDate", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by room type ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetOccupancyReportNatsRequest.prototype, "roomTypeId", void 0);
 class GetGuestAnalyticsReportNatsRequest {
@@ -1063,22 +1075,28 @@ class GetGuestAnalyticsReportNatsRequest {
 exports.GetGuestAnalyticsReportNatsRequest = GetGuestAnalyticsReportNatsRequest;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetGuestAnalyticsReportNatsRequest.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetGuestAnalyticsReportNatsRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Start date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetGuestAnalyticsReportNatsRequest.prototype, "startDate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'End date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetGuestAnalyticsReportNatsRequest.prototype, "endDate", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by guest type' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetGuestAnalyticsReportNatsRequest.prototype, "guestType", void 0);
 class GetFinancialReportNatsRequest {
@@ -1091,22 +1109,28 @@ class GetFinancialReportNatsRequest {
 exports.GetFinancialReportNatsRequest = GetFinancialReportNatsRequest;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetFinancialReportNatsRequest.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetFinancialReportNatsRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Start date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetFinancialReportNatsRequest.prototype, "startDate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'End date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetFinancialReportNatsRequest.prototype, "endDate", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Report type' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetFinancialReportNatsRequest.prototype, "reportType", void 0);
 class GetPerformanceReportNatsRequest {
@@ -1119,22 +1143,28 @@ class GetPerformanceReportNatsRequest {
 exports.GetPerformanceReportNatsRequest = GetPerformanceReportNatsRequest;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetPerformanceReportNatsRequest.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetPerformanceReportNatsRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Start date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetPerformanceReportNatsRequest.prototype, "startDate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'End date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetPerformanceReportNatsRequest.prototype, "endDate", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Metric to filter by' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetPerformanceReportNatsRequest.prototype, "metric", void 0);
 class ExportReportNatsRequest {
@@ -1148,26 +1178,34 @@ class ExportReportNatsRequest {
 exports.ExportReportNatsRequest = ExportReportNatsRequest;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ExportReportNatsRequest.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ExportReportNatsRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Report type' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ExportReportNatsRequest.prototype, "reportType", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Export format (pdf, excel, csv)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ExportReportNatsRequest.prototype, "format", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Start date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ExportReportNatsRequest.prototype, "startDate", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'End date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ExportReportNatsRequest.prototype, "endDate", void 0);
 class GetDashboardDataNatsRequest {
@@ -1179,18 +1217,24 @@ class GetDashboardDataNatsRequest {
 exports.GetDashboardDataNatsRequest = GetDashboardDataNatsRequest;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetDashboardDataNatsRequest.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetDashboardDataNatsRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Time period (week, month, quarter, year)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetDashboardDataNatsRequest.prototype, "period", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Specific metrics to include', type: [String] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)({ each: true }),
     __metadata("design:type", Array)
 ], GetDashboardDataNatsRequest.prototype, "metrics", void 0);
 class GetComparativeReportNatsRequest {
@@ -1204,26 +1248,32 @@ class GetComparativeReportNatsRequest {
 exports.GetComparativeReportNatsRequest = GetComparativeReportNatsRequest;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetComparativeReportNatsRequest.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetComparativeReportNatsRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Current period start date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetComparativeReportNatsRequest.prototype, "startDate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Current period end date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetComparativeReportNatsRequest.prototype, "endDate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Previous period start date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetComparativeReportNatsRequest.prototype, "compareStartDate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Previous period end date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetComparativeReportNatsRequest.prototype, "compareEndDate", void 0);
 //# sourceMappingURL=reports.nats.js.map
