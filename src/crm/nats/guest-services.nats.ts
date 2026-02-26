@@ -347,7 +347,7 @@ export class CreateServiceBookingDto {
 
   @ApiPropertyOptional({
     description: 'Currency code (ISO 4217)',
-    example: 'USD',
+    example: 'VND',
   })
   @IsOptional()
   @IsString()

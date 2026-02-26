@@ -233,7 +233,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Currency code (ISO 4217)',
-        example: 'USD',
+        example: 'VND',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
