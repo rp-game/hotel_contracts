@@ -63,13 +63,6 @@ export declare class AddressInfo {
     postalCode?: string;
     country?: string;
 }
-export interface AddressRequest {
-    street?: string;
-    city?: string;
-    stateProvince?: string;
-    postalCode?: string;
-    country?: string;
-}
 export declare class IdentificationInfo {
     type: IdentificationType;
     number: string;
@@ -102,15 +95,22 @@ export declare class LoyaltyMemberInfo {
     tier: LoyaltyTierInfo;
     status: string;
 }
-export interface CommunicationPreferencesRequest {
-    allowEmailMarketing?: boolean;
-    allowSmsMarketing?: boolean;
-    preferredChannel?: CommunicationChannel;
-}
 /**
  * Create Customer Request
  * Pattern: crm.customer.create
  */
+export declare class AddressRequest {
+    street?: string;
+    city?: string;
+    stateProvince?: string;
+    postalCode?: string;
+    country?: string;
+}
+export declare class CommunicationPreferencesDto {
+    allowEmailMarketing?: boolean;
+    allowSmsMarketing?: boolean;
+    preferredChannel?: CommunicationChannel;
+}
 export declare class CreateCustomerNatsRequest {
     tenantId?: string;
     firstName: string;
@@ -124,7 +124,7 @@ export declare class CreateCustomerNatsRequest {
     nationality?: string;
     address?: AddressRequest;
     languagePreferences?: string[];
-    communicationPreferences?: CommunicationPreferencesRequest;
+    communicationPreferences?: CommunicationPreferencesDto;
     tags?: string[];
     notes?: string;
 }
@@ -166,7 +166,7 @@ export declare class CustomerNatsResponse {
     preferences?: CustomerPreferences;
     emergencyContact?: EmergencyContact;
     languagePreferences?: string[];
-    communicationPreferences?: CommunicationPreferencesRequest;
+    communicationPreferences?: CommunicationPreferencesDto;
     tags?: string[];
     notes?: string;
     isAnonymized: boolean;

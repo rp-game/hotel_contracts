@@ -24,6 +24,19 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import {
+  IsString,
+  IsEmail,
+  IsOptional,
+  IsEnum,
+  IsDateString,
+  MaxLength,
+  MinLength,
+  ValidateNested,
+  IsArray,
+  ArrayMaxSize,
+} from 'class-validator';
+import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common';
 
 /**
@@ -83,13 +96,7 @@ export class AddressInfo {
   country?: string;
 }
 
-export interface AddressRequest {
-  street?: string;
-  city?: string;
-  stateProvince?: string;
-  postalCode?: string;
-  country?: string;
-}
+// AddressRequest is now a class defined below with validation decorators
 
 export class IdentificationInfo {
   @ApiProperty({ enum: IdentificationType, description: 'Identification document type' })
@@ -167,60 +174,141 @@ export class LoyaltyMemberInfo {
   status!: string;
 }
 
-export interface CommunicationPreferencesRequest {
-  allowEmailMarketing?: boolean;
-  allowSmsMarketing?: boolean;
-  preferredChannel?: CommunicationChannel;
-}
+// CommunicationPreferencesDto is now CommunicationPreferencesDto class defined below
 
 /**
  * Create Customer Request
  * Pattern: crm.customer.create
  */
+export class AddressRequest {
+  @ApiPropertyOptional({ description: 'Street address' })
+  @IsOptional()
+  @IsString()
+  street?: string;
+
+  @ApiPropertyOptional({ description: 'City' })
+  @IsOptional()
+  @IsString()
+  city?: string;
+
+  @ApiPropertyOptional({ description: 'State/Province' })
+  @IsOptional()
+  @IsString()
+  stateProvince?: string;
+
+  @ApiPropertyOptional({ description: 'Postal code' })
+  @IsOptional()
+  @IsString()
+  postalCode?: string;
+
+  @ApiPropertyOptional({ description: 'Country' })
+  @IsOptional()
+  @IsString()
+  country?: string;
+}
+
+export class CommunicationPreferencesDto {
+  @ApiPropertyOptional({ description: 'Allow email marketing' })
+  @IsOptional()
+  allowEmailMarketing?: boolean;
+
+  @ApiPropertyOptional({ description: 'Allow SMS marketing' })
+  @IsOptional()
+  allowSmsMarketing?: boolean;
+
+  @ApiPropertyOptional({ enum: CommunicationChannel, description: 'Preferred communication channel' })
+  @IsOptional()
+  @IsEnum(CommunicationChannel)
+  preferredChannel?: CommunicationChannel;
+}
+
 export class CreateCustomerNatsRequest {
-  @ApiPropertyOptional({ description: 'Tenant ID' })
+  @ApiPropertyOptional({ description: 'Tenant ID', maxLength: 255 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
   tenantId?: string;
 
-  @ApiProperty({ description: 'First name' })
+  @ApiProperty({ description: 'First name', maxLength: 100 })
+  @IsString()
+  @MinLength(1)
+  @MaxLength(100)
   firstName!: string;
 
-  @ApiProperty({ description: 'Last name' })
+  @ApiProperty({ description: 'Last name', maxLength: 100 })
+  @IsString()
+  @MinLength(1)
+  @MaxLength(100)
   lastName!: string;
 
   @ApiPropertyOptional({ enum: Gender, description: 'Gender' })
+  @IsOptional()
+  @IsEnum(Gender)
   gender?: Gender;
 
-  @ApiPropertyOptional({ description: 'Date of birth (YYYY-MM-DD)' })
+  @ApiPropertyOptional({ description: 'Date of birth (YYYY-MM-DD)', type: String, format: 'date' })
+  @IsOptional()
+  @IsDateString()
   dateOfBirth?: string;
 
-  @ApiPropertyOptional({ description: 'Email address' })
+  @ApiPropertyOptional({ description: 'Email address', maxLength: 255 })
+  @IsOptional()
+  @IsEmail()
+  @MaxLength(255)
   email?: string;
 
-  @ApiPropertyOptional({ description: 'Phone number' })
+  @ApiPropertyOptional({ description: 'Phone number', maxLength: 50 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(50)
   phoneNumber?: string;
 
   @ApiPropertyOptional({ enum: NationalIdType, description: 'National ID type' })
+  @IsOptional()
+  @IsEnum(NationalIdType)
   nationalIdType?: NationalIdType;
 
-  @ApiPropertyOptional({ description: 'National ID number' })
+  @ApiPropertyOptional({ description: 'National ID number', maxLength: 100 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(100)
   nationalIdNumber?: string;
 
-  @ApiPropertyOptional({ description: 'Nationality' })
+  @ApiPropertyOptional({ description: 'Nationality', maxLength: 100 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(100)
   nationality?: string;
 
-  @ApiPropertyOptional({ description: 'Address information' })
+  @ApiPropertyOptional({ description: 'Address information', type: AddressRequest })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => AddressRequest)
   address?: AddressRequest;
 
-  @ApiPropertyOptional({ type: [String], description: 'Language preferences' })
+  @ApiPropertyOptional({ type: [String], description: 'Language preferences', example: ['vi', 'en'] })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  @ArrayMaxSize(5)
   languagePreferences?: string[];
 
-  @ApiPropertyOptional({ description: 'Communication preferences' })
-  communicationPreferences?: CommunicationPreferencesRequest;
+  @ApiPropertyOptional({ description: 'Communication preferences', type: CommunicationPreferencesDto })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => CommunicationPreferencesDto)
+  communicationPreferences?: CommunicationPreferencesDto;
 
-  @ApiPropertyOptional({ type: [String], description: 'Tags' })
+  @ApiPropertyOptional({ type: [String], description: 'Tags', example: ['business_traveler', 'family'] })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  @ArrayMaxSize(10)
   tags?: string[];
 
   @ApiPropertyOptional({ description: 'Notes' })
+  @IsOptional()
+  @IsString()
   notes?: string;
 }
 
@@ -312,7 +400,7 @@ export class CustomerNatsResponse {
   languagePreferences?: string[];
 
   @ApiPropertyOptional({ description: 'Communication preferences' })
-  communicationPreferences?: CommunicationPreferencesRequest;
+  communicationPreferences?: CommunicationPreferencesDto;
 
   @ApiPropertyOptional({ type: [String], description: 'Tags' })
   tags?: string[];

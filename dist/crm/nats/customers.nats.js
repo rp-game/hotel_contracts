@@ -33,8 +33,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ExportDownloadData = exports.ExportStatusData = exports.ExportJobData = exports.FindAdvancedCustomersNatsRequest = exports.AdvancedCustomersListData = exports.AdvancedCustomerDto = exports.SegmentMembershipSummary = exports.CustomerSegmentSummary = exports.CustomerStatsData = exports.RecentCustomerInfo = exports.TopCustomerInfo = exports.MembershipDistribution = exports.CustomerStatsOverview = exports.RecalculateAllBookingStatsData = exports.RecalculateAllBookingStatsResultItem = exports.RecalculateBookingStatsData = exports.UpdateCustomerStatsResponseData = exports.FindOneCustomerNatsRequest = exports.CustomersListData = exports.CustomerNatsResponse = exports.UpdateCustomerNatsRequest = exports.CreateCustomerNatsRequest = exports.LoyaltyMemberInfo = exports.LoyaltyTierInfo = exports.EmergencyContact = exports.CustomerPreferences = exports.IdentificationInfo = exports.AddressInfo = exports.CommunicationChannel = exports.NationalIdType = exports.IdentificationType = exports.CustomerType = exports.Gender = void 0;
+exports.ExportDownloadData = exports.ExportStatusData = exports.ExportJobData = exports.FindAdvancedCustomersNatsRequest = exports.AdvancedCustomersListData = exports.AdvancedCustomerDto = exports.SegmentMembershipSummary = exports.CustomerSegmentSummary = exports.CustomerStatsData = exports.RecentCustomerInfo = exports.TopCustomerInfo = exports.MembershipDistribution = exports.CustomerStatsOverview = exports.RecalculateAllBookingStatsData = exports.RecalculateAllBookingStatsResultItem = exports.RecalculateBookingStatsData = exports.UpdateCustomerStatsResponseData = exports.FindOneCustomerNatsRequest = exports.CustomersListData = exports.CustomerNatsResponse = exports.UpdateCustomerNatsRequest = exports.CreateCustomerNatsRequest = exports.CommunicationPreferencesDto = exports.AddressRequest = exports.LoyaltyMemberInfo = exports.LoyaltyTierInfo = exports.EmergencyContact = exports.CustomerPreferences = exports.IdentificationInfo = exports.AddressInfo = exports.CommunicationChannel = exports.NationalIdType = exports.IdentificationType = exports.CustomerType = exports.Gender = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
 /**
  * Enums
  */
@@ -105,6 +107,7 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Country' }),
     __metadata("design:type", String)
 ], AddressInfo.prototype, "country", void 0);
+// AddressRequest is now a class defined below with validation decorators
 class IdentificationInfo {
     type;
     number;
@@ -230,10 +233,71 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Membership status' }),
     __metadata("design:type", String)
 ], LoyaltyMemberInfo.prototype, "status", void 0);
+// CommunicationPreferencesDto is now CommunicationPreferencesDto class defined below
 /**
  * Create Customer Request
  * Pattern: crm.customer.create
  */
+class AddressRequest {
+    street;
+    city;
+    stateProvince;
+    postalCode;
+    country;
+}
+exports.AddressRequest = AddressRequest;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Street address' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AddressRequest.prototype, "street", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'City' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AddressRequest.prototype, "city", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'State/Province' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AddressRequest.prototype, "stateProvince", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Postal code' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AddressRequest.prototype, "postalCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Country' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AddressRequest.prototype, "country", void 0);
+class CommunicationPreferencesDto {
+    allowEmailMarketing;
+    allowSmsMarketing;
+    preferredChannel;
+}
+exports.CommunicationPreferencesDto = CommunicationPreferencesDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Allow email marketing' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], CommunicationPreferencesDto.prototype, "allowEmailMarketing", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Allow SMS marketing' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], CommunicationPreferencesDto.prototype, "allowSmsMarketing", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: CommunicationChannel, description: 'Preferred communication channel' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(CommunicationChannel),
+    __metadata("design:type", String)
+], CommunicationPreferencesDto.prototype, "preferredChannel", void 0);
 class CreateCustomerNatsRequest {
     tenantId;
     firstName;
@@ -253,63 +317,106 @@ class CreateCustomerNatsRequest {
 }
 exports.CreateCustomerNatsRequest = CreateCustomerNatsRequest;
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID', maxLength: 255 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(255),
     __metadata("design:type", String)
 ], CreateCustomerNatsRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'First name' }),
+    (0, swagger_1.ApiProperty)({ description: 'First name', maxLength: 100 }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(1),
+    (0, class_validator_1.MaxLength)(100),
     __metadata("design:type", String)
 ], CreateCustomerNatsRequest.prototype, "firstName", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Last name' }),
+    (0, swagger_1.ApiProperty)({ description: 'Last name', maxLength: 100 }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(1),
+    (0, class_validator_1.MaxLength)(100),
     __metadata("design:type", String)
 ], CreateCustomerNatsRequest.prototype, "lastName", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ enum: Gender, description: 'Gender' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(Gender),
     __metadata("design:type", String)
 ], CreateCustomerNatsRequest.prototype, "gender", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Date of birth (YYYY-MM-DD)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Date of birth (YYYY-MM-DD)', type: String, format: 'date' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], CreateCustomerNatsRequest.prototype, "dateOfBirth", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Email address' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Email address', maxLength: 255 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEmail)(),
+    (0, class_validator_1.MaxLength)(255),
     __metadata("design:type", String)
 ], CreateCustomerNatsRequest.prototype, "email", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Phone number' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Phone number', maxLength: 50 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(50),
     __metadata("design:type", String)
 ], CreateCustomerNatsRequest.prototype, "phoneNumber", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ enum: NationalIdType, description: 'National ID type' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(NationalIdType),
     __metadata("design:type", String)
 ], CreateCustomerNatsRequest.prototype, "nationalIdType", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'National ID number' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'National ID number', maxLength: 100 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(100),
     __metadata("design:type", String)
 ], CreateCustomerNatsRequest.prototype, "nationalIdNumber", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Nationality' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Nationality', maxLength: 100 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(100),
     __metadata("design:type", String)
 ], CreateCustomerNatsRequest.prototype, "nationality", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Address information' }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Address information', type: AddressRequest }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => AddressRequest),
+    __metadata("design:type", AddressRequest)
 ], CreateCustomerNatsRequest.prototype, "address", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ type: [String], description: 'Language preferences' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: [String], description: 'Language preferences', example: ['vi', 'en'] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    (0, class_validator_1.ArrayMaxSize)(5),
     __metadata("design:type", Array)
 ], CreateCustomerNatsRequest.prototype, "languagePreferences", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Communication preferences' }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Communication preferences', type: CommunicationPreferencesDto }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => CommunicationPreferencesDto),
+    __metadata("design:type", CommunicationPreferencesDto)
 ], CreateCustomerNatsRequest.prototype, "communicationPreferences", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ type: [String], description: 'Tags' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: [String], description: 'Tags', example: ['business_traveler', 'family'] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    (0, class_validator_1.ArrayMaxSize)(10),
     __metadata("design:type", Array)
 ], CreateCustomerNatsRequest.prototype, "tags", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateCustomerNatsRequest.prototype, "notes", void 0);
 /**
@@ -464,7 +571,7 @@ __decorate([
 ], CustomerNatsResponse.prototype, "languagePreferences", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Communication preferences' }),
-    __metadata("design:type", Object)
+    __metadata("design:type", CommunicationPreferencesDto)
 ], CustomerNatsResponse.prototype, "communicationPreferences", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ type: [String], description: 'Tags' }),
