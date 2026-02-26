@@ -31,6 +31,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BulkUpdateSegmentsNatsRequest = exports.CreatePredefinedSegmentsNatsRequest = exports.GetRfmAnalysisNatsRequest = exports.GetSegmentAnalysisNatsRequest = exports.SegmentMembersNatsResponse = exports.MessageResponseDto = exports.RecalculateSegmentNatsRequest = exports.DeleteSegmentNatsRequest = exports.FindSegmentByIdNatsRequest = exports.SegmentationStatsDto = exports.SegmentPerformanceItemDto = exports.SegmentsNatsResponse = exports.CustomerSegmentNatsResponse = exports.UpdateSegmentNatsRequest = exports.CreateSegmentNatsRequest = exports.SegmentStatus = exports.SegmentType = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
 const customers_nats_1 = require("./customers.nats");
 /**
  * Segment Type Enum
@@ -69,40 +70,60 @@ class CreateSegmentNatsRequest {
     status;
     criteria;
     autoUpdate;
+    valueRules;
 }
 exports.CreateSegmentNatsRequest = CreateSegmentNatsRequest;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateSegmentNatsRequest.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'User ID who creates the segment' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateSegmentNatsRequest.prototype, "userId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Segment name' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateSegmentNatsRequest.prototype, "name", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Segment description' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateSegmentNatsRequest.prototype, "description", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Segment type', enum: SegmentType }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateSegmentNatsRequest.prototype, "type", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Segment status', enum: SegmentStatus }),
+    (0, class_validator_1.IsEnum)(SegmentStatus),
     __metadata("design:type", String)
 ], CreateSegmentNatsRequest.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Segmentation criteria' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Segmentation criteria' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
     __metadata("design:type", Object)
 ], CreateSegmentNatsRequest.prototype, "criteria", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Whether to auto-update members' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateSegmentNatsRequest.prototype, "autoUpdate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Value-based rules for VALUE_BASED segments' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], CreateSegmentNatsRequest.prototype, "valueRules", void 0);
 /**
  * Update Segment Request
  * Unified for both NATS messages and REST API requests

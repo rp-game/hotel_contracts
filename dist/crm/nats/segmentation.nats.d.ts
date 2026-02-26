@@ -52,8 +52,9 @@ export declare class CreateSegmentNatsRequest {
     description?: string;
     type: string;
     status: SegmentStatus;
-    criteria: Record<string, any>;
+    criteria?: Record<string, any>;
     autoUpdate?: boolean;
+    valueRules?: Record<string, any>;
     [key: string]: any;
 }
 /**

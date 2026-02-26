@@ -21,6 +21,7 @@
 
 import { NatsResponse } from '../../common';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsOptional, IsEnum, IsBoolean, IsObject } from 'class-validator';
 import { CustomerNatsResponse } from './customers.nats';
 
 /**
@@ -53,28 +54,46 @@ export enum SegmentStatus {
  */
 export class CreateSegmentNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
+  @IsOptional()
+  @IsString()
   tenantId: string;
 
   @ApiProperty({ description: 'User ID who creates the segment' })
+  @IsOptional()
+  @IsString()
   userId: string;
 
   @ApiProperty({ description: 'Segment name' })
+  @IsString()
   name: string;
 
   @ApiPropertyOptional({ description: 'Segment description' })
+  @IsOptional()
+  @IsString()
   description?: string;
 
   @ApiProperty({ description: 'Segment type', enum: SegmentType })
+  @IsString()
   type: string;
 
   @ApiProperty({ description: 'Segment status', enum: SegmentStatus })
+  @IsEnum(SegmentStatus)
   status: SegmentStatus;
 
-  @ApiProperty({ description: 'Segmentation criteria' })
-  criteria: Record<string, any>;
+  @ApiPropertyOptional({ description: 'Segmentation criteria' })
+  @IsOptional()
+  @IsObject()
+  criteria?: Record<string, any>;
 
   @ApiPropertyOptional({ description: 'Whether to auto-update members' })
+  @IsOptional()
+  @IsBoolean()
   autoUpdate?: boolean;
+
+  @ApiPropertyOptional({ description: 'Value-based rules for VALUE_BASED segments' })
+  @IsOptional()
+  @IsObject()
+  valueRules?: Record<string, any>;
 
   // Index signature for additional dynamic properties (expanded rules, etc.)
   [key: string]: any;
