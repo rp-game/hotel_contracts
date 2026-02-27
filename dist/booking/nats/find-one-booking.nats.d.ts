@@ -7,6 +7,7 @@
  * Used by: booking detail page and calendar modal
  */
 import { NatsResponse } from '../../common/nats-response.interface';
+import { BookingServiceResponseDto } from '../dto/booking-response.dto';
 /**
  * Room details in a booking
  */
@@ -191,6 +192,10 @@ export interface GetBookingByIdResponse {
      * Payment records
      */
     payments: BookingPayment[];
+    /**
+     * Additional services charged to this booking
+     */
+    services?: BookingServiceResponseDto[];
     /**
      * Special requests from guest
      */
