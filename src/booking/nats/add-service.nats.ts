@@ -47,6 +47,16 @@ export class AddServiceNatsRequest {
   @ApiProperty({ description: 'Staff user ID who added the service', format: 'uuid' })
   @IsUUID()
   addedBy: string;
+
+  @ApiPropertyOptional({ description: 'Booking room ID (if service is linked to specific room)', format: 'uuid' })
+  @IsOptional()
+  @IsUUID()
+  bookingRoomId?: string;
+
+  @ApiPropertyOptional({ description: 'Guest ID who is using the service', format: 'uuid' })
+  @IsOptional()
+  @IsUUID()
+  guestId?: string;
 }
 
 export interface ServiceData {

@@ -13,6 +13,8 @@ export declare class AddServiceNatsRequest {
     tenantId: string;
     hotelId: string;
     addedBy: string;
+    bookingRoomId?: string;
+    guestId?: string;
 }
 export interface ServiceData {
     id: string;

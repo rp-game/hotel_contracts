@@ -26,6 +26,8 @@ class AddServiceNatsRequest {
     tenantId;
     hotelId;
     addedBy;
+    bookingRoomId;
+    guestId;
 }
 exports.AddServiceNatsRequest = AddServiceNatsRequest;
 __decorate([
@@ -77,4 +79,16 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], AddServiceNatsRequest.prototype, "addedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking room ID (if service is linked to specific room)', format: 'uuid' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], AddServiceNatsRequest.prototype, "bookingRoomId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Guest ID who is using the service', format: 'uuid' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], AddServiceNatsRequest.prototype, "guestId", void 0);
 //# sourceMappingURL=add-service.nats.js.map
