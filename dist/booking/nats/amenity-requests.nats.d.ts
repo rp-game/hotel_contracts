@@ -153,7 +153,9 @@ export declare class FindAllAmenityRequestsNatsRequest {
     hotelId: string;
     status?: AmenityStatus;
     priority?: AmenityPriority;
+    search?: string;
     amenityType?: string;
+    assignedTo?: string;
     requestCategory?: SpecialRequestCategory;
     startDate?: string;
     endDate?: string;
@@ -200,6 +202,9 @@ export declare class UpdateAmenityRequestDto {
     guestRating?: number;
     guestFeedback?: string;
     estimatedCost?: number;
+    actualTime?: number;
+    assignedAt?: string;
+    completedAt?: string;
 }
 /**
  * Update Amenity Request NATS Request

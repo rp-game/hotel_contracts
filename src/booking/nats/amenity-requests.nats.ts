@@ -250,10 +250,20 @@ export class FindAllAmenityRequestsNatsRequest {
   @IsEnum(AmenityPriority)
   priority?: AmenityPriority;
 
+  @ApiPropertyOptional({ description: 'Search by guest name, room number, or description' })
+  @IsOptional()
+  @IsString()
+  search?: string;
+
   @ApiPropertyOptional({ description: 'Filter by amenity type' })
   @IsOptional()
   @IsString()
   amenityType?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by assigned staff' })
+  @IsOptional()
+  @IsString()
+  assignedTo?: string;
 
   @ApiPropertyOptional({ description: 'Filter by request category', enum: SpecialRequestCategory })
   @IsOptional()
@@ -369,6 +379,19 @@ export class UpdateAmenityRequestDto {
 
   @ApiPropertyOptional({ description: 'Estimated cost', example: 0 })
   estimatedCost?: number;
+
+  @ApiPropertyOptional({ description: 'Actual time taken in minutes' })
+  actualTime?: number;
+
+  @ApiPropertyOptional({ description: 'Timestamp when request was assigned (ISO 8601)' })
+  @IsOptional()
+  @IsDateString()
+  assignedAt?: string;
+
+  @ApiPropertyOptional({ description: 'Timestamp when request was completed (ISO 8601)' })
+  @IsOptional()
+  @IsDateString()
+  completedAt?: string;
 }
 
 /**

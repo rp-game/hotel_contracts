@@ -218,7 +218,9 @@ class FindAllAmenityRequestsNatsRequest {
     hotelId;
     status;
     priority;
+    search;
     amenityType;
+    assignedTo;
     requestCategory;
     startDate;
     endDate;
@@ -255,11 +257,23 @@ __decorate([
     __metadata("design:type", String)
 ], FindAllAmenityRequestsNatsRequest.prototype, "priority", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Search by guest name, room number, or description' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindAllAmenityRequestsNatsRequest.prototype, "search", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by amenity type' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], FindAllAmenityRequestsNatsRequest.prototype, "amenityType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by assigned staff' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindAllAmenityRequestsNatsRequest.prototype, "assignedTo", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by request category', enum: SpecialRequestCategory }),
     (0, class_validator_1.IsOptional)(),
@@ -352,6 +366,9 @@ class UpdateAmenityRequestDto {
     guestRating;
     guestFeedback;
     estimatedCost;
+    actualTime;
+    assignedAt;
+    completedAt;
 }
 exports.UpdateAmenityRequestDto = UpdateAmenityRequestDto;
 __decorate([
@@ -394,6 +411,22 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated cost', example: 0 }),
     __metadata("design:type", Number)
 ], UpdateAmenityRequestDto.prototype, "estimatedCost", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Actual time taken in minutes' }),
+    __metadata("design:type", Number)
+], UpdateAmenityRequestDto.prototype, "actualTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Timestamp when request was assigned (ISO 8601)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], UpdateAmenityRequestDto.prototype, "assignedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Timestamp when request was completed (ISO 8601)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], UpdateAmenityRequestDto.prototype, "completedAt", void 0);
 /**
  * Update Amenity Request NATS Request
  * Pattern: amenity_requests.update
