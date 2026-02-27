@@ -14,7 +14,7 @@ import { NatsResponse } from '../../common';
  * Booking Completed Event
  * Pattern: booking.completed
  */
-export interface BookingCompletedEventNatsRequest {
+export declare class BookingCompletedEventNatsRequest {
     bookingId: string;
     tenantId: string;
     customerId: string;
@@ -39,7 +39,7 @@ export type BookingCompletedEventNatsResponse = NatsResponse<{
  * Points Adjustment Request
  * Pattern: loyalty.points.adjust
  */
-export interface PointsAdjustmentNatsRequest {
+export declare class PointsAdjustmentNatsRequest {
     memberId: string;
     tenantId: string;
     points: number;
@@ -57,7 +57,7 @@ export type PointsAdjustmentNatsResponse = NatsResponse<{
  * Member Enrollment Event
  * Pattern: crm.member.enrolled
  */
-export interface MemberEnrollmentNatsRequest {
+export declare class MemberEnrollmentNatsRequest {
     memberId: string;
     tenantId: string;
     email: string;

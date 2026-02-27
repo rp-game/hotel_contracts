@@ -31,7 +31,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CoordinateDepartmentsNatsRequest = exports.RequestGuestApprovalNatsRequest = exports.PerformQualityCheckNatsRequest = exports.AssessFeasibilityNatsRequest = exports.GetAmenityRequestStatsNatsRequest = exports.AmenityRequestStatsNatsResponse = exports.CancelAmenityRequestNatsRequest = exports.CompleteAmenityRequestNatsRequest = exports.StartAmenityRequestNatsRequest = exports.AssignAmenityRequestNatsRequest = exports.UpdateAmenityRequestNatsRequest = exports.UpdateAmenityRequestDto = exports.FindOneAmenityRequestNatsRequest = exports.FindAllAmenityRequestsNatsRequest = exports.CreateAmenityRequestDto = exports.QualityCheckStatus = exports.FeasibilityStatus = exports.SpecialRequestCategory = exports.AmenityStatus = exports.AmenityPriority = void 0;
+exports.GetSpecialRequestCategoriesResponseDto = exports.SpecialRequestCategoryInfoDto = exports.GetSpecialRequestCategoriesNatsDto = exports.CoordinateDepartmentsNatsRequest = exports.RequestGuestApprovalNatsRequest = exports.PerformQualityCheckNatsRequest = exports.AssessFeasibilityNatsRequest = exports.GetAmenityRequestStatsNatsRequest = exports.AmenityRequestStatsNatsResponse = exports.CancelAmenityRequestNatsRequest = exports.CompleteAmenityRequestNatsRequest = exports.StartAmenityRequestNatsRequest = exports.AssignAmenityRequestNatsRequest = exports.UpdateAmenityRequestNatsRequest = exports.UpdateAmenityRequestDto = exports.FindOneAmenityRequestNatsRequest = exports.FindAllAmenityRequestsNatsRequest = exports.CreateAmenityRequestDto = exports.QualityCheckStatus = exports.FeasibilityStatus = exports.SpecialRequestCategory = exports.AmenityStatus = exports.AmenityPriority = void 0;
 const common_1 = require("../../common");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
@@ -117,66 +117,93 @@ class CreateAmenityRequestDto {
 exports.CreateAmenityRequestDto = CreateAmenityRequestDto;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID', example: '550e8400-e29b-41d4-a716-446655440000' }),
+    (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateAmenityRequestDto.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID', example: '550e8400-e29b-41d4-a716-446655440001' }),
+    (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateAmenityRequestDto.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Guest ID', example: '550e8400-e29b-41d4-a716-446655440002' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateAmenityRequestDto.prototype, "guestId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Guest name', example: 'John Doe' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateAmenityRequestDto.prototype, "guestName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Room number', example: '101' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateAmenityRequestDto.prototype, "roomNumber", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Amenity type requested', example: 'Extra Towels' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateAmenityRequestDto.prototype, "amenityType", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Request category', enum: SpecialRequestCategory }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(SpecialRequestCategory),
     __metadata("design:type", String)
 ], CreateAmenityRequestDto.prototype, "requestCategory", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Request description', example: 'Need 2 extra towels for guests' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateAmenityRequestDto.prototype, "description", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Priority level', enum: AmenityPriority, default: AmenityPriority.MEDIUM }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(AmenityPriority),
     __metadata("design:type", String)
 ], CreateAmenityRequestDto.prototype, "priority", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Assigned to staff ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateAmenityRequestDto.prototype, "assignedTo", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated time in minutes', example: 15 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateAmenityRequestDto.prototype, "estimatedTime", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Staff notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateAmenityRequestDto.prototype, "staffNotes", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated cost', example: 0 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateAmenityRequestDto.prototype, "estimatedCost", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Departments involved', type: [String] }),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Array)
 ], CreateAmenityRequestDto.prototype, "departmentsInvolved", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Guest approval required', default: false }),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], CreateAmenityRequestDto.prototype, "guestApprovalRequired", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Customer preferences applied', type: [String] }),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Array)
 ], CreateAmenityRequestDto.prototype, "customerPreferencesApplied", void 0);
 /**
@@ -709,4 +736,60 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Coordination notes' }),
     __metadata("design:type", String)
 ], CoordinateDepartmentsNatsRequest.prototype, "coordinationNotes", void 0);
+/**
+ * Get Special Request Categories Request
+ * Pattern: amenity_requests.special_categories
+ */
+class GetSpecialRequestCategoriesNatsDto {
+    tenantId;
+    hotelId;
+}
+exports.GetSpecialRequestCategoriesNatsDto = GetSpecialRequestCategoriesNatsDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetSpecialRequestCategoriesNatsDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetSpecialRequestCategoriesNatsDto.prototype, "hotelId", void 0);
+class SpecialRequestCategoryInfoDto {
+    displayName;
+    description;
+    subTypes;
+    requiredDepartments;
+    guestApprovalRequired;
+}
+exports.SpecialRequestCategoryInfoDto = SpecialRequestCategoryInfoDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], SpecialRequestCategoryInfoDto.prototype, "displayName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], SpecialRequestCategoryInfoDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [String] }),
+    __metadata("design:type", Array)
+], SpecialRequestCategoryInfoDto.prototype, "subTypes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [String] }),
+    __metadata("design:type", Array)
+], SpecialRequestCategoryInfoDto.prototype, "requiredDepartments", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Boolean)
+], SpecialRequestCategoryInfoDto.prototype, "guestApprovalRequired", void 0);
+class GetSpecialRequestCategoriesResponseDto {
+    categories;
+}
+exports.GetSpecialRequestCategoriesResponseDto = GetSpecialRequestCategoriesResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: 'object', additionalProperties: { $ref: '#/components/schemas/SpecialRequestCategoryInfoDto' } }),
+    __metadata("design:type", Object)
+], GetSpecialRequestCategoriesResponseDto.prototype, "categories", void 0);
 //# sourceMappingURL=amenity-requests.nats.js.map

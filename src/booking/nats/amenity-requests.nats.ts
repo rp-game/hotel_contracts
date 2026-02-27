@@ -134,51 +134,78 @@ export interface AmenityRequestNatsResponse {
  */
 export class CreateAmenityRequestDto {
   @ApiProperty({ description: 'Tenant ID', example: '550e8400-e29b-41d4-a716-446655440000' })
+  @IsUUID()
   tenantId: string;
 
   @ApiProperty({ description: 'Hotel ID', example: '550e8400-e29b-41d4-a716-446655440001' })
+  @IsUUID()
   hotelId: string;
 
   @ApiPropertyOptional({ description: 'Guest ID', example: '550e8400-e29b-41d4-a716-446655440002' })
+  @IsOptional()
+  @IsUUID()
   guestId?: string;
 
   @ApiProperty({ description: 'Guest name', example: 'John Doe' })
+  @IsString()
+  @IsNotEmpty()
   guestName: string;
 
   @ApiProperty({ description: 'Room number', example: '101' })
+  @IsString()
+  @IsNotEmpty()
   roomNumber: string;
 
   @ApiProperty({ description: 'Amenity type requested', example: 'Extra Towels' })
+  @IsString()
+  @IsNotEmpty()
   amenityType: string;
 
   @ApiPropertyOptional({ description: 'Request category', enum: SpecialRequestCategory })
+  @IsOptional()
+  @IsEnum(SpecialRequestCategory)
   requestCategory?: SpecialRequestCategory;
 
   @ApiProperty({ description: 'Request description', example: 'Need 2 extra towels for guests' })
+  @IsString()
+  @IsNotEmpty()
   description: string;
 
   @ApiPropertyOptional({ description: 'Priority level', enum: AmenityPriority, default: AmenityPriority.MEDIUM })
+  @IsOptional()
+  @IsEnum(AmenityPriority)
   priority?: AmenityPriority;
 
   @ApiPropertyOptional({ description: 'Assigned to staff ID' })
+  @IsOptional()
+  @IsString()
   assignedTo?: string;
 
   @ApiPropertyOptional({ description: 'Estimated time in minutes', example: 15 })
+  @IsOptional()
+  @IsNumber()
   estimatedTime?: number;
 
   @ApiPropertyOptional({ description: 'Staff notes' })
+  @IsOptional()
+  @IsString()
   staffNotes?: string;
 
   @ApiPropertyOptional({ description: 'Estimated cost', example: 0 })
+  @IsOptional()
+  @IsNumber()
   estimatedCost?: number;
 
   @ApiPropertyOptional({ description: 'Departments involved', type: [String] })
+  @IsOptional()
   departmentsInvolved?: string[];
 
   @ApiPropertyOptional({ description: 'Guest approval required', default: false })
+  @IsOptional()
   guestApprovalRequired?: boolean;
 
   @ApiPropertyOptional({ description: 'Customer preferences applied', type: [String] })
+  @IsOptional()
   customerPreferencesApplied?: string[];
 }
 
@@ -592,3 +619,42 @@ export class CoordinateDepartmentsNatsRequest {
  * Coordinate Departments Response
  */
 export type CoordinateDepartmentsNatsResponse = NatsResponse<AmenityRequestNatsResponse>;
+
+/**
+ * Get Special Request Categories Request
+ * Pattern: amenity_requests.special_categories
+ */
+export class GetSpecialRequestCategoriesNatsDto {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+}
+
+export class SpecialRequestCategoryInfoDto {
+  @ApiProperty()
+  displayName: string;
+
+  @ApiProperty()
+  description: string;
+
+  @ApiProperty({ type: [String] })
+  subTypes: string[];
+
+  @ApiProperty({ type: [String] })
+  requiredDepartments: string[];
+
+  @ApiProperty()
+  guestApprovalRequired: boolean;
+}
+
+export class GetSpecialRequestCategoriesResponseDto {
+  @ApiProperty({ type: 'object', additionalProperties: { $ref: '#/components/schemas/SpecialRequestCategoryInfoDto' } })
+  categories: Record<string, SpecialRequestCategoryInfoDto>;
+}
+
+export type GetSpecialRequestCategoriesNatsResponse = NatsResponse<GetSpecialRequestCategoriesResponseDto>;

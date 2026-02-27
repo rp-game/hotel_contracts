@@ -369,4 +369,23 @@ export declare class CoordinateDepartmentsNatsRequest {
  * Coordinate Departments Response
  */
 export type CoordinateDepartmentsNatsResponse = NatsResponse<AmenityRequestNatsResponse>;
+/**
+ * Get Special Request Categories Request
+ * Pattern: amenity_requests.special_categories
+ */
+export declare class GetSpecialRequestCategoriesNatsDto {
+    tenantId: string;
+    hotelId?: string;
+}
+export declare class SpecialRequestCategoryInfoDto {
+    displayName: string;
+    description: string;
+    subTypes: string[];
+    requiredDepartments: string[];
+    guestApprovalRequired: boolean;
+}
+export declare class GetSpecialRequestCategoriesResponseDto {
+    categories: Record<string, SpecialRequestCategoryInfoDto>;
+}
+export type GetSpecialRequestCategoriesNatsResponse = NatsResponse<GetSpecialRequestCategoriesResponseDto>;
 //# sourceMappingURL=amenity-requests.nats.d.ts.map
