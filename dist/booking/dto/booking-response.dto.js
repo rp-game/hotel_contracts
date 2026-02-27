@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookingResponseDto = exports.BookingServiceResponseDto = exports.BookingPaymentResponseDto = exports.BookingGuestResponseDto = exports.BookingRoomResponseDto = void 0;
+exports.BookingResponseDto = exports.FolioItemDto = exports.BookingServiceResponseDto = exports.BookingPaymentResponseDto = exports.BookingGuestResponseDto = exports.BookingRoomResponseDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const booking_status_enum_1 = require("../enums/booking-status.enum");
 const booking_source_enum_1 = require("../enums/booking-source.enum");
@@ -186,6 +186,44 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Is paid' }),
     __metadata("design:type", Boolean)
 ], BookingServiceResponseDto.prototype, "isPaid", void 0);
+class FolioItemDto {
+    type;
+    description;
+    quantity;
+    unitPrice;
+    totalPrice;
+    date;
+    referenceId;
+}
+exports.FolioItemDto = FolioItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Line item type', enum: ['ROOM', 'SERVICE', 'DISCOUNT', 'TAX'] }),
+    __metadata("design:type", String)
+], FolioItemDto.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Description of the line item' }),
+    __metadata("design:type", String)
+], FolioItemDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Quantity' }),
+    __metadata("design:type", Number)
+], FolioItemDto.prototype, "quantity", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Unit price' }),
+    __metadata("design:type", Number)
+], FolioItemDto.prototype, "unitPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total price for this line item' }),
+    __metadata("design:type", Number)
+], FolioItemDto.prototype, "totalPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Date of the charge (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], FolioItemDto.prototype, "date", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Reference ID (room ID, service ID, etc.)' }),
+    __metadata("design:type", String)
+], FolioItemDto.prototype, "referenceId", void 0);
 class BookingResponseDto {
     id;
     bookingCode;
@@ -224,6 +262,9 @@ class BookingResponseDto {
     guests;
     payments;
     services;
+    // Folio: server-computed line items breakdown
+    folio;
+    grandTotal;
     // Metadata
     createdAt;
     updatedAt;
@@ -347,6 +388,14 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Additional services', type: [BookingServiceResponseDto] }),
     __metadata("design:type", Array)
 ], BookingResponseDto.prototype, "services", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Folio line items (rooms + services + discounts)', type: [FolioItemDto] }),
+    __metadata("design:type", Array)
+], BookingResponseDto.prototype, "folio", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Grand total computed from folio (rooms + services)' }),
+    __metadata("design:type", Number)
+], BookingResponseDto.prototype, "grandTotal", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Created date' }),
     __metadata("design:type", Date)

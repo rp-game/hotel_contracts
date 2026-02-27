@@ -107,6 +107,29 @@ export class BookingServiceResponseDto {
   isPaid: boolean;
 }
 
+export class FolioItemDto {
+  @ApiProperty({ description: 'Line item type', enum: ['ROOM', 'SERVICE', 'DISCOUNT', 'TAX'] })
+  type: 'ROOM' | 'SERVICE' | 'DISCOUNT' | 'TAX';
+
+  @ApiProperty({ description: 'Description of the line item' })
+  description: string;
+
+  @ApiProperty({ description: 'Quantity' })
+  quantity: number;
+
+  @ApiProperty({ description: 'Unit price' })
+  unitPrice: number;
+
+  @ApiProperty({ description: 'Total price for this line item' })
+  totalPrice: number;
+
+  @ApiPropertyOptional({ description: 'Date of the charge (YYYY-MM-DD)' })
+  date?: string;
+
+  @ApiPropertyOptional({ description: 'Reference ID (room ID, service ID, etc.)' })
+  referenceId?: string;
+}
+
 export class BookingResponseDto {
   @ApiProperty({ description: 'Booking ID (UUID)' })
   id: string;
@@ -202,6 +225,13 @@ export class BookingResponseDto {
 
   @ApiProperty({ description: 'Additional services', type: [BookingServiceResponseDto] })
   services: BookingServiceResponseDto[];
+
+  // Folio: server-computed line items breakdown
+  @ApiPropertyOptional({ description: 'Folio line items (rooms + services + discounts)', type: [FolioItemDto] })
+  folio?: FolioItemDto[];
+
+  @ApiPropertyOptional({ description: 'Grand total computed from folio (rooms + services)' })
+  grandTotal?: number;
 
   // Metadata
   @ApiProperty({ description: 'Created date' })

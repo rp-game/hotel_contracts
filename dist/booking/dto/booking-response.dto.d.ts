@@ -41,6 +41,15 @@ export declare class BookingServiceResponseDto {
     serviceDate: Date;
     isPaid: boolean;
 }
+export declare class FolioItemDto {
+    type: 'ROOM' | 'SERVICE' | 'DISCOUNT' | 'TAX';
+    description: string;
+    quantity: number;
+    unitPrice: number;
+    totalPrice: number;
+    date?: string;
+    referenceId?: string;
+}
 export declare class BookingResponseDto {
     id: string;
     bookingCode: string;
@@ -71,6 +80,8 @@ export declare class BookingResponseDto {
     guests: BookingGuestResponseDto[];
     payments: BookingPaymentResponseDto[];
     services: BookingServiceResponseDto[];
+    folio?: FolioItemDto[];
+    grandTotal?: number;
     createdAt: Date;
     updatedAt: Date;
     createdBy?: string;
