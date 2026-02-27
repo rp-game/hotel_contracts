@@ -3,16 +3,49 @@
  * Pattern: booking.add_service
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsNumber, IsOptional, IsUUID, Min } from 'class-validator';
 import { NatsResponse } from '../../common';
 
-export interface AddServiceNatsRequest {
+export class AddServiceNatsRequest {
+  @ApiProperty({ description: 'Booking ID', format: 'uuid' })
+  @IsUUID()
   bookingId: string;
+
+  @ApiProperty({ description: 'Service ID', format: 'uuid' })
+  @IsUUID()
   serviceId: string;
+
+  @ApiPropertyOptional({ description: 'Service name for display in booking folio' })
+  @IsOptional()
+  @IsString()
+  serviceName?: string;
+
+  @ApiProperty({ description: 'Number of units / guests' })
+  @IsNumber()
+  @Min(1)
   quantity: number;
+
+  @ApiPropertyOptional({ description: 'Unit price in hotel currency' })
+  @IsOptional()
+  @IsNumber()
   unitPrice?: number;
+
+  @ApiPropertyOptional({ description: 'Additional notes' })
+  @IsOptional()
+  @IsString()
   notes?: string;
+
+  @ApiProperty({ description: 'Tenant ID', format: 'uuid' })
+  @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID', format: 'uuid' })
+  @IsUUID()
   hotelId: string;
+
+  @ApiProperty({ description: 'Staff user ID who added the service', format: 'uuid' })
+  @IsUUID()
   addedBy: string;
 }
 

@@ -3,9 +3,10 @@
  * Pattern: booking.add_service
  */
 import { NatsResponse } from '../../common';
-export interface AddServiceNatsRequest {
+export declare class AddServiceNatsRequest {
     bookingId: string;
     serviceId: string;
+    serviceName?: string;
     quantity: number;
     unitPrice?: number;
     notes?: string;
