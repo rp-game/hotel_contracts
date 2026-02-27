@@ -7,280 +7,184 @@
  * Used by: booking detail page and calendar modal
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsUUID, IsString } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
-import { BookingServiceResponseDto } from '../dto/booking-response.dto';
+import { BookingServiceResponseDto, FolioItemDto } from '../dto/booking-response.dto';
 
-/**
- * Room details in a booking
- */
-export interface BookingRoom {
-  /**
-   * Room ID
-   */
+export class BookingRoom {
+  @ApiProperty({ description: 'Room ID' })
   id: string;
 
-  /**
-   * Room number (e.g., "101")
-   */
+  @ApiProperty({ description: 'Room number (e.g., "101")' })
   roomNumber: string;
 
-  /**
-   * Room type ID
-   */
+  @ApiProperty({ description: 'Room type ID' })
   roomTypeId: string;
 
-  /**
-   * Room type name
-   */
+  @ApiProperty({ description: 'Room type name' })
   roomTypeName: string;
 
-  /**
-   * Check-in date for this room
-   */
+  @ApiProperty({ description: 'Check-in date for this room' })
   checkInDate: string;
 
-  /**
-   * Check-out date for this room
-   */
+  @ApiProperty({ description: 'Check-out date for this room' })
   checkOutDate: string;
 
-  /**
-   * Price per night for this room
-   */
+  @ApiProperty({ description: 'Price per night for this room' })
   pricePerNight: number;
 
-  /**
-   * Total price for this room
-   */
+  @ApiProperty({ description: 'Total price for this room' })
   totalPrice: number;
 }
 
-/**
- * Guest information in booking
- */
-export interface BookingGuest {
-  /**
-   * Guest ID
-   */
+export class BookingGuest {
+  @ApiProperty({ description: 'Guest ID' })
   id: string;
 
-  /**
-   * Guest first name
-   */
+  @ApiProperty({ description: 'Guest first name' })
   firstName: string;
 
-  /**
-   * Guest last name
-   */
+  @ApiProperty({ description: 'Guest last name' })
   lastName: string;
 
-  /**
-   * Guest full name
-   */
+  @ApiProperty({ description: 'Guest full name' })
   fullName: string;
 
-  /**
-   * Guest email
-   */
+  @ApiProperty({ description: 'Guest email' })
   email: string;
 
-  /**
-   * Guest phone number
-   */
+  @ApiProperty({ description: 'Guest phone number' })
   phone: string;
 
-  /**
-   * Guest nationality (optional)
-   */
+  @ApiPropertyOptional({ description: 'Guest nationality' })
   nationality?: string;
 
-  /**
-   * Guest ID type (passport, driver's license, etc.)
-   */
+  @ApiPropertyOptional({ description: 'Guest ID type (passport, driver license, etc.)' })
   idType?: string;
 
-  /**
-   * Guest ID number
-   */
+  @ApiPropertyOptional({ description: 'Guest ID number' })
   idNumber?: string;
 }
 
-/**
- * Payment information in booking
- */
-export interface BookingPayment {
-  /**
-   * Payment ID
-   */
+export class BookingPayment {
+  @ApiProperty({ description: 'Payment ID' })
   id: string;
 
-  /**
-   * Payment method
-   */
+  @ApiProperty({ description: 'Payment method' })
   method: string;
 
-  /**
-   * Payment status
-   */
+  @ApiProperty({
+    description: 'Payment status',
+    enum: ['PENDING', 'PARTIAL', 'COMPLETED', 'FAILED', 'CANCELLED', 'REFUNDED'],
+  })
   status: 'PENDING' | 'PARTIAL' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'REFUNDED';
 
-  /**
-   * Amount paid
-   */
+  @ApiProperty({ description: 'Amount paid' })
   amount: number;
 
-  /**
-   * Payment date
-   */
+  @ApiPropertyOptional({ description: 'Payment date' })
   paidAt?: string;
 
-  /**
-   * Transaction reference (optional)
-   */
+  @ApiPropertyOptional({ description: 'Transaction reference' })
   transactionRef?: string;
 }
 
-/**
- * NATS request to find a single booking
- */
-export interface GetBookingByIdRequest {
-  /**
-   * Tenant ID (multi-tenant isolation)
-   */
+export class GetBookingByIdRequest {
+  @ApiProperty({ description: 'Tenant ID', format: 'uuid' })
+  @IsUUID()
   tenantId: string;
 
-  /**
-   * Hotel ID
-   */
+  @ApiProperty({ description: 'Hotel ID', format: 'uuid' })
+  @IsUUID()
   hotelId: string;
 
-  /**
-   * Booking ID
-   */
+  @ApiProperty({ description: 'Booking ID', format: 'uuid' })
+  @IsUUID()
   bookingId: string;
 }
 
-/**
- * NATS response containing full booking details
- */
-export interface GetBookingByIdResponse {
-  /**
-   * Booking ID
-   */
+export class GetBookingByIdResponse {
+  @ApiProperty({ description: 'Booking ID' })
   id: string;
 
-  /**
-   * Booking code (e.g., BK2024123456)
-   */
+  @ApiProperty({ description: 'Booking code (e.g., BK2024123456)' })
   bookingCode: string;
 
-  /**
-   * Booking status
-   */
+  @ApiProperty({
+    description: 'Booking status',
+    enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'CHECKED_OUT', 'CANCELLED'],
+  })
   status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
 
-  /**
-   * Booking source (WEB, OTA, PHONE, WALK_IN, etc.)
-   */
+  @ApiProperty({ description: 'Booking source (WEB, OTA, PHONE, WALK_IN, etc.)' })
   source: string;
 
-  /**
-   * Payment status
-   */
+  @ApiProperty({
+    description: 'Payment status',
+    enum: ['PENDING', 'PARTIAL', 'COMPLETED', 'FAILED', 'CANCELLED', 'REFUNDED'],
+  })
   paymentStatus: 'PENDING' | 'PARTIAL' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'REFUNDED';
 
-  /**
-   * Check-in date (YYYY-MM-DD)
-   */
+  @ApiProperty({ description: 'Check-in date (YYYY-MM-DD)' })
   checkInDate: string;
 
-  /**
-   * Check-out date (YYYY-MM-DD)
-   */
+  @ApiProperty({ description: 'Check-out date (YYYY-MM-DD)' })
   checkOutDate: string;
 
-  /**
-   * Total booking amount
-   */
+  @ApiProperty({ description: 'Total booking amount' })
   totalAmount: number;
 
-  /**
-   * Amount already paid
-   */
+  @ApiProperty({ description: 'Amount already paid' })
   paidAmount: number;
 
-  /**
-   * Outstanding balance
-   */
+  @ApiProperty({ description: 'Outstanding balance' })
   balance: number;
 
-  /**
-   * Rooms in this booking
-   */
+  @ApiProperty({ description: 'Rooms in this booking', type: [BookingRoom] })
   rooms: BookingRoom[];
 
-  /**
-   * Primary guest information
-   */
+  @ApiProperty({ description: 'Primary guest information', type: BookingGuest })
   mainGuest: BookingGuest;
 
-  /**
-   * Additional guests (optional)
-   */
+  @ApiPropertyOptional({ description: 'Additional guests', type: [BookingGuest] })
   additionalGuests?: BookingGuest[];
 
-  /**
-   * Payment records
-   */
+  @ApiProperty({ description: 'Payment records', type: [BookingPayment] })
   payments: BookingPayment[];
 
-  /**
-   * Additional services charged to this booking
-   */
+  @ApiPropertyOptional({ description: 'Additional services charged to this booking', type: [BookingServiceResponseDto] })
   services?: BookingServiceResponseDto[];
 
-  /**
-   * Special requests from guest
-   */
+  @ApiPropertyOptional({ description: 'Folio line items (rooms + services + discounts)', type: [FolioItemDto] })
+  folio?: FolioItemDto[];
+
+  @ApiPropertyOptional({ description: 'Grand total computed from folio (rooms + services)' })
+  grandTotal?: number;
+
+  @ApiPropertyOptional({ description: 'Special requests from guest' })
   specialRequests?: string;
 
-  /**
-   * Internal notes about the booking
-   */
+  @ApiPropertyOptional({ description: 'Internal notes about the booking' })
   notes?: string;
 
-  /**
-   * Booking creation date
-   */
+  @ApiProperty({ description: 'Booking creation date' })
   createdAt: string;
 
-  /**
-   * Last update date
-   */
+  @ApiProperty({ description: 'Last update date' })
   updatedAt: string;
 
-  /**
-   * User who created the booking
-   */
+  @ApiPropertyOptional({ description: 'User who created the booking' })
   createdBy?: string;
 
-  /**
-   * User who last updated the booking
-   */
+  @ApiPropertyOptional({ description: 'User who last updated the booking' })
   updatedBy?: string;
 
-  /**
-   * Actual check-in time (optional)
-   */
+  @ApiPropertyOptional({ description: 'Actual check-in time' })
   actualCheckInTime?: string;
 
-  /**
-   * Actual check-out time (optional)
-   */
+  @ApiPropertyOptional({ description: 'Actual check-out time' })
   actualCheckOutTime?: string;
 }
 
-/**
- * Full NATS response type for find one booking
- */
 export type GetBookingByIdNatsResponse = NatsResponse<GetBookingByIdResponse>;
