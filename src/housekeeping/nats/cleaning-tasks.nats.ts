@@ -130,6 +130,12 @@ export class CleaningTaskNatsResponse {
 
   @ApiPropertyOptional({ description: 'Actual duration in minutes' })
   actualDuration?: number;
+
+  @ApiPropertyOptional({ description: 'Whether this task was auto-created by automation' })
+  isAutomated?: boolean;
+
+  @ApiPropertyOptional({ description: 'Whether this task was triggered by an event' })
+  eventTriggered?: boolean;
 }
 
 /**

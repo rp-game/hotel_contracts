@@ -71,6 +71,8 @@ export declare class CleaningTaskNatsResponse {
     updatedAt: string;
     completedAt?: string;
     actualDuration?: number;
+    isAutomated?: boolean;
+    eventTriggered?: boolean;
 }
 /**
  * Create Cleaning Task Request

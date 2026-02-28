@@ -99,6 +99,8 @@ class CleaningTaskNatsResponse {
     updatedAt;
     completedAt;
     actualDuration;
+    isAutomated;
+    eventTriggered;
 }
 exports.CleaningTaskNatsResponse = CleaningTaskNatsResponse;
 __decorate([
@@ -185,6 +187,14 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Actual duration in minutes' }),
     __metadata("design:type", Number)
 ], CleaningTaskNatsResponse.prototype, "actualDuration", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether this task was auto-created by automation' }),
+    __metadata("design:type", Boolean)
+], CleaningTaskNatsResponse.prototype, "isAutomated", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether this task was triggered by an event' }),
+    __metadata("design:type", Boolean)
+], CleaningTaskNatsResponse.prototype, "eventTriggered", void 0);
 /**
  * Create Cleaning Task Request
  * Pattern: housekeeping.cleaning-tasks.create
