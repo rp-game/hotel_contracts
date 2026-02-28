@@ -571,4 +571,25 @@ export declare class FindAllMembersExpiringPointsData {
  * Find All Members with Expiring Points Response (NATS wrapper)
  */
 export type FindAllMembersExpiringPointsNatsResponse = NatsResponse<FindAllMembersExpiringPointsData>;
+/**
+ * Sync Expiration Records Request
+ * Pattern: crm.loyalty.points_expiration.sync
+ * Generates points_expiration records from loyalty_transactions (EARN_POINTS)
+ * for a specific tenant or all tenants.
+ */
+export declare class SyncExpirationRecordsNatsRequest {
+    tenantId?: string;
+}
+/**
+ * Sync Expiration Records Result
+ * Returned when syncing a single tenant (tenantId provided).
+ */
+export declare class SyncExpirationRecordsResult {
+    created: number;
+    skipped: number;
+}
+/**
+ * Sync Expiration Records Response (NATS wrapper)
+ */
+export type SyncExpirationRecordsNatsResponse = NatsResponse<SyncExpirationRecordsResult>;
 //# sourceMappingURL=points-expiration.nats.d.ts.map

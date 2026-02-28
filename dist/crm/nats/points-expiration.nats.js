@@ -28,7 +28,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FindAllMembersExpiringPointsData = exports.MemberWithExpiringPointsNatsResponse = exports.PointsExpirationBatchNatsResponse = exports.PointsExpirationStatsDataNatsResponse = exports.StatsMetadataNatsResponse = exports.RetentionOpportunityNatsResponse = exports.MemberSegmentStatsNatsResponse = exports.ExpirationScheduleItemNatsResponse = exports.ExpirationOverviewNatsResponse = void 0;
+exports.SyncExpirationRecordsResult = exports.SyncExpirationRecordsNatsRequest = exports.FindAllMembersExpiringPointsData = exports.MemberWithExpiringPointsNatsResponse = exports.PointsExpirationBatchNatsResponse = exports.PointsExpirationStatsDataNatsResponse = exports.StatsMetadataNatsResponse = exports.RetentionOpportunityNatsResponse = exports.MemberSegmentStatsNatsResponse = exports.ExpirationScheduleItemNatsResponse = exports.ExpirationOverviewNatsResponse = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Expiration Overview Stats (nested in full stats response)
@@ -401,4 +401,38 @@ __decorate([
     }),
     __metadata("design:type", Boolean)
 ], FindAllMembersExpiringPointsData.prototype, "hasMore", void 0);
+/**
+ * Sync Expiration Records Request
+ * Pattern: crm.loyalty.points_expiration.sync
+ * Generates points_expiration records from loyalty_transactions (EARN_POINTS)
+ * for a specific tenant or all tenants.
+ */
+class SyncExpirationRecordsNatsRequest {
+    tenantId;
+}
+exports.SyncExpirationRecordsNatsRequest = SyncExpirationRecordsNatsRequest;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Tenant ID to sync. If omitted, syncs all tenants.',
+        example: '550e8400-e29b-41d4-a716-446655440001',
+    }),
+    __metadata("design:type", String)
+], SyncExpirationRecordsNatsRequest.prototype, "tenantId", void 0);
+/**
+ * Sync Expiration Records Result
+ * Returned when syncing a single tenant (tenantId provided).
+ */
+class SyncExpirationRecordsResult {
+    created;
+    skipped;
+}
+exports.SyncExpirationRecordsResult = SyncExpirationRecordsResult;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of new expiration records created', example: 5 }),
+    __metadata("design:type", Number)
+], SyncExpirationRecordsResult.prototype, "created", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of transactions skipped (no expiration policy or already expired)', example: 2 }),
+    __metadata("design:type", Number)
+], SyncExpirationRecordsResult.prototype, "skipped", void 0);
 //# sourceMappingURL=points-expiration.nats.js.map

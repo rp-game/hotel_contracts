@@ -756,3 +756,34 @@ export class FindAllMembersExpiringPointsData {
  * Find All Members with Expiring Points Response (NATS wrapper)
  */
 export type FindAllMembersExpiringPointsNatsResponse = NatsResponse<FindAllMembersExpiringPointsData>;
+
+/**
+ * Sync Expiration Records Request
+ * Pattern: crm.loyalty.points_expiration.sync
+ * Generates points_expiration records from loyalty_transactions (EARN_POINTS)
+ * for a specific tenant or all tenants.
+ */
+export class SyncExpirationRecordsNatsRequest {
+  @ApiPropertyOptional({
+    description: 'Tenant ID to sync. If omitted, syncs all tenants.',
+    example: '550e8400-e29b-41d4-a716-446655440001',
+  })
+  tenantId?: string;
+}
+
+/**
+ * Sync Expiration Records Result
+ * Returned when syncing a single tenant (tenantId provided).
+ */
+export class SyncExpirationRecordsResult {
+  @ApiProperty({ description: 'Number of new expiration records created', example: 5 })
+  created: number;
+
+  @ApiProperty({ description: 'Number of transactions skipped (no expiration policy or already expired)', example: 2 })
+  skipped: number;
+}
+
+/**
+ * Sync Expiration Records Response (NATS wrapper)
+ */
+export type SyncExpirationRecordsNatsResponse = NatsResponse<SyncExpirationRecordsResult>;
