@@ -29,10 +29,7 @@ export declare class GetChannelMappingsByRatePlanRequest {
     ratePlanId: string;
     tenantId: string;
 }
-export interface GetChannelMappingsByRatePlanResponse {
-    data: ChannelRateMapping[];
-}
-export type GetChannelMappingsByRatePlanNatsResponse = NatsResponse<GetChannelMappingsByRatePlanResponse>;
+export type GetChannelMappingsByRatePlanNatsResponse = NatsResponse<ChannelRateMapping[]>;
 /**
  * Update channel pricing configuration DTO
  */
