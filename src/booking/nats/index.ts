@@ -35,6 +35,7 @@ export * from './booking-events.nats';
 export * from './services.nats';
 
 // Conflict-related NATS contracts
+export * from './check-conflict.nats';
 export * from './get-conflicts.nats';
 export * from './detect-conflicts.nats';
 export * from './get-conflict-stats.nats';

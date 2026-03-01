@@ -28,6 +28,7 @@ export * from './booking-lookup.nats';
 export * from './payment-events.nats';
 export * from './booking-events.nats';
 export * from './services.nats';
+export * from './check-conflict.nats';
 export * from './get-conflicts.nats';
 export * from './detect-conflicts.nats';
 export * from './get-conflict-stats.nats';

@@ -47,6 +47,7 @@ __exportStar(require("./booking-events.nats"), exports);
 // Service NATS contracts
 __exportStar(require("./services.nats"), exports);
 // Conflict-related NATS contracts
+__exportStar(require("./check-conflict.nats"), exports);
 __exportStar(require("./get-conflicts.nats"), exports);
 __exportStar(require("./detect-conflicts.nats"), exports);
 __exportStar(require("./get-conflict-stats.nats"), exports);
