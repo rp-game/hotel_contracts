@@ -4,9 +4,10 @@ import { ConflictStatus, ConflictSeverity, ResolutionType } from '../types/confl
 import { GetConflictByIdNatsResponse } from './get-conflict-by-id.nats';
 
 export class UpdateConflictNatsRequest {
-  @ApiProperty()
+  @ApiPropertyOptional({ description: 'Conflict ID — injected from URL path by the API gateway' })
+  @IsOptional()
   @IsString()
-  id: string;
+  id?: string;
 
   @ApiPropertyOptional()
   @IsOptional()

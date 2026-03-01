@@ -27,7 +27,8 @@ class UpdateConflictNatsRequest {
 }
 exports.UpdateConflictNatsRequest = UpdateConflictNatsRequest;
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Conflict ID — injected from URL path by the API gateway' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateConflictNatsRequest.prototype, "id", void 0);

@@ -1,6 +1,6 @@
 import { GetConflictsNatsResponse } from './get-conflicts.nats';
 export declare class GetPendingConflictsNatsRequest {
-    tenantId: string;
+    tenantId?: string;
     hotelId?: string;
 }
 export type GetPendingConflictsNatsResponse = GetConflictsNatsResponse;

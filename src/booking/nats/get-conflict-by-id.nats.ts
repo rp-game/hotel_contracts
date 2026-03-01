@@ -1,5 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 import { NatsResponse } from '../../common';
 import { ConflictNatsData } from './get-conflicts.nats';
 
@@ -8,9 +8,10 @@ export class GetConflictByIdNatsRequest {
   @IsString()
   id: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsOptional()
   @IsString()
-  tenantId: string;
+  tenantId?: string;
 }
 
 export interface GetConflictByIdNatsResponse extends NatsResponse<ConflictNatsData> {

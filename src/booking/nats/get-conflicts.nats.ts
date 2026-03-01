@@ -5,9 +5,10 @@ import { NatsResponse } from '../../common';
 import { ConflictStatus, ConflictSeverity, ConflictType, ResolutionType } from '../types/conflict-enums';
 
 export class GetConflictsNatsRequest {
-  @ApiProperty({ description: 'Tenant ID' })
+  @ApiPropertyOptional({ description: 'Tenant ID' })
+  @IsOptional()
   @IsString()
-  tenantId: string;
+  tenantId?: string;
 
   @ApiPropertyOptional({ description: 'Hotel ID' })
   @IsOptional()

@@ -1,7 +1,7 @@
 import { NatsResponse } from '../../common';
 import { ConflictStatus, ConflictSeverity, ConflictType, ResolutionType } from '../types/conflict-enums';
 export declare class GetConflictsNatsRequest {
-    tenantId: string;
+    tenantId?: string;
     hotelId?: string;
     status?: ConflictStatus;
     severity?: ConflictSeverity;

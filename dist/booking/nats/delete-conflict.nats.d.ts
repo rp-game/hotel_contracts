@@ -1,7 +1,7 @@
 import { NatsResponse } from '../../common';
 export declare class DeleteConflictNatsRequest {
     id: string;
-    tenantId: string;
+    tenantId?: string;
 }
 export declare class DeleteConflictNatsData {
     deleted: boolean;

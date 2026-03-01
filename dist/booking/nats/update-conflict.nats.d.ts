@@ -1,7 +1,7 @@
 import { ConflictStatus, ConflictSeverity, ResolutionType } from '../types/conflict-enums';
 import { GetConflictByIdNatsResponse } from './get-conflict-by-id.nats';
 export declare class UpdateConflictNatsRequest {
-    id: string;
+    id?: string;
     tenantId?: string;
     status?: ConflictStatus;
     severity?: ConflictSeverity;

@@ -2,7 +2,7 @@ import { NatsResponse } from '../../common';
 import { ConflictNatsData } from './get-conflicts.nats';
 export declare class GetConflictByIdNatsRequest {
     id: string;
-    tenantId: string;
+    tenantId?: string;
 }
 export interface GetConflictByIdNatsResponse extends NatsResponse<ConflictNatsData> {
     data: ConflictNatsData;
