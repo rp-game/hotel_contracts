@@ -23,7 +23,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateRoomTypeRequest = exports.CreateRoomTypeRequest = void 0;
+exports.AddRoomTypeImageRequest = exports.UpdateRoomTypeRequest = exports.CreateRoomTypeRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 /**
@@ -240,4 +240,29 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdateRoomTypeRequest.prototype, "isActive", void 0);
+/**
+ * Add Image to Room Type Request
+ * Pattern: inventory.room-types.images.add
+ */
+class AddRoomTypeImageRequest {
+    id;
+    imageUrl;
+    tenantId;
+}
+exports.AddRoomTypeImageRequest = AddRoomTypeImageRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], AddRoomTypeImageRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Image URL to add' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AddRoomTypeImageRequest.prototype, "imageUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], AddRoomTypeImageRequest.prototype, "tenantId", void 0);
 //# sourceMappingURL=room-type.nats.js.map

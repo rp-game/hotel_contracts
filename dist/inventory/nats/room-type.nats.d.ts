@@ -98,6 +98,19 @@ export interface DeleteRoomTypeResponse {
 }
 export type DeleteRoomTypeNatsResponse = NatsResponse<DeleteRoomTypeResponse>;
 /**
+ * Add Image to Room Type Request
+ * Pattern: inventory.room-types.images.add
+ */
+export declare class AddRoomTypeImageRequest {
+    id: string;
+    imageUrl: string;
+    tenantId: string;
+}
+export interface AddRoomTypeImageResponse {
+    images: string[];
+}
+export type AddRoomTypeImageNatsResponse = NatsResponse<AddRoomTypeImageResponse>;
+/**
  * Get Room Types By IDs Request
  * Pattern: inventory.room-types.get-by-ids
  */
