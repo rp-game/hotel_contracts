@@ -9,6 +9,8 @@ export declare class CreateConflictNatsRequest {
     affectedRooms: string[];
     description: string;
     detectedBy?: string;
+    roomNumber?: string;
+    conflictDate?: string;
 }
 export type CreateConflictNatsResponse = GetConflictByIdNatsResponse;
 //# sourceMappingURL=create-conflict.nats.d.ts.map

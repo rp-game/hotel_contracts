@@ -1,6 +1,6 @@
 import { NatsResponse } from '../../common';
 export declare class GetConflictStatsNatsRequest {
-    tenantId: string;
+    tenantId?: string;
     hotelId?: string;
     startDate?: string;
     endDate?: string;

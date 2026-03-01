@@ -3,9 +3,10 @@ import { IsOptional, IsString } from 'class-validator';
 import { NatsResponse } from '../../common';
 
 export class GetConflictStatsNatsRequest {
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsOptional()
   @IsString()
-  tenantId: string;
+  tenantId?: string;
 
   @ApiPropertyOptional()
   @IsOptional()

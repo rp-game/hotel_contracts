@@ -38,6 +38,16 @@ export class CreateConflictNatsRequest {
   @IsOptional()
   @IsString()
   detectedBy?: string;
+
+  @ApiPropertyOptional({ description: 'Room number (human-readable), e.g. "101"' })
+  @IsOptional()
+  @IsString()
+  roomNumber?: string;
+
+  @ApiPropertyOptional({ description: 'Conflict date in YYYY-MM-DD format; defaults to today if omitted' })
+  @IsOptional()
+  @IsString()
+  conflictDate?: string;
 }
 
 export type CreateConflictNatsResponse = GetConflictByIdNatsResponse;

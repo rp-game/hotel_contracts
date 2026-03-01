@@ -22,6 +22,8 @@ class CreateConflictNatsRequest {
     affectedRooms;
     description;
     detectedBy;
+    roomNumber;
+    conflictDate;
 }
 exports.CreateConflictNatsRequest = CreateConflictNatsRequest;
 __decorate([
@@ -67,4 +69,16 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateConflictNatsRequest.prototype, "detectedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room number (human-readable), e.g. "101"' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateConflictNatsRequest.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Conflict date in YYYY-MM-DD format; defaults to today if omitted' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateConflictNatsRequest.prototype, "conflictDate", void 0);
 //# sourceMappingURL=create-conflict.nats.js.map
