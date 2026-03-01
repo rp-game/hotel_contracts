@@ -1,11 +1,11 @@
 import { NatsResponse } from '../../common';
-export interface GetConflictStatsNatsRequest {
+export declare class GetConflictStatsNatsRequest {
     tenantId: string;
     hotelId?: string;
     startDate?: string;
     endDate?: string;
 }
-export interface ConflictStatsNatsData {
+export declare class ConflictStatsNatsData {
     pending: number;
     inProgress: number;
     resolved: number;

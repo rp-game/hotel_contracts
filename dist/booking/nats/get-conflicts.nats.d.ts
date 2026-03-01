@@ -1,6 +1,6 @@
 import { NatsResponse } from '../../common';
 import { ConflictStatus, ConflictSeverity, ConflictType, ResolutionType } from '../types/conflict-enums';
-export interface GetConflictsNatsRequest {
+export declare class GetConflictsNatsRequest {
     tenantId: string;
     hotelId?: string;
     status?: ConflictStatus;
@@ -13,7 +13,7 @@ export interface GetConflictsNatsRequest {
     page?: number;
     limit?: number;
 }
-export interface ConflictNatsData {
+export declare class ConflictNatsData {
     id: string;
     tenantId: string;
     hotelId: string;
@@ -34,14 +34,21 @@ export interface ConflictNatsData {
     resolvedBy?: string;
     notes?: string;
 }
-export interface GetConflictsNatsResponseData {
+export declare class ConflictPaginationData {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+}
+export declare class GetConflictsNatsResponseData {
     data: ConflictNatsData[];
-    pagination: {
-        page: number;
-        limit: number;
-        total: number;
-        totalPages: number;
-    };
+    pagination: ConflictPaginationData;
+}
+export declare class ConflictListResponseDto {
+    data: ConflictNatsData[];
+    total: number;
+    page: number;
+    limit: number;
 }
 export interface GetConflictsNatsResponse extends NatsResponse<GetConflictsNatsResponseData> {
     data: GetConflictsNatsResponseData;

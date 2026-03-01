@@ -1,5 +1,5 @@
 import { GetConflictsNatsResponse } from './get-conflicts.nats';
-export interface GetCriticalConflictsNatsRequest {
+export declare class GetCriticalConflictsNatsRequest {
     tenantId: string;
     hotelId?: string;
 }

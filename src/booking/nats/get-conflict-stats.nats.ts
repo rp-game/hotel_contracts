@@ -1,18 +1,42 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 import { NatsResponse } from '../../common';
-import { ConflictStatus, ConflictSeverity, ConflictType } from '../types/conflict-enums';
 
-export interface GetConflictStatsNatsRequest {
+export class GetConflictStatsNatsRequest {
+  @ApiProperty()
+  @IsString()
   tenantId: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
   hotelId?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
   startDate?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
   endDate?: string;
 }
 
-export interface ConflictStatsNatsData {
+export class ConflictStatsNatsData {
+  @ApiProperty()
   pending: number;
+
+  @ApiProperty()
   inProgress: number;
+
+  @ApiProperty()
   resolved: number;
+
+  @ApiProperty()
   critical: number;
+
+  @ApiProperty()
   total: number;
 }
 

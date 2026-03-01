@@ -1,8 +1,15 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 import { NatsResponse } from '../../common';
 import { ConflictNatsData } from './get-conflicts.nats';
 
-export interface GetConflictByIdNatsRequest {
+export class GetConflictByIdNatsRequest {
+  @ApiProperty()
+  @IsString()
   id: string;
+
+  @ApiProperty()
+  @IsString()
   tenantId: string;
 }
 

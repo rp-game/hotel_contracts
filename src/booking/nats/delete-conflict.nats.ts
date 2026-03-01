@@ -1,10 +1,22 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 import { NatsResponse } from '../../common';
 
-export interface DeleteConflictNatsRequest {
+export class DeleteConflictNatsRequest {
+  @ApiProperty()
+  @IsString()
   id: string;
+
+  @ApiProperty()
+  @IsString()
   tenantId: string;
 }
 
-export interface DeleteConflictNatsResponse extends NatsResponse<{ deleted: boolean }> {
-  data: { deleted: boolean };
+export class DeleteConflictNatsData {
+  @ApiProperty()
+  deleted: boolean;
+}
+
+export interface DeleteConflictNatsResponse extends NatsResponse<DeleteConflictNatsData> {
+  data: DeleteConflictNatsData;
 }

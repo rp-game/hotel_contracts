@@ -1,21 +1,22 @@
 import { NatsResponse } from '../../common';
 import { ConflictNatsData } from './get-conflicts.nats';
-export interface DetectConflictsNatsRequest {
+export declare class DetectConflictsNatsRequest {
     tenantId: string;
     hotelId: string;
     startDate: string;
     endDate: string;
     roomIds?: string[];
 }
-export interface DetectConflictsNatsResponseData {
+export declare class DetectConflictsSummary {
+    doubleBookings: number;
+    maintenanceOverlaps: number;
+    totalRoomsAffected: number;
+}
+export declare class DetectConflictsNatsResponseData {
     conflicts: ConflictNatsData[];
     totalConflicts: number;
     highSeverityCount: number;
-    summary: {
-        doubleBookings: number;
-        maintenanceOverlaps: number;
-        totalRoomsAffected: number;
-    };
+    summary: DetectConflictsSummary;
 }
 export interface DetectConflictsNatsResponse extends NatsResponse<DetectConflictsNatsResponseData> {
     data: DetectConflictsNatsResponseData;

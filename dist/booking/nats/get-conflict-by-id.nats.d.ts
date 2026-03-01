@@ -1,6 +1,6 @@
 import { NatsResponse } from '../../common';
 import { ConflictNatsData } from './get-conflicts.nats';
-export interface GetConflictByIdNatsRequest {
+export declare class GetConflictByIdNatsRequest {
     id: string;
     tenantId: string;
 }

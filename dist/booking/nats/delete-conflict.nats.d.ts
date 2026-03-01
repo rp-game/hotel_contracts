@@ -1,13 +1,12 @@
 import { NatsResponse } from '../../common';
-export interface DeleteConflictNatsRequest {
+export declare class DeleteConflictNatsRequest {
     id: string;
     tenantId: string;
 }
-export interface DeleteConflictNatsResponse extends NatsResponse<{
+export declare class DeleteConflictNatsData {
     deleted: boolean;
-}> {
-    data: {
-        deleted: boolean;
-    };
+}
+export interface DeleteConflictNatsResponse extends NatsResponse<DeleteConflictNatsData> {
+    data: DeleteConflictNatsData;
 }
 //# sourceMappingURL=delete-conflict.nats.d.ts.map
