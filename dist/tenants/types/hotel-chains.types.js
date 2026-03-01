@@ -36,6 +36,7 @@ Object.defineProperty(exports, "HotelListResponseDto", { enumerable: true, get: 
  */
 class CreateHotelChainDto {
     name;
+    slug;
     brand;
     type;
     description;
@@ -56,6 +57,13 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateHotelChainDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'URL-friendly slug (lowercase, hyphens)', example: 'my-chain' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.Matches)(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, { message: 'slug must be lowercase alphanumeric with hyphens' }),
+    __metadata("design:type", String)
+], CreateHotelChainDto.prototype, "slug", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Chain brand' }),
     (0, class_validator_1.IsString)(),

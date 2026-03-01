@@ -15,6 +15,7 @@ export { HotelDto, HotelListResponseDto } from '../../inventory/nats/hotel.nats'
  */
 export declare class CreateHotelChainDto {
     name: string;
+    slug?: string;
     brand: string;
     type: ChainType;
     description?: string;

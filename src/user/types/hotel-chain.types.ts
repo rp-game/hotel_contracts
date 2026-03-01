@@ -2,8 +2,8 @@
  * Hotel Chain Types
  */
 
-import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsEnum, IsOptional, IsArray, IsNumber } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsEnum, IsOptional, IsArray, IsNumber, Matches } from 'class-validator';
 
 /**
  * Hotel Chain Type Enum
@@ -36,6 +36,12 @@ export class UpdateHotelChainDto {
   @IsOptional()
   @IsString()
   name?: string;
+
+  @ApiPropertyOptional({ description: 'URL-friendly slug (lowercase, hyphens)', example: 'my-chain' })
+  @IsOptional()
+  @IsString()
+  @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, { message: 'slug must be lowercase alphanumeric with hyphens' })
+  slug?: string;
 
   @ApiPropertyOptional({ description: 'Chain brand' })
   @IsOptional()
@@ -117,26 +123,66 @@ export class UpdateHotelChainDto {
 }
 
 /**
- * Hotel Chain Entity
+ * Hotel Chain response class (used by REST handlers and Swagger)
  */
-export interface HotelChain {
+export class HotelChain {
+  @ApiProperty({ description: 'Unique identifier' })
   id: string;
+
+  @ApiProperty({ description: 'Chain name' })
   name: string;
+
+  @ApiPropertyOptional({ description: 'URL-friendly slug', example: 'my-chain' })
+  slug?: string;
+
+  @ApiPropertyOptional({ description: 'Chain brand' })
   brand?: string;
-  type: ChainType;
+
+  @ApiPropertyOptional({ description: 'Chain type', enum: ChainType })
+  type?: ChainType;
+
+  @ApiPropertyOptional({ description: 'Chain description' })
   description?: string;
+
+  @ApiPropertyOptional({ description: 'Headquarters country' })
   headquartersCountry?: string;
+
+  @ApiPropertyOptional({ description: 'Headquarters city' })
   headquartersCity?: string;
+
+  @ApiPropertyOptional({ description: 'Headquarters address' })
   headquartersAddress?: string;
+
+  @ApiPropertyOptional({ description: 'Website URL' })
   websiteUrl?: string;
+
+  @ApiPropertyOptional({ description: 'Logo URL' })
   logoUrl?: string;
+
+  @ApiProperty({ description: 'Chain status', enum: HotelChainStatus })
   status: HotelChainStatus;
+
+  @ApiPropertyOptional({ description: 'Operating regions', type: [String] })
   operatingRegions?: string[];
+
+  @ApiPropertyOptional({ description: 'Target markets', type: [String] })
   targetMarkets?: string[];
+
+  @ApiPropertyOptional({ description: 'Amenities', type: [String] })
   amenities?: string[];
+
+  @ApiPropertyOptional({ description: 'Loyalty program name' })
   loyaltyProgram?: string;
+
+  @ApiPropertyOptional({ description: 'Total properties' })
   totalProperties?: number;
+
+  @ApiPropertyOptional({ description: 'Total rooms' })
   totalRooms?: number;
+
+  @ApiProperty({ description: 'Creation timestamp' })
   createdAt: Date;
+
+  @ApiProperty({ description: 'Last update timestamp' })
   updatedAt: Date;
 }

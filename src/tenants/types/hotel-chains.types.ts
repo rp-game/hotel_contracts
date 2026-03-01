@@ -17,7 +17,8 @@ import {
   IsNumber,
   IsUUID,
   IsEmail,
-  Min
+  Min,
+  Matches,
 } from 'class-validator';
 
 // Import enums for validation decorators
@@ -35,6 +36,12 @@ export class CreateHotelChainDto {
   @ApiProperty({ description: 'Chain name' })
   @IsString()
   name: string;
+
+  @ApiPropertyOptional({ description: 'URL-friendly slug (lowercase, hyphens)', example: 'my-chain' })
+  @IsOptional()
+  @IsString()
+  @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, { message: 'slug must be lowercase alphanumeric with hyphens' })
+  slug?: string;
 
   @ApiProperty({ description: 'Chain brand' })
   @IsString()

@@ -27,6 +27,7 @@ export declare enum HotelChainStatus {
  */
 export declare class UpdateHotelChainDto {
     name?: string;
+    slug?: string;
     brand?: string;
     type?: ChainType;
     description?: string;
@@ -44,13 +45,14 @@ export declare class UpdateHotelChainDto {
     totalRooms?: number;
 }
 /**
- * Hotel Chain Entity
+ * Hotel Chain response class (used by REST handlers and Swagger)
  */
-export interface HotelChain {
+export declare class HotelChain {
     id: string;
     name: string;
+    slug?: string;
     brand?: string;
-    type: ChainType;
+    type?: ChainType;
     description?: string;
     headquartersCountry?: string;
     headquartersCity?: string;
