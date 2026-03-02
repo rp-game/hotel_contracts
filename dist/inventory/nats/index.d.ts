@@ -11,4 +11,6 @@ export * from './hotel.nats';
 export * from './room-timeline.nats';
 export * from './room-move-events.nats';
 export * from './room-status.nats';
+export * from './room-type-search.nats';
+export * from './room-type-list.nats';
 //# sourceMappingURL=index.d.ts.map

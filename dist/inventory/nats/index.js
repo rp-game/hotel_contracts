@@ -27,4 +27,6 @@ __exportStar(require("./hotel.nats"), exports);
 __exportStar(require("./room-timeline.nats"), exports);
 __exportStar(require("./room-move-events.nats"), exports);
 __exportStar(require("./room-status.nats"), exports);
+__exportStar(require("./room-type-search.nats"), exports);
+__exportStar(require("./room-type-list.nats"), exports);
 //# sourceMappingURL=index.js.map
