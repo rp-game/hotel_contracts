@@ -195,6 +195,8 @@ class GetBookingByIdResponse {
     updatedBy;
     actualCheckInTime;
     actualCheckOutTime;
+    pricingBreakdown;
+    ratePlanId;
 }
 exports.GetBookingByIdResponse = GetBookingByIdResponse;
 __decorate([
@@ -303,4 +305,12 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Actual check-out time' }),
     __metadata("design:type", String)
 ], GetBookingByIdResponse.prototype, "actualCheckOutTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Pricing breakdown with optional ratePlanSnapshot' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "pricingBreakdown", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Rate plan ID applied to this booking', format: 'uuid' }),
+    __metadata("design:type", String)
+], GetBookingByIdResponse.prototype, "ratePlanId", void 0);
 //# sourceMappingURL=find-one-booking.nats.js.map

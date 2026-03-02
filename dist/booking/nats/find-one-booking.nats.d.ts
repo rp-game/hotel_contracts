@@ -68,6 +68,8 @@ export declare class GetBookingByIdResponse {
     updatedBy?: string;
     actualCheckInTime?: string;
     actualCheckOutTime?: string;
+    pricingBreakdown?: Record<string, unknown>;
+    ratePlanId?: string;
 }
 export type GetBookingByIdNatsResponse = NatsResponse<GetBookingByIdResponse>;
 //# sourceMappingURL=find-one-booking.nats.d.ts.map

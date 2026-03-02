@@ -6,6 +6,7 @@
  *
  * @updated 2026-02-12 - Converted to classes with @ApiProperty for dual use (NATS + REST)
  */
+import { CancellationPolicyDto } from './create-rate-plan.nats';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { CreateRatePlanRequest, CreateRatePlanResponse, CreateRatePlanNatsResponse, RatePlanTypeEnum, DerivationTypeEnum } from './create-rate-plan.nats';
 /**
@@ -19,6 +20,9 @@ export declare class UpdateRatePlanDto {
     name?: string;
     description?: string;
     isActive?: boolean;
+    cancellationPolicy?: CancellationPolicyDto | null;
+    mealPlan?: string | null;
+    paymentType?: string | null;
 }
 export declare class UpdateRatePlanRequest {
     id: string;

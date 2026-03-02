@@ -21,10 +21,11 @@ exports.DeleteRatePlanResponse = exports.DeleteRatePlanRequest = exports.FindRat
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const create_rate_plan_nats_1 = require("./create-rate-plan.nats");
-Object.defineProperty(exports, "CreateRatePlanRequest", { enumerable: true, get: function () { return create_rate_plan_nats_1.CreateRatePlanRequest; } });
-Object.defineProperty(exports, "CreateRatePlanResponse", { enumerable: true, get: function () { return create_rate_plan_nats_1.CreateRatePlanResponse; } });
-Object.defineProperty(exports, "RatePlanTypeEnum", { enumerable: true, get: function () { return create_rate_plan_nats_1.RatePlanTypeEnum; } });
-Object.defineProperty(exports, "DerivationTypeEnum", { enumerable: true, get: function () { return create_rate_plan_nats_1.DerivationTypeEnum; } });
+const create_rate_plan_nats_2 = require("./create-rate-plan.nats");
+Object.defineProperty(exports, "CreateRatePlanRequest", { enumerable: true, get: function () { return create_rate_plan_nats_2.CreateRatePlanRequest; } });
+Object.defineProperty(exports, "CreateRatePlanResponse", { enumerable: true, get: function () { return create_rate_plan_nats_2.CreateRatePlanResponse; } });
+Object.defineProperty(exports, "RatePlanTypeEnum", { enumerable: true, get: function () { return create_rate_plan_nats_2.RatePlanTypeEnum; } });
+Object.defineProperty(exports, "DerivationTypeEnum", { enumerable: true, get: function () { return create_rate_plan_nats_2.DerivationTypeEnum; } });
 /**
  * NATS Pattern: pricing.rate-plan.update
  */
@@ -32,6 +33,9 @@ class UpdateRatePlanDto {
     name;
     description;
     isActive;
+    cancellationPolicy;
+    mealPlan;
+    paymentType;
 }
 exports.UpdateRatePlanDto = UpdateRatePlanDto;
 __decorate([
@@ -61,6 +65,32 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdateRatePlanDto.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Cancellation policy details',
+        type: () => create_rate_plan_nats_1.CancellationPolicyDto,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], UpdateRatePlanDto.prototype, "cancellationPolicy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Meal plan included',
+        enum: ['ROOM_ONLY', 'BREAKFAST', 'HALF_BOARD', 'FULL_BOARD', 'ALL_INCLUSIVE'],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", Object)
+], UpdateRatePlanDto.prototype, "mealPlan", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Payment type requirement',
+        enum: ['PAY_NOW', 'PAY_AT_HOTEL', 'DEPOSIT_REQUIRED'],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", Object)
+], UpdateRatePlanDto.prototype, "paymentType", void 0);
 class UpdateRatePlanRequest {
     id;
     dto;
@@ -88,9 +118,9 @@ exports.UpdateRatePlanResponse = UpdateRatePlanResponse;
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Updated rate plan data',
-        type: create_rate_plan_nats_1.CreateRatePlanResponse,
+        type: create_rate_plan_nats_2.CreateRatePlanResponse,
     }),
-    __metadata("design:type", create_rate_plan_nats_1.CreateRatePlanResponse)
+    __metadata("design:type", create_rate_plan_nats_2.CreateRatePlanResponse)
 ], UpdateRatePlanResponse.prototype, "data", void 0);
 /**
  * NATS Pattern: pricing.rate-plan.get
@@ -114,9 +144,9 @@ exports.GetRatePlanResponse = GetRatePlanResponse;
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Rate plan data with parent details',
-        type: create_rate_plan_nats_1.CreateRatePlanResponse,
+        type: create_rate_plan_nats_2.CreateRatePlanResponse,
     }),
-    __metadata("design:type", create_rate_plan_nats_1.CreateRatePlanResponse)
+    __metadata("design:type", create_rate_plan_nats_2.CreateRatePlanResponse)
 ], GetRatePlanResponse.prototype, "data", void 0);
 /**
  * NATS Pattern: pricing.rate-plan.list
@@ -149,7 +179,7 @@ exports.ListRatePlansResponse = ListRatePlansResponse;
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'List of rate plans',
-        type: [create_rate_plan_nats_1.CreateRatePlanResponse],
+        type: [create_rate_plan_nats_2.CreateRatePlanResponse],
     }),
     __metadata("design:type", Array)
 ], ListRatePlansResponse.prototype, "data", void 0);
@@ -210,7 +240,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Derivation type',
-        enum: create_rate_plan_nats_1.DerivationTypeEnum,
+        enum: create_rate_plan_nats_2.DerivationTypeEnum,
     }),
     __metadata("design:type", String)
 ], CalculateRatePlanPriceResponse.prototype, "derivationType", void 0);
@@ -461,7 +491,7 @@ exports.FindRatePlansByChannelResponse = FindRatePlansByChannelResponse;
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'List of rate plans',
-        type: [create_rate_plan_nats_1.CreateRatePlanResponse],
+        type: [create_rate_plan_nats_2.CreateRatePlanResponse],
     }),
     __metadata("design:type", Array)
 ], FindRatePlansByChannelResponse.prototype, "data", void 0);

@@ -185,6 +185,12 @@ export class GetBookingByIdResponse {
 
   @ApiPropertyOptional({ description: 'Actual check-out time' })
   actualCheckOutTime?: string;
+
+  @ApiPropertyOptional({ description: 'Pricing breakdown with optional ratePlanSnapshot' })
+  pricingBreakdown?: Record<string, unknown>;
+
+  @ApiPropertyOptional({ description: 'Rate plan ID applied to this booking', format: 'uuid' })
+  ratePlanId?: string;
 }
 
 export type GetBookingByIdNatsResponse = NatsResponse<GetBookingByIdResponse>;
