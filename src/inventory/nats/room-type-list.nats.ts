@@ -71,17 +71,17 @@ export class RatePlanSummaryDto {
   planType: string;
 
   @ApiPropertyOptional({
-    description: 'Adjustment type for DERIVED plans',
+    description: 'Derivation type for DERIVED plans',
     example: 'PERCENTAGE',
     enum: ['PERCENTAGE', 'AMOUNT'],
   })
-  adjustmentType?: string;
+  derivationType?: string;
 
   @ApiPropertyOptional({
-    description: 'Adjustment value (percentage or fixed amount)',
+    description: 'Derivation value (percentage or fixed amount)',
     example: 10,
   })
-  adjustmentValue?: number;
+  derivationValue?: number;
 
   @ApiProperty({
     description: 'Meal plan included',

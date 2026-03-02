@@ -88,8 +88,8 @@ class RatePlanSummaryDto {
     ratePlanId;
     ratePlanName;
     planType;
-    adjustmentType;
-    adjustmentValue;
+    derivationType;
+    derivationValue;
     mealPlan;
     paymentType;
     cancellationPolicy;
@@ -110,19 +110,19 @@ __decorate([
 ], RatePlanSummaryDto.prototype, "planType", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'Adjustment type for DERIVED plans',
+        description: 'Derivation type for DERIVED plans',
         example: 'PERCENTAGE',
         enum: ['PERCENTAGE', 'AMOUNT'],
     }),
     __metadata("design:type", String)
-], RatePlanSummaryDto.prototype, "adjustmentType", void 0);
+], RatePlanSummaryDto.prototype, "derivationType", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'Adjustment value (percentage or fixed amount)',
+        description: 'Derivation value (percentage or fixed amount)',
         example: 10,
     }),
     __metadata("design:type", Number)
-], RatePlanSummaryDto.prototype, "adjustmentValue", void 0);
+], RatePlanSummaryDto.prototype, "derivationValue", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Meal plan included',

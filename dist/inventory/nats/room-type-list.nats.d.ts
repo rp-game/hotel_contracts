@@ -27,8 +27,8 @@ export declare class RatePlanSummaryDto {
     ratePlanId: string;
     ratePlanName: string;
     planType: string;
-    adjustmentType?: string;
-    adjustmentValue?: number;
+    derivationType?: string;
+    derivationValue?: number;
     mealPlan: string | null;
     paymentType: string | null;
     cancellationPolicy: {
