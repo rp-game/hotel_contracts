@@ -8,6 +8,12 @@
  * @updated 2026-02-12 - Aligned with actual BASE/DERIVED implementation
  */
 import { NatsResponse } from '../../common/nats-response.interface';
+export declare class CancellationPolicyDto {
+    type: 'FREE_CANCELLATION' | 'PARTIAL_REFUND' | 'NON_REFUNDABLE';
+    deadlineHours?: number;
+    penaltyPercent?: number;
+    description?: string;
+}
 /**
  * Rate plan type enum - BASE or DERIVED
  */
@@ -49,6 +55,9 @@ export declare class CreateRatePlanResponse {
     derivationType?: DerivationTypeEnum;
     derivationValue?: number;
     description?: string;
+    cancellationPolicy?: CancellationPolicyDto | null;
+    mealPlan?: string | null;
+    paymentType?: string | null;
     isActive: boolean;
     createdAt: string;
     updatedAt: string;

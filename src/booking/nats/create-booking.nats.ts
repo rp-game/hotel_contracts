@@ -209,6 +209,12 @@ export interface CreateBookingRequest {
   };
 
   /**
+   * Rate plan ID to apply to this booking (optional)
+   * When provided, rate plan details will be snapshotted in pricingBreakdown
+   */
+  ratePlanId?: string;
+
+  /**
    * Additional metadata
    */
   metadata?: Record<string, any>;

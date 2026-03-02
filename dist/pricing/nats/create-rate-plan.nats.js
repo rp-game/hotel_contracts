@@ -18,9 +18,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateRatePlanResponse = exports.CreateRatePlanRequest = exports.DerivationTypeEnum = exports.RatePlanTypeEnum = void 0;
+exports.CreateRatePlanResponse = exports.CreateRatePlanRequest = exports.DerivationTypeEnum = exports.RatePlanTypeEnum = exports.CancellationPolicyDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+class CancellationPolicyDto {
+    type;
+    deadlineHours;
+    penaltyPercent;
+    description;
+}
+exports.CancellationPolicyDto = CancellationPolicyDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Cancellation policy type',
+        enum: ['FREE_CANCELLATION', 'PARTIAL_REFUND', 'NON_REFUNDABLE'],
+        example: 'FREE_CANCELLATION',
+    }),
+    __metadata("design:type", String)
+], CancellationPolicyDto.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Hours before check-in for free cancellation',
+        example: 24,
+    }),
+    __metadata("design:type", Number)
+], CancellationPolicyDto.prototype, "deadlineHours", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Penalty percentage if cancelled after deadline',
+        example: 50,
+    }),
+    __metadata("design:type", Number)
+], CancellationPolicyDto.prototype, "penaltyPercent", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Human-readable description',
+        example: 'Free cancellation up to 24h before check-in',
+    }),
+    __metadata("design:type", String)
+], CancellationPolicyDto.prototype, "description", void 0);
 /**
  * Rate plan type enum - BASE or DERIVED
  */
@@ -135,6 +171,9 @@ class CreateRatePlanResponse {
     derivationType;
     derivationValue;
     description;
+    cancellationPolicy;
+    mealPlan;
+    paymentType;
     isActive;
     createdAt;
     updatedAt;
@@ -203,6 +242,29 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], CreateRatePlanResponse.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Cancellation policy details',
+        type: () => CancellationPolicyDto,
+    }),
+    __metadata("design:type", Object)
+], CreateRatePlanResponse.prototype, "cancellationPolicy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Meal plan included',
+        enum: ['ROOM_ONLY', 'BREAKFAST', 'HALF_BOARD', 'FULL_BOARD', 'ALL_INCLUSIVE'],
+        example: 'BREAKFAST',
+    }),
+    __metadata("design:type", Object)
+], CreateRatePlanResponse.prototype, "mealPlan", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Payment type requirement',
+        enum: ['PAY_NOW', 'PAY_AT_HOTEL', 'DEPOSIT_REQUIRED'],
+        example: 'PAY_NOW',
+    }),
+    __metadata("design:type", Object)
+], CreateRatePlanResponse.prototype, "paymentType", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Whether the rate plan is active',

@@ -12,6 +12,33 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsEnum, IsOptional, IsNumber, IsUUID } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 
+export class CancellationPolicyDto {
+  @ApiProperty({
+    description: 'Cancellation policy type',
+    enum: ['FREE_CANCELLATION', 'PARTIAL_REFUND', 'NON_REFUNDABLE'],
+    example: 'FREE_CANCELLATION',
+  })
+  type: 'FREE_CANCELLATION' | 'PARTIAL_REFUND' | 'NON_REFUNDABLE';
+
+  @ApiPropertyOptional({
+    description: 'Hours before check-in for free cancellation',
+    example: 24,
+  })
+  deadlineHours?: number;
+
+  @ApiPropertyOptional({
+    description: 'Penalty percentage if cancelled after deadline',
+    example: 50,
+  })
+  penaltyPercent?: number;
+
+  @ApiPropertyOptional({
+    description: 'Human-readable description',
+    example: 'Free cancellation up to 24h before check-in',
+  })
+  description?: string;
+}
+
 /**
  * Rate plan type enum - BASE or DERIVED
  */
@@ -153,6 +180,26 @@ export class CreateRatePlanResponse {
     description: 'Optional description',
   })
   description?: string;
+
+  @ApiPropertyOptional({
+    description: 'Cancellation policy details',
+    type: () => CancellationPolicyDto,
+  })
+  cancellationPolicy?: CancellationPolicyDto | null;
+
+  @ApiPropertyOptional({
+    description: 'Meal plan included',
+    enum: ['ROOM_ONLY', 'BREAKFAST', 'HALF_BOARD', 'FULL_BOARD', 'ALL_INCLUSIVE'],
+    example: 'BREAKFAST',
+  })
+  mealPlan?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Payment type requirement',
+    enum: ['PAY_NOW', 'PAY_AT_HOTEL', 'DEPOSIT_REQUIRED'],
+    example: 'PAY_NOW',
+  })
+  paymentType?: string | null;
 
   @ApiProperty({
     description: 'Whether the rate plan is active',
