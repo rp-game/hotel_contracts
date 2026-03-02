@@ -121,6 +121,31 @@ export class CreateRatePlanRequest {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @ApiPropertyOptional({
+    description: 'Cancellation policy details',
+    type: () => CancellationPolicyDto,
+  })
+  @IsOptional()
+  cancellationPolicy?: CancellationPolicyDto | null;
+
+  @ApiPropertyOptional({
+    description: 'Meal plan included',
+    enum: ['ROOM_ONLY', 'BREAKFAST', 'HALF_BOARD', 'FULL_BOARD', 'ALL_INCLUSIVE'],
+    example: 'BREAKFAST',
+  })
+  @IsOptional()
+  @IsString()
+  mealPlan?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Payment type requirement',
+    enum: ['PAY_NOW', 'PAY_AT_HOTEL', 'DEPOSIT_REQUIRED'],
+    example: 'PAY_NOW',
+  })
+  @IsOptional()
+  @IsString()
+  paymentType?: string | null;
 }
 
 /**

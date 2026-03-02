@@ -86,6 +86,9 @@ class CreateRatePlanRequest {
     derivationType;
     derivationValue;
     description;
+    cancellationPolicy;
+    mealPlan;
+    paymentType;
 }
 exports.CreateRatePlanRequest = CreateRatePlanRequest;
 __decorate([
@@ -158,6 +161,34 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateRatePlanRequest.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Cancellation policy details',
+        type: () => CancellationPolicyDto,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], CreateRatePlanRequest.prototype, "cancellationPolicy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Meal plan included',
+        enum: ['ROOM_ONLY', 'BREAKFAST', 'HALF_BOARD', 'FULL_BOARD', 'ALL_INCLUSIVE'],
+        example: 'BREAKFAST',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", Object)
+], CreateRatePlanRequest.prototype, "mealPlan", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Payment type requirement',
+        enum: ['PAY_NOW', 'PAY_AT_HOTEL', 'DEPOSIT_REQUIRED'],
+        example: 'PAY_NOW',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", Object)
+], CreateRatePlanRequest.prototype, "paymentType", void 0);
 /**
  * NATS response after creating rate plan
  */

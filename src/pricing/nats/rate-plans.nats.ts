@@ -9,6 +9,7 @@
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsBoolean, IsOptional, IsNumber, IsUUID } from 'class-validator';
+import { CancellationPolicyDto } from './create-rate-plan.nats';
 import { NatsResponse } from '../../common/nats-response.interface';
 import {
   CreateRatePlanRequest,
@@ -56,6 +57,29 @@ export class UpdateRatePlanDto {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'Cancellation policy details',
+    type: () => CancellationPolicyDto,
+  })
+  @IsOptional()
+  cancellationPolicy?: CancellationPolicyDto | null;
+
+  @ApiPropertyOptional({
+    description: 'Meal plan included',
+    enum: ['ROOM_ONLY', 'BREAKFAST', 'HALF_BOARD', 'FULL_BOARD', 'ALL_INCLUSIVE'],
+  })
+  @IsOptional()
+  @IsString()
+  mealPlan?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Payment type requirement',
+    enum: ['PAY_NOW', 'PAY_AT_HOTEL', 'DEPOSIT_REQUIRED'],
+  })
+  @IsOptional()
+  @IsString()
+  paymentType?: string | null;
 }
 
 export class UpdateRatePlanRequest {

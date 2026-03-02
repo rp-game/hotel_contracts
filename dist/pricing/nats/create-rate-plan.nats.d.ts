@@ -41,6 +41,9 @@ export declare class CreateRatePlanRequest {
     derivationType?: DerivationTypeEnum;
     derivationValue?: number;
     description?: string;
+    cancellationPolicy?: CancellationPolicyDto | null;
+    mealPlan?: string | null;
+    paymentType?: string | null;
 }
 /**
  * NATS response after creating rate plan
