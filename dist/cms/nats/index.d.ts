@@ -17,4 +17,5 @@ export * from './page.nats';
 export * from './tag.nats';
 export * from './image.nats';
 export * from './collection.nats';
+export * from './organizer-settings.nats';
 //# sourceMappingURL=index.d.ts.map

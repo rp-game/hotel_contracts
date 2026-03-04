@@ -240,6 +240,7 @@ class HotelWithStatsDto extends HotelDto {
     roomCount;
     availableRooms;
     occupiedRooms;
+    images;
 }
 exports.HotelWithStatsDto = HotelWithStatsDto;
 __decorate([
@@ -260,6 +261,16 @@ __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], HotelWithStatsDto.prototype, "occupiedRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Hotel images sourced from first 3 room types (populated when withImages=true)',
+        type: [String],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], HotelWithStatsDto.prototype, "images", void 0);
 /**
  * Hotel with room count
  * Returned by hotels.findAll and hotels.findByChain
@@ -292,6 +303,7 @@ class FindHotelsByChainRequestDto {
     city;
     country;
     status;
+    withImages;
 }
 exports.FindHotelsByChainRequestDto = FindHotelsByChainRequestDto;
 __decorate([
@@ -317,6 +329,14 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], FindHotelsByChainRequestDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Include hotel images sourced from the first 3 active room types of each hotel',
+        default: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], FindHotelsByChainRequestDto.prototype, "withImages", void 0);
 /**
  * Paginated response wrapper for hotel list endpoints
  * Used by REST API to return paginated hotel data

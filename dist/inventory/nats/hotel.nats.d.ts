@@ -84,6 +84,7 @@ export declare class HotelWithStatsDto extends HotelDto {
     roomCount?: number;
     availableRooms?: number;
     occupiedRooms?: number;
+    images?: string[];
 }
 /**
  * Hotel with room count
@@ -168,6 +169,7 @@ export declare class FindHotelsByChainRequestDto {
     city?: string;
     country?: string;
     status?: string;
+    withImages?: boolean;
 }
 export type FindHotelsByChainResponse = HotelWithStatsDto[];
 export type FindHotelsByChainNatsResponse = NatsResponse<FindHotelsByChainResponse>;

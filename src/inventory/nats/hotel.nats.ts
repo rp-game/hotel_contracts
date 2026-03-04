@@ -205,6 +205,15 @@ export class HotelWithStatsDto extends HotelDto {
   @IsOptional()
   @IsNumber()
   occupiedRooms?: number;
+
+  @ApiPropertyOptional({
+    description: 'Hotel images sourced from first 3 room types (populated when withImages=true)',
+    type: [String],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  images?: string[];
 }
 
 /**
@@ -324,6 +333,13 @@ export class FindHotelsByChainRequestDto {
   @IsOptional()
   @IsString()
   status?: string;
+
+  @ApiPropertyOptional({
+    description: 'Include hotel images sourced from the first 3 active room types of each hotel',
+    default: false,
+  })
+  @IsOptional()
+  withImages?: boolean;
 }
 
 export type FindHotelsByChainResponse = HotelWithStatsDto[];

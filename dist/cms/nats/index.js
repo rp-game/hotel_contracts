@@ -33,4 +33,5 @@ __exportStar(require("./page.nats"), exports);
 __exportStar(require("./tag.nats"), exports);
 __exportStar(require("./image.nats"), exports);
 __exportStar(require("./collection.nats"), exports);
+__exportStar(require("./organizer-settings.nats"), exports);
 //# sourceMappingURL=index.js.map
