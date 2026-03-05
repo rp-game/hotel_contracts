@@ -50,6 +50,58 @@ export class UpdateOrganizerSettingsBody {
 }
 
 /**
+ * A single section within a page config.
+ */
+export class PageSectionDto {
+  @ApiProperty({ description: 'Unique section identifier', example: 'hero1' })
+  id: string;
+
+  @ApiProperty({ description: 'Section type key from theme', example: 'hero' })
+  type: string;
+
+  @ApiProperty({
+    description: 'Section-specific data/settings',
+    required: false,
+    type: Object,
+    example: { heading: { en: 'Welcome' }, backgroundImage: { url: '/img/hero.jpg' } },
+  })
+  data?: Record<string, any>;
+}
+
+/**
+ * Request body for updating a page config (PUT pages-settings/:name).
+ * Mirrors riptik's PageConfigRequest struct.
+ */
+export class UpdatePageSettingsBody {
+  @ApiProperty({
+    description: 'Page title in multiple languages',
+    required: false,
+    type: Object,
+    example: { en: 'Home', vi: 'Trang chủ' },
+  })
+  title?: Record<string, string>;
+
+  @ApiProperty({
+    description: 'Ordered list of page sections',
+    required: false,
+    type: [PageSectionDto],
+  })
+  sections?: PageSectionDto[];
+}
+
+/**
+ * Request body for updating a menu (PUT menus/:menuType).
+ */
+export class UpdateMenuBody {
+  @ApiProperty({
+    description: 'Ordered list of menu items',
+    type: [Object],
+    example: [{ labels: { en: 'Home' }, type: 'route', url: '/', order: 0, visible: true }],
+  })
+  items: Record<string, any>[];
+}
+
+/**
  * Response wrapper for organizer settings endpoints.
  */
 export class OrganizerSettingsResponse {

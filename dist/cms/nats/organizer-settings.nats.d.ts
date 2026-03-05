@@ -10,6 +10,28 @@ export declare class UpdateOrganizerSettingsBody {
     [key: string]: any;
 }
 /**
+ * A single section within a page config.
+ */
+export declare class PageSectionDto {
+    id: string;
+    type: string;
+    data?: Record<string, any>;
+}
+/**
+ * Request body for updating a page config (PUT pages-settings/:name).
+ * Mirrors riptik's PageConfigRequest struct.
+ */
+export declare class UpdatePageSettingsBody {
+    title?: Record<string, string>;
+    sections?: PageSectionDto[];
+}
+/**
+ * Request body for updating a menu (PUT menus/:menuType).
+ */
+export declare class UpdateMenuBody {
+    items: Record<string, any>[];
+}
+/**
  * Response wrapper for organizer settings endpoints.
  */
 export declare class OrganizerSettingsResponse {

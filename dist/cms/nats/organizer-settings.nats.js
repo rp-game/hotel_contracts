@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrganizerSettingsResponse = exports.UpdateOrganizerSettingsBody = void 0;
+exports.OrganizerSettingsResponse = exports.UpdateMenuBody = exports.UpdatePageSettingsBody = exports.PageSectionDto = exports.UpdateOrganizerSettingsBody = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Request body for updating organizer/webshop settings.
@@ -66,6 +66,73 @@ __decorate([
     }),
     __metadata("design:type", Array)
 ], UpdateOrganizerSettingsBody.prototype, "menus", void 0);
+/**
+ * A single section within a page config.
+ */
+class PageSectionDto {
+    id;
+    type;
+    data;
+}
+exports.PageSectionDto = PageSectionDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Unique section identifier', example: 'hero1' }),
+    __metadata("design:type", String)
+], PageSectionDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Section type key from theme', example: 'hero' }),
+    __metadata("design:type", String)
+], PageSectionDto.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Section-specific data/settings',
+        required: false,
+        type: Object,
+        example: { heading: { en: 'Welcome' }, backgroundImage: { url: '/img/hero.jpg' } },
+    }),
+    __metadata("design:type", Object)
+], PageSectionDto.prototype, "data", void 0);
+/**
+ * Request body for updating a page config (PUT pages-settings/:name).
+ * Mirrors riptik's PageConfigRequest struct.
+ */
+class UpdatePageSettingsBody {
+    title;
+    sections;
+}
+exports.UpdatePageSettingsBody = UpdatePageSettingsBody;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Page title in multiple languages',
+        required: false,
+        type: Object,
+        example: { en: 'Home', vi: 'Trang chủ' },
+    }),
+    __metadata("design:type", Object)
+], UpdatePageSettingsBody.prototype, "title", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Ordered list of page sections',
+        required: false,
+        type: [PageSectionDto],
+    }),
+    __metadata("design:type", Array)
+], UpdatePageSettingsBody.prototype, "sections", void 0);
+/**
+ * Request body for updating a menu (PUT menus/:menuType).
+ */
+class UpdateMenuBody {
+    items;
+}
+exports.UpdateMenuBody = UpdateMenuBody;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Ordered list of menu items',
+        type: [Object],
+        example: [{ labels: { en: 'Home' }, type: 'route', url: '/', order: 0, visible: true }],
+    }),
+    __metadata("design:type", Array)
+], UpdateMenuBody.prototype, "items", void 0);
 /**
  * Response wrapper for organizer settings endpoints.
  */
