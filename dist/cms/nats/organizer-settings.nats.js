@@ -11,6 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrganizerSettingsResponse = exports.UpdateMenuBody = exports.UpdatePageSettingsBody = exports.PageSectionDto = exports.UpdateOrganizerSettingsBody = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
 /**
  * Request body for updating organizer/webshop settings.
  * Performs a shallow merge of top-level keys into existing settings.
@@ -77,10 +79,12 @@ class PageSectionDto {
 exports.PageSectionDto = PageSectionDto;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Unique section identifier', example: 'hero1' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], PageSectionDto.prototype, "id", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Section type key from theme', example: 'hero' }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], PageSectionDto.prototype, "type", void 0);
 __decorate([
@@ -90,6 +94,8 @@ __decorate([
         type: Object,
         example: { heading: { en: 'Welcome' }, backgroundImage: { url: '/img/hero.jpg' } },
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
     __metadata("design:type", Object)
 ], PageSectionDto.prototype, "data", void 0);
 /**
@@ -108,6 +114,8 @@ __decorate([
         type: Object,
         example: { en: 'Home', vi: 'Trang chủ' },
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
     __metadata("design:type", Object)
 ], UpdatePageSettingsBody.prototype, "title", void 0);
 __decorate([
@@ -116,6 +124,10 @@ __decorate([
         required: false,
         type: [PageSectionDto],
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => PageSectionDto),
     __metadata("design:type", Array)
 ], UpdatePageSettingsBody.prototype, "sections", void 0);
 /**
@@ -131,6 +143,7 @@ __decorate([
         type: [Object],
         example: [{ labels: { en: 'Home' }, type: 'route', url: '/', order: 0, visible: true }],
     }),
+    (0, class_validator_1.IsArray)(),
     __metadata("design:type", Array)
 ], UpdateMenuBody.prototype, "items", void 0);
 /**

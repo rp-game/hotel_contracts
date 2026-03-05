@@ -1,4 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString, IsObject, IsArray, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 
 /**
  * Request body for updating organizer/webshop settings.
@@ -54,9 +56,11 @@ export class UpdateOrganizerSettingsBody {
  */
 export class PageSectionDto {
   @ApiProperty({ description: 'Unique section identifier', example: 'hero1' })
+  @IsString()
   id: string;
 
   @ApiProperty({ description: 'Section type key from theme', example: 'hero' })
+  @IsString()
   type: string;
 
   @ApiProperty({
@@ -65,6 +69,8 @@ export class PageSectionDto {
     type: Object,
     example: { heading: { en: 'Welcome' }, backgroundImage: { url: '/img/hero.jpg' } },
   })
+  @IsOptional()
+  @IsObject()
   data?: Record<string, any>;
 }
 
@@ -79,6 +85,8 @@ export class UpdatePageSettingsBody {
     type: Object,
     example: { en: 'Home', vi: 'Trang chủ' },
   })
+  @IsOptional()
+  @IsObject()
   title?: Record<string, string>;
 
   @ApiProperty({
@@ -86,6 +94,10 @@ export class UpdatePageSettingsBody {
     required: false,
     type: [PageSectionDto],
   })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => PageSectionDto)
   sections?: PageSectionDto[];
 }
 
@@ -98,6 +110,7 @@ export class UpdateMenuBody {
     type: [Object],
     example: [{ labels: { en: 'Home' }, type: 'route', url: '/', order: 0, visible: true }],
   })
+  @IsArray()
   items: Record<string, any>[];
 }
 
