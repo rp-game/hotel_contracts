@@ -30,6 +30,8 @@ __decorate([
         required: false,
         example: '550e8400-e29b-41d4-a716-446655440001',
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateOrganizerSettingsBody.prototype, "hotel_id", void 0);
 __decorate([
@@ -42,6 +44,8 @@ __decorate([
             sectionTypes: { hero: { enabled: true }, gallery: { columns: 3 } },
         },
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
     __metadata("design:type", Object)
 ], UpdateOrganizerSettingsBody.prototype, "theme", void 0);
 __decorate([
@@ -54,6 +58,8 @@ __decorate([
             about: { layout: 'full-width' },
         },
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
     __metadata("design:type", Object)
 ], UpdateOrganizerSettingsBody.prototype, "pages", void 0);
 __decorate([
@@ -66,6 +72,8 @@ __decorate([
             { id: 'footer', label: 'Footer Menu', items: [{ label: 'About', url: '/about' }] },
         ],
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
     __metadata("design:type", Array)
 ], UpdateOrganizerSettingsBody.prototype, "menus", void 0);
 /**

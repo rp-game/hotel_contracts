@@ -12,6 +12,8 @@ export class UpdateOrganizerSettingsBody {
     required: false,
     example: '550e8400-e29b-41d4-a716-446655440001',
   })
+  @IsOptional()
+  @IsString()
   hotel_id?: string;
 
   @ApiProperty({
@@ -23,6 +25,8 @@ export class UpdateOrganizerSettingsBody {
       sectionTypes: { hero: { enabled: true }, gallery: { columns: 3 } },
     },
   })
+  @IsOptional()
+  @IsObject()
   theme?: Record<string, any>;
 
   @ApiProperty({
@@ -34,6 +38,8 @@ export class UpdateOrganizerSettingsBody {
       about: { layout: 'full-width' },
     },
   })
+  @IsOptional()
+  @IsObject()
   pages?: Record<string, any>;
 
   @ApiProperty({
@@ -45,6 +51,8 @@ export class UpdateOrganizerSettingsBody {
       { id: 'footer', label: 'Footer Menu', items: [{ label: 'About', url: '/about' }] },
     ],
   })
+  @IsOptional()
+  @IsArray()
   menus?: Record<string, any>[];
 
   // Allow any additional top-level keys (dynamic JSONB)
