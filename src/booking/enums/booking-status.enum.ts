@@ -43,4 +43,9 @@ export enum BookingStatus {
    * Booking is on hold (temporary)
    */
   ON_HOLD = 'ON_HOLD',
+
+  /**
+   * Booking created via webshop, awaiting online payment
+   */
+  PENDING_PAYMENT = 'PENDING_PAYMENT',
 }

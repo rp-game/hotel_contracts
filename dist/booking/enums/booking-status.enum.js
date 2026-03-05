@@ -40,5 +40,9 @@ var BookingStatus;
      * Booking is on hold (temporary)
      */
     BookingStatus["ON_HOLD"] = "ON_HOLD";
+    /**
+     * Booking created via webshop, awaiting online payment
+     */
+    BookingStatus["PENDING_PAYMENT"] = "PENDING_PAYMENT";
 })(BookingStatus || (exports.BookingStatus = BookingStatus = {}));
 //# sourceMappingURL=booking-status.enum.js.map
