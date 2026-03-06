@@ -681,6 +681,7 @@ export declare class TestPaymentGatewayNatsRequest {
     currency: string;
     tenantId: string;
     hotelId?: string;
+    chainId?: string;
 }
 /**
  * Response data for gateway.test pattern
