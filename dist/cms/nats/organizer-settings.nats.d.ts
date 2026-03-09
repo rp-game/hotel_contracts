@@ -16,6 +16,7 @@ export declare class PageSectionDto {
     id: string;
     type: string;
     data?: Record<string, any>;
+    visible?: boolean;
 }
 /**
  * Request body for updating a page config (PUT pages-settings/:name).

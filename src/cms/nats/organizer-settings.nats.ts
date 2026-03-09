@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, IsObject, IsArray, ValidateNested } from 'class-validator';
+import { IsOptional, IsString, IsObject, IsArray, ValidateNested, IsBoolean } from 'class-validator';
 import { Type } from 'class-transformer';
 
 /**
@@ -80,6 +80,15 @@ export class PageSectionDto {
   @IsOptional()
   @IsObject()
   data?: Record<string, any>;
+
+  @ApiProperty({
+    description: 'Section visibility (default: true). Set to false to hide section without deleting.',
+    required: false,
+    example: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  visible?: boolean;
 }
 
 /**

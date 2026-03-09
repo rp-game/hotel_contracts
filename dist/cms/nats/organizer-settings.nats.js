@@ -83,6 +83,7 @@ class PageSectionDto {
     id;
     type;
     data;
+    visible;
 }
 exports.PageSectionDto = PageSectionDto;
 __decorate([
@@ -106,6 +107,16 @@ __decorate([
     (0, class_validator_1.IsObject)(),
     __metadata("design:type", Object)
 ], PageSectionDto.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Section visibility (default: true). Set to false to hide section without deleting.',
+        required: false,
+        example: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], PageSectionDto.prototype, "visible", void 0);
 /**
  * Request body for updating a page config (PUT pages-settings/:name).
  * Mirrors riptik's PageConfigRequest struct.

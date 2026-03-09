@@ -636,7 +636,6 @@ class TestPaymentGatewayNatsRequest {
     currency;
     tenantId;
     hotelId;
-    chainId;
 }
 exports.TestPaymentGatewayNatsRequest = TestPaymentGatewayNatsRequest;
 __decorate([
@@ -659,10 +658,6 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (optional)' }),
     __metadata("design:type", String)
 ], TestPaymentGatewayNatsRequest.prototype, "hotelId", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Chain ID (optional, for inheritance resolution)' }),
-    __metadata("design:type", String)
-], TestPaymentGatewayNatsRequest.prototype, "chainId", void 0);
 /**
  * Response data for gateway.test pattern
  * Contains test result details
