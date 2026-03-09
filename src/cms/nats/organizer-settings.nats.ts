@@ -132,6 +132,37 @@ export class UpdateMenuBody {
 }
 
 /**
+ * Request body for upserting a custom domain.
+ */
+export class UpdateDomainBody {
+  @ApiProperty({ description: 'Custom domain name', example: 'booking.myhotel.com' })
+  @IsString()
+  domain_name: string;
+
+  @ApiProperty({ description: 'Domain type', required: false, example: 'organizer' })
+  @IsOptional()
+  @IsString()
+  domain_type?: string;
+}
+
+/**
+ * Domain info returned from webshop.
+ */
+export class DomainInfoDto {
+  @ApiProperty({ example: 'booking.myhotel.com' })
+  domain_name: string;
+
+  @ApiProperty({ example: 'organizer' })
+  domain_type: string;
+
+  @ApiProperty({ example: false })
+  verified: boolean;
+
+  @ApiProperty({ example: true })
+  ssl_enabled: boolean;
+}
+
+/**
  * Response wrapper for organizer settings endpoints.
  */
 export class OrganizerSettingsResponse {

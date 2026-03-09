@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrganizerSettingsResponse = exports.UpdateMenuBody = exports.UpdatePageSettingsBody = exports.PageSectionDto = exports.UpdateOrganizerSettingsBody = void 0;
+exports.OrganizerSettingsResponse = exports.DomainInfoDto = exports.UpdateDomainBody = exports.UpdateMenuBody = exports.UpdatePageSettingsBody = exports.PageSectionDto = exports.UpdateOrganizerSettingsBody = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -165,6 +165,51 @@ __decorate([
     (0, class_validator_1.IsArray)(),
     __metadata("design:type", Array)
 ], UpdateMenuBody.prototype, "items", void 0);
+/**
+ * Request body for upserting a custom domain.
+ */
+class UpdateDomainBody {
+    domain_name;
+    domain_type;
+}
+exports.UpdateDomainBody = UpdateDomainBody;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Custom domain name', example: 'booking.myhotel.com' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateDomainBody.prototype, "domain_name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Domain type', required: false, example: 'organizer' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateDomainBody.prototype, "domain_type", void 0);
+/**
+ * Domain info returned from webshop.
+ */
+class DomainInfoDto {
+    domain_name;
+    domain_type;
+    verified;
+    ssl_enabled;
+}
+exports.DomainInfoDto = DomainInfoDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'booking.myhotel.com' }),
+    __metadata("design:type", String)
+], DomainInfoDto.prototype, "domain_name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'organizer' }),
+    __metadata("design:type", String)
+], DomainInfoDto.prototype, "domain_type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: false }),
+    __metadata("design:type", Boolean)
+], DomainInfoDto.prototype, "verified", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: true }),
+    __metadata("design:type", Boolean)
+], DomainInfoDto.prototype, "ssl_enabled", void 0);
 /**
  * Response wrapper for organizer settings endpoints.
  */

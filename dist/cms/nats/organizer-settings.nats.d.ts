@@ -33,6 +33,22 @@ export declare class UpdateMenuBody {
     items: Record<string, any>[];
 }
 /**
+ * Request body for upserting a custom domain.
+ */
+export declare class UpdateDomainBody {
+    domain_name: string;
+    domain_type?: string;
+}
+/**
+ * Domain info returned from webshop.
+ */
+export declare class DomainInfoDto {
+    domain_name: string;
+    domain_type: string;
+    verified: boolean;
+    ssl_enabled: boolean;
+}
+/**
  * Response wrapper for organizer settings endpoints.
  */
 export declare class OrganizerSettingsResponse {
