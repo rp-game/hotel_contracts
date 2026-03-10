@@ -375,6 +375,9 @@ export interface ScheduleRoomMaintenanceRequest {
     description?: string;
     estimatedDuration?: number;
     scheduledTime?: string;
+    priority?: string;
+    hotelId?: string;
+    tenantId?: string;
 }
 export interface MaintenanceScheduleResponse {
     success: boolean;
