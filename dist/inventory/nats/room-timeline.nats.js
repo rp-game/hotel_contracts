@@ -37,7 +37,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnalyticsComparisonResponseDto = exports.ComprehensiveAnalyticsResponseDto = exports.OccupancyForecastDto = exports.TopPerformingRoomDto = exports.RevenueBreakdownItemDto = exports.HourlyOccupancyDto = exports.RoomTypePerformanceDto = exports.DailyTrendDto = exports.RoomSuggestionDto = exports.RoomSuggestionNextBookingDto = exports.RoomSuggestionFeaturesDto = exports.GetOptimizedRoomAssignmentRequest = exports.RoomBookingAvailability = exports.ConflictInfo = exports.RoomTimelineItem = exports.TimelineEvent = void 0;
+exports.UpdateRoomSettingsRequest = exports.TimelinePreferencesContract = exports.AutoStatusTransitionsDto = exports.NotificationSettingsDto = exports.ViewPreferencesDto = exports.WorkingHoursByDepartmentDto = exports.WorkingHoursDto = exports.CleaningTimesDto = exports.AnalyticsComparisonResponseDto = exports.ComprehensiveAnalyticsResponseDto = exports.OccupancyForecastDto = exports.TopPerformingRoomDto = exports.RevenueBreakdownItemDto = exports.HourlyOccupancyDto = exports.RoomTypePerformanceDto = exports.DailyTrendDto = exports.RoomSuggestionDto = exports.RoomSuggestionNextBookingDto = exports.RoomSuggestionFeaturesDto = exports.GetOptimizedRoomAssignmentRequest = exports.RoomBookingAvailability = exports.ConflictInfo = exports.RoomTimelineItem = exports.TimelineEvent = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -759,4 +759,254 @@ __decorate([
     }),
     __metadata("design:type", Object)
 ], AnalyticsComparisonResponseDto.prototype, "growth", void 0);
+class CleaningTimesDto {
+    default;
+    checkout;
+    maintenance;
+    deep;
+    inspection;
+}
+exports.CleaningTimesDto = CleaningTimesDto;
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], CleaningTimesDto.prototype, "default", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], CleaningTimesDto.prototype, "checkout", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], CleaningTimesDto.prototype, "maintenance", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], CleaningTimesDto.prototype, "deep", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], CleaningTimesDto.prototype, "inspection", void 0);
+class WorkingHoursDto {
+    start;
+    end;
+}
+exports.WorkingHoursDto = WorkingHoursDto;
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], WorkingHoursDto.prototype, "start", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], WorkingHoursDto.prototype, "end", void 0);
+class WorkingHoursByDepartmentDto {
+    reception;
+    housekeeping;
+    maintenance;
+}
+exports.WorkingHoursByDepartmentDto = WorkingHoursByDepartmentDto;
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => WorkingHoursDto),
+    (0, swagger_1.ApiPropertyOptional)({ type: WorkingHoursDto }),
+    __metadata("design:type", WorkingHoursDto)
+], WorkingHoursByDepartmentDto.prototype, "reception", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => WorkingHoursDto),
+    (0, swagger_1.ApiPropertyOptional)({ type: WorkingHoursDto }),
+    __metadata("design:type", WorkingHoursDto)
+], WorkingHoursByDepartmentDto.prototype, "housekeeping", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => WorkingHoursDto),
+    (0, swagger_1.ApiPropertyOptional)({ type: WorkingHoursDto }),
+    __metadata("design:type", WorkingHoursDto)
+], WorkingHoursByDepartmentDto.prototype, "maintenance", void 0);
+class ViewPreferencesDto {
+    defaultView;
+    showGuestNames;
+    showCleaningTimes;
+    showUnassignedBookings;
+    showRoomTypeCapacity;
+}
+exports.ViewPreferencesDto = ViewPreferencesDto;
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], ViewPreferencesDto.prototype, "defaultView", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Boolean)
+], ViewPreferencesDto.prototype, "showGuestNames", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Boolean)
+], ViewPreferencesDto.prototype, "showCleaningTimes", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Boolean)
+], ViewPreferencesDto.prototype, "showUnassignedBookings", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Boolean)
+], ViewPreferencesDto.prototype, "showRoomTypeCapacity", void 0);
+class NotificationSettingsDto {
+    enableRealTime;
+    occupancyThreshold;
+    maintenanceAlerts;
+    checkoutReminders;
+}
+exports.NotificationSettingsDto = NotificationSettingsDto;
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Boolean)
+], NotificationSettingsDto.prototype, "enableRealTime", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], NotificationSettingsDto.prototype, "occupancyThreshold", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Boolean)
+], NotificationSettingsDto.prototype, "maintenanceAlerts", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Boolean)
+], NotificationSettingsDto.prototype, "checkoutReminders", void 0);
+class AutoStatusTransitionsDto {
+    enabled;
+    checkoutToCleaningDelay;
+    cleaningToAvailableAuto;
+}
+exports.AutoStatusTransitionsDto = AutoStatusTransitionsDto;
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Boolean)
+], AutoStatusTransitionsDto.prototype, "enabled", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], AutoStatusTransitionsDto.prototype, "checkoutToCleaningDelay", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Boolean)
+], AutoStatusTransitionsDto.prototype, "cleaningToAvailableAuto", void 0);
+class TimelinePreferencesContract {
+    cleaningTimes;
+    statusColors;
+    workingHours;
+    workingHoursByDepartment;
+    viewPreferences;
+    notificationSettings;
+    autoStatusTransitions;
+}
+exports.TimelinePreferencesContract = TimelinePreferencesContract;
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => CleaningTimesDto),
+    (0, swagger_1.ApiPropertyOptional)({ type: CleaningTimesDto }),
+    __metadata("design:type", CleaningTimesDto)
+], TimelinePreferencesContract.prototype, "cleaningTimes", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Object }),
+    __metadata("design:type", Object)
+], TimelinePreferencesContract.prototype, "statusColors", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => WorkingHoursDto),
+    (0, swagger_1.ApiPropertyOptional)({ type: WorkingHoursDto }),
+    __metadata("design:type", WorkingHoursDto)
+], TimelinePreferencesContract.prototype, "workingHours", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => WorkingHoursByDepartmentDto),
+    (0, swagger_1.ApiPropertyOptional)({ type: WorkingHoursByDepartmentDto }),
+    __metadata("design:type", WorkingHoursByDepartmentDto)
+], TimelinePreferencesContract.prototype, "workingHoursByDepartment", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => ViewPreferencesDto),
+    (0, swagger_1.ApiPropertyOptional)({ type: ViewPreferencesDto }),
+    __metadata("design:type", ViewPreferencesDto)
+], TimelinePreferencesContract.prototype, "viewPreferences", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => NotificationSettingsDto),
+    (0, swagger_1.ApiPropertyOptional)({ type: NotificationSettingsDto }),
+    __metadata("design:type", NotificationSettingsDto)
+], TimelinePreferencesContract.prototype, "notificationSettings", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => AutoStatusTransitionsDto),
+    (0, swagger_1.ApiPropertyOptional)({ type: AutoStatusTransitionsDto }),
+    __metadata("design:type", AutoStatusTransitionsDto)
+], TimelinePreferencesContract.prototype, "autoStatusTransitions", void 0);
+/**
+ * Update Room Settings Request
+ * Pattern: rooms.settings.update
+ */
+class UpdateRoomSettingsRequest {
+    hotelId;
+    settings;
+}
+exports.UpdateRoomSettingsRequest = UpdateRoomSettingsRequest;
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID', format: 'uuid' }),
+    __metadata("design:type", String)
+], UpdateRoomSettingsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => TimelinePreferencesContract),
+    (0, swagger_1.ApiProperty)({ type: () => TimelinePreferencesContract, description: 'Timeline preferences configuration' }),
+    __metadata("design:type", TimelinePreferencesContract)
+], UpdateRoomSettingsRequest.prototype, "settings", void 0);
 //# sourceMappingURL=room-timeline.nats.js.map

@@ -745,13 +745,56 @@ export interface RoomSettings {
 }
 export type GetRoomSettingsResponse = RoomSettings;
 export type GetRoomSettingsNatsResponse = NatsResponse<GetRoomSettingsResponse>;
+export declare class CleaningTimesDto {
+    default?: number;
+    checkout?: number;
+    maintenance?: number;
+    deep?: number;
+    inspection?: number;
+}
+export declare class WorkingHoursDto {
+    start: string;
+    end: string;
+}
+export declare class WorkingHoursByDepartmentDto {
+    reception?: WorkingHoursDto;
+    housekeeping?: WorkingHoursDto;
+    maintenance?: WorkingHoursDto;
+}
+export declare class ViewPreferencesDto {
+    defaultView?: string;
+    showGuestNames?: boolean;
+    showCleaningTimes?: boolean;
+    showUnassignedBookings?: boolean;
+    showRoomTypeCapacity?: boolean;
+}
+export declare class NotificationSettingsDto {
+    enableRealTime?: boolean;
+    occupancyThreshold?: number;
+    maintenanceAlerts?: boolean;
+    checkoutReminders?: boolean;
+}
+export declare class AutoStatusTransitionsDto {
+    enabled?: boolean;
+    checkoutToCleaningDelay?: number;
+    cleaningToAvailableAuto?: boolean;
+}
+export declare class TimelinePreferencesContract implements TimelinePreferences {
+    cleaningTimes?: CleaningTimesDto;
+    statusColors?: Record<string, string>;
+    workingHours?: WorkingHoursDto;
+    workingHoursByDepartment?: WorkingHoursByDepartmentDto;
+    viewPreferences?: ViewPreferencesDto;
+    notificationSettings?: NotificationSettingsDto;
+    autoStatusTransitions?: AutoStatusTransitionsDto;
+}
 /**
  * Update Room Settings Request
  * Pattern: rooms.settings.update
  */
-export interface UpdateRoomSettingsRequest {
+export declare class UpdateRoomSettingsRequest {
     hotelId: string;
-    settings: TimelinePreferences;
+    settings: TimelinePreferencesContract;
 }
 export type UpdateRoomSettingsResponse = RoomSettings;
 export type UpdateRoomSettingsNatsResponse = NatsResponse<UpdateRoomSettingsResponse>;

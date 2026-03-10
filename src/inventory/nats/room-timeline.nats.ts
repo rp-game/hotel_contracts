@@ -1047,13 +1047,69 @@ export interface RoomSettings {
 export type GetRoomSettingsResponse = RoomSettings;
 export type GetRoomSettingsNatsResponse = NatsResponse<GetRoomSettingsResponse>;
 
+export class CleaningTimesDto {
+  @IsOptional() @IsNumber() @ApiPropertyOptional() default?: number;
+  @IsOptional() @IsNumber() @ApiPropertyOptional() checkout?: number;
+  @IsOptional() @IsNumber() @ApiPropertyOptional() maintenance?: number;
+  @IsOptional() @IsNumber() @ApiPropertyOptional() deep?: number;
+  @IsOptional() @IsNumber() @ApiPropertyOptional() inspection?: number;
+}
+
+export class WorkingHoursDto {
+  @IsString() @ApiProperty() start: string;
+  @IsString() @ApiProperty() end: string;
+}
+
+export class WorkingHoursByDepartmentDto {
+  @IsOptional() @ValidateNested() @Type(() => WorkingHoursDto) @ApiPropertyOptional({ type: WorkingHoursDto }) reception?: WorkingHoursDto;
+  @IsOptional() @ValidateNested() @Type(() => WorkingHoursDto) @ApiPropertyOptional({ type: WorkingHoursDto }) housekeeping?: WorkingHoursDto;
+  @IsOptional() @ValidateNested() @Type(() => WorkingHoursDto) @ApiPropertyOptional({ type: WorkingHoursDto }) maintenance?: WorkingHoursDto;
+}
+
+export class ViewPreferencesDto {
+  @IsOptional() @IsString() @ApiPropertyOptional() defaultView?: string;
+  @IsOptional() @IsBoolean() @ApiPropertyOptional() showGuestNames?: boolean;
+  @IsOptional() @IsBoolean() @ApiPropertyOptional() showCleaningTimes?: boolean;
+  @IsOptional() @IsBoolean() @ApiPropertyOptional() showUnassignedBookings?: boolean;
+  @IsOptional() @IsBoolean() @ApiPropertyOptional() showRoomTypeCapacity?: boolean;
+}
+
+export class NotificationSettingsDto {
+  @IsOptional() @IsBoolean() @ApiPropertyOptional() enableRealTime?: boolean;
+  @IsOptional() @IsNumber() @ApiPropertyOptional() occupancyThreshold?: number;
+  @IsOptional() @IsBoolean() @ApiPropertyOptional() maintenanceAlerts?: boolean;
+  @IsOptional() @IsBoolean() @ApiPropertyOptional() checkoutReminders?: boolean;
+}
+
+export class AutoStatusTransitionsDto {
+  @IsOptional() @IsBoolean() @ApiPropertyOptional() enabled?: boolean;
+  @IsOptional() @IsNumber() @ApiPropertyOptional() checkoutToCleaningDelay?: number;
+  @IsOptional() @IsBoolean() @ApiPropertyOptional() cleaningToAvailableAuto?: boolean;
+}
+
+export class TimelinePreferencesContract implements TimelinePreferences {
+  @IsOptional() @ValidateNested() @Type(() => CleaningTimesDto) @ApiPropertyOptional({ type: CleaningTimesDto }) cleaningTimes?: CleaningTimesDto;
+  @IsOptional() @ApiPropertyOptional({ type: Object }) statusColors?: Record<string, string>;
+  @IsOptional() @ValidateNested() @Type(() => WorkingHoursDto) @ApiPropertyOptional({ type: WorkingHoursDto }) workingHours?: WorkingHoursDto;
+  @IsOptional() @ValidateNested() @Type(() => WorkingHoursByDepartmentDto) @ApiPropertyOptional({ type: WorkingHoursByDepartmentDto }) workingHoursByDepartment?: WorkingHoursByDepartmentDto;
+  @IsOptional() @ValidateNested() @Type(() => ViewPreferencesDto) @ApiPropertyOptional({ type: ViewPreferencesDto }) viewPreferences?: ViewPreferencesDto;
+  @IsOptional() @ValidateNested() @Type(() => NotificationSettingsDto) @ApiPropertyOptional({ type: NotificationSettingsDto }) notificationSettings?: NotificationSettingsDto;
+  @IsOptional() @ValidateNested() @Type(() => AutoStatusTransitionsDto) @ApiPropertyOptional({ type: AutoStatusTransitionsDto }) autoStatusTransitions?: AutoStatusTransitionsDto;
+}
+
 /**
  * Update Room Settings Request
  * Pattern: rooms.settings.update
  */
-export interface UpdateRoomSettingsRequest {
+export class UpdateRoomSettingsRequest {
+  @IsString()
+  @ApiProperty({ description: 'Hotel ID', format: 'uuid' })
   hotelId: string;
-  settings: TimelinePreferences;
+
+  @ValidateNested()
+  @Type(() => TimelinePreferencesContract)
+  @ApiProperty({ type: () => TimelinePreferencesContract, description: 'Timeline preferences configuration' })
+  settings: TimelinePreferencesContract;
 }
 
 export type UpdateRoomSettingsResponse = RoomSettings;
