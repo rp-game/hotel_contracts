@@ -66,6 +66,7 @@ export declare class RoomTypeSearchResult {
     numberOfBeds: number;
     amenities: string[];
     images: string[];
+    basePrice: number;
     availableCount: number;
     ratePlans: RatePlanPricingDetail[];
 }

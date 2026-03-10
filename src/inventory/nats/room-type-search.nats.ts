@@ -275,6 +275,12 @@ export class RoomTypeSearchResult {
   images: string[];
 
   @ApiProperty({
+    description: 'Base price per night (fallback when no rate plans)',
+    example: 1000000,
+  })
+  basePrice: number;
+
+  @ApiProperty({
     description: 'Number of rooms available for the requested time range',
     example: 3,
   })

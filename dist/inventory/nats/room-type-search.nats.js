@@ -312,6 +312,7 @@ class RoomTypeSearchResult {
     numberOfBeds;
     amenities;
     images;
+    basePrice;
     availableCount;
     ratePlans;
 }
@@ -363,6 +364,13 @@ __decorate([
     }),
     __metadata("design:type", Array)
 ], RoomTypeSearchResult.prototype, "images", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Base price per night (fallback when no rate plans)',
+        example: 1000000,
+    }),
+    __metadata("design:type", Number)
+], RoomTypeSearchResult.prototype, "basePrice", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Number of rooms available for the requested time range',
