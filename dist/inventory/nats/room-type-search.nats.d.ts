@@ -17,7 +17,8 @@ export declare enum SearchBookingType {
 }
 export declare class SearchRoomTypesRequest {
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
+    hotelIds?: string[];
     bookingType: SearchBookingType;
     startDate?: string;
     endDate?: string;
@@ -56,6 +57,9 @@ export declare class RatePlanPricingDetail {
 }
 export declare class RoomTypeSearchResult {
     id: string;
+    hotelId?: string;
+    hotelName?: string;
+    hotelCity?: string;
     name: string;
     description: string | null;
     capacity: number;

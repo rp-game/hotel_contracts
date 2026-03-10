@@ -29,4 +29,5 @@ __exportStar(require("./room-move-events.nats"), exports);
 __exportStar(require("./room-status.nats"), exports);
 __exportStar(require("./room-type-search.nats"), exports);
 __exportStar(require("./room-type-list.nats"), exports);
+__exportStar(require("./province.nats"), exports);
 //# sourceMappingURL=index.js.map

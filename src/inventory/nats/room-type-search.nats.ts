@@ -20,6 +20,7 @@ import {
   IsEnum,
   IsInt,
   Min,
+  ValidateIf,
 } from 'class-validator';
 import { NatsResponse } from '../../common';
 
@@ -38,9 +39,20 @@ export class SearchRoomTypesRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty({ description: 'Hotel ID', example: 'uuid' })
+  @ApiPropertyOptional({ description: 'Hotel ID (single hotel search)', example: 'uuid' })
+  @IsOptional()
+  @ValidateIf((o) => o.hotelId !== undefined && o.hotelId !== '')
   @IsUUID()
-  hotelId: string;
+  hotelId?: string;
+
+  @ApiPropertyOptional({
+    description: 'Hotel IDs (multi-hotel / chain search)',
+    type: [String],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsUUID('4', { each: true })
+  hotelIds?: string[];
 
   @ApiProperty({
     description: 'Booking type',
@@ -227,6 +239,15 @@ export class RatePlanPricingDetail {
 export class RoomTypeSearchResult {
   @ApiProperty({ description: 'Room type ID', example: 'uuid' })
   id: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID (populated in multi-hotel search)' })
+  hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel name (populated in multi-hotel search)' })
+  hotelName?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel city (populated in multi-hotel search)' })
+  hotelCity?: string;
 
   @ApiProperty({ description: 'Room type name', example: 'Deluxe Room' })
   name: string;

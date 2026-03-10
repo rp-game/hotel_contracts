@@ -13,4 +13,5 @@ export * from './room-move-events.nats';
 export * from './room-status.nats';
 export * from './room-type-search.nats';
 export * from './room-type-list.nats';
+export * from './province.nats';
 //# sourceMappingURL=index.d.ts.map

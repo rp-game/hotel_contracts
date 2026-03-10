@@ -35,6 +35,7 @@ var SearchBookingType;
 class SearchRoomTypesRequest {
     tenantId;
     hotelId;
+    hotelIds;
     bookingType;
     // --- OVERNIGHT ---
     startDate;
@@ -57,10 +58,22 @@ __decorate([
     __metadata("design:type", String)
 ], SearchRoomTypesRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID', example: 'uuid' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (single hotel search)', example: 'uuid' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateIf)((o) => o.hotelId !== undefined && o.hotelId !== ''),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], SearchRoomTypesRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Hotel IDs (multi-hotel / chain search)',
+        type: [String],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsUUID)('4', { each: true }),
+    __metadata("design:type", Array)
+], SearchRoomTypesRequest.prototype, "hotelIds", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Booking type',
@@ -290,6 +303,9 @@ __decorate([
 ], RatePlanPricingDetail.prototype, "breakdown", void 0);
 class RoomTypeSearchResult {
     id;
+    hotelId;
+    hotelName;
+    hotelCity;
     name;
     description;
     capacity;
@@ -304,6 +320,18 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Room type ID', example: 'uuid' }),
     __metadata("design:type", String)
 ], RoomTypeSearchResult.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (populated in multi-hotel search)' }),
+    __metadata("design:type", String)
+], RoomTypeSearchResult.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel name (populated in multi-hotel search)' }),
+    __metadata("design:type", String)
+], RoomTypeSearchResult.prototype, "hotelName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel city (populated in multi-hotel search)' }),
+    __metadata("design:type", String)
+], RoomTypeSearchResult.prototype, "hotelCity", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Room type name', example: 'Deluxe Room' }),
     __metadata("design:type", String)
