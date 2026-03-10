@@ -584,7 +584,8 @@ export interface ScheduleRoomMaintenanceRequest {
   scheduledDate: string; // ISO datetime string
   type: string; // Maintenance type (ROUTINE, REPAIR, DEEP_CLEAN, INSPECTION)
   description?: string;
-  [key: string]: unknown; // Allow additional properties
+  estimatedDuration?: number;
+  scheduledTime?: string;
 }
 
 export interface MaintenanceScheduleResponse {

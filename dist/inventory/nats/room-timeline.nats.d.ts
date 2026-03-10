@@ -373,7 +373,8 @@ export interface ScheduleRoomMaintenanceRequest {
     scheduledDate: string;
     type: string;
     description?: string;
-    [key: string]: unknown;
+    estimatedDuration?: number;
+    scheduledTime?: string;
 }
 export interface MaintenanceScheduleResponse {
     success: boolean;
