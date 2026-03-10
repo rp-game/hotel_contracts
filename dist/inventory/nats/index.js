@@ -30,4 +30,5 @@ __exportStar(require("./room-status.nats"), exports);
 __exportStar(require("./room-type-search.nats"), exports);
 __exportStar(require("./room-type-list.nats"), exports);
 __exportStar(require("./province.nats"), exports);
+__exportStar(require("./hotel-search.nats"), exports);
 //# sourceMappingURL=index.js.map

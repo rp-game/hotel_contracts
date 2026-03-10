@@ -14,4 +14,5 @@ export * from './room-status.nats';
 export * from './room-type-search.nats';
 export * from './room-type-list.nats';
 export * from './province.nats';
+export * from './hotel-search.nats';
 //# sourceMappingURL=index.d.ts.map
