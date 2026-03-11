@@ -1,6 +1,0 @@
-export enum AchievementCategory {
-  EFFICIENCY = 'EFFICIENCY',
-  QUALITY = 'QUALITY',
-  TEAMWORK = 'TEAMWORK',
-  PUNCTUALITY = 'PUNCTUALITY',
-}

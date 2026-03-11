@@ -1,2 +1,1 @@
-export { RoomMoveStatus } from './room-move-status.enum';
-export { RoomMovePriority } from './room-move-priority.enum';
+export { RoomMovePriority, RoomMoveStatus } from './room-move.enum';

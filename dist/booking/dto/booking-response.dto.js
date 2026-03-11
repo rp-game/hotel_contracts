@@ -11,9 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookingResponseDto = exports.FolioItemDto = exports.BookingServiceResponseDto = exports.BookingPaymentResponseDto = exports.BookingGuestResponseDto = exports.BookingRoomResponseDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
-const booking_status_enum_1 = require("../enums/booking-status.enum");
-const booking_source_enum_1 = require("../enums/booking-source.enum");
-const payment_status_enum_1 = require("../enums/payment-status.enum");
+const booking_enum_1 = require("../enums/booking.enum");
 class BookingRoomResponseDto {
     id;
     roomTypeId;
@@ -309,11 +307,11 @@ __decorate([
     __metadata("design:type", String)
 ], BookingResponseDto.prototype, "assignmentStatus", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Booking status', enum: booking_status_enum_1.BookingStatus }),
+    (0, swagger_1.ApiProperty)({ description: 'Booking status', enum: booking_enum_1.BookingStatus }),
     __metadata("design:type", String)
 ], BookingResponseDto.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Booking source', enum: booking_source_enum_1.BookingSource }),
+    (0, swagger_1.ApiProperty)({ description: 'Booking source', enum: booking_enum_1.BookingSource }),
     __metadata("design:type", String)
 ], BookingResponseDto.prototype, "source", void 0);
 __decorate([
@@ -345,7 +343,7 @@ __decorate([
     __metadata("design:type", Number)
 ], BookingResponseDto.prototype, "paidAmount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Payment status', enum: payment_status_enum_1.PaymentStatus }),
+    (0, swagger_1.ApiProperty)({ description: 'Payment status', enum: booking_enum_1.PaymentStatus }),
     __metadata("design:type", String)
 ], BookingResponseDto.prototype, "paymentStatus", void 0);
 __decorate([

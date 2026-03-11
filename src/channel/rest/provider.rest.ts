@@ -7,7 +7,7 @@
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsEnum, IsOptional, IsBoolean, IsObject, IsArray, IsNumber } from 'class-validator';
-import { ProviderType } from '../enums/provider-type.enum';
+import { ProviderType } from '../enums/channel.enum';
 import { ChainConfigurationDto } from '../types/chain-config.types';
 
 /**

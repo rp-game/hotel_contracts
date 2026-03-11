@@ -1,7 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { BookingStatus } from '../enums/booking-status.enum';
-import { BookingSource } from '../enums/booking-source.enum';
-import { PaymentStatus } from '../enums/payment-status.enum';
+import { BookingStatus, BookingSource, PaymentStatus } from '../enums/booking.enum';
 
 export class BookingRoomResponseDto {
   @ApiProperty({ description: 'Room ID' })

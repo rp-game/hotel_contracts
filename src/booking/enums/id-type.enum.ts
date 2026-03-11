@@ -1,5 +1,0 @@
-export enum IdType {
-  PASSPORT = 'PASSPORT',
-  CITIZEN_ID = 'CITIZEN_ID',
-  DRIVING_LICENSE = 'DRIVING_LICENSE',
-}

@@ -13,7 +13,7 @@ exports.PerformanceDataDto = exports.PerformanceRankDto = exports.AchievementDto
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
-const achievement_enum_1 = require("../enums/achievement.enum");
+const user_enum_1 = require("../enums/user.enum");
 class PerformanceMetricsDto {
     period;
     tasksCompleted;
@@ -100,8 +100,8 @@ __decorate([
     __metadata("design:type", String)
 ], AchievementDto.prototype, "icon", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Achievement category', enum: achievement_enum_1.AchievementCategory }),
-    (0, class_validator_1.IsEnum)(achievement_enum_1.AchievementCategory),
+    (0, swagger_1.ApiProperty)({ description: 'Achievement category', enum: user_enum_1.AchievementCategory }),
+    (0, class_validator_1.IsEnum)(user_enum_1.AchievementCategory),
     __metadata("design:type", String)
 ], AchievementDto.prototype, "category", void 0);
 class PerformanceRankDto {

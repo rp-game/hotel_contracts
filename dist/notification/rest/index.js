@@ -16,4 +16,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./mark-all-read.dto"), exports);
 __exportStar(require("./unregister-device.dto"), exports);
+__exportStar(require("./register-device.dto"), exports);
+__exportStar(require("./notification-list.dto"), exports);
 //# sourceMappingURL=index.js.map

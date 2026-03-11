@@ -17,7 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AchievementCategory = exports.PerformanceDataDto = exports.PerformanceRankDto = exports.AchievementDto = exports.PerformanceMetricsDto = exports.ChangePasswordPayload = exports.GetStaffSchedulePayload = exports.ShiftStatus = exports.ShiftType = exports.StaffScheduleResponseDto = exports.StaffScheduleRequestDto = exports.ShiftScheduleDto = exports.UploadAvatarPayload = exports.UploadAvatarFilePayload = exports.AvatarUploadResponseDto = exports.ChangePasswordResponseDto = exports.ChangePasswordDto = exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
-const feedback_enum_1 = require("../enums/feedback.enum");
+const user_enum_1 = require("../enums/user.enum");
 // ============= UNIFIED DTOs - Re-exported from REST =============
 // CreateStaffDto and UpdateStaffStatusDto are imported above and used for BOTH REST and NATS
 // This ensures ONE source of truth for staff creation/update operations
@@ -426,9 +426,9 @@ __decorate([
 var feedback_dto_1 = require("../rest/feedback.dto");
 Object.defineProperty(exports, "FeedbackDto", { enumerable: true, get: function () { return feedback_dto_1.FeedbackDto; } });
 Object.defineProperty(exports, "FeedbackResponseDto", { enumerable: true, get: function () { return feedback_dto_1.FeedbackResponseDto; } });
-var feedback_enum_2 = require("../enums/feedback.enum");
-Object.defineProperty(exports, "FeedbackType", { enumerable: true, get: function () { return feedback_enum_2.FeedbackType; } });
-Object.defineProperty(exports, "FeedbackPriority", { enumerable: true, get: function () { return feedback_enum_2.FeedbackPriority; } });
+var user_enum_2 = require("../enums/user.enum");
+Object.defineProperty(exports, "FeedbackType", { enumerable: true, get: function () { return user_enum_2.FeedbackType; } });
+Object.defineProperty(exports, "FeedbackPriority", { enumerable: true, get: function () { return user_enum_2.FeedbackPriority; } });
 class SubmitFeedbackPayload {
     staffId;
     tenantId;
@@ -452,8 +452,8 @@ __decorate([
     __metadata("design:type", String)
 ], SubmitFeedbackPayload.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Feedback type', enum: feedback_enum_1.FeedbackType }),
-    (0, class_validator_1.IsEnum)(feedback_enum_1.FeedbackType),
+    (0, swagger_1.ApiProperty)({ description: 'Feedback type', enum: user_enum_1.FeedbackType }),
+    (0, class_validator_1.IsEnum)(user_enum_1.FeedbackType),
     __metadata("design:type", String)
 ], SubmitFeedbackPayload.prototype, "type", void 0);
 __decorate([
@@ -469,8 +469,8 @@ __decorate([
     __metadata("design:type", String)
 ], SubmitFeedbackPayload.prototype, "description", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Priority level', enum: feedback_enum_1.FeedbackPriority }),
-    (0, class_validator_1.IsEnum)(feedback_enum_1.FeedbackPriority),
+    (0, swagger_1.ApiProperty)({ description: 'Priority level', enum: user_enum_1.FeedbackPriority }),
+    (0, class_validator_1.IsEnum)(user_enum_1.FeedbackPriority),
     __metadata("design:type", String)
 ], SubmitFeedbackPayload.prototype, "priority", void 0);
 __decorate([
@@ -546,9 +546,9 @@ var schedule_dto_1 = require("../rest/schedule.dto");
 Object.defineProperty(exports, "ShiftScheduleDto", { enumerable: true, get: function () { return schedule_dto_1.ShiftScheduleDto; } });
 Object.defineProperty(exports, "StaffScheduleRequestDto", { enumerable: true, get: function () { return schedule_dto_1.StaffScheduleRequestDto; } });
 Object.defineProperty(exports, "StaffScheduleResponseDto", { enumerable: true, get: function () { return schedule_dto_1.StaffScheduleResponseDto; } });
-var shift_enum_1 = require("../enums/shift.enum");
-Object.defineProperty(exports, "ShiftType", { enumerable: true, get: function () { return shift_enum_1.ShiftType; } });
-Object.defineProperty(exports, "ShiftStatus", { enumerable: true, get: function () { return shift_enum_1.ShiftStatus; } });
+var user_enum_3 = require("../enums/user.enum");
+Object.defineProperty(exports, "ShiftType", { enumerable: true, get: function () { return user_enum_3.ShiftType; } });
+Object.defineProperty(exports, "ShiftStatus", { enumerable: true, get: function () { return user_enum_3.ShiftStatus; } });
 class GetStaffSchedulePayload {
     staffId;
     tenantId;
@@ -618,6 +618,6 @@ Object.defineProperty(exports, "PerformanceMetricsDto", { enumerable: true, get:
 Object.defineProperty(exports, "AchievementDto", { enumerable: true, get: function () { return performance_dto_1.AchievementDto; } });
 Object.defineProperty(exports, "PerformanceRankDto", { enumerable: true, get: function () { return performance_dto_1.PerformanceRankDto; } });
 Object.defineProperty(exports, "PerformanceDataDto", { enumerable: true, get: function () { return performance_dto_1.PerformanceDataDto; } });
-var achievement_enum_1 = require("../enums/achievement.enum");
-Object.defineProperty(exports, "AchievementCategory", { enumerable: true, get: function () { return achievement_enum_1.AchievementCategory; } });
+var user_enum_4 = require("../enums/user.enum");
+Object.defineProperty(exports, "AchievementCategory", { enumerable: true, get: function () { return user_enum_4.AchievementCategory; } });
 //# sourceMappingURL=staff.nats.js.map

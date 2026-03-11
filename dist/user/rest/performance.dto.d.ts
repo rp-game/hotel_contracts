@@ -1,4 +1,4 @@
-import { AchievementCategory } from '../enums/achievement.enum';
+import { AchievementCategory } from '../enums/user.enum';
 export declare class PerformanceMetricsDto {
     period: string;
     tasksCompleted: number;

@@ -1,6 +1,4 @@
-import { BookingStatus } from '../enums/booking-status.enum';
-import { BookingSource } from '../enums/booking-source.enum';
-import { PaymentStatus } from '../enums/payment-status.enum';
+import { BookingStatus, BookingSource, PaymentStatus } from '../enums/booking.enum';
 export declare class BookingRoomResponseDto {
     id: string;
     roomTypeId: string;

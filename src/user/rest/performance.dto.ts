@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNumber, IsDateString, IsEnum, IsArray, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
-import { AchievementCategory } from '../enums/achievement.enum';
+import { AchievementCategory } from '../enums/user.enum';
 
 export class PerformanceMetricsDto {
   @ApiProperty({ description: 'Time period', example: 'current_month' })

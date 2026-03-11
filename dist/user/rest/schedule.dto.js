@@ -13,7 +13,7 @@ exports.StaffScheduleResponseDto = exports.StaffScheduleRequestDto = exports.Shi
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
-const shift_enum_1 = require("../enums/shift.enum");
+const user_enum_1 = require("../enums/user.enum");
 class ShiftScheduleDto {
     id;
     date;
@@ -46,8 +46,8 @@ __decorate([
     __metadata("design:type", String)
 ], ShiftScheduleDto.prototype, "endTime", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Shift type', enum: shift_enum_1.ShiftType }),
-    (0, class_validator_1.IsEnum)(shift_enum_1.ShiftType),
+    (0, swagger_1.ApiProperty)({ description: 'Shift type', enum: user_enum_1.ShiftType }),
+    (0, class_validator_1.IsEnum)(user_enum_1.ShiftType),
     __metadata("design:type", String)
 ], ShiftScheduleDto.prototype, "shiftType", void 0);
 __decorate([
@@ -61,8 +61,8 @@ __decorate([
     __metadata("design:type", String)
 ], ShiftScheduleDto.prototype, "location", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Shift status', enum: shift_enum_1.ShiftStatus }),
-    (0, class_validator_1.IsEnum)(shift_enum_1.ShiftStatus),
+    (0, swagger_1.ApiProperty)({ description: 'Shift status', enum: user_enum_1.ShiftStatus }),
+    (0, class_validator_1.IsEnum)(user_enum_1.ShiftStatus),
     __metadata("design:type", String)
 ], ShiftScheduleDto.prototype, "status", void 0);
 __decorate([

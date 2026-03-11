@@ -1,4 +1,4 @@
-import { ShiftType, ShiftStatus } from '../enums/shift.enum';
+import { ShiftType, ShiftStatus } from '../enums/user.enum';
 export declare class ShiftScheduleDto {
     id: string;
     date: string;

@@ -2,5 +2,4 @@
  * Pricing Domain Enums
  */
 
-export * from './rate-plan-type.enum';
-export * from './rate-plan-status.enum';
+export * from './pricing.enum';

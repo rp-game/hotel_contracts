@@ -4,7 +4,7 @@
  * Exported from user-service
  */
 import { StaffStatus } from '../enums';
-import { FeedbackType, FeedbackPriority } from '../enums/feedback.enum';
+import { FeedbackType, FeedbackPriority } from '../enums/user.enum';
 export interface FindStaffByIdPayload {
     id: string;
 }
@@ -171,7 +171,7 @@ export declare class StaffPermissionCheckDto {
     hotelId: string;
 }
 export { FeedbackDto, FeedbackResponseDto } from '../rest/feedback.dto';
-export { FeedbackType, FeedbackPriority } from '../enums/feedback.enum';
+export { FeedbackType, FeedbackPriority } from '../enums/user.enum';
 export declare class SubmitFeedbackPayload {
     staffId: string;
     tenantId: string;
@@ -202,7 +202,7 @@ export declare class UploadAvatarPayload {
     file: UploadAvatarFilePayload;
 }
 export { ShiftScheduleDto, StaffScheduleRequestDto, StaffScheduleResponseDto } from '../rest/schedule.dto';
-export { ShiftType, ShiftStatus } from '../enums/shift.enum';
+export { ShiftType, ShiftStatus } from '../enums/user.enum';
 export declare class GetStaffSchedulePayload {
     staffId: string;
     tenantId: string;
@@ -217,5 +217,5 @@ export declare class ChangePasswordPayload {
     newPassword: string;
 }
 export { PerformanceMetricsDto, AchievementDto, PerformanceRankDto, PerformanceDataDto } from '../rest/performance.dto';
-export { AchievementCategory } from '../enums/achievement.enum';
+export { AchievementCategory } from '../enums/user.enum';
 //# sourceMappingURL=staff.nats.d.ts.map

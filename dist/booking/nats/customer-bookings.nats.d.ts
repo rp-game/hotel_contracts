@@ -7,7 +7,7 @@
  * Used by: Customer profile page - bookings list
  */
 import { NatsResponse } from '../../common/nats-response.interface';
-import { BookingStatus } from '../enums/booking-status.enum';
+import { BookingStatus } from '../enums/booking.enum';
 /**
  * Customer Booking Response
  * Compatible with API Gateway BookingDto

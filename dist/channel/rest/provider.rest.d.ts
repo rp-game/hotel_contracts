@@ -4,7 +4,7 @@
  * Used by API Gateway for provider configuration endpoints
  * These are class-based DTOs with @ApiProperty decorators for Swagger
  */
-import { ProviderType } from '../enums/provider-type.enum';
+import { ProviderType } from '../enums/channel.enum';
 import { ChainConfigurationDto } from '../types/chain-config.types';
 /**
  * Create Provider Configuration DTO

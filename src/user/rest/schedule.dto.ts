@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsDateString, IsEnum, IsArray, IsNumber, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
-import { ShiftType, ShiftStatus } from '../enums/shift.enum';
+import { ShiftType, ShiftStatus } from '../enums/user.enum';
 
 export class ShiftScheduleDto {
   @ApiProperty({ description: 'Schedule ID' })

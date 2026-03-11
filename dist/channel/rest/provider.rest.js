@@ -18,7 +18,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TestConnectionResponseDto = exports.TestResultDto = exports.TestConnectionRequestDto = exports.ValidationResponseDto = exports.ValidateProviderConfigDto = exports.CreateProviderConfigDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
-const provider_type_enum_1 = require("../enums/provider-type.enum");
+const channel_enum_1 = require("../enums/channel.enum");
 /**
  * Create Provider Configuration DTO
  * Used for POST /channel-management/providers
@@ -39,8 +39,8 @@ class CreateProviderConfigDto {
 }
 exports.CreateProviderConfigDto = CreateProviderConfigDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Provider type', enum: provider_type_enum_1.ProviderType }),
-    (0, class_validator_1.IsEnum)(provider_type_enum_1.ProviderType),
+    (0, swagger_1.ApiProperty)({ description: 'Provider type', enum: channel_enum_1.ProviderType }),
+    (0, class_validator_1.IsEnum)(channel_enum_1.ProviderType),
     __metadata("design:type", String)
 ], CreateProviderConfigDto.prototype, "providerType", void 0);
 __decorate([
@@ -155,8 +155,8 @@ class TestConnectionRequestDto {
 }
 exports.TestConnectionRequestDto = TestConnectionRequestDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Provider type', enum: provider_type_enum_1.ProviderType }),
-    (0, class_validator_1.IsEnum)(provider_type_enum_1.ProviderType),
+    (0, swagger_1.ApiProperty)({ description: 'Provider type', enum: channel_enum_1.ProviderType }),
+    (0, class_validator_1.IsEnum)(channel_enum_1.ProviderType),
     __metadata("design:type", String)
 ], TestConnectionRequestDto.prototype, "providerType", void 0);
 __decorate([

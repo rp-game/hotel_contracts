@@ -6,7 +6,7 @@
  * Called by: api-gateway
  */
 import { NatsResponse } from '../../common/nats-response.interface';
-import { BookingType } from '../enums/booking-type.enum';
+import { BookingType } from '../enums/booking.enum';
 /**
  * NATS request to create a booking
  *

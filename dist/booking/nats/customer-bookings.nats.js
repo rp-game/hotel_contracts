@@ -19,7 +19,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomerBookingsListNatsResponse = exports.CustomerBookingNatsResponse = void 0;
 const swagger_1 = require("@nestjs/swagger");
-const booking_status_enum_1 = require("../enums/booking-status.enum");
+const booking_enum_1 = require("../enums/booking.enum");
 /**
  * Customer Booking Response
  * Compatible with API Gateway BookingDto
@@ -129,7 +129,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Booking status',
-        enum: booking_status_enum_1.BookingStatus
+        enum: booking_enum_1.BookingStatus
     }),
     __metadata("design:type", String)
 ], CustomerBookingNatsResponse.prototype, "status", void 0);

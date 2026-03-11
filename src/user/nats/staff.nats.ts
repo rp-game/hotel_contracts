@@ -8,7 +8,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsEmail, IsEnum, MinLength } from 'class-validator';
 import { UserRole } from '../enums';
 import { StaffStatus } from '../enums';
-import { FeedbackType, FeedbackPriority } from '../enums/feedback.enum';
+import { FeedbackType, FeedbackPriority } from '../enums/user.enum';
 // Import unified DTOs from REST - used by both NATS and REST
 import { StaffDto, CreateStaffDto, UpdateStaffStatusDto } from '../rest/staff.dto';
 
@@ -380,7 +380,7 @@ export class StaffPermissionCheckDto {
 
 // ============= FEEDBACK =============
 export { FeedbackDto, FeedbackResponseDto } from '../rest/feedback.dto';
-export { FeedbackType, FeedbackPriority } from '../enums/feedback.enum';
+export { FeedbackType, FeedbackPriority } from '../enums/user.enum';
 
 export class SubmitFeedbackPayload {
   @ApiProperty({ description: 'Staff ID' })
@@ -463,7 +463,7 @@ export class UploadAvatarPayload {
 
 // ============= STAFF SCHEDULE =============
 export { ShiftScheduleDto, StaffScheduleRequestDto, StaffScheduleResponseDto } from '../rest/schedule.dto';
-export { ShiftType, ShiftStatus } from '../enums/shift.enum';
+export { ShiftType, ShiftStatus } from '../enums/user.enum';
 
 export class GetStaffSchedulePayload {
   @ApiProperty({ description: 'Staff ID' })
@@ -510,4 +510,4 @@ export class ChangePasswordPayload {
 
 // ============= STAFF PERFORMANCE (REST response) =============
 export { PerformanceMetricsDto, AchievementDto, PerformanceRankDto, PerformanceDataDto } from '../rest/performance.dto';
-export { AchievementCategory } from '../enums/achievement.enum';
+export { AchievementCategory } from '../enums/user.enum';
