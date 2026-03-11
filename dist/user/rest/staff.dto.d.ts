@@ -281,6 +281,111 @@ export declare class PublicUserDto {
     department?: string;
     position?: string;
 }
+export declare class StaffMobileDashboardStaffDto {
+    id: string;
+    name: string;
+    role: string;
+    avatar?: string;
+    shiftStart: string;
+    shiftEnd: string;
+    shiftStatus: string;
+}
+export declare class StaffMobileDashboardTaskSummaryDto {
+    total: number;
+    completed: number;
+    pending: number;
+    inProgress: number;
+    overdue: number;
+}
+export declare class QuickActionItemDto {
+    id: string;
+    title: string;
+    description: string;
+    icon: string;
+    actionUrl: string;
+    color: string;
+    requiresConfirmation: boolean;
+    order: number;
+    roles: string[];
+}
+export declare class StaffAlertDto {
+    id: string;
+    type: string;
+    title: string;
+    message: string;
+    priority: string;
+    createdAt: string;
+    roomNumber: string;
+    actionUrl: string;
+    acknowledged: boolean;
+}
+export declare class StaffRecentActivityDto {
+    id: string;
+    type: string;
+    description: string;
+    timestamp: string;
+    roomNumber: string;
+    status: string;
+    icon: string;
+}
+export declare class StaffMobileDashboardHotelStatusDto {
+    totalRooms: number;
+    occupiedRooms: number;
+    checkingOut: number;
+    checkingIn: number;
+    outOfOrder: number;
+    cleaning: number;
+}
+export declare class StaffMobilePerformanceDto {
+    tasksCompletedToday: number;
+    averageTaskTime: number;
+    efficiencyScore: number;
+    guestRating?: number;
+}
+/**
+ * Staff Mobile Dashboard DTO — composite response from service
+ * @usage GET /api/staff/:staffId/dashboard/mobile
+ */
+export declare class StaffMobileDashboardDto {
+    staff: StaffMobileDashboardStaffDto;
+    taskSummary: StaffMobileDashboardTaskSummaryDto;
+    quickActions: QuickActionItemDto[];
+    alerts: StaffAlertDto[];
+    hotelStatus: StaffMobileDashboardHotelStatusDto;
+    recentActivity: StaffRecentActivityDto[];
+    performance: StaffMobilePerformanceDto;
+}
+export declare class SelectHotelResultDto {
+    success: boolean;
+    message: string;
+    hotelId: string;
+    hotelName: string;
+}
+export declare class PhotoUploadResultDto {
+    success: boolean;
+    message: string;
+    photoId: string;
+    url: string;
+}
+export declare class BatchPhotoUploadResultDto {
+    success: boolean;
+    message: string;
+    photoIds: string[];
+}
+export declare class QuickUploadPhotoDto {
+    taskId?: string;
+    roomNumber?: string;
+    category?: string;
+    description?: string;
+    base64Data: string;
+    filename?: string;
+}
+export declare class BatchUploadPhotosDto {
+    files: Record<string, unknown>[];
+    taskId?: string;
+    roomNumber?: string;
+    category?: string;
+}
 /**
  * Public User List Response DTO
  * @description Paginated list of public user info

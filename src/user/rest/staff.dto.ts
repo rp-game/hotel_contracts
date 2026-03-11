@@ -705,6 +705,286 @@ export class PublicUserDto {
   position?: string;
 }
 
+// ============================================================================
+// STAFF MOBILE DASHBOARD DTOs (actual service response shapes)
+// ============================================================================
+
+export class StaffMobileDashboardStaffDto {
+  @ApiProperty({ description: 'Staff ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Staff full name' })
+  name: string;
+
+  @ApiProperty({ description: 'Staff role at hotel' })
+  role: string;
+
+  @ApiPropertyOptional({ description: 'Avatar URL' })
+  avatar?: string;
+
+  @ApiProperty({ description: 'Shift start time' })
+  shiftStart: string;
+
+  @ApiProperty({ description: 'Shift end time' })
+  shiftEnd: string;
+
+  @ApiProperty({ description: 'Current shift status' })
+  shiftStatus: string;
+}
+
+export class StaffMobileDashboardTaskSummaryDto {
+  @ApiProperty({ description: 'Total tasks' })
+  total: number;
+
+  @ApiProperty({ description: 'Completed tasks' })
+  completed: number;
+
+  @ApiProperty({ description: 'Pending tasks' })
+  pending: number;
+
+  @ApiProperty({ description: 'In-progress tasks' })
+  inProgress: number;
+
+  @ApiProperty({ description: 'Overdue tasks' })
+  overdue: number;
+}
+
+export class QuickActionItemDto {
+  @ApiProperty({ description: 'Action ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Action title' })
+  title: string;
+
+  @ApiProperty({ description: 'Action description' })
+  description: string;
+
+  @ApiProperty({ description: 'Icon name' })
+  icon: string;
+
+  @ApiProperty({ description: 'Action URL' })
+  actionUrl: string;
+
+  @ApiProperty({ description: 'Color code' })
+  color: string;
+
+  @ApiProperty({ description: 'Whether action requires confirmation' })
+  requiresConfirmation: boolean;
+
+  @ApiProperty({ description: 'Display order' })
+  order: number;
+
+  @ApiProperty({ description: 'Roles that can see this action', type: [String] })
+  roles: string[];
+}
+
+export class StaffAlertDto {
+  @ApiProperty({ description: 'Alert ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Alert type' })
+  type: string;
+
+  @ApiProperty({ description: 'Alert title' })
+  title: string;
+
+  @ApiProperty({ description: 'Alert message' })
+  message: string;
+
+  @ApiProperty({ description: 'Priority level' })
+  priority: string;
+
+  @ApiProperty({ description: 'Creation timestamp (ISO)' })
+  createdAt: string;
+
+  @ApiProperty({ description: 'Related room number' })
+  roomNumber: string;
+
+  @ApiProperty({ description: 'Action URL' })
+  actionUrl: string;
+
+  @ApiProperty({ description: 'Whether alert has been acknowledged' })
+  acknowledged: boolean;
+}
+
+export class StaffRecentActivityDto {
+  @ApiProperty({ description: 'Activity ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Activity type' })
+  type: string;
+
+  @ApiProperty({ description: 'Activity description' })
+  description: string;
+
+  @ApiProperty({ description: 'Activity timestamp (ISO)' })
+  timestamp: string;
+
+  @ApiProperty({ description: 'Related room number' })
+  roomNumber: string;
+
+  @ApiProperty({ description: 'Activity status' })
+  status: string;
+
+  @ApiProperty({ description: 'Icon name' })
+  icon: string;
+}
+
+export class StaffMobileDashboardHotelStatusDto {
+  @ApiProperty({ description: 'Total rooms in hotel' })
+  totalRooms: number;
+
+  @ApiProperty({ description: 'Currently occupied rooms' })
+  occupiedRooms: number;
+
+  @ApiProperty({ description: 'Rooms checking out today' })
+  checkingOut: number;
+
+  @ApiProperty({ description: 'Rooms checking in today' })
+  checkingIn: number;
+
+  @ApiProperty({ description: 'Out of order rooms' })
+  outOfOrder: number;
+
+  @ApiProperty({ description: 'Rooms being cleaned' })
+  cleaning: number;
+}
+
+export class StaffMobilePerformanceDto {
+  @ApiProperty({ description: 'Tasks completed today' })
+  tasksCompletedToday: number;
+
+  @ApiProperty({ description: 'Average task completion time in minutes' })
+  averageTaskTime: number;
+
+  @ApiProperty({ description: 'Efficiency score (0-100)' })
+  efficiencyScore: number;
+
+  @ApiPropertyOptional({ description: 'Guest rating (1.0-5.0)' })
+  guestRating?: number;
+}
+
+/**
+ * Staff Mobile Dashboard DTO — composite response from service
+ * @usage GET /api/staff/:staffId/dashboard/mobile
+ */
+export class StaffMobileDashboardDto {
+  @ApiProperty({ description: 'Staff info', type: StaffMobileDashboardStaffDto })
+  staff: StaffMobileDashboardStaffDto;
+
+  @ApiProperty({ description: 'Task summary', type: StaffMobileDashboardTaskSummaryDto })
+  taskSummary: StaffMobileDashboardTaskSummaryDto;
+
+  @ApiProperty({ description: 'Quick actions', type: [QuickActionItemDto] })
+  quickActions: QuickActionItemDto[];
+
+  @ApiProperty({ description: 'Staff alerts', type: [StaffAlertDto] })
+  alerts: StaffAlertDto[];
+
+  @ApiProperty({ description: 'Hotel status', type: StaffMobileDashboardHotelStatusDto })
+  hotelStatus: StaffMobileDashboardHotelStatusDto;
+
+  @ApiProperty({ description: 'Recent activity', type: [StaffRecentActivityDto] })
+  recentActivity: StaffRecentActivityDto[];
+
+  @ApiProperty({ description: 'Performance metrics', type: StaffMobilePerformanceDto })
+  performance: StaffMobilePerformanceDto;
+}
+
+// ============================================================================
+// STAFF MOBILE OTHER RESPONSE DTOs
+// ============================================================================
+
+export class SelectHotelResultDto {
+  @ApiProperty({ description: 'Operation success' })
+  success: boolean;
+
+  @ApiProperty({ description: 'Result message' })
+  message: string;
+
+  @ApiProperty({ description: 'Selected hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'Selected hotel name' })
+  hotelName: string;
+}
+
+export class PhotoUploadResultDto {
+  @ApiProperty({ description: 'Operation success' })
+  success: boolean;
+
+  @ApiProperty({ description: 'Result message' })
+  message: string;
+
+  @ApiProperty({ description: 'Uploaded photo ID' })
+  photoId: string;
+
+  @ApiProperty({ description: 'Photo URL' })
+  url: string;
+}
+
+export class BatchPhotoUploadResultDto {
+  @ApiProperty({ description: 'Operation success' })
+  success: boolean;
+
+  @ApiProperty({ description: 'Result message' })
+  message: string;
+
+  @ApiProperty({ description: 'Uploaded photo IDs', type: [String] })
+  photoIds: string[];
+}
+
+export class QuickUploadPhotoDto {
+  @ApiPropertyOptional({ description: 'Related task ID' })
+  @IsOptional()
+  @IsString()
+  taskId?: string;
+
+  @ApiPropertyOptional({ description: 'Related room number' })
+  @IsOptional()
+  @IsString()
+  roomNumber?: string;
+
+  @ApiPropertyOptional({ description: 'Photo category' })
+  @IsOptional()
+  @IsString()
+  category?: string;
+
+  @ApiPropertyOptional({ description: 'Photo description' })
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @ApiProperty({ description: 'Base64 encoded image data' })
+  @IsString()
+  base64Data: string;
+
+  @ApiPropertyOptional({ description: 'Original filename' })
+  @IsOptional()
+  @IsString()
+  filename?: string;
+}
+
+export class BatchUploadPhotosDto {
+  @ApiProperty({ description: 'Array of file data', type: [Object] })
+  files: Record<string, unknown>[];
+
+  @ApiPropertyOptional({ description: 'Related task ID' })
+  @IsOptional()
+  @IsString()
+  taskId?: string;
+
+  @ApiPropertyOptional({ description: 'Related room number' })
+  @IsOptional()
+  @IsString()
+  roomNumber?: string;
+
+  @ApiPropertyOptional({ description: 'Photo category' })
+  @IsOptional()
+  @IsString()
+  category?: string;
+}
+
 /**
  * Public User List Response DTO
  * @description Paginated list of public user info

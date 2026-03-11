@@ -231,4 +231,51 @@ export declare class ChangePasswordPayload {
 }
 export { PerformanceMetricsDto, AchievementDto, PerformanceRankDto, PerformanceDataDto } from '../rest/performance.dto';
 export { AchievementCategory } from '../enums/user.enum';
+export declare class FindStaffByZaloPayload {
+    zaloUserId: string;
+}
+export declare class FindStaffByPhonePayload {
+    phone: string;
+}
+export declare class LinkZaloToStaffPayload {
+    staffId: string;
+    zaloUserId: string;
+    zaloPhone: string;
+    zaloName: string;
+    zaloAvatar?: string;
+}
+export declare class GetStaffHotelsPayload {
+    staffId: string;
+    tenantId?: string;
+}
+export declare class ValidatePermissionPayload {
+    userId: string;
+    resource: string;
+    action: string;
+    tenantId?: string;
+}
+export declare class StaffZaloInfoDto {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+    roles: string[];
+    tenantId: string;
+    zaloUserId?: string;
+}
+export declare class LinkZaloResultDto {
+    success: boolean;
+    message: string;
+    staffId: string;
+    zaloUserId: string;
+}
+export declare class ValidatePermissionResultDto {
+    hasPermission: boolean;
+}
+export declare class LinkZaloBasicDto {
+    zaloUserId: string;
+    zaloPhone: string;
+    zaloName: string;
+    zaloAvatar?: string;
+}
 //# sourceMappingURL=staff.nats.d.ts.map

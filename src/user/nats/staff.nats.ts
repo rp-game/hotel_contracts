@@ -524,3 +524,129 @@ export class ChangePasswordPayload {
 // ============= STAFF PERFORMANCE (REST response) =============
 export { PerformanceMetricsDto, AchievementDto, PerformanceRankDto, PerformanceDataDto } from '../rest/performance.dto';
 export { AchievementCategory } from '../enums/user.enum';
+
+// ============= STAFF MOBILE NATS =============
+
+// --- Request Payloads ---
+
+export class FindStaffByZaloPayload {
+  @ApiProperty({ description: 'Zalo user ID' })
+  @IsString()
+  zaloUserId: string;
+}
+
+export class FindStaffByPhonePayload {
+  @ApiProperty({ description: 'Phone number' })
+  @IsString()
+  phone: string;
+}
+
+export class LinkZaloToStaffPayload {
+  @ApiProperty({ description: 'Staff ID' })
+  @IsString()
+  staffId: string;
+
+  @ApiProperty({ description: 'Zalo user ID' })
+  @IsString()
+  zaloUserId: string;
+
+  @ApiProperty({ description: 'Zalo phone number' })
+  @IsString()
+  zaloPhone: string;
+
+  @ApiProperty({ description: 'Zalo display name' })
+  @IsString()
+  zaloName: string;
+
+  @ApiPropertyOptional({ description: 'Zalo avatar URL' })
+  zaloAvatar?: string;
+}
+
+export class GetStaffHotelsPayload {
+  @ApiProperty({ description: 'Staff ID' })
+  @IsString()
+  staffId: string;
+
+  @ApiPropertyOptional({ description: 'Tenant ID filter' })
+  tenantId?: string;
+}
+
+export class ValidatePermissionPayload {
+  @ApiProperty({ description: 'User ID' })
+  @IsString()
+  userId: string;
+
+  @ApiProperty({ description: 'Resource to check permission for' })
+  @IsString()
+  resource: string;
+
+  @ApiProperty({ description: 'Action to check permission for' })
+  @IsString()
+  action: string;
+
+  @ApiPropertyOptional({ description: 'Tenant ID' })
+  tenantId?: string;
+}
+
+// --- Response DTOs ---
+
+export class StaffZaloInfoDto {
+  @ApiProperty({ description: 'Staff ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Staff full name' })
+  name: string;
+
+  @ApiProperty({ description: 'Staff email' })
+  email: string;
+
+  @ApiProperty({ description: 'Phone number' })
+  phone: string;
+
+  @ApiProperty({ description: 'Staff roles', type: [String] })
+  roles: string[];
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Zalo user ID (present when found via Zalo)' })
+  zaloUserId?: string;
+}
+
+export class LinkZaloResultDto {
+  @ApiProperty({ description: 'Operation success' })
+  success: boolean;
+
+  @ApiProperty({ description: 'Result message' })
+  message: string;
+
+  @ApiProperty({ description: 'Staff ID' })
+  staffId: string;
+
+  @ApiProperty({ description: 'Zalo user ID' })
+  zaloUserId: string;
+}
+
+export class ValidatePermissionResultDto {
+  @ApiProperty({ description: 'Whether user has the requested permission' })
+  hasPermission: boolean;
+}
+
+// --- REST Body DTO (for POST :staffId/link-zalo) ---
+
+export class LinkZaloBasicDto {
+  @ApiProperty({ description: 'Zalo user ID' })
+  @IsString()
+  zaloUserId: string;
+
+  @ApiProperty({ description: 'Zalo phone number' })
+  @IsString()
+  zaloPhone: string;
+
+  @ApiProperty({ description: 'Zalo display name' })
+  @IsString()
+  zaloName: string;
+
+  @ApiPropertyOptional({ description: 'Zalo avatar URL' })
+  zaloAvatar?: string;
+}

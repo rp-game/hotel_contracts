@@ -14,7 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AchievementCategory = exports.PerformanceDataDto = exports.PerformanceRankDto = exports.AchievementDto = exports.PerformanceMetricsDto = exports.ChangePasswordPayload = exports.GetStaffSchedulePayload = exports.ShiftStatus = exports.ShiftType = exports.StaffScheduleResponseDto = exports.StaffScheduleRequestDto = exports.ShiftScheduleDto = exports.UploadAvatarPayload = exports.UploadAvatarFilePayload = exports.AvatarUploadResponseDto = exports.ChangePasswordResponseDto = exports.ChangePasswordDto = exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
+exports.LinkZaloBasicDto = exports.ValidatePermissionResultDto = exports.LinkZaloResultDto = exports.StaffZaloInfoDto = exports.ValidatePermissionPayload = exports.GetStaffHotelsPayload = exports.LinkZaloToStaffPayload = exports.FindStaffByPhonePayload = exports.FindStaffByZaloPayload = exports.AchievementCategory = exports.PerformanceDataDto = exports.PerformanceRankDto = exports.AchievementDto = exports.PerformanceMetricsDto = exports.ChangePasswordPayload = exports.GetStaffSchedulePayload = exports.ShiftStatus = exports.ShiftType = exports.StaffScheduleResponseDto = exports.StaffScheduleRequestDto = exports.ShiftScheduleDto = exports.UploadAvatarPayload = exports.UploadAvatarFilePayload = exports.AvatarUploadResponseDto = exports.ChangePasswordResponseDto = exports.ChangePasswordDto = exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const user_enum_1 = require("../enums/user.enum");
@@ -620,4 +620,193 @@ Object.defineProperty(exports, "PerformanceRankDto", { enumerable: true, get: fu
 Object.defineProperty(exports, "PerformanceDataDto", { enumerable: true, get: function () { return performance_dto_1.PerformanceDataDto; } });
 var user_enum_4 = require("../enums/user.enum");
 Object.defineProperty(exports, "AchievementCategory", { enumerable: true, get: function () { return user_enum_4.AchievementCategory; } });
+// ============= STAFF MOBILE NATS =============
+// --- Request Payloads ---
+class FindStaffByZaloPayload {
+    zaloUserId;
+}
+exports.FindStaffByZaloPayload = FindStaffByZaloPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo user ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindStaffByZaloPayload.prototype, "zaloUserId", void 0);
+class FindStaffByPhonePayload {
+    phone;
+}
+exports.FindStaffByPhonePayload = FindStaffByPhonePayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Phone number' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindStaffByPhonePayload.prototype, "phone", void 0);
+class LinkZaloToStaffPayload {
+    staffId;
+    zaloUserId;
+    zaloPhone;
+    zaloName;
+    zaloAvatar;
+}
+exports.LinkZaloToStaffPayload = LinkZaloToStaffPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloToStaffPayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo user ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloToStaffPayload.prototype, "zaloUserId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo phone number' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloToStaffPayload.prototype, "zaloPhone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo display name' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloToStaffPayload.prototype, "zaloName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Zalo avatar URL' }),
+    __metadata("design:type", String)
+], LinkZaloToStaffPayload.prototype, "zaloAvatar", void 0);
+class GetStaffHotelsPayload {
+    staffId;
+    tenantId;
+}
+exports.GetStaffHotelsPayload = GetStaffHotelsPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetStaffHotelsPayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID filter' }),
+    __metadata("design:type", String)
+], GetStaffHotelsPayload.prototype, "tenantId", void 0);
+class ValidatePermissionPayload {
+    userId;
+    resource;
+    action;
+    tenantId;
+}
+exports.ValidatePermissionPayload = ValidatePermissionPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ValidatePermissionPayload.prototype, "userId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Resource to check permission for' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ValidatePermissionPayload.prototype, "resource", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Action to check permission for' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ValidatePermissionPayload.prototype, "action", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], ValidatePermissionPayload.prototype, "tenantId", void 0);
+// --- Response DTOs ---
+class StaffZaloInfoDto {
+    id;
+    name;
+    email;
+    phone;
+    roles;
+    tenantId;
+    zaloUserId;
+}
+exports.StaffZaloInfoDto = StaffZaloInfoDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], StaffZaloInfoDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff full name' }),
+    __metadata("design:type", String)
+], StaffZaloInfoDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff email' }),
+    __metadata("design:type", String)
+], StaffZaloInfoDto.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Phone number' }),
+    __metadata("design:type", String)
+], StaffZaloInfoDto.prototype, "phone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff roles', type: [String] }),
+    __metadata("design:type", Array)
+], StaffZaloInfoDto.prototype, "roles", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], StaffZaloInfoDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Zalo user ID (present when found via Zalo)' }),
+    __metadata("design:type", String)
+], StaffZaloInfoDto.prototype, "zaloUserId", void 0);
+class LinkZaloResultDto {
+    success;
+    message;
+    staffId;
+    zaloUserId;
+}
+exports.LinkZaloResultDto = LinkZaloResultDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Operation success' }),
+    __metadata("design:type", Boolean)
+], LinkZaloResultDto.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Result message' }),
+    __metadata("design:type", String)
+], LinkZaloResultDto.prototype, "message", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], LinkZaloResultDto.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo user ID' }),
+    __metadata("design:type", String)
+], LinkZaloResultDto.prototype, "zaloUserId", void 0);
+class ValidatePermissionResultDto {
+    hasPermission;
+}
+exports.ValidatePermissionResultDto = ValidatePermissionResultDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether user has the requested permission' }),
+    __metadata("design:type", Boolean)
+], ValidatePermissionResultDto.prototype, "hasPermission", void 0);
+// --- REST Body DTO (for POST :staffId/link-zalo) ---
+class LinkZaloBasicDto {
+    zaloUserId;
+    zaloPhone;
+    zaloName;
+    zaloAvatar;
+}
+exports.LinkZaloBasicDto = LinkZaloBasicDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo user ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloBasicDto.prototype, "zaloUserId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo phone number' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloBasicDto.prototype, "zaloPhone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo display name' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloBasicDto.prototype, "zaloName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Zalo avatar URL' }),
+    __metadata("design:type", String)
+], LinkZaloBasicDto.prototype, "zaloAvatar", void 0);
 //# sourceMappingURL=staff.nats.js.map
