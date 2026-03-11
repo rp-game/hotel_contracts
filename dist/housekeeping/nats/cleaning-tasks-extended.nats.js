@@ -13,10 +13,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TaskTimerDto = exports.TaskStatsDto = exports.MobileTaskListResponseDto = exports.TaskSummaryStatsDto = exports.MobileTaskUpdateDto = exports.MobileTaskDto = exports.GetPerformanceMetricsNatsRequest = exports.StaffPerformanceMetricsNatsResponse = exports.GetHousekeepingTasksPayload = exports.EnhancedCleaningTask = exports.ClockOutNatsRequest = exports.ClockInNatsRequest = exports.GetCurrentShiftNatsRequest = exports.ShiftData = exports.QuickCompleteTaskResponseDto = exports.QuickCompleteTaskDto = exports.QuickCompleteResult = exports.QuickCompleteTaskNatsRequest = exports.AddNotesResult = exports.AddTaskNotesNatsRequest = exports.GetRoomTasksNatsRequest = exports.SearchTasksNatsRequest = exports.MobileTaskResponse = exports.GetRecentTasksNatsRequest = void 0;
+exports.TaskTimerDto = exports.TaskStatsDto = exports.MobileTaskListResponseDto = exports.TaskSummaryStatsDto = exports.MobileTaskUpdateDto = exports.MobileTaskDto = exports.GetPerformanceMetricsNatsRequest = exports.StaffPerformanceMetricsNatsResponse = exports.GetHousekeepingTasksPayload = exports.EnhancedCleaningTask = exports.ClockOutNatsRequest = exports.ClockInNatsRequest = exports.GetCurrentShiftNatsRequest = exports.ShiftData = exports.QuickCompleteTaskResponseDto = exports.QuickCompleteTaskDto = exports.QuickCompleteResult = exports.QuickCompleteTaskNatsRequest = exports.AddNotesResult = exports.AddTaskNotesNatsRequest = exports.GetRoomTasksNatsRequest = exports.SearchTasksNatsRequest = exports.MobileTaskResponse = exports.GetRecentTasksNatsRequest = exports.FindTaskByIdNatsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
+// FIND TASK BY ID
+class FindTaskByIdNatsRequest {
+    id;
+    tenantId;
+    hotelId;
+}
+exports.FindTaskByIdNatsRequest = FindTaskByIdNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Task ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindTaskByIdNatsRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindTaskByIdNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindTaskByIdNatsRequest.prototype, "hotelId", void 0);
 // RECENT TASKS (Mobile)
 class GetRecentTasksNatsRequest {
     tenantId;

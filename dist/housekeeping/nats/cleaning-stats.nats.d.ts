@@ -10,7 +10,7 @@ import { NatsResponse } from '../../common';
 /**
  * Cleaning Task Statistics Response
  */
-export interface CleaningTaskStatsData {
+export declare class CleaningTaskStatsData {
     total: number;
     completed: number;
     inProgress: number;
@@ -23,7 +23,7 @@ export interface CleaningTaskStatsData {
  * Get Cleaning Task Stats Request
  * Pattern: housekeeping.cleaning-tasks.stats
  */
-export interface TaskStatsPayload {
+export declare class TaskStatsPayload {
     tenantId: string;
     hotelId: string;
 }

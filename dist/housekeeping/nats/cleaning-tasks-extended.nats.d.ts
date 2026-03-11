@@ -4,6 +4,11 @@
  */
 import { NatsResponse } from '../../common';
 import { TaskStatus, TaskType, TaskPriority } from '../enums';
+export declare class FindTaskByIdNatsRequest {
+    id: string;
+    tenantId: string;
+    hotelId: string;
+}
 export declare class GetRecentTasksNatsRequest {
     tenantId: string;
     hotelId: string;

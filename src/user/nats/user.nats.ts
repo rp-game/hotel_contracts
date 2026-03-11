@@ -11,113 +11,196 @@ import { Department } from '../enums';
 
 // ============= NATS Request DTOs =============
 
-export interface CreateUserRequestDto {
+export class CreateUserRequestDto {
+  @ApiProperty({ description: 'Email address' })
   email: string;
+
+  @ApiProperty({ description: 'Password' })
   password: string;
+
+  @ApiProperty({ description: 'First name' })
   firstName: string;
+
+  @ApiProperty({ description: 'Last name' })
   lastName: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'User roles', enum: UserRole, isArray: true })
   roles: UserRole[];
+
+  @ApiPropertyOptional({ description: 'Is account active' })
   isActive?: boolean;
 }
 
-export interface FindUserRequestDto {
+export class FindUserRequestDto {
+  @ApiProperty({ description: 'User ID' })
   id: string;
 }
 
-export interface FindAllUsersRequestDto {
+export class FindAllUsersRequestDto {
+  @ApiPropertyOptional({ description: 'Tenant ID' })
   tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Role filter' })
   role?: string;
+
+  @ApiPropertyOptional({ description: 'Page number' })
   page?: number;
+
+  @ApiPropertyOptional({ description: 'Items per page' })
   limit?: number;
 }
 
-export interface FindUserByEmailRequestDto {
+export class FindUserByEmailRequestDto {
+  @ApiProperty({ description: 'Email address' })
   email: string;
 }
 
-export interface UpdateUserRequestDto {
+export class UpdateUserRequestDto {
+  @ApiProperty({ description: 'User ID' })
   id: string;
+
+  @ApiPropertyOptional({ description: 'First name' })
   firstName?: string;
+
+  @ApiPropertyOptional({ description: 'Last name' })
   lastName?: string;
+
+  @ApiPropertyOptional({ description: 'User roles', enum: UserRole, isArray: true })
   roles?: UserRole[];
+
+  @ApiPropertyOptional({ description: 'Is account active' })
   isActive?: boolean;
 }
 
-export interface RemoveUserRequestDto {
+export class RemoveUserRequestDto {
+  @ApiProperty({ description: 'User ID' })
   id: string;
 }
 
 // ============= Staff-specific Request DTOs =============
 
-export interface FindStaffRequestDto {
+export class FindStaffRequestDto {
+  @ApiPropertyOptional({ description: 'Hotel ID' })
   hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Roles filter', type: [String] })
   roles?: string[];
+
+  @ApiPropertyOptional({ description: 'Staff status', enum: StaffStatus })
   staffStatus?: StaffStatus;
+
+  @ApiPropertyOptional({ description: 'Page number' })
   page?: number;
+
+  @ApiPropertyOptional({ description: 'Items per page' })
   limit?: number;
+
+  @ApiPropertyOptional({ description: 'Tenant ID' })
   tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Search query' })
   search?: string;
 }
 
-export interface GetStaffByIdRequestDto {
+export class GetStaffByIdRequestDto {
+  @ApiProperty({ description: 'Staff ID' })
   staffId: string;
 }
 
-export interface FindStaffByRoleRequestDto {
+export class FindStaffByRoleRequestDto {
+  @ApiProperty({ description: 'Role' })
   role: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 }
 
-export interface UpdateStaffStatusRequestDto {
+export class UpdateStaffStatusRequestDto {
+  @ApiProperty({ description: 'Staff ID' })
   id: string;
+
+  @ApiProperty({ description: 'Staff status', enum: StaffStatus })
   status: StaffStatus;
 }
 
-export interface AssignStaffToHotelRequestDto {
+export class AssignStaffToHotelRequestDto {
+  @ApiProperty({ description: 'Staff ID' })
   id: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 }
 
-export interface CreateStaffRequestDto extends CreateUserRequestDto {
+export class CreateStaffRequestDto extends CreateUserRequestDto {
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Staff status', enum: StaffStatus })
   staffStatus?: StaffStatus;
-  // Additional staff fields (to match CreateStaffDto from REST)
+
+  @ApiPropertyOptional({ description: 'Employee ID' })
   employeeId?: string;
+
+  @ApiPropertyOptional({ description: 'Position' })
   position?: string;
+
+  @ApiPropertyOptional({ description: 'Phone number' })
   phone?: string;
+
+  @ApiPropertyOptional({ description: 'Department', enum: Department })
   department?: Department;
 }
 
 // ============= User Search and Stats Request DTOs =============
 
-export interface SearchUsersRequestDto {
+export class SearchUsersRequestDto {
+  @ApiProperty({ description: 'Search query' })
   query: string;
+
+  @ApiPropertyOptional({ description: 'Tenant ID' })
   tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Role filter' })
   role?: string;
+
+  @ApiPropertyOptional({ description: 'Result limit' })
   limit?: number;
 }
 
-export interface GetUserStatsRequestDto {
+export class GetUserStatsRequestDto {
+  @ApiPropertyOptional({ description: 'Tenant ID' })
   tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
   hotelId?: string;
 }
 
-export interface AssignRolesRequestDto {
+export class AssignRolesRequestDto {
+  @ApiProperty({ description: 'User ID' })
   userId: string;
+
+  @ApiProperty({ description: 'Roles to assign', enum: UserRole, isArray: true })
   roles: UserRole[];
 }
 
-export interface ActivateUserRequestDto {
+export class ActivateUserRequestDto {
+  @ApiProperty({ description: 'User ID' })
   id: string;
 }
 
-export interface DeactivateUserRequestDto {
+export class DeactivateUserRequestDto {
+  @ApiProperty({ description: 'User ID' })
   id: string;
 }
 
-export interface GetGuestRequestDto {
+export class GetGuestRequestDto {
+  @ApiProperty({ description: 'Guest ID' })
   guestId: string;
 }
 
@@ -181,10 +264,33 @@ export class StaffInfoResponseDto {
   hotelId?: string;
 }
 
-export interface UserStatsDto {
+export class UserStatsDto {
+  @ApiProperty({ description: 'Total users' })
   totalUsers: number;
+
+  @ApiProperty({ description: 'Active users' })
   activeUsers: number;
+
+  @ApiProperty({ description: 'Inactive users' })
   inactiveUsers: number;
+
+  @ApiProperty({ description: 'Users by role' })
   usersByRole: Record<string, number>;
+
+  @ApiProperty({ description: 'Recent logins' })
   recentLogins: number;
+}
+
+export class FindStaffListNatsResponseDto {
+  @ApiProperty({ description: 'Staff list', type: [UserResponseDto] })
+  data: UserResponseDto[];
+
+  @ApiProperty({ description: 'Total count' })
+  total: number;
+
+  @ApiProperty({ description: 'Current page' })
+  page: number;
+
+  @ApiProperty({ description: 'Items per page' })
+  limit: number;
 }

@@ -3,7 +3,9 @@
  * Patterns: housekeeping.timers.*
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
+import { MobileTaskResponse } from './cleaning-tasks-extended.nats';
 import {
   TimerReportSummaryDto,
   TimerReportStaffStatsDto,
@@ -12,62 +14,131 @@ import {
   TimerReportDataDto
 } from '../rest/timers.rest';
 
-export interface TaskTimer {
+export class TaskTimer {
+  @ApiProperty({ description: 'Timer ID' })
   id: string;
+
+  @ApiProperty({ description: 'Task ID' })
   taskId: string;
+
+  @ApiProperty({ description: 'Staff ID' })
   staffId: string;
+
+  @ApiProperty({ description: 'Start time (ISO)' })
   startTime: string;
+
+  @ApiPropertyOptional({ description: 'Pause time (ISO)' })
   pauseTime?: string;
+
+  @ApiPropertyOptional({ description: 'Resume time (ISO)' })
   resumeTime?: string;
+
+  @ApiPropertyOptional({ description: 'Stop time (ISO)' })
   stopTime?: string;
+
+  @ApiProperty({ description: 'Timer status', enum: ['RUNNING', 'PAUSED', 'STOPPED'] })
   status: 'RUNNING' | 'PAUSED' | 'STOPPED';
-  totalDuration?: number; // in minutes
+
+  @ApiPropertyOptional({ description: 'Total duration in minutes' })
+  totalDuration?: number;
+
+  @ApiPropertyOptional({ description: 'Notes' })
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Quality rating' })
   qualityRating?: number;
+
+  @ApiPropertyOptional({ description: 'Reviewed by staff ID' })
   reviewedBy?: string;
+
+  @ApiPropertyOptional({ description: 'Whether timer was approved' })
   approved?: boolean;
+
+  @ApiPropertyOptional({ description: 'Review notes' })
   reviewNotes?: string;
+
+  @ApiPropertyOptional({ description: 'Adjusted minutes' })
   adjustedMinutes?: number;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiProperty({ description: 'Created at (ISO)' })
   createdAt: string;
+
+  @ApiProperty({ description: 'Updated at (ISO)' })
   updatedAt: string;
 }
 
 // START
-export interface StartTimerNatsRequest {
+export class StartTimerNatsRequest {
+  @ApiProperty({ description: 'Task ID' })
   taskId: string;
+
+  @ApiProperty({ description: 'Staff ID' })
   staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 }
-export type StartTimerNatsResponse = NatsResponse<any>;
+export type StartTimerNatsResponse = NatsResponse<MobileTaskResponse>;
 
 // PAUSE
-export interface PauseTimerNatsRequest {
+export class PauseTimerNatsRequest {
+  @ApiProperty({ description: 'Task ID' })
   taskId: string;
+
+  @ApiProperty({ description: 'Staff ID' })
   staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Pause notes' })
   notes?: string;
 }
-export type PauseTimerNatsResponse = NatsResponse<any>;
+export type PauseTimerNatsResponse = NatsResponse<MobileTaskResponse>;
 
 // RESUME
-export interface ResumeTimerNatsRequest {
+export class ResumeTimerNatsRequest {
+  @ApiProperty({ description: 'Task ID' })
   taskId: string;
+
+  @ApiProperty({ description: 'Staff ID' })
   staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 }
-export type ResumeTimerNatsResponse = NatsResponse<any>;
+export type ResumeTimerNatsResponse = NatsResponse<MobileTaskResponse>;
 
 // STOP
-export interface StopTimerNatsRequest {
+export class StopTimerNatsRequest {
+  @ApiProperty({ description: 'Task ID' })
   taskId: string;
+
+  @ApiProperty({ description: 'Staff ID' })
   staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiProperty({ description: 'Stop data' })
   stopData: {
     stopTime?: string;
     notes?: string;
@@ -77,51 +148,90 @@ export interface StopTimerNatsRequest {
 export type StopTimerNatsResponse = NatsResponse<any>;
 
 // STATS
-export interface GetTimerStatsNatsRequest {
+export class GetTimerStatsNatsRequest {
+  @ApiProperty({ description: 'Task ID' })
   taskId: string;
+
+  @ApiProperty({ description: 'Staff ID' })
   staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 }
-export interface TimerStats {
+export class TimerStats {
+  @ApiProperty({ description: 'Elapsed seconds' })
   elapsedSeconds: number;
+
+  @ApiProperty({ description: 'Paused seconds' })
   pausedSeconds: number;
+
+  @ApiProperty({ description: 'Working seconds' })
   workingSeconds: number;
+
+  @ApiProperty({ description: 'Elapsed time (formatted)' })
   elapsedTime: string;
+
+  @ApiProperty({ description: 'Paused time (formatted)' })
   pausedTime: string;
+
+  @ApiProperty({ description: 'Working time (formatted)' })
   workingTime: string;
+
+  @ApiProperty({ description: 'Efficiency percentage' })
   efficiency: number;
 }
 export type GetTimerStatsNatsResponse = NatsResponse<TimerStats>;
 
 // HISTORY
-export interface GetTaskTimersNatsRequest {
+export class GetTaskTimersNatsRequest {
+  @ApiProperty({ description: 'Task ID' })
   taskId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
-  filters?: any;
+
+  @ApiPropertyOptional({ description: 'Filters' })
+  filters?: Record<string, unknown>;
 }
 export type GetTaskTimersNatsResponse = NatsResponse<TaskTimer[]>;
 
 // REVIEW
-export interface ReviewTimerNatsRequest {
+export class ReviewTimerNatsRequest {
+  @ApiProperty({ description: 'Timer ID' })
   timerId: string;
+
+  @ApiProperty({ description: 'Review data' })
   reviewData: {
     reviewedBy: string;
     approved: boolean;
     reviewNotes?: string;
     adjustedMinutes?: number;
   };
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 }
 export type ReviewTimerNatsResponse = NatsResponse<TaskTimer>;
 
 // REPORT
-export interface GetTimerReportNatsRequest {
+export class GetTimerReportNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
-  filters?: any;
+
+  @ApiPropertyOptional({ description: 'Filters' })
+  filters?: Record<string, unknown>;
 }
 
 /**
@@ -139,16 +249,30 @@ export {
 export type GetTimerReportNatsResponse = NatsResponse<TimerReportDataDto>;
 
 // STAFF SUMMARY
-export interface GetStaffTaskSummaryNatsRequest {
+export class GetStaffTaskSummaryNatsRequest {
+  @ApiProperty({ description: 'Staff ID' })
   staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 }
-export interface StaffTaskSummary {
+export class StaffTaskSummary {
+  @ApiProperty({ description: 'Total tasks' })
   total: number;
+
+  @ApiProperty({ description: 'Completed tasks' })
   completed: number;
+
+  @ApiProperty({ description: 'Pending tasks' })
   pending: number;
+
+  @ApiProperty({ description: 'In-progress tasks' })
   inProgress: number;
+
+  @ApiPropertyOptional({ description: 'Overdue tasks' })
   overdue?: number;
 }
 export type GetStaffTaskSummaryNatsResponse = NatsResponse<StaffTaskSummary>;

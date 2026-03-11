@@ -3,8 +3,9 @@
  * Patterns: housekeeping.timers.*
  */
 import { NatsResponse } from '../../common';
+import { MobileTaskResponse } from './cleaning-tasks-extended.nats';
 import { TimerReportSummaryDto, TimerReportStaffStatsDto, TimerReportTaskDto, TimerReportTimerItemDto, TimerReportDataDto } from '../rest/timers.rest';
-export interface TaskTimer {
+export declare class TaskTimer {
     id: string;
     taskId: string;
     staffId: string;
@@ -25,29 +26,29 @@ export interface TaskTimer {
     createdAt: string;
     updatedAt: string;
 }
-export interface StartTimerNatsRequest {
+export declare class StartTimerNatsRequest {
     taskId: string;
     staffId: string;
     tenantId: string;
     hotelId: string;
 }
-export type StartTimerNatsResponse = NatsResponse<any>;
-export interface PauseTimerNatsRequest {
+export type StartTimerNatsResponse = NatsResponse<MobileTaskResponse>;
+export declare class PauseTimerNatsRequest {
     taskId: string;
     staffId: string;
     tenantId: string;
     hotelId: string;
     notes?: string;
 }
-export type PauseTimerNatsResponse = NatsResponse<any>;
-export interface ResumeTimerNatsRequest {
+export type PauseTimerNatsResponse = NatsResponse<MobileTaskResponse>;
+export declare class ResumeTimerNatsRequest {
     taskId: string;
     staffId: string;
     tenantId: string;
     hotelId: string;
 }
-export type ResumeTimerNatsResponse = NatsResponse<any>;
-export interface StopTimerNatsRequest {
+export type ResumeTimerNatsResponse = NatsResponse<MobileTaskResponse>;
+export declare class StopTimerNatsRequest {
     taskId: string;
     staffId: string;
     tenantId: string;
@@ -59,13 +60,13 @@ export interface StopTimerNatsRequest {
     };
 }
 export type StopTimerNatsResponse = NatsResponse<any>;
-export interface GetTimerStatsNatsRequest {
+export declare class GetTimerStatsNatsRequest {
     taskId: string;
     staffId: string;
     tenantId: string;
     hotelId: string;
 }
-export interface TimerStats {
+export declare class TimerStats {
     elapsedSeconds: number;
     pausedSeconds: number;
     workingSeconds: number;
@@ -75,14 +76,14 @@ export interface TimerStats {
     efficiency: number;
 }
 export type GetTimerStatsNatsResponse = NatsResponse<TimerStats>;
-export interface GetTaskTimersNatsRequest {
+export declare class GetTaskTimersNatsRequest {
     taskId: string;
     tenantId: string;
     hotelId: string;
-    filters?: any;
+    filters?: Record<string, unknown>;
 }
 export type GetTaskTimersNatsResponse = NatsResponse<TaskTimer[]>;
-export interface ReviewTimerNatsRequest {
+export declare class ReviewTimerNatsRequest {
     timerId: string;
     reviewData: {
         reviewedBy: string;
@@ -94,10 +95,10 @@ export interface ReviewTimerNatsRequest {
     hotelId: string;
 }
 export type ReviewTimerNatsResponse = NatsResponse<TaskTimer>;
-export interface GetTimerReportNatsRequest {
+export declare class GetTimerReportNatsRequest {
     tenantId: string;
     hotelId: string;
-    filters?: any;
+    filters?: Record<string, unknown>;
 }
 /**
  * Timer Report DTOs
@@ -105,12 +106,12 @@ export interface GetTimerReportNatsRequest {
  */
 export { TimerReportSummaryDto, TimerReportStaffStatsDto, TimerReportTaskDto, TimerReportTimerItemDto, TimerReportDataDto };
 export type GetTimerReportNatsResponse = NatsResponse<TimerReportDataDto>;
-export interface GetStaffTaskSummaryNatsRequest {
+export declare class GetStaffTaskSummaryNatsRequest {
     staffId: string;
     tenantId: string;
     hotelId: string;
 }
-export interface StaffTaskSummary {
+export declare class StaffTaskSummary {
     total: number;
     completed: number;
     pending: number;

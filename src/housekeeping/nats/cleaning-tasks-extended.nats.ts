@@ -8,6 +8,21 @@ import { IsString, IsOptional, IsNumber, IsArray, IsDateString, IsBoolean, IsEnu
 import { NatsResponse } from '../../common';
 import { TaskStatus, TaskType, TaskPriority } from '../enums';
 
+// FIND TASK BY ID
+export class FindTaskByIdNatsRequest {
+  @ApiProperty({ description: 'Task ID' })
+  @IsString()
+  id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
+  hotelId: string;
+}
+
 // RECENT TASKS (Mobile)
 export class GetRecentTasksNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
