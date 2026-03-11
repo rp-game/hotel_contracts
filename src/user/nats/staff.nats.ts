@@ -10,7 +10,7 @@ import { UserRole } from '../enums';
 import { StaffStatus } from '../enums';
 import { FeedbackType, FeedbackPriority } from '../enums/user.enum';
 // Import unified DTOs from REST - used by both NATS and REST
-import { StaffDto, CreateStaffDto, UpdateStaffStatusDto } from '../rest/staff.dto';
+import { StaffDto, CreateStaffDto, UpdateStaffStatusDto, EmergencyContactDto, UserPreferencesDto } from '../rest/staff.dto';
 
 // ============= NATS Message Payloads (Requests) =============
 
@@ -57,6 +57,19 @@ export { CreateStaffDto, UpdateStaffStatusDto } from '../rest/staff.dto';
 //     staffStatus?: StaffStatus;
 //   };
 // }
+
+export interface UpdateStaffProfilePayload {
+  staffId: string;
+  tenantId: string;
+  hotelId: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  avatar?: string;
+  emergencyContact?: EmergencyContactDto;
+  preferences?: UserPreferencesDto;
+}
 
 export interface DeactivateStaffPayload {
   id: string;

@@ -46,7 +46,8 @@ export declare enum StaffStatus {
     ACTIVE = "ACTIVE",
     INACTIVE = "INACTIVE",
     ON_LEAVE = "ON_LEAVE",
-    TERMINATED = "TERMINATED"
+    TERMINATED = "TERMINATED",
+    SUSPENDED = "SUSPENDED"
 }
 /**
  * Enum representing staff departments in the hotel system

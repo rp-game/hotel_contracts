@@ -9,8 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ClockInOutDto = exports.DeviceInfoDto = exports.QuickActionResponseDto = exports.NextActionDto = exports.QuickActionExecuteDto = exports.QuickActionParametersDto = exports.MobileDashboardDto = exports.DashboardCurrentShiftDto = exports.DashboardPerformanceDto = exports.DashboardOccupancyDto = exports.DashboardTaskStatsDto = exports.DashboardStaffInfoDto = exports.StaffResponseDto = exports.CreateStaffResponseDto = exports.StaffListResponseDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
+exports.UpdateProfileDto = exports.PublicUserListResponseDto = exports.PublicUserDto = exports.StaffProfileDto = exports.UserPreferencesDto = exports.NotificationPreferencesDto = exports.EmergencyContactDto = exports.ClockInOutDto = exports.DeviceInfoDto = exports.QuickActionResponseDto = exports.NextActionDto = exports.QuickActionExecuteDto = exports.QuickActionParametersDto = exports.MobileDashboardDto = exports.DashboardCurrentShiftDto = exports.DashboardPerformanceDto = exports.DashboardOccupancyDto = exports.DashboardTaskStatsDto = exports.DashboardStaffInfoDto = exports.StaffResponseDto = exports.CreateStaffResponseDto = exports.StaffListResponseDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
 /**
@@ -790,4 +791,336 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", DeviceInfoDto)
 ], ClockInOutDto.prototype, "deviceInfo", void 0);
+// ============================================================================
+// STAFF PROFILE & PUBLIC USER DTOs
+// ============================================================================
+/**
+ * Emergency Contact DTO
+ * @description Nested object for staff emergency contact info
+ */
+class EmergencyContactDto {
+    name;
+    phone;
+    relationship;
+}
+exports.EmergencyContactDto = EmergencyContactDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Contact name', example: 'Jane Doe' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], EmergencyContactDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Contact phone number', example: '+84-123-456-789' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], EmergencyContactDto.prototype, "phone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Relationship to staff', example: 'Spouse' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], EmergencyContactDto.prototype, "relationship", void 0);
+/**
+ * Notification Preferences DTO
+ * @description Nested object for notification channel preferences
+ */
+class NotificationPreferencesDto {
+    email;
+    push;
+    sms;
+}
+exports.NotificationPreferencesDto = NotificationPreferencesDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Receive email notifications', example: true }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], NotificationPreferencesDto.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Receive push notifications', example: true }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], NotificationPreferencesDto.prototype, "push", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Receive SMS notifications', example: false }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], NotificationPreferencesDto.prototype, "sms", void 0);
+/**
+ * User Preferences DTO
+ * @description Nested object for user preference settings
+ */
+class UserPreferencesDto {
+    language;
+    timezone;
+    notificationSettings;
+}
+exports.UserPreferencesDto = UserPreferencesDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Preferred language', example: 'vi' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UserPreferencesDto.prototype, "language", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Preferred timezone', example: 'Asia/Ho_Chi_Minh' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UserPreferencesDto.prototype, "timezone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notification settings', type: NotificationPreferencesDto }),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => NotificationPreferencesDto),
+    __metadata("design:type", NotificationPreferencesDto)
+], UserPreferencesDto.prototype, "notificationSettings", void 0);
+/**
+ * Staff Profile DTO
+ * @description Full staff profile response for mobile app
+ * @usage GET /api/staff/profile
+ */
+class StaffProfileDto {
+    id;
+    firstName;
+    lastName;
+    email;
+    phone;
+    role;
+    status;
+    avatar;
+    tenantId;
+    hotelId;
+    permissions;
+    department;
+    position;
+    hireDate;
+    emergencyContact;
+    preferences;
+    metadata;
+    createdAt;
+    updatedAt;
+}
+exports.StaffProfileDto = StaffProfileDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID (UUID)' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'First name' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "firstName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Last name' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "lastName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Email address' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Phone number' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "phone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff role (primary)' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "role", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff status', enum: enums_1.StaffStatus }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Profile avatar URL' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "avatar", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID (UUID)' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID (UUID)' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Staff permissions', type: [String] }),
+    __metadata("design:type", Array)
+], StaffProfileDto.prototype, "permissions", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Department' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "department", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Position/Job title' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "position", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hire date (ISO date)' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "hireDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Emergency contact information', type: EmergencyContactDto }),
+    __metadata("design:type", EmergencyContactDto)
+], StaffProfileDto.prototype, "emergencyContact", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User preferences', type: UserPreferencesDto }),
+    __metadata("design:type", UserPreferencesDto)
+], StaffProfileDto.prototype, "preferences", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional metadata' }),
+    __metadata("design:type", Object)
+], StaffProfileDto.prototype, "metadata", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Creation timestamp' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Last update timestamp' }),
+    __metadata("design:type", String)
+], StaffProfileDto.prototype, "updatedAt", void 0);
+/**
+ * Public User DTO
+ * @description Minimal public-facing user information
+ * @usage GET /api/staff/user/:userId/public-info, GET /api/staff/users/public-list
+ */
+class PublicUserDto {
+    id;
+    firstName;
+    lastName;
+    email;
+    role;
+    status;
+    avatar;
+    department;
+    position;
+}
+exports.PublicUserDto = PublicUserDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User ID (UUID)' }),
+    __metadata("design:type", String)
+], PublicUserDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'First name' }),
+    __metadata("design:type", String)
+], PublicUserDto.prototype, "firstName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Last name' }),
+    __metadata("design:type", String)
+], PublicUserDto.prototype, "lastName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Email address' }),
+    __metadata("design:type", String)
+], PublicUserDto.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User role' }),
+    __metadata("design:type", String)
+], PublicUserDto.prototype, "role", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User status' }),
+    __metadata("design:type", String)
+], PublicUserDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Profile avatar URL' }),
+    __metadata("design:type", String)
+], PublicUserDto.prototype, "avatar", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Department' }),
+    __metadata("design:type", String)
+], PublicUserDto.prototype, "department", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Position/Job title' }),
+    __metadata("design:type", String)
+], PublicUserDto.prototype, "position", void 0);
+/**
+ * Public User List Response DTO
+ * @description Paginated list of public user info
+ * @usage GET /api/staff/users/public-list
+ */
+class PublicUserListResponseDto {
+    data;
+    total;
+    page;
+    limit;
+    hasNext;
+    hasPrev;
+}
+exports.PublicUserListResponseDto = PublicUserListResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'List of public user info', type: [PublicUserDto] }),
+    __metadata("design:type", Array)
+], PublicUserListResponseDto.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total count of users' }),
+    __metadata("design:type", Number)
+], PublicUserListResponseDto.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current page' }),
+    __metadata("design:type", Number)
+], PublicUserListResponseDto.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Items per page' }),
+    __metadata("design:type", Number)
+], PublicUserListResponseDto.prototype, "limit", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Has next page' }),
+    __metadata("design:type", Boolean)
+], PublicUserListResponseDto.prototype, "hasNext", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Has previous page' }),
+    __metadata("design:type", Boolean)
+], PublicUserListResponseDto.prototype, "hasPrev", void 0);
+/**
+ * Update Profile DTO
+ * @description Request body for updating staff profile
+ * @usage PUT /api/staff/profile
+ */
+class UpdateProfileDto {
+    firstName;
+    lastName;
+    email;
+    phone;
+    avatar;
+    emergencyContact;
+    preferences;
+}
+exports.UpdateProfileDto = UpdateProfileDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'First name' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateProfileDto.prototype, "firstName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Last name' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateProfileDto.prototype, "lastName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Email address' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEmail)(),
+    __metadata("design:type", String)
+], UpdateProfileDto.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Phone number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateProfileDto.prototype, "phone", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Profile avatar URL' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateProfileDto.prototype, "avatar", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Emergency contact information', type: EmergencyContactDto }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => EmergencyContactDto),
+    __metadata("design:type", EmergencyContactDto)
+], UpdateProfileDto.prototype, "emergencyContact", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User preferences', type: UserPreferencesDto }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => UserPreferencesDto),
+    __metadata("design:type", UserPreferencesDto)
+], UpdateProfileDto.prototype, "preferences", void 0);
 //# sourceMappingURL=staff.dto.js.map

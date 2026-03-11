@@ -55,6 +55,8 @@ export interface FindStaffRequestDto {
   staffStatus?: StaffStatus;
   page?: number;
   limit?: number;
+  tenantId?: string;
+  search?: string;
 }
 
 export interface GetStaffByIdRequestDto {

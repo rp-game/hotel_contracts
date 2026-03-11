@@ -5,6 +5,7 @@
  */
 import { StaffStatus } from '../enums';
 import { FeedbackType, FeedbackPriority } from '../enums/user.enum';
+import { EmergencyContactDto, UserPreferencesDto } from '../rest/staff.dto';
 export interface FindStaffByIdPayload {
     id: string;
 }
@@ -14,6 +15,18 @@ export interface FindStaffByHotelPayload {
     status?: StaffStatus;
 }
 export { CreateStaffDto, UpdateStaffStatusDto } from '../rest/staff.dto';
+export interface UpdateStaffProfilePayload {
+    staffId: string;
+    tenantId: string;
+    hotelId: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    phone?: string;
+    avatar?: string;
+    emergencyContact?: EmergencyContactDto;
+    preferences?: UserPreferencesDto;
+}
 export interface DeactivateStaffPayload {
     id: string;
     tenantId: string;

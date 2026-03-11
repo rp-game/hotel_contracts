@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsEmail, IsArray, IsBoolean, IsUUID, IsOptional, IsEnum, IsDateString, IsNumber } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsString, IsEmail, IsArray, IsBoolean, IsUUID, IsOptional, IsEnum, IsDateString, IsNumber, ValidateNested } from 'class-validator';
 import { StaffStatus, Department } from '../enums';
 
 /**
@@ -542,4 +543,230 @@ export class ClockInOutDto {
   @ApiPropertyOptional({ description: 'Device information', type: DeviceInfoDto })
   @IsOptional()
   deviceInfo?: DeviceInfoDto;
+}
+
+// ============================================================================
+// STAFF PROFILE & PUBLIC USER DTOs
+// ============================================================================
+
+/**
+ * Emergency Contact DTO
+ * @description Nested object for staff emergency contact info
+ */
+export class EmergencyContactDto {
+  @ApiProperty({ description: 'Contact name', example: 'Jane Doe' })
+  @IsString()
+  name: string;
+
+  @ApiProperty({ description: 'Contact phone number', example: '+84-123-456-789' })
+  @IsString()
+  phone: string;
+
+  @ApiProperty({ description: 'Relationship to staff', example: 'Spouse' })
+  @IsString()
+  relationship: string;
+}
+
+/**
+ * Notification Preferences DTO
+ * @description Nested object for notification channel preferences
+ */
+export class NotificationPreferencesDto {
+  @ApiProperty({ description: 'Receive email notifications', example: true })
+  @IsBoolean()
+  email: boolean;
+
+  @ApiProperty({ description: 'Receive push notifications', example: true })
+  @IsBoolean()
+  push: boolean;
+
+  @ApiProperty({ description: 'Receive SMS notifications', example: false })
+  @IsBoolean()
+  sms: boolean;
+}
+
+/**
+ * User Preferences DTO
+ * @description Nested object for user preference settings
+ */
+export class UserPreferencesDto {
+  @ApiProperty({ description: 'Preferred language', example: 'vi' })
+  @IsString()
+  language: string;
+
+  @ApiProperty({ description: 'Preferred timezone', example: 'Asia/Ho_Chi_Minh' })
+  @IsString()
+  timezone: string;
+
+  @ApiProperty({ description: 'Notification settings', type: NotificationPreferencesDto })
+  @ValidateNested()
+  @Type(() => NotificationPreferencesDto)
+  notificationSettings: NotificationPreferencesDto;
+}
+
+/**
+ * Staff Profile DTO
+ * @description Full staff profile response for mobile app
+ * @usage GET /api/staff/profile
+ */
+export class StaffProfileDto {
+  @ApiProperty({ description: 'Staff ID (UUID)' })
+  id: string;
+
+  @ApiProperty({ description: 'First name' })
+  firstName: string;
+
+  @ApiProperty({ description: 'Last name' })
+  lastName: string;
+
+  @ApiProperty({ description: 'Email address' })
+  email: string;
+
+  @ApiPropertyOptional({ description: 'Phone number' })
+  phone?: string;
+
+  @ApiProperty({ description: 'Staff role (primary)' })
+  role: string;
+
+  @ApiProperty({ description: 'Staff status', enum: StaffStatus })
+  status: StaffStatus;
+
+  @ApiPropertyOptional({ description: 'Profile avatar URL' })
+  avatar?: string;
+
+  @ApiProperty({ description: 'Tenant ID (UUID)' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID (UUID)' })
+  hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Staff permissions', type: [String] })
+  permissions?: string[];
+
+  @ApiPropertyOptional({ description: 'Department' })
+  department?: string;
+
+  @ApiPropertyOptional({ description: 'Position/Job title' })
+  position?: string;
+
+  @ApiPropertyOptional({ description: 'Hire date (ISO date)' })
+  hireDate?: string;
+
+  @ApiPropertyOptional({ description: 'Emergency contact information', type: EmergencyContactDto })
+  emergencyContact?: EmergencyContactDto;
+
+  @ApiPropertyOptional({ description: 'User preferences', type: UserPreferencesDto })
+  preferences?: UserPreferencesDto;
+
+  @ApiPropertyOptional({ description: 'Additional metadata' })
+  metadata?: Record<string, unknown>;
+
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt: string;
+
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt: string;
+}
+
+/**
+ * Public User DTO
+ * @description Minimal public-facing user information
+ * @usage GET /api/staff/user/:userId/public-info, GET /api/staff/users/public-list
+ */
+export class PublicUserDto {
+  @ApiProperty({ description: 'User ID (UUID)' })
+  id: string;
+
+  @ApiProperty({ description: 'First name' })
+  firstName: string;
+
+  @ApiProperty({ description: 'Last name' })
+  lastName: string;
+
+  @ApiProperty({ description: 'Email address' })
+  email: string;
+
+  @ApiProperty({ description: 'User role' })
+  role: string;
+
+  @ApiProperty({ description: 'User status' })
+  status: string;
+
+  @ApiPropertyOptional({ description: 'Profile avatar URL' })
+  avatar?: string;
+
+  @ApiPropertyOptional({ description: 'Department' })
+  department?: string;
+
+  @ApiPropertyOptional({ description: 'Position/Job title' })
+  position?: string;
+}
+
+/**
+ * Public User List Response DTO
+ * @description Paginated list of public user info
+ * @usage GET /api/staff/users/public-list
+ */
+export class PublicUserListResponseDto {
+  @ApiProperty({ description: 'List of public user info', type: [PublicUserDto] })
+  data: PublicUserDto[];
+
+  @ApiProperty({ description: 'Total count of users' })
+  total: number;
+
+  @ApiProperty({ description: 'Current page' })
+  page: number;
+
+  @ApiProperty({ description: 'Items per page' })
+  limit: number;
+
+  @ApiProperty({ description: 'Has next page' })
+  hasNext: boolean;
+
+  @ApiProperty({ description: 'Has previous page' })
+  hasPrev: boolean;
+}
+
+/**
+ * Update Profile DTO
+ * @description Request body for updating staff profile
+ * @usage PUT /api/staff/profile
+ */
+export class UpdateProfileDto {
+  @ApiPropertyOptional({ description: 'First name' })
+  @IsOptional()
+  @IsString()
+  firstName?: string;
+
+  @ApiPropertyOptional({ description: 'Last name' })
+  @IsOptional()
+  @IsString()
+  lastName?: string;
+
+  @ApiPropertyOptional({ description: 'Email address' })
+  @IsOptional()
+  @IsEmail()
+  email?: string;
+
+  @ApiPropertyOptional({ description: 'Phone number' })
+  @IsOptional()
+  @IsString()
+  phone?: string;
+
+  @ApiPropertyOptional({ description: 'Profile avatar URL' })
+  @IsOptional()
+  @IsString()
+  avatar?: string;
+
+  @ApiPropertyOptional({ description: 'Emergency contact information', type: EmergencyContactDto })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => EmergencyContactDto)
+  emergencyContact?: EmergencyContactDto;
+
+  @ApiPropertyOptional({ description: 'User preferences', type: UserPreferencesDto })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => UserPreferencesDto)
+  preferences?: UserPreferencesDto;
 }

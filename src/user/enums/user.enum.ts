@@ -74,6 +74,7 @@ export enum StaffStatus {
   INACTIVE = 'INACTIVE',
   ON_LEAVE = 'ON_LEAVE',
   TERMINATED = 'TERMINATED',
+  SUSPENDED = 'SUSPENDED',
 }
 
 /**

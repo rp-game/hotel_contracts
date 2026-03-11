@@ -211,4 +211,100 @@ export declare class ClockInOutDto {
     timestamp: string;
     deviceInfo?: DeviceInfoDto;
 }
+/**
+ * Emergency Contact DTO
+ * @description Nested object for staff emergency contact info
+ */
+export declare class EmergencyContactDto {
+    name: string;
+    phone: string;
+    relationship: string;
+}
+/**
+ * Notification Preferences DTO
+ * @description Nested object for notification channel preferences
+ */
+export declare class NotificationPreferencesDto {
+    email: boolean;
+    push: boolean;
+    sms: boolean;
+}
+/**
+ * User Preferences DTO
+ * @description Nested object for user preference settings
+ */
+export declare class UserPreferencesDto {
+    language: string;
+    timezone: string;
+    notificationSettings: NotificationPreferencesDto;
+}
+/**
+ * Staff Profile DTO
+ * @description Full staff profile response for mobile app
+ * @usage GET /api/staff/profile
+ */
+export declare class StaffProfileDto {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone?: string;
+    role: string;
+    status: StaffStatus;
+    avatar?: string;
+    tenantId: string;
+    hotelId: string;
+    permissions?: string[];
+    department?: string;
+    position?: string;
+    hireDate?: string;
+    emergencyContact?: EmergencyContactDto;
+    preferences?: UserPreferencesDto;
+    metadata?: Record<string, unknown>;
+    createdAt: string;
+    updatedAt: string;
+}
+/**
+ * Public User DTO
+ * @description Minimal public-facing user information
+ * @usage GET /api/staff/user/:userId/public-info, GET /api/staff/users/public-list
+ */
+export declare class PublicUserDto {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    role: string;
+    status: string;
+    avatar?: string;
+    department?: string;
+    position?: string;
+}
+/**
+ * Public User List Response DTO
+ * @description Paginated list of public user info
+ * @usage GET /api/staff/users/public-list
+ */
+export declare class PublicUserListResponseDto {
+    data: PublicUserDto[];
+    total: number;
+    page: number;
+    limit: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+}
+/**
+ * Update Profile DTO
+ * @description Request body for updating staff profile
+ * @usage PUT /api/staff/profile
+ */
+export declare class UpdateProfileDto {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    phone?: string;
+    avatar?: string;
+    emergencyContact?: EmergencyContactDto;
+    preferences?: UserPreferencesDto;
+}
 //# sourceMappingURL=staff.dto.d.ts.map

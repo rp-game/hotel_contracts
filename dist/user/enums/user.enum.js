@@ -65,6 +65,7 @@ var StaffStatus;
     StaffStatus["INACTIVE"] = "INACTIVE";
     StaffStatus["ON_LEAVE"] = "ON_LEAVE";
     StaffStatus["TERMINATED"] = "TERMINATED";
+    StaffStatus["SUSPENDED"] = "SUSPENDED";
 })(StaffStatus || (exports.StaffStatus = StaffStatus = {}));
 /**
  * Enum representing staff departments in the hotel system
