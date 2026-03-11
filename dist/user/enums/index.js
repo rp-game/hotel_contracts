@@ -17,4 +17,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./user-role.enum"), exports);
 __exportStar(require("./staff-status.enum"), exports);
 __exportStar(require("./department.enum"), exports);
+__exportStar(require("./feedback.enum"), exports);
 //# sourceMappingURL=index.js.map

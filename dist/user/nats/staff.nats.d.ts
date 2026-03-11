@@ -4,6 +4,7 @@
  * Exported from user-service
  */
 import { StaffStatus } from '../enums';
+import { FeedbackType, FeedbackPriority } from '../enums/feedback.enum';
 export interface FindStaffByIdPayload {
     id: string;
 }
@@ -168,5 +169,18 @@ export declare class StaffPermissionCheckDto {
     allowed: boolean;
     tenantId: string;
     hotelId: string;
+}
+export { FeedbackDto, FeedbackResponseDto } from '../rest/feedback.dto';
+export { FeedbackType, FeedbackPriority } from '../enums/feedback.enum';
+export declare class SubmitFeedbackPayload {
+    staffId: string;
+    tenantId: string;
+    type: FeedbackType;
+    subject: string;
+    description: string;
+    priority: FeedbackPriority;
+    contactEmail: string;
+    userAgent: string;
+    appVersion: string;
 }
 //# sourceMappingURL=staff.nats.d.ts.map

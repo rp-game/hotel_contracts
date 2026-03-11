@@ -5,8 +5,10 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsEmail, IsEnum, MinLength } from 'class-validator';
 import { UserRole } from '../enums';
 import { StaffStatus } from '../enums';
+import { FeedbackType, FeedbackPriority } from '../enums/feedback.enum';
 // Import unified DTOs from REST - used by both NATS and REST
 import { StaffDto, CreateStaffDto, UpdateStaffStatusDto } from '../rest/staff.dto';
 
@@ -374,4 +376,48 @@ export class StaffPermissionCheckDto {
 
   @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+}
+
+// ============= FEEDBACK =============
+export { FeedbackDto, FeedbackResponseDto } from '../rest/feedback.dto';
+export { FeedbackType, FeedbackPriority } from '../enums/feedback.enum';
+
+export class SubmitFeedbackPayload {
+  @ApiProperty({ description: 'Staff ID' })
+  @IsString()
+  staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Feedback type', enum: FeedbackType })
+  @IsEnum(FeedbackType)
+  type: FeedbackType;
+
+  @ApiProperty({ description: 'Feedback subject' })
+  @IsString()
+  @MinLength(5)
+  subject: string;
+
+  @ApiProperty({ description: 'Detailed description' })
+  @IsString()
+  @MinLength(10)
+  description: string;
+
+  @ApiProperty({ description: 'Priority level', enum: FeedbackPriority })
+  @IsEnum(FeedbackPriority)
+  priority: FeedbackPriority;
+
+  @ApiProperty({ description: 'Contact email' })
+  @IsEmail()
+  contactEmail: string;
+
+  @ApiProperty({ description: 'User agent/platform' })
+  @IsString()
+  userAgent: string;
+
+  @ApiProperty({ description: 'App version' })
+  @IsString()
+  appVersion: string;
 }

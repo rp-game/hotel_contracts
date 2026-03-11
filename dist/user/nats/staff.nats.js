@@ -14,8 +14,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
+exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
+const feedback_enum_1 = require("../enums/feedback.enum");
 // ============= UNIFIED DTOs - Re-exported from REST =============
 // CreateStaffDto and UpdateStaffStatusDto are imported above and used for BOTH REST and NATS
 // This ensures ONE source of truth for staff creation/update operations
@@ -420,4 +422,70 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
     __metadata("design:type", String)
 ], StaffPermissionCheckDto.prototype, "hotelId", void 0);
+// ============= FEEDBACK =============
+var feedback_dto_1 = require("../rest/feedback.dto");
+Object.defineProperty(exports, "FeedbackDto", { enumerable: true, get: function () { return feedback_dto_1.FeedbackDto; } });
+Object.defineProperty(exports, "FeedbackResponseDto", { enumerable: true, get: function () { return feedback_dto_1.FeedbackResponseDto; } });
+var feedback_enum_2 = require("../enums/feedback.enum");
+Object.defineProperty(exports, "FeedbackType", { enumerable: true, get: function () { return feedback_enum_2.FeedbackType; } });
+Object.defineProperty(exports, "FeedbackPriority", { enumerable: true, get: function () { return feedback_enum_2.FeedbackPriority; } });
+class SubmitFeedbackPayload {
+    staffId;
+    tenantId;
+    type;
+    subject;
+    description;
+    priority;
+    contactEmail;
+    userAgent;
+    appVersion;
+}
+exports.SubmitFeedbackPayload = SubmitFeedbackPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Feedback type', enum: feedback_enum_1.FeedbackType }),
+    (0, class_validator_1.IsEnum)(feedback_enum_1.FeedbackType),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Feedback subject' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(5),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "subject", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Detailed description' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(10),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Priority level', enum: feedback_enum_1.FeedbackPriority }),
+    (0, class_validator_1.IsEnum)(feedback_enum_1.FeedbackPriority),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "priority", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Contact email' }),
+    (0, class_validator_1.IsEmail)(),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "contactEmail", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User agent/platform' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "userAgent", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'App version' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "appVersion", void 0);
 //# sourceMappingURL=staff.nats.js.map

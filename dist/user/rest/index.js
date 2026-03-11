@@ -18,4 +18,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./find-staff-by-hotel.dto"), exports);
 __exportStar(require("./user-management.dto"), exports);
 __exportStar(require("./staff.dto"), exports);
+__exportStar(require("./feedback.dto"), exports);
 //# sourceMappingURL=index.js.map

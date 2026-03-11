@@ -1,4 +1,5 @@
 export * from './user-role.enum';
 export * from './staff-status.enum';
 export * from './department.enum';
+export * from './feedback.enum';
 //# sourceMappingURL=index.d.ts.map
