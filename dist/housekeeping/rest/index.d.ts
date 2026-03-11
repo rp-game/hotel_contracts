@@ -9,5 +9,6 @@ export { AutomationStatusDto, ActiveRulesDto, AutomationStatsDto, LastRunTimesDt
 export { CheckoutAutomationSettingsDto, CheckinAutomationSettingsDto, AutoAssignmentSettingsDto, OverdueMonitoringSettingsDto, AutomationLastRunTimesDto, AutomationSettingsDto, } from './automation-settings.dto';
 export { TimerReportSummaryDto, TimerReportStaffStatsDto, TimerReportTaskDto, TimerReportTimerItemDto, TimerReportDataDto, } from './timers.rest';
 export { CreateQualityStandardDto, UpdateQualityStandardDto, GetAllQualityStandardsQueryDto, GetQualityStandardsStatisticsQueryDto, } from './quality-standards.rest';
+export * from './quick-complete-task.rest';
 export * from '../nats';
 //# sourceMappingURL=index.d.ts.map

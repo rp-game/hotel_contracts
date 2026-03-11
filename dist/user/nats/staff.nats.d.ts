@@ -183,4 +183,11 @@ export declare class SubmitFeedbackPayload {
     userAgent: string;
     appVersion: string;
 }
+export { ChangePasswordDto, ChangePasswordResponseDto } from '../rest/change-password.dto';
+export declare class ChangePasswordPayload {
+    staffId: string;
+    tenantId: string;
+    currentPassword: string;
+    newPassword: string;
+}
 //# sourceMappingURL=staff.nats.d.ts.map

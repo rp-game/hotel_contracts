@@ -4,6 +4,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsOptional, IsNumber, IsArray, IsDateString } from 'class-validator';
 import { NatsResponse } from '../../common';
 
 // RECENT TASKS (Mobile)
@@ -84,22 +85,56 @@ export interface AddNotesResult {
 export type AddTaskNotesNatsResponse = NatsResponse<AddNotesResult>;
 
 // QUICK COMPLETE
-export interface QuickCompleteTaskNatsRequest {
+export class QuickCompleteTaskNatsRequest {
+  @ApiProperty({ description: 'Task ID' })
+  @IsString()
   taskId: string;
+
+  @ApiProperty({ description: 'Staff ID' })
+  @IsString()
   staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
   hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Completion notes' })
+  @IsOptional()
+  @IsString()
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Task quality rating 1-5' })
+  @IsOptional()
+  @IsNumber()
   qualityRating?: number;
+
+  @ApiPropertyOptional({ description: 'Completion photos' })
+  @IsOptional()
+  @IsArray()
   photos?: string[];
+
+  @ApiPropertyOptional({ description: 'Completion timestamp' })
+  @IsOptional()
+  @IsDateString()
   completedAt?: string;
 }
-export interface QuickCompleteResult {
+export class QuickCompleteResult {
+  @ApiProperty({ description: 'Completed task ID' })
   taskId: string;
+
+  @ApiProperty({ description: 'Completion timestamp' })
   completedAt: string;
+
+  @ApiProperty({ description: 'Task data' })
   data: MobileTaskResponse;
 }
 export type QuickCompleteTaskNatsResponse = NatsResponse<QuickCompleteResult>;
+
+export { QuickCompleteTaskDto, QuickCompleteTaskResponseDto } from '../rest/quick-complete-task.rest';
 
 // SHIFT MANAGEMENT
 export interface ShiftData {

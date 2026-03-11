@@ -13,8 +13,86 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetPerformanceMetricsNatsRequest = exports.StaffPerformanceMetricsNatsResponse = void 0;
+exports.GetPerformanceMetricsNatsRequest = exports.StaffPerformanceMetricsNatsResponse = exports.QuickCompleteTaskResponseDto = exports.QuickCompleteTaskDto = exports.QuickCompleteResult = exports.QuickCompleteTaskNatsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
+// QUICK COMPLETE
+class QuickCompleteTaskNatsRequest {
+    taskId;
+    staffId;
+    tenantId;
+    hotelId;
+    notes;
+    qualityRating;
+    photos;
+    completedAt;
+}
+exports.QuickCompleteTaskNatsRequest = QuickCompleteTaskNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Task ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickCompleteTaskNatsRequest.prototype, "taskId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickCompleteTaskNatsRequest.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickCompleteTaskNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickCompleteTaskNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Completion notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickCompleteTaskNatsRequest.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Task quality rating 1-5' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], QuickCompleteTaskNatsRequest.prototype, "qualityRating", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Completion photos' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    __metadata("design:type", Array)
+], QuickCompleteTaskNatsRequest.prototype, "photos", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Completion timestamp' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], QuickCompleteTaskNatsRequest.prototype, "completedAt", void 0);
+class QuickCompleteResult {
+    taskId;
+    completedAt;
+    data;
+}
+exports.QuickCompleteResult = QuickCompleteResult;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Completed task ID' }),
+    __metadata("design:type", String)
+], QuickCompleteResult.prototype, "taskId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Completion timestamp' }),
+    __metadata("design:type", String)
+], QuickCompleteResult.prototype, "completedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Task data' }),
+    __metadata("design:type", Object)
+], QuickCompleteResult.prototype, "data", void 0);
+var quick_complete_task_rest_1 = require("../rest/quick-complete-task.rest");
+Object.defineProperty(exports, "QuickCompleteTaskDto", { enumerable: true, get: function () { return quick_complete_task_rest_1.QuickCompleteTaskDto; } });
+Object.defineProperty(exports, "QuickCompleteTaskResponseDto", { enumerable: true, get: function () { return quick_complete_task_rest_1.QuickCompleteTaskResponseDto; } });
 /**
  * Staff Performance Metrics (from getPerformanceMetrics)
  * This is what the service ACTUALLY returns - NOT the PerformanceMetric entity

@@ -41,5 +41,8 @@ export {
   GetQualityStandardsStatisticsQueryDto,
 } from './quality-standards.rest';
 
+// Quick Complete Task DTOs
+export * from './quick-complete-task.rest';
+
 // Re-export NATS contracts for internal use
 export * from '../nats';

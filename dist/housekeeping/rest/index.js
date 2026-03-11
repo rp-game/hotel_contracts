@@ -49,6 +49,8 @@ Object.defineProperty(exports, "CreateQualityStandardDto", { enumerable: true, g
 Object.defineProperty(exports, "UpdateQualityStandardDto", { enumerable: true, get: function () { return quality_standards_rest_1.UpdateQualityStandardDto; } });
 Object.defineProperty(exports, "GetAllQualityStandardsQueryDto", { enumerable: true, get: function () { return quality_standards_rest_1.GetAllQualityStandardsQueryDto; } });
 Object.defineProperty(exports, "GetQualityStandardsStatisticsQueryDto", { enumerable: true, get: function () { return quality_standards_rest_1.GetQualityStandardsStatisticsQueryDto; } });
+// Quick Complete Task DTOs
+__exportStar(require("./quick-complete-task.rest"), exports);
 // Re-export NATS contracts for internal use
 __exportStar(require("../nats"), exports);
 //# sourceMappingURL=index.js.map

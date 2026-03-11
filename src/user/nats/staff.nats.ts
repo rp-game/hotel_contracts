@@ -421,3 +421,26 @@ export class SubmitFeedbackPayload {
   @IsString()
   appVersion: string;
 }
+
+// ============= CHANGE PASSWORD =============
+export { ChangePasswordDto, ChangePasswordResponseDto } from '../rest/change-password.dto';
+
+export class ChangePasswordPayload {
+  @ApiProperty({ description: 'Staff ID' })
+  @IsString()
+  staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Current password' })
+  @IsString()
+  @MinLength(1)
+  currentPassword: string;
+
+  @ApiProperty({ description: 'New password' })
+  @IsString()
+  @MinLength(8)
+  newPassword: string;
+}

@@ -72,7 +72,7 @@ export interface AddNotesResult {
     addedBy: string;
 }
 export type AddTaskNotesNatsResponse = NatsResponse<AddNotesResult>;
-export interface QuickCompleteTaskNatsRequest {
+export declare class QuickCompleteTaskNatsRequest {
     taskId: string;
     staffId: string;
     tenantId: string;
@@ -82,12 +82,13 @@ export interface QuickCompleteTaskNatsRequest {
     photos?: string[];
     completedAt?: string;
 }
-export interface QuickCompleteResult {
+export declare class QuickCompleteResult {
     taskId: string;
     completedAt: string;
     data: MobileTaskResponse;
 }
 export type QuickCompleteTaskNatsResponse = NatsResponse<QuickCompleteResult>;
+export { QuickCompleteTaskDto, QuickCompleteTaskResponseDto } from '../rest/quick-complete-task.rest';
 export interface ShiftData {
     id: string;
     staffId: string;

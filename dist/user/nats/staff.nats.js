@@ -14,7 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
+exports.ChangePasswordPayload = exports.ChangePasswordResponseDto = exports.ChangePasswordDto = exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const feedback_enum_1 = require("../enums/feedback.enum");
@@ -488,4 +488,37 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], SubmitFeedbackPayload.prototype, "appVersion", void 0);
+// ============= CHANGE PASSWORD =============
+var change_password_dto_1 = require("../rest/change-password.dto");
+Object.defineProperty(exports, "ChangePasswordDto", { enumerable: true, get: function () { return change_password_dto_1.ChangePasswordDto; } });
+Object.defineProperty(exports, "ChangePasswordResponseDto", { enumerable: true, get: function () { return change_password_dto_1.ChangePasswordResponseDto; } });
+class ChangePasswordPayload {
+    staffId;
+    tenantId;
+    currentPassword;
+    newPassword;
+}
+exports.ChangePasswordPayload = ChangePasswordPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ChangePasswordPayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ChangePasswordPayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current password' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(1),
+    __metadata("design:type", String)
+], ChangePasswordPayload.prototype, "currentPassword", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'New password' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(8),
+    __metadata("design:type", String)
+], ChangePasswordPayload.prototype, "newPassword", void 0);
 //# sourceMappingURL=staff.nats.js.map
