@@ -3,4 +3,5 @@ export * from './staff-status.enum';
 export * from './department.enum';
 export * from './feedback.enum';
 export * from './shift.enum';
+export * from './achievement.enum';
 //# sourceMappingURL=index.d.ts.map

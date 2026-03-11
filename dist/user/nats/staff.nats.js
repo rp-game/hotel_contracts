@@ -14,7 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChangePasswordPayload = exports.GetStaffSchedulePayload = exports.ShiftStatus = exports.ShiftType = exports.StaffScheduleResponseDto = exports.StaffScheduleRequestDto = exports.ShiftScheduleDto = exports.UploadAvatarPayload = exports.UploadAvatarFilePayload = exports.AvatarUploadResponseDto = exports.ChangePasswordResponseDto = exports.ChangePasswordDto = exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
+exports.AchievementCategory = exports.PerformanceDataDto = exports.PerformanceRankDto = exports.AchievementDto = exports.PerformanceMetricsDto = exports.ChangePasswordPayload = exports.GetStaffSchedulePayload = exports.ShiftStatus = exports.ShiftType = exports.StaffScheduleResponseDto = exports.StaffScheduleRequestDto = exports.ShiftScheduleDto = exports.UploadAvatarPayload = exports.UploadAvatarFilePayload = exports.AvatarUploadResponseDto = exports.ChangePasswordResponseDto = exports.ChangePasswordDto = exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const feedback_enum_1 = require("../enums/feedback.enum");
@@ -612,4 +612,12 @@ __decorate([
     (0, class_validator_1.MinLength)(8),
     __metadata("design:type", String)
 ], ChangePasswordPayload.prototype, "newPassword", void 0);
+// ============= STAFF PERFORMANCE (REST response) =============
+var performance_dto_1 = require("../rest/performance.dto");
+Object.defineProperty(exports, "PerformanceMetricsDto", { enumerable: true, get: function () { return performance_dto_1.PerformanceMetricsDto; } });
+Object.defineProperty(exports, "AchievementDto", { enumerable: true, get: function () { return performance_dto_1.AchievementDto; } });
+Object.defineProperty(exports, "PerformanceRankDto", { enumerable: true, get: function () { return performance_dto_1.PerformanceRankDto; } });
+Object.defineProperty(exports, "PerformanceDataDto", { enumerable: true, get: function () { return performance_dto_1.PerformanceDataDto; } });
+var achievement_enum_1 = require("../enums/achievement.enum");
+Object.defineProperty(exports, "AchievementCategory", { enumerable: true, get: function () { return achievement_enum_1.AchievementCategory; } });
 //# sourceMappingURL=staff.nats.js.map

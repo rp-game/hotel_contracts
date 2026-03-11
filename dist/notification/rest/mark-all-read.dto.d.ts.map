@@ -1,0 +1,1 @@
+{"version":3,"file":"mark-all-read.dto.d.ts","sourceRoot":"","sources":["../../../src/notification/rest/mark-all-read.dto.ts"],"names":[],"mappings":"AAGA,qBAAa,2BAA2B;IAItC,SAAS,CAAC,EAAE,MAAM,CAAC;CACpB;AAED,qBAAa,+BAA+B;IAE1C,OAAO,EAAE,OAAO,CAAC;IAGjB,WAAW,EAAE,MAAM,CAAC;IAGpB,OAAO,EAAE,MAAM,CAAC;CACjB"}

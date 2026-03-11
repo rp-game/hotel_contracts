@@ -507,3 +507,7 @@ export class ChangePasswordPayload {
   @MinLength(8)
   newPassword: string;
 }
+
+// ============= STAFF PERFORMANCE (REST response) =============
+export { PerformanceMetricsDto, AchievementDto, PerformanceRankDto, PerformanceDataDto } from '../rest/performance.dto';
+export { AchievementCategory } from '../enums/achievement.enum';

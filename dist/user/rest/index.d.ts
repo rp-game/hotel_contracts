@@ -5,4 +5,5 @@ export * from './feedback.dto';
 export * from './change-password.dto';
 export * from './avatar.dto';
 export * from './schedule.dto';
+export * from './performance.dto';
 //# sourceMappingURL=index.d.ts.map

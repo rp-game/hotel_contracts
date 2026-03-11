@@ -216,4 +216,6 @@ export declare class ChangePasswordPayload {
     currentPassword: string;
     newPassword: string;
 }
+export { PerformanceMetricsDto, AchievementDto, PerformanceRankDto, PerformanceDataDto } from '../rest/performance.dto';
+export { AchievementCategory } from '../enums/achievement.enum';
 //# sourceMappingURL=staff.nats.d.ts.map
