@@ -18,4 +18,5 @@ __exportStar(require("./user-role.enum"), exports);
 __exportStar(require("./staff-status.enum"), exports);
 __exportStar(require("./department.enum"), exports);
 __exportStar(require("./feedback.enum"), exports);
+__exportStar(require("./shift.enum"), exports);
 //# sourceMappingURL=index.js.map

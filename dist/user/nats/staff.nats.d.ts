@@ -184,6 +184,32 @@ export declare class SubmitFeedbackPayload {
     appVersion: string;
 }
 export { ChangePasswordDto, ChangePasswordResponseDto } from '../rest/change-password.dto';
+export { AvatarUploadResponseDto } from '../rest/avatar.dto';
+/**
+ * File metadata for avatar upload via NATS.
+ * Note: No @ApiProperty on `buffer` because Buffer is not Swagger-serializable.
+ * This class is NATS-only — the REST side uses multipart/form-data with @ApiConsumes + inline schema.
+ */
+export declare class UploadAvatarFilePayload {
+    buffer: any;
+    originalname: string;
+    mimetype: string;
+    size: number;
+}
+export declare class UploadAvatarPayload {
+    staffId: string;
+    tenantId: string;
+    file: UploadAvatarFilePayload;
+}
+export { ShiftScheduleDto, StaffScheduleRequestDto, StaffScheduleResponseDto } from '../rest/schedule.dto';
+export { ShiftType, ShiftStatus } from '../enums/shift.enum';
+export declare class GetStaffSchedulePayload {
+    staffId: string;
+    tenantId: string;
+    hotelId: string;
+    startDate: string;
+    endDate: string;
+}
 export declare class ChangePasswordPayload {
     staffId: string;
     tenantId: string;

@@ -14,7 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChangePasswordPayload = exports.ChangePasswordResponseDto = exports.ChangePasswordDto = exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
+exports.ChangePasswordPayload = exports.GetStaffSchedulePayload = exports.ShiftStatus = exports.ShiftType = exports.StaffScheduleResponseDto = exports.StaffScheduleRequestDto = exports.ShiftScheduleDto = exports.UploadAvatarPayload = exports.UploadAvatarFilePayload = exports.AvatarUploadResponseDto = exports.ChangePasswordResponseDto = exports.ChangePasswordDto = exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const feedback_enum_1 = require("../enums/feedback.enum");
@@ -492,6 +492,97 @@ __decorate([
 var change_password_dto_1 = require("../rest/change-password.dto");
 Object.defineProperty(exports, "ChangePasswordDto", { enumerable: true, get: function () { return change_password_dto_1.ChangePasswordDto; } });
 Object.defineProperty(exports, "ChangePasswordResponseDto", { enumerable: true, get: function () { return change_password_dto_1.ChangePasswordResponseDto; } });
+// ============= AVATAR UPLOAD =============
+var avatar_dto_1 = require("../rest/avatar.dto");
+Object.defineProperty(exports, "AvatarUploadResponseDto", { enumerable: true, get: function () { return avatar_dto_1.AvatarUploadResponseDto; } });
+/**
+ * File metadata for avatar upload via NATS.
+ * Note: No @ApiProperty on `buffer` because Buffer is not Swagger-serializable.
+ * This class is NATS-only — the REST side uses multipart/form-data with @ApiConsumes + inline schema.
+ */
+class UploadAvatarFilePayload {
+    buffer; // Buffer - binary data, not typed to avoid @types/node dependency
+    originalname;
+    mimetype;
+    size;
+}
+exports.UploadAvatarFilePayload = UploadAvatarFilePayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Original filename' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UploadAvatarFilePayload.prototype, "originalname", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'File MIME type' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UploadAvatarFilePayload.prototype, "mimetype", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'File size in bytes' }),
+    __metadata("design:type", Number)
+], UploadAvatarFilePayload.prototype, "size", void 0);
+class UploadAvatarPayload {
+    staffId;
+    tenantId;
+    file;
+}
+exports.UploadAvatarPayload = UploadAvatarPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UploadAvatarPayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UploadAvatarPayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Avatar file' }),
+    __metadata("design:type", UploadAvatarFilePayload)
+], UploadAvatarPayload.prototype, "file", void 0);
+// ============= STAFF SCHEDULE =============
+var schedule_dto_1 = require("../rest/schedule.dto");
+Object.defineProperty(exports, "ShiftScheduleDto", { enumerable: true, get: function () { return schedule_dto_1.ShiftScheduleDto; } });
+Object.defineProperty(exports, "StaffScheduleRequestDto", { enumerable: true, get: function () { return schedule_dto_1.StaffScheduleRequestDto; } });
+Object.defineProperty(exports, "StaffScheduleResponseDto", { enumerable: true, get: function () { return schedule_dto_1.StaffScheduleResponseDto; } });
+var shift_enum_1 = require("../enums/shift.enum");
+Object.defineProperty(exports, "ShiftType", { enumerable: true, get: function () { return shift_enum_1.ShiftType; } });
+Object.defineProperty(exports, "ShiftStatus", { enumerable: true, get: function () { return shift_enum_1.ShiftStatus; } });
+class GetStaffSchedulePayload {
+    staffId;
+    tenantId;
+    hotelId;
+    startDate;
+    endDate;
+}
+exports.GetStaffSchedulePayload = GetStaffSchedulePayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetStaffSchedulePayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetStaffSchedulePayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetStaffSchedulePayload.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Start date', example: '2025-08-17' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetStaffSchedulePayload.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'End date', example: '2025-08-23' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetStaffSchedulePayload.prototype, "endDate", void 0);
+// ============= CHANGE PASSWORD =============
 class ChangePasswordPayload {
     staffId;
     tenantId;

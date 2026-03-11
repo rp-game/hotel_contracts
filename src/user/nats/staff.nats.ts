@@ -425,6 +425,69 @@ export class SubmitFeedbackPayload {
 // ============= CHANGE PASSWORD =============
 export { ChangePasswordDto, ChangePasswordResponseDto } from '../rest/change-password.dto';
 
+// ============= AVATAR UPLOAD =============
+export { AvatarUploadResponseDto } from '../rest/avatar.dto';
+
+/**
+ * File metadata for avatar upload via NATS.
+ * Note: No @ApiProperty on `buffer` because Buffer is not Swagger-serializable.
+ * This class is NATS-only — the REST side uses multipart/form-data with @ApiConsumes + inline schema.
+ */
+export class UploadAvatarFilePayload {
+  buffer: any; // Buffer - binary data, not typed to avoid @types/node dependency
+
+  @ApiProperty({ description: 'Original filename' })
+  @IsString()
+  originalname: string;
+
+  @ApiProperty({ description: 'File MIME type' })
+  @IsString()
+  mimetype: string;
+
+  @ApiProperty({ description: 'File size in bytes' })
+  size: number;
+}
+
+export class UploadAvatarPayload {
+  @ApiProperty({ description: 'Staff ID' })
+  @IsString()
+  staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Avatar file' })
+  file: UploadAvatarFilePayload;
+}
+
+// ============= STAFF SCHEDULE =============
+export { ShiftScheduleDto, StaffScheduleRequestDto, StaffScheduleResponseDto } from '../rest/schedule.dto';
+export { ShiftType, ShiftStatus } from '../enums/shift.enum';
+
+export class GetStaffSchedulePayload {
+  @ApiProperty({ description: 'Staff ID' })
+  @IsString()
+  staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
+  hotelId: string;
+
+  @ApiProperty({ description: 'Start date', example: '2025-08-17' })
+  @IsString()
+  startDate: string;
+
+  @ApiProperty({ description: 'End date', example: '2025-08-23' })
+  @IsString()
+  endDate: string;
+}
+
+// ============= CHANGE PASSWORD =============
 export class ChangePasswordPayload {
   @ApiProperty({ description: 'Staff ID' })
   @IsString()

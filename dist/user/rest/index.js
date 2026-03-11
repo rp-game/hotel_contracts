@@ -20,4 +20,6 @@ __exportStar(require("./user-management.dto"), exports);
 __exportStar(require("./staff.dto"), exports);
 __exportStar(require("./feedback.dto"), exports);
 __exportStar(require("./change-password.dto"), exports);
+__exportStar(require("./avatar.dto"), exports);
+__exportStar(require("./schedule.dto"), exports);
 //# sourceMappingURL=index.js.map
