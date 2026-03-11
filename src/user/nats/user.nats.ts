@@ -4,6 +4,7 @@
  * Exported from user-service
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { UserRole } from '../enums';
 import { StaffStatus } from '../enums';
 import { Department } from '../enums';
@@ -122,27 +123,61 @@ export interface GetGuestRequestDto {
 
 // ============= NATS Response DTOs =============
 
-export interface UserResponseDto {
+export class UserResponseDto {
+  @ApiProperty({ description: 'User ID' })
   id: string;
+
+  @ApiProperty({ description: 'Email address' })
   email: string;
+
+  @ApiProperty({ description: 'First name' })
   firstName: string;
+
+  @ApiProperty({ description: 'Last name' })
   lastName: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiProperty({ description: 'User roles', enum: UserRole, isArray: true })
   roles: UserRole[];
+
+  @ApiProperty({ description: 'Is account active' })
   isActive: boolean;
+
+  @ApiPropertyOptional({ description: 'Staff status', enum: StaffStatus })
   staffStatus?: StaffStatus;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
   hotelId?: string;
+
+  @ApiProperty({ description: 'Created at' })
   createdAt: Date;
+
+  @ApiProperty({ description: 'Updated at' })
   updatedAt: Date;
 }
 
-export interface StaffInfoResponseDto {
+export class StaffInfoResponseDto {
+  @ApiProperty({ description: 'User ID' })
   id: string;
+
+  @ApiProperty({ description: 'First name' })
   firstName: string;
+
+  @ApiProperty({ description: 'Last name' })
   lastName: string;
+
+  @ApiProperty({ description: 'Email address' })
   email: string;
+
+  @ApiProperty({ description: 'User roles', enum: UserRole, isArray: true })
   roles: UserRole[];
+
+  @ApiPropertyOptional({ description: 'Staff status', enum: StaffStatus })
   staffStatus?: StaffStatus;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
   hotelId?: string;
 }
 

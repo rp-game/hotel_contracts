@@ -383,6 +383,7 @@ class DashboardStaffInfoDto {
     tenantId;
     hotelId;
     permissions;
+    isActive;
 }
 exports.DashboardStaffInfoDto = DashboardStaffInfoDto;
 __decorate([
@@ -429,6 +430,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Permissions', type: [String] }),
     __metadata("design:type", Array)
 ], DashboardStaffInfoDto.prototype, "permissions", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Is account active' }),
+    __metadata("design:type", Boolean)
+], DashboardStaffInfoDto.prototype, "isActive", void 0);
 /**
  * Dashboard Task Stats
  */

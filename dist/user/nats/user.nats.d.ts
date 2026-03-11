@@ -93,7 +93,7 @@ export interface DeactivateUserRequestDto {
 export interface GetGuestRequestDto {
     guestId: string;
 }
-export interface UserResponseDto {
+export declare class UserResponseDto {
     id: string;
     email: string;
     firstName: string;
@@ -106,7 +106,7 @@ export interface UserResponseDto {
     createdAt: Date;
     updatedAt: Date;
 }
-export interface StaffInfoResponseDto {
+export declare class StaffInfoResponseDto {
     id: string;
     firstName: string;
     lastName: string;

@@ -110,6 +110,7 @@ export declare class DashboardStaffInfoDto {
     tenantId: string;
     hotelId: string;
     permissions?: string[];
+    isActive?: boolean;
 }
 /**
  * Dashboard Task Stats

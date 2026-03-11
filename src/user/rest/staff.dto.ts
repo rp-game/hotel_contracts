@@ -299,6 +299,9 @@ export class DashboardStaffInfoDto {
 
   @ApiPropertyOptional({ description: 'Permissions', type: [String] })
   permissions?: string[];
+
+  @ApiPropertyOptional({ description: 'Is account active' })
+  isActive?: boolean;
 }
 
 /**
