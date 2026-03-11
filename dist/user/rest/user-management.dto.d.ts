@@ -36,6 +36,8 @@ export declare class UpdateUserDto {
     avatarUrl?: string;
     language?: string;
     timezone?: string;
+    password?: string;
+    preferences?: Record<string, unknown>;
 }
 export declare class UserDto {
     id: string;

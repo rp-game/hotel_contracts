@@ -129,6 +129,9 @@ export class SubscriptionResponseDto {
 
   @ApiProperty({ description: 'Last update date' })
   updatedAt: string;
+
+  @ApiPropertyOptional({ description: 'Stripe subscription ID' })
+  stripeSubscriptionId?: string;
 }
 
 export class SubscriptionListResponseDto {
@@ -143,6 +146,9 @@ export class SubscriptionListResponseDto {
 
   @ApiProperty({ description: 'Items per page' })
   limit: number;
+
+  @ApiPropertyOptional({ description: 'Total pages' })
+  totalPages?: number;
 }
 
 export class PlanTemplateResponseDto {
@@ -610,4 +616,401 @@ export class ApiCallPayload {
 
   @ApiProperty({ description: 'HTTP method' })
   method: string;
+}
+
+// ============= Platform Subscription NATS Payload Classes =============
+
+export class GetSubscriptionAnalyticsPayload {}
+
+export class GetRevenueAnalyticsPayload {
+  @ApiPropertyOptional({ description: 'Start date' })
+  startDate?: string;
+
+  @ApiPropertyOptional({ description: 'End date' })
+  endDate?: string;
+
+  @ApiPropertyOptional({ description: 'Group by period' })
+  groupBy?: string;
+}
+
+export class GetSubscriptionsListPayload {
+  @ApiPropertyOptional({ description: 'Filter by status' })
+  status?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by plan' })
+  plan?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by tenant ID' })
+  tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by billing cycle' })
+  billingCycle?: string;
+
+  @ApiPropertyOptional({ description: 'Page number' })
+  page?: number;
+
+  @ApiPropertyOptional({ description: 'Items per page' })
+  limit?: number;
+
+  @ApiPropertyOptional({ description: 'Sort field' })
+  sortBy?: string;
+
+  @ApiPropertyOptional({ description: 'Sort order' })
+  sortOrder?: 'ASC' | 'DESC';
+}
+
+export class FindSubscriptionByIdPayload {
+  @ApiProperty({ description: 'Subscription ID' })
+  id: string;
+}
+
+export class GetTenantSubscriptionPayload {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+}
+
+// ============= Subscription REST DTOs (migrated from local) =============
+
+import { IsUUID, IsEnum, IsNumber, IsString, IsBoolean, IsOptional, IsDateString, IsPositive, Min, Max } from 'class-validator';
+
+export class CreateSubscriptionDto {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiProperty({ enum: SubscriptionPlan, description: 'Subscription plan' })
+  @IsEnum(SubscriptionPlan)
+  plan: SubscriptionPlan;
+
+  @ApiProperty({ enum: BillingCycle, description: 'Billing cycle' })
+  @IsEnum(BillingCycle)
+  billingCycle: BillingCycle;
+
+  @ApiPropertyOptional({ description: 'Stripe customer ID' })
+  @IsOptional()
+  @IsString()
+  stripeCustomerId?: string;
+
+  @ApiPropertyOptional({ description: 'Stripe price ID' })
+  @IsOptional()
+  @IsString()
+  stripePriceId?: string;
+
+  @ApiPropertyOptional({ description: 'Trial end date' })
+  @IsOptional()
+  @IsDateString()
+  trialEndsAt?: string;
+}
+
+export class UpdateSubscriptionDto {
+  @ApiPropertyOptional({ enum: SubscriptionPlan, description: 'Subscription plan' })
+  @IsOptional()
+  @IsEnum(SubscriptionPlan)
+  plan?: SubscriptionPlan;
+
+  @ApiPropertyOptional({ enum: SubscriptionStatus, description: 'Subscription status' })
+  @IsOptional()
+  @IsEnum(SubscriptionStatus)
+  status?: SubscriptionStatus;
+
+  @ApiPropertyOptional({ enum: BillingCycle, description: 'Billing cycle' })
+  @IsOptional()
+  @IsEnum(BillingCycle)
+  billingCycle?: BillingCycle;
+
+  @ApiPropertyOptional({ description: 'Hotel limit' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  hotelLimit?: number;
+
+  @ApiPropertyOptional({ description: 'Room limit' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  roomLimit?: number;
+
+  @ApiPropertyOptional({ description: 'User limit' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  userLimit?: number;
+
+  @ApiPropertyOptional({ description: 'Advanced reporting feature' })
+  @IsOptional()
+  @IsBoolean()
+  advancedReporting?: boolean;
+
+  @ApiPropertyOptional({ description: 'API access feature' })
+  @IsOptional()
+  @IsBoolean()
+  apiAccess?: boolean;
+
+  @ApiPropertyOptional({ description: 'White label feature' })
+  @IsOptional()
+  @IsBoolean()
+  whiteLabel?: boolean;
+
+  @ApiPropertyOptional({ description: 'Cancel at period end' })
+  @IsOptional()
+  @IsBoolean()
+  cancelAtPeriodEnd?: boolean;
+}
+
+export class SubscriptionUsageDto {
+  @ApiProperty({ description: 'Usage metric name' })
+  metric: string;
+
+  @ApiProperty({ description: 'Current usage' })
+  currentUsage: number;
+
+  @ApiProperty({ description: 'Limit value' })
+  limitValue: number;
+
+  @ApiProperty({ description: 'Previous period usage' })
+  previousPeriodUsage: number;
+
+  @ApiProperty({ description: 'Usage percentage' })
+  usagePercentage: number;
+
+  @ApiProperty({ description: 'Limit exceeded flag' })
+  limitExceeded: boolean;
+
+  @ApiPropertyOptional({ description: 'Overage charge' })
+  overageCharge?: number;
+}
+
+export class PlanChangeDto {
+  @ApiProperty({ enum: SubscriptionPlan, description: 'New subscription plan' })
+  @IsEnum(SubscriptionPlan)
+  newPlan: SubscriptionPlan;
+
+  @ApiPropertyOptional({ enum: BillingCycle, description: 'New billing cycle' })
+  @IsOptional()
+  @IsEnum(BillingCycle)
+  newBillingCycle?: BillingCycle;
+
+  @ApiPropertyOptional({ description: 'Apply change immediately' })
+  @IsOptional()
+  @IsBoolean()
+  immediate?: boolean;
+}
+
+export class CancelSubscriptionDto {
+  @ApiPropertyOptional({ description: 'Cancel at period end instead of immediately' })
+  @IsOptional()
+  @IsBoolean()
+  cancelAtPeriodEnd?: boolean;
+
+  @ApiPropertyOptional({ description: 'Cancellation reason' })
+  @IsOptional()
+  @IsString()
+  reason?: string;
+}
+
+export class CreatePlanTemplateDto {
+  @ApiProperty({ description: 'Plan type' })
+  @IsString()
+  planType: string;
+
+  @ApiProperty({ description: 'Plan name' })
+  @IsString()
+  name: string;
+
+  @ApiPropertyOptional({ description: 'Plan description' })
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @ApiProperty({ description: 'Monthly price' })
+  @IsNumber()
+  @IsPositive()
+  monthlyPrice: number;
+
+  @ApiProperty({ description: 'Annual price' })
+  @IsNumber()
+  @IsPositive()
+  annualPrice: number;
+
+  @ApiPropertyOptional({ description: 'Hotel limit' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  hotelLimit?: number;
+
+  @ApiPropertyOptional({ description: 'Room limit' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  roomLimit?: number;
+
+  @ApiPropertyOptional({ description: 'User limit' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  userLimit?: number;
+
+  @ApiPropertyOptional({ description: 'Advanced reporting feature' })
+  @IsOptional()
+  @IsBoolean()
+  advancedReporting?: boolean;
+
+  @ApiPropertyOptional({ description: 'API access feature' })
+  @IsOptional()
+  @IsBoolean()
+  apiAccess?: boolean;
+
+  @ApiPropertyOptional({ description: 'White label feature' })
+  @IsOptional()
+  @IsBoolean()
+  whiteLabel?: boolean;
+
+  @ApiPropertyOptional({ description: 'Features list as JSON string' })
+  @IsOptional()
+  @IsString()
+  features?: string;
+
+  @ApiPropertyOptional({ description: 'Display order' })
+  @IsOptional()
+  @IsNumber()
+  displayOrder?: number;
+
+  @ApiPropertyOptional({ description: 'Is popular plan' })
+  @IsOptional()
+  @IsBoolean()
+  isPopular?: boolean;
+}
+
+export class UpdatePlanTemplateDto {
+  @ApiPropertyOptional({ description: 'Plan name' })
+  @IsOptional()
+  @IsString()
+  name?: string;
+
+  @ApiPropertyOptional({ description: 'Plan description' })
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @ApiPropertyOptional({ description: 'Monthly price' })
+  @IsOptional()
+  @IsNumber()
+  @IsPositive()
+  monthlyPrice?: number;
+
+  @ApiPropertyOptional({ description: 'Annual price' })
+  @IsOptional()
+  @IsNumber()
+  @IsPositive()
+  annualPrice?: number;
+
+  @ApiPropertyOptional({ description: 'Hotel limit' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  hotelLimit?: number;
+
+  @ApiPropertyOptional({ description: 'Room limit' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  roomLimit?: number;
+
+  @ApiPropertyOptional({ description: 'User limit' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  userLimit?: number;
+
+  @ApiPropertyOptional({ description: 'Advanced reporting feature' })
+  @IsOptional()
+  @IsBoolean()
+  advancedReporting?: boolean;
+
+  @ApiPropertyOptional({ description: 'API access feature' })
+  @IsOptional()
+  @IsBoolean()
+  apiAccess?: boolean;
+
+  @ApiPropertyOptional({ description: 'White label feature' })
+  @IsOptional()
+  @IsBoolean()
+  whiteLabel?: boolean;
+
+  @ApiPropertyOptional({ description: 'Features list as JSON string' })
+  @IsOptional()
+  @IsString()
+  features?: string;
+
+  @ApiPropertyOptional({ description: 'Display order' })
+  @IsOptional()
+  @IsNumber()
+  displayOrder?: number;
+
+  @ApiPropertyOptional({ description: 'Is popular plan' })
+  @IsOptional()
+  @IsBoolean()
+  isPopular?: boolean;
+
+  @ApiPropertyOptional({ description: 'Plan status' })
+  @IsOptional()
+  @IsString()
+  status?: string;
+}
+
+export class SubscriptionQueryDto {
+  @ApiPropertyOptional({ description: 'Filter by status' })
+  @IsOptional()
+  @IsString()
+  status?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by plan' })
+  @IsOptional()
+  @IsString()
+  plan?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by tenant ID' })
+  @IsOptional()
+  @IsUUID()
+  tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by billing cycle' })
+  @IsOptional()
+  @IsString()
+  billingCycle?: string;
+
+  @ApiPropertyOptional({ description: 'Page number' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  page?: number;
+
+  @ApiPropertyOptional({ description: 'Items per page' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  @Max(100)
+  limit?: number;
+
+  @ApiPropertyOptional({ description: 'Sort field' })
+  @IsOptional()
+  @IsString()
+  sortBy?: string;
+
+  @ApiPropertyOptional({ description: 'Sort order' })
+  @IsOptional()
+  @IsString()
+  sortOrder?: 'ASC' | 'DESC';
+}
+
+export class CreateSubscriptionWithTemplateDto extends CreateSubscriptionDto {
+  @ApiPropertyOptional({ description: 'Plan template ID to use for subscription setup' })
+  @IsOptional()
+  @IsUUID()
+  planTemplateId?: string;
+
+  @ApiPropertyOptional({ description: 'Current period start date' })
+  @IsOptional()
+  @IsDateString()
+  currentPeriodStart?: string;
 }

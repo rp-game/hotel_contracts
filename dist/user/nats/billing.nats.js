@@ -19,7 +19,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ApiCallPayload = exports.ResourceEventPayload = exports.StripeInvoicePaymentFailedPayload = exports.StripeInvoicePaymentSucceededPayload = exports.StripeSubscriptionUpdatedPayload = exports.InvoicePaymentFailedPayload = exports.PayInvoicePayload = exports.ListInvoicesPayload = exports.GetInvoicePayload = exports.CreateInvoicePayload = exports.DeletePaymentMethodPayload = exports.SetDefaultPaymentMethodPayload = exports.GetPaymentMethodsPayload = exports.CreatePaymentMethodPayload = exports.EnforceLimitsPayload = exports.CheckLimitsPayload = exports.GetUsagePayload = exports.TrackUsagePayload = exports.ListSubscriptionsPayload = exports.ReactivateSubscriptionPayload = exports.CancelSubscriptionPayload = exports.ChangePlanPayload = exports.UpdateSubscriptionPayload = exports.GetSubscriptionPayload = exports.CreateSubscriptionPayload = exports.RevenueAnalyticsDto = exports.RevenueDataPointDto = exports.SubscriptionAnalyticsDto = exports.SubscriptionRevenueDto = exports.PlanDistributionDto = exports.SubscriptionAnalyticsOverviewDto = exports.PlanTemplateResponseDto = exports.SubscriptionListResponseDto = exports.SubscriptionResponseDto = exports.SubscriptionTenantDto = exports.PlanTemplateStatus = exports.BillingCycle = exports.SubscriptionStatus = exports.SubscriptionPlan = void 0;
+exports.CreatePlanTemplateDto = exports.CancelSubscriptionDto = exports.PlanChangeDto = exports.SubscriptionUsageDto = exports.UpdateSubscriptionDto = exports.CreateSubscriptionDto = exports.GetTenantSubscriptionPayload = exports.FindSubscriptionByIdPayload = exports.GetSubscriptionsListPayload = exports.GetRevenueAnalyticsPayload = exports.GetSubscriptionAnalyticsPayload = exports.ApiCallPayload = exports.ResourceEventPayload = exports.StripeInvoicePaymentFailedPayload = exports.StripeInvoicePaymentSucceededPayload = exports.StripeSubscriptionUpdatedPayload = exports.InvoicePaymentFailedPayload = exports.PayInvoicePayload = exports.ListInvoicesPayload = exports.GetInvoicePayload = exports.CreateInvoicePayload = exports.DeletePaymentMethodPayload = exports.SetDefaultPaymentMethodPayload = exports.GetPaymentMethodsPayload = exports.CreatePaymentMethodPayload = exports.EnforceLimitsPayload = exports.CheckLimitsPayload = exports.GetUsagePayload = exports.TrackUsagePayload = exports.ListSubscriptionsPayload = exports.ReactivateSubscriptionPayload = exports.CancelSubscriptionPayload = exports.ChangePlanPayload = exports.UpdateSubscriptionPayload = exports.GetSubscriptionPayload = exports.CreateSubscriptionPayload = exports.RevenueAnalyticsDto = exports.RevenueDataPointDto = exports.SubscriptionAnalyticsDto = exports.SubscriptionRevenueDto = exports.PlanDistributionDto = exports.SubscriptionAnalyticsOverviewDto = exports.PlanTemplateResponseDto = exports.SubscriptionListResponseDto = exports.SubscriptionResponseDto = exports.SubscriptionTenantDto = exports.PlanTemplateStatus = exports.BillingCycle = exports.SubscriptionStatus = exports.SubscriptionPlan = void 0;
+exports.CreateSubscriptionWithTemplateDto = exports.SubscriptionQueryDto = exports.UpdatePlanTemplateDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 // ============= Enums =============
 var SubscriptionPlan;
@@ -95,6 +96,7 @@ class SubscriptionResponseDto {
     cancelAtPeriodEnd;
     createdAt;
     updatedAt;
+    stripeSubscriptionId;
 }
 exports.SubscriptionResponseDto = SubscriptionResponseDto;
 __decorate([
@@ -197,11 +199,16 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Last update date' }),
     __metadata("design:type", String)
 ], SubscriptionResponseDto.prototype, "updatedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Stripe subscription ID' }),
+    __metadata("design:type", String)
+], SubscriptionResponseDto.prototype, "stripeSubscriptionId", void 0);
 class SubscriptionListResponseDto {
     subscriptions;
     total;
     page;
     limit;
+    totalPages;
 }
 exports.SubscriptionListResponseDto = SubscriptionListResponseDto;
 __decorate([
@@ -220,6 +227,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Items per page' }),
     __metadata("design:type", Number)
 ], SubscriptionListResponseDto.prototype, "limit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Total pages' }),
+    __metadata("design:type", Number)
+], SubscriptionListResponseDto.prototype, "totalPages", void 0);
 class PlanTemplateResponseDto {
     id;
     planType;
@@ -967,4 +978,570 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'HTTP method' }),
     __metadata("design:type", String)
 ], ApiCallPayload.prototype, "method", void 0);
+// ============= Platform Subscription NATS Payload Classes =============
+class GetSubscriptionAnalyticsPayload {
+}
+exports.GetSubscriptionAnalyticsPayload = GetSubscriptionAnalyticsPayload;
+class GetRevenueAnalyticsPayload {
+    startDate;
+    endDate;
+    groupBy;
+}
+exports.GetRevenueAnalyticsPayload = GetRevenueAnalyticsPayload;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Start date' }),
+    __metadata("design:type", String)
+], GetRevenueAnalyticsPayload.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'End date' }),
+    __metadata("design:type", String)
+], GetRevenueAnalyticsPayload.prototype, "endDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Group by period' }),
+    __metadata("design:type", String)
+], GetRevenueAnalyticsPayload.prototype, "groupBy", void 0);
+class GetSubscriptionsListPayload {
+    status;
+    plan;
+    tenantId;
+    billingCycle;
+    page;
+    limit;
+    sortBy;
+    sortOrder;
+}
+exports.GetSubscriptionsListPayload = GetSubscriptionsListPayload;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by status' }),
+    __metadata("design:type", String)
+], GetSubscriptionsListPayload.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by plan' }),
+    __metadata("design:type", String)
+], GetSubscriptionsListPayload.prototype, "plan", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by tenant ID' }),
+    __metadata("design:type", String)
+], GetSubscriptionsListPayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by billing cycle' }),
+    __metadata("design:type", String)
+], GetSubscriptionsListPayload.prototype, "billingCycle", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Page number' }),
+    __metadata("design:type", Number)
+], GetSubscriptionsListPayload.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Items per page' }),
+    __metadata("design:type", Number)
+], GetSubscriptionsListPayload.prototype, "limit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sort field' }),
+    __metadata("design:type", String)
+], GetSubscriptionsListPayload.prototype, "sortBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sort order' }),
+    __metadata("design:type", String)
+], GetSubscriptionsListPayload.prototype, "sortOrder", void 0);
+class FindSubscriptionByIdPayload {
+    id;
+}
+exports.FindSubscriptionByIdPayload = FindSubscriptionByIdPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Subscription ID' }),
+    __metadata("design:type", String)
+], FindSubscriptionByIdPayload.prototype, "id", void 0);
+class GetTenantSubscriptionPayload {
+    tenantId;
+}
+exports.GetTenantSubscriptionPayload = GetTenantSubscriptionPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetTenantSubscriptionPayload.prototype, "tenantId", void 0);
+// ============= Subscription REST DTOs (migrated from local) =============
+const class_validator_1 = require("class-validator");
+class CreateSubscriptionDto {
+    tenantId;
+    plan;
+    billingCycle;
+    stripeCustomerId;
+    stripePriceId;
+    trialEndsAt;
+}
+exports.CreateSubscriptionDto = CreateSubscriptionDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateSubscriptionDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: SubscriptionPlan, description: 'Subscription plan' }),
+    (0, class_validator_1.IsEnum)(SubscriptionPlan),
+    __metadata("design:type", String)
+], CreateSubscriptionDto.prototype, "plan", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: BillingCycle, description: 'Billing cycle' }),
+    (0, class_validator_1.IsEnum)(BillingCycle),
+    __metadata("design:type", String)
+], CreateSubscriptionDto.prototype, "billingCycle", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Stripe customer ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSubscriptionDto.prototype, "stripeCustomerId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Stripe price ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSubscriptionDto.prototype, "stripePriceId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Trial end date' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], CreateSubscriptionDto.prototype, "trialEndsAt", void 0);
+class UpdateSubscriptionDto {
+    plan;
+    status;
+    billingCycle;
+    hotelLimit;
+    roomLimit;
+    userLimit;
+    advancedReporting;
+    apiAccess;
+    whiteLabel;
+    cancelAtPeriodEnd;
+}
+exports.UpdateSubscriptionDto = UpdateSubscriptionDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: SubscriptionPlan, description: 'Subscription plan' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(SubscriptionPlan),
+    __metadata("design:type", String)
+], UpdateSubscriptionDto.prototype, "plan", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: SubscriptionStatus, description: 'Subscription status' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(SubscriptionStatus),
+    __metadata("design:type", String)
+], UpdateSubscriptionDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: BillingCycle, description: 'Billing cycle' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(BillingCycle),
+    __metadata("design:type", String)
+], UpdateSubscriptionDto.prototype, "billingCycle", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel limit' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], UpdateSubscriptionDto.prototype, "hotelLimit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room limit' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], UpdateSubscriptionDto.prototype, "roomLimit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User limit' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], UpdateSubscriptionDto.prototype, "userLimit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Advanced reporting feature' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdateSubscriptionDto.prototype, "advancedReporting", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'API access feature' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdateSubscriptionDto.prototype, "apiAccess", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'White label feature' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdateSubscriptionDto.prototype, "whiteLabel", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Cancel at period end' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdateSubscriptionDto.prototype, "cancelAtPeriodEnd", void 0);
+class SubscriptionUsageDto {
+    metric;
+    currentUsage;
+    limitValue;
+    previousPeriodUsage;
+    usagePercentage;
+    limitExceeded;
+    overageCharge;
+}
+exports.SubscriptionUsageDto = SubscriptionUsageDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Usage metric name' }),
+    __metadata("design:type", String)
+], SubscriptionUsageDto.prototype, "metric", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current usage' }),
+    __metadata("design:type", Number)
+], SubscriptionUsageDto.prototype, "currentUsage", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Limit value' }),
+    __metadata("design:type", Number)
+], SubscriptionUsageDto.prototype, "limitValue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Previous period usage' }),
+    __metadata("design:type", Number)
+], SubscriptionUsageDto.prototype, "previousPeriodUsage", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Usage percentage' }),
+    __metadata("design:type", Number)
+], SubscriptionUsageDto.prototype, "usagePercentage", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Limit exceeded flag' }),
+    __metadata("design:type", Boolean)
+], SubscriptionUsageDto.prototype, "limitExceeded", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Overage charge' }),
+    __metadata("design:type", Number)
+], SubscriptionUsageDto.prototype, "overageCharge", void 0);
+class PlanChangeDto {
+    newPlan;
+    newBillingCycle;
+    immediate;
+}
+exports.PlanChangeDto = PlanChangeDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: SubscriptionPlan, description: 'New subscription plan' }),
+    (0, class_validator_1.IsEnum)(SubscriptionPlan),
+    __metadata("design:type", String)
+], PlanChangeDto.prototype, "newPlan", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: BillingCycle, description: 'New billing cycle' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(BillingCycle),
+    __metadata("design:type", String)
+], PlanChangeDto.prototype, "newBillingCycle", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Apply change immediately' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], PlanChangeDto.prototype, "immediate", void 0);
+class CancelSubscriptionDto {
+    cancelAtPeriodEnd;
+    reason;
+}
+exports.CancelSubscriptionDto = CancelSubscriptionDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Cancel at period end instead of immediately' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CancelSubscriptionDto.prototype, "cancelAtPeriodEnd", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Cancellation reason' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CancelSubscriptionDto.prototype, "reason", void 0);
+class CreatePlanTemplateDto {
+    planType;
+    name;
+    description;
+    monthlyPrice;
+    annualPrice;
+    hotelLimit;
+    roomLimit;
+    userLimit;
+    advancedReporting;
+    apiAccess;
+    whiteLabel;
+    features;
+    displayOrder;
+    isPopular;
+}
+exports.CreatePlanTemplateDto = CreatePlanTemplateDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Plan type' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePlanTemplateDto.prototype, "planType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Plan name' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePlanTemplateDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Plan description' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePlanTemplateDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Monthly price' }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsPositive)(),
+    __metadata("design:type", Number)
+], CreatePlanTemplateDto.prototype, "monthlyPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Annual price' }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsPositive)(),
+    __metadata("design:type", Number)
+], CreatePlanTemplateDto.prototype, "annualPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel limit' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], CreatePlanTemplateDto.prototype, "hotelLimit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room limit' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], CreatePlanTemplateDto.prototype, "roomLimit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User limit' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], CreatePlanTemplateDto.prototype, "userLimit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Advanced reporting feature' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreatePlanTemplateDto.prototype, "advancedReporting", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'API access feature' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreatePlanTemplateDto.prototype, "apiAccess", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'White label feature' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreatePlanTemplateDto.prototype, "whiteLabel", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Features list as JSON string' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePlanTemplateDto.prototype, "features", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Display order' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreatePlanTemplateDto.prototype, "displayOrder", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Is popular plan' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreatePlanTemplateDto.prototype, "isPopular", void 0);
+class UpdatePlanTemplateDto {
+    name;
+    description;
+    monthlyPrice;
+    annualPrice;
+    hotelLimit;
+    roomLimit;
+    userLimit;
+    advancedReporting;
+    apiAccess;
+    whiteLabel;
+    features;
+    displayOrder;
+    isPopular;
+    status;
+}
+exports.UpdatePlanTemplateDto = UpdatePlanTemplateDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Plan name' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdatePlanTemplateDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Plan description' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdatePlanTemplateDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Monthly price' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsPositive)(),
+    __metadata("design:type", Number)
+], UpdatePlanTemplateDto.prototype, "monthlyPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Annual price' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsPositive)(),
+    __metadata("design:type", Number)
+], UpdatePlanTemplateDto.prototype, "annualPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel limit' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], UpdatePlanTemplateDto.prototype, "hotelLimit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room limit' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], UpdatePlanTemplateDto.prototype, "roomLimit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User limit' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], UpdatePlanTemplateDto.prototype, "userLimit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Advanced reporting feature' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdatePlanTemplateDto.prototype, "advancedReporting", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'API access feature' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdatePlanTemplateDto.prototype, "apiAccess", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'White label feature' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdatePlanTemplateDto.prototype, "whiteLabel", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Features list as JSON string' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdatePlanTemplateDto.prototype, "features", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Display order' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdatePlanTemplateDto.prototype, "displayOrder", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Is popular plan' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdatePlanTemplateDto.prototype, "isPopular", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Plan status' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdatePlanTemplateDto.prototype, "status", void 0);
+class SubscriptionQueryDto {
+    status;
+    plan;
+    tenantId;
+    billingCycle;
+    page;
+    limit;
+    sortBy;
+    sortOrder;
+}
+exports.SubscriptionQueryDto = SubscriptionQueryDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by status' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubscriptionQueryDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by plan' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubscriptionQueryDto.prototype, "plan", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by tenant ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], SubscriptionQueryDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by billing cycle' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubscriptionQueryDto.prototype, "billingCycle", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Page number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], SubscriptionQueryDto.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Items per page' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.Max)(100),
+    __metadata("design:type", Number)
+], SubscriptionQueryDto.prototype, "limit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sort field' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubscriptionQueryDto.prototype, "sortBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sort order' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubscriptionQueryDto.prototype, "sortOrder", void 0);
+class CreateSubscriptionWithTemplateDto extends CreateSubscriptionDto {
+    planTemplateId;
+    currentPeriodStart;
+}
+exports.CreateSubscriptionWithTemplateDto = CreateSubscriptionWithTemplateDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Plan template ID to use for subscription setup' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateSubscriptionWithTemplateDto.prototype, "planTemplateId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Current period start date' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], CreateSubscriptionWithTemplateDto.prototype, "currentPeriodStart", void 0);
 //# sourceMappingURL=billing.nats.js.map

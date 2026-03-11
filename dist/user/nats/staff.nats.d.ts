@@ -27,6 +27,11 @@ export interface UpdateStaffProfilePayload {
     emergencyContact?: EmergencyContactDto;
     preferences?: UserPreferencesDto;
 }
+export declare class RemoveStaffPayload {
+    id: string;
+    tenantId: string;
+    hotelId: string;
+}
 export interface DeactivateStaffPayload {
     id: string;
     tenantId: string;

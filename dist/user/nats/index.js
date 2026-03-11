@@ -22,5 +22,6 @@ __exportStar(require("./hotel-chain.nats"), exports);
 __exportStar(require("./staff.nats"), exports);
 __exportStar(require("./user.nats"), exports);
 __exportStar(require("./billing.nats"), exports);
+__exportStar(require("./onboarding.nats"), exports);
 __exportStar(require("./room-move.nats"), exports);
 //# sourceMappingURL=index.js.map

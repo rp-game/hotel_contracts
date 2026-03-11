@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsEmail, IsArray, IsBoolean, IsUUID, IsOptional } from 'class-validator';
+import { IsString, IsEmail, IsArray, IsBoolean, IsUUID, IsOptional, Length } from 'class-validator';
 
 /**
  * ============================================================================
@@ -147,6 +147,16 @@ export class UpdateUserDto {
   @IsOptional()
   @IsString()
   timezone?: string;
+
+  @ApiPropertyOptional({ description: 'User password', minLength: 8, maxLength: 100 })
+  @IsOptional()
+  @IsString()
+  @Length(8, 100)
+  password?: string;
+
+  @ApiPropertyOptional({ description: 'User preferences stored as JSON' })
+  @IsOptional()
+  preferences?: Record<string, unknown>;
 }
 
 // ============================================================================

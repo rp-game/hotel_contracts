@@ -63,12 +63,14 @@ export declare class SubscriptionResponseDto {
     cancelAtPeriodEnd?: boolean;
     createdAt: string;
     updatedAt: string;
+    stripeSubscriptionId?: string;
 }
 export declare class SubscriptionListResponseDto {
     subscriptions: SubscriptionResponseDto[];
     total: number;
     page: number;
     limit: number;
+    totalPages?: number;
 }
 export declare class PlanTemplateResponseDto {
     id: string;
@@ -266,5 +268,112 @@ export declare class ApiCallPayload {
     tenantId: string;
     endpoint: string;
     method: string;
+}
+export declare class GetSubscriptionAnalyticsPayload {
+}
+export declare class GetRevenueAnalyticsPayload {
+    startDate?: string;
+    endDate?: string;
+    groupBy?: string;
+}
+export declare class GetSubscriptionsListPayload {
+    status?: string;
+    plan?: string;
+    tenantId?: string;
+    billingCycle?: string;
+    page?: number;
+    limit?: number;
+    sortBy?: string;
+    sortOrder?: 'ASC' | 'DESC';
+}
+export declare class FindSubscriptionByIdPayload {
+    id: string;
+}
+export declare class GetTenantSubscriptionPayload {
+    tenantId: string;
+}
+export declare class CreateSubscriptionDto {
+    tenantId: string;
+    plan: SubscriptionPlan;
+    billingCycle: BillingCycle;
+    stripeCustomerId?: string;
+    stripePriceId?: string;
+    trialEndsAt?: string;
+}
+export declare class UpdateSubscriptionDto {
+    plan?: SubscriptionPlan;
+    status?: SubscriptionStatus;
+    billingCycle?: BillingCycle;
+    hotelLimit?: number;
+    roomLimit?: number;
+    userLimit?: number;
+    advancedReporting?: boolean;
+    apiAccess?: boolean;
+    whiteLabel?: boolean;
+    cancelAtPeriodEnd?: boolean;
+}
+export declare class SubscriptionUsageDto {
+    metric: string;
+    currentUsage: number;
+    limitValue: number;
+    previousPeriodUsage: number;
+    usagePercentage: number;
+    limitExceeded: boolean;
+    overageCharge?: number;
+}
+export declare class PlanChangeDto {
+    newPlan: SubscriptionPlan;
+    newBillingCycle?: BillingCycle;
+    immediate?: boolean;
+}
+export declare class CancelSubscriptionDto {
+    cancelAtPeriodEnd?: boolean;
+    reason?: string;
+}
+export declare class CreatePlanTemplateDto {
+    planType: string;
+    name: string;
+    description?: string;
+    monthlyPrice: number;
+    annualPrice: number;
+    hotelLimit?: number;
+    roomLimit?: number;
+    userLimit?: number;
+    advancedReporting?: boolean;
+    apiAccess?: boolean;
+    whiteLabel?: boolean;
+    features?: string;
+    displayOrder?: number;
+    isPopular?: boolean;
+}
+export declare class UpdatePlanTemplateDto {
+    name?: string;
+    description?: string;
+    monthlyPrice?: number;
+    annualPrice?: number;
+    hotelLimit?: number;
+    roomLimit?: number;
+    userLimit?: number;
+    advancedReporting?: boolean;
+    apiAccess?: boolean;
+    whiteLabel?: boolean;
+    features?: string;
+    displayOrder?: number;
+    isPopular?: boolean;
+    status?: string;
+}
+export declare class SubscriptionQueryDto {
+    status?: string;
+    plan?: string;
+    tenantId?: string;
+    billingCycle?: string;
+    page?: number;
+    limit?: number;
+    sortBy?: string;
+    sortOrder?: 'ASC' | 'DESC';
+}
+export declare class CreateSubscriptionWithTemplateDto extends CreateSubscriptionDto {
+    planTemplateId?: string;
+    currentPeriodStart?: string;
 }
 //# sourceMappingURL=billing.nats.d.ts.map

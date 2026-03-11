@@ -71,6 +71,17 @@ export interface UpdateStaffProfilePayload {
   preferences?: UserPreferencesDto;
 }
 
+export class RemoveStaffPayload {
+  @ApiProperty({ description: 'Staff ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+}
+
 export interface DeactivateStaffPayload {
   id: string;
   tenantId: string;

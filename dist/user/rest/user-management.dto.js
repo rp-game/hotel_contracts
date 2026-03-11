@@ -138,6 +138,8 @@ class UpdateUserDto {
     avatarUrl;
     language;
     timezone;
+    password;
+    preferences;
 }
 exports.UpdateUserDto = UpdateUserDto;
 __decorate([
@@ -210,6 +212,18 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateUserDto.prototype, "timezone", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User password', minLength: 8, maxLength: 100 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.Length)(8, 100),
+    __metadata("design:type", String)
+], UpdateUserDto.prototype, "password", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User preferences stored as JSON' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], UpdateUserDto.prototype, "preferences", void 0);
 // ============================================================================
 // RESPONSE DTOs
 // ============================================================================

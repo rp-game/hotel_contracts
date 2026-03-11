@@ -14,7 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LinkZaloBasicDto = exports.ValidatePermissionResultDto = exports.LinkZaloResultDto = exports.StaffZaloInfoDto = exports.ValidatePermissionPayload = exports.GetStaffHotelsPayload = exports.LinkZaloToStaffPayload = exports.FindStaffByPhonePayload = exports.FindStaffByZaloPayload = exports.AchievementCategory = exports.PerformanceDataDto = exports.PerformanceRankDto = exports.AchievementDto = exports.PerformanceMetricsDto = exports.ChangePasswordPayload = exports.GetStaffSchedulePayload = exports.ShiftStatus = exports.ShiftType = exports.StaffScheduleResponseDto = exports.StaffScheduleRequestDto = exports.ShiftScheduleDto = exports.UploadAvatarPayload = exports.UploadAvatarFilePayload = exports.AvatarUploadResponseDto = exports.ChangePasswordResponseDto = exports.ChangePasswordDto = exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
+exports.LinkZaloBasicDto = exports.ValidatePermissionResultDto = exports.LinkZaloResultDto = exports.StaffZaloInfoDto = exports.ValidatePermissionPayload = exports.GetStaffHotelsPayload = exports.LinkZaloToStaffPayload = exports.FindStaffByPhonePayload = exports.FindStaffByZaloPayload = exports.AchievementCategory = exports.PerformanceDataDto = exports.PerformanceRankDto = exports.AchievementDto = exports.PerformanceMetricsDto = exports.ChangePasswordPayload = exports.GetStaffSchedulePayload = exports.ShiftStatus = exports.ShiftType = exports.StaffScheduleResponseDto = exports.StaffScheduleRequestDto = exports.ShiftScheduleDto = exports.UploadAvatarPayload = exports.UploadAvatarFilePayload = exports.AvatarUploadResponseDto = exports.ChangePasswordResponseDto = exports.ChangePasswordDto = exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.RemoveStaffPayload = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const user_enum_1 = require("../enums/user.enum");
@@ -24,6 +24,24 @@ const user_enum_1 = require("../enums/user.enum");
 var staff_dto_1 = require("../rest/staff.dto");
 Object.defineProperty(exports, "CreateStaffDto", { enumerable: true, get: function () { return staff_dto_1.CreateStaffDto; } });
 Object.defineProperty(exports, "UpdateStaffStatusDto", { enumerable: true, get: function () { return staff_dto_1.UpdateStaffStatusDto; } });
+class RemoveStaffPayload {
+    id;
+    tenantId;
+    hotelId;
+}
+exports.RemoveStaffPayload = RemoveStaffPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], RemoveStaffPayload.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], RemoveStaffPayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], RemoveStaffPayload.prototype, "hotelId", void 0);
 // ============= NATS Response DTOs =============
 /**
  * Staff DTO - Re-exported from rest/staff.dto.ts
