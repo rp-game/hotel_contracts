@@ -18,6 +18,14 @@ export enum NotificationPriority {
   URGENT = 'urgent',
 }
 
+export enum NotificationChannel {
+  IN_APP = 'in_app',
+  PUSH = 'push',
+  SMS = 'sms',
+  EMAIL = 'email',
+  WEBSOCKET = 'websocket',
+}
+
 export enum DevicePlatform {
   IOS = 'ios',
   ANDROID = 'android',

@@ -1,4 +1,4 @@
-import { DevicePlatform, NotificationType, NotificationPriority } from '../enums/notification.enum';
+import { DevicePlatform, NotificationType, NotificationPriority, NotificationChannel } from '../enums/notification.enum';
 export { MarkAllNotificationsReadDto, MarkAllNotificationsResponseDto } from '../rest/mark-all-read.dto';
 export { UnregisterDeviceDto, UnregisterDeviceResponseDto } from '../rest/unregister-device.dto';
 export { RegisterDeviceDto, DeviceRegistrationResponseDto } from '../rest/register-device.dto';
@@ -96,5 +96,28 @@ export declare class StaffNotificationSettingsDto {
     vibrationEnabled: boolean;
     quietHoursStart?: string;
     quietHoursEnd?: string;
+}
+/**
+ * Request for notification.send NATS pattern.
+ * Uses staffIds (string[]) for multi-recipient support.
+ * Different from StaffSendNotificationNatsRequest which uses staffId (string) for single-recipient.
+ */
+export declare class SendStaffNotificationMultiNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    staffIds: string[];
+    type: NotificationType;
+    title: string;
+    body: string;
+    priority: NotificationPriority;
+    data?: Record<string, unknown>;
+    icon?: string;
+    imageUrl?: string;
+    scheduledFor?: string;
+    channels?: NotificationChannel[];
+}
+export declare class SendNotificationResponseDto {
+    success: boolean;
+    messageId?: string;
 }
 //# sourceMappingURL=staff-notification.nats.d.ts.map

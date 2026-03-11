@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsDateString, IsEnum, IsNumber, IsArray, IsBoolean } from 'class-validator';
 import { Type } from 'class-transformer';
-import { DevicePlatform, NotificationType, NotificationPriority } from '../enums/notification.enum';
+import { DevicePlatform, NotificationType, NotificationPriority, NotificationChannel } from '../enums/notification.enum';
 
 // Re-export REST DTOs for use by NATS layer
 export { MarkAllNotificationsReadDto, MarkAllNotificationsResponseDto } from '../rest/mark-all-read.dto';
@@ -306,4 +306,75 @@ export class StaffNotificationSettingsDto {
   @IsOptional()
   @IsString()
   quietHoursEnd?: string;
+}
+
+// ============= SEND NOTIFICATION (multi-recipient) =============
+
+/**
+ * Request for notification.send NATS pattern.
+ * Uses staffIds (string[]) for multi-recipient support.
+ * Different from StaffSendNotificationNatsRequest which uses staffId (string) for single-recipient.
+ */
+export class SendStaffNotificationMultiNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
+  hotelId: string;
+
+  @ApiProperty({ description: 'Staff IDs to notify', type: [String] })
+  @IsArray()
+  @IsString({ each: true })
+  staffIds: string[];
+
+  @ApiProperty({ description: 'Notification type', enum: NotificationType })
+  @IsEnum(NotificationType)
+  type: NotificationType;
+
+  @ApiProperty({ description: 'Notification title' })
+  @IsString()
+  title: string;
+
+  @ApiProperty({ description: 'Notification body' })
+  @IsString()
+  body: string;
+
+  @ApiProperty({ description: 'Notification priority', enum: NotificationPriority })
+  @IsEnum(NotificationPriority)
+  priority: NotificationPriority;
+
+  @ApiPropertyOptional({ description: 'Additional data', type: Object })
+  @IsOptional()
+  data?: Record<string, unknown>;
+
+  @ApiPropertyOptional({ description: 'Icon URL' })
+  @IsOptional()
+  @IsString()
+  icon?: string;
+
+  @ApiPropertyOptional({ description: 'Image URL' })
+  @IsOptional()
+  @IsString()
+  imageUrl?: string;
+
+  @ApiPropertyOptional({ description: 'Scheduled send time' })
+  @IsOptional()
+  @IsDateString()
+  scheduledFor?: string;
+
+  @ApiPropertyOptional({ description: 'Notification channels', enum: NotificationChannel, isArray: true })
+  @IsOptional()
+  @IsArray()
+  @IsEnum(NotificationChannel, { each: true })
+  channels?: NotificationChannel[];
+}
+
+export class SendNotificationResponseDto {
+  @ApiProperty({ description: 'Success flag' })
+  success: boolean;
+
+  @ApiPropertyOptional({ description: 'Message ID' })
+  messageId?: string;
 }

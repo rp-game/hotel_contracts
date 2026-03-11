@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StaffNotificationSettingsDto = exports.StaffSendNotificationNatsRequest = exports.GetUnreadCountResponseDto = exports.GetUnreadCountPayload = exports.MarkNotificationReadResponseDto = exports.MarkNotificationReadPayload = exports.GetMobileNotificationsResponseDto = exports.NotificationItemDto = exports.GetMobileNotificationsPayload = exports.RegisterDevicePayload = exports.UnregisterDevicePayload = exports.MarkAllNotificationsReadPayload = exports.NotificationListResponseDto = exports.MarkNotificationReadDto = exports.DeviceRegistrationResponseDto = exports.RegisterDeviceDto = exports.UnregisterDeviceResponseDto = exports.UnregisterDeviceDto = exports.MarkAllNotificationsResponseDto = exports.MarkAllNotificationsReadDto = void 0;
+exports.SendNotificationResponseDto = exports.SendStaffNotificationMultiNatsRequest = exports.StaffNotificationSettingsDto = exports.StaffSendNotificationNatsRequest = exports.GetUnreadCountResponseDto = exports.GetUnreadCountPayload = exports.MarkNotificationReadResponseDto = exports.MarkNotificationReadPayload = exports.GetMobileNotificationsResponseDto = exports.NotificationItemDto = exports.GetMobileNotificationsPayload = exports.RegisterDevicePayload = exports.UnregisterDevicePayload = exports.MarkAllNotificationsReadPayload = exports.NotificationListResponseDto = exports.MarkNotificationReadDto = exports.DeviceRegistrationResponseDto = exports.RegisterDeviceDto = exports.UnregisterDeviceResponseDto = exports.UnregisterDeviceDto = exports.MarkAllNotificationsResponseDto = exports.MarkAllNotificationsReadDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -470,4 +470,104 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], StaffNotificationSettingsDto.prototype, "quietHoursEnd", void 0);
+// ============= SEND NOTIFICATION (multi-recipient) =============
+/**
+ * Request for notification.send NATS pattern.
+ * Uses staffIds (string[]) for multi-recipient support.
+ * Different from StaffSendNotificationNatsRequest which uses staffId (string) for single-recipient.
+ */
+class SendStaffNotificationMultiNatsRequest {
+    tenantId;
+    hotelId;
+    staffIds;
+    type;
+    title;
+    body;
+    priority;
+    data;
+    icon;
+    imageUrl;
+    scheduledFor;
+    channels;
+}
+exports.SendStaffNotificationMultiNatsRequest = SendStaffNotificationMultiNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SendStaffNotificationMultiNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SendStaffNotificationMultiNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff IDs to notify', type: [String] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], SendStaffNotificationMultiNatsRequest.prototype, "staffIds", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notification type', enum: notification_enum_1.NotificationType }),
+    (0, class_validator_1.IsEnum)(notification_enum_1.NotificationType),
+    __metadata("design:type", String)
+], SendStaffNotificationMultiNatsRequest.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notification title' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SendStaffNotificationMultiNatsRequest.prototype, "title", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notification body' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SendStaffNotificationMultiNatsRequest.prototype, "body", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notification priority', enum: notification_enum_1.NotificationPriority }),
+    (0, class_validator_1.IsEnum)(notification_enum_1.NotificationPriority),
+    __metadata("design:type", String)
+], SendStaffNotificationMultiNatsRequest.prototype, "priority", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional data', type: Object }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], SendStaffNotificationMultiNatsRequest.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Icon URL' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SendStaffNotificationMultiNatsRequest.prototype, "icon", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Image URL' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SendStaffNotificationMultiNatsRequest.prototype, "imageUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Scheduled send time' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], SendStaffNotificationMultiNatsRequest.prototype, "scheduledFor", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Notification channels', enum: notification_enum_1.NotificationChannel, isArray: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsEnum)(notification_enum_1.NotificationChannel, { each: true }),
+    __metadata("design:type", Array)
+], SendStaffNotificationMultiNatsRequest.prototype, "channels", void 0);
+class SendNotificationResponseDto {
+    success;
+    messageId;
+}
+exports.SendNotificationResponseDto = SendNotificationResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Success flag' }),
+    __metadata("design:type", Boolean)
+], SendNotificationResponseDto.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Message ID' }),
+    __metadata("design:type", String)
+], SendNotificationResponseDto.prototype, "messageId", void 0);
 //# sourceMappingURL=staff-notification.nats.js.map

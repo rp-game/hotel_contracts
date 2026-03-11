@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DevicePlatform = exports.NotificationPriority = exports.NotificationType = void 0;
+exports.DevicePlatform = exports.NotificationChannel = exports.NotificationPriority = exports.NotificationType = void 0;
 var NotificationType;
 (function (NotificationType) {
     NotificationType["TASK_ASSIGNED"] = "task_assigned";
@@ -21,6 +21,14 @@ var NotificationPriority;
     NotificationPriority["HIGH"] = "high";
     NotificationPriority["URGENT"] = "urgent";
 })(NotificationPriority || (exports.NotificationPriority = NotificationPriority = {}));
+var NotificationChannel;
+(function (NotificationChannel) {
+    NotificationChannel["IN_APP"] = "in_app";
+    NotificationChannel["PUSH"] = "push";
+    NotificationChannel["SMS"] = "sms";
+    NotificationChannel["EMAIL"] = "email";
+    NotificationChannel["WEBSOCKET"] = "websocket";
+})(NotificationChannel || (exports.NotificationChannel = NotificationChannel = {}));
 var DevicePlatform;
 (function (DevicePlatform) {
     DevicePlatform["IOS"] = "ios";
