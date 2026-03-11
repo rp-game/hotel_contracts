@@ -180,6 +180,7 @@ export declare class QuickActionParametersDto {
     notes?: string;
     priority?: string;
     dueDate?: string;
+    status?: string;
 }
 export declare class QuickActionExecuteDto {
     actionId: string;

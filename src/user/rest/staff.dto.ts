@@ -469,6 +469,11 @@ export class QuickActionParametersDto {
   @IsOptional()
   @IsString()
   dueDate?: string;
+
+  @ApiPropertyOptional({ description: 'Status value for status-update actions' })
+  @IsOptional()
+  @IsString()
+  status?: string;
 }
 
 export class QuickActionExecuteDto {

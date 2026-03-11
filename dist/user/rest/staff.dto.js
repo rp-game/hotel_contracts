@@ -650,6 +650,7 @@ class QuickActionParametersDto {
     notes;
     priority;
     dueDate;
+    status;
 }
 exports.QuickActionParametersDto = QuickActionParametersDto;
 __decorate([
@@ -688,6 +689,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], QuickActionParametersDto.prototype, "dueDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Status value for status-update actions' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickActionParametersDto.prototype, "status", void 0);
 class QuickActionExecuteDto {
     actionId;
     parameters;
