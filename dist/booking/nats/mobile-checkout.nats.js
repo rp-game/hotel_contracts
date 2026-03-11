@@ -237,23 +237,23 @@ class CheckoutStatsData {
 }
 exports.CheckoutStatsData = CheckoutStatsData;
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Total checkouts for today' }),
     __metadata("design:type", Number)
 ], CheckoutStatsData.prototype, "totalCheckouts", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Completed checkouts' }),
     __metadata("design:type", Number)
 ], CheckoutStatsData.prototype, "completedCheckouts", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Pending checkouts' }),
     __metadata("design:type", Number)
 ], CheckoutStatsData.prototype, "pendingCheckouts", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Revenue from checkouts' }),
     __metadata("design:type", Number)
 ], CheckoutStatsData.prototype, "revenue", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Average checkout time in minutes' }),
     __metadata("design:type", Number)
 ], CheckoutStatsData.prototype, "averageCheckoutTime", void 0);
 // ============= CHECKOUT HISTORY =============
@@ -405,35 +405,35 @@ class ValidateQRCheckoutData {
 }
 exports.ValidateQRCheckoutData = ValidateQRCheckoutData;
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Booking ID' }),
     __metadata("design:type", String)
 ], ValidateQRCheckoutData.prototype, "id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Booking code' }),
     __metadata("design:type", String)
 ], ValidateQRCheckoutData.prototype, "bookingCode", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Guest name' }),
     __metadata("design:type", String)
 ], ValidateQRCheckoutData.prototype, "guestName", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Guest email' }),
     __metadata("design:type", String)
 ], ValidateQRCheckoutData.prototype, "guestEmail", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Room number' }),
     __metadata("design:type", String)
 ], ValidateQRCheckoutData.prototype, "roomNumber", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Check-out date' }),
     __metadata("design:type", String)
 ], ValidateQRCheckoutData.prototype, "checkOutDate", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Booking status' }),
     __metadata("design:type", String)
 ], ValidateQRCheckoutData.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Total amount' }),
     __metadata("design:type", Number)
 ], ValidateQRCheckoutData.prototype, "totalAmount", void 0);
 class ValidateQRData {
@@ -446,27 +446,27 @@ class ValidateQRData {
 }
 exports.ValidateQRData = ValidateQRData;
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Whether QR code is valid' }),
     __metadata("design:type", Boolean)
 ], ValidateQRData.prototype, "isValid", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking ID if valid' }),
     __metadata("design:type", String)
 ], ValidateQRData.prototype, "bookingId", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room number' }),
     __metadata("design:type", String)
 ], ValidateQRData.prototype, "roomNumber", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Guest name' }),
     __metadata("design:type", String)
 ], ValidateQRData.prototype, "guestName", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ type: ValidateQRCheckoutData }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Checkout data if valid', type: ValidateQRCheckoutData }),
     __metadata("design:type", ValidateQRCheckoutData)
 ], ValidateQRData.prototype, "checkoutData", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Error message if invalid' }),
     __metadata("design:type", String)
 ], ValidateQRData.prototype, "message", void 0);
 // ============= READY ROOMS =============
@@ -500,23 +500,23 @@ class ReadyRoom {
 }
 exports.ReadyRoom = ReadyRoom;
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Room number' }),
     __metadata("design:type", String)
 ], ReadyRoom.prototype, "roomNumber", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Guest name' }),
     __metadata("design:type", String)
 ], ReadyRoom.prototype, "guestName", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Check-out time' }),
     __metadata("design:type", String)
 ], ReadyRoom.prototype, "checkOutTime", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ enum: ['overdue', 'pending'] }),
+    (0, swagger_1.ApiProperty)({ description: 'Status', enum: ['overdue', 'pending'] }),
     __metadata("design:type", String)
 ], ReadyRoom.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Booking ID' }),
     __metadata("design:type", String)
 ], ReadyRoom.prototype, "bookingId", void 0);
 class ReadyRoomsData {
@@ -525,11 +525,11 @@ class ReadyRoomsData {
 }
 exports.ReadyRoomsData = ReadyRoomsData;
 __decorate([
-    (0, swagger_1.ApiProperty)({ type: [ReadyRoom] }),
+    (0, swagger_1.ApiProperty)({ type: [ReadyRoom], description: 'Rooms ready for checkout' }),
     __metadata("design:type", Array)
 ], ReadyRoomsData.prototype, "data", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ description: 'Total count' }),
     __metadata("design:type", Number)
 ], ReadyRoomsData.prototype, "total", void 0);
 // ============= CHECKOUT ITEMS =============

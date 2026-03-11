@@ -102,3 +102,25 @@ export class CheckoutItemsResponseDto {
   @ApiPropertyOptional({ description: 'Special requests' })
   specialRequests?: string;
 }
+
+// ============= BATCH 6 REQUEST DTOs =============
+
+export class ValidateQRCodeRequestDto {
+  @ApiProperty({ description: 'QR code string' })
+  @IsString()
+  @IsNotEmpty()
+  qrCode: string;
+}
+
+// ============= BATCH 6 RESPONSE DTOs =============
+
+// SearchCheckoutsResponseDto — REST version uses CheckoutHistoryItemDto (sanitized)
+// instead of NATS CheckoutDataItem (has internal tenantId/hotelId/status/source)
+export class SearchCheckoutsResponseDto {
+  @ApiProperty({ type: [CheckoutHistoryItemDto], description: 'Search results' })
+  @Type(() => CheckoutHistoryItemDto)
+  data: CheckoutHistoryItemDto[];
+
+  @ApiProperty({ description: 'Total count' })
+  total: number;
+}

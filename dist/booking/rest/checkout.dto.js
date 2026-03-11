@@ -15,7 +15,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckoutItemsResponseDto = exports.CheckoutHistoryResponseDto = exports.CheckoutHistoryItemDto = exports.CompleteCheckoutResponseDto = exports.StartCheckoutResponseDto = exports.CompleteCheckoutRequestDto = exports.StartCheckoutRequestDto = void 0;
+exports.SearchCheckoutsResponseDto = exports.ValidateQRCodeRequestDto = exports.CheckoutItemsResponseDto = exports.CheckoutHistoryResponseDto = exports.CheckoutHistoryItemDto = exports.CompleteCheckoutResponseDto = exports.StartCheckoutResponseDto = exports.CompleteCheckoutRequestDto = exports.StartCheckoutRequestDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -240,4 +240,32 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Special requests' }),
     __metadata("design:type", String)
 ], CheckoutItemsResponseDto.prototype, "specialRequests", void 0);
+// ============= BATCH 6 REQUEST DTOs =============
+class ValidateQRCodeRequestDto {
+    qrCode;
+}
+exports.ValidateQRCodeRequestDto = ValidateQRCodeRequestDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'QR code string' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], ValidateQRCodeRequestDto.prototype, "qrCode", void 0);
+// ============= BATCH 6 RESPONSE DTOs =============
+// SearchCheckoutsResponseDto — REST version uses CheckoutHistoryItemDto (sanitized)
+// instead of NATS CheckoutDataItem (has internal tenantId/hotelId/status/source)
+class SearchCheckoutsResponseDto {
+    data;
+    total;
+}
+exports.SearchCheckoutsResponseDto = SearchCheckoutsResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [CheckoutHistoryItemDto], description: 'Search results' }),
+    (0, class_transformer_1.Type)(() => CheckoutHistoryItemDto),
+    __metadata("design:type", Array)
+], SearchCheckoutsResponseDto.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total count' }),
+    __metadata("design:type", Number)
+], SearchCheckoutsResponseDto.prototype, "total", void 0);
 //# sourceMappingURL=checkout.dto.js.map

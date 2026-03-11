@@ -99,11 +99,11 @@ export class GetTodayCheckoutStatsNatsRequest {
 }
 
 export class CheckoutStatsData {
-  @ApiProperty() totalCheckouts: number;
-  @ApiProperty() completedCheckouts: number;
-  @ApiProperty() pendingCheckouts: number;
-  @ApiProperty() revenue: number;
-  @ApiProperty() averageCheckoutTime: number;
+  @ApiProperty({ description: 'Total checkouts for today' }) totalCheckouts: number;
+  @ApiProperty({ description: 'Completed checkouts' }) completedCheckouts: number;
+  @ApiProperty({ description: 'Pending checkouts' }) pendingCheckouts: number;
+  @ApiProperty({ description: 'Revenue from checkouts' }) revenue: number;
+  @ApiProperty({ description: 'Average checkout time in minutes' }) averageCheckoutTime: number;
 }
 
 export type GetTodayCheckoutStatsNatsResponse = NatsResponse<CheckoutStatsData>;
@@ -154,23 +154,23 @@ export class ValidateCheckoutQRNatsRequest {
 }
 
 export class ValidateQRCheckoutData {
-  @ApiProperty() id: string;
-  @ApiProperty() bookingCode: string;
-  @ApiProperty() guestName: string;
-  @ApiPropertyOptional() guestEmail?: string;
-  @ApiProperty() roomNumber: string;
-  @ApiProperty() checkOutDate: string;
-  @ApiProperty() status: string;
-  @ApiProperty() totalAmount: number;
+  @ApiProperty({ description: 'Booking ID' }) id: string;
+  @ApiProperty({ description: 'Booking code' }) bookingCode: string;
+  @ApiProperty({ description: 'Guest name' }) guestName: string;
+  @ApiPropertyOptional({ description: 'Guest email' }) guestEmail?: string;
+  @ApiProperty({ description: 'Room number' }) roomNumber: string;
+  @ApiProperty({ description: 'Check-out date' }) checkOutDate: string;
+  @ApiProperty({ description: 'Booking status' }) status: string;
+  @ApiProperty({ description: 'Total amount' }) totalAmount: number;
 }
 
 export class ValidateQRData {
-  @ApiProperty() isValid: boolean;
-  @ApiPropertyOptional() bookingId?: string;
-  @ApiPropertyOptional() roomNumber?: string;
-  @ApiPropertyOptional() guestName?: string;
-  @ApiPropertyOptional({ type: ValidateQRCheckoutData }) checkoutData?: ValidateQRCheckoutData;
-  @ApiPropertyOptional() message?: string;
+  @ApiProperty({ description: 'Whether QR code is valid' }) isValid: boolean;
+  @ApiPropertyOptional({ description: 'Booking ID if valid' }) bookingId?: string;
+  @ApiPropertyOptional({ description: 'Room number' }) roomNumber?: string;
+  @ApiPropertyOptional({ description: 'Guest name' }) guestName?: string;
+  @ApiPropertyOptional({ description: 'Checkout data if valid', type: ValidateQRCheckoutData }) checkoutData?: ValidateQRCheckoutData;
+  @ApiPropertyOptional({ description: 'Error message if invalid' }) message?: string;
 }
 
 export type ValidateCheckoutQRNatsResponse = NatsResponse<ValidateQRData>;
@@ -184,16 +184,16 @@ export class GetReadyRoomsNatsRequest {
 }
 
 export class ReadyRoom {
-  @ApiProperty() roomNumber: string;
-  @ApiProperty() guestName: string;
-  @ApiProperty() checkOutTime: string;
-  @ApiProperty({ enum: ['overdue', 'pending'] }) status: 'overdue' | 'pending';
-  @ApiProperty() bookingId: string;
+  @ApiProperty({ description: 'Room number' }) roomNumber: string;
+  @ApiProperty({ description: 'Guest name' }) guestName: string;
+  @ApiProperty({ description: 'Check-out time' }) checkOutTime: string;
+  @ApiProperty({ description: 'Status', enum: ['overdue', 'pending'] }) status: 'overdue' | 'pending';
+  @ApiProperty({ description: 'Booking ID' }) bookingId: string;
 }
 
 export class ReadyRoomsData {
-  @ApiProperty({ type: [ReadyRoom] }) data: ReadyRoom[];
-  @ApiProperty() total: number;
+  @ApiProperty({ type: [ReadyRoom], description: 'Rooms ready for checkout' }) data: ReadyRoom[];
+  @ApiProperty({ description: 'Total count' }) total: number;
 }
 
 export type GetReadyRoomsNatsResponse = NatsResponse<ReadyRoomsData>;

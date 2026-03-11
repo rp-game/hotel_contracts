@@ -56,4 +56,11 @@ export declare class CheckoutItemsResponseDto {
     damages: Record<string, unknown>[];
     specialRequests?: string;
 }
+export declare class ValidateQRCodeRequestDto {
+    qrCode: string;
+}
+export declare class SearchCheckoutsResponseDto {
+    data: CheckoutHistoryItemDto[];
+    total: number;
+}
 //# sourceMappingURL=checkout.dto.d.ts.map
