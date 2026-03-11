@@ -257,4 +257,49 @@ export interface GetTopPerformingRoomsNatsRequest {
     endDate: string;
     limit?: number;
 }
+/**
+ * NATS Pattern: bookings.analytics.daily_trends
+ * Batch query for daily occupancy/revenue trends (replaces N+1 daily calls)
+ */
+export interface GetDailyTrendsNatsRequest {
+    hotelId: string;
+    startDate: string;
+    endDate: string;
+}
+export interface DailyTrendItem {
+    date: string;
+    occupiedRooms: number;
+    totalBookings: number;
+    revenue: number;
+}
+/**
+ * NATS Pattern: bookings.analytics.hourly_distribution
+ * Check-in/check-out counts by hour of day
+ */
+export interface GetHourlyDistributionNatsRequest {
+    hotelId: string;
+    startDate: string;
+    endDate: string;
+}
+export interface HourlyDistributionItem {
+    hour: number;
+    checkIns: number;
+    checkOuts: number;
+}
+/**
+ * NATS Pattern: bookings.analytics.forecast
+ * Future booking predictions based on confirmed reservations
+ */
+export interface GetForecastNatsRequest {
+    hotelId: string;
+    totalRooms: number;
+    days?: number;
+}
+export interface ForecastItem {
+    date: string;
+    confirmedBookings: number;
+    predictedRevenue: number;
+    occupancyRate: number;
+    demandLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'PEAK';
+}
 //# sourceMappingURL=analytics.nats.d.ts.map

@@ -15,3 +15,4 @@
 // Financial-specific types only (not re-exporting payment types to avoid conflicts in root index)
 export * from './additional-services.nats';
 export * from './service-bookings.nats';
+export * from './analytics.nats';

@@ -13,4 +13,5 @@
  */
 export * from './additional-services.nats';
 export * from './service-bookings.nats';
+export * from './analytics.nats';
 //# sourceMappingURL=index.d.ts.map
