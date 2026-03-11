@@ -3,7 +3,7 @@
  * Housekeeping Task Status Enum
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TaskType = exports.TaskStatus = void 0;
+exports.ActiveShiftStatus = exports.TaskPriority = exports.TaskType = exports.TaskStatus = void 0;
 var TaskStatus;
 (function (TaskStatus) {
     TaskStatus["PENDING"] = "PENDING";
@@ -36,5 +36,29 @@ var TaskType;
     TaskType["INSPECTION"] = "INSPECTION";
     TaskType["TURNOVER"] = "TURNOVER";
     TaskType["LAUNDRY"] = "LAUNDRY";
+    TaskType["REGULAR"] = "REGULAR";
+    TaskType["CHECKOUT_CLEAN"] = "CHECKOUT_CLEAN";
+    TaskType["MAINTENANCE_CLEAN"] = "MAINTENANCE_CLEAN";
 })(TaskType || (exports.TaskType = TaskType = {}));
+/**
+ * Housekeeping Task Priority Enum
+ */
+var TaskPriority;
+(function (TaskPriority) {
+    TaskPriority["LOW"] = "LOW";
+    TaskPriority["MEDIUM"] = "MEDIUM";
+    TaskPriority["HIGH"] = "HIGH";
+    TaskPriority["URGENT"] = "URGENT";
+})(TaskPriority || (exports.TaskPriority = TaskPriority = {}));
+/**
+ * Active Shift Status Enum
+ * Used for clock-in/out tracking (distinct from scheduling ShiftStatus in user enums)
+ */
+var ActiveShiftStatus;
+(function (ActiveShiftStatus) {
+    ActiveShiftStatus["NOT_STARTED"] = "not_started";
+    ActiveShiftStatus["ACTIVE"] = "active";
+    ActiveShiftStatus["BREAK"] = "break";
+    ActiveShiftStatus["COMPLETED"] = "completed";
+})(ActiveShiftStatus || (exports.ActiveShiftStatus = ActiveShiftStatus = {}));
 //# sourceMappingURL=housekeeping.enum.js.map

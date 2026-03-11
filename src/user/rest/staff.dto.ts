@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsEmail, IsArray, IsBoolean, IsUUID, IsOptional, IsEnum, IsDateString } from 'class-validator';
+import { IsString, IsEmail, IsArray, IsBoolean, IsUUID, IsOptional, IsEnum, IsDateString, IsNumber } from 'class-validator';
 import { StaffStatus, Department } from '../enums';
 
 /**
@@ -255,4 +255,291 @@ export class StaffResponseDto {
 
   @ApiProperty({ description: 'Operation message' })
   message?: string;
+}
+
+// ============================================================================
+// MOBILE DASHBOARD DTOs
+// ============================================================================
+
+/**
+ * Dashboard Staff Info
+ * @usage Part of MobileDashboardDto
+ */
+export class DashboardStaffInfoDto {
+  @ApiProperty({ description: 'Staff ID' })
+  id: string;
+
+  @ApiProperty({ description: 'First name' })
+  firstName: string;
+
+  @ApiProperty({ description: 'Last name' })
+  lastName: string;
+
+  @ApiProperty({ description: 'Email' })
+  email: string;
+
+  @ApiPropertyOptional({ description: 'Phone number' })
+  phone?: string;
+
+  @ApiProperty({ description: 'Staff role' })
+  role: string;
+
+  @ApiProperty({ description: 'Staff status' })
+  status: string;
+
+  @ApiPropertyOptional({ description: 'Avatar URL' })
+  avatar?: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Permissions', type: [String] })
+  permissions?: string[];
+}
+
+/**
+ * Dashboard Task Stats
+ */
+export class DashboardTaskStatsDto {
+  @ApiProperty({ description: 'Total tasks' })
+  total: number;
+
+  @ApiProperty({ description: 'Pending tasks' })
+  pending: number;
+
+  @ApiProperty({ description: 'In-progress tasks' })
+  inProgress: number;
+
+  @ApiProperty({ description: 'Completed tasks' })
+  completed: number;
+
+  @ApiProperty({ description: 'Overdue tasks' })
+  overdue: number;
+
+  @ApiProperty({ description: 'Tasks completed today' })
+  todayCompleted: number;
+
+  @ApiProperty({ description: 'Tasks completed this week' })
+  weekCompleted: number;
+
+  @ApiPropertyOptional({ description: 'Average completion time in minutes' })
+  averageCompletionTime?: number;
+}
+
+/**
+ * Dashboard Occupancy
+ */
+export class DashboardOccupancyDto {
+  @ApiProperty({ description: 'Total rooms' })
+  totalRooms: number;
+
+  @ApiProperty({ description: 'Occupied rooms' })
+  occupiedRooms: number;
+
+  @ApiProperty({ description: 'Available rooms' })
+  availableRooms: number;
+
+  @ApiProperty({ description: 'Out of order rooms' })
+  outOfOrderRooms: number;
+
+  @ApiProperty({ description: 'Checkouts today' })
+  checkoutsToday: number;
+
+  @ApiProperty({ description: 'Check-ins today' })
+  checkinsToday: number;
+
+  @ApiProperty({ description: 'Occupancy rate (percentage)' })
+  occupancyRate: number;
+
+  @ApiProperty({ description: 'Date (ISO)' })
+  date: string;
+}
+
+/**
+ * Dashboard Performance
+ */
+export class DashboardPerformanceDto {
+  @ApiProperty({ description: 'Tasks completed today' })
+  tasksCompletedToday: number;
+
+  @ApiProperty({ description: 'Average task time in minutes' })
+  averageTaskTime: number;
+
+  @ApiPropertyOptional({ description: 'Quality score (0-100)' })
+  qualityScore?: number;
+
+  @ApiPropertyOptional({ description: 'Punctuality score (0-100)' })
+  punctualityScore?: number;
+
+  @ApiProperty({ description: 'Performance period' })
+  period: string;
+}
+
+/**
+ * Dashboard Current Shift
+ */
+export class DashboardCurrentShiftDto {
+  @ApiPropertyOptional({ description: 'Shift ID' })
+  id?: string;
+
+  @ApiProperty({ description: 'Staff ID' })
+  staffId: string;
+
+  @ApiPropertyOptional({ description: 'Clock-in time (ISO)' })
+  clockInTime?: string;
+
+  @ApiPropertyOptional({ description: 'Clock-out time (ISO)' })
+  clockOutTime?: string;
+
+  @ApiProperty({ description: 'Shift status' })
+  status: string;
+
+  @ApiProperty({ description: 'Hours worked (decimal)' })
+  hoursWorked: number;
+
+  @ApiPropertyOptional({ description: 'Break time in minutes' })
+  breakTime?: number;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+}
+
+/**
+ * Mobile Dashboard DTO — composite dashboard response
+ * @usage GET /api/staff/dashboard
+ */
+export class MobileDashboardDto {
+  @ApiProperty({ description: 'Staff information', type: DashboardStaffInfoDto })
+  staffInfo: DashboardStaffInfoDto;
+
+  @ApiProperty({ description: 'Task statistics', type: DashboardTaskStatsDto })
+  taskStats: DashboardTaskStatsDto;
+
+  @ApiProperty({ description: 'Hotel occupancy', type: DashboardOccupancyDto })
+  occupancy: DashboardOccupancyDto;
+
+  @ApiProperty({ description: 'Staff performance metrics', type: DashboardPerformanceDto })
+  performance: DashboardPerformanceDto;
+
+  @ApiProperty({ description: 'Current shift information', type: DashboardCurrentShiftDto })
+  currentShift: DashboardCurrentShiftDto;
+}
+
+// ============================================================================
+// QUICK ACTION DTOs
+// ============================================================================
+
+export class QuickActionParametersDto {
+  @ApiPropertyOptional({ description: 'Room number for room-specific actions' })
+  @IsOptional()
+  @IsString()
+  roomNumber?: string;
+
+  @ApiPropertyOptional({ description: 'Guest ID for guest-related actions' })
+  @IsOptional()
+  @IsString()
+  guestId?: string;
+
+  @ApiPropertyOptional({ description: 'Task ID for task-related actions' })
+  @IsOptional()
+  @IsString()
+  taskId?: string;
+
+  @ApiPropertyOptional({ description: 'Action notes' })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+
+  @ApiPropertyOptional({ description: 'Priority level for actions' })
+  @IsOptional()
+  @IsString()
+  priority?: string;
+
+  @ApiPropertyOptional({ description: 'Due date for scheduled actions' })
+  @IsOptional()
+  @IsString()
+  dueDate?: string;
+}
+
+export class QuickActionExecuteDto {
+  @ApiProperty({ description: 'Action ID to execute' })
+  @IsString()
+  actionId: string;
+
+  @ApiPropertyOptional({ description: 'Additional parameters for action', type: QuickActionParametersDto })
+  @IsOptional()
+  parameters?: QuickActionParametersDto;
+}
+
+export class NextActionDto {
+  @ApiProperty({ description: 'Next action title' })
+  title: string;
+
+  @ApiProperty({ description: 'Next action URL' })
+  actionUrl: string;
+
+  @ApiProperty({ description: 'Next action icon' })
+  icon: string;
+}
+
+export class QuickActionResponseDto {
+  @ApiProperty({ description: 'Action execution status' })
+  success: boolean;
+
+  @ApiProperty({ description: 'Response message' })
+  message: string;
+
+  @ApiPropertyOptional({ description: 'Result data from action', type: Object })
+  data?: Record<string, unknown>;
+
+  @ApiPropertyOptional({ description: 'Next suggested action', type: NextActionDto })
+  nextAction?: NextActionDto;
+}
+
+// ============================================================================
+// CLOCK IN/OUT DTOs
+// ============================================================================
+
+export class DeviceInfoDto {
+  @ApiProperty({ description: 'Device ID' })
+  @IsString()
+  deviceId: string;
+
+  @ApiProperty({ description: 'Device platform' })
+  @IsString()
+  platform: string;
+
+  @ApiProperty({ description: 'App version' })
+  @IsString()
+  appVersion: string;
+}
+
+export class ClockInOutDto {
+  @ApiPropertyOptional({ description: 'GPS location for verification' })
+  @IsOptional()
+  location?: {
+    latitude: number;
+    longitude: number;
+    accuracy: number;
+    timestamp: string;
+  };
+
+  @ApiPropertyOptional({ description: 'Additional notes' })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+
+  @ApiProperty({ description: 'Clock in/out timestamp' })
+  @IsString()
+  timestamp: string;
+
+  @ApiPropertyOptional({ description: 'Device information', type: DeviceInfoDto })
+  @IsOptional()
+  deviceInfo?: DeviceInfoDto;
 }

@@ -30,6 +30,28 @@ export declare enum TaskType {
     WINDOW_CLEANING = "WINDOW_CLEANING",
     INSPECTION = "INSPECTION",
     TURNOVER = "TURNOVER",
-    LAUNDRY = "LAUNDRY"
+    LAUNDRY = "LAUNDRY",
+    REGULAR = "REGULAR",
+    CHECKOUT_CLEAN = "CHECKOUT_CLEAN",
+    MAINTENANCE_CLEAN = "MAINTENANCE_CLEAN"
+}
+/**
+ * Housekeeping Task Priority Enum
+ */
+export declare enum TaskPriority {
+    LOW = "LOW",
+    MEDIUM = "MEDIUM",
+    HIGH = "HIGH",
+    URGENT = "URGENT"
+}
+/**
+ * Active Shift Status Enum
+ * Used for clock-in/out tracking (distinct from scheduling ShiftStatus in user enums)
+ */
+export declare enum ActiveShiftStatus {
+    NOT_STARTED = "not_started",
+    ACTIVE = "active",
+    BREAK = "break",
+    COMPLETED = "completed"
 }
 //# sourceMappingURL=housekeeping.enum.d.ts.map

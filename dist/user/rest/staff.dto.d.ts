@@ -94,4 +94,121 @@ export declare class StaffResponseDto {
     data: StaffDto;
     message?: string;
 }
+/**
+ * Dashboard Staff Info
+ * @usage Part of MobileDashboardDto
+ */
+export declare class DashboardStaffInfoDto {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone?: string;
+    role: string;
+    status: string;
+    avatar?: string;
+    tenantId: string;
+    hotelId: string;
+    permissions?: string[];
+}
+/**
+ * Dashboard Task Stats
+ */
+export declare class DashboardTaskStatsDto {
+    total: number;
+    pending: number;
+    inProgress: number;
+    completed: number;
+    overdue: number;
+    todayCompleted: number;
+    weekCompleted: number;
+    averageCompletionTime?: number;
+}
+/**
+ * Dashboard Occupancy
+ */
+export declare class DashboardOccupancyDto {
+    totalRooms: number;
+    occupiedRooms: number;
+    availableRooms: number;
+    outOfOrderRooms: number;
+    checkoutsToday: number;
+    checkinsToday: number;
+    occupancyRate: number;
+    date: string;
+}
+/**
+ * Dashboard Performance
+ */
+export declare class DashboardPerformanceDto {
+    tasksCompletedToday: number;
+    averageTaskTime: number;
+    qualityScore?: number;
+    punctualityScore?: number;
+    period: string;
+}
+/**
+ * Dashboard Current Shift
+ */
+export declare class DashboardCurrentShiftDto {
+    id?: string;
+    staffId: string;
+    clockInTime?: string;
+    clockOutTime?: string;
+    status: string;
+    hoursWorked: number;
+    breakTime?: number;
+    tenantId: string;
+    hotelId: string;
+}
+/**
+ * Mobile Dashboard DTO — composite dashboard response
+ * @usage GET /api/staff/dashboard
+ */
+export declare class MobileDashboardDto {
+    staffInfo: DashboardStaffInfoDto;
+    taskStats: DashboardTaskStatsDto;
+    occupancy: DashboardOccupancyDto;
+    performance: DashboardPerformanceDto;
+    currentShift: DashboardCurrentShiftDto;
+}
+export declare class QuickActionParametersDto {
+    roomNumber?: string;
+    guestId?: string;
+    taskId?: string;
+    notes?: string;
+    priority?: string;
+    dueDate?: string;
+}
+export declare class QuickActionExecuteDto {
+    actionId: string;
+    parameters?: QuickActionParametersDto;
+}
+export declare class NextActionDto {
+    title: string;
+    actionUrl: string;
+    icon: string;
+}
+export declare class QuickActionResponseDto {
+    success: boolean;
+    message: string;
+    data?: Record<string, unknown>;
+    nextAction?: NextActionDto;
+}
+export declare class DeviceInfoDto {
+    deviceId: string;
+    platform: string;
+    appVersion: string;
+}
+export declare class ClockInOutDto {
+    location?: {
+        latitude: number;
+        longitude: number;
+        accuracy: number;
+        timestamp: string;
+    };
+    notes?: string;
+    timestamp: string;
+    deviceInfo?: DeviceInfoDto;
+}
 //# sourceMappingURL=staff.dto.d.ts.map

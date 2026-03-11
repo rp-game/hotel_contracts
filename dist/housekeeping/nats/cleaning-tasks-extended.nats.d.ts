@@ -3,13 +3,14 @@
  * Patterns: housekeeping.tasks.* (mobile and extended patterns)
  */
 import { NatsResponse } from '../../common';
-export interface GetRecentTasksNatsRequest {
+import { TaskStatus, TaskType, TaskPriority } from '../enums';
+export declare class GetRecentTasksNatsRequest {
     tenantId: string;
     hotelId: string;
     staffId: string;
     limit: number;
 }
-export interface MobileTaskResponse {
+export declare class MobileTaskResponse {
     id: string;
     title: string;
     description: string;
@@ -43,20 +44,20 @@ export interface MobileTaskResponse {
     canComplete: boolean;
 }
 export type GetRecentTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
-export interface SearchTasksNatsRequest {
+export declare class SearchTasksNatsRequest {
     tenantId: string;
     hotelId: string;
     query: string;
     filters?: object;
 }
 export type SearchTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
-export interface GetRoomTasksNatsRequest {
+export declare class GetRoomTasksNatsRequest {
     tenantId: string;
     hotelId: string;
     roomNumber: string;
 }
 export type GetRoomTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
-export interface AddTaskNotesNatsRequest {
+export declare class AddTaskNotesNatsRequest {
     taskId: string;
     staffId: string;
     tenantId: string;
@@ -64,7 +65,7 @@ export interface AddTaskNotesNatsRequest {
     notes: string;
     photos?: string[];
 }
-export interface AddNotesResult {
+export declare class AddNotesResult {
     taskId: string;
     notes: string;
     photos?: string[];
@@ -89,7 +90,7 @@ export declare class QuickCompleteResult {
 }
 export type QuickCompleteTaskNatsResponse = NatsResponse<QuickCompleteResult>;
 export { QuickCompleteTaskDto, QuickCompleteTaskResponseDto } from '../rest/quick-complete-task.rest';
-export interface ShiftData {
+export declare class ShiftData {
     id: string;
     staffId: string;
     date: string;
@@ -102,19 +103,19 @@ export interface ShiftData {
     tenantId: string;
     hotelId: string;
 }
-export interface GetCurrentShiftNatsRequest {
+export declare class GetCurrentShiftNatsRequest {
     staffId: string;
     tenantId: string;
     hotelId: string;
 }
 export type GetCurrentShiftNatsResponse = NatsResponse<ShiftData>;
-export interface ClockInNatsRequest {
+export declare class ClockInNatsRequest {
     staffId: string;
     tenantId: string;
     hotelId: string;
 }
 export type ClockInNatsResponse = NatsResponse<ShiftData>;
-export interface ClockOutNatsRequest {
+export declare class ClockOutNatsRequest {
     staffId: string;
     tenantId: string;
     hotelId: string;
@@ -124,7 +125,7 @@ export type ClockOutNatsResponse = NatsResponse<ShiftData>;
  * Enhanced Cleaning Task (from getHousekeepingTasks)
  * This is what the service ACTUALLY returns - enhanced with room and staff details
  */
-export interface EnhancedCleaningTask {
+export declare class EnhancedCleaningTask {
     id: string;
     roomId: string;
     roomNumber: string;
@@ -154,7 +155,7 @@ export interface EnhancedCleaningTask {
  * Get Housekeeping Tasks Request
  * Pattern: housekeeping.tasks
  */
-export interface GetHousekeepingTasksPayload {
+export declare class GetHousekeepingTasksPayload {
     tenantId: string;
     hotelId: string;
     date?: string;
@@ -188,4 +189,93 @@ export declare class GetPerformanceMetricsNatsRequest {
     startDate?: string;
 }
 export type GetPerformanceMetricsNatsResponse = NatsResponse<StaffPerformanceMetricsNatsResponse[]>;
+/**
+ * Mobile Task DTO — REST response shape (entity-like with relations)
+ * Different from MobileTaskResponse which is the NATS mobile-UI flattened shape
+ * @usage GET /api/staff/tasks, GET /api/staff/tasks/:id
+ */
+export declare class MobileTaskDto {
+    id: string;
+    tenantId: string;
+    hotelId: string;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt?: string;
+    roomId: string;
+    assignedToId?: string;
+    taskType: TaskType;
+    status: TaskStatus;
+    priority: TaskPriority;
+    instructions?: string;
+    scheduledDate: string;
+    scheduledFor?: string;
+    deadline?: string;
+    completedAt?: string;
+    verifiedBy?: string;
+    verifiedAt?: string;
+    isAutomated: boolean;
+    eventTriggered: boolean;
+    description?: string;
+    notes?: string;
+    estimatedDuration: number;
+    assignedTo?: {
+        id: string;
+        fullName: string;
+    } | null;
+    roomNumber?: string;
+    assignedToDetails?: Record<string, unknown>;
+}
+/**
+ * Mobile Task Update DTO — REST @Body() for task updates
+ * @usage PUT /api/staff/tasks/:id
+ */
+export declare class MobileTaskUpdateDto {
+    status?: TaskStatus;
+    progress?: number;
+    notes?: string;
+    photos?: string[];
+    requestHelp?: boolean;
+    timeSpent?: number;
+}
+/**
+ * Task Summary Statistics
+ */
+export declare class TaskSummaryStatsDto {
+    pending: number;
+    inProgress: number;
+    completed: number;
+    overdue: number;
+}
+/**
+ * Mobile Task List Response DTO — paginated response
+ * @usage GET /api/staff/tasks response
+ */
+export declare class MobileTaskListResponseDto {
+    data: MobileTaskDto[];
+    total: number;
+    page: number;
+    limit: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+    summary?: TaskSummaryStatsDto;
+}
+/**
+ * Task Stats DTO — replaces local TaskStatsData in client
+ */
+export declare class TaskStatsDto {
+    total: number;
+    completed: number;
+    pending: number;
+    inProgress: number;
+}
+/**
+ * Task Timer DTO — replaces local TimerData in client
+ */
+export declare class TaskTimerDto {
+    taskId: string;
+    staffId: string;
+    startTime: string;
+    endTime?: string;
+    status: string;
+}
 //# sourceMappingURL=cleaning-tasks-extended.nats.d.ts.map

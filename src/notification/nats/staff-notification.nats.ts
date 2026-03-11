@@ -1,5 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsDateString, IsEnum, IsNumber, IsArray } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsOptional, IsDateString, IsEnum, IsNumber, IsArray, IsBoolean } from 'class-validator';
 import { Type } from 'class-transformer';
 import { DevicePlatform, NotificationType, NotificationPriority } from '../enums/notification.enum';
 
@@ -205,4 +205,105 @@ export class GetUnreadCountPayload {
 export class GetUnreadCountResponseDto {
   @ApiProperty({ description: 'Unread notification count' })
   count: number;
+}
+
+// ============= SEND NOTIFICATION =============
+
+export class StaffSendNotificationNatsRequest {
+  @ApiProperty({ description: 'Staff ID to send notification to (or "all" for broadcast)' })
+  @IsString()
+  staffId: string;
+
+  @ApiProperty({ description: 'Notification type', enum: NotificationType })
+  @IsEnum(NotificationType)
+  type: NotificationType;
+
+  @ApiProperty({ description: 'Notification title' })
+  @IsString()
+  title: string;
+
+  @ApiProperty({ description: 'Notification message body' })
+  @IsString()
+  body: string;
+
+  @ApiProperty({ description: 'Notification priority', enum: NotificationPriority })
+  @IsEnum(NotificationPriority)
+  priority: NotificationPriority;
+
+  @ApiPropertyOptional({ description: 'Additional data payload', type: Object })
+  @IsOptional()
+  data?: Record<string, unknown>;
+
+  @ApiPropertyOptional({ description: 'Notification icon' })
+  @IsOptional()
+  @IsString()
+  icon?: string;
+
+  @ApiPropertyOptional({ description: 'Notification image URL' })
+  @IsOptional()
+  @IsString()
+  imageUrl?: string;
+
+  @ApiPropertyOptional({ description: 'Schedule notification for later' })
+  @IsOptional()
+  @IsDateString()
+  scheduleFor?: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
+  hotelId: string;
+}
+
+// ============= NOTIFICATION SETTINGS =============
+
+export class StaffNotificationSettingsDto {
+  @ApiProperty({ description: 'Enable push notifications' })
+  pushEnabled: boolean;
+
+  @ApiProperty({ description: 'Enable email notifications' })
+  emailEnabled: boolean;
+
+  @ApiProperty({ description: 'Enable SMS notifications' })
+  smsEnabled: boolean;
+
+  @ApiProperty({ description: 'Task assignment notifications' })
+  taskAssignments: boolean;
+
+  @ApiProperty({ description: 'Urgent request notifications' })
+  urgentRequests: boolean;
+
+  @ApiProperty({ description: 'Schedule change notifications' })
+  scheduleChanges: boolean;
+
+  @ApiProperty({ description: 'System alert notifications' })
+  systemAlerts: boolean;
+
+  @ApiProperty({ description: 'Team message notifications' })
+  teamMessages: boolean;
+
+  @ApiProperty({ description: 'Checkout reminder notifications' })
+  checkoutReminders: boolean;
+
+  @ApiProperty({ description: 'Maintenance alert notifications' })
+  maintenanceAlerts: boolean;
+
+  @ApiProperty({ description: 'Notification sound enabled' })
+  soundEnabled: boolean;
+
+  @ApiProperty({ description: 'Notification vibration enabled' })
+  vibrationEnabled: boolean;
+
+  @ApiPropertyOptional({ description: 'Quiet hours start time (24h format)' })
+  @IsOptional()
+  @IsString()
+  quietHoursStart?: string;
+
+  @ApiPropertyOptional({ description: 'Quiet hours end time (24h format)' })
+  @IsOptional()
+  @IsString()
+  quietHoursEnd?: string;
 }

@@ -68,4 +68,33 @@ export declare class GetUnreadCountPayload {
 export declare class GetUnreadCountResponseDto {
     count: number;
 }
+export declare class StaffSendNotificationNatsRequest {
+    staffId: string;
+    type: NotificationType;
+    title: string;
+    body: string;
+    priority: NotificationPriority;
+    data?: Record<string, unknown>;
+    icon?: string;
+    imageUrl?: string;
+    scheduleFor?: string;
+    tenantId: string;
+    hotelId: string;
+}
+export declare class StaffNotificationSettingsDto {
+    pushEnabled: boolean;
+    emailEnabled: boolean;
+    smsEnabled: boolean;
+    taskAssignments: boolean;
+    urgentRequests: boolean;
+    scheduleChanges: boolean;
+    systemAlerts: boolean;
+    teamMessages: boolean;
+    checkoutReminders: boolean;
+    maintenanceAlerts: boolean;
+    soundEnabled: boolean;
+    vibrationEnabled: boolean;
+    quietHoursStart?: string;
+    quietHoursEnd?: string;
+}
 //# sourceMappingURL=staff-notification.nats.d.ts.map

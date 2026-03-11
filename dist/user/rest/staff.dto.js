@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StaffResponseDto = exports.CreateStaffResponseDto = exports.StaffListResponseDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
+exports.ClockInOutDto = exports.DeviceInfoDto = exports.QuickActionResponseDto = exports.NextActionDto = exports.QuickActionExecuteDto = exports.QuickActionParametersDto = exports.MobileDashboardDto = exports.DashboardCurrentShiftDto = exports.DashboardPerformanceDto = exports.DashboardOccupancyDto = exports.DashboardTaskStatsDto = exports.DashboardStaffInfoDto = exports.StaffResponseDto = exports.CreateStaffResponseDto = exports.StaffListResponseDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
@@ -363,4 +363,431 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Operation message' }),
     __metadata("design:type", String)
 ], StaffResponseDto.prototype, "message", void 0);
+// ============================================================================
+// MOBILE DASHBOARD DTOs
+// ============================================================================
+/**
+ * Dashboard Staff Info
+ * @usage Part of MobileDashboardDto
+ */
+class DashboardStaffInfoDto {
+    id;
+    firstName;
+    lastName;
+    email;
+    phone;
+    role;
+    status;
+    avatar;
+    tenantId;
+    hotelId;
+    permissions;
+}
+exports.DashboardStaffInfoDto = DashboardStaffInfoDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], DashboardStaffInfoDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'First name' }),
+    __metadata("design:type", String)
+], DashboardStaffInfoDto.prototype, "firstName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Last name' }),
+    __metadata("design:type", String)
+], DashboardStaffInfoDto.prototype, "lastName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Email' }),
+    __metadata("design:type", String)
+], DashboardStaffInfoDto.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Phone number' }),
+    __metadata("design:type", String)
+], DashboardStaffInfoDto.prototype, "phone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff role' }),
+    __metadata("design:type", String)
+], DashboardStaffInfoDto.prototype, "role", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff status' }),
+    __metadata("design:type", String)
+], DashboardStaffInfoDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Avatar URL' }),
+    __metadata("design:type", String)
+], DashboardStaffInfoDto.prototype, "avatar", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], DashboardStaffInfoDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], DashboardStaffInfoDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Permissions', type: [String] }),
+    __metadata("design:type", Array)
+], DashboardStaffInfoDto.prototype, "permissions", void 0);
+/**
+ * Dashboard Task Stats
+ */
+class DashboardTaskStatsDto {
+    total;
+    pending;
+    inProgress;
+    completed;
+    overdue;
+    todayCompleted;
+    weekCompleted;
+    averageCompletionTime;
+}
+exports.DashboardTaskStatsDto = DashboardTaskStatsDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total tasks' }),
+    __metadata("design:type", Number)
+], DashboardTaskStatsDto.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Pending tasks' }),
+    __metadata("design:type", Number)
+], DashboardTaskStatsDto.prototype, "pending", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'In-progress tasks' }),
+    __metadata("design:type", Number)
+], DashboardTaskStatsDto.prototype, "inProgress", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Completed tasks' }),
+    __metadata("design:type", Number)
+], DashboardTaskStatsDto.prototype, "completed", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Overdue tasks' }),
+    __metadata("design:type", Number)
+], DashboardTaskStatsDto.prototype, "overdue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tasks completed today' }),
+    __metadata("design:type", Number)
+], DashboardTaskStatsDto.prototype, "todayCompleted", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tasks completed this week' }),
+    __metadata("design:type", Number)
+], DashboardTaskStatsDto.prototype, "weekCompleted", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Average completion time in minutes' }),
+    __metadata("design:type", Number)
+], DashboardTaskStatsDto.prototype, "averageCompletionTime", void 0);
+/**
+ * Dashboard Occupancy
+ */
+class DashboardOccupancyDto {
+    totalRooms;
+    occupiedRooms;
+    availableRooms;
+    outOfOrderRooms;
+    checkoutsToday;
+    checkinsToday;
+    occupancyRate;
+    date;
+}
+exports.DashboardOccupancyDto = DashboardOccupancyDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total rooms' }),
+    __metadata("design:type", Number)
+], DashboardOccupancyDto.prototype, "totalRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Occupied rooms' }),
+    __metadata("design:type", Number)
+], DashboardOccupancyDto.prototype, "occupiedRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Available rooms' }),
+    __metadata("design:type", Number)
+], DashboardOccupancyDto.prototype, "availableRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Out of order rooms' }),
+    __metadata("design:type", Number)
+], DashboardOccupancyDto.prototype, "outOfOrderRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Checkouts today' }),
+    __metadata("design:type", Number)
+], DashboardOccupancyDto.prototype, "checkoutsToday", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Check-ins today' }),
+    __metadata("design:type", Number)
+], DashboardOccupancyDto.prototype, "checkinsToday", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Occupancy rate (percentage)' }),
+    __metadata("design:type", Number)
+], DashboardOccupancyDto.prototype, "occupancyRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Date (ISO)' }),
+    __metadata("design:type", String)
+], DashboardOccupancyDto.prototype, "date", void 0);
+/**
+ * Dashboard Performance
+ */
+class DashboardPerformanceDto {
+    tasksCompletedToday;
+    averageTaskTime;
+    qualityScore;
+    punctualityScore;
+    period;
+}
+exports.DashboardPerformanceDto = DashboardPerformanceDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tasks completed today' }),
+    __metadata("design:type", Number)
+], DashboardPerformanceDto.prototype, "tasksCompletedToday", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Average task time in minutes' }),
+    __metadata("design:type", Number)
+], DashboardPerformanceDto.prototype, "averageTaskTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Quality score (0-100)' }),
+    __metadata("design:type", Number)
+], DashboardPerformanceDto.prototype, "qualityScore", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Punctuality score (0-100)' }),
+    __metadata("design:type", Number)
+], DashboardPerformanceDto.prototype, "punctualityScore", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Performance period' }),
+    __metadata("design:type", String)
+], DashboardPerformanceDto.prototype, "period", void 0);
+/**
+ * Dashboard Current Shift
+ */
+class DashboardCurrentShiftDto {
+    id;
+    staffId;
+    clockInTime;
+    clockOutTime;
+    status;
+    hoursWorked;
+    breakTime;
+    tenantId;
+    hotelId;
+}
+exports.DashboardCurrentShiftDto = DashboardCurrentShiftDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Shift ID' }),
+    __metadata("design:type", String)
+], DashboardCurrentShiftDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], DashboardCurrentShiftDto.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Clock-in time (ISO)' }),
+    __metadata("design:type", String)
+], DashboardCurrentShiftDto.prototype, "clockInTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Clock-out time (ISO)' }),
+    __metadata("design:type", String)
+], DashboardCurrentShiftDto.prototype, "clockOutTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Shift status' }),
+    __metadata("design:type", String)
+], DashboardCurrentShiftDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hours worked (decimal)' }),
+    __metadata("design:type", Number)
+], DashboardCurrentShiftDto.prototype, "hoursWorked", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Break time in minutes' }),
+    __metadata("design:type", Number)
+], DashboardCurrentShiftDto.prototype, "breakTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], DashboardCurrentShiftDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], DashboardCurrentShiftDto.prototype, "hotelId", void 0);
+/**
+ * Mobile Dashboard DTO — composite dashboard response
+ * @usage GET /api/staff/dashboard
+ */
+class MobileDashboardDto {
+    staffInfo;
+    taskStats;
+    occupancy;
+    performance;
+    currentShift;
+}
+exports.MobileDashboardDto = MobileDashboardDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff information', type: DashboardStaffInfoDto }),
+    __metadata("design:type", DashboardStaffInfoDto)
+], MobileDashboardDto.prototype, "staffInfo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Task statistics', type: DashboardTaskStatsDto }),
+    __metadata("design:type", DashboardTaskStatsDto)
+], MobileDashboardDto.prototype, "taskStats", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel occupancy', type: DashboardOccupancyDto }),
+    __metadata("design:type", DashboardOccupancyDto)
+], MobileDashboardDto.prototype, "occupancy", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff performance metrics', type: DashboardPerformanceDto }),
+    __metadata("design:type", DashboardPerformanceDto)
+], MobileDashboardDto.prototype, "performance", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current shift information', type: DashboardCurrentShiftDto }),
+    __metadata("design:type", DashboardCurrentShiftDto)
+], MobileDashboardDto.prototype, "currentShift", void 0);
+// ============================================================================
+// QUICK ACTION DTOs
+// ============================================================================
+class QuickActionParametersDto {
+    roomNumber;
+    guestId;
+    taskId;
+    notes;
+    priority;
+    dueDate;
+}
+exports.QuickActionParametersDto = QuickActionParametersDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room number for room-specific actions' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickActionParametersDto.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Guest ID for guest-related actions' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickActionParametersDto.prototype, "guestId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Task ID for task-related actions' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickActionParametersDto.prototype, "taskId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Action notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickActionParametersDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Priority level for actions' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickActionParametersDto.prototype, "priority", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Due date for scheduled actions' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickActionParametersDto.prototype, "dueDate", void 0);
+class QuickActionExecuteDto {
+    actionId;
+    parameters;
+}
+exports.QuickActionExecuteDto = QuickActionExecuteDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Action ID to execute' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuickActionExecuteDto.prototype, "actionId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional parameters for action', type: QuickActionParametersDto }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", QuickActionParametersDto)
+], QuickActionExecuteDto.prototype, "parameters", void 0);
+class NextActionDto {
+    title;
+    actionUrl;
+    icon;
+}
+exports.NextActionDto = NextActionDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Next action title' }),
+    __metadata("design:type", String)
+], NextActionDto.prototype, "title", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Next action URL' }),
+    __metadata("design:type", String)
+], NextActionDto.prototype, "actionUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Next action icon' }),
+    __metadata("design:type", String)
+], NextActionDto.prototype, "icon", void 0);
+class QuickActionResponseDto {
+    success;
+    message;
+    data;
+    nextAction;
+}
+exports.QuickActionResponseDto = QuickActionResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Action execution status' }),
+    __metadata("design:type", Boolean)
+], QuickActionResponseDto.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Response message' }),
+    __metadata("design:type", String)
+], QuickActionResponseDto.prototype, "message", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Result data from action', type: Object }),
+    __metadata("design:type", Object)
+], QuickActionResponseDto.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Next suggested action', type: NextActionDto }),
+    __metadata("design:type", NextActionDto)
+], QuickActionResponseDto.prototype, "nextAction", void 0);
+// ============================================================================
+// CLOCK IN/OUT DTOs
+// ============================================================================
+class DeviceInfoDto {
+    deviceId;
+    platform;
+    appVersion;
+}
+exports.DeviceInfoDto = DeviceInfoDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Device ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeviceInfoDto.prototype, "deviceId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Device platform' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeviceInfoDto.prototype, "platform", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'App version' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeviceInfoDto.prototype, "appVersion", void 0);
+class ClockInOutDto {
+    location;
+    notes;
+    timestamp;
+    deviceInfo;
+}
+exports.ClockInOutDto = ClockInOutDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'GPS location for verification' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], ClockInOutDto.prototype, "location", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ClockInOutDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Clock in/out timestamp' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ClockInOutDto.prototype, "timestamp", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Device information', type: DeviceInfoDto }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", DeviceInfoDto)
+], ClockInOutDto.prototype, "deviceInfo", void 0);
 //# sourceMappingURL=staff.dto.js.map

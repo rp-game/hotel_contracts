@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetUnreadCountResponseDto = exports.GetUnreadCountPayload = exports.MarkNotificationReadResponseDto = exports.MarkNotificationReadPayload = exports.GetMobileNotificationsResponseDto = exports.NotificationItemDto = exports.GetMobileNotificationsPayload = exports.RegisterDevicePayload = exports.UnregisterDevicePayload = exports.MarkAllNotificationsReadPayload = exports.NotificationListResponseDto = exports.MarkNotificationReadDto = exports.DeviceRegistrationResponseDto = exports.RegisterDeviceDto = exports.UnregisterDeviceResponseDto = exports.UnregisterDeviceDto = exports.MarkAllNotificationsResponseDto = exports.MarkAllNotificationsReadDto = void 0;
+exports.StaffNotificationSettingsDto = exports.StaffSendNotificationNatsRequest = exports.GetUnreadCountResponseDto = exports.GetUnreadCountPayload = exports.MarkNotificationReadResponseDto = exports.MarkNotificationReadPayload = exports.GetMobileNotificationsResponseDto = exports.NotificationItemDto = exports.GetMobileNotificationsPayload = exports.RegisterDevicePayload = exports.UnregisterDevicePayload = exports.MarkAllNotificationsReadPayload = exports.NotificationListResponseDto = exports.MarkNotificationReadDto = exports.DeviceRegistrationResponseDto = exports.RegisterDeviceDto = exports.UnregisterDeviceResponseDto = exports.UnregisterDeviceDto = exports.MarkAllNotificationsResponseDto = exports.MarkAllNotificationsReadDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -319,4 +319,155 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Unread notification count' }),
     __metadata("design:type", Number)
 ], GetUnreadCountResponseDto.prototype, "count", void 0);
+// ============= SEND NOTIFICATION =============
+class StaffSendNotificationNatsRequest {
+    staffId;
+    type;
+    title;
+    body;
+    priority;
+    data;
+    icon;
+    imageUrl;
+    scheduleFor;
+    tenantId;
+    hotelId;
+}
+exports.StaffSendNotificationNatsRequest = StaffSendNotificationNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID to send notification to (or "all" for broadcast)' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], StaffSendNotificationNatsRequest.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notification type', enum: notification_enum_1.NotificationType }),
+    (0, class_validator_1.IsEnum)(notification_enum_1.NotificationType),
+    __metadata("design:type", String)
+], StaffSendNotificationNatsRequest.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notification title' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], StaffSendNotificationNatsRequest.prototype, "title", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notification message body' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], StaffSendNotificationNatsRequest.prototype, "body", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notification priority', enum: notification_enum_1.NotificationPriority }),
+    (0, class_validator_1.IsEnum)(notification_enum_1.NotificationPriority),
+    __metadata("design:type", String)
+], StaffSendNotificationNatsRequest.prototype, "priority", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional data payload', type: Object }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], StaffSendNotificationNatsRequest.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Notification icon' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], StaffSendNotificationNatsRequest.prototype, "icon", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Notification image URL' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], StaffSendNotificationNatsRequest.prototype, "imageUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Schedule notification for later' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], StaffSendNotificationNatsRequest.prototype, "scheduleFor", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], StaffSendNotificationNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], StaffSendNotificationNatsRequest.prototype, "hotelId", void 0);
+// ============= NOTIFICATION SETTINGS =============
+class StaffNotificationSettingsDto {
+    pushEnabled;
+    emailEnabled;
+    smsEnabled;
+    taskAssignments;
+    urgentRequests;
+    scheduleChanges;
+    systemAlerts;
+    teamMessages;
+    checkoutReminders;
+    maintenanceAlerts;
+    soundEnabled;
+    vibrationEnabled;
+    quietHoursStart;
+    quietHoursEnd;
+}
+exports.StaffNotificationSettingsDto = StaffNotificationSettingsDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Enable push notifications' }),
+    __metadata("design:type", Boolean)
+], StaffNotificationSettingsDto.prototype, "pushEnabled", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Enable email notifications' }),
+    __metadata("design:type", Boolean)
+], StaffNotificationSettingsDto.prototype, "emailEnabled", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Enable SMS notifications' }),
+    __metadata("design:type", Boolean)
+], StaffNotificationSettingsDto.prototype, "smsEnabled", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Task assignment notifications' }),
+    __metadata("design:type", Boolean)
+], StaffNotificationSettingsDto.prototype, "taskAssignments", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Urgent request notifications' }),
+    __metadata("design:type", Boolean)
+], StaffNotificationSettingsDto.prototype, "urgentRequests", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Schedule change notifications' }),
+    __metadata("design:type", Boolean)
+], StaffNotificationSettingsDto.prototype, "scheduleChanges", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'System alert notifications' }),
+    __metadata("design:type", Boolean)
+], StaffNotificationSettingsDto.prototype, "systemAlerts", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Team message notifications' }),
+    __metadata("design:type", Boolean)
+], StaffNotificationSettingsDto.prototype, "teamMessages", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Checkout reminder notifications' }),
+    __metadata("design:type", Boolean)
+], StaffNotificationSettingsDto.prototype, "checkoutReminders", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Maintenance alert notifications' }),
+    __metadata("design:type", Boolean)
+], StaffNotificationSettingsDto.prototype, "maintenanceAlerts", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notification sound enabled' }),
+    __metadata("design:type", Boolean)
+], StaffNotificationSettingsDto.prototype, "soundEnabled", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notification vibration enabled' }),
+    __metadata("design:type", Boolean)
+], StaffNotificationSettingsDto.prototype, "vibrationEnabled", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Quiet hours start time (24h format)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], StaffNotificationSettingsDto.prototype, "quietHoursStart", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Quiet hours end time (24h format)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], StaffNotificationSettingsDto.prototype, "quietHoursEnd", void 0);
 //# sourceMappingURL=staff-notification.nats.js.map
