@@ -28,6 +28,8 @@ export declare class BookingPaymentResponseDto {
     paymentStatus: string;
     paymentDate: Date;
     transactionId?: string;
+    createdBy?: string;
+    notes?: string;
 }
 export declare class BookingServiceResponseDto {
     id: string;

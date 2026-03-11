@@ -77,6 +77,12 @@ export class BookingPaymentResponseDto {
 
   @ApiPropertyOptional({ description: 'Transaction ID' })
   transactionId?: string;
+
+  @ApiPropertyOptional({ description: 'User ID who collected/created the payment' })
+  createdBy?: string;
+
+  @ApiPropertyOptional({ description: 'Payment notes' })
+  notes?: string;
 }
 
 export class BookingServiceResponseDto {

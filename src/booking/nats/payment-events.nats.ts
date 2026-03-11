@@ -91,4 +91,6 @@ export interface OfflinePaymentConfirmedNatsRequest {
   confirmedAt: string;
   tenantId: string;
   hotelId: string;
+  receivedBy?: string;
+  notes?: string;
 }
