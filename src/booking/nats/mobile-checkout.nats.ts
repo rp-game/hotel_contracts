@@ -11,22 +11,11 @@
  *   - booking.checkout.complete - Complete checkout process
  */
 
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsNotEmpty, IsOptional, IsNumber, IsArray } from 'class-validator';
 import { NatsResponse } from '../../common';
 
-// ============= ADDITIONAL SERVICE =============
-
-export interface AdditionalService {
-  id: string;
-  serviceName: string;
-  quantity: number;
-  unitPrice: string;
-  totalPrice: string;
-  date: string;
-  status: 'PENDING' | 'PAID';
-}
-
-// ============= BILL ITEM =============
+// ============= SHARED TYPES =============
 
 export class BillItem {
   @ApiPropertyOptional({ description: 'Item description' })
@@ -45,197 +34,247 @@ export class BillItem {
   category?: 'ROOM' | 'SERVICE' | 'TAX' | 'DEPOSIT';
 }
 
-// ============= CHECKOUT DATA (Booking Summary for Checkout Lists) =============
-
-export interface CheckoutData {
+// Matches getBookingByIdSimple() return shape for rooms
+export class CheckoutRoomItem {
+  @ApiProperty({ description: 'Room record ID' })
   id: string;
-  bookingCode: string;
-  tenantId: string;
-  hotelId: string;
-  status: string;
-  source: string;
-  guestName: string;
-  guestEmail?: string;
-  guestPhone?: string;
-  checkInDate: string;
-  checkOutDate: string;
-  totalAmount: number;
-  paidAmount: number;
-  paymentStatus: string;
-  roomCount: number;
+
+  @ApiProperty({ description: 'Room type ID' })
+  roomTypeId: string;
+
+  @ApiProperty({ description: 'Room type name' })
+  roomTypeName: string;
+
+  @ApiPropertyOptional({ description: 'Physical room ID' })
+  roomId?: string;
+
+  @ApiPropertyOptional({ description: 'Room number' })
+  roomNumber?: string;
+
+  @ApiProperty({ description: 'Price per night' })
+  pricePerNight: number;
+
+  @ApiProperty({ description: 'Total price for this room' })
+  totalPrice: number;
+
+  @ApiPropertyOptional({ description: 'Discount amount' })
+  discountAmount?: number;
+
+  @ApiProperty({ description: 'Adult count' })
   adultCount: number;
+
+  @ApiProperty({ description: 'Child count' })
   childCount: number;
-  createdAt: string;
-  createdBy?: string;
+}
+
+// Matches findBookings() mapped result shape — used in history/search
+export class CheckoutDataItem {
+  @ApiProperty() id: string;
+  @ApiProperty() bookingCode: string;
+  @ApiProperty() tenantId: string;
+  @ApiProperty() hotelId: string;
+  @ApiProperty() status: string;
+  @ApiProperty() source: string;
+  @ApiProperty() guestName: string;
+  @ApiPropertyOptional() guestEmail?: string;
+  @ApiPropertyOptional() guestPhone?: string;
+  @ApiProperty() checkInDate: string;
+  @ApiProperty() checkOutDate: string;
+  @ApiProperty() totalAmount: number;
+  @ApiProperty() paidAmount: number;
+  @ApiProperty() paymentStatus: string;
+  @ApiProperty() roomCount: number;
+  @ApiProperty() adultCount: number;
+  @ApiProperty() childCount: number;
+  @ApiProperty() createdAt: string;
+  @ApiPropertyOptional() createdBy?: string;
 }
 
 // ============= TODAY'S STATS =============
 
-export interface GetTodayCheckoutStatsNatsRequest {
-  tenantId: string;
-  hotelId: string;
-  date: string;
+export class GetTodayCheckoutStatsNatsRequest {
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
+  @ApiProperty() @IsString() date: string;
 }
 
-export interface CheckoutStatsData {
-  totalCheckouts: number;
-  completedCheckouts: number;
-  pendingCheckouts: number;
-  revenue: number;
-  averageCheckoutTime: number;
+export class CheckoutStatsData {
+  @ApiProperty() totalCheckouts: number;
+  @ApiProperty() completedCheckouts: number;
+  @ApiProperty() pendingCheckouts: number;
+  @ApiProperty() revenue: number;
+  @ApiProperty() averageCheckoutTime: number;
 }
 
 export type GetTodayCheckoutStatsNatsResponse = NatsResponse<CheckoutStatsData>;
 
 // ============= CHECKOUT HISTORY =============
 
-export interface GetCheckoutHistoryNatsRequest {
-  tenantId: string;
-  hotelId: string;
-  staffId: string;
-  page?: number;
-  limit?: number;
-  startDate?: string;
-  endDate?: string;
+export class GetCheckoutHistoryNatsRequest {
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
+  @ApiProperty() @IsString() staffId: string;
+  @ApiPropertyOptional() @IsOptional() @IsNumber() page?: number;
+  @ApiPropertyOptional() @IsOptional() @IsNumber() limit?: number;
+  @ApiPropertyOptional() @IsOptional() @IsString() startDate?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() endDate?: string;
 }
 
-export interface CheckoutHistoryData {
-  data: CheckoutData[];
-  total: number;
-  page: number;
-  limit: number;
+export class CheckoutHistoryData {
+  @ApiProperty({ type: [CheckoutDataItem] }) data: CheckoutDataItem[];
+  @ApiProperty() total: number;
+  @ApiProperty() page: number;
+  @ApiProperty() limit: number;
 }
 
 export type GetCheckoutHistoryNatsResponse = NatsResponse<CheckoutHistoryData>;
 
 // ============= SEARCH CHECKOUTS =============
 
-export interface SearchCheckoutsNatsRequest {
-  tenantId: string;
-  hotelId: string;
-  query: string;
-  filters?: any;
+export class SearchCheckoutsNatsRequest {
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
+  @ApiProperty() @IsString() query: string;
+  @ApiPropertyOptional() @IsOptional() filters?: Record<string, unknown>;
 }
 
-export interface SearchCheckoutsData {
-  data: CheckoutData[];
-  total: number;
+export class SearchCheckoutsData {
+  @ApiProperty({ type: [CheckoutDataItem] }) data: CheckoutDataItem[];
+  @ApiProperty() total: number;
 }
 
 export type SearchCheckoutsNatsResponse = NatsResponse<SearchCheckoutsData>;
 
 // ============= VALIDATE QR =============
 
-export interface ValidateCheckoutQRNatsRequest {
-  qrCode: string;
-  tenantId: string;
-  hotelId: string;
+export class ValidateCheckoutQRNatsRequest {
+  @ApiProperty() @IsString() @IsNotEmpty() qrCode: string;
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
 }
 
-export interface ValidateQRData {
-  isValid: boolean;
-  bookingId?: string;
-  roomNumber?: string;
-  guestName?: string;
-  checkoutData?: {
-    id: string;
-    bookingCode: string;
-    guestName: string;
-    guestEmail?: string;
-    roomNumber: string;
-    checkOutDate: string;
-    status: string;
-    totalAmount: number;
-  };
-  message?: string;
+export class ValidateQRCheckoutData {
+  @ApiProperty() id: string;
+  @ApiProperty() bookingCode: string;
+  @ApiProperty() guestName: string;
+  @ApiPropertyOptional() guestEmail?: string;
+  @ApiProperty() roomNumber: string;
+  @ApiProperty() checkOutDate: string;
+  @ApiProperty() status: string;
+  @ApiProperty() totalAmount: number;
+}
+
+export class ValidateQRData {
+  @ApiProperty() isValid: boolean;
+  @ApiPropertyOptional() bookingId?: string;
+  @ApiPropertyOptional() roomNumber?: string;
+  @ApiPropertyOptional() guestName?: string;
+  @ApiPropertyOptional({ type: ValidateQRCheckoutData }) checkoutData?: ValidateQRCheckoutData;
+  @ApiPropertyOptional() message?: string;
 }
 
 export type ValidateCheckoutQRNatsResponse = NatsResponse<ValidateQRData>;
 
 // ============= READY ROOMS =============
 
-export interface GetReadyRoomsNatsRequest {
-  tenantId: string;
-  hotelId: string;
-  date: string;
+export class GetReadyRoomsNatsRequest {
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
+  @ApiProperty() @IsString() date: string;
 }
 
-export interface ReadyRoom {
-  roomNumber: string;
-  guestName: string;
-  checkOutTime: string;
-  status: 'overdue' | 'pending';
-  bookingId: string;
+export class ReadyRoom {
+  @ApiProperty() roomNumber: string;
+  @ApiProperty() guestName: string;
+  @ApiProperty() checkOutTime: string;
+  @ApiProperty({ enum: ['overdue', 'pending'] }) status: 'overdue' | 'pending';
+  @ApiProperty() bookingId: string;
 }
 
-export interface ReadyRoomsData {
-  data: ReadyRoom[];
-  total: number;
+export class ReadyRoomsData {
+  @ApiProperty({ type: [ReadyRoom] }) data: ReadyRoom[];
+  @ApiProperty() total: number;
 }
 
 export type GetReadyRoomsNatsResponse = NatsResponse<ReadyRoomsData>;
 
 // ============= CHECKOUT ITEMS =============
 
-export interface GetCheckoutItemsNatsRequest {
-  bookingId: string;
-  tenantId: string;
-  hotelId: string;
+export class GetCheckoutItemsNatsRequest {
+  @ApiProperty() @IsString() @IsNotEmpty() bookingId: string;
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
 }
 
-export interface CheckoutItemsData {
-  booking: {
-    id: string;
-    bookingCode: string;
-    guestName: string;
-    totalAmount: number;
-    paymentStatus: string;
-  };
-  rooms: any[];
-  services: any[];
-  damages: any[];
-  specialRequests: string;
+export class CheckoutBookingSummary {
+  @ApiProperty() id: string;
+  @ApiProperty() bookingCode: string;
+  @ApiProperty() guestName: string;
+  @ApiProperty() totalAmount: number;
+  @ApiProperty() paymentStatus: string;
+}
+
+export class CheckoutItemsData {
+  @ApiProperty({ type: CheckoutBookingSummary })
+  booking: CheckoutBookingSummary;
+
+  @ApiProperty({ type: [CheckoutRoomItem], description: 'Rooms in this booking' })
+  rooms: CheckoutRoomItem[];
+
+  @ApiProperty({ type: [Object], description: 'Additional services' })
+  services: Record<string, unknown>[];
+
+  @ApiProperty({ type: [Object], description: 'Damage reports' })
+  damages: Record<string, unknown>[];
+
+  @ApiPropertyOptional({ description: 'Special requests' })
+  specialRequests?: string;
 }
 
 export type GetCheckoutItemsNatsResponse = NatsResponse<CheckoutItemsData>;
 
 // ============= START CHECKOUT =============
 
-export interface StartCheckoutNatsRequest {
-  bookingId: string;
-  staffId: string;
-  tenantId: string;
-  hotelId: string;
+export class StartCheckoutNatsRequest {
+  @ApiProperty() @IsString() @IsNotEmpty() bookingId: string;
+  @ApiProperty() @IsString() staffId: string;
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
+  @ApiProperty({ description: 'Checkout start time' })
   startTime: string | Date;
 }
 
-export interface StartCheckoutData {
-  bookingId: string;
-  status: string;
-  startTime: string | Date;
-  staffId: string;
+export class StartCheckoutData {
+  @ApiProperty() bookingId: string;
+  @ApiProperty() status: string;
+  @ApiProperty() startTime: string | Date;
+  @ApiProperty() staffId: string;
 }
 
 export type StartCheckoutNatsResponse = NatsResponse<StartCheckoutData>;
 
 // ============= COMPLETE CHECKOUT (Mobile) =============
 
-export interface CompleteCheckoutNatsRequest {
-  bookingId: string;
-  staffId: string;
-  tenantId: string;
-  hotelId: string;
-  completedTime: string | Date;
-  notes?: string;
-  damages?: any[];
-  services?: any[];
+export class CompleteCheckoutNatsRequest {
+  @ApiProperty() @IsString() @IsNotEmpty() bookingId: string;
+  @ApiProperty() @IsString() staffId: string;
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
+  @ApiProperty() completedTime: string | Date;
+  @ApiPropertyOptional() @IsOptional() @IsString() notes?: string;
+  @ApiPropertyOptional({ description: 'Damage reports', type: [Object] })
+  @IsOptional() @IsArray()
+  damages?: Record<string, unknown>[];
+  @ApiPropertyOptional({ description: 'Additional services', type: [Object] })
+  @IsOptional() @IsArray()
+  services?: Record<string, unknown>[];
 }
 
-export interface CompleteCheckoutData {
-  bookingId: string;
-  status: string;
-  completedTime: string | Date;
-  finalAmount: number;
+export class CompleteCheckoutData {
+  @ApiProperty() bookingId: string;
+  @ApiProperty() status: string;
+  @ApiProperty() completedTime: string | Date;
+  @ApiProperty() finalAmount: number;
 }
 
 export type CompleteCheckoutNatsResponse = NatsResponse<CompleteCheckoutData>;

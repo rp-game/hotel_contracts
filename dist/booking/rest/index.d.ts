@@ -7,4 +7,5 @@
  * Routes: /bookings, /bookings/:id, /bookings/unassigned, etc.
  */
 export * from './unassigned-bookings.rest';
+export * from './checkout.dto';
 //# sourceMappingURL=index.d.ts.map

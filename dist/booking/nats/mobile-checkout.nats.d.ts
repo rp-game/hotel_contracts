@@ -11,15 +11,6 @@
  *   - booking.checkout.complete - Complete checkout process
  */
 import { NatsResponse } from '../../common';
-export interface AdditionalService {
-    id: string;
-    serviceName: string;
-    quantity: number;
-    unitPrice: string;
-    totalPrice: string;
-    date: string;
-    status: 'PENDING' | 'PAID';
-}
 export declare class BillItem {
     description?: string;
     quantity?: number;
@@ -27,7 +18,19 @@ export declare class BillItem {
     totalPrice?: string;
     category?: 'ROOM' | 'SERVICE' | 'TAX' | 'DEPOSIT';
 }
-export interface CheckoutData {
+export declare class CheckoutRoomItem {
+    id: string;
+    roomTypeId: string;
+    roomTypeName: string;
+    roomId?: string;
+    roomNumber?: string;
+    pricePerNight: number;
+    totalPrice: number;
+    discountAmount?: number;
+    adultCount: number;
+    childCount: number;
+}
+export declare class CheckoutDataItem {
     id: string;
     bookingCode: string;
     tenantId: string;
@@ -48,12 +51,12 @@ export interface CheckoutData {
     createdAt: string;
     createdBy?: string;
 }
-export interface GetTodayCheckoutStatsNatsRequest {
+export declare class GetTodayCheckoutStatsNatsRequest {
     tenantId: string;
     hotelId: string;
     date: string;
 }
-export interface CheckoutStatsData {
+export declare class CheckoutStatsData {
     totalCheckouts: number;
     completedCheckouts: number;
     pendingCheckouts: number;
@@ -61,7 +64,7 @@ export interface CheckoutStatsData {
     averageCheckoutTime: number;
 }
 export type GetTodayCheckoutStatsNatsResponse = NatsResponse<CheckoutStatsData>;
-export interface GetCheckoutHistoryNatsRequest {
+export declare class GetCheckoutHistoryNatsRequest {
     tenantId: string;
     hotelId: string;
     staffId: string;
@@ -70,108 +73,110 @@ export interface GetCheckoutHistoryNatsRequest {
     startDate?: string;
     endDate?: string;
 }
-export interface CheckoutHistoryData {
-    data: CheckoutData[];
+export declare class CheckoutHistoryData {
+    data: CheckoutDataItem[];
     total: number;
     page: number;
     limit: number;
 }
 export type GetCheckoutHistoryNatsResponse = NatsResponse<CheckoutHistoryData>;
-export interface SearchCheckoutsNatsRequest {
+export declare class SearchCheckoutsNatsRequest {
     tenantId: string;
     hotelId: string;
     query: string;
-    filters?: any;
+    filters?: Record<string, unknown>;
 }
-export interface SearchCheckoutsData {
-    data: CheckoutData[];
+export declare class SearchCheckoutsData {
+    data: CheckoutDataItem[];
     total: number;
 }
 export type SearchCheckoutsNatsResponse = NatsResponse<SearchCheckoutsData>;
-export interface ValidateCheckoutQRNatsRequest {
+export declare class ValidateCheckoutQRNatsRequest {
     qrCode: string;
     tenantId: string;
     hotelId: string;
 }
-export interface ValidateQRData {
+export declare class ValidateQRCheckoutData {
+    id: string;
+    bookingCode: string;
+    guestName: string;
+    guestEmail?: string;
+    roomNumber: string;
+    checkOutDate: string;
+    status: string;
+    totalAmount: number;
+}
+export declare class ValidateQRData {
     isValid: boolean;
     bookingId?: string;
     roomNumber?: string;
     guestName?: string;
-    checkoutData?: {
-        id: string;
-        bookingCode: string;
-        guestName: string;
-        guestEmail?: string;
-        roomNumber: string;
-        checkOutDate: string;
-        status: string;
-        totalAmount: number;
-    };
+    checkoutData?: ValidateQRCheckoutData;
     message?: string;
 }
 export type ValidateCheckoutQRNatsResponse = NatsResponse<ValidateQRData>;
-export interface GetReadyRoomsNatsRequest {
+export declare class GetReadyRoomsNatsRequest {
     tenantId: string;
     hotelId: string;
     date: string;
 }
-export interface ReadyRoom {
+export declare class ReadyRoom {
     roomNumber: string;
     guestName: string;
     checkOutTime: string;
     status: 'overdue' | 'pending';
     bookingId: string;
 }
-export interface ReadyRoomsData {
+export declare class ReadyRoomsData {
     data: ReadyRoom[];
     total: number;
 }
 export type GetReadyRoomsNatsResponse = NatsResponse<ReadyRoomsData>;
-export interface GetCheckoutItemsNatsRequest {
+export declare class GetCheckoutItemsNatsRequest {
     bookingId: string;
     tenantId: string;
     hotelId: string;
 }
-export interface CheckoutItemsData {
-    booking: {
-        id: string;
-        bookingCode: string;
-        guestName: string;
-        totalAmount: number;
-        paymentStatus: string;
-    };
-    rooms: any[];
-    services: any[];
-    damages: any[];
-    specialRequests: string;
+export declare class CheckoutBookingSummary {
+    id: string;
+    bookingCode: string;
+    guestName: string;
+    totalAmount: number;
+    paymentStatus: string;
+}
+export declare class CheckoutItemsData {
+    booking: CheckoutBookingSummary;
+    rooms: CheckoutRoomItem[];
+    services: Record<string, unknown>[];
+    damages: Record<string, unknown>[];
+    specialRequests?: string;
 }
 export type GetCheckoutItemsNatsResponse = NatsResponse<CheckoutItemsData>;
-export interface StartCheckoutNatsRequest {
+export declare class StartCheckoutNatsRequest {
     bookingId: string;
     staffId: string;
     tenantId: string;
     hotelId: string;
     startTime: string | Date;
 }
-export interface StartCheckoutData {
+export declare class StartCheckoutData {
     bookingId: string;
     status: string;
     startTime: string | Date;
     staffId: string;
 }
 export type StartCheckoutNatsResponse = NatsResponse<StartCheckoutData>;
-export interface CompleteCheckoutNatsRequest {
+export declare class CompleteCheckoutNatsRequest {
     bookingId: string;
     staffId: string;
     tenantId: string;
     hotelId: string;
     completedTime: string | Date;
     notes?: string;
-    damages?: any[];
-    services?: any[];
+    damages?: Record<string, unknown>[];
+    services?: Record<string, unknown>[];
 }
-export interface CompleteCheckoutData {
+export declare class CompleteCheckoutData {
     bookingId: string;
     status: string;
     completedTime: string | Date;
