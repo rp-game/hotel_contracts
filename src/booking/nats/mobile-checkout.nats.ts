@@ -6,6 +6,7 @@
  *   - booking.checkout.search - Search checkouts
  *   - booking.checkout.validateQR - Validate QR code for checkout
  *   - booking.checkout.readyRooms - Rooms ready for checkout
+ *   - booking.checkout.detail - Get detailed checkout info for a booking
  *   - booking.checkout.items - Get checkout items/charges
  *   - booking.checkout.start - Start checkout process
  *   - booking.checkout.complete - Complete checkout process
@@ -198,6 +199,27 @@ export class ReadyRoomsData {
 
 export type GetReadyRoomsNatsResponse = NatsResponse<ReadyRoomsData>;
 
+// ============= CHECKOUT DETAIL =============
+
+export class GetCheckoutDetailNatsRequest {
+  @ApiProperty() @IsString() @IsNotEmpty() bookingId: string;
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
+}
+
+export class CheckoutDetailData {
+  @ApiProperty({ description: 'Booking ID' }) id: string;
+  @ApiProperty({ description: 'Room number' }) roomNumber: string;
+  @ApiProperty({ description: 'Guest name' }) guestName: string;
+  @ApiProperty({ description: 'Checkout time (ISO string)' }) checkoutTime: string;
+  @ApiProperty({ description: 'Booking status' }) status: string;
+  @ApiPropertyOptional({ description: 'Special requests' }) specialRequests?: string;
+  @ApiPropertyOptional({ description: 'Checkout notes' }) notes?: string;
+  @ApiProperty({ description: 'Photos', type: [String] }) photos: string[];
+}
+
+export type GetCheckoutDetailNatsResponse = NatsResponse<CheckoutDetailData>;
+
 // ============= CHECKOUT ITEMS =============
 
 export class GetCheckoutItemsNatsRequest {
@@ -212,6 +234,9 @@ export class CheckoutBookingSummary {
   @ApiProperty() guestName: string;
   @ApiProperty() totalAmount: number;
   @ApiProperty() paymentStatus: string;
+  @ApiPropertyOptional({ description: 'Check-in date' }) checkInDate?: string;
+  @ApiPropertyOptional({ description: 'Check-out date' }) checkOutDate?: string;
+  @ApiPropertyOptional({ description: 'Paid amount' }) paidAmount?: number;
 }
 
 export class CheckoutItemsData {

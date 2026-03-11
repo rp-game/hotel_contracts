@@ -7,6 +7,7 @@
  *   - booking.checkout.search - Search checkouts
  *   - booking.checkout.validateQR - Validate QR code for checkout
  *   - booking.checkout.readyRooms - Rooms ready for checkout
+ *   - booking.checkout.detail - Get detailed checkout info for a booking
  *   - booking.checkout.items - Get checkout items/charges
  *   - booking.checkout.start - Start checkout process
  *   - booking.checkout.complete - Complete checkout process
@@ -21,7 +22,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CompleteCheckoutData = exports.CompleteCheckoutNatsRequest = exports.StartCheckoutData = exports.StartCheckoutNatsRequest = exports.CheckoutItemsData = exports.CheckoutBookingSummary = exports.GetCheckoutItemsNatsRequest = exports.ReadyRoomsData = exports.ReadyRoom = exports.GetReadyRoomsNatsRequest = exports.ValidateQRData = exports.ValidateQRCheckoutData = exports.ValidateCheckoutQRNatsRequest = exports.SearchCheckoutsData = exports.SearchCheckoutsNatsRequest = exports.CheckoutHistoryData = exports.GetCheckoutHistoryNatsRequest = exports.CheckoutStatsData = exports.GetTodayCheckoutStatsNatsRequest = exports.CheckoutDataItem = exports.CheckoutRoomItem = exports.BillItem = void 0;
+exports.CompleteCheckoutData = exports.CompleteCheckoutNatsRequest = exports.StartCheckoutData = exports.StartCheckoutNatsRequest = exports.CheckoutItemsData = exports.CheckoutBookingSummary = exports.GetCheckoutItemsNatsRequest = exports.CheckoutDetailData = exports.GetCheckoutDetailNatsRequest = exports.ReadyRoomsData = exports.ReadyRoom = exports.GetReadyRoomsNatsRequest = exports.ValidateQRData = exports.ValidateQRCheckoutData = exports.ValidateCheckoutQRNatsRequest = exports.SearchCheckoutsData = exports.SearchCheckoutsNatsRequest = exports.CheckoutHistoryData = exports.GetCheckoutHistoryNatsRequest = exports.CheckoutStatsData = exports.GetTodayCheckoutStatsNatsRequest = exports.CheckoutDataItem = exports.CheckoutRoomItem = exports.BillItem = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 // ============= SHARED TYPES =============
@@ -532,6 +533,72 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total count' }),
     __metadata("design:type", Number)
 ], ReadyRoomsData.prototype, "total", void 0);
+// ============= CHECKOUT DETAIL =============
+class GetCheckoutDetailNatsRequest {
+    bookingId;
+    tenantId;
+    hotelId;
+}
+exports.GetCheckoutDetailNatsRequest = GetCheckoutDetailNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], GetCheckoutDetailNatsRequest.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetCheckoutDetailNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetCheckoutDetailNatsRequest.prototype, "hotelId", void 0);
+class CheckoutDetailData {
+    id;
+    roomNumber;
+    guestName;
+    checkoutTime;
+    status;
+    specialRequests;
+    notes;
+    photos;
+}
+exports.CheckoutDetailData = CheckoutDetailData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Booking ID' }),
+    __metadata("design:type", String)
+], CheckoutDetailData.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room number' }),
+    __metadata("design:type", String)
+], CheckoutDetailData.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Guest name' }),
+    __metadata("design:type", String)
+], CheckoutDetailData.prototype, "guestName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Checkout time (ISO string)' }),
+    __metadata("design:type", String)
+], CheckoutDetailData.prototype, "checkoutTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Booking status' }),
+    __metadata("design:type", String)
+], CheckoutDetailData.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Special requests' }),
+    __metadata("design:type", String)
+], CheckoutDetailData.prototype, "specialRequests", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Checkout notes' }),
+    __metadata("design:type", String)
+], CheckoutDetailData.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Photos', type: [String] }),
+    __metadata("design:type", Array)
+], CheckoutDetailData.prototype, "photos", void 0);
 // ============= CHECKOUT ITEMS =============
 class GetCheckoutItemsNatsRequest {
     bookingId;
@@ -561,6 +628,9 @@ class CheckoutBookingSummary {
     guestName;
     totalAmount;
     paymentStatus;
+    checkInDate;
+    checkOutDate;
+    paidAmount;
 }
 exports.CheckoutBookingSummary = CheckoutBookingSummary;
 __decorate([
@@ -583,6 +653,18 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], CheckoutBookingSummary.prototype, "paymentStatus", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Check-in date' }),
+    __metadata("design:type", String)
+], CheckoutBookingSummary.prototype, "checkInDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Check-out date' }),
+    __metadata("design:type", String)
+], CheckoutBookingSummary.prototype, "checkOutDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Paid amount' }),
+    __metadata("design:type", Number)
+], CheckoutBookingSummary.prototype, "paidAmount", void 0);
 class CheckoutItemsData {
     booking;
     rooms;

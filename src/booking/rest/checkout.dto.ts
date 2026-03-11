@@ -6,7 +6,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsOptional, IsArray } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsArray, IsNumber, IsBoolean, IsEnum, IsDateString } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CheckoutRoomItem, CheckoutBookingSummary } from '../nats/mobile-checkout.nats';
 
@@ -123,4 +123,218 @@ export class SearchCheckoutsResponseDto {
 
   @ApiProperty({ description: 'Total count' })
   total: number;
+}
+
+// ============= BATCH 7: ENUMS =============
+
+export enum RoomCondition {
+  GOOD = 'GOOD',
+  DAMAGED = 'DAMAGED',
+  NEEDS_ATTENTION = 'NEEDS_ATTENTION',
+}
+
+export enum CheckoutStatus {
+  PENDING = 'PENDING',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+}
+
+// ============= BATCH 7: NESTED DTOs =============
+
+export class DamageReportDto {
+  @ApiProperty({ description: 'Item or area damaged' })
+  @IsString()
+  @IsNotEmpty()
+  item: string;
+
+  @ApiProperty({ description: 'Description of damage' })
+  @IsString()
+  @IsNotEmpty()
+  description: string;
+
+  @ApiProperty({ description: 'Severity level (1-5)' })
+  @IsNumber()
+  severity: number;
+
+  @ApiPropertyOptional({ description: 'Estimated repair cost' })
+  @IsOptional()
+  @IsNumber()
+  estimatedCost?: number;
+
+  @ApiPropertyOptional({ description: 'Photos of damage', type: [String] })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  photos?: string[];
+}
+
+export class RoomInspectionDto {
+  @ApiProperty({ description: 'Guest has departed' })
+  @IsBoolean()
+  guestDeparted: boolean;
+
+  @ApiProperty({ description: 'Number of key cards returned' })
+  @IsNumber()
+  keyCardsReturned: number;
+
+  @ApiProperty({ description: 'Room condition', enum: RoomCondition })
+  @IsEnum(RoomCondition)
+  roomCondition: RoomCondition;
+
+  @ApiPropertyOptional({ description: 'List of damages found', type: [DamageReportDto] })
+  @IsOptional()
+  @IsArray()
+  damages?: DamageReportDto[];
+
+  @ApiPropertyOptional({ description: 'List of missing items', type: [String] })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  missingItems?: string[];
+
+  @ApiPropertyOptional({ description: 'Inspection photos', type: [String] })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  photos?: string[];
+
+  @ApiPropertyOptional({ description: 'Inspection notes' })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+}
+
+export class GpsLocationDto {
+  @ApiProperty({ description: 'Latitude' })
+  @IsNumber()
+  latitude: number;
+
+  @ApiProperty({ description: 'Longitude' })
+  @IsNumber()
+  longitude: number;
+
+  @ApiProperty({ description: 'GPS accuracy in meters' })
+  @IsNumber()
+  accuracy: number;
+
+  @ApiProperty({ description: 'Timestamp of GPS reading' })
+  @IsString()
+  timestamp: string;
+}
+
+// ============= BATCH 7: REQUEST DTOs =============
+
+export class MobileCheckoutRequestDto {
+  @ApiProperty({ description: 'Room number' })
+  @IsString()
+  @IsNotEmpty()
+  roomNumber: string;
+
+  @ApiProperty({ description: 'Guest name verification' })
+  @IsString()
+  @IsNotEmpty()
+  guestName: string;
+
+  @ApiProperty({ description: 'Expected checkout time' })
+  @IsDateString()
+  expectedCheckoutTime: string;
+
+  @ApiProperty({ description: 'Actual checkout time' })
+  @IsDateString()
+  actualCheckoutTime: string;
+
+  @ApiProperty({ description: 'Room inspection details', type: RoomInspectionDto })
+  inspection: RoomInspectionDto;
+
+  @ApiPropertyOptional({ description: 'GPS location for verification', type: GpsLocationDto })
+  @IsOptional()
+  location?: GpsLocationDto;
+
+  @ApiPropertyOptional({ description: 'Additional notes' })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+}
+
+export class QRCheckoutRequestDto {
+  @ApiProperty({ description: 'QR code data scanned from room' })
+  @IsString()
+  @IsNotEmpty()
+  qrCodeData: string;
+
+  @ApiProperty({ description: 'Room inspection details', type: RoomInspectionDto })
+  inspection: RoomInspectionDto;
+
+  @ApiProperty({ description: 'GPS location for verification', type: GpsLocationDto })
+  location: GpsLocationDto;
+}
+
+// ============= BATCH 7: RESPONSE DTOs =============
+
+export class CheckoutInfoResponseDto {
+  @ApiProperty({ description: 'Booking ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Room number' })
+  roomNumber: string;
+
+  @ApiProperty({ description: 'Guest name' })
+  guestName: string;
+
+  @ApiProperty({ description: 'Guest phone' })
+  guestPhone: string;
+
+  @ApiProperty({ description: 'Expected checkout time' })
+  expectedCheckoutTime: string;
+
+  @ApiProperty({ description: 'Check-in time' })
+  checkInTime: string;
+
+  @ApiProperty({ description: 'Total amount' })
+  totalAmount: string;
+
+  @ApiProperty({ description: 'Paid amount' })
+  paidAmount: string;
+
+  @ApiProperty({ description: 'Outstanding balance' })
+  balance: string;
+
+  @ApiProperty({ description: 'Number of adults' })
+  adults: number;
+
+  @ApiProperty({ description: 'Number of children' })
+  children: number;
+
+  @ApiPropertyOptional({ description: 'Additional services', type: [Object] })
+  additionalServices?: any[];
+
+  @ApiProperty({ description: 'Checkout status', enum: CheckoutStatus })
+  status: CheckoutStatus;
+
+  @ApiProperty({ description: 'Whether checkout is overdue' })
+  isOverdue: boolean;
+}
+
+export class MobileCheckoutResponseDto {
+  @ApiProperty({ description: 'Checkout operation status' })
+  success: boolean;
+
+  @ApiProperty({ description: 'Checkout ID' })
+  checkoutId: string;
+
+  @ApiProperty({ description: 'Response message' })
+  message: string;
+
+  @ApiProperty({ description: 'Updated booking status' })
+  bookingStatus: string;
+
+  @ApiProperty({ description: 'Room status after checkout' })
+  roomStatus: string;
+
+  @ApiPropertyOptional({ description: 'Generated housekeeping task ID' })
+  housekeepingTaskId?: string;
+
+  @ApiProperty({ description: 'Timestamp of checkout completion' })
+  completedAt: string;
 }

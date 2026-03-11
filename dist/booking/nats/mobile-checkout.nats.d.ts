@@ -6,6 +6,7 @@
  *   - booking.checkout.search - Search checkouts
  *   - booking.checkout.validateQR - Validate QR code for checkout
  *   - booking.checkout.readyRooms - Rooms ready for checkout
+ *   - booking.checkout.detail - Get detailed checkout info for a booking
  *   - booking.checkout.items - Get checkout items/charges
  *   - booking.checkout.start - Start checkout process
  *   - booking.checkout.complete - Complete checkout process
@@ -132,6 +133,22 @@ export declare class ReadyRoomsData {
     total: number;
 }
 export type GetReadyRoomsNatsResponse = NatsResponse<ReadyRoomsData>;
+export declare class GetCheckoutDetailNatsRequest {
+    bookingId: string;
+    tenantId: string;
+    hotelId: string;
+}
+export declare class CheckoutDetailData {
+    id: string;
+    roomNumber: string;
+    guestName: string;
+    checkoutTime: string;
+    status: string;
+    specialRequests?: string;
+    notes?: string;
+    photos: string[];
+}
+export type GetCheckoutDetailNatsResponse = NatsResponse<CheckoutDetailData>;
 export declare class GetCheckoutItemsNatsRequest {
     bookingId: string;
     tenantId: string;
@@ -143,6 +160,9 @@ export declare class CheckoutBookingSummary {
     guestName: string;
     totalAmount: number;
     paymentStatus: string;
+    checkInDate?: string;
+    checkOutDate?: string;
+    paidAmount?: number;
 }
 export declare class CheckoutItemsData {
     booking: CheckoutBookingSummary;
