@@ -77,7 +77,7 @@ export interface CheckOutBookingNatsRequest {
   finalAmount?: number;
   finalBillAmount?: string | number;
   paymentMethod?: string;
-  depositRefund?: number;
+  paymentAmount?: number;
   billItems?: BillItem[];
 }
 
