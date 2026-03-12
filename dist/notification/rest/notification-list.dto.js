@@ -13,7 +13,7 @@ exports.NotificationListResponseDto = exports.MarkNotificationReadDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
-const staff_notification_nats_1 = require("../nats/staff-notification.nats");
+const notification_item_dto_1 = require("./notification-item.dto");
 class MarkNotificationReadDto {
     notificationIds;
 }
@@ -33,8 +33,8 @@ class NotificationListResponseDto {
 }
 exports.NotificationListResponseDto = NotificationListResponseDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'List of notifications', type: [staff_notification_nats_1.NotificationItemDto] }),
-    (0, class_transformer_1.Type)(() => staff_notification_nats_1.NotificationItemDto),
+    (0, swagger_1.ApiProperty)({ description: 'List of notifications', type: [notification_item_dto_1.NotificationItemDto] }),
+    (0, class_transformer_1.Type)(() => notification_item_dto_1.NotificationItemDto),
     __metadata("design:type", Array)
 ], NotificationListResponseDto.prototype, "notifications", void 0);
 __decorate([

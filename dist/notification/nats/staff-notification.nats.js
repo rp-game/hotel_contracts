@@ -9,12 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SendNotificationResponseDto = exports.SendStaffNotificationMultiNatsRequest = exports.DeleteNotificationResponseDto = exports.GetPreferencesNatsResponse = exports.GetPreferencesNatsRequest = exports.UpdatePreferencesNatsResponse = exports.UpdatePreferencesNatsRequest = exports.StaffNotificationPreferencesDto = exports.QuietHoursDto = exports.StaffNotificationSettingsDto = exports.StaffSendNotificationNatsRequest = exports.GetUnreadCountResponseDto = exports.GetUnreadCountPayload = exports.MarkNotificationReadResponseDto = exports.MarkNotificationReadPayload = exports.GetMobileNotificationsResponseDto = exports.NotificationItemDto = exports.GetMobileNotificationsPayload = exports.RegisterDevicePayload = exports.UnregisterDevicePayload = exports.MarkAllNotificationsReadPayload = exports.NotificationListResponseDto = exports.MarkNotificationReadDto = exports.DeviceRegistrationResponseDto = exports.RegisterDeviceDto = exports.UnregisterDeviceResponseDto = exports.UnregisterDeviceDto = exports.MarkAllNotificationsResponseDto = exports.MarkAllNotificationsReadDto = void 0;
+exports.SendNotificationResponseDto = exports.SendStaffNotificationMultiNatsRequest = exports.DeleteNotificationResponseDto = exports.GetPreferencesNatsResponse = exports.GetPreferencesNatsRequest = exports.UpdatePreferencesNatsResponse = exports.UpdatePreferencesNatsRequest = exports.StaffNotificationPreferencesDto = exports.QuietHoursDto = exports.StaffNotificationSettingsDto = exports.StaffSendNotificationNatsRequest = exports.GetUnreadCountResponseDto = exports.GetUnreadCountPayload = exports.MarkNotificationReadResponseDto = exports.MarkNotificationReadPayload = exports.GetMobileNotificationsResponseDto = exports.GetMobileNotificationsPayload = exports.RegisterDevicePayload = exports.UnregisterDevicePayload = exports.MarkAllNotificationsReadPayload = exports.NotificationListResponseDto = exports.MarkNotificationReadDto = exports.DeviceRegistrationResponseDto = exports.RegisterDeviceDto = exports.UnregisterDeviceResponseDto = exports.UnregisterDeviceDto = exports.MarkAllNotificationsResponseDto = exports.MarkAllNotificationsReadDto = exports.NotificationItemDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 const notification_enum_1 = require("../enums/notification.enum");
+const notification_item_dto_1 = require("../rest/notification-item.dto");
 // Re-export REST DTOs for use by NATS layer
+var notification_item_dto_2 = require("../rest/notification-item.dto");
+Object.defineProperty(exports, "NotificationItemDto", { enumerable: true, get: function () { return notification_item_dto_2.NotificationItemDto; } });
 var mark_all_read_dto_1 = require("../rest/mark-all-read.dto");
 Object.defineProperty(exports, "MarkAllNotificationsReadDto", { enumerable: true, get: function () { return mark_all_read_dto_1.MarkAllNotificationsReadDto; } });
 Object.defineProperty(exports, "MarkAllNotificationsResponseDto", { enumerable: true, get: function () { return mark_all_read_dto_1.MarkAllNotificationsResponseDto; } });
@@ -161,69 +164,6 @@ __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], GetMobileNotificationsPayload.prototype, "limit", void 0);
-class NotificationItemDto {
-    id;
-    recipientId;
-    type;
-    title;
-    message;
-    priority;
-    isRead;
-    isSent;
-    data;
-    readAt;
-    sentAt;
-    createdAt;
-}
-exports.NotificationItemDto = NotificationItemDto;
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Notification ID' }),
-    __metadata("design:type", String)
-], NotificationItemDto.prototype, "id", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Recipient staff ID' }),
-    __metadata("design:type", String)
-], NotificationItemDto.prototype, "recipientId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Notification type', enum: notification_enum_1.NotificationType }),
-    __metadata("design:type", String)
-], NotificationItemDto.prototype, "type", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Notification title' }),
-    __metadata("design:type", String)
-], NotificationItemDto.prototype, "title", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Notification message body' }),
-    __metadata("design:type", String)
-], NotificationItemDto.prototype, "message", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Notification priority', enum: notification_enum_1.NotificationPriority }),
-    __metadata("design:type", String)
-], NotificationItemDto.prototype, "priority", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Whether notification has been read' }),
-    __metadata("design:type", Boolean)
-], NotificationItemDto.prototype, "isRead", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Whether notification has been sent' }),
-    __metadata("design:type", Boolean)
-], NotificationItemDto.prototype, "isSent", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Additional data payload', required: false, type: Object }),
-    __metadata("design:type", Object)
-], NotificationItemDto.prototype, "data", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Time when notification was read', required: false }),
-    __metadata("design:type", String)
-], NotificationItemDto.prototype, "readAt", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Time when notification was sent', required: false }),
-    __metadata("design:type", String)
-], NotificationItemDto.prototype, "sentAt", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Notification creation time' }),
-    __metadata("design:type", String)
-], NotificationItemDto.prototype, "createdAt", void 0);
 class GetMobileNotificationsResponseDto {
     notifications;
     total;
@@ -233,8 +173,8 @@ class GetMobileNotificationsResponseDto {
 }
 exports.GetMobileNotificationsResponseDto = GetMobileNotificationsResponseDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'List of notifications', type: [NotificationItemDto] }),
-    (0, class_transformer_1.Type)(() => NotificationItemDto),
+    (0, swagger_1.ApiProperty)({ description: 'List of notifications', type: [notification_item_dto_1.NotificationItemDto] }),
+    (0, class_transformer_1.Type)(() => notification_item_dto_1.NotificationItemDto),
     __metadata("design:type", Array)
 ], GetMobileNotificationsResponseDto.prototype, "notifications", void 0);
 __decorate([

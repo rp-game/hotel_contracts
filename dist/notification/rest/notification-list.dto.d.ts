@@ -1,4 +1,4 @@
-import { NotificationItemDto } from '../nats/staff-notification.nats';
+import { NotificationItemDto } from './notification-item.dto';
 export declare class MarkNotificationReadDto {
     notificationIds: string[];
 }

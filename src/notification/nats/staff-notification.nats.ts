@@ -2,8 +2,10 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsDateString, IsEnum, IsNumber, IsArray, IsBoolean } from 'class-validator';
 import { Type } from 'class-transformer';
 import { DevicePlatform, NotificationType, NotificationPriority, NotificationChannel } from '../enums/notification.enum';
+import { NotificationItemDto } from '../rest/notification-item.dto';
 
 // Re-export REST DTOs for use by NATS layer
+export { NotificationItemDto } from '../rest/notification-item.dto';
 export { MarkAllNotificationsReadDto, MarkAllNotificationsResponseDto } from '../rest/mark-all-read.dto';
 export { UnregisterDeviceDto, UnregisterDeviceResponseDto } from '../rest/unregister-device.dto';
 export { RegisterDeviceDto, DeviceRegistrationResponseDto } from '../rest/register-device.dto';
@@ -103,44 +105,6 @@ export class GetMobileNotificationsPayload {
   @ApiProperty({ description: 'Items per page' })
   @IsNumber()
   limit: number;
-}
-
-export class NotificationItemDto {
-  @ApiProperty({ description: 'Notification ID' })
-  id: string;
-
-  @ApiProperty({ description: 'Recipient staff ID' })
-  recipientId: string;
-
-  @ApiProperty({ description: 'Notification type', enum: NotificationType })
-  type: NotificationType;
-
-  @ApiProperty({ description: 'Notification title' })
-  title: string;
-
-  @ApiProperty({ description: 'Notification message body' })
-  message: string;
-
-  @ApiProperty({ description: 'Notification priority', enum: NotificationPriority })
-  priority: NotificationPriority;
-
-  @ApiProperty({ description: 'Whether notification has been read' })
-  isRead: boolean;
-
-  @ApiProperty({ description: 'Whether notification has been sent' })
-  isSent: boolean;
-
-  @ApiProperty({ description: 'Additional data payload', required: false, type: Object })
-  data?: Record<string, unknown>;
-
-  @ApiProperty({ description: 'Time when notification was read', required: false })
-  readAt?: string;
-
-  @ApiProperty({ description: 'Time when notification was sent', required: false })
-  sentAt?: string;
-
-  @ApiProperty({ description: 'Notification creation time' })
-  createdAt: string;
 }
 
 export class GetMobileNotificationsResponseDto {

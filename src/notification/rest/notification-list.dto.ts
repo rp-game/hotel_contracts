@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
-import { NotificationItemDto } from '../nats/staff-notification.nats';
+import { NotificationItemDto } from './notification-item.dto';
 
 export class MarkNotificationReadDto {
   @ApiProperty({ description: 'Notification IDs to mark as read', type: [String] })

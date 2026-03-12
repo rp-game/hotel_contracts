@@ -1,4 +1,6 @@
 import { DevicePlatform, NotificationType, NotificationPriority, NotificationChannel } from '../enums/notification.enum';
+import { NotificationItemDto } from '../rest/notification-item.dto';
+export { NotificationItemDto } from '../rest/notification-item.dto';
 export { MarkAllNotificationsReadDto, MarkAllNotificationsResponseDto } from '../rest/mark-all-read.dto';
 export { UnregisterDeviceDto, UnregisterDeviceResponseDto } from '../rest/unregister-device.dto';
 export { RegisterDeviceDto, DeviceRegistrationResponseDto } from '../rest/register-device.dto';
@@ -29,20 +31,6 @@ export declare class GetMobileNotificationsPayload {
     hotelId: string;
     page: number;
     limit: number;
-}
-export declare class NotificationItemDto {
-    id: string;
-    recipientId: string;
-    type: NotificationType;
-    title: string;
-    message: string;
-    priority: NotificationPriority;
-    isRead: boolean;
-    isSent: boolean;
-    data?: Record<string, unknown>;
-    readAt?: string;
-    sentAt?: string;
-    createdAt: string;
 }
 export declare class GetMobileNotificationsResponseDto {
     notifications: NotificationItemDto[];
