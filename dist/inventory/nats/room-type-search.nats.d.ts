@@ -73,6 +73,9 @@ export declare class RoomTypeSearchResult {
     amenities: string[];
     images: string[];
     basePrice: number;
+    basePriceTotal?: number;
+    basePriceTaxAmount?: number;
+    basePriceGrossAmount?: number;
     availableCount: number;
     ratePlans: RatePlanPricingDetail[];
 }

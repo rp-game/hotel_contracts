@@ -299,6 +299,15 @@ export class RoomTypeSearchResult {
   })
   basePrice: number;
 
+  @ApiPropertyOptional({ description: 'Base price total for stay (basePrice × units)' })
+  basePriceTotal?: number;
+
+  @ApiPropertyOptional({ description: 'Tax on base price total' })
+  basePriceTaxAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Base price gross (basePriceTotal + tax)' })
+  basePriceGrossAmount?: number;
+
   @ApiProperty({
     description: 'Number of rooms available for the requested time range',
     example: 3,

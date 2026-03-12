@@ -342,6 +342,9 @@ class RoomTypeSearchResult {
     amenities;
     images;
     basePrice;
+    basePriceTotal;
+    basePriceTaxAmount;
+    basePriceGrossAmount;
     availableCount;
     ratePlans;
 }
@@ -400,6 +403,18 @@ __decorate([
     }),
     __metadata("design:type", Number)
 ], RoomTypeSearchResult.prototype, "basePrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Base price total for stay (basePrice × units)' }),
+    __metadata("design:type", Number)
+], RoomTypeSearchResult.prototype, "basePriceTotal", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax on base price total' }),
+    __metadata("design:type", Number)
+], RoomTypeSearchResult.prototype, "basePriceTaxAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Base price gross (basePriceTotal + tax)' }),
+    __metadata("design:type", Number)
+], RoomTypeSearchResult.prototype, "basePriceGrossAmount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Number of rooms available for the requested time range',
