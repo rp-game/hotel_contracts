@@ -97,6 +97,38 @@ export declare class StaffNotificationSettingsDto {
     quietHoursStart?: string;
     quietHoursEnd?: string;
 }
+export declare class QuietHoursDto {
+    start: string;
+    end: string;
+}
+export declare class StaffNotificationPreferencesDto {
+    pushEnabled?: boolean;
+    smsEnabled?: boolean;
+    emailEnabled?: boolean;
+    channels?: NotificationChannel[];
+    quietHours?: QuietHoursDto;
+    notificationTypes?: Record<string, boolean>;
+}
+export declare class UpdatePreferencesNatsRequest {
+    staffId: string;
+    tenantId: string;
+    preferences: StaffNotificationPreferencesDto;
+}
+export declare class UpdatePreferencesNatsResponse {
+    success: boolean;
+    message: string;
+}
+export declare class GetPreferencesNatsRequest {
+    staffId: string;
+    tenantId: string;
+}
+export declare class GetPreferencesNatsResponse {
+    preferences: StaffNotificationPreferencesDto;
+}
+export declare class DeleteNotificationResponseDto {
+    id: string;
+    status: string;
+}
 /**
  * Request for notification.send NATS pattern.
  * Uses staffIds (string[]) for multi-recipient support.

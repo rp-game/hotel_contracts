@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SendNotificationResponseDto = exports.SendStaffNotificationMultiNatsRequest = exports.StaffNotificationSettingsDto = exports.StaffSendNotificationNatsRequest = exports.GetUnreadCountResponseDto = exports.GetUnreadCountPayload = exports.MarkNotificationReadResponseDto = exports.MarkNotificationReadPayload = exports.GetMobileNotificationsResponseDto = exports.NotificationItemDto = exports.GetMobileNotificationsPayload = exports.RegisterDevicePayload = exports.UnregisterDevicePayload = exports.MarkAllNotificationsReadPayload = exports.NotificationListResponseDto = exports.MarkNotificationReadDto = exports.DeviceRegistrationResponseDto = exports.RegisterDeviceDto = exports.UnregisterDeviceResponseDto = exports.UnregisterDeviceDto = exports.MarkAllNotificationsResponseDto = exports.MarkAllNotificationsReadDto = void 0;
+exports.SendNotificationResponseDto = exports.SendStaffNotificationMultiNatsRequest = exports.DeleteNotificationResponseDto = exports.GetPreferencesNatsResponse = exports.GetPreferencesNatsRequest = exports.UpdatePreferencesNatsResponse = exports.UpdatePreferencesNatsRequest = exports.StaffNotificationPreferencesDto = exports.QuietHoursDto = exports.StaffNotificationSettingsDto = exports.StaffSendNotificationNatsRequest = exports.GetUnreadCountResponseDto = exports.GetUnreadCountPayload = exports.MarkNotificationReadResponseDto = exports.MarkNotificationReadPayload = exports.GetMobileNotificationsResponseDto = exports.NotificationItemDto = exports.GetMobileNotificationsPayload = exports.RegisterDevicePayload = exports.UnregisterDevicePayload = exports.MarkAllNotificationsReadPayload = exports.NotificationListResponseDto = exports.MarkNotificationReadDto = exports.DeviceRegistrationResponseDto = exports.RegisterDeviceDto = exports.UnregisterDeviceResponseDto = exports.UnregisterDeviceDto = exports.MarkAllNotificationsResponseDto = exports.MarkAllNotificationsReadDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -470,6 +470,135 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], StaffNotificationSettingsDto.prototype, "quietHoursEnd", void 0);
+// ============= NOTIFICATION PREFERENCES (NATS) =============
+class QuietHoursDto {
+    start;
+    end;
+}
+exports.QuietHoursDto = QuietHoursDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Quiet hours start time (24h format, e.g. "22:00")' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuietHoursDto.prototype, "start", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Quiet hours end time (24h format, e.g. "07:00")' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], QuietHoursDto.prototype, "end", void 0);
+class StaffNotificationPreferencesDto {
+    pushEnabled;
+    smsEnabled;
+    emailEnabled;
+    channels;
+    quietHours;
+    notificationTypes;
+}
+exports.StaffNotificationPreferencesDto = StaffNotificationPreferencesDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Enable push notifications' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], StaffNotificationPreferencesDto.prototype, "pushEnabled", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Enable SMS notifications' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], StaffNotificationPreferencesDto.prototype, "smsEnabled", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Enable email notifications' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], StaffNotificationPreferencesDto.prototype, "emailEnabled", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Notification channels', enum: notification_enum_1.NotificationChannel, isArray: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsEnum)(notification_enum_1.NotificationChannel, { each: true }),
+    __metadata("design:type", Array)
+], StaffNotificationPreferencesDto.prototype, "channels", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Quiet hours settings', type: QuietHoursDto }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", QuietHoursDto)
+], StaffNotificationPreferencesDto.prototype, "quietHours", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Notification type flags (taskAssignments, urgentRequests, etc.)', type: Object }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], StaffNotificationPreferencesDto.prototype, "notificationTypes", void 0);
+class UpdatePreferencesNatsRequest {
+    staffId;
+    tenantId;
+    preferences;
+}
+exports.UpdatePreferencesNatsRequest = UpdatePreferencesNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdatePreferencesNatsRequest.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdatePreferencesNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Preferences to update', type: StaffNotificationPreferencesDto }),
+    __metadata("design:type", StaffNotificationPreferencesDto)
+], UpdatePreferencesNatsRequest.prototype, "preferences", void 0);
+class UpdatePreferencesNatsResponse {
+    success;
+    message;
+}
+exports.UpdatePreferencesNatsResponse = UpdatePreferencesNatsResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Success flag' }),
+    __metadata("design:type", Boolean)
+], UpdatePreferencesNatsResponse.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Response message' }),
+    __metadata("design:type", String)
+], UpdatePreferencesNatsResponse.prototype, "message", void 0);
+class GetPreferencesNatsRequest {
+    staffId;
+    tenantId;
+}
+exports.GetPreferencesNatsRequest = GetPreferencesNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetPreferencesNatsRequest.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetPreferencesNatsRequest.prototype, "tenantId", void 0);
+class GetPreferencesNatsResponse {
+    preferences;
+}
+exports.GetPreferencesNatsResponse = GetPreferencesNatsResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User notification preferences', type: StaffNotificationPreferencesDto }),
+    __metadata("design:type", StaffNotificationPreferencesDto)
+], GetPreferencesNatsResponse.prototype, "preferences", void 0);
+class DeleteNotificationResponseDto {
+    id;
+    status;
+}
+exports.DeleteNotificationResponseDto = DeleteNotificationResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Deleted notification ID' }),
+    __metadata("design:type", String)
+], DeleteNotificationResponseDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Deletion status' }),
+    __metadata("design:type", String)
+], DeleteNotificationResponseDto.prototype, "status", void 0);
 // ============= SEND NOTIFICATION (multi-recipient) =============
 /**
  * Request for notification.send NATS pattern.

@@ -308,6 +308,93 @@ export class StaffNotificationSettingsDto {
   quietHoursEnd?: string;
 }
 
+// ============= NOTIFICATION PREFERENCES (NATS) =============
+
+export class QuietHoursDto {
+  @ApiProperty({ description: 'Quiet hours start time (24h format, e.g. "22:00")' })
+  @IsString()
+  start: string;
+
+  @ApiProperty({ description: 'Quiet hours end time (24h format, e.g. "07:00")' })
+  @IsString()
+  end: string;
+}
+
+export class StaffNotificationPreferencesDto {
+  @ApiPropertyOptional({ description: 'Enable push notifications' })
+  @IsOptional()
+  @IsBoolean()
+  pushEnabled?: boolean;
+
+  @ApiPropertyOptional({ description: 'Enable SMS notifications' })
+  @IsOptional()
+  @IsBoolean()
+  smsEnabled?: boolean;
+
+  @ApiPropertyOptional({ description: 'Enable email notifications' })
+  @IsOptional()
+  @IsBoolean()
+  emailEnabled?: boolean;
+
+  @ApiPropertyOptional({ description: 'Notification channels', enum: NotificationChannel, isArray: true })
+  @IsOptional()
+  @IsArray()
+  @IsEnum(NotificationChannel, { each: true })
+  channels?: NotificationChannel[];
+
+  @ApiPropertyOptional({ description: 'Quiet hours settings', type: QuietHoursDto })
+  @IsOptional()
+  quietHours?: QuietHoursDto;
+
+  @ApiPropertyOptional({ description: 'Notification type flags (taskAssignments, urgentRequests, etc.)', type: Object })
+  @IsOptional()
+  notificationTypes?: Record<string, boolean>;
+}
+
+export class UpdatePreferencesNatsRequest {
+  @ApiProperty({ description: 'Staff ID' })
+  @IsString()
+  staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Preferences to update', type: StaffNotificationPreferencesDto })
+  preferences: StaffNotificationPreferencesDto;
+}
+
+export class UpdatePreferencesNatsResponse {
+  @ApiProperty({ description: 'Success flag' })
+  success: boolean;
+
+  @ApiProperty({ description: 'Response message' })
+  message: string;
+}
+
+export class GetPreferencesNatsRequest {
+  @ApiProperty({ description: 'Staff ID' })
+  @IsString()
+  staffId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId: string;
+}
+
+export class GetPreferencesNatsResponse {
+  @ApiProperty({ description: 'User notification preferences', type: StaffNotificationPreferencesDto })
+  preferences: StaffNotificationPreferencesDto;
+}
+
+export class DeleteNotificationResponseDto {
+  @ApiProperty({ description: 'Deleted notification ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Deletion status' })
+  status: string;
+}
+
 // ============= SEND NOTIFICATION (multi-recipient) =============
 
 /**
