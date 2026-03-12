@@ -21,6 +21,7 @@ exports.GetBookingByIdResponse = exports.GetBookingByIdRequest = exports.Booking
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const booking_response_dto_1 = require("../dto/booking-response.dto");
+const pricing_breakdown_dto_1 = require("../dto/pricing-breakdown.dto");
 class BookingRoom {
     id;
     roomNumber;
@@ -306,8 +307,8 @@ __decorate([
     __metadata("design:type", String)
 ], GetBookingByIdResponse.prototype, "actualCheckOutTime", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Pricing breakdown with optional ratePlanSnapshot' }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Pricing breakdown with adjustments and ratePlanSnapshot', type: () => pricing_breakdown_dto_1.PricingBreakdownDto }),
+    __metadata("design:type", pricing_breakdown_dto_1.PricingBreakdownDto)
 ], GetBookingByIdResponse.prototype, "pricingBreakdown", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Rate plan ID applied to this booking', format: 'uuid' }),

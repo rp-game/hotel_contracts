@@ -23,6 +23,21 @@ export declare class PricingBreakdownDetailDto {
     };
     grossAmount?: number;
 }
+export declare class RatePlanSnapshotDto {
+    id: string;
+    name: string;
+    mealPlan?: string | null;
+    paymentType?: string | null;
+    cancellationPolicy?: string | null;
+    adjustmentType?: string | null;
+    adjustmentValue?: number | null;
+}
+export declare class RatePlanAdjustmentDto {
+    type: 'PERCENTAGE' | 'AMOUNT';
+    value: number;
+    originalTotal: number;
+    adjustedTotal: number;
+}
 export declare class PricingBreakdownDto {
     baseRate: number;
     nights: number;
@@ -30,6 +45,8 @@ export declare class PricingBreakdownDto {
     breakdown: PricingBreakdownDetailDto;
     finalPrice: number;
     calculatedAt: Date;
+    ratePlanSnapshot?: RatePlanSnapshotDto;
+    ratePlanAdjustment?: RatePlanAdjustmentDto;
 }
 export declare class BookingPricingBreakdownResponseDto {
     bookingId: string;

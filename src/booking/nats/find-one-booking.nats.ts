@@ -11,6 +11,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsUUID, IsString } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { BookingServiceResponseDto, FolioItemDto } from '../dto/booking-response.dto';
+import { PricingBreakdownDto } from '../dto/pricing-breakdown.dto';
 
 export class BookingRoom {
   @ApiProperty({ description: 'Room ID' })
@@ -186,8 +187,8 @@ export class GetBookingByIdResponse {
   @ApiPropertyOptional({ description: 'Actual check-out time' })
   actualCheckOutTime?: string;
 
-  @ApiPropertyOptional({ description: 'Pricing breakdown with optional ratePlanSnapshot' })
-  pricingBreakdown?: Record<string, unknown>;
+  @ApiPropertyOptional({ description: 'Pricing breakdown with adjustments and ratePlanSnapshot', type: () => PricingBreakdownDto })
+  pricingBreakdown?: PricingBreakdownDto;
 
   @ApiPropertyOptional({ description: 'Rate plan ID applied to this booking', format: 'uuid' })
   ratePlanId?: string;

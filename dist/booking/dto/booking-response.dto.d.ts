@@ -1,4 +1,5 @@
 import { BookingStatus, BookingSource, PaymentStatus } from '../enums/booking.enum';
+import { PricingBreakdownDto } from './pricing-breakdown.dto';
 export declare class BookingRoomResponseDto {
     id: string;
     roomTypeId: string;
@@ -99,6 +100,9 @@ export declare class BookingResponseDto {
     services: BookingServiceResponseDto[];
     folio?: FolioItemDto[];
     grandTotal?: number;
+    balance?: number;
+    pricingBreakdown?: PricingBreakdownDto;
+    ratePlanId?: string;
     createdAt: Date;
     updatedAt: Date;
     createdBy?: string;

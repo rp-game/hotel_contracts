@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { BookingStatus, BookingSource, PaymentStatus } from '../enums/booking.enum';
+import { PricingBreakdownDto } from './pricing-breakdown.dto';
 
 export class BookingRoomResponseDto {
   @ApiProperty({ description: 'Room ID' })
@@ -263,6 +264,18 @@ export class BookingResponseDto {
 
   @ApiPropertyOptional({ description: 'Grand total computed from folio (rooms + services)' })
   grandTotal?: number;
+
+  @ApiPropertyOptional({ description: 'Outstanding balance (totalAmount - paidAmount)' })
+  balance?: number;
+
+  @ApiPropertyOptional({
+    description: 'Pricing breakdown with adjustments, rules, and optional ratePlanSnapshot',
+    type: PricingBreakdownDto,
+  })
+  pricingBreakdown?: PricingBreakdownDto;
+
+  @ApiPropertyOptional({ description: 'Rate plan ID applied to this booking', format: 'uuid' })
+  ratePlanId?: string;
 
   // Metadata
   @ApiProperty({ description: 'Created date' })

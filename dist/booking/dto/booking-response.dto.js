@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookingResponseDto = exports.FolioItemDto = exports.BookingServiceResponseDto = exports.BookingPaymentResponseDto = exports.BookingGuestResponseDto = exports.BookingRoomResponseDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const booking_enum_1 = require("../enums/booking.enum");
+const pricing_breakdown_dto_1 = require("./pricing-breakdown.dto");
 class BookingRoomResponseDto {
     id;
     roomTypeId;
@@ -305,6 +306,9 @@ class BookingResponseDto {
     // Folio: server-computed line items breakdown
     folio;
     grandTotal;
+    balance;
+    pricingBreakdown;
+    ratePlanId;
     // Metadata
     createdAt;
     updatedAt;
@@ -444,6 +448,21 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Grand total computed from folio (rooms + services)' }),
     __metadata("design:type", Number)
 ], BookingResponseDto.prototype, "grandTotal", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Outstanding balance (totalAmount - paidAmount)' }),
+    __metadata("design:type", Number)
+], BookingResponseDto.prototype, "balance", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Pricing breakdown with adjustments, rules, and optional ratePlanSnapshot',
+        type: pricing_breakdown_dto_1.PricingBreakdownDto,
+    }),
+    __metadata("design:type", pricing_breakdown_dto_1.PricingBreakdownDto)
+], BookingResponseDto.prototype, "pricingBreakdown", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Rate plan ID applied to this booking', format: 'uuid' }),
+    __metadata("design:type", String)
+], BookingResponseDto.prototype, "ratePlanId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Created date' }),
     __metadata("design:type", Date)

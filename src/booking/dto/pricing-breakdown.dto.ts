@@ -80,6 +80,43 @@ export class PricingBreakdownDetailDto {
   grossAmount?: number;
 }
 
+export class RatePlanSnapshotDto {
+  @ApiProperty({ description: 'Rate plan ID', format: 'uuid' })
+  id: string;
+
+  @ApiProperty({ description: 'Rate plan name' })
+  name: string;
+
+  @ApiPropertyOptional({ description: 'Meal plan included' })
+  mealPlan?: string | null;
+
+  @ApiPropertyOptional({ description: 'Payment type (e.g. PREPAID, PAY_AT_HOTEL)' })
+  paymentType?: string | null;
+
+  @ApiPropertyOptional({ description: 'Cancellation policy' })
+  cancellationPolicy?: string | null;
+
+  @ApiPropertyOptional({ description: 'Adjustment type (PERCENTAGE or AMOUNT)' })
+  adjustmentType?: string | null;
+
+  @ApiPropertyOptional({ description: 'Adjustment value (e.g. -10 for -10%)' })
+  adjustmentValue?: number | null;
+}
+
+export class RatePlanAdjustmentDto {
+  @ApiProperty({ description: 'Adjustment type', enum: ['PERCENTAGE', 'AMOUNT'] })
+  type: 'PERCENTAGE' | 'AMOUNT';
+
+  @ApiProperty({ description: 'Adjustment value (e.g. -10 for -10% discount)', example: -10 })
+  value: number;
+
+  @ApiProperty({ description: 'Total before rate plan adjustment', example: 3600000 })
+  originalTotal: number;
+
+  @ApiProperty({ description: 'Total after rate plan adjustment', example: 3240000 })
+  adjustedTotal: number;
+}
+
 export class PricingBreakdownDto {
   @ApiProperty({
     description: 'Base rate per night in VND',
@@ -116,6 +153,18 @@ export class PricingBreakdownDto {
     example: '2026-02-24T10:30:00Z',
   })
   calculatedAt: Date;
+
+  @ApiPropertyOptional({
+    description: 'Snapshot of rate plan applied at booking time',
+    type: RatePlanSnapshotDto,
+  })
+  ratePlanSnapshot?: RatePlanSnapshotDto;
+
+  @ApiPropertyOptional({
+    description: 'Rate plan price adjustment details',
+    type: RatePlanAdjustmentDto,
+  })
+  ratePlanAdjustment?: RatePlanAdjustmentDto;
 }
 
 export class BookingPricingBreakdownResponseDto {

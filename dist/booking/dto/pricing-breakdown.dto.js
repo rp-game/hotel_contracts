@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookingPricingBreakdownResponseDto = exports.PricingBreakdownDto = exports.PricingBreakdownDetailDto = void 0;
+exports.BookingPricingBreakdownResponseDto = exports.PricingBreakdownDto = exports.RatePlanAdjustmentDto = exports.RatePlanSnapshotDto = exports.PricingBreakdownDetailDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 class PricingBreakdownDetailDto {
     baseAmount;
@@ -117,6 +117,67 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Gross amount (net + all taxes)' }),
     __metadata("design:type", Number)
 ], PricingBreakdownDetailDto.prototype, "grossAmount", void 0);
+class RatePlanSnapshotDto {
+    id;
+    name;
+    mealPlan;
+    paymentType;
+    cancellationPolicy;
+    adjustmentType;
+    adjustmentValue;
+}
+exports.RatePlanSnapshotDto = RatePlanSnapshotDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Rate plan ID', format: 'uuid' }),
+    __metadata("design:type", String)
+], RatePlanSnapshotDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Rate plan name' }),
+    __metadata("design:type", String)
+], RatePlanSnapshotDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Meal plan included' }),
+    __metadata("design:type", Object)
+], RatePlanSnapshotDto.prototype, "mealPlan", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payment type (e.g. PREPAID, PAY_AT_HOTEL)' }),
+    __metadata("design:type", Object)
+], RatePlanSnapshotDto.prototype, "paymentType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Cancellation policy' }),
+    __metadata("design:type", Object)
+], RatePlanSnapshotDto.prototype, "cancellationPolicy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Adjustment type (PERCENTAGE or AMOUNT)' }),
+    __metadata("design:type", Object)
+], RatePlanSnapshotDto.prototype, "adjustmentType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Adjustment value (e.g. -10 for -10%)' }),
+    __metadata("design:type", Object)
+], RatePlanSnapshotDto.prototype, "adjustmentValue", void 0);
+class RatePlanAdjustmentDto {
+    type;
+    value;
+    originalTotal;
+    adjustedTotal;
+}
+exports.RatePlanAdjustmentDto = RatePlanAdjustmentDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Adjustment type', enum: ['PERCENTAGE', 'AMOUNT'] }),
+    __metadata("design:type", String)
+], RatePlanAdjustmentDto.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Adjustment value (e.g. -10 for -10% discount)', example: -10 }),
+    __metadata("design:type", Number)
+], RatePlanAdjustmentDto.prototype, "value", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total before rate plan adjustment', example: 3600000 }),
+    __metadata("design:type", Number)
+], RatePlanAdjustmentDto.prototype, "originalTotal", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total after rate plan adjustment', example: 3240000 }),
+    __metadata("design:type", Number)
+], RatePlanAdjustmentDto.prototype, "adjustedTotal", void 0);
 class PricingBreakdownDto {
     baseRate;
     nights;
@@ -124,6 +185,8 @@ class PricingBreakdownDto {
     breakdown;
     finalPrice;
     calculatedAt;
+    ratePlanSnapshot;
+    ratePlanAdjustment;
 }
 exports.PricingBreakdownDto = PricingBreakdownDto;
 __decorate([
@@ -168,6 +231,20 @@ __decorate([
     }),
     __metadata("design:type", Date)
 ], PricingBreakdownDto.prototype, "calculatedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Snapshot of rate plan applied at booking time',
+        type: RatePlanSnapshotDto,
+    }),
+    __metadata("design:type", RatePlanSnapshotDto)
+], PricingBreakdownDto.prototype, "ratePlanSnapshot", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Rate plan price adjustment details',
+        type: RatePlanAdjustmentDto,
+    }),
+    __metadata("design:type", RatePlanAdjustmentDto)
+], PricingBreakdownDto.prototype, "ratePlanAdjustment", void 0);
 class BookingPricingBreakdownResponseDto {
     bookingId;
     roomTypeId;

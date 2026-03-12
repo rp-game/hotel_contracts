@@ -8,6 +8,7 @@
  */
 import { NatsResponse } from '../../common/nats-response.interface';
 import { BookingServiceResponseDto, FolioItemDto } from '../dto/booking-response.dto';
+import { PricingBreakdownDto } from '../dto/pricing-breakdown.dto';
 export declare class BookingRoom {
     id: string;
     roomNumber: string;
@@ -68,7 +69,7 @@ export declare class GetBookingByIdResponse {
     updatedBy?: string;
     actualCheckInTime?: string;
     actualCheckOutTime?: string;
-    pricingBreakdown?: Record<string, unknown>;
+    pricingBreakdown?: PricingBreakdownDto;
     ratePlanId?: string;
 }
 export type GetBookingByIdNatsResponse = NatsResponse<GetBookingByIdResponse>;
