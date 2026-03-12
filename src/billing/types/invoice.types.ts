@@ -46,6 +46,9 @@ export class InvoiceItem {
     overageQuantity: number;
   };
 
+  @ApiPropertyOptional({ description: 'Net amount before tax' })
+  netAmount?: number;
+
   @ApiPropertyOptional({ description: 'Tax rate (decimal)' })
   taxRate?: number;
 
@@ -280,6 +283,9 @@ export class CreateInvoiceRequest {
     apiCallsCount: number;
     additionalServices: Record<string, any>;
   };
+
+  @ApiPropertyOptional({ description: 'Tax breakdown by type' })
+  taxBreakdown?: { serviceCharge: { rate: number; amount: number }; vat: { rate: number; amount: number } };
 
   @ApiPropertyOptional({ description: 'Notes' })
   notes?: string;

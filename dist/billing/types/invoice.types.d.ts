@@ -25,6 +25,7 @@ export declare class InvoiceItem {
         totalUsage: number;
         overageQuantity: number;
     };
+    netAmount?: number;
     taxRate?: number;
     taxAmount?: number;
     isTaxable?: boolean;
@@ -135,6 +136,16 @@ export declare class CreateInvoiceRequest {
         storageUsedGB: number;
         apiCallsCount: number;
         additionalServices: Record<string, any>;
+    };
+    taxBreakdown?: {
+        serviceCharge: {
+            rate: number;
+            amount: number;
+        };
+        vat: {
+            rate: number;
+            amount: number;
+        };
     };
     notes?: string;
     items: InvoiceItem[];

@@ -31,6 +31,7 @@ class InvoiceItem {
     usagePeriodStart;
     usagePeriodEnd;
     usageDetails;
+    netAmount;
     taxRate;
     taxAmount;
     isTaxable;
@@ -72,6 +73,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Usage details' }),
     __metadata("design:type", Object)
 ], InvoiceItem.prototype, "usageDetails", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Net amount before tax' }),
+    __metadata("design:type", Number)
+], InvoiceItem.prototype, "netAmount", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Tax rate (decimal)' }),
     __metadata("design:type", Number)
@@ -340,6 +345,7 @@ class CreateInvoiceRequest {
     tenantEmail;
     billingAddress;
     usageMetrics;
+    taxBreakdown;
     notes;
     items;
 }
@@ -408,6 +414,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Usage metrics' }),
     __metadata("design:type", Object)
 ], CreateInvoiceRequest.prototype, "usageMetrics", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax breakdown by type' }),
+    __metadata("design:type", Object)
+], CreateInvoiceRequest.prototype, "taxBreakdown", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Notes' }),
     __metadata("design:type", String)
