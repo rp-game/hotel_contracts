@@ -19,6 +19,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskStatsPayload = exports.CleaningTaskStatsData = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
 /**
  * Cleaning Task Statistics Response
  */
@@ -67,6 +68,7 @@ __decorate([
 class TaskStatsPayload {
     tenantId;
     hotelId;
+    staffId;
 }
 exports.TaskStatsPayload = TaskStatsPayload;
 __decorate([
@@ -77,4 +79,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
     __metadata("design:type", String)
 ], TaskStatsPayload.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Staff ID (optional, for per-staff stats)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], TaskStatsPayload.prototype, "staffId", void 0);
 //# sourceMappingURL=cleaning-stats.nats.js.map

@@ -26,6 +26,7 @@ export declare class CleaningTaskStatsData {
 export declare class TaskStatsPayload {
     tenantId: string;
     hotelId: string;
+    staffId?: string;
 }
 export type CleaningTaskStatsNatsResponse = NatsResponse<CleaningTaskStatsData>;
 //# sourceMappingURL=cleaning-stats.nats.d.ts.map

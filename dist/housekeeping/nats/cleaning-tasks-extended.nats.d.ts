@@ -49,11 +49,16 @@ export declare class MobileTaskResponse {
     canComplete: boolean;
 }
 export type GetRecentTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
+export declare class SearchTasksFilters {
+    assignedToId?: string;
+    status?: string;
+    type?: string;
+}
 export declare class SearchTasksNatsRequest {
     tenantId: string;
     hotelId: string;
     query: string;
-    filters?: object;
+    filters?: SearchTasksFilters;
 }
 export type SearchTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
 export declare class GetRoomTasksNatsRequest {

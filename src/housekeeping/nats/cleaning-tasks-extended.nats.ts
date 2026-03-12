@@ -122,6 +122,23 @@ export class MobileTaskResponse {
 export type GetRecentTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
 
 // SEARCH TASKS (Mobile)
+export class SearchTasksFilters {
+  @ApiPropertyOptional({ description: 'Filter by assigned staff ID' })
+  @IsOptional()
+  @IsString()
+  assignedToId?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by task status' })
+  @IsOptional()
+  @IsString()
+  status?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by task type' })
+  @IsOptional()
+  @IsString()
+  type?: string;
+}
+
 export class SearchTasksNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
   @IsString()
@@ -135,9 +152,9 @@ export class SearchTasksNatsRequest {
   @IsString()
   query: string;
 
-  @ApiPropertyOptional({ description: 'Search filters' })
+  @ApiPropertyOptional({ description: 'Search filters', type: SearchTasksFilters })
   @IsOptional()
-  filters?: object;
+  filters?: SearchTasksFilters;
 }
 export type SearchTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
 

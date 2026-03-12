@@ -7,7 +7,8 @@
  * Called by: api-gateway (HousekeepingService)
  */
 
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 import { NatsResponse } from '../../common';
 
 /**
@@ -46,6 +47,11 @@ export class TaskStatsPayload {
 
   @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Staff ID (optional, for per-staff stats)' })
+  @IsOptional()
+  @IsString()
+  staffId?: string;
 }
 
 export type CleaningTaskStatsNatsResponse = NatsResponse<CleaningTaskStatsData>;
