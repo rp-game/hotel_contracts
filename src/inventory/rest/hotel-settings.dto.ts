@@ -3,6 +3,46 @@ import { IsString, IsOptional, IsEmail, IsBoolean, IsEnum, IsObject, ValidateNes
 import { Type } from 'class-transformer';
 
 /**
+ * Tax Configuration DTO
+ * Stores hotel-level tax settings (VAT, service charge, display mode)
+ * Compounding order is always: SERVICE_CHARGE first, then VAT (Vietnam standard)
+ */
+export class TaxConfigurationDto {
+  @ApiPropertyOptional({
+    description: 'VAT rate in percentage (e.g. 8 for 8%)',
+    example: 8,
+    minimum: 0,
+    maximum: 100,
+  })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  vatRate?: number;
+
+  @ApiPropertyOptional({
+    description: 'Service charge rate in percentage (e.g. 5 for 5%)',
+    example: 5,
+    minimum: 0,
+    maximum: 100,
+  })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  serviceChargeRate?: number;
+
+  @ApiPropertyOptional({
+    enum: ['inclusive', 'exclusive'],
+    description: 'How prices are displayed: inclusive (tax included in shown price) or exclusive (tax shown separately, "++" convention)',
+    example: 'exclusive',
+  })
+  @IsOptional()
+  @IsEnum(['inclusive', 'exclusive'])
+  taxDisplayMode?: 'inclusive' | 'exclusive';
+}
+
+/**
  * Hotel Operation Settings - Unified DTO for REST and NATS
  * Single source of truth for operation settings across all layers
  */
@@ -76,6 +116,15 @@ export class HotelOperationSettingsDto {
     start: string;
     end: string;
   };
+
+  @ApiPropertyOptional({
+    description: 'Tax configuration for the hotel',
+    type: TaxConfigurationDto,
+  })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => TaxConfigurationDto)
+  taxConfiguration?: TaxConfigurationDto;
 }
 
 /**

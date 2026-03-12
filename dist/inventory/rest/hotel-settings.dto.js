@@ -9,10 +9,57 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HotelSettingsResponseDto = exports.UpdateHotelSettingsRequestDto = exports.HotelOperationSettingsDto = void 0;
+exports.HotelSettingsResponseDto = exports.UpdateHotelSettingsRequestDto = exports.HotelOperationSettingsDto = exports.TaxConfigurationDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
+/**
+ * Tax Configuration DTO
+ * Stores hotel-level tax settings (VAT, service charge, display mode)
+ * Compounding order is always: SERVICE_CHARGE first, then VAT (Vietnam standard)
+ */
+class TaxConfigurationDto {
+    vatRate;
+    serviceChargeRate;
+    taxDisplayMode;
+}
+exports.TaxConfigurationDto = TaxConfigurationDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'VAT rate in percentage (e.g. 8 for 8%)',
+        example: 8,
+        minimum: 0,
+        maximum: 100,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(100),
+    __metadata("design:type", Number)
+], TaxConfigurationDto.prototype, "vatRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Service charge rate in percentage (e.g. 5 for 5%)',
+        example: 5,
+        minimum: 0,
+        maximum: 100,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(100),
+    __metadata("design:type", Number)
+], TaxConfigurationDto.prototype, "serviceChargeRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        enum: ['inclusive', 'exclusive'],
+        description: 'How prices are displayed: inclusive (tax included in shown price) or exclusive (tax shown separately, "++" convention)',
+        example: 'exclusive',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(['inclusive', 'exclusive']),
+    __metadata("design:type", String)
+], TaxConfigurationDto.prototype, "taxDisplayMode", void 0);
 /**
  * Hotel Operation Settings - Unified DTO for REST and NATS
  * Single source of truth for operation settings across all layers
@@ -28,6 +75,7 @@ class HotelOperationSettingsDto {
     hourlyBooking;
     preferBookingMode;
     businessHours;
+    taxConfiguration;
 }
 exports.HotelOperationSettingsDto = HotelOperationSettingsDto;
 __decorate([
@@ -107,6 +155,16 @@ __decorate([
     (0, class_validator_1.IsObject)(),
     __metadata("design:type", Object)
 ], HotelOperationSettingsDto.prototype, "businessHours", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Tax configuration for the hotel',
+        type: TaxConfigurationDto,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => TaxConfigurationDto),
+    __metadata("design:type", TaxConfigurationDto)
+], HotelOperationSettingsDto.prototype, "taxConfiguration", void 0);
 /**
  * Update Hotel Settings Request DTO
  * Used for POST /hotels/:id/settings endpoint

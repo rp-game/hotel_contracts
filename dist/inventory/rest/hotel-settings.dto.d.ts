@@ -1,4 +1,14 @@
 /**
+ * Tax Configuration DTO
+ * Stores hotel-level tax settings (VAT, service charge, display mode)
+ * Compounding order is always: SERVICE_CHARGE first, then VAT (Vietnam standard)
+ */
+export declare class TaxConfigurationDto {
+    vatRate?: number;
+    serviceChargeRate?: number;
+    taxDisplayMode?: 'inclusive' | 'exclusive';
+}
+/**
  * Hotel Operation Settings - Unified DTO for REST and NATS
  * Single source of truth for operation settings across all layers
  */
@@ -16,6 +26,7 @@ export declare class HotelOperationSettingsDto {
         start: string;
         end: string;
     };
+    taxConfiguration?: TaxConfigurationDto;
 }
 /**
  * Update Hotel Settings Request DTO
