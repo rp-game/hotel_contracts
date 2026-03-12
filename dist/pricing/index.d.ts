@@ -15,4 +15,5 @@
 export * from './types';
 export * from './rest';
 export * from './enums';
+export * from './utils';
 //# sourceMappingURL=index.d.ts.map

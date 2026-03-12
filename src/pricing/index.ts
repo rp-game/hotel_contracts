@@ -17,3 +17,4 @@
 export * from './types'; // Exported for type definitions
 export * from './rest';
 export * from './enums';
+export * from './utils';

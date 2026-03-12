@@ -65,6 +65,11 @@ export interface CalculateRateRequest {
     bookingType?: string;
     startTime?: string;
     endTime?: string;
+    /** Hotel tax configuration, passed by caller to avoid cross-service fetch */
+    taxConfiguration?: {
+        vatRate: number;
+        serviceChargeRate: number;
+    };
 }
 export declare class CalculateRateResponse {
     data: DynamicRateCalculation;

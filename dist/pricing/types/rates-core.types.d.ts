@@ -56,6 +56,20 @@ export interface RateHistory {
     changedAt: string;
 }
 /**
+ * Tax breakdown item (service charge or VAT)
+ */
+export declare class TaxBreakdownItem {
+    rate: number;
+    amount: number;
+}
+/**
+ * Structured tax breakdown for rate calculations
+ */
+export declare class RateTaxBreakdown {
+    serviceCharge: TaxBreakdownItem;
+    vat: TaxBreakdownItem;
+}
+/**
  * Rate breakdown details
  */
 export declare class RateBreakdown {
@@ -68,6 +82,8 @@ export declare class RateBreakdown {
     advanceBookingDiscount: number;
     lastMinuteDiscount: number;
     taxes: number;
+    taxBreakdown?: RateTaxBreakdown;
+    grossAmount?: number;
 }
 /**
  * Dynamic rate calculation result

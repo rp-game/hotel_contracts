@@ -15,7 +15,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DynamicRateCalculation = exports.RateBreakdown = exports.Rate = exports.RateRestrictionDto = void 0;
+exports.DynamicRateCalculation = exports.RateBreakdown = exports.RateTaxBreakdown = exports.TaxBreakdownItem = exports.Rate = exports.RateRestrictionDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Rate restriction (min stay, closed to arrival, etc.)
@@ -135,6 +135,38 @@ __decorate([
     __metadata("design:type", String)
 ], Rate.prototype, "updatedAt", void 0);
 /**
+ * Tax breakdown item (service charge or VAT)
+ */
+class TaxBreakdownItem {
+    rate;
+    amount;
+}
+exports.TaxBreakdownItem = TaxBreakdownItem;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tax rate in percentage', example: 8 }),
+    __metadata("design:type", Number)
+], TaxBreakdownItem.prototype, "rate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Calculated tax amount', example: 84000 }),
+    __metadata("design:type", Number)
+], TaxBreakdownItem.prototype, "amount", void 0);
+/**
+ * Structured tax breakdown for rate calculations
+ */
+class RateTaxBreakdown {
+    serviceCharge;
+    vat;
+}
+exports.RateTaxBreakdown = RateTaxBreakdown;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Service charge breakdown', type: TaxBreakdownItem }),
+    __metadata("design:type", TaxBreakdownItem)
+], RateTaxBreakdown.prototype, "serviceCharge", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'VAT breakdown', type: TaxBreakdownItem }),
+    __metadata("design:type", TaxBreakdownItem)
+], RateTaxBreakdown.prototype, "vat", void 0);
+/**
  * Rate breakdown details
  */
 class RateBreakdown {
@@ -147,6 +179,8 @@ class RateBreakdown {
     advanceBookingDiscount;
     lastMinuteDiscount;
     taxes;
+    taxBreakdown;
+    grossAmount;
 }
 exports.RateBreakdown = RateBreakdown;
 __decorate([
@@ -182,9 +216,17 @@ __decorate([
     __metadata("design:type", Number)
 ], RateBreakdown.prototype, "lastMinuteDiscount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Taxes' }),
+    (0, swagger_1.ApiProperty)({ description: 'Total tax amount (serviceCharge + VAT). See taxBreakdown for per-type detail.' }),
     __metadata("design:type", Number)
 ], RateBreakdown.prototype, "taxes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Detailed tax breakdown by type', type: RateTaxBreakdown, required: false }),
+    __metadata("design:type", RateTaxBreakdown)
+], RateBreakdown.prototype, "taxBreakdown", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Gross amount (calculatedRate + taxes)', required: false }),
+    __metadata("design:type", Number)
+], RateBreakdown.prototype, "grossAmount", void 0);
 /**
  * Dynamic rate calculation result
  */

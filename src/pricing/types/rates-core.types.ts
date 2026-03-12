@@ -104,6 +104,28 @@ export interface RateHistory {
 }
 
 /**
+ * Tax breakdown item (service charge or VAT)
+ */
+export class TaxBreakdownItem {
+  @ApiProperty({ description: 'Tax rate in percentage', example: 8 })
+  rate: number;
+
+  @ApiProperty({ description: 'Calculated tax amount', example: 84000 })
+  amount: number;
+}
+
+/**
+ * Structured tax breakdown for rate calculations
+ */
+export class RateTaxBreakdown {
+  @ApiProperty({ description: 'Service charge breakdown', type: TaxBreakdownItem })
+  serviceCharge: TaxBreakdownItem;
+
+  @ApiProperty({ description: 'VAT breakdown', type: TaxBreakdownItem })
+  vat: TaxBreakdownItem;
+}
+
+/**
  * Rate breakdown details
  */
 export class RateBreakdown {
@@ -131,8 +153,14 @@ export class RateBreakdown {
   @ApiProperty({ description: 'Last minute discount' })
   lastMinuteDiscount: number;
 
-  @ApiProperty({ description: 'Taxes' })
+  @ApiProperty({ description: 'Total tax amount (serviceCharge + VAT). See taxBreakdown for per-type detail.' })
   taxes: number;
+
+  @ApiProperty({ description: 'Detailed tax breakdown by type', type: RateTaxBreakdown, required: false })
+  taxBreakdown?: RateTaxBreakdown;
+
+  @ApiProperty({ description: 'Gross amount (calculatedRate + taxes)', required: false })
+  grossAmount?: number;
 }
 
 /**

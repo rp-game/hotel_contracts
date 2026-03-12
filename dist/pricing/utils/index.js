@@ -1,18 +1,4 @@
 "use strict";
-/**
- * Pricing Domain Contracts
- *
- * Includes:
- * - REST API DTOs
- * - Domain types and enums
- *
- * Import examples:
- * ```typescript
- * import { CreateRatePlanRequest } from '@hotel/contracts/pricing/nats';
- * import { RatePlanType, RatePlanStatus } from '@hotel/contracts/pricing';
- * import * as PricingContracts from '@hotel/contracts/pricing';
- * ```
- */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -28,9 +14,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// export * from './nats'; // Not exported to avoid conflicts
-__exportStar(require("./types"), exports); // Exported for type definitions
-__exportStar(require("./rest"), exports);
-__exportStar(require("./enums"), exports);
-__exportStar(require("./utils"), exports);
+__exportStar(require("./tax-calculator"), exports);
 //# sourceMappingURL=index.js.map
