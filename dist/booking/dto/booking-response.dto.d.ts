@@ -8,6 +8,18 @@ export declare class BookingRoomResponseDto {
     pricePerUnit: number;
     totalPrice: number;
     discountAmount: number;
+    taxAmount?: number;
+    grossAmount?: number;
+    taxBreakdown?: {
+        serviceCharge: {
+            rate: number;
+            amount: number;
+        };
+        vat: {
+            rate: number;
+            amount: number;
+        };
+    };
     adultCount: number;
     childCount: number;
 }
@@ -47,6 +59,9 @@ export declare class FolioItemDto {
     quantity: number;
     unitPrice: number;
     totalPrice: number;
+    taxRate?: number;
+    taxAmount?: number;
+    netAmount?: number;
     date?: string;
     referenceId?: string;
 }
@@ -68,6 +83,8 @@ export declare class BookingResponseDto {
     actualCheckInTime?: Date;
     actualCheckOutTime?: Date;
     totalAmount: number;
+    taxAmount?: number;
+    grossAmount?: number;
     paidAmount: number;
     paymentStatus: PaymentStatus;
     specialRequests?: string;

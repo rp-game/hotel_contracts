@@ -23,6 +23,9 @@ class PricingBreakdownDetailDto {
     promotionDiscountPercent;
     occupancyAdjustment;
     yieldAdjustment;
+    taxes;
+    taxBreakdown;
+    grossAmount;
 }
 exports.PricingBreakdownDetailDto = PricingBreakdownDetailDto;
 __decorate([
@@ -102,6 +105,18 @@ __decorate([
     }),
     __metadata("design:type", Number)
 ], PricingBreakdownDetailDto.prototype, "yieldAdjustment", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Total tax amount (service charge + VAT)' }),
+    __metadata("design:type", Number)
+], PricingBreakdownDetailDto.prototype, "taxes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax breakdown by type' }),
+    __metadata("design:type", Object)
+], PricingBreakdownDetailDto.prototype, "taxBreakdown", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Gross amount (net + all taxes)' }),
+    __metadata("design:type", Number)
+], PricingBreakdownDetailDto.prototype, "grossAmount", void 0);
 class PricingBreakdownDto {
     baseRate;
     nights;

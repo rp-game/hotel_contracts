@@ -26,6 +26,18 @@ export class BookingRoomResponseDto {
   @ApiProperty({ description: 'Discount amount' })
   discountAmount: number;
 
+  @ApiPropertyOptional({ description: 'Tax amount for this room' })
+  taxAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Gross amount (totalPrice + taxAmount)' })
+  grossAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Tax breakdown snapshot' })
+  taxBreakdown?: {
+    serviceCharge: { rate: number; amount: number };
+    vat: { rate: number; amount: number };
+  };
+
   @ApiProperty({ description: 'Adult count' })
   adultCount: number;
 
@@ -127,6 +139,15 @@ export class FolioItemDto {
   @ApiProperty({ description: 'Total price for this line item' })
   totalPrice: number;
 
+  @ApiPropertyOptional({ description: 'Tax rate applied' })
+  taxRate?: number;
+
+  @ApiPropertyOptional({ description: 'Tax amount for this line item' })
+  taxAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Net amount before tax' })
+  netAmount?: number;
+
   @ApiPropertyOptional({ description: 'Date of the charge (YYYY-MM-DD)' })
   date?: string;
 
@@ -189,6 +210,12 @@ export class BookingResponseDto {
   // Payment information
   @ApiProperty({ description: 'Total booking amount' })
   totalAmount: number;
+
+  @ApiPropertyOptional({ description: 'Total tax amount across all rooms' })
+  taxAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Gross total (totalAmount + taxAmount)' })
+  grossAmount?: number;
 
   @ApiProperty({ description: 'Amount already paid' })
   paidAmount: number;

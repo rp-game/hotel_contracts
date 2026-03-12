@@ -10,6 +10,18 @@ export declare class PricingBreakdownDetailDto {
     promotionDiscountPercent?: number;
     occupancyAdjustment?: number;
     yieldAdjustment?: number;
+    taxes?: number;
+    taxBreakdown?: {
+        serviceCharge: {
+            rate: number;
+            amount: number;
+        };
+        vat: {
+            rate: number;
+            amount: number;
+        };
+    };
+    grossAmount?: number;
 }
 export declare class PricingBreakdownDto {
     baseRate: number;

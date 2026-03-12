@@ -66,6 +66,18 @@ export class PricingBreakdownDetailDto {
     example: 0,
   })
   yieldAdjustment?: number;
+
+  @ApiPropertyOptional({ description: 'Total tax amount (service charge + VAT)' })
+  taxes?: number;
+
+  @ApiPropertyOptional({ description: 'Tax breakdown by type' })
+  taxBreakdown?: {
+    serviceCharge: { rate: number; amount: number };
+    vat: { rate: number; amount: number };
+  };
+
+  @ApiPropertyOptional({ description: 'Gross amount (net + all taxes)' })
+  grossAmount?: number;
 }
 
 export class PricingBreakdownDto {

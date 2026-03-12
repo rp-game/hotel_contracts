@@ -21,6 +21,9 @@ class BookingRoomResponseDto {
     pricePerUnit;
     totalPrice;
     discountAmount;
+    taxAmount;
+    grossAmount;
+    taxBreakdown;
     adultCount;
     childCount;
 }
@@ -57,6 +60,18 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Discount amount' }),
     __metadata("design:type", Number)
 ], BookingRoomResponseDto.prototype, "discountAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax amount for this room' }),
+    __metadata("design:type", Number)
+], BookingRoomResponseDto.prototype, "taxAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Gross amount (totalPrice + taxAmount)' }),
+    __metadata("design:type", Number)
+], BookingRoomResponseDto.prototype, "grossAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax breakdown snapshot' }),
+    __metadata("design:type", Object)
+], BookingRoomResponseDto.prototype, "taxBreakdown", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Adult count' }),
     __metadata("design:type", Number)
@@ -200,6 +215,9 @@ class FolioItemDto {
     quantity;
     unitPrice;
     totalPrice;
+    taxRate;
+    taxAmount;
+    netAmount;
     date;
     referenceId;
 }
@@ -224,6 +242,18 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total price for this line item' }),
     __metadata("design:type", Number)
 ], FolioItemDto.prototype, "totalPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax rate applied' }),
+    __metadata("design:type", Number)
+], FolioItemDto.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax amount for this line item' }),
+    __metadata("design:type", Number)
+], FolioItemDto.prototype, "taxAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Net amount before tax' }),
+    __metadata("design:type", Number)
+], FolioItemDto.prototype, "netAmount", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Date of the charge (YYYY-MM-DD)' }),
     __metadata("design:type", String)
@@ -254,6 +284,8 @@ class BookingResponseDto {
     actualCheckOutTime;
     // Payment information
     totalAmount;
+    taxAmount;
+    grossAmount;
     paidAmount;
     paymentStatus;
     // Other information
@@ -348,6 +380,14 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total booking amount' }),
     __metadata("design:type", Number)
 ], BookingResponseDto.prototype, "totalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Total tax amount across all rooms' }),
+    __metadata("design:type", Number)
+], BookingResponseDto.prototype, "taxAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Gross total (totalAmount + taxAmount)' }),
+    __metadata("design:type", Number)
+], BookingResponseDto.prototype, "grossAmount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Amount already paid' }),
     __metadata("design:type", Number)
