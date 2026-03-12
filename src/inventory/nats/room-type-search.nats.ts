@@ -23,6 +23,7 @@ import {
   ValidateIf,
 } from 'class-validator';
 import { NatsResponse } from '../../common';
+import { RateTaxBreakdown } from '../../pricing/types/rates-core.types';
 
 export enum SearchBookingType {
   OVERNIGHT = 'OVERNIGHT',
@@ -158,8 +159,14 @@ export class PriceBreakdownDto {
   @ApiProperty({ description: 'Promotion/promo code discount (-)', example: 0 })
   promotionDiscount: number;
 
-  @ApiProperty({ description: 'Taxes included in total', example: 100000 })
+  @ApiProperty({ description: 'Total tax amount (service charge + VAT)', example: 100000 })
   taxes: number;
+
+  @ApiPropertyOptional({ description: 'Tax breakdown by type (service charge, VAT)', type: RateTaxBreakdown })
+  taxBreakdown?: RateTaxBreakdown;
+
+  @ApiPropertyOptional({ description: 'Gross amount including tax (totalPrice + taxes)', example: 2300000 })
+  grossAmount?: number;
 }
 
 export class CancellationPolicySummaryDto {
@@ -220,8 +227,14 @@ export class RatePlanPricingDetail {
   })
   pricePerUnit: number;
 
-  @ApiProperty({ description: 'Total price for the booking', example: 2200000 })
+  @ApiProperty({ description: 'Total price for the booking (net, before tax)', example: 2200000 })
   totalPrice: number;
+
+  @ApiPropertyOptional({ description: 'Tax amount (service charge + VAT)', example: 295240 })
+  taxAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Gross amount (totalPrice + taxAmount)', example: 2495240 })
+  grossAmount?: number;
 
   @ApiProperty({
     description: 'Number of units (nights for OVERNIGHT, hours for HOURLY)',

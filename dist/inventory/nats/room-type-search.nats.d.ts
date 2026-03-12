@@ -10,6 +10,7 @@
  * Called by: api-gateway, frontend-facing services
  */
 import { NatsResponse } from '../../common';
+import { RateTaxBreakdown } from '../../pricing/types/rates-core.types';
 export declare enum SearchBookingType {
     OVERNIGHT = "OVERNIGHT",
     HOURLY = "HOURLY",
@@ -37,6 +38,8 @@ export declare class PriceBreakdownDto {
     lengthOfStayDiscount: number;
     promotionDiscount: number;
     taxes: number;
+    taxBreakdown?: RateTaxBreakdown;
+    grossAmount?: number;
 }
 export declare class CancellationPolicySummaryDto {
     type: string;
@@ -52,6 +55,8 @@ export declare class RatePlanPricingDetail {
     cancellationPolicy: CancellationPolicySummaryDto | null;
     pricePerUnit: number;
     totalPrice: number;
+    taxAmount?: number;
+    grossAmount?: number;
     numberOfUnits: number;
     breakdown: PriceBreakdownDto;
 }

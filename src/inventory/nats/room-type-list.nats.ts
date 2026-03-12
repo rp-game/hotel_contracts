@@ -109,10 +109,16 @@ export class RatePlanSummaryDto {
   } | null;
 
   @ApiProperty({
-    description: 'Price per unit — basePrice with rate plan adjustment applied',
+    description: 'Price per unit — basePrice with rate plan adjustment applied (net, before tax)',
     example: 1100000,
   })
   pricePerUnit: number;
+
+  @ApiPropertyOptional({ description: 'Tax amount per unit (service charge + VAT)', example: 147620 })
+  taxPerUnit?: number;
+
+  @ApiPropertyOptional({ description: 'Gross price per unit (pricePerUnit + taxPerUnit)', example: 1247620 })
+  grossPerUnit?: number;
 }
 
 export class RoomTypeListItem {

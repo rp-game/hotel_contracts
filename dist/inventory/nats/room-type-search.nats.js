@@ -23,6 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SearchRoomTypesResponse = exports.RoomTypeSearchResult = exports.RatePlanPricingDetail = exports.CancellationPolicySummaryDto = exports.PriceBreakdownDto = exports.SearchRoomTypesRequest = exports.SearchBookingType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const rates_core_types_1 = require("../../pricing/types/rates-core.types");
 var SearchBookingType;
 (function (SearchBookingType) {
     SearchBookingType["OVERNIGHT"] = "OVERNIGHT";
@@ -173,6 +174,8 @@ class PriceBreakdownDto {
     lengthOfStayDiscount;
     promotionDiscount;
     taxes;
+    taxBreakdown;
+    grossAmount;
 }
 exports.PriceBreakdownDto = PriceBreakdownDto;
 __decorate([
@@ -196,9 +199,17 @@ __decorate([
     __metadata("design:type", Number)
 ], PriceBreakdownDto.prototype, "promotionDiscount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Taxes included in total', example: 100000 }),
+    (0, swagger_1.ApiProperty)({ description: 'Total tax amount (service charge + VAT)', example: 100000 }),
     __metadata("design:type", Number)
 ], PriceBreakdownDto.prototype, "taxes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax breakdown by type (service charge, VAT)', type: rates_core_types_1.RateTaxBreakdown }),
+    __metadata("design:type", rates_core_types_1.RateTaxBreakdown)
+], PriceBreakdownDto.prototype, "taxBreakdown", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Gross amount including tax (totalPrice + taxes)', example: 2300000 }),
+    __metadata("design:type", Number)
+], PriceBreakdownDto.prototype, "grossAmount", void 0);
 class CancellationPolicySummaryDto {
     type;
     deadlineHours;
@@ -240,6 +251,8 @@ class RatePlanPricingDetail {
     cancellationPolicy;
     pricePerUnit;
     totalPrice;
+    taxAmount;
+    grossAmount;
     numberOfUnits;
     breakdown;
 }
@@ -284,9 +297,17 @@ __decorate([
     __metadata("design:type", Number)
 ], RatePlanPricingDetail.prototype, "pricePerUnit", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Total price for the booking', example: 2200000 }),
+    (0, swagger_1.ApiProperty)({ description: 'Total price for the booking (net, before tax)', example: 2200000 }),
     __metadata("design:type", Number)
 ], RatePlanPricingDetail.prototype, "totalPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax amount (service charge + VAT)', example: 295240 }),
+    __metadata("design:type", Number)
+], RatePlanPricingDetail.prototype, "taxAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Gross amount (totalPrice + taxAmount)', example: 2495240 }),
+    __metadata("design:type", Number)
+], RatePlanPricingDetail.prototype, "grossAmount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Number of units (nights for OVERNIGHT, hours for HOURLY)',
