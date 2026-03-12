@@ -173,6 +173,13 @@ export declare class MobileDashboardDto {
     performance: DashboardPerformanceDto;
     currentShift: DashboardCurrentShiftDto;
 }
+export declare class QuickStatsResponseDto {
+    tasksToday: number;
+    tasksCompleted: number;
+    tasksPending: number;
+    currentShift: string;
+    hoursWorked: number;
+}
 export declare class QuickActionParametersDto {
     roomNumber?: string;
     guestId?: string;
@@ -372,6 +379,11 @@ export declare class BatchPhotoUploadResultDto {
     success: boolean;
     message: string;
     photoIds: string[];
+}
+export declare class PhotoUploadContextDto {
+    taskId?: string;
+    roomNumber?: string;
+    type?: string;
 }
 export declare class QuickUploadPhotoDto {
     taskId?: string;

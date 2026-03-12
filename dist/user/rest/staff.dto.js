@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateProfileDto = exports.PublicUserListResponseDto = exports.BatchUploadPhotosDto = exports.QuickUploadPhotoDto = exports.BatchPhotoUploadResultDto = exports.PhotoUploadResultDto = exports.SelectHotelResultDto = exports.StaffMobileDashboardDto = exports.StaffMobilePerformanceDto = exports.StaffMobileDashboardHotelStatusDto = exports.StaffRecentActivityDto = exports.StaffAlertDto = exports.QuickActionItemDto = exports.StaffMobileDashboardTaskSummaryDto = exports.StaffMobileDashboardStaffDto = exports.PublicUserDto = exports.StaffProfileDto = exports.UserPreferencesDto = exports.NotificationPreferencesDto = exports.EmergencyContactDto = exports.ClockInOutDto = exports.DeviceInfoDto = exports.QuickActionResponseDto = exports.NextActionDto = exports.QuickActionExecuteDto = exports.QuickActionParametersDto = exports.MobileDashboardDto = exports.DashboardCurrentShiftDto = exports.DashboardPerformanceDto = exports.DashboardOccupancyDto = exports.DashboardTaskStatsDto = exports.DashboardStaffInfoDto = exports.StaffResponseDto = exports.CreateStaffResponseDto = exports.StaffListResponseDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
+exports.UpdateProfileDto = exports.PublicUserListResponseDto = exports.BatchUploadPhotosDto = exports.QuickUploadPhotoDto = exports.PhotoUploadContextDto = exports.BatchPhotoUploadResultDto = exports.PhotoUploadResultDto = exports.SelectHotelResultDto = exports.StaffMobileDashboardDto = exports.StaffMobilePerformanceDto = exports.StaffMobileDashboardHotelStatusDto = exports.StaffRecentActivityDto = exports.StaffAlertDto = exports.QuickActionItemDto = exports.StaffMobileDashboardTaskSummaryDto = exports.StaffMobileDashboardStaffDto = exports.PublicUserDto = exports.StaffProfileDto = exports.UserPreferencesDto = exports.NotificationPreferencesDto = exports.EmergencyContactDto = exports.ClockInOutDto = exports.DeviceInfoDto = exports.QuickActionResponseDto = exports.NextActionDto = exports.QuickActionExecuteDto = exports.QuickActionParametersDto = exports.QuickStatsResponseDto = exports.MobileDashboardDto = exports.DashboardCurrentShiftDto = exports.DashboardPerformanceDto = exports.DashboardOccupancyDto = exports.DashboardTaskStatsDto = exports.DashboardStaffInfoDto = exports.StaffResponseDto = exports.CreateStaffResponseDto = exports.StaffListResponseDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
@@ -640,6 +640,37 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Current shift information', type: DashboardCurrentShiftDto }),
     __metadata("design:type", DashboardCurrentShiftDto)
 ], MobileDashboardDto.prototype, "currentShift", void 0);
+// ============================================================================
+// QUICK STATS DTO
+// ============================================================================
+class QuickStatsResponseDto {
+    tasksToday;
+    tasksCompleted;
+    tasksPending;
+    currentShift;
+    hoursWorked;
+}
+exports.QuickStatsResponseDto = QuickStatsResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total tasks assigned today' }),
+    __metadata("design:type", Number)
+], QuickStatsResponseDto.prototype, "tasksToday", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tasks completed today' }),
+    __metadata("design:type", Number)
+], QuickStatsResponseDto.prototype, "tasksCompleted", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tasks pending today' }),
+    __metadata("design:type", Number)
+], QuickStatsResponseDto.prototype, "tasksPending", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current shift status' }),
+    __metadata("design:type", String)
+], QuickStatsResponseDto.prototype, "currentShift", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hours worked in current shift' }),
+    __metadata("design:type", Number)
+], QuickStatsResponseDto.prototype, "hoursWorked", void 0);
 // ============================================================================
 // QUICK ACTION DTOs
 // ============================================================================
@@ -1406,6 +1437,30 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Uploaded photo IDs', type: [String] }),
     __metadata("design:type", Array)
 ], BatchPhotoUploadResultDto.prototype, "photoIds", void 0);
+class PhotoUploadContextDto {
+    taskId;
+    roomNumber;
+    type;
+}
+exports.PhotoUploadContextDto = PhotoUploadContextDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Related task ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], PhotoUploadContextDto.prototype, "taskId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Related room number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], PhotoUploadContextDto.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Photo type/category' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], PhotoUploadContextDto.prototype, "type", void 0);
 class QuickUploadPhotoDto {
     taskId;
     roomNumber;

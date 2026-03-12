@@ -436,6 +436,27 @@ export class MobileDashboardDto {
 }
 
 // ============================================================================
+// QUICK STATS DTO
+// ============================================================================
+
+export class QuickStatsResponseDto {
+  @ApiProperty({ description: 'Total tasks assigned today' })
+  tasksToday: number;
+
+  @ApiProperty({ description: 'Tasks completed today' })
+  tasksCompleted: number;
+
+  @ApiProperty({ description: 'Tasks pending today' })
+  tasksPending: number;
+
+  @ApiProperty({ description: 'Current shift status' })
+  currentShift: string;
+
+  @ApiProperty({ description: 'Hours worked in current shift' })
+  hoursWorked: number;
+}
+
+// ============================================================================
 // QUICK ACTION DTOs
 // ============================================================================
 
@@ -937,6 +958,23 @@ export class BatchPhotoUploadResultDto {
 
   @ApiProperty({ description: 'Uploaded photo IDs', type: [String] })
   photoIds: string[];
+}
+
+export class PhotoUploadContextDto {
+  @ApiPropertyOptional({ description: 'Related task ID' })
+  @IsOptional()
+  @IsString()
+  taskId?: string;
+
+  @ApiPropertyOptional({ description: 'Related room number' })
+  @IsOptional()
+  @IsString()
+  roomNumber?: string;
+
+  @ApiPropertyOptional({ description: 'Photo type/category' })
+  @IsOptional()
+  @IsString()
+  type?: string;
 }
 
 export class QuickUploadPhotoDto {
