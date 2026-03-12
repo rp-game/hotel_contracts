@@ -179,6 +179,8 @@ class GetBookingByIdResponse {
     checkInDate;
     checkOutDate;
     totalAmount;
+    taxAmount;
+    grossAmount;
     paidAmount;
     balance;
     rooms;
@@ -238,6 +240,14 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total booking amount' }),
     __metadata("design:type", Number)
 ], GetBookingByIdResponse.prototype, "totalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Total tax amount across all rooms' }),
+    __metadata("design:type", Number)
+], GetBookingByIdResponse.prototype, "taxAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Gross total (totalAmount + taxAmount)' }),
+    __metadata("design:type", Number)
+], GetBookingByIdResponse.prototype, "grossAmount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Amount already paid' }),
     __metadata("design:type", Number)

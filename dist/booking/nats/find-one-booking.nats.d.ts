@@ -52,6 +52,8 @@ export declare class GetBookingByIdResponse {
     checkInDate: string;
     checkOutDate: string;
     totalAmount: number;
+    taxAmount?: number;
+    grossAmount?: number;
     paidAmount: number;
     balance: number;
     rooms: BookingRoom[];

@@ -136,6 +136,12 @@ export class GetBookingByIdResponse {
   @ApiProperty({ description: 'Total booking amount' })
   totalAmount: number;
 
+  @ApiPropertyOptional({ description: 'Total tax amount across all rooms' })
+  taxAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Gross total (totalAmount + taxAmount)' })
+  grossAmount?: number;
+
   @ApiProperty({ description: 'Amount already paid' })
   paidAmount: number;
 
