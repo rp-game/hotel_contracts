@@ -67,6 +67,10 @@ export declare class GetRoomTasksNatsRequest {
     roomNumber: string;
 }
 export type GetRoomTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
+export declare class AddTaskNotesBodyDto {
+    notes: string;
+    photos?: string[];
+}
 export declare class AddTaskNotesNatsRequest {
     taskId: string;
     staffId: string;

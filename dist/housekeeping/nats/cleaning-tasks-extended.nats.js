@@ -13,7 +13,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TaskTimerDto = exports.TaskStatsDto = exports.MobileTaskListResponseDto = exports.TaskSummaryStatsDto = exports.MobileTaskUpdateDto = exports.MobileTaskDto = exports.GetPerformanceMetricsNatsRequest = exports.StaffPerformanceMetricsNatsResponse = exports.GetHousekeepingTasksPayload = exports.EnhancedCleaningTask = exports.ClockOutNatsRequest = exports.ClockInNatsRequest = exports.GetCurrentShiftNatsRequest = exports.ShiftData = exports.QuickCompleteTaskResponseDto = exports.QuickCompleteTaskDto = exports.QuickCompleteResult = exports.QuickCompleteTaskNatsRequest = exports.AddNotesResult = exports.AddTaskNotesNatsRequest = exports.GetRoomTasksNatsRequest = exports.SearchTasksNatsRequest = exports.SearchTasksFilters = exports.MobileTaskResponse = exports.GetRecentTasksNatsRequest = exports.FindTaskByIdNatsRequest = void 0;
+exports.TaskTimerDto = exports.TaskStatsDto = exports.MobileTaskListResponseDto = exports.TaskSummaryStatsDto = exports.MobileTaskUpdateDto = exports.MobileTaskDto = exports.GetPerformanceMetricsNatsRequest = exports.StaffPerformanceMetricsNatsResponse = exports.GetHousekeepingTasksPayload = exports.EnhancedCleaningTask = exports.ClockOutNatsRequest = exports.ClockInNatsRequest = exports.GetCurrentShiftNatsRequest = exports.ShiftData = exports.QuickCompleteTaskResponseDto = exports.QuickCompleteTaskDto = exports.QuickCompleteResult = exports.QuickCompleteTaskNatsRequest = exports.AddNotesResult = exports.AddTaskNotesNatsRequest = exports.AddTaskNotesBodyDto = exports.GetRoomTasksNatsRequest = exports.SearchTasksNatsRequest = exports.SearchTasksFilters = exports.MobileTaskResponse = exports.GetRecentTasksNatsRequest = exports.FindTaskByIdNatsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
@@ -260,6 +260,23 @@ __decorate([
     __metadata("design:type", String)
 ], GetRoomTasksNatsRequest.prototype, "roomNumber", void 0);
 // ADD NOTES
+class AddTaskNotesBodyDto {
+    notes;
+    photos;
+}
+exports.AddTaskNotesBodyDto = AddTaskNotesBodyDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notes content' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AddTaskNotesBodyDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Photo URLs', type: [String] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], AddTaskNotesBodyDto.prototype, "photos", void 0);
 class AddTaskNotesNatsRequest {
     taskId;
     staffId;

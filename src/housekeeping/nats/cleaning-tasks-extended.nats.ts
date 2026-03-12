@@ -175,6 +175,18 @@ export class GetRoomTasksNatsRequest {
 export type GetRoomTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
 
 // ADD NOTES
+export class AddTaskNotesBodyDto {
+  @ApiProperty({ description: 'Notes content' })
+  @IsString()
+  notes: string;
+
+  @ApiPropertyOptional({ description: 'Photo URLs', type: [String] })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  photos?: string[];
+}
+
 export class AddTaskNotesNatsRequest {
   @ApiProperty({ description: 'Task ID' })
   @IsString()
