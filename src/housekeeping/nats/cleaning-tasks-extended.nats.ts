@@ -7,6 +7,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsNumber, IsArray, IsDateString, IsBoolean, IsEnum } from 'class-validator';
 import { NatsResponse } from '../../common';
 import { TaskStatus, TaskType, TaskPriority } from '../enums';
+import { CleaningTaskNatsResponse } from './cleaning-tasks.nats';
 
 // FIND TASK BY ID
 export class FindTaskByIdNatsRequest {
@@ -119,7 +120,7 @@ export class MobileTaskResponse {
   @ApiProperty({ description: 'Whether task can be completed' })
   canComplete: boolean;
 }
-export type GetRecentTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
+export type GetRecentTasksNatsResponse = NatsResponse<CleaningTaskNatsResponse[]>;
 
 // SEARCH TASKS (Mobile)
 export class SearchTasksFilters {
@@ -156,7 +157,7 @@ export class SearchTasksNatsRequest {
   @IsOptional()
   filters?: SearchTasksFilters;
 }
-export type SearchTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
+export type SearchTasksNatsResponse = NatsResponse<CleaningTaskNatsResponse[]>;
 
 // TASKS BY ROOM (Mobile)
 export class GetRoomTasksNatsRequest {
@@ -172,7 +173,7 @@ export class GetRoomTasksNatsRequest {
   @IsString()
   roomNumber: string;
 }
-export type GetRoomTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
+export type GetRoomTasksNatsResponse = NatsResponse<CleaningTaskNatsResponse[]>;
 
 // ADD NOTES
 export class AddTaskNotesBodyDto {
@@ -276,8 +277,8 @@ export class QuickCompleteResult {
   @ApiProperty({ description: 'Completion timestamp' })
   completedAt: string;
 
-  @ApiProperty({ description: 'Task data' })
-  data: MobileTaskResponse;
+  @ApiProperty({ description: 'Task data', type: CleaningTaskNatsResponse })
+  data: CleaningTaskNatsResponse;
 }
 export type QuickCompleteTaskNatsResponse = NatsResponse<QuickCompleteResult>;
 

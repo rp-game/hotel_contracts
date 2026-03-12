@@ -17,6 +17,7 @@ exports.TaskTimerDto = exports.TaskStatsDto = exports.MobileTaskListResponseDto 
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
+const cleaning_tasks_nats_1 = require("./cleaning-tasks.nats");
 // FIND TASK BY ID
 class FindTaskByIdNatsRequest {
     id;
@@ -416,8 +417,8 @@ __decorate([
     __metadata("design:type", String)
 ], QuickCompleteResult.prototype, "completedAt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Task data' }),
-    __metadata("design:type", MobileTaskResponse)
+    (0, swagger_1.ApiProperty)({ description: 'Task data', type: cleaning_tasks_nats_1.CleaningTaskNatsResponse }),
+    __metadata("design:type", cleaning_tasks_nats_1.CleaningTaskNatsResponse)
 ], QuickCompleteResult.prototype, "data", void 0);
 var quick_complete_task_rest_1 = require("../rest/quick-complete-task.rest");
 Object.defineProperty(exports, "QuickCompleteTaskDto", { enumerable: true, get: function () { return quick_complete_task_rest_1.QuickCompleteTaskDto; } });

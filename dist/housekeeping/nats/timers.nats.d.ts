@@ -3,7 +3,7 @@
  * Patterns: housekeeping.timers.*
  */
 import { NatsResponse } from '../../common';
-import { MobileTaskResponse } from './cleaning-tasks-extended.nats';
+import { CleaningTaskNatsResponse } from './cleaning-tasks.nats';
 import { TimerReportSummaryDto, TimerReportStaffStatsDto, TimerReportTaskDto, TimerReportTimerItemDto, TimerReportDataDto } from '../rest/timers.rest';
 export declare class TaskTimer {
     id: string;
@@ -32,7 +32,7 @@ export declare class StartTimerNatsRequest {
     tenantId: string;
     hotelId: string;
 }
-export type StartTimerNatsResponse = NatsResponse<MobileTaskResponse>;
+export type StartTimerNatsResponse = NatsResponse<CleaningTaskNatsResponse>;
 export declare class PauseTimerNatsRequest {
     taskId: string;
     staffId: string;
@@ -40,14 +40,14 @@ export declare class PauseTimerNatsRequest {
     hotelId: string;
     notes?: string;
 }
-export type PauseTimerNatsResponse = NatsResponse<MobileTaskResponse>;
+export type PauseTimerNatsResponse = NatsResponse<CleaningTaskNatsResponse>;
 export declare class ResumeTimerNatsRequest {
     taskId: string;
     staffId: string;
     tenantId: string;
     hotelId: string;
 }
-export type ResumeTimerNatsResponse = NatsResponse<MobileTaskResponse>;
+export type ResumeTimerNatsResponse = NatsResponse<CleaningTaskNatsResponse>;
 export declare class StopTimerNatsRequest {
     taskId: string;
     staffId: string;

@@ -5,7 +5,7 @@
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
-import { MobileTaskResponse } from './cleaning-tasks-extended.nats';
+import { CleaningTaskNatsResponse } from './cleaning-tasks.nats';
 import {
   TimerReportSummaryDto,
   TimerReportStaffStatsDto,
@@ -87,7 +87,7 @@ export class StartTimerNatsRequest {
   @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 }
-export type StartTimerNatsResponse = NatsResponse<MobileTaskResponse>;
+export type StartTimerNatsResponse = NatsResponse<CleaningTaskNatsResponse>;
 
 // PAUSE
 export class PauseTimerNatsRequest {
@@ -106,7 +106,7 @@ export class PauseTimerNatsRequest {
   @ApiPropertyOptional({ description: 'Pause notes' })
   notes?: string;
 }
-export type PauseTimerNatsResponse = NatsResponse<MobileTaskResponse>;
+export type PauseTimerNatsResponse = NatsResponse<CleaningTaskNatsResponse>;
 
 // RESUME
 export class ResumeTimerNatsRequest {
@@ -122,7 +122,7 @@ export class ResumeTimerNatsRequest {
   @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 }
-export type ResumeTimerNatsResponse = NatsResponse<MobileTaskResponse>;
+export type ResumeTimerNatsResponse = NatsResponse<CleaningTaskNatsResponse>;
 
 // STOP
 export class StopTimerNatsRequest {

@@ -4,6 +4,7 @@
  */
 import { NatsResponse } from '../../common';
 import { TaskStatus, TaskType, TaskPriority } from '../enums';
+import { CleaningTaskNatsResponse } from './cleaning-tasks.nats';
 export declare class FindTaskByIdNatsRequest {
     id: string;
     tenantId: string;
@@ -48,7 +49,7 @@ export declare class MobileTaskResponse {
     canPause: boolean;
     canComplete: boolean;
 }
-export type GetRecentTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
+export type GetRecentTasksNatsResponse = NatsResponse<CleaningTaskNatsResponse[]>;
 export declare class SearchTasksFilters {
     assignedToId?: string;
     status?: string;
@@ -60,13 +61,13 @@ export declare class SearchTasksNatsRequest {
     query: string;
     filters?: SearchTasksFilters;
 }
-export type SearchTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
+export type SearchTasksNatsResponse = NatsResponse<CleaningTaskNatsResponse[]>;
 export declare class GetRoomTasksNatsRequest {
     tenantId: string;
     hotelId: string;
     roomNumber: string;
 }
-export type GetRoomTasksNatsResponse = NatsResponse<MobileTaskResponse[]>;
+export type GetRoomTasksNatsResponse = NatsResponse<CleaningTaskNatsResponse[]>;
 export declare class AddTaskNotesBodyDto {
     notes: string;
     photos?: string[];
@@ -100,7 +101,7 @@ export declare class QuickCompleteTaskNatsRequest {
 export declare class QuickCompleteResult {
     taskId: string;
     completedAt: string;
-    data: MobileTaskResponse;
+    data: CleaningTaskNatsResponse;
 }
 export type QuickCompleteTaskNatsResponse = NatsResponse<QuickCompleteResult>;
 export { QuickCompleteTaskDto, QuickCompleteTaskResponseDto } from '../rest/quick-complete-task.rest';
