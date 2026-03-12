@@ -87,19 +87,19 @@ export class RatePlanSnapshotDto {
   @ApiProperty({ description: 'Rate plan name' })
   name: string;
 
-  @ApiPropertyOptional({ description: 'Meal plan included' })
+  @ApiPropertyOptional({ description: 'Meal plan included', type: String, nullable: true })
   mealPlan?: string | null;
 
-  @ApiPropertyOptional({ description: 'Payment type (e.g. PREPAID, PAY_AT_HOTEL)' })
+  @ApiPropertyOptional({ description: 'Payment type (e.g. PREPAID, PAY_AT_HOTEL)', type: String, nullable: true })
   paymentType?: string | null;
 
-  @ApiPropertyOptional({ description: 'Cancellation policy' })
+  @ApiPropertyOptional({ description: 'Cancellation policy', type: String, nullable: true })
   cancellationPolicy?: string | null;
 
-  @ApiPropertyOptional({ description: 'Adjustment type (PERCENTAGE or AMOUNT)' })
+  @ApiPropertyOptional({ description: 'Adjustment type (PERCENTAGE or AMOUNT)', type: String, nullable: true })
   adjustmentType?: string | null;
 
-  @ApiPropertyOptional({ description: 'Adjustment value (e.g. -10 for -10%)' })
+  @ApiPropertyOptional({ description: 'Adjustment value (e.g. -10 for -10%)', type: Number, nullable: true })
   adjustmentValue?: number | null;
 }
 

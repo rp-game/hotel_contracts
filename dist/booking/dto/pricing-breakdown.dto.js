@@ -136,23 +136,23 @@ __decorate([
     __metadata("design:type", String)
 ], RatePlanSnapshotDto.prototype, "name", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Meal plan included' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Meal plan included', type: String, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanSnapshotDto.prototype, "mealPlan", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Payment type (e.g. PREPAID, PAY_AT_HOTEL)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payment type (e.g. PREPAID, PAY_AT_HOTEL)', type: String, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanSnapshotDto.prototype, "paymentType", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Cancellation policy' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Cancellation policy', type: String, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanSnapshotDto.prototype, "cancellationPolicy", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Adjustment type (PERCENTAGE or AMOUNT)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Adjustment type (PERCENTAGE or AMOUNT)', type: String, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanSnapshotDto.prototype, "adjustmentType", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Adjustment value (e.g. -10 for -10%)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Adjustment value (e.g. -10 for -10%)', type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanSnapshotDto.prototype, "adjustmentValue", void 0);
 class RatePlanAdjustmentDto {
