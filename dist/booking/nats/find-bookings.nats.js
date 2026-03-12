@@ -83,6 +83,18 @@ class BookingSummary {
      */
     paidAmount;
     /**
+     * Tax amount (service charge + VAT)
+     */
+    taxAmount;
+    /**
+     * Gross amount (totalAmount + taxAmount)
+     */
+    grossAmount;
+    /**
+     * Outstanding balance (grossAmount - paidAmount)
+     */
+    balance;
+    /**
      * Guest full name
      */
     guestName;
@@ -225,6 +237,18 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Amount already paid' }),
     __metadata("design:type", Number)
 ], BookingSummary.prototype, "paidAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax amount (service charge + VAT)' }),
+    __metadata("design:type", Number)
+], BookingSummary.prototype, "taxAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Gross amount (totalAmount + taxAmount)' }),
+    __metadata("design:type", Number)
+], BookingSummary.prototype, "grossAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Outstanding balance (grossAmount - paidAmount)' }),
+    __metadata("design:type", Number)
+], BookingSummary.prototype, "balance", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Guest full name' }),
     __metadata("design:type", String)

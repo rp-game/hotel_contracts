@@ -58,6 +58,18 @@ export declare class BookingSummary {
      */
     paidAmount: number;
     /**
+     * Tax amount (service charge + VAT)
+     */
+    taxAmount?: number;
+    /**
+     * Gross amount (totalAmount + taxAmount)
+     */
+    grossAmount?: number;
+    /**
+     * Outstanding balance (grossAmount - paidAmount)
+     */
+    balance: number;
+    /**
      * Guest full name
      */
     guestName: string;

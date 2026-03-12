@@ -86,6 +86,24 @@ export class BookingSummary {
   paidAmount: number;
 
   /**
+   * Tax amount (service charge + VAT)
+   */
+  @ApiPropertyOptional({ description: 'Tax amount (service charge + VAT)' })
+  taxAmount?: number;
+
+  /**
+   * Gross amount (totalAmount + taxAmount)
+   */
+  @ApiPropertyOptional({ description: 'Gross amount (totalAmount + taxAmount)' })
+  grossAmount?: number;
+
+  /**
+   * Outstanding balance (grossAmount - paidAmount)
+   */
+  @ApiProperty({ description: 'Outstanding balance (grossAmount - paidAmount)' })
+  balance: number;
+
+  /**
    * Guest full name
    */
   @ApiProperty({ description: 'Guest full name' })
