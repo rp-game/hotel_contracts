@@ -89,6 +89,7 @@ class CreateRatePlanRequest {
     cancellationPolicy;
     mealPlan;
     paymentType;
+    depositPercent;
 }
 exports.CreateRatePlanRequest = CreateRatePlanRequest;
 __decorate([
@@ -189,6 +190,17 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", Object)
 ], CreateRatePlanRequest.prototype, "paymentType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Deposit percentage required (when paymentType = DEPOSIT_REQUIRED). E.g. 50 = 50%',
+        example: 50,
+        minimum: 1,
+        maximum: 100,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Object)
+], CreateRatePlanRequest.prototype, "depositPercent", void 0);
 /**
  * NATS response after creating rate plan
  */
@@ -205,6 +217,7 @@ class CreateRatePlanResponse {
     cancellationPolicy;
     mealPlan;
     paymentType;
+    depositPercent;
     isActive;
     createdAt;
     updatedAt;
@@ -296,6 +309,13 @@ __decorate([
     }),
     __metadata("design:type", Object)
 ], CreateRatePlanResponse.prototype, "paymentType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Deposit percentage required (when paymentType = DEPOSIT_REQUIRED)',
+        example: 50,
+    }),
+    __metadata("design:type", Object)
+], CreateRatePlanResponse.prototype, "depositPercent", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Whether the rate plan is active',

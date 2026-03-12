@@ -214,6 +214,12 @@ export class RatePlanPricingDetail {
   })
   paymentType: string | null;
 
+  @ApiPropertyOptional({
+    description: 'Deposit percentage (when paymentType = DEPOSIT_REQUIRED)',
+    example: 50,
+  })
+  depositPercent?: number | null;
+
   @ApiProperty({
     description: 'Cancellation policy',
     type: CancellationPolicySummaryDto,

@@ -95,6 +95,7 @@ export declare enum PaymentStatus {
     PAID = "PAID",
     UNPAID = "UNPAID",
     COMPLETED = "COMPLETED",
+    DEPOSIT_PAID = "DEPOSIT_PAID",
     PARTIALLY_PAID = "PARTIALLY_PAID",
     FAILED = "FAILED",
     REFUNDED = "REFUNDED",

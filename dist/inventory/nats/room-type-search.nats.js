@@ -248,6 +248,7 @@ class RatePlanPricingDetail {
     ratePlanName;
     mealPlan;
     paymentType;
+    depositPercent;
     cancellationPolicy;
     pricePerUnit;
     totalPrice;
@@ -281,6 +282,13 @@ __decorate([
     }),
     __metadata("design:type", Object)
 ], RatePlanPricingDetail.prototype, "paymentType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Deposit percentage (when paymentType = DEPOSIT_REQUIRED)',
+        example: 50,
+    }),
+    __metadata("design:type", Object)
+], RatePlanPricingDetail.prototype, "depositPercent", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Cancellation policy',

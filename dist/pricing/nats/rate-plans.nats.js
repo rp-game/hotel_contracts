@@ -36,6 +36,7 @@ class UpdateRatePlanDto {
     cancellationPolicy;
     mealPlan;
     paymentType;
+    depositPercent;
 }
 exports.UpdateRatePlanDto = UpdateRatePlanDto;
 __decorate([
@@ -91,6 +92,13 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", Object)
 ], UpdateRatePlanDto.prototype, "paymentType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Deposit percentage required (when paymentType = DEPOSIT_REQUIRED)',
+        example: 50,
+    }),
+    __metadata("design:type", Object)
+], UpdateRatePlanDto.prototype, "depositPercent", void 0);
 class UpdateRatePlanRequest {
     id;
     dto;

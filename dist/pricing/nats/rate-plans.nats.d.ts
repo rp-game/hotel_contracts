@@ -23,6 +23,7 @@ export declare class UpdateRatePlanDto {
     cancellationPolicy?: CancellationPolicyDto | null;
     mealPlan?: string | null;
     paymentType?: string | null;
+    depositPercent?: number | null;
 }
 export declare class UpdateRatePlanRequest {
     id: string;

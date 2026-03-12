@@ -80,6 +80,12 @@ export class UpdateRatePlanDto {
   @IsOptional()
   @IsString()
   paymentType?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Deposit percentage required (when paymentType = DEPOSIT_REQUIRED)',
+    example: 50,
+  })
+  depositPercent?: number | null;
 }
 
 export class UpdateRatePlanRequest {

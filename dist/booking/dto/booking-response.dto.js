@@ -287,6 +287,7 @@ class BookingResponseDto {
     totalAmount;
     taxAmount;
     grossAmount;
+    requiredDeposit;
     paidAmount;
     paymentStatus;
     // Other information
@@ -392,6 +393,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Gross total (totalAmount + taxAmount)' }),
     __metadata("design:type", Number)
 ], BookingResponseDto.prototype, "grossAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Required deposit amount (when rate plan requires DEPOSIT_REQUIRED)' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "requiredDeposit", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Amount already paid' }),
     __metadata("design:type", Number)

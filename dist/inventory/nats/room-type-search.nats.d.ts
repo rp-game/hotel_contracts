@@ -52,6 +52,7 @@ export declare class RatePlanPricingDetail {
     ratePlanName: string;
     mealPlan: string | null;
     paymentType: string | null;
+    depositPercent?: number | null;
     cancellationPolicy: CancellationPolicySummaryDto | null;
     pricePerUnit: number;
     totalPrice: number;

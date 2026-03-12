@@ -98,6 +98,12 @@ export class BookingSummary {
   grossAmount?: number;
 
   /**
+   * Required deposit amount
+   */
+  @ApiPropertyOptional({ description: 'Required deposit (when rate plan requires DEPOSIT_REQUIRED)' })
+  requiredDeposit?: number | null;
+
+  /**
    * Outstanding balance (grossAmount - paidAmount)
    */
   @ApiProperty({ description: 'Outstanding balance (grossAmount - paidAmount)' })

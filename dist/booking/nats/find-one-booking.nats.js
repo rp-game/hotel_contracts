@@ -181,6 +181,7 @@ class GetBookingByIdResponse {
     totalAmount;
     taxAmount;
     grossAmount;
+    requiredDeposit;
     paidAmount;
     balance;
     rooms;
@@ -248,6 +249,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Gross total (totalAmount + taxAmount)' }),
     __metadata("design:type", Number)
 ], GetBookingByIdResponse.prototype, "grossAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Required deposit (when rate plan requires DEPOSIT_REQUIRED)' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "requiredDeposit", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Amount already paid' }),
     __metadata("design:type", Number)

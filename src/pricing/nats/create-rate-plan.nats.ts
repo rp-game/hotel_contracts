@@ -146,6 +146,16 @@ export class CreateRatePlanRequest {
   @IsOptional()
   @IsString()
   paymentType?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Deposit percentage required (when paymentType = DEPOSIT_REQUIRED). E.g. 50 = 50%',
+    example: 50,
+    minimum: 1,
+    maximum: 100,
+  })
+  @IsOptional()
+  @IsNumber()
+  depositPercent?: number | null;
 }
 
 /**
@@ -225,6 +235,12 @@ export class CreateRatePlanResponse {
     example: 'PAY_NOW',
   })
   paymentType?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Deposit percentage required (when paymentType = DEPOSIT_REQUIRED)',
+    example: 50,
+  })
+  depositPercent?: number | null;
 
   @ApiProperty({
     description: 'Whether the rate plan is active',

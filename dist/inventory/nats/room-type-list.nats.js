@@ -92,6 +92,7 @@ class RatePlanSummaryDto {
     derivationValue;
     mealPlan;
     paymentType;
+    depositPercent;
     cancellationPolicy;
     pricePerUnit;
 }
@@ -139,6 +140,13 @@ __decorate([
     }),
     __metadata("design:type", Object)
 ], RatePlanSummaryDto.prototype, "paymentType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Deposit percentage (when paymentType = DEPOSIT_REQUIRED)',
+        example: 50,
+    }),
+    __metadata("design:type", Object)
+], RatePlanSummaryDto.prototype, "depositPercent", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Cancellation policy',

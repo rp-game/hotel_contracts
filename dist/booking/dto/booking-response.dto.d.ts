@@ -86,6 +86,7 @@ export declare class BookingResponseDto {
     totalAmount: number;
     taxAmount?: number;
     grossAmount?: number;
+    requiredDeposit?: number | null;
     paidAmount: number;
     paymentStatus: PaymentStatus;
     specialRequests?: string;

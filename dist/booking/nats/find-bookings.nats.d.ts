@@ -66,6 +66,10 @@ export declare class BookingSummary {
      */
     grossAmount?: number;
     /**
+     * Required deposit amount
+     */
+    requiredDeposit?: number | null;
+    /**
      * Outstanding balance (grossAmount - paidAmount)
      */
     balance: number;

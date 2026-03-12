@@ -91,6 +91,10 @@ class BookingSummary {
      */
     grossAmount;
     /**
+     * Required deposit amount
+     */
+    requiredDeposit;
+    /**
      * Outstanding balance (grossAmount - paidAmount)
      */
     balance;
@@ -245,6 +249,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Gross amount (totalAmount + taxAmount)' }),
     __metadata("design:type", Number)
 ], BookingSummary.prototype, "grossAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Required deposit (when rate plan requires DEPOSIT_REQUIRED)' }),
+    __metadata("design:type", Object)
+], BookingSummary.prototype, "requiredDeposit", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Outstanding balance (grossAmount - paidAmount)' }),
     __metadata("design:type", Number)

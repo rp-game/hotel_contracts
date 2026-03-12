@@ -54,6 +54,7 @@ export declare class GetBookingByIdResponse {
     totalAmount: number;
     taxAmount?: number;
     grossAmount?: number;
+    requiredDeposit?: number | null;
     paidAmount: number;
     balance: number;
     rooms: BookingRoom[];

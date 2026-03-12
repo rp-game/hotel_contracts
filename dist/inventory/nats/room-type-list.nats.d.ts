@@ -31,6 +31,7 @@ export declare class RatePlanSummaryDto {
     derivationValue?: number;
     mealPlan: string | null;
     paymentType: string | null;
+    depositPercent?: number | null;
     cancellationPolicy: {
         type: string;
         deadlineHours?: number;

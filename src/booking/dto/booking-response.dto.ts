@@ -218,6 +218,9 @@ export class BookingResponseDto {
   @ApiPropertyOptional({ description: 'Gross total (totalAmount + taxAmount)' })
   grossAmount?: number;
 
+  @ApiPropertyOptional({ description: 'Required deposit amount (when rate plan requires DEPOSIT_REQUIRED)' })
+  requiredDeposit?: number | null;
+
   @ApiProperty({ description: 'Amount already paid' })
   paidAmount: number;
 

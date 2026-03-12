@@ -103,6 +103,7 @@ var PaymentStatus;
     PaymentStatus["PAID"] = "PAID";
     PaymentStatus["UNPAID"] = "UNPAID";
     PaymentStatus["COMPLETED"] = "COMPLETED";
+    PaymentStatus["DEPOSIT_PAID"] = "DEPOSIT_PAID";
     PaymentStatus["PARTIALLY_PAID"] = "PARTIALLY_PAID";
     PaymentStatus["FAILED"] = "FAILED";
     PaymentStatus["REFUNDED"] = "REFUNDED";
