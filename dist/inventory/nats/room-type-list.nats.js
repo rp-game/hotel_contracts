@@ -94,8 +94,6 @@ class RatePlanSummaryDto {
     paymentType;
     cancellationPolicy;
     pricePerUnit;
-    taxPerUnit;
-    grossPerUnit;
 }
 exports.RatePlanSummaryDto = RatePlanSummaryDto;
 __decorate([
@@ -150,19 +148,11 @@ __decorate([
 ], RatePlanSummaryDto.prototype, "cancellationPolicy", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Price per unit — basePrice with rate plan adjustment applied (net, before tax)',
+        description: 'Price per unit — basePrice with rate plan adjustment applied',
         example: 1100000,
     }),
     __metadata("design:type", Number)
 ], RatePlanSummaryDto.prototype, "pricePerUnit", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax amount per unit (service charge + VAT)', example: 147620 }),
-    __metadata("design:type", Number)
-], RatePlanSummaryDto.prototype, "taxPerUnit", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Gross price per unit (pricePerUnit + taxPerUnit)', example: 1247620 }),
-    __metadata("design:type", Number)
-], RatePlanSummaryDto.prototype, "grossPerUnit", void 0);
 class RoomTypeListItem {
     id;
     name;

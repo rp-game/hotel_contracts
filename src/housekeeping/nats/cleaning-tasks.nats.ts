@@ -61,6 +61,32 @@ export class AssignedStaffNatsDto {
 }
 
 /**
+ * Task Photo DTO
+ */
+export class TaskPhotoDto {
+  @ApiProperty({ description: 'Photo ID' })
+  id: string;
+
+  @ApiProperty({ description: 'URL to the uploaded photo' })
+  url: string;
+
+  @ApiPropertyOptional({ description: 'URL to the photo thumbnail' })
+  thumbnailUrl?: string;
+
+  @ApiProperty({ description: 'Category of the photo (BEFORE/DURING/AFTER)' })
+  category: string;
+
+  @ApiProperty({ description: 'Timestamp when the photo was uploaded (ISO datetime)' })
+  uploadedAt: string;
+
+  @ApiProperty({ description: 'ID of the staff member who uploaded the photo' })
+  uploadedBy: string;
+
+  @ApiPropertyOptional({ description: 'Optional description or notes about the photo' })
+  description?: string;
+}
+
+/**
  * Single Cleaning Task Response
  * @unified Used by both NATS responses and REST API responses
  */
@@ -136,6 +162,24 @@ export class CleaningTaskNatsResponse {
 
   @ApiPropertyOptional({ description: 'Whether this task was triggered by an event' })
   eventTriggered?: boolean;
+
+  @ApiPropertyOptional({ description: 'Room type resolved from inventory-service' })
+  roomType?: string;
+
+  @ApiPropertyOptional({ description: 'Floor number resolved from inventory-service' })
+  floor?: number;
+
+  @ApiPropertyOptional({ description: 'Building resolved from inventory-service' })
+  building?: string;
+
+  @ApiPropertyOptional({ description: 'Timestamp when staff was assigned (ISO datetime)' })
+  assignedAt?: string;
+
+  @ApiPropertyOptional({ description: 'Timestamp when task started (IN_PROGRESS) (ISO datetime)' })
+  startedAt?: string;
+
+  @ApiPropertyOptional({ description: 'Array of task photos', type: [TaskPhotoDto] })
+  photos?: TaskPhotoDto[];
 }
 
 /**

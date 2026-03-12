@@ -49,6 +49,18 @@ export declare class AssignedStaffNatsDto {
     avatar?: string;
 }
 /**
+ * Task Photo DTO
+ */
+export declare class TaskPhotoDto {
+    id: string;
+    url: string;
+    thumbnailUrl?: string;
+    category: string;
+    uploadedAt: string;
+    uploadedBy: string;
+    description?: string;
+}
+/**
  * Single Cleaning Task Response
  * @unified Used by both NATS responses and REST API responses
  */
@@ -73,6 +85,12 @@ export declare class CleaningTaskNatsResponse {
     actualDuration?: number;
     isAutomated?: boolean;
     eventTriggered?: boolean;
+    roomType?: string;
+    floor?: number;
+    building?: string;
+    assignedAt?: string;
+    startedAt?: string;
+    photos?: TaskPhotoDto[];
 }
 /**
  * Create Cleaning Task Request

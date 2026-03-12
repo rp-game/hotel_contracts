@@ -38,8 +38,6 @@ export declare class RatePlanSummaryDto {
         description?: string;
     } | null;
     pricePerUnit: number;
-    taxPerUnit?: number;
-    grossPerUnit?: number;
 }
 export declare class RoomTypeListItem {
     id: string;

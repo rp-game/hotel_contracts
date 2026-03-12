@@ -18,7 +18,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CleaningTasksListNatsResponse = exports.FindAllCleaningTasksNatsRequest = exports.UpdateCleaningTaskNatsRequest = exports.UpdateCleaningTaskFieldsDto = exports.CreateCleaningTaskNatsRequest = exports.CleaningTaskNatsResponse = exports.AssignedStaffNatsDto = exports.CleaningTaskPriority = exports.CleaningTaskType = exports.CleaningTaskStatus = void 0;
+exports.CleaningTasksListNatsResponse = exports.FindAllCleaningTasksNatsRequest = exports.UpdateCleaningTaskNatsRequest = exports.UpdateCleaningTaskFieldsDto = exports.CreateCleaningTaskNatsRequest = exports.CleaningTaskNatsResponse = exports.TaskPhotoDto = exports.AssignedStaffNatsDto = exports.CleaningTaskPriority = exports.CleaningTaskType = exports.CleaningTaskStatus = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Cleaning Task Status Enum
@@ -77,6 +77,47 @@ __decorate([
     __metadata("design:type", String)
 ], AssignedStaffNatsDto.prototype, "avatar", void 0);
 /**
+ * Task Photo DTO
+ */
+class TaskPhotoDto {
+    id;
+    url;
+    thumbnailUrl;
+    category;
+    uploadedAt;
+    uploadedBy;
+    description;
+}
+exports.TaskPhotoDto = TaskPhotoDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Photo ID' }),
+    __metadata("design:type", String)
+], TaskPhotoDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'URL to the uploaded photo' }),
+    __metadata("design:type", String)
+], TaskPhotoDto.prototype, "url", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'URL to the photo thumbnail' }),
+    __metadata("design:type", String)
+], TaskPhotoDto.prototype, "thumbnailUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Category of the photo (BEFORE/DURING/AFTER)' }),
+    __metadata("design:type", String)
+], TaskPhotoDto.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Timestamp when the photo was uploaded (ISO datetime)' }),
+    __metadata("design:type", String)
+], TaskPhotoDto.prototype, "uploadedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'ID of the staff member who uploaded the photo' }),
+    __metadata("design:type", String)
+], TaskPhotoDto.prototype, "uploadedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Optional description or notes about the photo' }),
+    __metadata("design:type", String)
+], TaskPhotoDto.prototype, "description", void 0);
+/**
  * Single Cleaning Task Response
  * @unified Used by both NATS responses and REST API responses
  */
@@ -101,6 +142,12 @@ class CleaningTaskNatsResponse {
     actualDuration;
     isAutomated;
     eventTriggered;
+    roomType;
+    floor;
+    building;
+    assignedAt;
+    startedAt;
+    photos;
 }
 exports.CleaningTaskNatsResponse = CleaningTaskNatsResponse;
 __decorate([
@@ -195,6 +242,30 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Whether this task was triggered by an event' }),
     __metadata("design:type", Boolean)
 ], CleaningTaskNatsResponse.prototype, "eventTriggered", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room type resolved from inventory-service' }),
+    __metadata("design:type", String)
+], CleaningTaskNatsResponse.prototype, "roomType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Floor number resolved from inventory-service' }),
+    __metadata("design:type", Number)
+], CleaningTaskNatsResponse.prototype, "floor", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Building resolved from inventory-service' }),
+    __metadata("design:type", String)
+], CleaningTaskNatsResponse.prototype, "building", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Timestamp when staff was assigned (ISO datetime)' }),
+    __metadata("design:type", String)
+], CleaningTaskNatsResponse.prototype, "assignedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Timestamp when task started (IN_PROGRESS) (ISO datetime)' }),
+    __metadata("design:type", String)
+], CleaningTaskNatsResponse.prototype, "startedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Array of task photos', type: [TaskPhotoDto] }),
+    __metadata("design:type", Array)
+], CleaningTaskNatsResponse.prototype, "photos", void 0);
 /**
  * Create Cleaning Task Request
  * Pattern: housekeeping.cleaning-tasks.create
