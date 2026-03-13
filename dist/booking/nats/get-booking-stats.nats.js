@@ -9,8 +9,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookingStatsResponseDto = exports.BookingStatusCountDto = void 0;
+exports.BookingStatsResponseDto = exports.BookingStatusCountDto = exports.GetBookingStatsNatsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
+class GetBookingStatsNatsRequest {
+    tenantId;
+    hotelId;
+    period;
+    startDate;
+    endDate;
+}
+exports.GetBookingStatsNatsRequest = GetBookingStatsNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetBookingStatsNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetBookingStatsNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Period shortcut: week, month, year', enum: ['week', 'month', 'year'] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsIn)(['week', 'month', 'year']),
+    __metadata("design:type", String)
+], GetBookingStatsNatsRequest.prototype, "period", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Start date (YYYY-MM-DD)', example: '2025-01-01' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], GetBookingStatsNatsRequest.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'End date (YYYY-MM-DD)', example: '2025-01-31' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], GetBookingStatsNatsRequest.prototype, "endDate", void 0);
 class BookingStatusCountDto {
     status;
     count;
