@@ -1,3 +1,4 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 
 /**
@@ -40,6 +41,38 @@ export interface GetBookingStatsNatsRequest {
   endDate?: string;
 }
 
+export class BookingStatusCountDto {
+  @ApiProperty({ description: 'Booking status (e.g. CONFIRMED, CANCELLED)', example: 'CONFIRMED' })
+  status: string;
+
+  @ApiProperty({ description: 'Number of bookings with this status', example: 12 })
+  count: number;
+}
+
+export class BookingStatsResponseDto {
+  @ApiProperty({ description: 'Total number of bookings', example: 35 })
+  totalBookings: number;
+
+  @ApiProperty({ description: 'Number of confirmed bookings', example: 28 })
+  confirmedBookings: number;
+
+  @ApiProperty({ description: 'Number of cancelled bookings', example: 2 })
+  cancelledBookings: number;
+
+  @ApiProperty({ description: 'Occupancy rate as percentage (0-100)', example: 85.5 })
+  occupancyRate: number;
+
+  @ApiProperty({ description: 'Average stay duration in nights', example: 3.2 })
+  averageStay: number;
+
+  @ApiProperty({ description: 'Total revenue', example: 15000000 })
+  revenue: number;
+
+  @ApiPropertyOptional({ description: 'Booking count grouped by status', type: () => [BookingStatusCountDto] })
+  bookingsByStatus?: BookingStatusCountDto[];
+}
+
+
 /**
  * Response with booking statistics
  */
@@ -61,6 +94,9 @@ export interface GetBookingStatsNatsResponse {
 
   /** Total revenue from all bookings in the period */
   revenue: number;
+
+  /** Booking count grouped by status */
+  bookingsByStatus?: BookingStatusCountDto[];
 }
 
 /**

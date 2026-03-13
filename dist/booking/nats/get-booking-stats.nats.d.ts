@@ -34,6 +34,19 @@ export interface GetBookingStatsNatsRequest {
      */
     endDate?: string;
 }
+export declare class BookingStatusCountDto {
+    status: string;
+    count: number;
+}
+export declare class BookingStatsResponseDto {
+    totalBookings: number;
+    confirmedBookings: number;
+    cancelledBookings: number;
+    occupancyRate: number;
+    averageStay: number;
+    revenue: number;
+    bookingsByStatus?: BookingStatusCountDto[];
+}
 /**
  * Response with booking statistics
  */
@@ -50,6 +63,8 @@ export interface GetBookingStatsNatsResponse {
     averageStay: number;
     /** Total revenue from all bookings in the period */
     revenue: number;
+    /** Booking count grouped by status */
+    bookingsByStatus?: BookingStatusCountDto[];
 }
 /**
  * NATS response type for booking statistics
