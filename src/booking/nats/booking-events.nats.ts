@@ -48,8 +48,11 @@ export class BookingCheckedOutEvent {
   @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 
-  @ApiProperty({ description: 'Final amount after all charges' })
+  @ApiProperty({ description: 'Final amount after all charges (post-tax)' })
   finalAmount: number;
+
+  @ApiPropertyOptional({ description: 'Net amount before taxes (used for totalSpent tracking)' })
+  netAmount?: number;
 
   @ApiProperty({ description: 'Check-in date (ISO string)' })
   checkInDate: string;

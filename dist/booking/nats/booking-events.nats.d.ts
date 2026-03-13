@@ -24,6 +24,7 @@ export declare class BookingCheckedOutEvent {
     tenantId: string;
     hotelId: string;
     finalAmount: number;
+    netAmount?: number;
     checkInDate: string;
     checkOutDate: string;
     checkedOutAt: Date;

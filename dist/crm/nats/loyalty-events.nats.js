@@ -35,6 +35,7 @@ class BookingCompletedEventNatsRequest {
     checkInDate;
     checkOutDate;
     totalAmount;
+    netAmount;
     numberOfNights;
     numberOfGuests;
     status;
@@ -71,9 +72,13 @@ __decorate([
     __metadata("design:type", String)
 ], BookingCompletedEventNatsRequest.prototype, "checkOutDate", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Total booking amount as string' }),
+    (0, swagger_1.ApiProperty)({ description: 'Total booking amount (post-tax) as string' }),
     __metadata("design:type", String)
 ], BookingCompletedEventNatsRequest.prototype, "totalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Net booking amount (pre-tax, used for loyalty points calculation) as string' }),
+    __metadata("design:type", String)
+], BookingCompletedEventNatsRequest.prototype, "netAmount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Number of nights stayed' }),
     __metadata("design:type", Number)

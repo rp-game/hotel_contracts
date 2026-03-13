@@ -66,6 +66,7 @@ class BookingCheckedOutEvent {
     tenantId;
     hotelId;
     finalAmount;
+    netAmount;
     checkInDate;
     checkOutDate;
     checkedOutAt;
@@ -88,9 +89,13 @@ __decorate([
     __metadata("design:type", String)
 ], BookingCheckedOutEvent.prototype, "hotelId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Final amount after all charges' }),
+    (0, swagger_1.ApiProperty)({ description: 'Final amount after all charges (post-tax)' }),
     __metadata("design:type", Number)
 ], BookingCheckedOutEvent.prototype, "finalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Net amount before taxes (used for totalSpent tracking)' }),
+    __metadata("design:type", Number)
+], BookingCheckedOutEvent.prototype, "netAmount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Check-in date (ISO string)' }),
     __metadata("design:type", String)

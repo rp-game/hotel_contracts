@@ -13,6 +13,7 @@
  * - crm.segmentation.analysis
  * - crm.segmentation.rfm.analysis
  * - crm.segmentation.predefined.create
+ * - crm.segmentation.evaluate-customer
  * - crm.segmentation.bulk-update
  *
  * Handler: crm-service (SegmentationController)
@@ -374,4 +375,19 @@ export declare class BulkUpdateSegmentsNatsRequest {
  * Bulk Update Segments Response
  */
 export type BulkUpdateSegmentsNatsResponse = NatsResponse<MessageResponseDto>;
+/**
+ * Evaluate Customer For Segments Request
+ * Pattern: crm.segmentation.evaluate-customer
+ * Called after customer create/update to check which segments the customer qualifies for.
+ */
+export declare class EvaluateCustomerSegmentsRequest {
+    tenantId: string;
+    customerId: string;
+}
+/**
+ * Evaluate Customer For Segments Response
+ */
+export type EvaluateCustomerSegmentsResponse = NatsResponse<{
+    evaluated: true;
+}>;
 //# sourceMappingURL=segmentation.nats.d.ts.map

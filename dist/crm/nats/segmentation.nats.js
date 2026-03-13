@@ -14,6 +14,7 @@
  * - crm.segmentation.analysis
  * - crm.segmentation.rfm.analysis
  * - crm.segmentation.predefined.create
+ * - crm.segmentation.evaluate-customer
  * - crm.segmentation.bulk-update
  *
  * Handler: crm-service (SegmentationController)
@@ -29,7 +30,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BulkUpdateSegmentsNatsRequest = exports.CreatePredefinedSegmentsNatsRequest = exports.GetRfmAnalysisNatsRequest = exports.GetSegmentAnalysisNatsRequest = exports.SegmentMembersNatsResponse = exports.MessageResponseDto = exports.RecalculateSegmentNatsRequest = exports.DeleteSegmentNatsRequest = exports.FindSegmentByIdNatsRequest = exports.SegmentationStatsDto = exports.SegmentPerformanceItemDto = exports.SegmentsNatsResponse = exports.CustomerSegmentNatsResponse = exports.UpdateSegmentNatsRequest = exports.CreateSegmentNatsRequest = exports.SegmentStatus = exports.SegmentType = void 0;
+exports.EvaluateCustomerSegmentsRequest = exports.BulkUpdateSegmentsNatsRequest = exports.CreatePredefinedSegmentsNatsRequest = exports.GetRfmAnalysisNatsRequest = exports.GetSegmentAnalysisNatsRequest = exports.SegmentMembersNatsResponse = exports.MessageResponseDto = exports.RecalculateSegmentNatsRequest = exports.DeleteSegmentNatsRequest = exports.FindSegmentByIdNatsRequest = exports.SegmentationStatsDto = exports.SegmentPerformanceItemDto = exports.SegmentsNatsResponse = exports.CustomerSegmentNatsResponse = exports.UpdateSegmentNatsRequest = exports.CreateSegmentNatsRequest = exports.SegmentStatus = exports.SegmentType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const customers_nats_1 = require("./customers.nats");
@@ -513,4 +514,24 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
     __metadata("design:type", String)
 ], BulkUpdateSegmentsNatsRequest.prototype, "tenantId", void 0);
+/**
+ * Evaluate Customer For Segments Request
+ * Pattern: crm.segmentation.evaluate-customer
+ * Called after customer create/update to check which segments the customer qualifies for.
+ */
+class EvaluateCustomerSegmentsRequest {
+    tenantId;
+    customerId;
+}
+exports.EvaluateCustomerSegmentsRequest = EvaluateCustomerSegmentsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], EvaluateCustomerSegmentsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer ID to evaluate' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], EvaluateCustomerSegmentsRequest.prototype, "customerId", void 0);
 //# sourceMappingURL=segmentation.nats.js.map

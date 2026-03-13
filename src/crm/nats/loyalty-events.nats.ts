@@ -39,8 +39,11 @@ export class BookingCompletedEventNatsRequest {
   @ApiProperty({ description: 'Check-out date ISO string' })
   checkOutDate: string;
 
-  @ApiProperty({ description: 'Total booking amount as string' })
+  @ApiProperty({ description: 'Total booking amount (post-tax) as string' })
   totalAmount: string;
+
+  @ApiPropertyOptional({ description: 'Net booking amount (pre-tax, used for loyalty points calculation) as string' })
+  netAmount?: string;
 
   @ApiProperty({ description: 'Number of nights stayed' })
   numberOfNights: number;

@@ -23,6 +23,7 @@ export declare class BookingCompletedEventNatsRequest {
     checkInDate: string;
     checkOutDate: string;
     totalAmount: string;
+    netAmount?: string;
     numberOfNights: number;
     numberOfGuests: number;
     status: string;
