@@ -15,6 +15,12 @@
  */
 export type PromotionStatus = 'ACTIVE' | 'INACTIVE' | 'EXPIRED' | 'UPCOMING';
 /**
+ * Promotion scope - determines who owns and who can see this promotion
+ * HOTEL: owned by a specific hotel, visible only to that hotel
+ * CHAIN: owned by a hotel chain, inherited by all hotels in the chain (read-only for hotel admins)
+ */
+export type PromotionScope = 'HOTEL' | 'CHAIN';
+/**
  * Promotion conditions structure
  * Stored as JSONB in database
  */
@@ -32,7 +38,9 @@ export declare class PromotionConditionsDto {
 export declare class PromotionDto {
     id: string;
     tenantId: string;
-    hotelId: string;
+    hotelId?: string | null;
+    promotionScope: PromotionScope;
+    isChainPromotion?: boolean;
     name: string;
     code: string;
     description?: string;

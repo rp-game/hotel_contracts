@@ -33,6 +33,7 @@ const types_1 = require("../types");
 class GetPromotionsRequest {
     tenantId;
     hotelId;
+    chainId;
     roomTypeId;
     checkIn;
     checkOut;
@@ -51,10 +52,17 @@ __decorate([
     __metadata("design:type", String)
 ], GetPromotionsRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID — omit for chain-level promotions' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], GetPromotionsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Chain tenant ID — when provided, includes chain-level promotions in results' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetPromotionsRequest.prototype, "chainId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by room type ID' }),
     (0, class_validator_1.IsOptional)(),
@@ -129,6 +137,7 @@ __decorate([
 class CreatePromotionRequest {
     tenantId;
     hotelId;
+    promotionScope;
     name;
     code;
     description;
@@ -154,10 +163,20 @@ __decorate([
     __metadata("design:type", String)
 ], CreatePromotionRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID — required for HOTEL scope, omit for CHAIN scope' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreatePromotionRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Promotion scope: HOTEL = specific hotel only, CHAIN = all hotels in chain',
+        enum: ['HOTEL', 'CHAIN'],
+        default: 'HOTEL'
+    }),
+    (0, class_validator_1.IsEnum)(['HOTEL', 'CHAIN']),
+    __metadata("design:type", String)
+], CreatePromotionRequest.prototype, "promotionScope", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Promotion name', maxLength: 100 }),
     (0, class_validator_1.IsString)(),
@@ -273,6 +292,7 @@ __decorate([
 class UpdatePromotionRequest {
     id;
     tenantId;
+    hotelId;
     name;
     code;
     description;
@@ -302,6 +322,12 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], UpdatePromotionRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID — required for HOTEL scope promotions' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdatePromotionRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Updated name', maxLength: 100 }),
     (0, class_validator_1.IsOptional)(),
@@ -422,6 +448,7 @@ __decorate([
 class DeletePromotionRequest {
     id;
     tenantId;
+    hotelId;
 }
 exports.DeletePromotionRequest = DeletePromotionRequest;
 __decorate([
@@ -434,6 +461,12 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeletePromotionRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID — used to enforce ownership check' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], DeletePromotionRequest.prototype, "hotelId", void 0);
 /**
  * Validate promotion code request
  */
@@ -445,6 +478,7 @@ class ValidatePromotionRequest {
     checkIn;
     checkOut;
     bookingAmount;
+    chainId;
 }
 exports.ValidatePromotionRequest = ValidatePromotionRequest;
 __decorate([
@@ -483,6 +517,12 @@ __decorate([
     (0, class_validator_1.Min)(0),
     __metadata("design:type", Number)
 ], ValidatePromotionRequest.prototype, "bookingAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Chain tenant ID — when provided, allows chain-level promotions to be applied' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], ValidatePromotionRequest.prototype, "chainId", void 0);
 /**
  * Validate promotion response
  */

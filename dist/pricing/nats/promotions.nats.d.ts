@@ -9,13 +9,14 @@
  * @verified_date 2026-02-13
  */
 import { NatsResponse } from '../../common/nats-response.interface';
-import { PromotionDto, PromotionsPaginatedResponseDto, PromotionStatus, PromotionConditionsDto } from '../types';
+import { PromotionDto, PromotionsPaginatedResponseDto, PromotionStatus, PromotionConditionsDto, PromotionScope } from '../types';
 /**
  * Get promotions request with pagination and filtering
  */
 export declare class GetPromotionsRequest {
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
+    chainId?: string;
     roomTypeId?: string;
     checkIn?: string;
     checkOut?: string;
@@ -32,7 +33,8 @@ export declare class GetPromotionsRequest {
  */
 export declare class CreatePromotionRequest {
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
+    promotionScope: PromotionScope;
     name: string;
     code: string;
     description?: string;
@@ -58,6 +60,7 @@ export declare class CreatePromotionRequest {
 export declare class UpdatePromotionRequest {
     id: string;
     tenantId: string;
+    hotelId?: string;
     name?: string;
     code?: string;
     description?: string;
@@ -82,6 +85,7 @@ export declare class UpdatePromotionRequest {
 export declare class DeletePromotionRequest {
     id: string;
     tenantId: string;
+    hotelId?: string;
 }
 /**
  * Validate promotion code request
@@ -94,6 +98,7 @@ export declare class ValidatePromotionRequest {
     checkIn: string;
     checkOut: string;
     bookingAmount: number;
+    chainId?: string;
 }
 /**
  * Validate promotion response

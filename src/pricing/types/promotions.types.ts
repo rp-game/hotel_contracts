@@ -19,6 +19,13 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 export type PromotionStatus = 'ACTIVE' | 'INACTIVE' | 'EXPIRED' | 'UPCOMING';
 
 /**
+ * Promotion scope - determines who owns and who can see this promotion
+ * HOTEL: owned by a specific hotel, visible only to that hotel
+ * CHAIN: owned by a hotel chain, inherited by all hotels in the chain (read-only for hotel admins)
+ */
+export type PromotionScope = 'HOTEL' | 'CHAIN';
+
+/**
  * Promotion conditions structure
  * Stored as JSONB in database
  */
@@ -70,11 +77,24 @@ export class PromotionDto {
   })
   tenantId: string;
 
-  @ApiProperty({
-    description: 'Hotel ID',
+  @ApiPropertyOptional({
+    description: 'Hotel ID — null for CHAIN scope promotions (apply to all hotels in chain)',
     example: '550e8400-e29b-41d4-a716-446655440002'
   })
-  hotelId: string;
+  hotelId?: string | null;
+
+  @ApiProperty({
+    description: 'Promotion scope: HOTEL = specific hotel only, CHAIN = all hotels in chain',
+    enum: ['HOTEL', 'CHAIN'],
+    example: 'HOTEL'
+  })
+  promotionScope: PromotionScope;
+
+  @ApiPropertyOptional({
+    description: 'True when this promotion is inherited from the chain (read-only for hotel admins)',
+    example: false
+  })
+  isChainPromotion?: boolean;
 
   @ApiProperty({
     description: 'Promotion name',

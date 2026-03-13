@@ -26,7 +26,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common/nats-response.interface';
-import { PromotionDto, PromotionsPaginatedResponseDto, PromotionStatus, PromotionConditionsDto } from '../types';
+import { PromotionDto, PromotionsPaginatedResponseDto, PromotionStatus, PromotionConditionsDto, PromotionScope } from '../types';
 
 // ============================================================================
 // Query/Request DTOs
@@ -40,9 +40,15 @@ export class GetPromotionsRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty({ description: 'Hotel ID' })
+  @ApiPropertyOptional({ description: 'Hotel ID — omit for chain-level promotions' })
+  @IsOptional()
   @IsUUID()
-  hotelId: string;
+  hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Chain tenant ID — when provided, includes chain-level promotions in results' })
+  @IsOptional()
+  @IsUUID()
+  chainId?: string;
 
   @ApiPropertyOptional({ description: 'Filter by room type ID' })
   @IsOptional()
@@ -111,9 +117,18 @@ export class CreatePromotionRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty({ description: 'Hotel ID' })
+  @ApiPropertyOptional({ description: 'Hotel ID — required for HOTEL scope, omit for CHAIN scope' })
+  @IsOptional()
   @IsUUID()
-  hotelId: string;
+  hotelId?: string;
+
+  @ApiProperty({
+    description: 'Promotion scope: HOTEL = specific hotel only, CHAIN = all hotels in chain',
+    enum: ['HOTEL', 'CHAIN'],
+    default: 'HOTEL'
+  })
+  @IsEnum(['HOTEL', 'CHAIN'])
+  promotionScope: PromotionScope;
 
   @ApiProperty({ description: 'Promotion name', maxLength: 100 })
   @IsString()
@@ -219,6 +234,11 @@ export class UpdatePromotionRequest {
   @ApiProperty({ description: 'Tenant ID' })
   @IsUUID()
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID — required for HOTEL scope promotions' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
 
   @ApiPropertyOptional({ description: 'Updated name', maxLength: 100 })
   @IsOptional()
@@ -329,6 +349,11 @@ export class DeletePromotionRequest {
   @ApiProperty({ description: 'Tenant ID' })
   @IsUUID()
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID — used to enforce ownership check' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
 }
 
 /**
@@ -363,6 +388,11 @@ export class ValidatePromotionRequest {
   @IsNumber()
   @Min(0)
   bookingAmount: number;
+
+  @ApiPropertyOptional({ description: 'Chain tenant ID — when provided, allows chain-level promotions to be applied' })
+  @IsOptional()
+  @IsUUID()
+  chainId?: string;
 }
 
 /**

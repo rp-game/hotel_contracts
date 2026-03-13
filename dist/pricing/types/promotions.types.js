@@ -75,6 +75,8 @@ class PromotionDto {
     id;
     tenantId;
     hotelId;
+    promotionScope;
+    isChainPromotion;
     name;
     code;
     description;
@@ -113,12 +115,27 @@ __decorate([
     __metadata("design:type", String)
 ], PromotionDto.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Hotel ID',
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Hotel ID — null for CHAIN scope promotions (apply to all hotels in chain)',
         example: '550e8400-e29b-41d4-a716-446655440002'
     }),
-    __metadata("design:type", String)
+    __metadata("design:type", Object)
 ], PromotionDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Promotion scope: HOTEL = specific hotel only, CHAIN = all hotels in chain',
+        enum: ['HOTEL', 'CHAIN'],
+        example: 'HOTEL'
+    }),
+    __metadata("design:type", String)
+], PromotionDto.prototype, "promotionScope", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'True when this promotion is inherited from the chain (read-only for hotel admins)',
+        example: false
+    }),
+    __metadata("design:type", Boolean)
+], PromotionDto.prototype, "isChainPromotion", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Promotion name',
