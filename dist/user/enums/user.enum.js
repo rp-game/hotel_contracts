@@ -18,6 +18,9 @@ var UserRole;
     // === TENANT/CHAIN LEVEL ROLES ===
     UserRole["CHAIN_OWNER"] = "CHAIN_OWNER";
     UserRole["CHAIN_MANAGER"] = "CHAIN_MANAGER";
+    // === AGENCY LEVEL ROLES ===
+    UserRole["AGENCY_ADMIN"] = "AGENCY_ADMIN";
+    UserRole["AGENCY_STAFF"] = "AGENCY_STAFF";
     // === HOTEL LEVEL ROLES ===
     UserRole["HOTEL_MANAGER"] = "HOTEL_MANAGER";
     UserRole["ASSISTANT_MANAGER"] = "ASSISTANT_MANAGER";

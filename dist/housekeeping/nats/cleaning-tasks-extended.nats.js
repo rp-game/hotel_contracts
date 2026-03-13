@@ -13,7 +13,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TaskTimerDto = exports.TaskStatsDto = exports.MobileTaskListResponseDto = exports.TaskSummaryStatsDto = exports.MobileTaskUpdateDto = exports.MobileTaskDto = exports.GetPerformanceMetricsNatsRequest = exports.StaffPerformanceMetricsNatsResponse = exports.GetHousekeepingTasksPayload = exports.EnhancedCleaningTask = exports.ClockOutNatsRequest = exports.ClockInNatsRequest = exports.GetCurrentShiftNatsRequest = exports.ShiftData = exports.QuickCompleteTaskResponseDto = exports.QuickCompleteTaskDto = exports.QuickCompleteResult = exports.QuickCompleteTaskNatsRequest = exports.AddNotesResult = exports.AddTaskNotesNatsRequest = exports.AddTaskNotesBodyDto = exports.GetRoomTasksNatsRequest = exports.SearchTasksNatsRequest = exports.SearchTasksFilters = exports.MobileTaskResponse = exports.GetRecentTasksNatsRequest = exports.FindTaskByIdNatsRequest = void 0;
+exports.TaskTimerDto = exports.TaskStatsDto = exports.MobileTaskListResponseDto = exports.TaskSummaryStatsDto = exports.MobileTaskDto = exports.GetPerformanceMetricsNatsRequest = exports.StaffPerformanceMetricsNatsResponse = exports.GetHousekeepingTasksPayload = exports.EnhancedCleaningTask = exports.ClockOutNatsRequest = exports.ClockInNatsRequest = exports.GetCurrentShiftNatsRequest = exports.ShiftData = exports.QuickCompleteTaskResponseDto = exports.QuickCompleteTaskDto = exports.QuickCompleteResult = exports.QuickCompleteTaskNatsRequest = exports.AddNotesResult = exports.AddTaskNotesNatsRequest = exports.AddTaskNotesBodyDto = exports.GetRoomTasksNatsRequest = exports.SearchTasksNatsRequest = exports.SearchTasksFilters = exports.MobileTaskResponse = exports.GetRecentTasksNatsRequest = exports.FindTaskByIdNatsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
@@ -925,56 +925,6 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Full staff details for backward compatibility', type: Object }),
     __metadata("design:type", Object)
 ], MobileTaskDto.prototype, "assignedToDetails", void 0);
-/**
- * Mobile Task Update DTO — REST @Body() for task updates
- * @usage PUT /api/staff/tasks/:id
- */
-class MobileTaskUpdateDto {
-    status;
-    progress;
-    notes;
-    photos;
-    requestHelp;
-    timeSpent;
-}
-exports.MobileTaskUpdateDto = MobileTaskUpdateDto;
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Task status', enum: enums_1.TaskStatus }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(enums_1.TaskStatus),
-    __metadata("design:type", String)
-], MobileTaskUpdateDto.prototype, "status", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Progress percentage (0-100)' }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], MobileTaskUpdateDto.prototype, "progress", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Update notes' }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], MobileTaskUpdateDto.prototype, "notes", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Photos for this update', type: [String] }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.IsString)({ each: true }),
-    __metadata("design:type", Array)
-], MobileTaskUpdateDto.prototype, "photos", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Request help flag' }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
-], MobileTaskUpdateDto.prototype, "requestHelp", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Time spent on task in minutes' }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], MobileTaskUpdateDto.prototype, "timeSpent", void 0);
 /**
  * Task Summary Statistics
  */

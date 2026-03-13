@@ -615,43 +615,6 @@ export class MobileTaskDto {
 }
 
 /**
- * Mobile Task Update DTO — REST @Body() for task updates
- * @usage PUT /api/staff/tasks/:id
- */
-export class MobileTaskUpdateDto {
-  @ApiPropertyOptional({ description: 'Task status', enum: TaskStatus })
-  @IsOptional()
-  @IsEnum(TaskStatus)
-  status?: TaskStatus;
-
-  @ApiPropertyOptional({ description: 'Progress percentage (0-100)' })
-  @IsOptional()
-  @IsNumber()
-  progress?: number;
-
-  @ApiPropertyOptional({ description: 'Update notes' })
-  @IsOptional()
-  @IsString()
-  notes?: string;
-
-  @ApiPropertyOptional({ description: 'Photos for this update', type: [String] })
-  @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
-  photos?: string[];
-
-  @ApiPropertyOptional({ description: 'Request help flag' })
-  @IsOptional()
-  @IsBoolean()
-  requestHelp?: boolean;
-
-  @ApiPropertyOptional({ description: 'Time spent on task in minutes' })
-  @IsOptional()
-  @IsNumber()
-  timeSpent?: number;
-}
-
-/**
  * Task Summary Statistics
  */
 export class TaskSummaryStatsDto {

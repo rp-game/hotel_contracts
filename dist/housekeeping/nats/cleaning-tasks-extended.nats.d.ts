@@ -242,18 +242,6 @@ export declare class MobileTaskDto {
     assignedToDetails?: Record<string, unknown>;
 }
 /**
- * Mobile Task Update DTO — REST @Body() for task updates
- * @usage PUT /api/staff/tasks/:id
- */
-export declare class MobileTaskUpdateDto {
-    status?: TaskStatus;
-    progress?: number;
-    notes?: string;
-    photos?: string[];
-    requestHelp?: boolean;
-    timeSpent?: number;
-}
-/**
  * Task Summary Statistics
  */
 export declare class TaskSummaryStatsDto {
