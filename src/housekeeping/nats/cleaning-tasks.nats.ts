@@ -9,6 +9,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsEnum, IsString, IsNumber, IsDateString } from 'class-validator';
 import { NatsResponse } from '../../common';
 
 /**
@@ -232,39 +233,59 @@ export class UpdateCleaningTaskFieldsDto {
     description: 'Task type',
     enum: CleaningTaskType
   })
+  @IsOptional()
+  @IsEnum(CleaningTaskType)
   taskType?: CleaningTaskType;
 
   @ApiPropertyOptional({
     description: 'Task status',
     enum: CleaningTaskStatus
   })
+  @IsOptional()
+  @IsEnum(CleaningTaskStatus)
   status?: CleaningTaskStatus;
 
   @ApiPropertyOptional({
     description: 'Task priority',
     enum: CleaningTaskPriority
   })
+  @IsOptional()
+  @IsEnum(CleaningTaskPriority)
   priority?: CleaningTaskPriority;
 
   @ApiPropertyOptional({ description: 'Task description' })
+  @IsOptional()
+  @IsString()
   description?: string;
 
   @ApiPropertyOptional({ description: 'Task completion notes' })
+  @IsOptional()
+  @IsString()
   notes?: string;
 
   @ApiPropertyOptional({ description: 'Estimated duration in minutes' })
+  @IsOptional()
+  @IsNumber()
   estimatedDuration?: number;
 
   @ApiPropertyOptional({ description: 'Scheduled start time (ISO datetime)' })
+  @IsOptional()
+  @IsDateString()
   scheduledFor?: string;
 
   @ApiPropertyOptional({ description: 'Assigned staff ID' })
+  @IsOptional()
+  @IsString()
   assignedToId?: string;
 
   @ApiPropertyOptional({ description: 'Completion timestamp (ISO datetime)' })
+  @IsOptional()
+  @IsDateString()
   completedAt?: string;
 
   @ApiPropertyOptional({ description: 'Actual duration in minutes' })
+  @IsOptional()
+  @IsNumber()
   actualDuration?: number;
 }
 

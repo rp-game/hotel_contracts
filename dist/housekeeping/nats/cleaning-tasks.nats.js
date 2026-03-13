@@ -20,6 +20,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CleaningTasksListNatsResponse = exports.FindAllCleaningTasksNatsRequest = exports.UpdateCleaningTaskNatsRequest = exports.UpdateCleaningTaskFieldsDto = exports.CreateCleaningTaskNatsRequest = exports.CleaningTaskNatsResponse = exports.TaskPhotoDto = exports.AssignedStaffNatsDto = exports.CleaningTaskPriority = exports.CleaningTaskType = exports.CleaningTaskStatus = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
 /**
  * Cleaning Task Status Enum
  */
@@ -350,6 +351,8 @@ __decorate([
         description: 'Task type',
         enum: CleaningTaskType
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(CleaningTaskType),
     __metadata("design:type", String)
 ], UpdateCleaningTaskFieldsDto.prototype, "taskType", void 0);
 __decorate([
@@ -357,6 +360,8 @@ __decorate([
         description: 'Task status',
         enum: CleaningTaskStatus
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(CleaningTaskStatus),
     __metadata("design:type", String)
 ], UpdateCleaningTaskFieldsDto.prototype, "status", void 0);
 __decorate([
@@ -364,34 +369,50 @@ __decorate([
         description: 'Task priority',
         enum: CleaningTaskPriority
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(CleaningTaskPriority),
     __metadata("design:type", String)
 ], UpdateCleaningTaskFieldsDto.prototype, "priority", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Task description' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateCleaningTaskFieldsDto.prototype, "description", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Task completion notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateCleaningTaskFieldsDto.prototype, "notes", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated duration in minutes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateCleaningTaskFieldsDto.prototype, "estimatedDuration", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Scheduled start time (ISO datetime)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], UpdateCleaningTaskFieldsDto.prototype, "scheduledFor", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Assigned staff ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateCleaningTaskFieldsDto.prototype, "assignedToId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Completion timestamp (ISO datetime)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], UpdateCleaningTaskFieldsDto.prototype, "completedAt", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Actual duration in minutes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateCleaningTaskFieldsDto.prototype, "actualDuration", void 0);
 /**
