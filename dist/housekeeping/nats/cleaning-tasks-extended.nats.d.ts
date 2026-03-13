@@ -66,6 +66,7 @@ export declare class GetRoomTasksNatsRequest {
     tenantId: string;
     hotelId: string;
     roomNumber: string;
+    staffId?: string;
 }
 export type GetRoomTasksNatsResponse = NatsResponse<CleaningTaskNatsResponse[]>;
 export declare class AddTaskNotesBodyDto {

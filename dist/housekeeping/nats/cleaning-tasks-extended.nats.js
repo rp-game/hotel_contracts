@@ -243,6 +243,7 @@ class GetRoomTasksNatsRequest {
     tenantId;
     hotelId;
     roomNumber;
+    staffId;
 }
 exports.GetRoomTasksNatsRequest = GetRoomTasksNatsRequest;
 __decorate([
@@ -260,6 +261,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetRoomTasksNatsRequest.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Staff ID for filtering (optional)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetRoomTasksNatsRequest.prototype, "staffId", void 0);
 // ADD NOTES
 class AddTaskNotesBodyDto {
     notes;

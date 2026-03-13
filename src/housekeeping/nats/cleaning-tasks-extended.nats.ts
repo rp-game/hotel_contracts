@@ -172,6 +172,11 @@ export class GetRoomTasksNatsRequest {
   @ApiProperty({ description: 'Room number' })
   @IsString()
   roomNumber: string;
+
+  @ApiPropertyOptional({ description: 'Staff ID for filtering (optional)' })
+  @IsOptional()
+  @IsString()
+  staffId?: string;
 }
 export type GetRoomTasksNatsResponse = NatsResponse<CleaningTaskNatsResponse[]>;
 
