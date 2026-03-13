@@ -90,10 +90,30 @@ export class CreateSegmentNatsRequest {
   @IsBoolean()
   autoUpdate?: boolean;
 
+  @ApiPropertyOptional({ description: 'RFM segmentation rules' })
+  @IsOptional()
+  @IsObject()
+  rfmRules?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Behavioral segmentation rules' })
+  @IsOptional()
+  @IsObject()
+  behavioralRules?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Demographic segmentation rules' })
+  @IsOptional()
+  @IsObject()
+  demographicRules?: Record<string, any>;
+
   @ApiPropertyOptional({ description: 'Value-based rules for VALUE_BASED segments' })
   @IsOptional()
   @IsObject()
   valueRules?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Update frequency for auto-updates' })
+  @IsOptional()
+  @IsString()
+  updateFrequency?: string;
 
   // Index signature for additional dynamic properties (expanded rules, etc.)
   [key: string]: any;

@@ -70,7 +70,11 @@ class CreateSegmentNatsRequest {
     status;
     criteria;
     autoUpdate;
+    rfmRules;
+    behavioralRules;
+    demographicRules;
     valueRules;
+    updateFrequency;
 }
 exports.CreateSegmentNatsRequest = CreateSegmentNatsRequest;
 __decorate([
@@ -119,11 +123,35 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CreateSegmentNatsRequest.prototype, "autoUpdate", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'RFM segmentation rules' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], CreateSegmentNatsRequest.prototype, "rfmRules", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Behavioral segmentation rules' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], CreateSegmentNatsRequest.prototype, "behavioralRules", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Demographic segmentation rules' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], CreateSegmentNatsRequest.prototype, "demographicRules", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Value-based rules for VALUE_BASED segments' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsObject)(),
     __metadata("design:type", Object)
 ], CreateSegmentNatsRequest.prototype, "valueRules", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Update frequency for auto-updates' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSegmentNatsRequest.prototype, "updateFrequency", void 0);
 /**
  * Update Segment Request
  * Unified for both NATS messages and REST API requests

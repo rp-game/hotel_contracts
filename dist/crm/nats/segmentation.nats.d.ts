@@ -54,7 +54,11 @@ export declare class CreateSegmentNatsRequest {
     status: SegmentStatus;
     criteria?: Record<string, any>;
     autoUpdate?: boolean;
+    rfmRules?: Record<string, any>;
+    behavioralRules?: Record<string, any>;
+    demographicRules?: Record<string, any>;
     valueRules?: Record<string, any>;
+    updateFrequency?: string;
     [key: string]: any;
 }
 /**
