@@ -19,7 +19,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProvinceDto = exports.ListProvincesByChainRequest = void 0;
+exports.ProvinceDto = exports.ListProvincesByIdsRequest = exports.ListProvincesByChainRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 // ============================================================================
@@ -34,6 +34,16 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], ListProvincesByChainRequest.prototype, "chainId", void 0);
+class ListProvincesByIdsRequest {
+    provinceIds;
+}
+exports.ListProvincesByIdsRequest = ListProvincesByIdsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Province IDs to look up', type: [Number] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsInt)({ each: true }),
+    __metadata("design:type", Array)
+], ListProvincesByIdsRequest.prototype, "provinceIds", void 0);
 // ============================================================================
 // RESPONSE
 // ============================================================================

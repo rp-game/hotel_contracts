@@ -16,6 +16,7 @@ import {
   IsOptional,
   IsInt,
   IsEnum,
+  IsArray,
   Min,
 } from 'class-validator';
 import { NatsResponse } from '../../common';
@@ -25,9 +26,16 @@ import { NatsResponse } from '../../common';
 // ============================================================================
 
 export class SearchHotelsRequest {
-  @ApiProperty({ description: 'Hotel chain ID', example: 'uuid' })
+  @ApiPropertyOptional({ description: 'Hotel chain ID', example: 'uuid' })
+  @IsOptional()
   @IsString()
-  chainId: string;
+  chainId?: string;
+
+  @ApiPropertyOptional({ description: 'Province IDs (for agency search)', type: [Number], example: [1, 24] })
+  @IsOptional()
+  @IsArray()
+  @IsInt({ each: true })
+  provinceIds?: number[];
 
   @ApiProperty({ description: 'Check-in date (YYYY-MM-DD local time)', example: '2026-03-15' })
   @IsString()
@@ -164,6 +172,9 @@ export class HotelSearchResultDto {
 
   @ApiProperty({ description: 'Number of nights for the search dates', example: 2 })
   numberOfNights: number;
+
+  @ApiPropertyOptional({ description: 'Tenant ID (owner of this hotel)' })
+  tenantId?: string;
 }
 
 export class SearchHotelsResponse {

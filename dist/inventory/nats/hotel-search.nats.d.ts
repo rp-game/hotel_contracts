@@ -11,7 +11,8 @@
  */
 import { NatsResponse } from '../../common';
 export declare class SearchHotelsRequest {
-    chainId: string;
+    chainId?: string;
+    provinceIds?: number[];
     checkInDate: string;
     checkOutDate: string;
     adults?: number;
@@ -45,6 +46,7 @@ export declare class HotelSearchResultDto {
     lowestPricePerNight: number | null;
     lowestPriceRoomTypeName: string | null;
     numberOfNights: number;
+    tenantId?: string;
 }
 export declare class SearchHotelsResponse {
     hotels: HotelSearchResultDto[];

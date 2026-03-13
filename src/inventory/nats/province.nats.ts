@@ -10,7 +10,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsUUID } from 'class-validator';
+import { IsString, IsUUID, IsArray, IsInt, IsOptional } from 'class-validator';
 
 // ============================================================================
 // REQUEST
@@ -20,6 +20,13 @@ export class ListProvincesByChainRequest {
   @ApiProperty({ description: 'Chain ID (from hotel entity chainId)' })
   @IsUUID()
   chainId: string;
+}
+
+export class ListProvincesByIdsRequest {
+  @ApiProperty({ description: 'Province IDs to look up', type: [Number] })
+  @IsArray()
+  @IsInt({ each: true })
+  provinceIds: number[];
 }
 
 // ============================================================================

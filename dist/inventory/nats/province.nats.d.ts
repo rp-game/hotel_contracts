@@ -11,6 +11,9 @@
 export declare class ListProvincesByChainRequest {
     chainId: string;
 }
+export declare class ListProvincesByIdsRequest {
+    provinceIds: number[];
+}
 export declare class ProvinceDto {
     id: number;
     name: string;

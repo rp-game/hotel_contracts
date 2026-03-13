@@ -28,6 +28,7 @@ const class_validator_1 = require("class-validator");
 // ============================================================================
 class SearchHotelsRequest {
     chainId;
+    provinceIds;
     checkInDate;
     checkOutDate;
     adults;
@@ -40,10 +41,18 @@ class SearchHotelsRequest {
 }
 exports.SearchHotelsRequest = SearchHotelsRequest;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel chain ID', example: 'uuid' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel chain ID', example: 'uuid' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], SearchHotelsRequest.prototype, "chainId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Province IDs (for agency search)', type: [Number], example: [1, 24] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsInt)({ each: true }),
+    __metadata("design:type", Array)
+], SearchHotelsRequest.prototype, "provinceIds", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Check-in date (YYYY-MM-DD local time)', example: '2026-03-15' }),
     (0, class_validator_1.IsString)(),
@@ -131,6 +140,7 @@ class HotelSearchResultDto {
     lowestPricePerNight;
     lowestPriceRoomTypeName;
     numberOfNights;
+    tenantId;
 }
 exports.HotelSearchResultDto = HotelSearchResultDto;
 __decorate([
@@ -233,6 +243,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Number of nights for the search dates', example: 2 }),
     __metadata("design:type", Number)
 ], HotelSearchResultDto.prototype, "numberOfNights", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID (owner of this hotel)' }),
+    __metadata("design:type", String)
+], HotelSearchResultDto.prototype, "tenantId", void 0);
 class SearchHotelsResponse {
     hotels;
     total;
