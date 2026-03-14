@@ -63,7 +63,6 @@ export declare class CreateLoyaltyProgramNatsRequest {
     redemptionRules?: RedemptionRulesRequest;
     pointsValidityPeriod?: number;
     tierBasis?: TierBasis;
-    tiers?: CreateLoyaltyTierNatsRequest[];
 }
 /**
  * Tier Benefits

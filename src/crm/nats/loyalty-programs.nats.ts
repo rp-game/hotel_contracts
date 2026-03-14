@@ -20,6 +20,7 @@
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsArray, IsBoolean, IsDateString, IsEnum, IsInt, IsNumber, IsOptional, IsString, IsUUID, MaxLength, Min, ValidateNested } from 'class-validator';
+
 import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common';
 import { LoyaltyTierNatsResponse, FindAllLoyaltyTiersDto } from './loyalty-tiers.nats';
@@ -132,13 +133,6 @@ export class CreateLoyaltyProgramNatsRequest {
   @IsOptional()
   @IsEnum(TierBasis)
   tierBasis?: TierBasis;
-
-  @ApiPropertyOptional({ type: () => [CreateLoyaltyTierNatsRequest] })
-  @IsOptional()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateLoyaltyTierNatsRequest)
-  tiers?: CreateLoyaltyTierNatsRequest[];
 }
 
 /**
