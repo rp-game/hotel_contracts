@@ -29,7 +29,7 @@ export declare enum TierBasis {
 /**
  * Earning Rules
  */
-export interface EarningRulesRequest {
+export declare class EarningRulesRequest {
     pointsPerDollar?: string;
     pointsPerVisit?: number;
     minimumSpendForPoints?: string;
@@ -40,7 +40,7 @@ export type EarningRulesResponse = EarningRulesRequest;
 /**
  * Redemption Rules
  */
-export interface RedemptionRulesRequest {
+export declare class RedemptionRulesRequest {
     minimumPointsForRedemption?: number;
     pointValue?: string;
     maxRedemptionPercentage?: string;
@@ -51,7 +51,7 @@ export type RedemptionRulesResponse = RedemptionRulesRequest;
  * Create Loyalty Program Request
  * Pattern: crm.loyalty_program.create
  */
-export interface CreateLoyaltyProgramNatsRequest {
+export declare class CreateLoyaltyProgramNatsRequest {
     tenantId: string;
     hotelId?: string;
     name: string;
@@ -61,12 +61,14 @@ export interface CreateLoyaltyProgramNatsRequest {
     isActive?: boolean;
     earningRules?: EarningRulesRequest;
     redemptionRules?: RedemptionRulesRequest;
+    pointsValidityPeriod?: number;
     tierBasis?: TierBasis;
+    tiers?: CreateLoyaltyTierNatsRequest[];
 }
 /**
  * Tier Benefits
  */
-export interface TierBenefitsRequest {
+export declare class TierBenefitsRequest {
     roomUpgrade?: boolean;
     lateCheckout?: boolean;
     discountPercentage?: string;
@@ -79,7 +81,7 @@ export interface TierBenefitsRequest {
 /**
  * Create Loyalty Tier Request
  */
-export interface CreateLoyaltyTierNatsRequest {
+export declare class CreateLoyaltyTierNatsRequest {
     tenantId: string;
     programId: string;
     name: string;

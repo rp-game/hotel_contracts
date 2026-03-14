@@ -28,9 +28,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SyncProgramsNatsRequest = exports.LoyaltyProgramsSyncData = exports.LoyaltyProgramSyncSummary = exports.LoyaltyProgramNatsResponse = exports.IndividualProgramStats = exports.TierBasis = void 0;
+exports.SyncProgramsNatsRequest = exports.LoyaltyProgramsSyncData = exports.LoyaltyProgramSyncSummary = exports.LoyaltyProgramNatsResponse = exports.IndividualProgramStats = exports.CreateLoyaltyTierNatsRequest = exports.TierBenefitsRequest = exports.CreateLoyaltyProgramNatsRequest = exports.RedemptionRulesRequest = exports.EarningRulesRequest = exports.TierBasis = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
 const loyalty_tiers_nats_1 = require("./loyalty-tiers.nats");
 /**
  * Tier Basis — determines which points metric is used for tier qualification
@@ -40,6 +41,302 @@ var TierBasis;
     TierBasis["LIFETIME_POINTS"] = "LIFETIME_POINTS";
     TierBasis["POINTS_BALANCE"] = "POINTS_BALANCE";
 })(TierBasis || (exports.TierBasis = TierBasis = {}));
+/**
+ * Earning Rules
+ */
+class EarningRulesRequest {
+    pointsPerDollar;
+    pointsPerVisit;
+    minimumSpendForPoints;
+    referralBonus;
+    bonusMultiplier;
+}
+exports.EarningRulesRequest = EarningRulesRequest;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Points earned per dollar spent (decimal string)', example: '2.50' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], EarningRulesRequest.prototype, "pointsPerDollar", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Points earned per visit/stay', example: 100 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsInt)(),
+    __metadata("design:type", Number)
+], EarningRulesRequest.prototype, "pointsPerVisit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Minimum spend to earn points (decimal string)', example: '10.00' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], EarningRulesRequest.prototype, "minimumSpendForPoints", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Bonus points for referrals', example: 1000 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsInt)(),
+    __metadata("design:type", Number)
+], EarningRulesRequest.prototype, "referralBonus", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Bonus point multiplier (decimal string)', example: '1.25' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], EarningRulesRequest.prototype, "bonusMultiplier", void 0);
+/**
+ * Redemption Rules
+ */
+class RedemptionRulesRequest {
+    minimumPointsForRedemption;
+    pointValue;
+    maxRedemptionPercentage;
+    redemptionCategories;
+}
+exports.RedemptionRulesRequest = RedemptionRulesRequest;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Minimum points required for redemption', example: 100 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsInt)(),
+    __metadata("design:type", Number)
+], RedemptionRulesRequest.prototype, "minimumPointsForRedemption", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Cash value per point (decimal string)', example: '0.0100' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RedemptionRulesRequest.prototype, "pointValue", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Max bill percentage payable with points (decimal string)', example: '50.00' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RedemptionRulesRequest.prototype, "maxRedemptionPercentage", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [String], description: 'Categories where points can be redeemed' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], RedemptionRulesRequest.prototype, "redemptionCategories", void 0);
+/**
+ * Create Loyalty Program Request
+ * Pattern: crm.loyalty_program.create
+ */
+class CreateLoyaltyProgramNatsRequest {
+    tenantId;
+    hotelId;
+    name;
+    description;
+    startDate;
+    endDate;
+    isActive;
+    earningRules;
+    redemptionRules;
+    pointsValidityPeriod;
+    tierBasis;
+    tiers;
+}
+exports.CreateLoyaltyProgramNatsRequest = CreateLoyaltyProgramNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateLoyaltyProgramNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateLoyaltyProgramNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ maxLength: 255 }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(255),
+    __metadata("design:type", String)
+], CreateLoyaltyProgramNatsRequest.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateLoyaltyProgramNatsRequest.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], CreateLoyaltyProgramNatsRequest.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], CreateLoyaltyProgramNatsRequest.prototype, "endDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreateLoyaltyProgramNatsRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: () => EarningRulesRequest }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => EarningRulesRequest),
+    __metadata("design:type", EarningRulesRequest)
+], CreateLoyaltyProgramNatsRequest.prototype, "earningRules", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: () => RedemptionRulesRequest }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => RedemptionRulesRequest),
+    __metadata("design:type", RedemptionRulesRequest)
+], CreateLoyaltyProgramNatsRequest.prototype, "redemptionRules", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Points validity period in months', minimum: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], CreateLoyaltyProgramNatsRequest.prototype, "pointsValidityPeriod", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: TierBasis, default: TierBasis.LIFETIME_POINTS }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(TierBasis),
+    __metadata("design:type", String)
+], CreateLoyaltyProgramNatsRequest.prototype, "tierBasis", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: () => [CreateLoyaltyTierNatsRequest] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => CreateLoyaltyTierNatsRequest),
+    __metadata("design:type", Array)
+], CreateLoyaltyProgramNatsRequest.prototype, "tiers", void 0);
+/**
+ * Tier Benefits
+ */
+class TierBenefitsRequest {
+    roomUpgrade;
+    lateCheckout;
+    discountPercentage;
+    freeServices;
+    prioritySupport;
+    welcomeGift;
+    airportTransfer;
+    maxGuests;
+}
+exports.TierBenefitsRequest = TierBenefitsRequest;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], TierBenefitsRequest.prototype, "roomUpgrade", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], TierBenefitsRequest.prototype, "lateCheckout", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], TierBenefitsRequest.prototype, "discountPercentage", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [String] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], TierBenefitsRequest.prototype, "freeServices", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], TierBenefitsRequest.prototype, "prioritySupport", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], TierBenefitsRequest.prototype, "welcomeGift", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], TierBenefitsRequest.prototype, "airportTransfer", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsInt)(),
+    __metadata("design:type", Number)
+], TierBenefitsRequest.prototype, "maxGuests", void 0);
+/**
+ * Create Loyalty Tier Request
+ */
+class CreateLoyaltyTierNatsRequest {
+    tenantId;
+    programId;
+    name;
+    minimumPoints;
+    pointsMultiplier;
+    benefits;
+    order;
+    isActive;
+}
+exports.CreateLoyaltyTierNatsRequest = CreateLoyaltyTierNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateLoyaltyTierNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateLoyaltyTierNatsRequest.prototype, "programId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ maxLength: 100 }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(100),
+    __metadata("design:type", String)
+], CreateLoyaltyTierNatsRequest.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Minimum points required for this tier', minimum: 0 }),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], CreateLoyaltyTierNatsRequest.prototype, "minimumPoints", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Points multiplier for this tier' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)({ maxDecimalPlaces: 2 }),
+    __metadata("design:type", Number)
+], CreateLoyaltyTierNatsRequest.prototype, "pointsMultiplier", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: () => TierBenefitsRequest }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => TierBenefitsRequest),
+    __metadata("design:type", TierBenefitsRequest)
+], CreateLoyaltyTierNatsRequest.prototype, "benefits", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Display order', minimum: 0 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], CreateLoyaltyTierNatsRequest.prototype, "order", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ default: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreateLoyaltyTierNatsRequest.prototype, "isActive", void 0);
 /**
  * Individual Loyalty Program Stats
  * Statistics for a single loyalty program - can be used in both NATS responses and REST API

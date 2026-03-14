@@ -19,7 +19,8 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNumber, IsOptional } from 'class-validator';
+import { IsArray, IsBoolean, IsDateString, IsEnum, IsInt, IsNumber, IsOptional, IsString, IsUUID, MaxLength, Min, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common';
 import { LoyaltyTierNatsResponse, FindAllLoyaltyTiersDto } from './loyalty-tiers.nats';
 
@@ -34,11 +35,30 @@ export enum TierBasis {
 /**
  * Earning Rules
  */
-export interface EarningRulesRequest {
+export class EarningRulesRequest {
+  @ApiPropertyOptional({ description: 'Points earned per dollar spent (decimal string)', example: '2.50' })
+  @IsOptional()
+  @IsString()
   pointsPerDollar?: string;
+
+  @ApiPropertyOptional({ description: 'Points earned per visit/stay', example: 100 })
+  @IsOptional()
+  @IsInt()
   pointsPerVisit?: number;
+
+  @ApiPropertyOptional({ description: 'Minimum spend to earn points (decimal string)', example: '10.00' })
+  @IsOptional()
+  @IsString()
   minimumSpendForPoints?: string;
+
+  @ApiPropertyOptional({ description: 'Bonus points for referrals', example: 1000 })
+  @IsOptional()
+  @IsInt()
   referralBonus?: number;
+
+  @ApiPropertyOptional({ description: 'Bonus point multiplier (decimal string)', example: '1.25' })
+  @IsOptional()
+  @IsString()
   bonusMultiplier?: string;
 }
 
@@ -47,10 +67,26 @@ export type EarningRulesResponse = EarningRulesRequest;
 /**
  * Redemption Rules
  */
-export interface RedemptionRulesRequest {
+export class RedemptionRulesRequest {
+  @ApiPropertyOptional({ description: 'Minimum points required for redemption', example: 100 })
+  @IsOptional()
+  @IsInt()
   minimumPointsForRedemption?: number;
+
+  @ApiPropertyOptional({ description: 'Cash value per point (decimal string)', example: '0.0100' })
+  @IsOptional()
+  @IsString()
   pointValue?: string;
+
+  @ApiPropertyOptional({ description: 'Max bill percentage payable with points (decimal string)', example: '50.00' })
+  @IsOptional()
+  @IsString()
   maxRedemptionPercentage?: string;
+
+  @ApiPropertyOptional({ type: [String], description: 'Categories where points can be redeemed' })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
   redemptionCategories?: string[];
 }
 
@@ -60,44 +96,102 @@ export type RedemptionRulesResponse = RedemptionRulesRequest;
  * Create Loyalty Program Request
  * Pattern: crm.loyalty_program.create
  */
-export interface CreateLoyaltyProgramNatsRequest {
-  tenantId: string;
-  hotelId?: string;
+export class CreateLoyaltyProgramNatsRequest {
+  @ApiProperty() @IsUUID() tenantId: string;
+  @ApiPropertyOptional() @IsOptional() @IsUUID() hotelId?: string;
+
+  @ApiProperty({ maxLength: 255 })
+  @IsString()
+  @MaxLength(255)
   name: string;
-  description?: string;
-  startDate?: string;
-  endDate?: string;
-  isActive?: boolean;
+
+  @ApiPropertyOptional() @IsOptional() @IsString() description?: string;
+  @ApiPropertyOptional() @IsOptional() @IsDateString() startDate?: string;
+  @ApiPropertyOptional() @IsOptional() @IsDateString() endDate?: string;
+  @ApiPropertyOptional() @IsOptional() @IsBoolean() isActive?: boolean;
+
+  @ApiPropertyOptional({ type: () => EarningRulesRequest })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => EarningRulesRequest)
   earningRules?: EarningRulesRequest;
+
+  @ApiPropertyOptional({ type: () => RedemptionRulesRequest })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => RedemptionRulesRequest)
   redemptionRules?: RedemptionRulesRequest;
+
+  @ApiPropertyOptional({ description: 'Points validity period in months', minimum: 1 })
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  pointsValidityPeriod?: number;
+
+  @ApiPropertyOptional({ enum: TierBasis, default: TierBasis.LIFETIME_POINTS })
+  @IsOptional()
+  @IsEnum(TierBasis)
   tierBasis?: TierBasis;
+
+  @ApiPropertyOptional({ type: () => [CreateLoyaltyTierNatsRequest] })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateLoyaltyTierNatsRequest)
+  tiers?: CreateLoyaltyTierNatsRequest[];
 }
 
 /**
  * Tier Benefits
  */
-export interface TierBenefitsRequest {
-  roomUpgrade?: boolean;
-  lateCheckout?: boolean;
-  discountPercentage?: string;
-  freeServices?: string[];
-  prioritySupport?: boolean;
-  welcomeGift?: boolean;
-  airportTransfer?: boolean;
-  maxGuests?: number;
+export class TierBenefitsRequest {
+  @ApiPropertyOptional() @IsOptional() @IsBoolean() roomUpgrade?: boolean;
+  @ApiPropertyOptional() @IsOptional() @IsBoolean() lateCheckout?: boolean;
+  @ApiPropertyOptional() @IsOptional() @IsString() discountPercentage?: string;
+  @ApiPropertyOptional({ type: [String] }) @IsOptional() @IsArray() @IsString({ each: true }) freeServices?: string[];
+  @ApiPropertyOptional() @IsOptional() @IsBoolean() prioritySupport?: boolean;
+  @ApiPropertyOptional() @IsOptional() @IsBoolean() welcomeGift?: boolean;
+  @ApiPropertyOptional() @IsOptional() @IsBoolean() airportTransfer?: boolean;
+  @ApiPropertyOptional() @IsOptional() @IsInt() maxGuests?: number;
 }
 
 /**
  * Create Loyalty Tier Request
  */
-export interface CreateLoyaltyTierNatsRequest {
-  tenantId: string;
-  programId: string;
+export class CreateLoyaltyTierNatsRequest {
+  @ApiProperty() @IsUUID() tenantId: string;
+  @ApiProperty() @IsUUID() programId: string;
+
+  @ApiProperty({ maxLength: 100 })
+  @IsString()
+  @MaxLength(100)
   name: string;
+
+  @ApiProperty({ description: 'Minimum points required for this tier', minimum: 0 })
+  @IsInt()
+  @Min(0)
   minimumPoints: number;
+
+  @ApiPropertyOptional({ description: 'Points multiplier for this tier' })
+  @IsOptional()
+  @IsNumber({ maxDecimalPlaces: 2 })
   pointsMultiplier?: number;
+
+  @ApiPropertyOptional({ type: () => TierBenefitsRequest })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => TierBenefitsRequest)
   benefits?: TierBenefitsRequest;
+
+  @ApiPropertyOptional({ description: 'Display order', minimum: 0 })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
   order?: number;
+
+  @ApiPropertyOptional({ default: true })
+  @IsOptional()
+  @IsBoolean()
   isActive?: boolean;
 }
 
