@@ -222,6 +222,7 @@ export type RemoveTierNatsResponse = NatsResponse<{
  */
 export interface FindAllTiersNatsRequest {
     tenantId: string;
+    programId?: string;
 }
 /**
  * Find All Tiers Response

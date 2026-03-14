@@ -161,7 +161,7 @@ __decorate([
     __metadata("design:type", Array)
 ], LoyaltyProgramNatsResponse.prototype, "tiers", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Program statistics' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Program statistics', type: () => IndividualProgramStats }),
     __metadata("design:type", IndividualProgramStats)
 ], LoyaltyProgramNatsResponse.prototype, "stats", void 0);
 __decorate([

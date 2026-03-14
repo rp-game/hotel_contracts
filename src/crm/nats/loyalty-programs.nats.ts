@@ -181,7 +181,7 @@ export class LoyaltyProgramNatsResponse {
   @ApiPropertyOptional({ description: 'Program tiers', type: [LoyaltyTierNatsResponse] })
   tiers?: LoyaltyTierNatsResponse[];
 
-  @ApiPropertyOptional({ description: 'Program statistics' })
+  @ApiPropertyOptional({ description: 'Program statistics', type: () => IndividualProgramStats })
   stats?: IndividualProgramStats;
 
   @ApiProperty({ description: 'Creation timestamp', type: String })
@@ -314,6 +314,7 @@ export type RemoveTierNatsResponse = NatsResponse<{ message: string }>;
  */
 export interface FindAllTiersNatsRequest {
   tenantId: string;
+  programId?: string;
 }
 
 /**
