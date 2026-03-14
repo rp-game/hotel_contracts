@@ -72,4 +72,21 @@ export declare class MemberEnrollmentNatsRequest {
 export type MemberEnrollmentNatsResponse = NatsResponse<{
     message: string;
 }>;
+/**
+ * Tier Changed Event
+ * Pattern: crm.loyalty.tier-changed (fire-and-forget emit)
+ */
+export declare class TierChangedEventNatsPayload {
+    tenantId: string;
+    hotelId: string;
+    memberId: string;
+    customerId: string;
+    previousTierId?: string;
+    previousTierName?: string;
+    newTierId?: string;
+    newTierName?: string;
+    changeType: 'UPGRADE' | 'DOWNGRADE';
+    pointsAtTime: number;
+    lifetimePointsAtTime: number;
+}
 //# sourceMappingURL=loyalty-events.nats.d.ts.map

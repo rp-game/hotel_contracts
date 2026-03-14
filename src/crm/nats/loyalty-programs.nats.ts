@@ -24,6 +24,14 @@ import { NatsResponse } from '../../common';
 import { LoyaltyTierNatsResponse, FindAllLoyaltyTiersDto } from './loyalty-tiers.nats';
 
 /**
+ * Tier Basis — determines which points metric is used for tier qualification
+ */
+export enum TierBasis {
+  LIFETIME_POINTS = 'LIFETIME_POINTS',
+  POINTS_BALANCE = 'POINTS_BALANCE',
+}
+
+/**
  * Earning Rules
  */
 export interface EarningRulesRequest {
@@ -62,6 +70,7 @@ export interface CreateLoyaltyProgramNatsRequest {
   isActive?: boolean;
   earningRules?: EarningRulesRequest;
   redemptionRules?: RedemptionRulesRequest;
+  tierBasis?: TierBasis;
 }
 
 /**
@@ -177,6 +186,9 @@ export class LoyaltyProgramNatsResponse {
 
   @ApiPropertyOptional({ description: 'Redemption rules configuration' })
   redemptionRules?: RedemptionRulesResponse;
+
+  @ApiPropertyOptional({ enum: TierBasis, default: TierBasis.LIFETIME_POINTS, description: 'Which points metric is used for tier qualification' })
+  tierBasis?: TierBasis;
 
   @ApiPropertyOptional({ description: 'Program tiers', type: [LoyaltyTierNatsResponse] })
   tiers?: LoyaltyTierNatsResponse[];

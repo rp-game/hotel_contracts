@@ -28,10 +28,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SyncProgramsNatsRequest = exports.LoyaltyProgramsSyncData = exports.LoyaltyProgramSyncSummary = exports.LoyaltyProgramNatsResponse = exports.IndividualProgramStats = void 0;
+exports.SyncProgramsNatsRequest = exports.LoyaltyProgramsSyncData = exports.LoyaltyProgramSyncSummary = exports.LoyaltyProgramNatsResponse = exports.IndividualProgramStats = exports.TierBasis = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const loyalty_tiers_nats_1 = require("./loyalty-tiers.nats");
+/**
+ * Tier Basis — determines which points metric is used for tier qualification
+ */
+var TierBasis;
+(function (TierBasis) {
+    TierBasis["LIFETIME_POINTS"] = "LIFETIME_POINTS";
+    TierBasis["POINTS_BALANCE"] = "POINTS_BALANCE";
+})(TierBasis || (exports.TierBasis = TierBasis = {}));
 /**
  * Individual Loyalty Program Stats
  * Statistics for a single loyalty program - can be used in both NATS responses and REST API
@@ -109,6 +117,7 @@ class LoyaltyProgramNatsResponse {
     isActive;
     earningRules;
     redemptionRules;
+    tierBasis;
     tiers;
     stats;
     createdAt;
@@ -156,6 +165,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Redemption rules configuration' }),
     __metadata("design:type", Object)
 ], LoyaltyProgramNatsResponse.prototype, "redemptionRules", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: TierBasis, default: TierBasis.LIFETIME_POINTS, description: 'Which points metric is used for tier qualification' }),
+    __metadata("design:type", String)
+], LoyaltyProgramNatsResponse.prototype, "tierBasis", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Program tiers', type: [loyalty_tiers_nats_1.LoyaltyTierNatsResponse] }),
     __metadata("design:type", Array)

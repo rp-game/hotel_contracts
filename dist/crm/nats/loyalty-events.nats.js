@@ -20,7 +20,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MemberEnrollmentNatsRequest = exports.PointsAdjustmentNatsRequest = exports.BookingCompletedEventNatsRequest = void 0;
+exports.TierChangedEventNatsPayload = exports.MemberEnrollmentNatsRequest = exports.PointsAdjustmentNatsRequest = exports.BookingCompletedEventNatsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Booking Completed Event
@@ -173,4 +173,66 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'CRM customer UUID' }),
     __metadata("design:type", String)
 ], MemberEnrollmentNatsRequest.prototype, "customerId", void 0);
+/**
+ * Tier Changed Event
+ * Pattern: crm.loyalty.tier-changed (fire-and-forget emit)
+ */
+class TierChangedEventNatsPayload {
+    tenantId;
+    hotelId;
+    memberId;
+    customerId;
+    previousTierId;
+    previousTierName;
+    newTierId;
+    newTierName;
+    changeType;
+    pointsAtTime;
+    lifetimePointsAtTime;
+}
+exports.TierChangedEventNatsPayload = TierChangedEventNatsPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant UUID' }),
+    __metadata("design:type", String)
+], TierChangedEventNatsPayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel UUID' }),
+    __metadata("design:type", String)
+], TierChangedEventNatsPayload.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Loyalty member UUID' }),
+    __metadata("design:type", String)
+], TierChangedEventNatsPayload.prototype, "memberId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'CRM customer UUID' }),
+    __metadata("design:type", String)
+], TierChangedEventNatsPayload.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Previous tier ID (undefined if no previous tier)' }),
+    __metadata("design:type", String)
+], TierChangedEventNatsPayload.prototype, "previousTierId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Previous tier name' }),
+    __metadata("design:type", String)
+], TierChangedEventNatsPayload.prototype, "previousTierName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'New tier ID (undefined if tier stripped)' }),
+    __metadata("design:type", String)
+], TierChangedEventNatsPayload.prototype, "newTierId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'New tier name' }),
+    __metadata("design:type", String)
+], TierChangedEventNatsPayload.prototype, "newTierName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Type of tier change', enum: ['UPGRADE', 'DOWNGRADE'] }),
+    __metadata("design:type", String)
+], TierChangedEventNatsPayload.prototype, "changeType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Member points balance at time of change' }),
+    __metadata("design:type", Number)
+], TierChangedEventNatsPayload.prototype, "pointsAtTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Member lifetime points at time of change' }),
+    __metadata("design:type", Number)
+], TierChangedEventNatsPayload.prototype, "lifetimePointsAtTime", void 0);
 //# sourceMappingURL=loyalty-events.nats.js.map

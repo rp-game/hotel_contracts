@@ -20,6 +20,13 @@
 import { NatsResponse } from '../../common';
 import { LoyaltyTierNatsResponse, FindAllLoyaltyTiersDto } from './loyalty-tiers.nats';
 /**
+ * Tier Basis — determines which points metric is used for tier qualification
+ */
+export declare enum TierBasis {
+    LIFETIME_POINTS = "LIFETIME_POINTS",
+    POINTS_BALANCE = "POINTS_BALANCE"
+}
+/**
  * Earning Rules
  */
 export interface EarningRulesRequest {
@@ -54,6 +61,7 @@ export interface CreateLoyaltyProgramNatsRequest {
     isActive?: boolean;
     earningRules?: EarningRulesRequest;
     redemptionRules?: RedemptionRulesRequest;
+    tierBasis?: TierBasis;
 }
 /**
  * Tier Benefits
@@ -107,6 +115,7 @@ export declare class LoyaltyProgramNatsResponse {
     isActive: boolean;
     earningRules?: EarningRulesResponse;
     redemptionRules?: RedemptionRulesResponse;
+    tierBasis?: TierBasis;
     tiers?: LoyaltyTierNatsResponse[];
     stats?: IndividualProgramStats;
     createdAt: string | Date;

@@ -123,3 +123,42 @@ export class MemberEnrollmentNatsRequest {
  * Member Enrollment Response
  */
 export type MemberEnrollmentNatsResponse = NatsResponse<{ message: string }>;
+
+/**
+ * Tier Changed Event
+ * Pattern: crm.loyalty.tier-changed (fire-and-forget emit)
+ */
+export class TierChangedEventNatsPayload {
+  @ApiProperty({ description: 'Tenant UUID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel UUID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'Loyalty member UUID' })
+  memberId: string;
+
+  @ApiProperty({ description: 'CRM customer UUID' })
+  customerId: string;
+
+  @ApiPropertyOptional({ description: 'Previous tier ID (undefined if no previous tier)' })
+  previousTierId?: string;
+
+  @ApiPropertyOptional({ description: 'Previous tier name' })
+  previousTierName?: string;
+
+  @ApiPropertyOptional({ description: 'New tier ID (undefined if tier stripped)' })
+  newTierId?: string;
+
+  @ApiPropertyOptional({ description: 'New tier name' })
+  newTierName?: string;
+
+  @ApiProperty({ description: 'Type of tier change', enum: ['UPGRADE', 'DOWNGRADE'] })
+  changeType: 'UPGRADE' | 'DOWNGRADE';
+
+  @ApiProperty({ description: 'Member points balance at time of change' })
+  pointsAtTime: number;
+
+  @ApiProperty({ description: 'Member lifetime points at time of change' })
+  lifetimePointsAtTime: number;
+}
