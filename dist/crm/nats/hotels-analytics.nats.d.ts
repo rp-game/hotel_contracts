@@ -25,9 +25,11 @@ export interface GetCustomerRetentionAnalyticsNatsRequest {
     hotelId: string;
     period: string;
 }
-export interface SyncLoyaltyProgramsAcrossChainNatsRequest {
+export declare class SyncLoyaltyProgramsAcrossChainNatsRequest {
+    tenantId: string;
     chainId: string;
     hotelIds: string[];
+    period?: string;
 }
 export interface GetCustomerDemographicsNatsRequest {
     hotelId: string;
@@ -194,7 +196,7 @@ export interface CustomerRetentionAnalyticsData {
     churnAnalysis: ChurnAnalysisData;
     lastUpdated: string;
 }
-export interface ProgramDetailData {
+export declare class ProgramDetailData {
     programId: string;
     hotelId: string;
     programName: string;
@@ -202,12 +204,12 @@ export interface ProgramDetailData {
     memberCount: number;
     syncTimestamp: string;
 }
-export interface SyncErrorData {
+export declare class SyncErrorData {
     hotelId: string;
     errorMessage: string;
     timestamp: string;
 }
-export interface LoyaltyProgramSyncData {
+export declare class LoyaltyProgramSyncData {
     chainId: string;
     hotelIds: string[];
     syncStatus: string;

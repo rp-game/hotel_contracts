@@ -3,6 +3,8 @@
  * Defines request/response types for hotel-level analytics operations
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+
 // ============================================================================
 // REQUEST TYPES
 // ============================================================================
@@ -36,9 +38,18 @@ export interface GetCustomerRetentionAnalyticsNatsRequest {
   period: string;
 }
 
-export interface SyncLoyaltyProgramsAcrossChainNatsRequest {
+export class SyncLoyaltyProgramsAcrossChainNatsRequest {
+  @ApiProperty({ description: 'Tenant ID (chain owner)' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel chain ID' })
   chainId: string;
+
+  @ApiProperty({ type: [String], description: 'Hotel IDs to sync' })
   hotelIds: string[];
+
+  @ApiPropertyOptional({ description: 'Reporting period (e.g. monthly)' })
+  period?: string;
 }
 
 export interface GetCustomerDemographicsNatsRequest {
@@ -233,28 +244,57 @@ export interface CustomerRetentionAnalyticsData {
   lastUpdated: string;
 }
 
-export interface ProgramDetailData {
+export class ProgramDetailData {
+  @ApiProperty({ description: 'Loyalty program ID' })
   programId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiProperty({ description: 'Program name' })
   programName: string;
+
+  @ApiProperty({ description: 'Sync status' })
   syncStatus: string;
+
+  @ApiProperty({ description: 'Number of enrolled members' })
   memberCount: number;
+
+  @ApiProperty({ description: 'Sync timestamp (ISO string)' })
   syncTimestamp: string;
 }
 
-export interface SyncErrorData {
+export class SyncErrorData {
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+
+  @ApiProperty({ description: 'Error message' })
   errorMessage: string;
+
+  @ApiProperty({ description: 'Error timestamp (ISO string)' })
   timestamp: string;
 }
 
-export interface LoyaltyProgramSyncData {
+export class LoyaltyProgramSyncData {
+  @ApiProperty({ description: 'Chain ID' })
   chainId: string;
+
+  @ApiProperty({ type: [String], description: 'Hotel IDs in the chain' })
   hotelIds: string[];
+
+  @ApiProperty({ description: 'Overall sync status' })
   syncStatus: string;
+
+  @ApiProperty({ description: 'Number of programs synced' })
   totalProgramsSynced: number;
+
+  @ApiProperty({ type: () => [ProgramDetailData] })
   programDetails: ProgramDetailData[];
+
+  @ApiProperty({ description: 'Sync timestamp (ISO string)' })
   syncTimestamp: string;
+
+  @ApiProperty({ type: () => [SyncErrorData] })
   errors: SyncErrorData[];
 }
 

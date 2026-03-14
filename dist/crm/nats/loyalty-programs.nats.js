@@ -28,7 +28,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoyaltyProgramNatsResponse = exports.IndividualProgramStats = void 0;
+exports.SyncProgramsNatsRequest = exports.LoyaltyProgramsSyncData = exports.LoyaltyProgramSyncSummary = exports.LoyaltyProgramNatsResponse = exports.IndividualProgramStats = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const loyalty_tiers_nats_1 = require("./loyalty-tiers.nats");
@@ -176,4 +176,104 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Deletion timestamp', type: String }),
     __metadata("design:type", Object)
 ], LoyaltyProgramNatsResponse.prototype, "deletedAt", void 0);
+/**
+ * Program Sync — inline program summary
+ */
+class LoyaltyProgramSyncSummary {
+    id;
+    name;
+    type;
+    isActive;
+    pointsPerDollar;
+    tierCount;
+    memberCount;
+}
+exports.LoyaltyProgramSyncSummary = LoyaltyProgramSyncSummary;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Program ID' }),
+    __metadata("design:type", String)
+], LoyaltyProgramSyncSummary.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Program name' }),
+    __metadata("design:type", String)
+], LoyaltyProgramSyncSummary.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Program type', example: 'points' }),
+    __metadata("design:type", String)
+], LoyaltyProgramSyncSummary.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether the program is active' }),
+    __metadata("design:type", Boolean)
+], LoyaltyProgramSyncSummary.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Points earned per dollar spent' }),
+    __metadata("design:type", Number)
+], LoyaltyProgramSyncSummary.prototype, "pointsPerDollar", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of tiers' }),
+    __metadata("design:type", Number)
+], LoyaltyProgramSyncSummary.prototype, "tierCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of enrolled members' }),
+    __metadata("design:type", Number)
+], LoyaltyProgramSyncSummary.prototype, "memberCount", void 0);
+/**
+ * Program Sync Response data
+ * Pattern: loyalty.programs.sync
+ */
+class LoyaltyProgramsSyncData {
+    totalPrograms;
+    activePrograms;
+    programs;
+    totalMembers;
+    totalPointsIssued;
+    totalPointsRedeemed;
+    period;
+}
+exports.LoyaltyProgramsSyncData = LoyaltyProgramsSyncData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total number of loyalty programs' }),
+    __metadata("design:type", Number)
+], LoyaltyProgramsSyncData.prototype, "totalPrograms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of active programs' }),
+    __metadata("design:type", Number)
+], LoyaltyProgramsSyncData.prototype, "activePrograms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: () => [LoyaltyProgramSyncSummary] }),
+    __metadata("design:type", Array)
+], LoyaltyProgramsSyncData.prototype, "programs", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total enrolled members' }),
+    __metadata("design:type", Number)
+], LoyaltyProgramsSyncData.prototype, "totalMembers", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total points issued across all programs' }),
+    __metadata("design:type", Number)
+], LoyaltyProgramsSyncData.prototype, "totalPointsIssued", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total points redeemed across all programs' }),
+    __metadata("design:type", Number)
+], LoyaltyProgramsSyncData.prototype, "totalPointsRedeemed", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reporting period' }),
+    __metadata("design:type", String)
+], LoyaltyProgramsSyncData.prototype, "period", void 0);
+/**
+ * Sync Programs Request
+ * Pattern: loyalty.programs.sync
+ */
+class SyncProgramsNatsRequest {
+    tenantId;
+    period;
+}
+exports.SyncProgramsNatsRequest = SyncProgramsNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], SyncProgramsNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reporting period (e.g. monthly, yearly)' }),
+    __metadata("design:type", String)
+], SyncProgramsNatsRequest.prototype, "period", void 0);
 //# sourceMappingURL=loyalty-programs.nats.js.map

@@ -250,20 +250,25 @@ export interface ProgramStatsNatsRequest {
  */
 export type ProgramStatsNatsResponse = NatsResponse<LoyaltyProgramStats>;
 /**
- * Program Sync Response
+ * Program Sync — inline program summary
  */
-export interface LoyaltyProgramsSyncData {
+export declare class LoyaltyProgramSyncSummary {
+    id: string;
+    name: string;
+    type: string;
+    isActive: boolean;
+    pointsPerDollar: number;
+    tierCount: number;
+    memberCount: number;
+}
+/**
+ * Program Sync Response data
+ * Pattern: loyalty.programs.sync
+ */
+export declare class LoyaltyProgramsSyncData {
     totalPrograms: number;
     activePrograms: number;
-    programs: Array<{
-        id: string;
-        name: string;
-        type: string;
-        isActive: boolean;
-        pointsPerDollar: any;
-        tierCount: number;
-        memberCount: number;
-    }>;
+    programs: LoyaltyProgramSyncSummary[];
     totalMembers: number;
     totalPointsIssued: number;
     totalPointsRedeemed: number;
@@ -273,8 +278,8 @@ export interface LoyaltyProgramsSyncData {
  * Sync Programs Request
  * Pattern: loyalty.programs.sync
  */
-export interface SyncProgramsNatsRequest {
-    hotelId: string;
+export declare class SyncProgramsNatsRequest {
+    tenantId: string;
     period: string;
 }
 /**

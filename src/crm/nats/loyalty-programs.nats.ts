@@ -347,23 +347,55 @@ export interface ProgramStatsNatsRequest {
 export type ProgramStatsNatsResponse = NatsResponse<LoyaltyProgramStats>;
 
 /**
- * Program Sync Response
+ * Program Sync — inline program summary
  */
-export interface LoyaltyProgramsSyncData {
+export class LoyaltyProgramSyncSummary {
+  @ApiProperty({ description: 'Program ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Program name' })
+  name: string;
+
+  @ApiProperty({ description: 'Program type', example: 'points' })
+  type: string;
+
+  @ApiProperty({ description: 'Whether the program is active' })
+  isActive: boolean;
+
+  @ApiProperty({ description: 'Points earned per dollar spent' })
+  pointsPerDollar: number;
+
+  @ApiProperty({ description: 'Number of tiers' })
+  tierCount: number;
+
+  @ApiProperty({ description: 'Number of enrolled members' })
+  memberCount: number;
+}
+
+/**
+ * Program Sync Response data
+ * Pattern: loyalty.programs.sync
+ */
+export class LoyaltyProgramsSyncData {
+  @ApiProperty({ description: 'Total number of loyalty programs' })
   totalPrograms: number;
+
+  @ApiProperty({ description: 'Number of active programs' })
   activePrograms: number;
-  programs: Array<{
-    id: string;
-    name: string;
-    type: string;
-    isActive: boolean;
-    pointsPerDollar: any;
-    tierCount: number;
-    memberCount: number;
-  }>;
+
+  @ApiProperty({ type: () => [LoyaltyProgramSyncSummary] })
+  programs: LoyaltyProgramSyncSummary[];
+
+  @ApiProperty({ description: 'Total enrolled members' })
   totalMembers: number;
+
+  @ApiProperty({ description: 'Total points issued across all programs' })
   totalPointsIssued: number;
+
+  @ApiProperty({ description: 'Total points redeemed across all programs' })
   totalPointsRedeemed: number;
+
+  @ApiProperty({ description: 'Reporting period' })
   period: string;
 }
 
@@ -371,8 +403,11 @@ export interface LoyaltyProgramsSyncData {
  * Sync Programs Request
  * Pattern: loyalty.programs.sync
  */
-export interface SyncProgramsNatsRequest {
-  hotelId: string;
+export class SyncProgramsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Reporting period (e.g. monthly, yearly)' })
   period: string;
 }
 
