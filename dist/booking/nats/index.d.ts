@@ -47,4 +47,5 @@ export * from './booking-lookup.nats';
 export * from './assign-room.nats';
 export * from './payment-events.nats';
 export * from './occupancy.nats';
+export * from './member-revenue.nats';
 //# sourceMappingURL=index.d.ts.map

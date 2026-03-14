@@ -71,4 +71,5 @@ __exportStar(require("./booking-lookup.nats"), exports);
 __exportStar(require("./assign-room.nats"), exports);
 __exportStar(require("./payment-events.nats"), exports);
 __exportStar(require("./occupancy.nats"), exports);
+__exportStar(require("./member-revenue.nats"), exports);
 //# sourceMappingURL=index.js.map
