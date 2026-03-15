@@ -1,6 +1,6 @@
 {
   "name": "@hotel/contracts",
-  "version": "0.1.456",
+  "version": "0.1.457",
   "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -164,6 +164,14 @@
     "./notification/rest": {
       "types": "./dist/notification/rest/index.d.ts",
       "default": "./dist/notification/rest/index.js"
+    },
+    "./notification/providers": {
+      "types": "./dist/notification/providers/index.d.ts",
+      "default": "./dist/notification/providers/index.js"
+    },
+    "./notification/websocket": {
+      "types": "./dist/notification/websocket/index.d.ts",
+      "default": "./dist/notification/websocket/index.js"
     },
     "./ota": {
       "types": "./dist/ota/index.d.ts",
@@ -410,6 +418,12 @@
       ],
       "notification/rest": [
         "dist/notification/rest/index.d.ts"
+      ],
+      "notification/providers": [
+        "dist/notification/providers/index.d.ts"
+      ],
+      "notification/websocket": [
+        "dist/notification/websocket/index.d.ts"
       ],
       "ota": [
         "dist/ota/index.d.ts"

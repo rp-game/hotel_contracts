@@ -135,6 +135,11 @@ export declare class SendStaffNotificationMultiNatsRequest {
     imageUrl?: string;
     scheduledFor?: string;
     channels?: NotificationChannel[];
+    recipients?: Array<{
+        staffId: string;
+        email?: string;
+        phone?: string;
+    }>;
 }
 export declare class SendNotificationResponseDto {
     success: boolean;

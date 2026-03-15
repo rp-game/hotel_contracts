@@ -558,6 +558,7 @@ class SendStaffNotificationMultiNatsRequest {
     imageUrl;
     scheduledFor;
     channels;
+    recipients;
 }
 exports.SendStaffNotificationMultiNatsRequest = SendStaffNotificationMultiNatsRequest;
 __decorate([
@@ -626,6 +627,16 @@ __decorate([
     (0, class_validator_1.IsEnum)(notification_enum_1.NotificationChannel, { each: true }),
     __metadata("design:type", Array)
 ], SendStaffNotificationMultiNatsRequest.prototype, "channels", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Recipients with contact info for EMAIL/SMS channels',
+        type: 'array',
+        items: { type: 'object' },
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    __metadata("design:type", Array)
+], SendStaffNotificationMultiNatsRequest.prototype, "recipients", void 0);
 class SendNotificationResponseDto {
     success;
     messageId;

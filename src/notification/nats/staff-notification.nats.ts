@@ -420,6 +420,19 @@ export class SendStaffNotificationMultiNatsRequest {
   @IsArray()
   @IsEnum(NotificationChannel, { each: true })
   channels?: NotificationChannel[];
+
+  @ApiPropertyOptional({
+    description: 'Recipients with contact info for EMAIL/SMS channels',
+    type: 'array',
+    items: { type: 'object' },
+  })
+  @IsOptional()
+  @IsArray()
+  recipients?: Array<{
+    staffId: string;
+    email?: string;
+    phone?: string;
+  }>;
 }
 
 export class SendNotificationResponseDto {
