@@ -2,26 +2,6 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsEnum } from 'class-validator';
 import { NotificationType, NotificationPriority } from '../enums/notification.enum';
 
-// ============= WS BROADCAST PAYLOAD =============
-
-export class WsBroadcastPayload {
-  @ApiProperty({ description: 'Target staff ID (for personal room)' })
-  @IsOptional()
-  @IsString()
-  staffId?: string;
-
-  @ApiProperty({ description: 'Hotel ID (for hotel-wide room)' })
-  @IsString()
-  hotelId: string;
-
-  @ApiProperty({ description: 'Tenant ID (for tenant-wide room)' })
-  @IsString()
-  tenantId: string;
-
-  @ApiProperty({ description: 'Notification event data' })
-  event: WsNotificationEvent;
-}
-
 // ============= WS NOTIFICATION EVENT =============
 
 export class WsNotificationEvent {
@@ -52,4 +32,24 @@ export class WsNotificationEvent {
   @ApiProperty({ description: 'Timestamp' })
   @IsString()
   timestamp: string;
+}
+
+// ============= WS BROADCAST PAYLOAD =============
+
+export class WsBroadcastPayload {
+  @ApiProperty({ description: 'Target staff ID (for personal room)' })
+  @IsOptional()
+  @IsString()
+  staffId?: string;
+
+  @ApiProperty({ description: 'Hotel ID (for hotel-wide room)' })
+  @IsString()
+  hotelId: string;
+
+  @ApiProperty({ description: 'Tenant ID (for tenant-wide room)' })
+  @IsString()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Notification event data', type: () => WsNotificationEvent })
+  event: WsNotificationEvent;
 }

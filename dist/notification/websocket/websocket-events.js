@@ -9,38 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WsNotificationEvent = exports.WsBroadcastPayload = void 0;
+exports.WsBroadcastPayload = exports.WsNotificationEvent = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const notification_enum_1 = require("../enums/notification.enum");
-// ============= WS BROADCAST PAYLOAD =============
-class WsBroadcastPayload {
-    staffId;
-    hotelId;
-    tenantId;
-    event;
-}
-exports.WsBroadcastPayload = WsBroadcastPayload;
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Target staff ID (for personal room)' }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], WsBroadcastPayload.prototype, "staffId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID (for hotel-wide room)' }),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], WsBroadcastPayload.prototype, "hotelId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Tenant ID (for tenant-wide room)' }),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], WsBroadcastPayload.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Notification event data' }),
-    __metadata("design:type", WsNotificationEvent)
-], WsBroadcastPayload.prototype, "event", void 0);
 // ============= WS NOTIFICATION EVENT =============
 class WsNotificationEvent {
     notificationId;
@@ -87,4 +59,32 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], WsNotificationEvent.prototype, "timestamp", void 0);
+// ============= WS BROADCAST PAYLOAD =============
+class WsBroadcastPayload {
+    staffId;
+    hotelId;
+    tenantId;
+    event;
+}
+exports.WsBroadcastPayload = WsBroadcastPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Target staff ID (for personal room)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], WsBroadcastPayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID (for hotel-wide room)' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], WsBroadcastPayload.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID (for tenant-wide room)' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], WsBroadcastPayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notification event data', type: () => WsNotificationEvent }),
+    __metadata("design:type", WsNotificationEvent)
+], WsBroadcastPayload.prototype, "event", void 0);
 //# sourceMappingURL=websocket-events.js.map
