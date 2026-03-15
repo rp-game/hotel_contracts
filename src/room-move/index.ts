@@ -1,5 +1,10 @@
 // Export enums
-export { RoomMoveStatus, RoomMovePriority } from './enums';
+export {
+  RoomMoveStatus,
+  RoomMovePriority,
+  RoomMoveReason,
+  RoomMoveType,
+} from './enums';
 
 // Export types
 export type {
@@ -39,3 +44,20 @@ export type {
   QuickRoomMovePricingEstimateRequest,
   QuickRoomMovePricingEstimateNatsResponse,
 } from './nats';
+
+// Export REST DTOs
+export {
+  InitiateRoomMoveDto,
+  ApproveRoomMoveDto,
+  RejectRoomMoveDto,
+  ScheduleRoomMoveDto,
+  ExecuteRoomMoveDto,
+  CancelRoomMoveDto,
+  QuickTransferRoomDto,
+  CalculateMovePricingDto,
+  RoomMoveResponseDto,
+  RoomMoveSearchResponseDto,
+  AvailableRoomResponseDto,
+  RoomMovePricingResponseDto,
+  RoomMoveDashboardStatsDto,
+} from './rest';
