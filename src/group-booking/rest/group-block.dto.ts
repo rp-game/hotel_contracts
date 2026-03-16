@@ -60,6 +60,11 @@ export class CreateBlockAllocationDto {
  * DTO for creating a new group block
  */
 export class CreateGroupBlockDto {
+  @ApiPropertyOptional({ description: 'Hotel ID (required if not in JWT)' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+
   @ApiProperty({ description: 'Group name' })
   @IsString()
   @IsNotEmpty()
@@ -285,6 +290,11 @@ export class UpdateBlockAllocationDto {
  * Query DTO for listing group blocks
  */
 export class FindGroupBlocksQueryDto {
+  @ApiPropertyOptional({ description: 'Hotel ID (required if not in JWT)' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+
   @ApiPropertyOptional({ description: 'Filter by status', enum: GroupBlockStatus })
   @IsOptional()
   @IsEnum(GroupBlockStatus)

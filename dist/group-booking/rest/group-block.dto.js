@@ -70,6 +70,7 @@ __decorate([
  * DTO for creating a new group block
  */
 class CreateGroupBlockDto {
+    hotelId;
     groupName;
     organizerName;
     organizerEmail;
@@ -91,6 +92,12 @@ class CreateGroupBlockDto {
     allocations;
 }
 exports.CreateGroupBlockDto = CreateGroupBlockDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (required if not in JWT)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateGroupBlockDto.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Group name' }),
     (0, class_validator_1.IsString)(),
@@ -381,6 +388,7 @@ __decorate([
  * Query DTO for listing group blocks
  */
 class FindGroupBlocksQueryDto {
+    hotelId;
     status;
     search;
     checkInDateStart;
@@ -393,6 +401,12 @@ class FindGroupBlocksQueryDto {
     sortOrder;
 }
 exports.FindGroupBlocksQueryDto = FindGroupBlocksQueryDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (required if not in JWT)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindGroupBlocksQueryDto.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by status', enum: group_block_enum_1.GroupBlockStatus }),
     (0, class_validator_1.IsOptional)(),

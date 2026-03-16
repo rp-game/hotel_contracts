@@ -21,6 +21,7 @@ export declare class CreateBlockAllocationDto {
  * DTO for creating a new group block
  */
 export declare class CreateGroupBlockDto {
+    hotelId?: string;
     groupName: string;
     organizerName?: string;
     organizerEmail?: string;
@@ -82,6 +83,7 @@ export declare class UpdateBlockAllocationDto {
  * Query DTO for listing group blocks
  */
 export declare class FindGroupBlocksQueryDto {
+    hotelId?: string;
     status?: GroupBlockStatus;
     search?: string;
     checkInDateStart?: string;
