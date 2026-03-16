@@ -14,7 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GroupMasterFolioDto = exports.GroupFolioSummaryDto = exports.GroupFolioBookingItemDto = exports.BatchCheckInResultDto = exports.BatchCheckInResultItemDto = exports.GroupBlockBookingSummaryDto = exports.GroupBlockResponseDto = exports.GroupBlockListResponseDto = void 0;
+exports.GroupMasterFolioDto = exports.GroupFolioSummaryDto = exports.GroupFolioBookingItemDto = exports.BatchRoomAssignResultDto = exports.BatchRoomAssignResultItemDto = exports.BatchCheckInResultDto = exports.BatchCheckInResultItemDto = exports.GroupBlockBookingSummaryDto = exports.GroupBlockResponseDto = exports.GroupBlockListResponseDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const group_block_types_1 = require("../types/group-block.types");
 /**
@@ -67,12 +67,15 @@ class GroupBlockBookingSummaryDto {
     guestPhone;
     roomTypeName;
     roomNumber;
+    roomId;
+    roomTypeId;
     checkInDate;
     checkOutDate;
     status;
     totalAmount;
     adultCount;
     childCount;
+    preRegistrationStatus;
 }
 exports.GroupBlockBookingSummaryDto = GroupBlockBookingSummaryDto;
 __decorate([
@@ -100,6 +103,14 @@ __decorate([
     __metadata("design:type", Object)
 ], GroupBlockBookingSummaryDto.prototype, "roomNumber", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true, description: 'Room ID for room assignment' }),
+    __metadata("design:type", Object)
+], GroupBlockBookingSummaryDto.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true, description: 'Room type ID for filtering available rooms' }),
+    __metadata("design:type", Object)
+], GroupBlockBookingSummaryDto.prototype, "roomTypeId", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], GroupBlockBookingSummaryDto.prototype, "checkInDate", void 0);
@@ -123,6 +134,10 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], GroupBlockBookingSummaryDto.prototype, "childCount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true, description: 'Pre-registration status: NOT_STARTED | PARTIAL | COMPLETE' }),
+    __metadata("design:type", Object)
+], GroupBlockBookingSummaryDto.prototype, "preRegistrationStatus", void 0);
 // =================== Batch Check-In ===================
 class BatchCheckInResultItemDto {
     bookingId;
@@ -170,6 +185,58 @@ __decorate([
     (0, swagger_1.ApiProperty)({ type: [BatchCheckInResultItemDto] }),
     __metadata("design:type", Array)
 ], BatchCheckInResultDto.prototype, "results", void 0);
+// =================== Batch Room Assignment ===================
+class BatchRoomAssignResultItemDto {
+    bookingId;
+    roomId;
+    roomNumber;
+    success;
+    error;
+}
+exports.BatchRoomAssignResultItemDto = BatchRoomAssignResultItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], BatchRoomAssignResultItemDto.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], BatchRoomAssignResultItemDto.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], BatchRoomAssignResultItemDto.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Boolean)
+], BatchRoomAssignResultItemDto.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], BatchRoomAssignResultItemDto.prototype, "error", void 0);
+class BatchRoomAssignResultDto {
+    total;
+    succeeded;
+    failed;
+    results;
+}
+exports.BatchRoomAssignResultDto = BatchRoomAssignResultDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], BatchRoomAssignResultDto.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], BatchRoomAssignResultDto.prototype, "succeeded", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], BatchRoomAssignResultDto.prototype, "failed", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [BatchRoomAssignResultItemDto] }),
+    __metadata("design:type", Array)
+], BatchRoomAssignResultDto.prototype, "results", void 0);
 // =================== Master Folio ===================
 class GroupFolioBookingItemDto {
     bookingId;

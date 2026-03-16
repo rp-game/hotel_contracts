@@ -27,12 +27,15 @@ export declare class GroupBlockBookingSummaryDto {
     guestPhone: string;
     roomTypeName: string;
     roomNumber: string | null;
+    roomId: string | null;
+    roomTypeId: string | null;
     checkInDate: string;
     checkOutDate: string;
     status: string;
     totalAmount: number;
     adultCount: number;
     childCount: number;
+    preRegistrationStatus: string | null;
 }
 export declare class BatchCheckInResultItemDto {
     bookingId: string;
@@ -45,6 +48,19 @@ export declare class BatchCheckInResultDto {
     succeeded: number;
     failed: number;
     results: BatchCheckInResultItemDto[];
+}
+export declare class BatchRoomAssignResultItemDto {
+    bookingId: string;
+    roomId: string;
+    roomNumber: string;
+    success: boolean;
+    error?: string;
+}
+export declare class BatchRoomAssignResultDto {
+    total: number;
+    succeeded: number;
+    failed: number;
+    results: BatchRoomAssignResultItemDto[];
 }
 export declare class GroupFolioBookingItemDto {
     bookingId: string;

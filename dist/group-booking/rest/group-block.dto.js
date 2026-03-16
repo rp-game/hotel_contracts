@@ -16,7 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BatchCheckInDto = exports.FindGroupBlocksQueryDto = exports.UpdateBlockAllocationDto = exports.UpdateGroupBlockStatusDto = exports.UpdateGroupBlockDto = exports.CreateGroupBlockDto = exports.CreateBlockAllocationDto = void 0;
+exports.BatchRoomAssignDto = exports.BatchRoomAssignItemDto = exports.BatchCheckInDto = exports.FindGroupBlocksQueryDto = exports.UpdateBlockAllocationDto = exports.UpdateGroupBlockStatusDto = exports.UpdateGroupBlockDto = exports.CreateGroupBlockDto = exports.CreateBlockAllocationDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -475,6 +475,7 @@ __decorate([
 class BatchCheckInDto {
     bookingIds;
     notes;
+    mode;
 }
 exports.BatchCheckInDto = BatchCheckInDto;
 __decorate([
@@ -489,4 +490,49 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], BatchCheckInDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Check-in mode: EXPRESS skips guest processing, FULL is standard', enum: ['EXPRESS', 'FULL'], default: 'EXPRESS' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsIn)(['EXPRESS', 'FULL']),
+    __metadata("design:type", String)
+], BatchCheckInDto.prototype, "mode", void 0);
+/**
+ * Single room assignment item for batch room assignment
+ */
+class BatchRoomAssignItemDto {
+    bookingId;
+    roomId;
+    roomNumber;
+}
+exports.BatchRoomAssignItemDto = BatchRoomAssignItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Booking ID to assign room to' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], BatchRoomAssignItemDto.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room ID to assign' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], BatchRoomAssignItemDto.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room number' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], BatchRoomAssignItemDto.prototype, "roomNumber", void 0);
+/**
+ * Batch room assignment DTO — assign rooms to multiple group bookings at once
+ */
+class BatchRoomAssignDto {
+    assignments;
+}
+exports.BatchRoomAssignDto = BatchRoomAssignDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'List of room assignments', type: [BatchRoomAssignItemDto] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => BatchRoomAssignItemDto),
+    __metadata("design:type", Array)
+], BatchRoomAssignDto.prototype, "assignments", void 0);
 //# sourceMappingURL=group-block.dto.js.map

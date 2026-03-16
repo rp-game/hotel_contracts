@@ -27,12 +27,15 @@ export interface GroupBlockBookingSummary {
     guestPhone: string;
     roomTypeName: string;
     roomNumber: string | null;
+    roomId: string | null;
+    roomTypeId: string | null;
     checkInDate: string;
     checkOutDate: string;
     status: string;
     totalAmount: number;
     adultCount: number;
     childCount: number;
+    preRegistrationStatus: string | null;
 }
 export type GetGroupBlockBookingsNatsResponse = NatsResponse<GroupBlockBookingSummary[]>;
 /**
@@ -41,10 +44,13 @@ export type GetGroupBlockBookingsNatsResponse = NatsResponse<GroupBlockBookingSu
 export interface BatchCheckInNatsRequest {
     tenantId: string;
     hotelId: string;
+    groupBlockId?: string;
     bookingIds: string[];
     checkedInBy: string;
     checkedInByName: string;
     notes?: string;
+    /** Check-in mode: EXPRESS skips guest processing for pre-registered guests, FULL is standard. Default: EXPRESS */
+    mode?: 'EXPRESS' | 'FULL';
 }
 export interface BatchCheckInResult {
     total: number;

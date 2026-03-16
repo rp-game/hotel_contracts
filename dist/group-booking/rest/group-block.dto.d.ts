@@ -101,5 +101,20 @@ export declare class FindGroupBlocksQueryDto {
 export declare class BatchCheckInDto {
     bookingIds: string[];
     notes?: string;
+    mode?: 'EXPRESS' | 'FULL';
+}
+/**
+ * Single room assignment item for batch room assignment
+ */
+export declare class BatchRoomAssignItemDto {
+    bookingId: string;
+    roomId: string;
+    roomNumber: string;
+}
+/**
+ * Batch room assignment DTO — assign rooms to multiple group bookings at once
+ */
+export declare class BatchRoomAssignDto {
+    assignments: BatchRoomAssignItemDto[];
 }
 //# sourceMappingURL=group-block.dto.d.ts.map

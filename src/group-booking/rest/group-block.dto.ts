@@ -18,6 +18,7 @@ import {
   IsNumber,
   IsUUID,
   IsArray,
+  IsIn,
   ValidateNested,
   Min,
 } from 'class-validator';
@@ -361,4 +362,38 @@ export class BatchCheckInDto {
   @IsOptional()
   @IsString()
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Check-in mode: EXPRESS skips guest processing, FULL is standard', enum: ['EXPRESS', 'FULL'], default: 'EXPRESS' })
+  @IsOptional()
+  @IsIn(['EXPRESS', 'FULL'])
+  mode?: 'EXPRESS' | 'FULL';
+}
+
+/**
+ * Single room assignment item for batch room assignment
+ */
+export class BatchRoomAssignItemDto {
+  @ApiProperty({ description: 'Booking ID to assign room to' })
+  @IsUUID()
+  bookingId: string;
+
+  @ApiProperty({ description: 'Room ID to assign' })
+  @IsUUID()
+  roomId: string;
+
+  @ApiProperty({ description: 'Room number' })
+  @IsString()
+  @IsNotEmpty()
+  roomNumber: string;
+}
+
+/**
+ * Batch room assignment DTO — assign rooms to multiple group bookings at once
+ */
+export class BatchRoomAssignDto {
+  @ApiProperty({ description: 'List of room assignments', type: [BatchRoomAssignItemDto] })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => BatchRoomAssignItemDto)
+  assignments: BatchRoomAssignItemDto[];
 }

@@ -44,12 +44,15 @@ export class GroupBlockBookingSummaryDto {
   @ApiProperty() guestPhone: string;
   @ApiProperty() roomTypeName: string;
   @ApiPropertyOptional({ type: String, nullable: true }) roomNumber: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true, description: 'Room ID for room assignment' }) roomId: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true, description: 'Room type ID for filtering available rooms' }) roomTypeId: string | null;
   @ApiProperty() checkInDate: string;
   @ApiProperty() checkOutDate: string;
   @ApiProperty() status: string;
   @ApiProperty() totalAmount: number;
   @ApiProperty() adultCount: number;
   @ApiProperty() childCount: number;
+  @ApiPropertyOptional({ type: String, nullable: true, description: 'Pre-registration status: NOT_STARTED | PARTIAL | COMPLETE' }) preRegistrationStatus: string | null;
 }
 
 // =================== Batch Check-In ===================
@@ -66,6 +69,23 @@ export class BatchCheckInResultDto {
   @ApiProperty() succeeded: number;
   @ApiProperty() failed: number;
   @ApiProperty({ type: [BatchCheckInResultItemDto] }) results: BatchCheckInResultItemDto[];
+}
+
+// =================== Batch Room Assignment ===================
+
+export class BatchRoomAssignResultItemDto {
+  @ApiProperty() bookingId: string;
+  @ApiProperty() roomId: string;
+  @ApiProperty() roomNumber: string;
+  @ApiProperty() success: boolean;
+  @ApiPropertyOptional() error?: string;
+}
+
+export class BatchRoomAssignResultDto {
+  @ApiProperty() total: number;
+  @ApiProperty() succeeded: number;
+  @ApiProperty() failed: number;
+  @ApiProperty({ type: [BatchRoomAssignResultItemDto] }) results: BatchRoomAssignResultItemDto[];
 }
 
 // =================== Master Folio ===================
