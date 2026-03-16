@@ -21,4 +21,5 @@ __exportStar(require("./get-group-block.nats"), exports);
 __exportStar(require("./update-group-block-status.nats"), exports);
 __exportStar(require("./manage-allocations.nats"), exports);
 __exportStar(require("./group-block-stats.nats"), exports);
+__exportStar(require("./batch-check-in.nats"), exports);
 //# sourceMappingURL=index.js.map

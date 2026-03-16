@@ -5,4 +5,5 @@ export * from './get-group-block.nats';
 export * from './update-group-block-status.nats';
 export * from './manage-allocations.nats';
 export * from './group-block-stats.nats';
+export * from './batch-check-in.nats';
 //# sourceMappingURL=index.d.ts.map

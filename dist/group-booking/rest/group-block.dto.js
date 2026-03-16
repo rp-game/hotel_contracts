@@ -16,7 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FindGroupBlocksQueryDto = exports.UpdateBlockAllocationDto = exports.UpdateGroupBlockStatusDto = exports.UpdateGroupBlockDto = exports.CreateGroupBlockDto = exports.CreateBlockAllocationDto = void 0;
+exports.BatchCheckInDto = exports.FindGroupBlocksQueryDto = exports.UpdateBlockAllocationDto = exports.UpdateGroupBlockStatusDto = exports.UpdateGroupBlockDto = exports.CreateGroupBlockDto = exports.CreateBlockAllocationDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -469,4 +469,24 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], FindGroupBlocksQueryDto.prototype, "sortOrder", void 0);
+/**
+ * Batch check-in DTO — check in multiple group bookings at once
+ */
+class BatchCheckInDto {
+    bookingIds;
+    notes;
+}
+exports.BatchCheckInDto = BatchCheckInDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'List of booking IDs to check in', type: [String] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsUUID)('4', { each: true }),
+    __metadata("design:type", Array)
+], BatchCheckInDto.prototype, "bookingIds", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Check-in notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BatchCheckInDto.prototype, "notes", void 0);
 //# sourceMappingURL=group-block.dto.js.map

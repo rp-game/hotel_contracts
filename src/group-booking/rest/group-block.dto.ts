@@ -347,3 +347,18 @@ export class FindGroupBlocksQueryDto {
   @IsString()
   sortOrder?: 'ASC' | 'DESC';
 }
+
+/**
+ * Batch check-in DTO — check in multiple group bookings at once
+ */
+export class BatchCheckInDto {
+  @ApiProperty({ description: 'List of booking IDs to check in', type: [String] })
+  @IsArray()
+  @IsUUID('4', { each: true })
+  bookingIds: string[];
+
+  @ApiPropertyOptional({ description: 'Check-in notes' })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+}

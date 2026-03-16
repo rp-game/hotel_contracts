@@ -95,4 +95,11 @@ export declare class FindGroupBlocksQueryDto {
     sortBy?: string;
     sortOrder?: 'ASC' | 'DESC';
 }
+/**
+ * Batch check-in DTO — check in multiple group bookings at once
+ */
+export declare class BatchCheckInDto {
+    bookingIds: string[];
+    notes?: string;
+}
 //# sourceMappingURL=group-block.dto.d.ts.map
