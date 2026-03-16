@@ -4,7 +4,7 @@
  * Wrapper classes for REST API responses with Swagger documentation.
  */
 
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { GroupBlockSummary, GroupBlockDetails } from '../types/group-block.types';
 
 /**
@@ -33,4 +33,72 @@ export class GroupBlockListResponseDto {
 export class GroupBlockResponseDto {
   @ApiProperty({ description: 'Group block details', type: GroupBlockDetails })
   data: GroupBlockDetails;
+}
+
+// =================== Group Block Bookings ===================
+
+export class GroupBlockBookingSummaryDto {
+  @ApiProperty() id: string;
+  @ApiProperty() bookingCode: string;
+  @ApiProperty() guestName: string;
+  @ApiProperty() guestPhone: string;
+  @ApiProperty() roomTypeName: string;
+  @ApiPropertyOptional({ type: String, nullable: true }) roomNumber: string | null;
+  @ApiProperty() checkInDate: string;
+  @ApiProperty() checkOutDate: string;
+  @ApiProperty() status: string;
+  @ApiProperty() totalAmount: number;
+  @ApiProperty() adultCount: number;
+  @ApiProperty() childCount: number;
+}
+
+// =================== Batch Check-In ===================
+
+export class BatchCheckInResultItemDto {
+  @ApiProperty() bookingId: string;
+  @ApiProperty() bookingCode: string;
+  @ApiProperty() success: boolean;
+  @ApiPropertyOptional() error?: string;
+}
+
+export class BatchCheckInResultDto {
+  @ApiProperty() total: number;
+  @ApiProperty() succeeded: number;
+  @ApiProperty() failed: number;
+  @ApiProperty({ type: [BatchCheckInResultItemDto] }) results: BatchCheckInResultItemDto[];
+}
+
+// =================== Master Folio ===================
+
+export class GroupFolioBookingItemDto {
+  @ApiProperty() bookingId: string;
+  @ApiProperty() bookingCode: string;
+  @ApiProperty() guestName: string;
+  @ApiProperty() roomTypeName: string;
+  @ApiPropertyOptional({ type: String, nullable: true }) roomNumber: string | null;
+  @ApiProperty() checkInDate: string;
+  @ApiProperty() checkOutDate: string;
+  @ApiProperty() status: string;
+  @ApiProperty() totalAmount: number;
+  @ApiProperty() taxAmount: number;
+  @ApiProperty() grossAmount: number;
+  @ApiProperty() paidAmount: number;
+  @ApiProperty() balance: number;
+}
+
+export class GroupFolioSummaryDto {
+  @ApiProperty() totalBookings: number;
+  @ApiProperty() totalRoomCharges: number;
+  @ApiProperty() totalTaxAmount: number;
+  @ApiProperty() totalGrossAmount: number;
+  @ApiProperty() totalPaidAmount: number;
+  @ApiProperty() totalBalance: number;
+}
+
+export class GroupMasterFolioDto {
+  @ApiProperty() groupBlockId: string;
+  @ApiProperty() blockCode: string;
+  @ApiProperty() groupName: string;
+  @ApiProperty({ type: [GroupFolioBookingItemDto] }) bookings: GroupFolioBookingItemDto[];
+  @ApiProperty({ type: GroupFolioSummaryDto }) summary: GroupFolioSummaryDto;
 }
