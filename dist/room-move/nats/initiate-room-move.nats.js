@@ -24,9 +24,19 @@ class InitiateRoomMoveRequest {
     bookingId;
     currentRoomId;
     targetRoomId;
+    targetRoomTypeId;
     reason;
+    description;
+    internalNotes;
     requestedBy;
+    requestedByName;
     priority;
+    porterRequired;
+    assignedPorterId;
+    assignedPorterName;
+    guestApprovalRequired;
+    preferredMoveTime;
+    isEmergency;
     tenantId;
     hotelId;
 }
@@ -50,11 +60,29 @@ __decorate([
     __metadata("design:type", String)
 ], InitiateRoomMoveRequest.prototype, "targetRoomId", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Target room type ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], InitiateRoomMoveRequest.prototype, "targetRoomTypeId", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Reason for room move' }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], InitiateRoomMoveRequest.prototype, "reason", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Description / additional details' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], InitiateRoomMoveRequest.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Internal notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], InitiateRoomMoveRequest.prototype, "internalNotes", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'User requesting the move' }),
     (0, class_validator_1.IsString)(),
@@ -62,11 +90,53 @@ __decorate([
     __metadata("design:type", String)
 ], InitiateRoomMoveRequest.prototype, "requestedBy", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Name of user requesting the move' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], InitiateRoomMoveRequest.prototype, "requestedByName", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Move priority', enum: enums_1.RoomMovePriority }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(enums_1.RoomMovePriority),
     __metadata("design:type", String)
 ], InitiateRoomMoveRequest.prototype, "priority", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether porter is required' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], InitiateRoomMoveRequest.prototype, "porterRequired", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Assigned porter ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], InitiateRoomMoveRequest.prototype, "assignedPorterId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Assigned porter name' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], InitiateRoomMoveRequest.prototype, "assignedPorterName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether guest approval is required' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], InitiateRoomMoveRequest.prototype, "guestApprovalRequired", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Preferred move time (ISO datetime)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], InitiateRoomMoveRequest.prototype, "preferredMoveTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether this is an emergency move' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], InitiateRoomMoveRequest.prototype, "isEmergency", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
     (0, class_validator_1.IsUUID)(),

@@ -12,9 +12,19 @@ export declare class InitiateRoomMoveRequest {
     bookingId: string;
     currentRoomId: string;
     targetRoomId: string;
+    targetRoomTypeId?: string;
     reason: string;
+    description?: string;
+    internalNotes?: string;
     requestedBy: string;
+    requestedByName?: string;
     priority?: RoomMovePriority;
+    porterRequired?: boolean;
+    assignedPorterId?: string;
+    assignedPorterName?: string;
+    guestApprovalRequired?: boolean;
+    preferredMoveTime?: string;
+    isEmergency?: boolean;
     tenantId: string;
     hotelId: string;
 }

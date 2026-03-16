@@ -25,12 +25,29 @@ class SearchRoomMoveRequest {
     hotelId;
     searchType;
     status;
+    priority;
+    reason;
     bookingId;
     roomId;
     page;
     limit;
     sortBy;
     sortOrder;
+    includeTimeline;
+    includeBookingDetails;
+    includeGuestDetails;
+    includeStaffDetails;
+    includeRoomDetails;
+    // Date range filters
+    requestedFrom;
+    requestedTo;
+    // Staff filters
+    requestedBy;
+    // Text search
+    searchText;
+    // Special filters
+    emergencyOnly;
+    scheduledToday;
 }
 exports.SearchRoomMoveRequest = SearchRoomMoveRequest;
 __decorate([
@@ -56,6 +73,18 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Object)
 ], SearchRoomMoveRequest.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by priority' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SearchRoomMoveRequest.prototype, "priority", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by reason' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SearchRoomMoveRequest.prototype, "reason", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by booking ID' }),
     (0, class_validator_1.IsOptional)(),
@@ -87,9 +116,75 @@ __decorate([
     __metadata("design:type", String)
 ], SearchRoomMoveRequest.prototype, "sortBy", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Sort order', enum: ['asc', 'desc'] }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sort order', enum: ['ASC', 'DESC'] }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], SearchRoomMoveRequest.prototype, "sortOrder", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Include timeline events' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], SearchRoomMoveRequest.prototype, "includeTimeline", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Include booking details' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], SearchRoomMoveRequest.prototype, "includeBookingDetails", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Include guest details' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], SearchRoomMoveRequest.prototype, "includeGuestDetails", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Include staff details' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], SearchRoomMoveRequest.prototype, "includeStaffDetails", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Include room details' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], SearchRoomMoveRequest.prototype, "includeRoomDetails", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by requested date from (ISO datetime)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SearchRoomMoveRequest.prototype, "requestedFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by requested date to (ISO datetime)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SearchRoomMoveRequest.prototype, "requestedTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by requester user ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SearchRoomMoveRequest.prototype, "requestedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Text search across description and notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SearchRoomMoveRequest.prototype, "searchText", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter emergency moves only' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], SearchRoomMoveRequest.prototype, "emergencyOnly", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter moves scheduled for today' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], SearchRoomMoveRequest.prototype, "scheduledToday", void 0);
 //# sourceMappingURL=search-room-move.nats.js.map

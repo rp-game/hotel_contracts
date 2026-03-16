@@ -12,6 +12,11 @@ export declare class ScheduleRoomMoveRequest {
     scheduledFor: string;
     estimatedDuration?: number;
     notes?: string;
+    scheduledBy?: string;
+    scheduledByName?: string;
+    porterRequired?: boolean;
+    assignedPorterId?: string;
+    assignedPorterName?: string;
     tenantId: string;
     hotelId: string;
 }

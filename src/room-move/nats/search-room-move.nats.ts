@@ -8,7 +8,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsOptional, IsUUID, IsEnum, IsNumber, IsArray } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsUUID, IsEnum, IsNumber, IsArray, IsBoolean } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomMoveSearchResult, AvailableRoom } from '../types';
 import { RoomMoveStatus } from '../enums';
@@ -32,6 +32,16 @@ export class SearchRoomMoveRequest {
   @ApiPropertyOptional({ description: 'Filter by status' })
   @IsOptional()
   status?: RoomMoveStatus | RoomMoveStatus[];
+
+  @ApiPropertyOptional({ description: 'Filter by priority' })
+  @IsOptional()
+  @IsString()
+  priority?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by reason' })
+  @IsOptional()
+  @IsString()
+  reason?: string;
 
   @ApiPropertyOptional({ description: 'Filter by booking ID' })
   @IsOptional()
@@ -58,10 +68,69 @@ export class SearchRoomMoveRequest {
   @IsString()
   sortBy?: string;
 
-  @ApiPropertyOptional({ description: 'Sort order', enum: ['asc', 'desc'] })
+  @ApiPropertyOptional({ description: 'Sort order', enum: ['ASC', 'DESC'] })
   @IsOptional()
   @IsString()
-  sortOrder?: 'asc' | 'desc';
+  sortOrder?: 'ASC' | 'DESC';
+
+  @ApiPropertyOptional({ description: 'Include timeline events' })
+  @IsOptional()
+  @IsBoolean()
+  includeTimeline?: boolean;
+
+  @ApiPropertyOptional({ description: 'Include booking details' })
+  @IsOptional()
+  @IsBoolean()
+  includeBookingDetails?: boolean;
+
+  @ApiPropertyOptional({ description: 'Include guest details' })
+  @IsOptional()
+  @IsBoolean()
+  includeGuestDetails?: boolean;
+
+  @ApiPropertyOptional({ description: 'Include staff details' })
+  @IsOptional()
+  @IsBoolean()
+  includeStaffDetails?: boolean;
+
+  @ApiPropertyOptional({ description: 'Include room details' })
+  @IsOptional()
+  @IsBoolean()
+  includeRoomDetails?: boolean;
+
+  // Date range filters
+  @ApiPropertyOptional({ description: 'Filter by requested date from (ISO datetime)' })
+  @IsOptional()
+  @IsString()
+  requestedFrom?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by requested date to (ISO datetime)' })
+  @IsOptional()
+  @IsString()
+  requestedTo?: string;
+
+  // Staff filters
+  @ApiPropertyOptional({ description: 'Filter by requester user ID' })
+  @IsOptional()
+  @IsString()
+  requestedBy?: string;
+
+  // Text search
+  @ApiPropertyOptional({ description: 'Text search across description and notes' })
+  @IsOptional()
+  @IsString()
+  searchText?: string;
+
+  // Special filters
+  @ApiPropertyOptional({ description: 'Filter emergency moves only' })
+  @IsOptional()
+  @IsBoolean()
+  emergencyOnly?: boolean;
+
+  @ApiPropertyOptional({ description: 'Filter moves scheduled for today' })
+  @IsOptional()
+  @IsBoolean()
+  scheduledToday?: boolean;
 }
 
 /**

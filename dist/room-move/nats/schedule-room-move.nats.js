@@ -24,6 +24,11 @@ class ScheduleRoomMoveRequest {
     scheduledFor;
     estimatedDuration;
     notes;
+    scheduledBy;
+    scheduledByName;
+    porterRequired;
+    assignedPorterId;
+    assignedPorterName;
     tenantId;
     hotelId;
 }
@@ -52,6 +57,36 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ScheduleRoomMoveRequest.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User who scheduled the move' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ScheduleRoomMoveRequest.prototype, "scheduledBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Name of user who scheduled the move' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ScheduleRoomMoveRequest.prototype, "scheduledByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether porter is required' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], ScheduleRoomMoveRequest.prototype, "porterRequired", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Assigned porter ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], ScheduleRoomMoveRequest.prototype, "assignedPorterId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Assigned porter name' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ScheduleRoomMoveRequest.prototype, "assignedPorterName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
     (0, class_validator_1.IsUUID)(),

@@ -14,12 +14,25 @@ export declare class SearchRoomMoveRequest {
     hotelId: string;
     searchType?: 'search' | 'dashboard-stats' | 'mobile-staff' | 'emergency-available-rooms';
     status?: RoomMoveStatus | RoomMoveStatus[];
+    priority?: string;
+    reason?: string;
     bookingId?: string;
     roomId?: string;
     page?: number;
     limit?: number;
     sortBy?: string;
-    sortOrder?: 'asc' | 'desc';
+    sortOrder?: 'ASC' | 'DESC';
+    includeTimeline?: boolean;
+    includeBookingDetails?: boolean;
+    includeGuestDetails?: boolean;
+    includeStaffDetails?: boolean;
+    includeRoomDetails?: boolean;
+    requestedFrom?: string;
+    requestedTo?: string;
+    requestedBy?: string;
+    searchText?: string;
+    emergencyOnly?: boolean;
+    scheduledToday?: boolean;
 }
 /**
  * Search Room Move Response

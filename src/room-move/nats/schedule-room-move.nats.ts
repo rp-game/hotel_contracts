@@ -7,7 +7,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsOptional, IsUUID, IsDateString, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsUUID, IsDateString, IsNumber, IsBoolean } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomMoveDetails } from '../types';
 
@@ -31,6 +31,31 @@ export class ScheduleRoomMoveRequest {
   @IsOptional()
   @IsString()
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'User who scheduled the move' })
+  @IsOptional()
+  @IsString()
+  scheduledBy?: string;
+
+  @ApiPropertyOptional({ description: 'Name of user who scheduled the move' })
+  @IsOptional()
+  @IsString()
+  scheduledByName?: string;
+
+  @ApiPropertyOptional({ description: 'Whether porter is required' })
+  @IsOptional()
+  @IsBoolean()
+  porterRequired?: boolean;
+
+  @ApiPropertyOptional({ description: 'Assigned porter ID' })
+  @IsOptional()
+  @IsUUID()
+  assignedPorterId?: string;
+
+  @ApiPropertyOptional({ description: 'Assigned porter name' })
+  @IsOptional()
+  @IsString()
+  assignedPorterName?: string;
 
   @ApiProperty({ description: 'Tenant ID' })
   @IsUUID()
