@@ -1,11 +1,13 @@
+/**
+ * Cancel Room Move NATS Contract
+ *
+ * NATS Pattern: room-move.cancel
+ * Handler: booking-service
+ * Called by: api-gateway
+ */
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomMoveDetails } from '../types';
-/**
- * Cancel Room Move Request
- * Pattern: room-move.cancel
- * Handler: booking-service
- */
-export interface CancelRoomMoveRequest {
+export declare class CancelRoomMoveRequest {
     moveRequestId: string;
     cancelledBy: string;
     reason: string;
@@ -14,8 +16,7 @@ export interface CancelRoomMoveRequest {
     hotelId: string;
 }
 /**
- * Cancel Room Move Response
+ * Type-safe NATS response wrapper
  */
-export interface CancelRoomMoveNatsResponse extends NatsResponse<RoomMoveDetails> {
-}
+export type CancelRoomMoveNatsResponse = NatsResponse<RoomMoveDetails>;
 //# sourceMappingURL=cancel-room-move.nats.d.ts.map

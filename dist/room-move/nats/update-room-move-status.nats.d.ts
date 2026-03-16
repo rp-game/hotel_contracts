@@ -1,12 +1,14 @@
+/**
+ * Update Room Move Status NATS Contract
+ *
+ * NATS Pattern: room-move.update-status
+ * Handler: booking-service
+ * Called by: api-gateway
+ */
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomMoveDetails } from '../types';
 import { RoomMoveStatus } from '../enums';
-/**
- * Update Room Move Status Request
- * Pattern: room-move.update-status
- * Handler: booking-service
- */
-export interface UpdateRoomMoveStatusRequest {
+export declare class UpdateRoomMoveStatusRequest {
     moveRequestId: string;
     status: RoomMoveStatus;
     updatedBy: string;
@@ -15,8 +17,7 @@ export interface UpdateRoomMoveStatusRequest {
     hotelId: string;
 }
 /**
- * Update Room Move Status Response
+ * Type-safe NATS response wrapper
  */
-export interface UpdateRoomMoveStatusNatsResponse extends NatsResponse<RoomMoveDetails> {
-}
+export type UpdateRoomMoveStatusNatsResponse = NatsResponse<RoomMoveDetails>;
 //# sourceMappingURL=update-room-move-status.nats.d.ts.map

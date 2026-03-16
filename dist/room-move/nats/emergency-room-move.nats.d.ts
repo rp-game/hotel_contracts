@@ -1,12 +1,14 @@
-import { NatsResponse } from '../../common/nats-response.interface';
-import { RoomMoveDetails } from '../types';
 /**
- * Emergency Room Move Request
- * Pattern: room-move.emergency
+ * Emergency Room Move NATS Contract
+ *
+ * NATS Pattern: room-move.emergency
  * Handler: booking-service
+ * Called by: api-gateway
  * Priority: Always URGENT for emergency moves
  */
-export interface EmergencyRoomMoveRequest {
+import { NatsResponse } from '../../common/nats-response.interface';
+import { RoomMoveDetails } from '../types';
+export declare class EmergencyRoomMoveRequest {
     bookingId: string;
     currentRoomId: string;
     reason: string;
@@ -17,8 +19,7 @@ export interface EmergencyRoomMoveRequest {
     hotelId: string;
 }
 /**
- * Emergency Room Move Response
+ * Type-safe NATS response wrapper
  */
-export interface EmergencyRoomMoveNatsResponse extends NatsResponse<RoomMoveDetails> {
-}
+export type EmergencyRoomMoveNatsResponse = NatsResponse<RoomMoveDetails>;
 //# sourceMappingURL=emergency-room-move.nats.d.ts.map

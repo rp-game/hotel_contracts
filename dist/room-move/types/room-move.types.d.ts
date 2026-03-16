@@ -3,7 +3,7 @@ import { RoomMoveStatus, RoomMovePriority } from '../enums';
  * Complete room move details record
  * Contains all metadata and history of a room move request
  */
-export interface RoomMoveDetails {
+export declare class RoomMoveDetails {
     moveRequestId: string;
     tenantId: string;
     hotelId: string;
@@ -28,7 +28,7 @@ export interface RoomMoveDetails {
  * Minimal room move item for list views
  * Used in search results and dashboards
  */
-export interface RoomMoveListItem {
+export declare class RoomMoveListItem {
     moveRequestId: string;
     bookingId: string;
     currentRoomId: string;
@@ -41,7 +41,7 @@ export interface RoomMoveListItem {
 /**
  * Paginated search results for room moves
  */
-export interface RoomMoveSearchResult {
+export declare class RoomMoveSearchResult {
     items: RoomMoveListItem[];
     total: number;
     page: number;
@@ -52,7 +52,7 @@ export interface RoomMoveSearchResult {
  * Available room details for assignment
  * Returned when searching for available rooms for room move
  */
-export interface AvailableRoom {
+export declare class AvailableRoom {
     roomId: string;
     roomNumber: string;
     roomType: string;
@@ -66,7 +66,7 @@ export interface AvailableRoom {
  * Pricing calculation results for room moves
  * Contains pricing breakdown and additional charges
  */
-export interface RoomMovePricingDetails {
+export declare class RoomMovePricingDetails {
     originalPrice: number;
     newRoomPrice: number;
     priceDifference: number;

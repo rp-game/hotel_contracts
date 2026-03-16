@@ -1,19 +1,35 @@
+/**
+ * Get Room Move By Booking NATS Contract
+ *
+ * NATS Pattern: room-move.get-by-booking
+ * Handler: booking-service
+ * Called by: api-gateway
+ */
+
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsUUID } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomMoveDetails } from '../types';
 
-/**
- * Get Room Move By Booking Request
- * Pattern: room-move.get-by-booking
- * Handler: booking-service
- */
-export interface GetRoomMoveByBookingRequest {
+export class GetRoomMoveByBookingRequest {
+  @ApiProperty({ description: 'Booking ID' })
+  @IsUUID()
+  @IsNotEmpty()
   bookingId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  @IsNotEmpty()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsUUID()
+  @IsNotEmpty()
   hotelId: string;
 }
 
 /**
- * Get Room Move By Booking Response
+ * Type-safe NATS response wrapper
  * Returns array of room moves associated with a booking
  */
-export interface GetRoomMoveByBookingNatsResponse extends NatsResponse<RoomMoveDetails[]> {}
+export type GetRoomMoveByBookingNatsResponse = NatsResponse<RoomMoveDetails[]>;

@@ -1,13 +1,15 @@
+/**
+ * Search Room Move NATS Contract
+ *
+ * NATS Pattern: room-move.search
+ * Handler: booking-service
+ * Called by: api-gateway
+ * Types: search, dashboard-stats, mobile-staff, emergency-available-rooms
+ */
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomMoveSearchResult, AvailableRoom } from '../types';
 import { RoomMoveStatus } from '../enums';
-/**
- * Search Room Move Request
- * Pattern: room-move.search
- * Handler: booking-service
- * Types: search, dashboard-stats, mobile-staff, emergency-available-rooms
- */
-export interface SearchRoomMoveRequest {
+export declare class SearchRoomMoveRequest {
     tenantId: string;
     hotelId: string;
     searchType?: 'search' | 'dashboard-stats' | 'mobile-staff' | 'emergency-available-rooms';
@@ -25,6 +27,5 @@ export interface SearchRoomMoveRequest {
  * - search/dashboard-stats/mobile-staff: RoomMoveSearchResult
  * - emergency-available-rooms: Array of AvailableRoom
  */
-export interface SearchRoomMoveNatsResponse extends NatsResponse<RoomMoveSearchResult | AvailableRoom[]> {
-}
+export type SearchRoomMoveNatsResponse = NatsResponse<RoomMoveSearchResult | AvailableRoom[]>;
 //# sourceMappingURL=search-room-move.nats.d.ts.map

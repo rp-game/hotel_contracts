@@ -1,12 +1,14 @@
-import { NatsResponse } from '../../common/nats-response.interface';
-import { RoomMoveDetails } from '../types';
 /**
- * Execute Room Move Request
- * Pattern: room-move.execute
+ * Execute Room Move NATS Contract
+ *
+ * NATS Pattern: room-move.execute
  * Handler: booking-service
+ * Called by: api-gateway
  * Modes: standard, mobile-start, mobile-complete, quick-transfer
  */
-export interface ExecuteRoomMoveRequest {
+import { NatsResponse } from '../../common/nats-response.interface';
+import { RoomMoveDetails } from '../types';
+export declare class ExecuteRoomMoveRequest {
     moveRequestId: string;
     executedBy: string;
     mode?: 'standard' | 'mobile-start' | 'mobile-complete' | 'quick-transfer';
@@ -16,8 +18,7 @@ export interface ExecuteRoomMoveRequest {
     hotelId: string;
 }
 /**
- * Execute Room Move Response
+ * Type-safe NATS response wrapper
  */
-export interface ExecuteRoomMoveNatsResponse extends NatsResponse<RoomMoveDetails> {
-}
+export type ExecuteRoomMoveNatsResponse = NatsResponse<RoomMoveDetails>;
 //# sourceMappingURL=execute-room-move.nats.d.ts.map

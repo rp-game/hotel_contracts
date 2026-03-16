@@ -1,40 +1,92 @@
+/**
+ * Room Move Pricing NATS Contracts
+ *
+ * NATS Patterns:
+ * - room-move.pricing.calculate
+ * - room-move.pricing.quick-estimate
+ * Handler: pricing-service
+ * Called by: api-gateway
+ */
+
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsNotEmpty, IsOptional, IsUUID, IsDateString } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomMovePricingDetails } from '../types';
 
 /**
  * Calculate Room Move Pricing Request
  * Pattern: room-move.pricing.calculate
- * Handler: pricing-service
  */
-export interface CalculateRoomMovePricingRequest {
+export class CalculateRoomMovePricingRequest {
+  @ApiProperty({ description: 'Booking ID' })
+  @IsUUID()
+  @IsNotEmpty()
   bookingId: string;
+
+  @ApiProperty({ description: 'Current room ID' })
+  @IsUUID()
+  @IsNotEmpty()
   currentRoomId: string;
+
+  @ApiProperty({ description: 'Target room ID' })
+  @IsUUID()
+  @IsNotEmpty()
   targetRoomId: string;
-  checkInDate?: string; // ISO date
-  checkOutDate?: string; // ISO date
+
+  @ApiPropertyOptional({ description: 'Check-in date (ISO date)' })
+  @IsOptional()
+  @IsDateString()
+  checkInDate?: string;
+
+  @ApiPropertyOptional({ description: 'Check-out date (ISO date)' })
+  @IsOptional()
+  @IsDateString()
+  checkOutDate?: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  @IsNotEmpty()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsUUID()
+  @IsNotEmpty()
   hotelId: string;
 }
 
 /**
- * Calculate Room Move Pricing Response
+ * Type-safe NATS response wrapper
  */
-export interface CalculateRoomMovePricingNatsResponse extends NatsResponse<RoomMovePricingDetails> {}
+export type CalculateRoomMovePricingNatsResponse = NatsResponse<RoomMovePricingDetails>;
 
 /**
  * Quick Room Move Pricing Estimate Request
  * Pattern: room-move.pricing.quick-estimate
- * Handler: pricing-service
  * Faster calculation with fewer details
  */
-export interface QuickRoomMovePricingEstimateRequest {
+export class QuickRoomMovePricingEstimateRequest {
+  @ApiProperty({ description: 'Current room ID' })
+  @IsUUID()
+  @IsNotEmpty()
   currentRoomId: string;
+
+  @ApiProperty({ description: 'Target room ID' })
+  @IsUUID()
+  @IsNotEmpty()
   targetRoomId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  @IsNotEmpty()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsUUID()
+  @IsNotEmpty()
   hotelId: string;
 }
 
 /**
- * Quick Room Move Pricing Estimate Response
+ * Type-safe NATS response wrapper
  */
-export interface QuickRoomMovePricingEstimateNatsResponse extends NatsResponse<RoomMovePricingDetails> {}
+export type QuickRoomMovePricingEstimateNatsResponse = NatsResponse<RoomMovePricingDetails>;

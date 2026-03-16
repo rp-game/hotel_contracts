@@ -6,8 +6,8 @@ export {
   RoomMoveType,
 } from './enums';
 
-// Export types
-export type {
+// Export types (classes)
+export {
   RoomMoveDetails,
   RoomMoveListItem,
   RoomMoveSearchResult,
@@ -15,33 +15,37 @@ export type {
   RoomMovePricingDetails,
 } from './types';
 
-// Export NATS contracts
-export type {
+// Export NATS request classes
+export {
   InitiateRoomMoveRequest,
-  InitiateRoomMoveNatsResponse,
   ApproveRoomMoveRequest,
-  ApproveRoomMoveNatsResponse,
   RejectRoomMoveRequest,
-  RejectRoomMoveNatsResponse,
   ScheduleRoomMoveRequest,
-  ScheduleRoomMoveNatsResponse,
   ExecuteRoomMoveRequest,
-  ExecuteRoomMoveNatsResponse,
   CancelRoomMoveRequest,
-  CancelRoomMoveNatsResponse,
   SearchRoomMoveRequest,
-  SearchRoomMoveNatsResponse,
   GetRoomMoveByIdRequest,
-  GetRoomMoveByIdNatsResponse,
   GetRoomMoveByBookingRequest,
-  GetRoomMoveByBookingNatsResponse,
   UpdateRoomMoveStatusRequest,
-  UpdateRoomMoveStatusNatsResponse,
   EmergencyRoomMoveRequest,
-  EmergencyRoomMoveNatsResponse,
   CalculateRoomMovePricingRequest,
-  CalculateRoomMovePricingNatsResponse,
   QuickRoomMovePricingEstimateRequest,
+} from './nats';
+
+// Export NATS response types
+export type {
+  InitiateRoomMoveNatsResponse,
+  ApproveRoomMoveNatsResponse,
+  RejectRoomMoveNatsResponse,
+  ScheduleRoomMoveNatsResponse,
+  ExecuteRoomMoveNatsResponse,
+  CancelRoomMoveNatsResponse,
+  SearchRoomMoveNatsResponse,
+  GetRoomMoveByIdNatsResponse,
+  GetRoomMoveByBookingNatsResponse,
+  UpdateRoomMoveStatusNatsResponse,
+  EmergencyRoomMoveNatsResponse,
+  CalculateRoomMovePricingNatsResponse,
   QuickRoomMovePricingEstimateNatsResponse,
 } from './nats';
 

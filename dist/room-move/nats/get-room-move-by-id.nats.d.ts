@@ -1,18 +1,19 @@
+/**
+ * Get Room Move By ID NATS Contract
+ *
+ * NATS Pattern: room-move.get-by-id
+ * Handler: booking-service
+ * Called by: api-gateway
+ */
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomMoveDetails } from '../types';
-/**
- * Get Room Move By ID Request
- * Pattern: room-move.get-by-id
- * Handler: booking-service
- */
-export interface GetRoomMoveByIdRequest {
+export declare class GetRoomMoveByIdRequest {
     moveRequestId: string;
     tenantId: string;
     hotelId: string;
 }
 /**
- * Get Room Move By ID Response
+ * Type-safe NATS response wrapper
  */
-export interface GetRoomMoveByIdNatsResponse extends NatsResponse<RoomMoveDetails> {
-}
+export type GetRoomMoveByIdNatsResponse = NatsResponse<RoomMoveDetails>;
 //# sourceMappingURL=get-room-move-by-id.nats.d.ts.map

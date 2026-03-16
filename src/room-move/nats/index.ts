@@ -1,61 +1,85 @@
-export type {
+export {
   InitiateRoomMoveRequest,
+} from './initiate-room-move.nats';
+export type {
   InitiateRoomMoveNatsResponse,
 } from './initiate-room-move.nats';
 
-export type {
+export {
   ApproveRoomMoveRequest,
+} from './approve-room-move.nats';
+export type {
   ApproveRoomMoveNatsResponse,
 } from './approve-room-move.nats';
 
-export type {
+export {
   RejectRoomMoveRequest,
+} from './reject-room-move.nats';
+export type {
   RejectRoomMoveNatsResponse,
 } from './reject-room-move.nats';
 
-export type {
+export {
   ScheduleRoomMoveRequest,
+} from './schedule-room-move.nats';
+export type {
   ScheduleRoomMoveNatsResponse,
 } from './schedule-room-move.nats';
 
-export type {
+export {
   ExecuteRoomMoveRequest,
+} from './execute-room-move.nats';
+export type {
   ExecuteRoomMoveNatsResponse,
 } from './execute-room-move.nats';
 
-export type {
+export {
   CancelRoomMoveRequest,
+} from './cancel-room-move.nats';
+export type {
   CancelRoomMoveNatsResponse,
 } from './cancel-room-move.nats';
 
-export type {
+export {
   SearchRoomMoveRequest,
+} from './search-room-move.nats';
+export type {
   SearchRoomMoveNatsResponse,
 } from './search-room-move.nats';
 
-export type {
+export {
   GetRoomMoveByIdRequest,
+} from './get-room-move-by-id.nats';
+export type {
   GetRoomMoveByIdNatsResponse,
 } from './get-room-move-by-id.nats';
 
-export type {
+export {
   GetRoomMoveByBookingRequest,
+} from './get-room-move-by-booking.nats';
+export type {
   GetRoomMoveByBookingNatsResponse,
 } from './get-room-move-by-booking.nats';
 
-export type {
+export {
   UpdateRoomMoveStatusRequest,
+} from './update-room-move-status.nats';
+export type {
   UpdateRoomMoveStatusNatsResponse,
 } from './update-room-move-status.nats';
 
-export type {
+export {
   EmergencyRoomMoveRequest,
+} from './emergency-room-move.nats';
+export type {
   EmergencyRoomMoveNatsResponse,
 } from './emergency-room-move.nats';
 
-export type {
+export {
   CalculateRoomMovePricingRequest,
-  CalculateRoomMovePricingNatsResponse,
   QuickRoomMovePricingEstimateRequest,
+} from './room-move-pricing.nats';
+export type {
+  CalculateRoomMovePricingNatsResponse,
   QuickRoomMovePricingEstimateNatsResponse,
 } from './room-move-pricing.nats';

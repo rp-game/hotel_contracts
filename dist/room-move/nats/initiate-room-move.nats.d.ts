@@ -1,12 +1,14 @@
+/**
+ * Initiate Room Move NATS Contract
+ *
+ * NATS Pattern: room-move.initiate
+ * Handler: booking-service
+ * Called by: api-gateway
+ */
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomMoveDetails } from '../types';
 import { RoomMovePriority } from '../enums';
-/**
- * Initiate Room Move Request
- * Pattern: room-move.initiate
- * Handler: booking-service
- */
-export interface InitiateRoomMoveRequest {
+export declare class InitiateRoomMoveRequest {
     bookingId: string;
     currentRoomId: string;
     targetRoomId: string;
@@ -17,8 +19,7 @@ export interface InitiateRoomMoveRequest {
     hotelId: string;
 }
 /**
- * Initiate Room Move Response
+ * Type-safe NATS response wrapper
  */
-export interface InitiateRoomMoveNatsResponse extends NatsResponse<RoomMoveDetails> {
-}
+export type InitiateRoomMoveNatsResponse = NatsResponse<RoomMoveDetails>;
 //# sourceMappingURL=initiate-room-move.nats.d.ts.map

@@ -1,20 +1,44 @@
+/**
+ * Reject Room Move NATS Contract
+ *
+ * NATS Pattern: room-move.reject
+ * Handler: booking-service
+ * Called by: api-gateway
+ */
+
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsNotEmpty, IsOptional, IsUUID } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomMoveDetails } from '../types';
 
-/**
- * Reject Room Move Request
- * Pattern: room-move.reject
- * Handler: booking-service
- */
-export interface RejectRoomMoveRequest {
+export class RejectRoomMoveRequest {
+  @ApiProperty({ description: 'Move request ID' })
+  @IsUUID()
+  @IsNotEmpty()
   moveRequestId: string;
+
+  @ApiProperty({ description: 'User rejecting the move' })
+  @IsString()
+  @IsNotEmpty()
   rejectedBy: string;
+
+  @ApiProperty({ description: 'Rejection reason' })
+  @IsString()
+  @IsNotEmpty()
   reason: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  @IsNotEmpty()
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsUUID()
+  @IsNotEmpty()
   hotelId: string;
 }
 
 /**
- * Reject Room Move Response
+ * Type-safe NATS response wrapper
  */
-export interface RejectRoomMoveNatsResponse extends NatsResponse<RoomMoveDetails> {}
+export type RejectRoomMoveNatsResponse = NatsResponse<RoomMoveDetails>;
