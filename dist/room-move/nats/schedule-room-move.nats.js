@@ -29,6 +29,17 @@ class ScheduleRoomMoveRequest {
     porterRequired;
     assignedPorterId;
     assignedPorterName;
+    // Porter logistics
+    porterArrivalTime;
+    // Guest notification
+    notifyGuest;
+    guestNotificationMessage;
+    notificationChannels;
+    // Housekeeping coordination
+    notifyHousekeeping;
+    roomCleaningScheduled;
+    housekeepingTasks;
+    housekeepingNotes;
     tenantId;
     hotelId;
 }
@@ -87,6 +98,54 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ScheduleRoomMoveRequest.prototype, "assignedPorterName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Porter arrival time (ISO datetime)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ScheduleRoomMoveRequest.prototype, "porterArrivalTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether to notify guest' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], ScheduleRoomMoveRequest.prototype, "notifyGuest", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Guest notification message' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ScheduleRoomMoveRequest.prototype, "guestNotificationMessage", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Notification channels' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    __metadata("design:type", Array)
+], ScheduleRoomMoveRequest.prototype, "notificationChannels", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether to notify housekeeping' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], ScheduleRoomMoveRequest.prototype, "notifyHousekeeping", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether room cleaning is scheduled' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], ScheduleRoomMoveRequest.prototype, "roomCleaningScheduled", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Housekeeping tasks' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    __metadata("design:type", Array)
+], ScheduleRoomMoveRequest.prototype, "housekeepingTasks", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Housekeeping notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ScheduleRoomMoveRequest.prototype, "housekeepingNotes", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
     (0, class_validator_1.IsUUID)(),

@@ -7,7 +7,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsOptional, IsUUID, IsDateString, IsNumber, IsBoolean } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsUUID, IsDateString, IsNumber, IsBoolean, IsArray } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomMoveDetails } from '../types';
 
@@ -56,6 +56,49 @@ export class ScheduleRoomMoveRequest {
   @IsOptional()
   @IsString()
   assignedPorterName?: string;
+
+  // Porter logistics
+  @ApiPropertyOptional({ description: 'Porter arrival time (ISO datetime)' })
+  @IsOptional()
+  @IsString()
+  porterArrivalTime?: string;
+
+  // Guest notification
+  @ApiPropertyOptional({ description: 'Whether to notify guest' })
+  @IsOptional()
+  @IsBoolean()
+  notifyGuest?: boolean;
+
+  @ApiPropertyOptional({ description: 'Guest notification message' })
+  @IsOptional()
+  @IsString()
+  guestNotificationMessage?: string;
+
+  @ApiPropertyOptional({ description: 'Notification channels' })
+  @IsOptional()
+  @IsArray()
+  notificationChannels?: string[];
+
+  // Housekeeping coordination
+  @ApiPropertyOptional({ description: 'Whether to notify housekeeping' })
+  @IsOptional()
+  @IsBoolean()
+  notifyHousekeeping?: boolean;
+
+  @ApiPropertyOptional({ description: 'Whether room cleaning is scheduled' })
+  @IsOptional()
+  @IsBoolean()
+  roomCleaningScheduled?: boolean;
+
+  @ApiPropertyOptional({ description: 'Housekeeping tasks' })
+  @IsOptional()
+  @IsArray()
+  housekeepingTasks?: string[];
+
+  @ApiPropertyOptional({ description: 'Housekeeping notes' })
+  @IsOptional()
+  @IsString()
+  housekeepingNotes?: string;
 
   @ApiProperty({ description: 'Tenant ID' })
   @IsUUID()

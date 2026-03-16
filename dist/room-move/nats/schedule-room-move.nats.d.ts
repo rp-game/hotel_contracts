@@ -17,6 +17,14 @@ export declare class ScheduleRoomMoveRequest {
     porterRequired?: boolean;
     assignedPorterId?: string;
     assignedPorterName?: string;
+    porterArrivalTime?: string;
+    notifyGuest?: boolean;
+    guestNotificationMessage?: string;
+    notificationChannels?: string[];
+    notifyHousekeeping?: boolean;
+    roomCleaningScheduled?: boolean;
+    housekeepingTasks?: string[];
+    housekeepingNotes?: string;
     tenantId: string;
     hotelId: string;
 }
