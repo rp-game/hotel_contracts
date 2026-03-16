@@ -62,6 +62,7 @@ export * from './notification';
 export * from './report';
 export * from './platform';
 export * from './room-move';
+export * from './group-booking';
 export * from './cms';
 export * from './tenants';
 export * from './auth';

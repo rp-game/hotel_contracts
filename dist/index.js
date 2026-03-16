@@ -76,6 +76,7 @@ __exportStar(require("./notification"), exports);
 __exportStar(require("./report"), exports);
 __exportStar(require("./platform"), exports);
 __exportStar(require("./room-move"), exports);
+__exportStar(require("./group-booking"), exports);
 __exportStar(require("./cms"), exports);
 __exportStar(require("./tenants"), exports);
 __exportStar(require("./auth"), exports);
