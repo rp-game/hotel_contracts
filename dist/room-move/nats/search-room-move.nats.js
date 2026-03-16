@@ -5,7 +5,7 @@
  * NATS Pattern: room-move.search
  * Handler: booking-service
  * Called by: api-gateway
- * Types: search, dashboard-stats, mobile-staff, emergency-available-rooms
+ * Types: search, dashboard-stats, mobile-staff
  */
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -63,7 +63,7 @@ __decorate([
     __metadata("design:type", String)
 ], SearchRoomMoveRequest.prototype, "hotelId", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Search type', enum: ['search', 'dashboard-stats', 'mobile-staff', 'emergency-available-rooms'] }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Search type', enum: ['search', 'dashboard-stats', 'mobile-staff'] }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)

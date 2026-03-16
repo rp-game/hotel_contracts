@@ -20,6 +20,8 @@ export { UpdateRoomMoveStatusRequest, } from './update-room-move-status.nats';
 export type { UpdateRoomMoveStatusNatsResponse, } from './update-room-move-status.nats';
 export { EmergencyRoomMoveRequest, } from './emergency-room-move.nats';
 export type { EmergencyRoomMoveNatsResponse, } from './emergency-room-move.nats';
+export { GetAvailableRoomsRequest, } from './get-available-rooms.nats';
+export type { GetAvailableRoomsNatsResponse, } from './get-available-rooms.nats';
 export { CalculateRoomMovePricingRequest, QuickRoomMovePricingEstimateRequest, } from './room-move-pricing.nats';
 export type { CalculateRoomMovePricingNatsResponse, QuickRoomMovePricingEstimateNatsResponse, } from './room-move-pricing.nats';
 //# sourceMappingURL=index.d.ts.map

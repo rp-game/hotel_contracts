@@ -76,6 +76,13 @@ export type {
 } from './emergency-room-move.nats';
 
 export {
+  GetAvailableRoomsRequest,
+} from './get-available-rooms.nats';
+export type {
+  GetAvailableRoomsNatsResponse,
+} from './get-available-rooms.nats';
+
+export {
   CalculateRoomMovePricingRequest,
   QuickRoomMovePricingEstimateRequest,
 } from './room-move-pricing.nats';
