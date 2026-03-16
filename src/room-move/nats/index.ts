@@ -76,10 +76,10 @@ export type {
 } from './emergency-room-move.nats';
 
 export {
-  GetAvailableRoomsRequest,
+  GetAvailableRoomsForMoveRequest,
 } from './get-available-rooms.nats';
 export type {
-  GetAvailableRoomsNatsResponse,
+  GetAvailableRoomsForMoveNatsResponse,
 } from './get-available-rooms.nats';
 
 export {

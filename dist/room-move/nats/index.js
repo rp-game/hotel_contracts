@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QuickRoomMovePricingEstimateRequest = exports.CalculateRoomMovePricingRequest = exports.GetAvailableRoomsRequest = exports.EmergencyRoomMoveRequest = exports.UpdateRoomMoveStatusRequest = exports.GetRoomMoveByBookingRequest = exports.GetRoomMoveByIdRequest = exports.SearchRoomMoveRequest = exports.CancelRoomMoveRequest = exports.ExecuteRoomMoveRequest = exports.ScheduleRoomMoveRequest = exports.RejectRoomMoveRequest = exports.ApproveRoomMoveRequest = exports.InitiateRoomMoveRequest = void 0;
+exports.QuickRoomMovePricingEstimateRequest = exports.CalculateRoomMovePricingRequest = exports.GetAvailableRoomsForMoveRequest = exports.EmergencyRoomMoveRequest = exports.UpdateRoomMoveStatusRequest = exports.GetRoomMoveByBookingRequest = exports.GetRoomMoveByIdRequest = exports.SearchRoomMoveRequest = exports.CancelRoomMoveRequest = exports.ExecuteRoomMoveRequest = exports.ScheduleRoomMoveRequest = exports.RejectRoomMoveRequest = exports.ApproveRoomMoveRequest = exports.InitiateRoomMoveRequest = void 0;
 var initiate_room_move_nats_1 = require("./initiate-room-move.nats");
 Object.defineProperty(exports, "InitiateRoomMoveRequest", { enumerable: true, get: function () { return initiate_room_move_nats_1.InitiateRoomMoveRequest; } });
 var approve_room_move_nats_1 = require("./approve-room-move.nats");
@@ -24,7 +24,7 @@ Object.defineProperty(exports, "UpdateRoomMoveStatusRequest", { enumerable: true
 var emergency_room_move_nats_1 = require("./emergency-room-move.nats");
 Object.defineProperty(exports, "EmergencyRoomMoveRequest", { enumerable: true, get: function () { return emergency_room_move_nats_1.EmergencyRoomMoveRequest; } });
 var get_available_rooms_nats_1 = require("./get-available-rooms.nats");
-Object.defineProperty(exports, "GetAvailableRoomsRequest", { enumerable: true, get: function () { return get_available_rooms_nats_1.GetAvailableRoomsRequest; } });
+Object.defineProperty(exports, "GetAvailableRoomsForMoveRequest", { enumerable: true, get: function () { return get_available_rooms_nats_1.GetAvailableRoomsForMoveRequest; } });
 var room_move_pricing_nats_1 = require("./room-move-pricing.nats");
 Object.defineProperty(exports, "CalculateRoomMovePricingRequest", { enumerable: true, get: function () { return room_move_pricing_nats_1.CalculateRoomMovePricingRequest; } });
 Object.defineProperty(exports, "QuickRoomMovePricingEstimateRequest", { enumerable: true, get: function () { return room_move_pricing_nats_1.QuickRoomMovePricingEstimateRequest; } });

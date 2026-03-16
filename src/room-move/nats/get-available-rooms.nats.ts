@@ -11,7 +11,7 @@ import { IsString, IsNotEmpty, IsOptional, IsUUID, IsNumber } from 'class-valida
 import { NatsResponse } from '../../common/nats-response.interface';
 import { AvailableRoom } from '../types';
 
-export class GetAvailableRoomsRequest {
+export class GetAvailableRoomsForMoveRequest {
   @ApiProperty({ description: 'Booking ID to find alternative rooms for' })
   @IsUUID()
   @IsNotEmpty()
@@ -50,4 +50,4 @@ export class GetAvailableRoomsRequest {
 /**
  * Type-safe NATS response wrapper
  */
-export type GetAvailableRoomsNatsResponse = NatsResponse<AvailableRoom[]>;
+export type GetAvailableRoomsForMoveNatsResponse = NatsResponse<AvailableRoom[]>;

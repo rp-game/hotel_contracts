@@ -16,10 +16,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetAvailableRoomsRequest = void 0;
+exports.GetAvailableRoomsForMoveRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
-class GetAvailableRoomsRequest {
+class GetAvailableRoomsForMoveRequest {
     bookingId;
     tenantId;
     hotelId;
@@ -28,46 +28,46 @@ class GetAvailableRoomsRequest {
     limit;
     emergency;
 }
-exports.GetAvailableRoomsRequest = GetAvailableRoomsRequest;
+exports.GetAvailableRoomsForMoveRequest = GetAvailableRoomsForMoveRequest;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Booking ID to find alternative rooms for' }),
     (0, class_validator_1.IsUUID)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], GetAvailableRoomsRequest.prototype, "bookingId", void 0);
+], GetAvailableRoomsForMoveRequest.prototype, "bookingId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
     (0, class_validator_1.IsUUID)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], GetAvailableRoomsRequest.prototype, "tenantId", void 0);
+], GetAvailableRoomsForMoveRequest.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
     (0, class_validator_1.IsUUID)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], GetAvailableRoomsRequest.prototype, "hotelId", void 0);
+], GetAvailableRoomsForMoveRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Type of move filter' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], GetAvailableRoomsRequest.prototype, "moveType", void 0);
+], GetAvailableRoomsForMoveRequest.prototype, "moveType", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Maximum rate difference' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], GetAvailableRoomsRequest.prototype, "maxRateDifference", void 0);
+], GetAvailableRoomsForMoveRequest.prototype, "maxRateDifference", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Maximum number of rooms to return' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], GetAvailableRoomsRequest.prototype, "limit", void 0);
+], GetAvailableRoomsForMoveRequest.prototype, "limit", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Whether this is an emergency request' }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
-], GetAvailableRoomsRequest.prototype, "emergency", void 0);
+], GetAvailableRoomsForMoveRequest.prototype, "emergency", void 0);
 //# sourceMappingURL=get-available-rooms.nats.js.map

@@ -28,6 +28,7 @@ export {
   GetRoomMoveByBookingRequest,
   UpdateRoomMoveStatusRequest,
   EmergencyRoomMoveRequest,
+  GetAvailableRoomsForMoveRequest,
   CalculateRoomMovePricingRequest,
   QuickRoomMovePricingEstimateRequest,
 } from './nats';
@@ -45,6 +46,7 @@ export type {
   GetRoomMoveByBookingNatsResponse,
   UpdateRoomMoveStatusNatsResponse,
   EmergencyRoomMoveNatsResponse,
+  GetAvailableRoomsForMoveNatsResponse,
   CalculateRoomMovePricingNatsResponse,
   QuickRoomMovePricingEstimateNatsResponse,
 } from './nats';

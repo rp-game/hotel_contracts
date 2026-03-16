@@ -7,7 +7,7 @@
  */
 import { NatsResponse } from '../../common/nats-response.interface';
 import { AvailableRoom } from '../types';
-export declare class GetAvailableRoomsRequest {
+export declare class GetAvailableRoomsForMoveRequest {
     bookingId: string;
     tenantId: string;
     hotelId: string;
@@ -19,5 +19,5 @@ export declare class GetAvailableRoomsRequest {
 /**
  * Type-safe NATS response wrapper
  */
-export type GetAvailableRoomsNatsResponse = NatsResponse<AvailableRoom[]>;
+export type GetAvailableRoomsForMoveNatsResponse = NatsResponse<AvailableRoom[]>;
 //# sourceMappingURL=get-available-rooms.nats.d.ts.map
