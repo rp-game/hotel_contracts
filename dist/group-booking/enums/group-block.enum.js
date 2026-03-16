@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GroupBlockAction = exports.InventoryControlMode = exports.GroupBillingMode = exports.GroupBlockStatus = void 0;
+exports.GroupBlockAction = exports.PreRegistrationStatus = exports.InventoryControlMode = exports.GroupBillingMode = exports.GroupBlockStatus = void 0;
 /**
  * Group Block Status - State machine for group booking blocks
  *
@@ -37,6 +37,15 @@ var InventoryControlMode;
     InventoryControlMode["NON_ELASTIC"] = "NON_ELASTIC";
     InventoryControlMode["SELL_LIMIT"] = "SELL_LIMIT";
 })(InventoryControlMode || (exports.InventoryControlMode = InventoryControlMode = {}));
+/**
+ * Pre-Registration Status - Tracks guest pre-registration progress for group bookings
+ */
+var PreRegistrationStatus;
+(function (PreRegistrationStatus) {
+    PreRegistrationStatus["NOT_STARTED"] = "NOT_STARTED";
+    PreRegistrationStatus["PARTIAL"] = "PARTIAL";
+    PreRegistrationStatus["COMPLETE"] = "COMPLETE";
+})(PreRegistrationStatus || (exports.PreRegistrationStatus = PreRegistrationStatus = {}));
 /**
  * Group Block Action - Audit trail actions for group block history
  */

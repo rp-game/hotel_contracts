@@ -215,6 +215,16 @@ export interface CreateBookingRequest {
   ratePlanId?: string;
 
   /**
+   * Group block ID — links this booking to a group block (for group pickup)
+   */
+  groupBlockId?: string;
+
+  /**
+   * Block allocation ID — tracks which allocation this pickup came from
+   */
+  blockAllocationId?: string;
+
+  /**
    * Additional metadata
    */
   metadata?: Record<string, any>;

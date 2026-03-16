@@ -32,6 +32,14 @@ export declare enum InventoryControlMode {
     SELL_LIMIT = "SELL_LIMIT"
 }
 /**
+ * Pre-Registration Status - Tracks guest pre-registration progress for group bookings
+ */
+export declare enum PreRegistrationStatus {
+    NOT_STARTED = "NOT_STARTED",
+    PARTIAL = "PARTIAL",
+    COMPLETE = "COMPLETE"
+}
+/**
  * Group Block Action - Audit trail actions for group block history
  */
 export declare enum GroupBlockAction {

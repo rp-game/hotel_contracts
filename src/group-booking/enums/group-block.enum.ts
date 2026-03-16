@@ -35,6 +35,15 @@ export enum InventoryControlMode {
 }
 
 /**
+ * Pre-Registration Status - Tracks guest pre-registration progress for group bookings
+ */
+export enum PreRegistrationStatus {
+  NOT_STARTED = 'NOT_STARTED',
+  PARTIAL = 'PARTIAL',
+  COMPLETE = 'COMPLETE',
+}
+
+/**
  * Group Block Action - Audit trail actions for group block history
  */
 export enum GroupBlockAction {
