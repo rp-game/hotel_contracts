@@ -22,6 +22,11 @@ export class RejectRoomMoveRequest {
   @IsNotEmpty()
   rejectedBy: string;
 
+  @ApiPropertyOptional({ description: 'Name of user rejecting the move' })
+  @IsOptional()
+  @IsString()
+  rejectedByName?: string;
+
   @ApiProperty({ description: 'Rejection reason' })
   @IsString()
   @IsNotEmpty()

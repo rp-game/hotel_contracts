@@ -10,6 +10,7 @@ import { RoomMoveDetails } from '../types';
 export declare class CancelRoomMoveRequest {
     moveRequestId: string;
     cancelledBy: string;
+    cancelledByName?: string;
     reason: string;
     refundApplicable?: boolean;
     tenantId: string;

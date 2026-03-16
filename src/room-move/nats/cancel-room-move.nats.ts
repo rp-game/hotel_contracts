@@ -22,6 +22,11 @@ export class CancelRoomMoveRequest {
   @IsNotEmpty()
   cancelledBy: string;
 
+  @ApiPropertyOptional({ description: 'Name of user cancelling the move' })
+  @IsOptional()
+  @IsString()
+  cancelledByName?: string;
+
   @ApiProperty({ description: 'Cancellation reason' })
   @IsString()
   @IsNotEmpty()

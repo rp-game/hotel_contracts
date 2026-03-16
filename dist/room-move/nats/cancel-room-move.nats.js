@@ -22,6 +22,7 @@ const class_validator_1 = require("class-validator");
 class CancelRoomMoveRequest {
     moveRequestId;
     cancelledBy;
+    cancelledByName;
     reason;
     refundApplicable;
     tenantId;
@@ -40,6 +41,12 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CancelRoomMoveRequest.prototype, "cancelledBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Name of user cancelling the move' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CancelRoomMoveRequest.prototype, "cancelledByName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Cancellation reason' }),
     (0, class_validator_1.IsString)(),

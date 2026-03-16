@@ -22,6 +22,7 @@ const class_validator_1 = require("class-validator");
 class RejectRoomMoveRequest {
     moveRequestId;
     rejectedBy;
+    rejectedByName;
     reason;
     tenantId;
     hotelId;
@@ -39,6 +40,12 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], RejectRoomMoveRequest.prototype, "rejectedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Name of user rejecting the move' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RejectRoomMoveRequest.prototype, "rejectedByName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Rejection reason' }),
     (0, class_validator_1.IsString)(),

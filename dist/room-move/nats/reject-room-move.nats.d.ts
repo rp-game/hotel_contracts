@@ -10,6 +10,7 @@ import { RoomMoveDetails } from '../types';
 export declare class RejectRoomMoveRequest {
     moveRequestId: string;
     rejectedBy: string;
+    rejectedByName?: string;
     reason: string;
     tenantId: string;
     hotelId: string;
