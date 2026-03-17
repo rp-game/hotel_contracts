@@ -25,7 +25,10 @@ import { EInvoiceStatus, CustomerType, InvoicePaymentMethod, ProviderType, EInvo
 // SHARED DATA TYPES
 // ============================================================================
 
-export class EInvoiceItemData {
+/**
+ * Input item for create/update requests (computed fields optional — service calculates them)
+ */
+export class EInvoiceItemInput {
   @ApiProperty({ description: 'Item order' })
   orderBy: number;
 
@@ -44,20 +47,25 @@ export class EInvoiceItemData {
   @ApiProperty({ description: 'Unit price' })
   unitPrice: number;
 
-  @ApiProperty({ description: 'Subtotal (quantity * unitPrice)' })
-  subtotal: number;
-
   @ApiProperty({ description: 'VAT rate (-3, -2, -1, 0, 5, 8, 10)' })
   vatRate: number;
+
+  @ApiPropertyOptional({ description: 'Discount percentage' })
+  discount?: number;
+}
+
+/**
+ * Full item data with computed fields (for responses)
+ */
+export class EInvoiceItemData extends EInvoiceItemInput {
+  @ApiProperty({ description: 'Subtotal (quantity * unitPrice)' })
+  subtotal: number;
 
   @ApiProperty({ description: 'VAT amount' })
   vatAmount: number;
 
   @ApiProperty({ description: 'Total (subtotal + vatAmount)' })
   total: number;
-
-  @ApiPropertyOptional({ description: 'Discount percentage' })
-  discount?: number;
 
   @ApiPropertyOptional({ description: 'Discount amount' })
   discountAmount?: number;
@@ -334,8 +342,8 @@ export class CreateEInvoiceNatsRequest {
   @ApiPropertyOptional({ description: 'Notes' })
   notes?: string;
 
-  @ApiProperty({ description: 'Line items', type: [EInvoiceItemData] })
-  items: EInvoiceItemData[];
+  @ApiProperty({ description: 'Line items', type: [EInvoiceItemInput] })
+  items: EInvoiceItemInput[];
 }
 
 export class CreateEInvoiceFromInvoiceNatsRequest {
@@ -431,8 +439,8 @@ export class UpdateEInvoiceNatsRequest {
   @ApiPropertyOptional({ description: 'Notes' })
   notes?: string;
 
-  @ApiPropertyOptional({ description: 'Updated line items', type: [EInvoiceItemData] })
-  items?: EInvoiceItemData[];
+  @ApiPropertyOptional({ description: 'Updated line items', type: [EInvoiceItemInput] })
+  items?: EInvoiceItemInput[];
 }
 
 export class IssueEInvoiceNatsRequest {

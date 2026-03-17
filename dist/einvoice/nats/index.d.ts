@@ -18,18 +18,26 @@
  */
 import { NatsResponse, NatsPaginatedResponse } from '../../common/nats-response.interface';
 import { EInvoiceStatus, CustomerType, InvoicePaymentMethod, ProviderType, EInvoiceAction } from '../enums';
-export declare class EInvoiceItemData {
+/**
+ * Input item for create/update requests (computed fields optional — service calculates them)
+ */
+export declare class EInvoiceItemInput {
     orderBy: number;
     code?: string;
     name: string;
     unit?: string;
     quantity: number;
     unitPrice: number;
-    subtotal: number;
     vatRate: number;
+    discount?: number;
+}
+/**
+ * Full item data with computed fields (for responses)
+ */
+export declare class EInvoiceItemData extends EInvoiceItemInput {
+    subtotal: number;
     vatAmount: number;
     total: number;
-    discount?: number;
     discountAmount?: number;
 }
 export declare class EInvoiceHistoryData {
@@ -134,7 +142,7 @@ export declare class CreateEInvoiceNatsRequest {
     paymentMethod: InvoicePaymentMethod;
     arisingDate: string;
     notes?: string;
-    items: EInvoiceItemData[];
+    items: EInvoiceItemInput[];
 }
 export declare class CreateEInvoiceFromInvoiceNatsRequest {
     tenantId: string;
@@ -169,7 +177,7 @@ export declare class UpdateEInvoiceNatsRequest {
     paymentMethod?: InvoicePaymentMethod;
     arisingDate?: string;
     notes?: string;
-    items?: EInvoiceItemData[];
+    items?: EInvoiceItemInput[];
 }
 export declare class IssueEInvoiceNatsRequest {
     tenantId: string;

@@ -27,59 +27,72 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetProviderConfigNatsRequest = exports.SaveProviderConfigNatsRequest = exports.GetEInvoiceHtmlNatsRequest = exports.GetEInvoicePdfNatsRequest = exports.FindEInvoiceNatsRequest = exports.FindEInvoicesNatsRequest = exports.DeleteEInvoiceNatsRequest = exports.IssueEInvoiceNatsRequest = exports.UpdateEInvoiceNatsRequest = exports.CreateEInvoiceFromInvoiceNatsRequest = exports.CreateEInvoiceNatsRequest = exports.EINVOICE_PATTERNS = exports.ProviderConfigData = exports.EInvoiceSummary = exports.EInvoiceData = exports.EInvoiceHistoryData = exports.EInvoiceItemData = void 0;
+exports.GetProviderConfigNatsRequest = exports.SaveProviderConfigNatsRequest = exports.GetEInvoiceHtmlNatsRequest = exports.GetEInvoicePdfNatsRequest = exports.FindEInvoiceNatsRequest = exports.FindEInvoicesNatsRequest = exports.DeleteEInvoiceNatsRequest = exports.IssueEInvoiceNatsRequest = exports.UpdateEInvoiceNatsRequest = exports.CreateEInvoiceFromInvoiceNatsRequest = exports.CreateEInvoiceNatsRequest = exports.EINVOICE_PATTERNS = exports.ProviderConfigData = exports.EInvoiceSummary = exports.EInvoiceData = exports.EInvoiceHistoryData = exports.EInvoiceItemData = exports.EInvoiceItemInput = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const enums_1 = require("../enums");
 // ============================================================================
 // SHARED DATA TYPES
 // ============================================================================
-class EInvoiceItemData {
+/**
+ * Input item for create/update requests (computed fields optional — service calculates them)
+ */
+class EInvoiceItemInput {
     orderBy;
     code;
     name;
     unit;
     quantity;
     unitPrice;
-    subtotal;
     vatRate;
+    discount;
+}
+exports.EInvoiceItemInput = EInvoiceItemInput;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Item order' }),
+    __metadata("design:type", Number)
+], EInvoiceItemInput.prototype, "orderBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Product/service code' }),
+    __metadata("design:type", String)
+], EInvoiceItemInput.prototype, "code", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Product/service name' }),
+    __metadata("design:type", String)
+], EInvoiceItemInput.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Unit of measurement (e.g., Đêm, Lần, Phần)' }),
+    __metadata("design:type", String)
+], EInvoiceItemInput.prototype, "unit", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Quantity' }),
+    __metadata("design:type", Number)
+], EInvoiceItemInput.prototype, "quantity", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Unit price' }),
+    __metadata("design:type", Number)
+], EInvoiceItemInput.prototype, "unitPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'VAT rate (-3, -2, -1, 0, 5, 8, 10)' }),
+    __metadata("design:type", Number)
+], EInvoiceItemInput.prototype, "vatRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Discount percentage' }),
+    __metadata("design:type", Number)
+], EInvoiceItemInput.prototype, "discount", void 0);
+/**
+ * Full item data with computed fields (for responses)
+ */
+class EInvoiceItemData extends EInvoiceItemInput {
+    subtotal;
     vatAmount;
     total;
-    discount;
     discountAmount;
 }
 exports.EInvoiceItemData = EInvoiceItemData;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Item order' }),
-    __metadata("design:type", Number)
-], EInvoiceItemData.prototype, "orderBy", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Product/service code' }),
-    __metadata("design:type", String)
-], EInvoiceItemData.prototype, "code", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Product/service name' }),
-    __metadata("design:type", String)
-], EInvoiceItemData.prototype, "name", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Unit of measurement (e.g., Đêm, Lần, Phần)' }),
-    __metadata("design:type", String)
-], EInvoiceItemData.prototype, "unit", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Quantity' }),
-    __metadata("design:type", Number)
-], EInvoiceItemData.prototype, "quantity", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Unit price' }),
-    __metadata("design:type", Number)
-], EInvoiceItemData.prototype, "unitPrice", void 0);
-__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Subtotal (quantity * unitPrice)' }),
     __metadata("design:type", Number)
 ], EInvoiceItemData.prototype, "subtotal", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'VAT rate (-3, -2, -1, 0, 5, 8, 10)' }),
-    __metadata("design:type", Number)
-], EInvoiceItemData.prototype, "vatRate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'VAT amount' }),
     __metadata("design:type", Number)
@@ -88,10 +101,6 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total (subtotal + vatAmount)' }),
     __metadata("design:type", Number)
 ], EInvoiceItemData.prototype, "total", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Discount percentage' }),
-    __metadata("design:type", Number)
-], EInvoiceItemData.prototype, "discount", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Discount amount' }),
     __metadata("design:type", Number)
@@ -532,7 +541,7 @@ __decorate([
     __metadata("design:type", String)
 ], CreateEInvoiceNatsRequest.prototype, "notes", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Line items', type: [EInvoiceItemData] }),
+    (0, swagger_1.ApiProperty)({ description: 'Line items', type: [EInvoiceItemInput] }),
     __metadata("design:type", Array)
 ], CreateEInvoiceNatsRequest.prototype, "items", void 0);
 class CreateEInvoiceFromInvoiceNatsRequest {
@@ -693,7 +702,7 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateEInvoiceNatsRequest.prototype, "notes", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Updated line items', type: [EInvoiceItemData] }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Updated line items', type: [EInvoiceItemInput] }),
     __metadata("design:type", Array)
 ], UpdateEInvoiceNatsRequest.prototype, "items", void 0);
 class IssueEInvoiceNatsRequest {
