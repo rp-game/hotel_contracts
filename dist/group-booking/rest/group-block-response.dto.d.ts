@@ -62,6 +62,19 @@ export declare class BatchRoomAssignResultDto {
     failed: number;
     results: BatchRoomAssignResultItemDto[];
 }
+export declare class BatchPickupResultItemDto {
+    bookingId: string;
+    bookingCode: string;
+    guestName: string;
+    success: boolean;
+    error?: string;
+}
+export declare class BatchPickupResultDto {
+    total: number;
+    succeeded: number;
+    failed: number;
+    results: BatchPickupResultItemDto[];
+}
 export declare class GroupFolioBookingItemDto {
     bookingId: string;
     bookingCode: string;

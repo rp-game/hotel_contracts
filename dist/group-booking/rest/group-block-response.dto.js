@@ -14,7 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GroupMasterFolioDto = exports.GroupFolioSummaryDto = exports.GroupFolioBookingItemDto = exports.BatchRoomAssignResultDto = exports.BatchRoomAssignResultItemDto = exports.BatchCheckInResultDto = exports.BatchCheckInResultItemDto = exports.GroupBlockBookingSummaryDto = exports.GroupBlockResponseDto = exports.GroupBlockListResponseDto = void 0;
+exports.GroupMasterFolioDto = exports.GroupFolioSummaryDto = exports.GroupFolioBookingItemDto = exports.BatchPickupResultDto = exports.BatchPickupResultItemDto = exports.BatchRoomAssignResultDto = exports.BatchRoomAssignResultItemDto = exports.BatchCheckInResultDto = exports.BatchCheckInResultItemDto = exports.GroupBlockBookingSummaryDto = exports.GroupBlockResponseDto = exports.GroupBlockListResponseDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const group_block_types_1 = require("../types/group-block.types");
 /**
@@ -237,6 +237,58 @@ __decorate([
     (0, swagger_1.ApiProperty)({ type: [BatchRoomAssignResultItemDto] }),
     __metadata("design:type", Array)
 ], BatchRoomAssignResultDto.prototype, "results", void 0);
+// =================== Batch Pickup ===================
+class BatchPickupResultItemDto {
+    bookingId;
+    bookingCode;
+    guestName;
+    success;
+    error;
+}
+exports.BatchPickupResultItemDto = BatchPickupResultItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], BatchPickupResultItemDto.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], BatchPickupResultItemDto.prototype, "bookingCode", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], BatchPickupResultItemDto.prototype, "guestName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Boolean)
+], BatchPickupResultItemDto.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], BatchPickupResultItemDto.prototype, "error", void 0);
+class BatchPickupResultDto {
+    total;
+    succeeded;
+    failed;
+    results;
+}
+exports.BatchPickupResultDto = BatchPickupResultDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], BatchPickupResultDto.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], BatchPickupResultDto.prototype, "succeeded", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], BatchPickupResultDto.prototype, "failed", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [BatchPickupResultItemDto] }),
+    __metadata("design:type", Array)
+], BatchPickupResultDto.prototype, "results", void 0);
 // =================== Master Folio ===================
 class GroupFolioBookingItemDto {
     bookingId;

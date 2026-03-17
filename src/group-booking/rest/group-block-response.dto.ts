@@ -88,6 +88,23 @@ export class BatchRoomAssignResultDto {
   @ApiProperty({ type: [BatchRoomAssignResultItemDto] }) results: BatchRoomAssignResultItemDto[];
 }
 
+// =================== Batch Pickup ===================
+
+export class BatchPickupResultItemDto {
+  @ApiProperty() bookingId: string;
+  @ApiProperty() bookingCode: string;
+  @ApiProperty() guestName: string;
+  @ApiProperty() success: boolean;
+  @ApiPropertyOptional() error?: string;
+}
+
+export class BatchPickupResultDto {
+  @ApiProperty() total: number;
+  @ApiProperty() succeeded: number;
+  @ApiProperty() failed: number;
+  @ApiProperty({ type: [BatchPickupResultItemDto] }) results: BatchPickupResultItemDto[];
+}
+
 // =================== Master Folio ===================
 
 export class GroupFolioBookingItemDto {

@@ -96,6 +96,21 @@ export declare class FindGroupBlocksQueryDto {
     sortOrder?: 'ASC' | 'DESC';
 }
 /**
+ * Guest item for batch pickup
+ */
+export declare class BatchPickupGuestItemDto {
+    guestName?: string;
+    guestPhone?: string;
+}
+/**
+ * Batch pickup DTO — create multiple bookings from a group block allocation
+ */
+export declare class BatchPickupDto {
+    blockAllocationId: string;
+    numberOfRooms: number;
+    guests?: BatchPickupGuestItemDto[];
+}
+/**
  * Batch check-in DTO — check in multiple group bookings at once
  */
 export declare class BatchCheckInDto {

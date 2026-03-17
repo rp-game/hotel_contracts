@@ -350,6 +350,42 @@ export class FindGroupBlocksQueryDto {
 }
 
 /**
+ * Guest item for batch pickup
+ */
+export class BatchPickupGuestItemDto {
+  @ApiPropertyOptional({ description: 'Guest name (defaults to "Guest N" if empty)' })
+  @IsOptional()
+  @IsString()
+  guestName?: string;
+
+  @ApiPropertyOptional({ description: 'Guest phone number' })
+  @IsOptional()
+  @IsString()
+  guestPhone?: string;
+}
+
+/**
+ * Batch pickup DTO — create multiple bookings from a group block allocation
+ */
+export class BatchPickupDto {
+  @ApiProperty({ description: 'Block allocation ID to pick up from' })
+  @IsUUID()
+  blockAllocationId: string;
+
+  @ApiProperty({ description: 'Number of rooms to pick up', minimum: 1 })
+  @IsNumber()
+  @Min(1)
+  numberOfRooms: number;
+
+  @ApiPropertyOptional({ description: 'Guest details for each room', type: [BatchPickupGuestItemDto] })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => BatchPickupGuestItemDto)
+  guests?: BatchPickupGuestItemDto[];
+}
+
+/**
  * Batch check-in DTO — check in multiple group bookings at once
  */
 export class BatchCheckInDto {

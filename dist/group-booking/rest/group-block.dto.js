@@ -16,7 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BatchRoomAssignDto = exports.BatchRoomAssignItemDto = exports.BatchCheckInDto = exports.FindGroupBlocksQueryDto = exports.UpdateBlockAllocationDto = exports.UpdateGroupBlockStatusDto = exports.UpdateGroupBlockDto = exports.CreateGroupBlockDto = exports.CreateBlockAllocationDto = void 0;
+exports.BatchRoomAssignDto = exports.BatchRoomAssignItemDto = exports.BatchCheckInDto = exports.BatchPickupDto = exports.BatchPickupGuestItemDto = exports.FindGroupBlocksQueryDto = exports.UpdateBlockAllocationDto = exports.UpdateGroupBlockStatusDto = exports.UpdateGroupBlockDto = exports.CreateGroupBlockDto = exports.CreateBlockAllocationDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -469,6 +469,54 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], FindGroupBlocksQueryDto.prototype, "sortOrder", void 0);
+/**
+ * Guest item for batch pickup
+ */
+class BatchPickupGuestItemDto {
+    guestName;
+    guestPhone;
+}
+exports.BatchPickupGuestItemDto = BatchPickupGuestItemDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Guest name (defaults to "Guest N" if empty)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BatchPickupGuestItemDto.prototype, "guestName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Guest phone number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BatchPickupGuestItemDto.prototype, "guestPhone", void 0);
+/**
+ * Batch pickup DTO — create multiple bookings from a group block allocation
+ */
+class BatchPickupDto {
+    blockAllocationId;
+    numberOfRooms;
+    guests;
+}
+exports.BatchPickupDto = BatchPickupDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Block allocation ID to pick up from' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], BatchPickupDto.prototype, "blockAllocationId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of rooms to pick up', minimum: 1 }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], BatchPickupDto.prototype, "numberOfRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Guest details for each room', type: [BatchPickupGuestItemDto] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => BatchPickupGuestItemDto),
+    __metadata("design:type", Array)
+], BatchPickupDto.prototype, "guests", void 0);
 /**
  * Batch check-in DTO — check in multiple group bookings at once
  */
