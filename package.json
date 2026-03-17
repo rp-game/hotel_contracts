@@ -1,6 +1,6 @@
 {
   "name": "@hotel/contracts",
-  "version": "0.1.478",
+  "version": "0.1.479",
   "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -328,6 +328,26 @@
     "./auth/rest": {
       "types": "./dist/auth/rest/index.d.ts",
       "default": "./dist/auth/rest/index.js"
+    },
+    "./einvoice": {
+      "types": "./dist/einvoice/index.d.ts",
+      "default": "./dist/einvoice/index.js"
+    },
+    "./einvoice/enums": {
+      "types": "./dist/einvoice/enums/index.d.ts",
+      "default": "./dist/einvoice/enums/index.js"
+    },
+    "./einvoice/nats": {
+      "types": "./dist/einvoice/nats/index.d.ts",
+      "default": "./dist/einvoice/nats/index.js"
+    },
+    "./einvoice/rest": {
+      "types": "./dist/einvoice/rest/index.d.ts",
+      "default": "./dist/einvoice/rest/index.js"
+    },
+    "./einvoice/types": {
+      "types": "./dist/einvoice/types/index.d.ts",
+      "default": "./dist/einvoice/types/index.js"
     }
   },
   "typesVersions": {
@@ -562,6 +582,21 @@
       ],
       "auth/rest": [
         "dist/auth/rest/index.d.ts"
+      ],
+      "einvoice": [
+        "dist/einvoice/index.d.ts"
+      ],
+      "einvoice/enums": [
+        "dist/einvoice/enums/index.d.ts"
+      ],
+      "einvoice/nats": [
+        "dist/einvoice/nats/index.d.ts"
+      ],
+      "einvoice/rest": [
+        "dist/einvoice/rest/index.d.ts"
+      ],
+      "einvoice/types": [
+        "dist/einvoice/types/index.d.ts"
       ]
     }
   },
