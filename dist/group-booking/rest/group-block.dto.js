@@ -16,7 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BatchRoomAssignDto = exports.BatchRoomAssignItemDto = exports.BatchCheckInDto = exports.BatchPickupDto = exports.BatchPickupGuestItemDto = exports.FindGroupBlocksQueryDto = exports.UpdateBlockAllocationDto = exports.UpdateGroupBlockStatusDto = exports.UpdateGroupBlockDto = exports.CreateGroupBlockDto = exports.CreateBlockAllocationDto = void 0;
+exports.VoidGroupDepositDto = exports.RecordGroupDepositDto = exports.BatchRoomAssignDto = exports.BatchRoomAssignItemDto = exports.BatchCheckInDto = exports.BatchPickupDto = exports.BatchPickupGuestItemDto = exports.FindGroupBlocksQueryDto = exports.UpdateBlockAllocationDto = exports.UpdateGroupBlockStatusDto = exports.UpdateGroupBlockDto = exports.CreateGroupBlockDto = exports.CreateBlockAllocationDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -583,4 +583,51 @@ __decorate([
     (0, class_transformer_1.Type)(() => BatchRoomAssignItemDto),
     __metadata("design:type", Array)
 ], BatchRoomAssignDto.prototype, "assignments", void 0);
+/**
+ * DTO for recording a group deposit payment
+ */
+class RecordGroupDepositDto {
+    amount;
+    paymentMethod;
+    reference;
+    notes;
+}
+exports.RecordGroupDepositDto = RecordGroupDepositDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Payment amount', minimum: 0.01 }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0.01),
+    __metadata("design:type", Number)
+], RecordGroupDepositDto.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Payment method (CASH, BANK_TRANSFER, CREDIT_CARD, EWALLET)' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], RecordGroupDepositDto.prototype, "paymentMethod", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payment reference number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RecordGroupDepositDto.prototype, "reference", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Notes about this payment' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RecordGroupDepositDto.prototype, "notes", void 0);
+/**
+ * DTO for voiding a group deposit payment
+ */
+class VoidGroupDepositDto {
+    reason;
+}
+exports.VoidGroupDepositDto = VoidGroupDepositDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Reason for voiding' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], VoidGroupDepositDto.prototype, "reason", void 0);
 //# sourceMappingURL=group-block.dto.js.map

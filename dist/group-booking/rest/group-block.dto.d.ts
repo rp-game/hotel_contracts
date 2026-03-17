@@ -132,4 +132,19 @@ export declare class BatchRoomAssignItemDto {
 export declare class BatchRoomAssignDto {
     assignments: BatchRoomAssignItemDto[];
 }
+/**
+ * DTO for recording a group deposit payment
+ */
+export declare class RecordGroupDepositDto {
+    amount: number;
+    paymentMethod: string;
+    reference?: string;
+    notes?: string;
+}
+/**
+ * DTO for voiding a group deposit payment
+ */
+export declare class VoidGroupDepositDto {
+    reason?: string;
+}
 //# sourceMappingURL=group-block.dto.d.ts.map

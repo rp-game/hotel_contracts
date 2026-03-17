@@ -139,3 +139,27 @@ export class GroupMasterFolioDto {
   @ApiProperty({ type: [GroupFolioBookingItemDto] }) bookings: GroupFolioBookingItemDto[];
   @ApiProperty({ type: GroupFolioSummaryDto }) summary: GroupFolioSummaryDto;
 }
+
+// =================== Deposit Payments ===================
+
+export class GroupDepositPaymentDto {
+  @ApiProperty() id: string;
+  @ApiProperty() groupBlockId: string;
+  @ApiProperty() amount: number;
+  @ApiProperty() paymentMethod: string;
+  @ApiPropertyOptional({ type: String, nullable: true }) reference: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) notes: string | null;
+  @ApiProperty() status: string;
+  @ApiProperty() receivedBy: string;
+  @ApiPropertyOptional({ type: String, nullable: true }) receivedByName: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) voidedAt: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) voidReason: string | null;
+  @ApiProperty() createdAt: string;
+}
+
+export class GroupDepositListResponseDto {
+  @ApiProperty({ type: [GroupDepositPaymentDto] }) deposits: GroupDepositPaymentDto[];
+  @ApiProperty() totalDeposited: number;
+  @ApiProperty() totalVoided: number;
+  @ApiProperty() netDeposited: number;
+}

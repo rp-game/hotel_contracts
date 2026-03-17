@@ -105,4 +105,24 @@ export declare class GroupMasterFolioDto {
     bookings: GroupFolioBookingItemDto[];
     summary: GroupFolioSummaryDto;
 }
+export declare class GroupDepositPaymentDto {
+    id: string;
+    groupBlockId: string;
+    amount: number;
+    paymentMethod: string;
+    reference: string | null;
+    notes: string | null;
+    status: string;
+    receivedBy: string;
+    receivedByName: string | null;
+    voidedAt: string | null;
+    voidReason: string | null;
+    createdAt: string;
+}
+export declare class GroupDepositListResponseDto {
+    deposits: GroupDepositPaymentDto[];
+    totalDeposited: number;
+    totalVoided: number;
+    netDeposited: number;
+}
 //# sourceMappingURL=group-block-response.dto.d.ts.map

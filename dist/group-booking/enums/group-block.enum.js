@@ -59,5 +59,7 @@ var GroupBlockAction;
     GroupBlockAction["BOOKING_PICKED_UP"] = "BOOKING_PICKED_UP";
     GroupBlockAction["BOOKING_CANCELLED"] = "BOOKING_CANCELLED";
     GroupBlockAction["DETAILS_UPDATED"] = "DETAILS_UPDATED";
+    GroupBlockAction["DEPOSIT_RECEIVED"] = "DEPOSIT_RECEIVED";
+    GroupBlockAction["DEPOSIT_VOIDED"] = "DEPOSIT_VOIDED";
 })(GroupBlockAction || (exports.GroupBlockAction = GroupBlockAction = {}));
 //# sourceMappingURL=group-block.enum.js.map

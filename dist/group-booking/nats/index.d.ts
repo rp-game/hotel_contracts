@@ -9,4 +9,5 @@ export * from './batch-check-in.nats';
 export * from './batch-room-assign.nats';
 export * from './group-folio.nats';
 export * from './batch-pickup.nats';
+export * from './group-deposit.nats';
 //# sourceMappingURL=index.d.ts.map

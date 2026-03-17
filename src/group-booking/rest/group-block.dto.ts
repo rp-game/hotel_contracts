@@ -433,3 +433,38 @@ export class BatchRoomAssignDto {
   @Type(() => BatchRoomAssignItemDto)
   assignments: BatchRoomAssignItemDto[];
 }
+
+/**
+ * DTO for recording a group deposit payment
+ */
+export class RecordGroupDepositDto {
+  @ApiProperty({ description: 'Payment amount', minimum: 0.01 })
+  @IsNumber()
+  @Min(0.01)
+  amount: number;
+
+  @ApiProperty({ description: 'Payment method (CASH, BANK_TRANSFER, CREDIT_CARD, EWALLET)' })
+  @IsString()
+  @IsNotEmpty()
+  paymentMethod: string;
+
+  @ApiPropertyOptional({ description: 'Payment reference number' })
+  @IsOptional()
+  @IsString()
+  reference?: string;
+
+  @ApiPropertyOptional({ description: 'Notes about this payment' })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+}
+
+/**
+ * DTO for voiding a group deposit payment
+ */
+export class VoidGroupDepositDto {
+  @ApiPropertyOptional({ description: 'Reason for voiding' })
+  @IsOptional()
+  @IsString()
+  reason?: string;
+}
