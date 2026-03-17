@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GroupBlockAction = exports.PreRegistrationStatus = exports.InventoryControlMode = exports.GroupBillingMode = exports.GroupBlockStatus = void 0;
+exports.GroupMasterChargeCategory = exports.GroupBlockAction = exports.PreRegistrationStatus = exports.InventoryControlMode = exports.GroupBillingMode = exports.GroupBlockStatus = void 0;
 /**
  * Group Block Status - State machine for group booking blocks
  *
@@ -61,5 +61,18 @@ var GroupBlockAction;
     GroupBlockAction["DETAILS_UPDATED"] = "DETAILS_UPDATED";
     GroupBlockAction["DEPOSIT_RECEIVED"] = "DEPOSIT_RECEIVED";
     GroupBlockAction["DEPOSIT_VOIDED"] = "DEPOSIT_VOIDED";
+    GroupBlockAction["MASTER_CHARGE_POSTED"] = "MASTER_CHARGE_POSTED";
+    GroupBlockAction["MASTER_CHARGE_VOIDED"] = "MASTER_CHARGE_VOIDED";
+    GroupBlockAction["PAYMENT_RECEIVED"] = "PAYMENT_RECEIVED";
+    GroupBlockAction["PAYMENT_VOIDED"] = "PAYMENT_VOIDED";
 })(GroupBlockAction || (exports.GroupBlockAction = GroupBlockAction = {}));
+/**
+ * Group Master Charge Category
+ */
+var GroupMasterChargeCategory;
+(function (GroupMasterChargeCategory) {
+    GroupMasterChargeCategory["SERVICE"] = "SERVICE";
+    GroupMasterChargeCategory["F_AND_B"] = "F_AND_B";
+    GroupMasterChargeCategory["OTHER"] = "OTHER";
+})(GroupMasterChargeCategory || (exports.GroupMasterChargeCategory = GroupMasterChargeCategory = {}));
 //# sourceMappingURL=group-block.enum.js.map

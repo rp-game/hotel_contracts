@@ -14,7 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GroupDepositListResponseDto = exports.GroupDepositPaymentDto = exports.GroupMasterFolioDto = exports.GroupFolioSummaryDto = exports.GroupFolioBookingItemDto = exports.BatchPickupResultDto = exports.BatchPickupResultItemDto = exports.BatchRoomAssignResultDto = exports.BatchRoomAssignResultItemDto = exports.BatchCheckInResultDto = exports.BatchCheckInResultItemDto = exports.GroupBlockBookingSummaryDto = exports.GroupBlockResponseDto = exports.GroupBlockListResponseDto = void 0;
+exports.GroupPaymentListResponseDto = exports.GroupDepositListResponseDto = exports.GroupDepositPaymentDto = exports.GroupMasterFolioDto = exports.GroupPaymentResponseDto = exports.GroupMasterChargeResponseDto = exports.GroupFolioSummaryDto = exports.GroupFolioBookingItemDto = exports.BatchPickupResultDto = exports.BatchPickupResultItemDto = exports.BatchRoomAssignResultDto = exports.BatchRoomAssignResultItemDto = exports.BatchCheckInResultDto = exports.BatchCheckInResultItemDto = exports.GroupBlockBookingSummaryDto = exports.GroupBlockResponseDto = exports.GroupBlockListResponseDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const group_block_types_1 = require("../types/group-block.types");
 /**
@@ -363,8 +363,12 @@ class GroupFolioSummaryDto {
     totalRoomCharges;
     totalTaxAmount;
     totalGrossAmount;
+    totalMasterCharges;
+    totalDepositPaid;
+    totalPaymentPaid;
     totalPaidAmount;
     totalBalance;
+    creditBalance;
 }
 exports.GroupFolioSummaryDto = GroupFolioSummaryDto;
 __decorate([
@@ -386,16 +390,174 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
+], GroupFolioSummaryDto.prototype, "totalMasterCharges", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GroupFolioSummaryDto.prototype, "totalDepositPaid", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GroupFolioSummaryDto.prototype, "totalPaymentPaid", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
 ], GroupFolioSummaryDto.prototype, "totalPaidAmount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], GroupFolioSummaryDto.prototype, "totalBalance", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GroupFolioSummaryDto.prototype, "creditBalance", void 0);
+// =================== Master Charges ===================
+class GroupMasterChargeResponseDto {
+    id;
+    groupBlockId;
+    category;
+    description;
+    amount;
+    date;
+    taxRate;
+    reference;
+    createdBy;
+    createdByName;
+    voidedAt;
+    voidReason;
+    createdAt;
+}
+exports.GroupMasterChargeResponseDto = GroupMasterChargeResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupMasterChargeResponseDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupMasterChargeResponseDto.prototype, "groupBlockId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupMasterChargeResponseDto.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupMasterChargeResponseDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GroupMasterChargeResponseDto.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupMasterChargeResponseDto.prototype, "date", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GroupMasterChargeResponseDto.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], GroupMasterChargeResponseDto.prototype, "reference", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupMasterChargeResponseDto.prototype, "createdBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], GroupMasterChargeResponseDto.prototype, "createdByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], GroupMasterChargeResponseDto.prototype, "voidedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], GroupMasterChargeResponseDto.prototype, "voidReason", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupMasterChargeResponseDto.prototype, "createdAt", void 0);
+// =================== Unified Payments ===================
+class GroupPaymentResponseDto {
+    id;
+    groupBlockId;
+    type;
+    amount;
+    paymentMethod;
+    reference;
+    notes;
+    status;
+    receivedBy;
+    receivedByName;
+    voidedAt;
+    voidReason;
+    createdAt;
+}
+exports.GroupPaymentResponseDto = GroupPaymentResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupPaymentResponseDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupPaymentResponseDto.prototype, "groupBlockId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupPaymentResponseDto.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GroupPaymentResponseDto.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupPaymentResponseDto.prototype, "paymentMethod", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], GroupPaymentResponseDto.prototype, "reference", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], GroupPaymentResponseDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupPaymentResponseDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupPaymentResponseDto.prototype, "receivedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], GroupPaymentResponseDto.prototype, "receivedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], GroupPaymentResponseDto.prototype, "voidedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], GroupPaymentResponseDto.prototype, "voidReason", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupPaymentResponseDto.prototype, "createdAt", void 0);
 class GroupMasterFolioDto {
     groupBlockId;
     blockCode;
     groupName;
+    billingMode;
     bookings;
+    masterCharges;
+    deposits;
+    payments;
     summary;
 }
 exports.GroupMasterFolioDto = GroupMasterFolioDto;
@@ -412,17 +574,34 @@ __decorate([
     __metadata("design:type", String)
 ], GroupMasterFolioDto.prototype, "groupName", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupMasterFolioDto.prototype, "billingMode", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ type: [GroupFolioBookingItemDto] }),
     __metadata("design:type", Array)
 ], GroupMasterFolioDto.prototype, "bookings", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ type: [GroupMasterChargeResponseDto] }),
+    __metadata("design:type", Array)
+], GroupMasterFolioDto.prototype, "masterCharges", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [GroupPaymentResponseDto] }),
+    __metadata("design:type", Array)
+], GroupMasterFolioDto.prototype, "deposits", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [GroupPaymentResponseDto] }),
+    __metadata("design:type", Array)
+], GroupMasterFolioDto.prototype, "payments", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ type: GroupFolioSummaryDto }),
     __metadata("design:type", GroupFolioSummaryDto)
 ], GroupMasterFolioDto.prototype, "summary", void 0);
-// =================== Deposit Payments ===================
+// =================== Deposit Payments (backward compat) ===================
 class GroupDepositPaymentDto {
     id;
     groupBlockId;
+    type;
     amount;
     paymentMethod;
     reference;
@@ -443,6 +622,10 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], GroupDepositPaymentDto.prototype, "groupBlockId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GroupDepositPaymentDto.prototype, "type", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
@@ -506,4 +689,32 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], GroupDepositListResponseDto.prototype, "netDeposited", void 0);
+class GroupPaymentListResponseDto {
+    payments;
+    totalDeposited;
+    totalSettlementPaid;
+    totalVoided;
+    netPaid;
+}
+exports.GroupPaymentListResponseDto = GroupPaymentListResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [GroupPaymentResponseDto] }),
+    __metadata("design:type", Array)
+], GroupPaymentListResponseDto.prototype, "payments", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GroupPaymentListResponseDto.prototype, "totalDeposited", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GroupPaymentListResponseDto.prototype, "totalSettlementPaid", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GroupPaymentListResponseDto.prototype, "totalVoided", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GroupPaymentListResponseDto.prototype, "netPaid", void 0);
 //# sourceMappingURL=group-block-response.dto.js.map

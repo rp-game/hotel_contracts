@@ -10,4 +10,6 @@ export * from './batch-room-assign.nats';
 export * from './group-folio.nats';
 export * from './batch-pickup.nats';
 export * from './group-deposit.nats';
+export * from './group-master-charge.nats';
+export * from './group-payment.nats';
 //# sourceMappingURL=index.d.ts.map

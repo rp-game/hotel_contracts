@@ -6,6 +6,8 @@
  * Called by: api-gateway
  */
 import { NatsResponse } from '../../common/nats-response.interface';
+import { GroupMasterChargeItem } from './group-master-charge.nats';
+import { GroupPaymentItem } from './group-payment.nats';
 /**
  * NATS request to get aggregated master folio for a group block
  */
@@ -33,14 +35,22 @@ export interface GroupMasterFolio {
     groupBlockId: string;
     blockCode: string;
     groupName: string;
+    billingMode: string;
     bookings: GroupFolioBookingItem[];
+    masterCharges: GroupMasterChargeItem[];
+    deposits: GroupPaymentItem[];
+    payments: GroupPaymentItem[];
     summary: {
         totalBookings: number;
         totalRoomCharges: number;
         totalTaxAmount: number;
         totalGrossAmount: number;
+        totalMasterCharges: number;
+        totalDepositPaid: number;
+        totalPaymentPaid: number;
         totalPaidAmount: number;
         totalBalance: number;
+        creditBalance: number;
     };
 }
 export type GetGroupMasterFolioNatsResponse = NatsResponse<GroupMasterFolio>;

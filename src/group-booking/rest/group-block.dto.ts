@@ -23,7 +23,7 @@ import {
   Min,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { GroupBlockStatus, GroupBillingMode, InventoryControlMode } from '../enums/group-block.enum';
+import { GroupBlockStatus, GroupBillingMode, InventoryControlMode, GroupMasterChargeCategory } from '../enums/group-block.enum';
 
 /**
  * DTO for creating a block allocation (nested in CreateGroupBlockDto)
@@ -463,6 +463,93 @@ export class RecordGroupDepositDto {
  * DTO for voiding a group deposit payment
  */
 export class VoidGroupDepositDto {
+  @ApiPropertyOptional({ description: 'Reason for voiding' })
+  @IsOptional()
+  @IsString()
+  reason?: string;
+}
+
+// =================== Master Charges ===================
+
+/**
+ * DTO for posting a charge to the group master folio
+ */
+export class PostGroupMasterChargeDto {
+  @ApiProperty({ description: 'Charge category', enum: GroupMasterChargeCategory })
+  @IsEnum(GroupMasterChargeCategory)
+  category: GroupMasterChargeCategory;
+
+  @ApiProperty({ description: 'Charge description' })
+  @IsString()
+  @IsNotEmpty()
+  description: string;
+
+  @ApiProperty({ description: 'Charge amount', minimum: 0.01 })
+  @IsNumber()
+  @Min(0.01)
+  amount: number;
+
+  @ApiProperty({ description: 'Charge date (YYYY-MM-DD)' })
+  @IsDateString()
+  date: string;
+
+  @ApiPropertyOptional({ description: 'VAT rate (default 8)', default: 8 })
+  @IsOptional()
+  @IsNumber()
+  taxRate?: number;
+
+  @ApiPropertyOptional({ description: 'Reference number' })
+  @IsOptional()
+  @IsString()
+  reference?: string;
+}
+
+/**
+ * DTO for voiding a master charge
+ */
+export class VoidGroupMasterChargeDto {
+  @ApiProperty({ description: 'Reason for voiding' })
+  @IsString()
+  @IsNotEmpty()
+  reason: string;
+}
+
+// =================== Unified Payments ===================
+
+/**
+ * DTO for recording a group payment (deposit or settlement)
+ */
+export class RecordGroupPaymentDto {
+  @ApiProperty({ description: 'Payment amount', minimum: 0.01 })
+  @IsNumber()
+  @Min(0.01)
+  amount: number;
+
+  @ApiProperty({ description: 'Payment method (CASH, BANK_TRANSFER, CREDIT_CARD, EWALLET)' })
+  @IsString()
+  @IsNotEmpty()
+  paymentMethod: string;
+
+  @ApiPropertyOptional({ description: 'Payment type', default: 'PAYMENT', enum: ['DEPOSIT', 'PAYMENT'] })
+  @IsOptional()
+  @IsIn(['DEPOSIT', 'PAYMENT'])
+  type?: 'DEPOSIT' | 'PAYMENT';
+
+  @ApiPropertyOptional({ description: 'Payment reference number' })
+  @IsOptional()
+  @IsString()
+  reference?: string;
+
+  @ApiPropertyOptional({ description: 'Notes about this payment' })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+}
+
+/**
+ * DTO for voiding a group payment
+ */
+export class VoidGroupPaymentDto {
   @ApiPropertyOptional({ description: 'Reason for voiding' })
   @IsOptional()
   @IsString()

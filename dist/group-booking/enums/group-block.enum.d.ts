@@ -52,6 +52,18 @@ export declare enum GroupBlockAction {
     BOOKING_CANCELLED = "BOOKING_CANCELLED",
     DETAILS_UPDATED = "DETAILS_UPDATED",
     DEPOSIT_RECEIVED = "DEPOSIT_RECEIVED",
-    DEPOSIT_VOIDED = "DEPOSIT_VOIDED"
+    DEPOSIT_VOIDED = "DEPOSIT_VOIDED",
+    MASTER_CHARGE_POSTED = "MASTER_CHARGE_POSTED",
+    MASTER_CHARGE_VOIDED = "MASTER_CHARGE_VOIDED",
+    PAYMENT_RECEIVED = "PAYMENT_RECEIVED",
+    PAYMENT_VOIDED = "PAYMENT_VOIDED"
+}
+/**
+ * Group Master Charge Category
+ */
+export declare enum GroupMasterChargeCategory {
+    SERVICE = "SERVICE",
+    F_AND_B = "F_AND_B",
+    OTHER = "OTHER"
 }
 //# sourceMappingURL=group-block.enum.d.ts.map

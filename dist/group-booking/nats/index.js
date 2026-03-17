@@ -26,4 +26,6 @@ __exportStar(require("./batch-room-assign.nats"), exports);
 __exportStar(require("./group-folio.nats"), exports);
 __exportStar(require("./batch-pickup.nats"), exports);
 __exportStar(require("./group-deposit.nats"), exports);
+__exportStar(require("./group-master-charge.nats"), exports);
+__exportStar(require("./group-payment.nats"), exports);
 //# sourceMappingURL=index.js.map

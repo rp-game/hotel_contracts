@@ -16,7 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VoidGroupDepositDto = exports.RecordGroupDepositDto = exports.BatchRoomAssignDto = exports.BatchRoomAssignItemDto = exports.BatchCheckInDto = exports.BatchPickupDto = exports.BatchPickupGuestItemDto = exports.FindGroupBlocksQueryDto = exports.UpdateBlockAllocationDto = exports.UpdateGroupBlockStatusDto = exports.UpdateGroupBlockDto = exports.CreateGroupBlockDto = exports.CreateBlockAllocationDto = void 0;
+exports.VoidGroupPaymentDto = exports.RecordGroupPaymentDto = exports.VoidGroupMasterChargeDto = exports.PostGroupMasterChargeDto = exports.VoidGroupDepositDto = exports.RecordGroupDepositDto = exports.BatchRoomAssignDto = exports.BatchRoomAssignItemDto = exports.BatchCheckInDto = exports.BatchPickupDto = exports.BatchPickupGuestItemDto = exports.FindGroupBlocksQueryDto = exports.UpdateBlockAllocationDto = exports.UpdateGroupBlockStatusDto = exports.UpdateGroupBlockDto = exports.CreateGroupBlockDto = exports.CreateBlockAllocationDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -630,4 +630,119 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], VoidGroupDepositDto.prototype, "reason", void 0);
+// =================== Master Charges ===================
+/**
+ * DTO for posting a charge to the group master folio
+ */
+class PostGroupMasterChargeDto {
+    category;
+    description;
+    amount;
+    date;
+    taxRate;
+    reference;
+}
+exports.PostGroupMasterChargeDto = PostGroupMasterChargeDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Charge category', enum: group_block_enum_1.GroupMasterChargeCategory }),
+    (0, class_validator_1.IsEnum)(group_block_enum_1.GroupMasterChargeCategory),
+    __metadata("design:type", String)
+], PostGroupMasterChargeDto.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Charge description' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], PostGroupMasterChargeDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Charge amount', minimum: 0.01 }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0.01),
+    __metadata("design:type", Number)
+], PostGroupMasterChargeDto.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Charge date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], PostGroupMasterChargeDto.prototype, "date", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate (default 8)', default: 8 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], PostGroupMasterChargeDto.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Reference number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], PostGroupMasterChargeDto.prototype, "reference", void 0);
+/**
+ * DTO for voiding a master charge
+ */
+class VoidGroupMasterChargeDto {
+    reason;
+}
+exports.VoidGroupMasterChargeDto = VoidGroupMasterChargeDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reason for voiding' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], VoidGroupMasterChargeDto.prototype, "reason", void 0);
+// =================== Unified Payments ===================
+/**
+ * DTO for recording a group payment (deposit or settlement)
+ */
+class RecordGroupPaymentDto {
+    amount;
+    paymentMethod;
+    type;
+    reference;
+    notes;
+}
+exports.RecordGroupPaymentDto = RecordGroupPaymentDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Payment amount', minimum: 0.01 }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0.01),
+    __metadata("design:type", Number)
+], RecordGroupPaymentDto.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Payment method (CASH, BANK_TRANSFER, CREDIT_CARD, EWALLET)' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], RecordGroupPaymentDto.prototype, "paymentMethod", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payment type', default: 'PAYMENT', enum: ['DEPOSIT', 'PAYMENT'] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsIn)(['DEPOSIT', 'PAYMENT']),
+    __metadata("design:type", String)
+], RecordGroupPaymentDto.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payment reference number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RecordGroupPaymentDto.prototype, "reference", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Notes about this payment' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RecordGroupPaymentDto.prototype, "notes", void 0);
+/**
+ * DTO for voiding a group payment
+ */
+class VoidGroupPaymentDto {
+    reason;
+}
+exports.VoidGroupPaymentDto = VoidGroupPaymentDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Reason for voiding' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], VoidGroupPaymentDto.prototype, "reason", void 0);
 //# sourceMappingURL=group-block.dto.js.map

@@ -5,7 +5,7 @@
  * Used by API Gateway controllers for request validation.
  * Note: tenantId/hotelId are NOT included — injected from JWT by controller.
  */
-import { GroupBlockStatus, GroupBillingMode, InventoryControlMode } from '../enums/group-block.enum';
+import { GroupBlockStatus, GroupBillingMode, InventoryControlMode, GroupMasterChargeCategory } from '../enums/group-block.enum';
 /**
  * DTO for creating a block allocation (nested in CreateGroupBlockDto)
  */
@@ -145,6 +145,39 @@ export declare class RecordGroupDepositDto {
  * DTO for voiding a group deposit payment
  */
 export declare class VoidGroupDepositDto {
+    reason?: string;
+}
+/**
+ * DTO for posting a charge to the group master folio
+ */
+export declare class PostGroupMasterChargeDto {
+    category: GroupMasterChargeCategory;
+    description: string;
+    amount: number;
+    date: string;
+    taxRate?: number;
+    reference?: string;
+}
+/**
+ * DTO for voiding a master charge
+ */
+export declare class VoidGroupMasterChargeDto {
+    reason: string;
+}
+/**
+ * DTO for recording a group payment (deposit or settlement)
+ */
+export declare class RecordGroupPaymentDto {
+    amount: number;
+    paymentMethod: string;
+    type?: 'DEPOSIT' | 'PAYMENT';
+    reference?: string;
+    notes?: string;
+}
+/**
+ * DTO for voiding a group payment
+ */
+export declare class VoidGroupPaymentDto {
     reason?: string;
 }
 //# sourceMappingURL=group-block.dto.d.ts.map

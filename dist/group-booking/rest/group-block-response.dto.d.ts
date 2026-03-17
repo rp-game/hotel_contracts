@@ -95,19 +95,58 @@ export declare class GroupFolioSummaryDto {
     totalRoomCharges: number;
     totalTaxAmount: number;
     totalGrossAmount: number;
+    totalMasterCharges: number;
+    totalDepositPaid: number;
+    totalPaymentPaid: number;
     totalPaidAmount: number;
     totalBalance: number;
+    creditBalance: number;
+}
+export declare class GroupMasterChargeResponseDto {
+    id: string;
+    groupBlockId: string;
+    category: string;
+    description: string;
+    amount: number;
+    date: string;
+    taxRate: number;
+    reference: string | null;
+    createdBy: string;
+    createdByName: string | null;
+    voidedAt: string | null;
+    voidReason: string | null;
+    createdAt: string;
+}
+export declare class GroupPaymentResponseDto {
+    id: string;
+    groupBlockId: string;
+    type: string;
+    amount: number;
+    paymentMethod: string;
+    reference: string | null;
+    notes: string | null;
+    status: string;
+    receivedBy: string;
+    receivedByName: string | null;
+    voidedAt: string | null;
+    voidReason: string | null;
+    createdAt: string;
 }
 export declare class GroupMasterFolioDto {
     groupBlockId: string;
     blockCode: string;
     groupName: string;
+    billingMode: string;
     bookings: GroupFolioBookingItemDto[];
+    masterCharges: GroupMasterChargeResponseDto[];
+    deposits: GroupPaymentResponseDto[];
+    payments: GroupPaymentResponseDto[];
     summary: GroupFolioSummaryDto;
 }
 export declare class GroupDepositPaymentDto {
     id: string;
     groupBlockId: string;
+    type: string;
     amount: number;
     paymentMethod: string;
     reference: string | null;
@@ -124,5 +163,12 @@ export declare class GroupDepositListResponseDto {
     totalDeposited: number;
     totalVoided: number;
     netDeposited: number;
+}
+export declare class GroupPaymentListResponseDto {
+    payments: GroupPaymentResponseDto[];
+    totalDeposited: number;
+    totalSettlementPaid: number;
+    totalVoided: number;
+    netPaid: number;
 }
 //# sourceMappingURL=group-block-response.dto.d.ts.map

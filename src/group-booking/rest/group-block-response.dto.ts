@@ -128,23 +128,68 @@ export class GroupFolioSummaryDto {
   @ApiProperty() totalRoomCharges: number;
   @ApiProperty() totalTaxAmount: number;
   @ApiProperty() totalGrossAmount: number;
+  @ApiProperty() totalMasterCharges: number;
+  @ApiProperty() totalDepositPaid: number;
+  @ApiProperty() totalPaymentPaid: number;
   @ApiProperty() totalPaidAmount: number;
   @ApiProperty() totalBalance: number;
+  @ApiProperty() creditBalance: number;
+}
+
+// =================== Master Charges ===================
+
+export class GroupMasterChargeResponseDto {
+  @ApiProperty() id: string;
+  @ApiProperty() groupBlockId: string;
+  @ApiProperty() category: string;
+  @ApiProperty() description: string;
+  @ApiProperty() amount: number;
+  @ApiProperty() date: string;
+  @ApiProperty() taxRate: number;
+  @ApiPropertyOptional({ type: String, nullable: true }) reference: string | null;
+  @ApiProperty() createdBy: string;
+  @ApiPropertyOptional({ type: String, nullable: true }) createdByName: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) voidedAt: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) voidReason: string | null;
+  @ApiProperty() createdAt: string;
+}
+
+// =================== Unified Payments ===================
+
+export class GroupPaymentResponseDto {
+  @ApiProperty() id: string;
+  @ApiProperty() groupBlockId: string;
+  @ApiProperty() type: string;
+  @ApiProperty() amount: number;
+  @ApiProperty() paymentMethod: string;
+  @ApiPropertyOptional({ type: String, nullable: true }) reference: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) notes: string | null;
+  @ApiProperty() status: string;
+  @ApiProperty() receivedBy: string;
+  @ApiPropertyOptional({ type: String, nullable: true }) receivedByName: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) voidedAt: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) voidReason: string | null;
+  @ApiProperty() createdAt: string;
 }
 
 export class GroupMasterFolioDto {
   @ApiProperty() groupBlockId: string;
   @ApiProperty() blockCode: string;
   @ApiProperty() groupName: string;
+  @ApiProperty() billingMode: string;
   @ApiProperty({ type: [GroupFolioBookingItemDto] }) bookings: GroupFolioBookingItemDto[];
+  @ApiProperty({ type: [GroupMasterChargeResponseDto] }) masterCharges: GroupMasterChargeResponseDto[];
+  @ApiProperty({ type: [GroupPaymentResponseDto] }) deposits: GroupPaymentResponseDto[];
+  @ApiProperty({ type: [GroupPaymentResponseDto] }) payments: GroupPaymentResponseDto[];
   @ApiProperty({ type: GroupFolioSummaryDto }) summary: GroupFolioSummaryDto;
 }
 
-// =================== Deposit Payments ===================
+// =================== Deposit Payments (backward compat) ===================
 
 export class GroupDepositPaymentDto {
   @ApiProperty() id: string;
   @ApiProperty() groupBlockId: string;
+  @ApiProperty() type: string;
   @ApiProperty() amount: number;
   @ApiProperty() paymentMethod: string;
   @ApiPropertyOptional({ type: String, nullable: true }) reference: string | null;
@@ -162,4 +207,12 @@ export class GroupDepositListResponseDto {
   @ApiProperty() totalDeposited: number;
   @ApiProperty() totalVoided: number;
   @ApiProperty() netDeposited: number;
+}
+
+export class GroupPaymentListResponseDto {
+  @ApiProperty({ type: [GroupPaymentResponseDto] }) payments: GroupPaymentResponseDto[];
+  @ApiProperty() totalDeposited: number;
+  @ApiProperty() totalSettlementPaid: number;
+  @ApiProperty() totalVoided: number;
+  @ApiProperty() netPaid: number;
 }
