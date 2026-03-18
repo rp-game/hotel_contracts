@@ -62,6 +62,11 @@ export class CreateStockAdjustmentRequest {
   @IsUUID()
   performedBy: string;
 
+  @ApiPropertyOptional({ description: 'Staff name (denormalized)' })
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
+
   @ApiProperty({ type: [StockAdjustmentItemDto] })
   @IsArray()
   @ValidateNested({ each: true })
@@ -125,6 +130,9 @@ export class StockAdjustmentResponse {
 
   @ApiProperty()
   performedBy: string;
+
+  @ApiPropertyOptional()
+  performedByName?: string;
 
   @ApiProperty({ type: [StockAdjustmentItemResponse] })
   items: StockAdjustmentItemResponse[];

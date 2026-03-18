@@ -18,6 +18,7 @@ export declare class CreateStockIssueRequest {
     issueDate: string;
     notes?: string;
     issuedBy: string;
+    issuedByName?: string;
     items: StockIssueItemDto[];
 }
 export declare class StockIssueItemResponse {
@@ -45,6 +46,7 @@ export declare class StockIssueResponse {
     issueDate: string;
     notes?: string;
     issuedBy: string;
+    issuedByName?: string;
     totalCost: number;
     items: StockIssueItemResponse[];
     createdAt: Date;

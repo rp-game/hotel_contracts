@@ -78,6 +78,11 @@ export class CreateGoodsReceiptRequest {
   @IsUUID()
   receivedBy: string;
 
+  @ApiPropertyOptional({ description: 'Staff name (denormalized)' })
+  @IsOptional()
+  @IsString()
+  receivedByName?: string;
+
   @ApiProperty({ type: [GoodsReceiptItemDto] })
   @IsArray()
   @ValidateNested({ each: true })
@@ -159,6 +164,9 @@ export class GoodsReceiptResponse {
 
   @ApiProperty()
   receivedBy: string;
+
+  @ApiPropertyOptional()
+  receivedByName?: string;
 
   @ApiProperty({ type: [GoodsReceiptItemResponse] })
   items: GoodsReceiptItemResponse[];

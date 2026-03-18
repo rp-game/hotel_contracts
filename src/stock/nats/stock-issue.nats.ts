@@ -78,6 +78,11 @@ export class CreateStockIssueRequest {
   @IsUUID()
   issuedBy: string;
 
+  @ApiPropertyOptional({ description: 'Staff name (denormalized)' })
+  @IsOptional()
+  @IsString()
+  issuedByName?: string;
+
   @ApiProperty({ type: [StockIssueItemDto] })
   @IsArray()
   @ValidateNested({ each: true })
@@ -153,6 +158,9 @@ export class StockIssueResponse {
 
   @ApiProperty()
   issuedBy: string;
+
+  @ApiPropertyOptional()
+  issuedByName?: string;
 
   @ApiProperty()
   totalCost: number;

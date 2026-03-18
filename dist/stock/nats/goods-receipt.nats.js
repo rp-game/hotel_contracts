@@ -56,6 +56,7 @@ class CreateGoodsReceiptRequest {
     photoUrl;
     notes;
     receivedBy;
+    receivedByName;
     items;
 }
 exports.CreateGoodsReceiptRequest = CreateGoodsReceiptRequest;
@@ -121,6 +122,12 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateGoodsReceiptRequest.prototype, "receivedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Staff name (denormalized)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateGoodsReceiptRequest.prototype, "receivedByName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ type: [GoodsReceiptItemDto] }),
     (0, class_validator_1.IsArray)(),
@@ -188,6 +195,7 @@ class GoodsReceiptResponse {
     photoUrl;
     notes;
     receivedBy;
+    receivedByName;
     items;
     createdAt;
 }
@@ -256,6 +264,10 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], GoodsReceiptResponse.prototype, "receivedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], GoodsReceiptResponse.prototype, "receivedByName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ type: [GoodsReceiptItemResponse] }),
     __metadata("design:type", Array)

@@ -17,6 +17,7 @@ export declare class CreateGoodsReceiptRequest {
     photoUrl?: string;
     notes?: string;
     receivedBy: string;
+    receivedByName?: string;
     items: GoodsReceiptItemDto[];
 }
 export declare class GoodsReceiptItemResponse {
@@ -46,6 +47,7 @@ export declare class GoodsReceiptResponse {
     photoUrl?: string;
     notes?: string;
     receivedBy: string;
+    receivedByName?: string;
     items: GoodsReceiptItemResponse[];
     createdAt: Date;
 }

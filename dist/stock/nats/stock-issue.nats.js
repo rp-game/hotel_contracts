@@ -63,6 +63,7 @@ class CreateStockIssueRequest {
     issueDate;
     notes;
     issuedBy;
+    issuedByName;
     items;
 }
 exports.CreateStockIssueRequest = CreateStockIssueRequest;
@@ -121,6 +122,12 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateStockIssueRequest.prototype, "issuedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Staff name (denormalized)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateStockIssueRequest.prototype, "issuedByName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ type: [StockIssueItemDto] }),
     (0, class_validator_1.IsArray)(),
@@ -194,6 +201,7 @@ class StockIssueResponse {
     issueDate;
     notes;
     issuedBy;
+    issuedByName;
     totalCost;
     items;
     createdAt;
@@ -247,6 +255,10 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], StockIssueResponse.prototype, "issuedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], StockIssueResponse.prototype, "issuedByName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)

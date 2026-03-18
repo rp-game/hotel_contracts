@@ -15,6 +15,7 @@ export declare class CreateStockAdjustmentRequest {
     adjustmentDate: string;
     notes?: string;
     performedBy: string;
+    performedByName?: string;
     items: StockAdjustmentItemDto[];
 }
 export declare class StockAdjustmentItemResponse {
@@ -38,6 +39,7 @@ export declare class StockAdjustmentResponse {
     adjustmentDate: string;
     notes?: string;
     performedBy: string;
+    performedByName?: string;
     items: StockAdjustmentItemResponse[];
     createdAt: Date;
 }
