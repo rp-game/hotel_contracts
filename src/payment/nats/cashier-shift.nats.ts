@@ -34,6 +34,18 @@ export enum CashierShiftType {
  * NATS request to open a new cashier shift
  * Pattern: cashier-shift.open
  */
+export interface ShiftTimeRange {
+  start: string; // HH:mm
+  end: string;   // HH:mm
+  label?: string;
+}
+
+export interface ShiftConfig {
+  morning?: ShiftTimeRange;
+  afternoon?: ShiftTimeRange;
+  night?: ShiftTimeRange;
+}
+
 export interface OpenCashierShiftNatsRequest {
   tenantId: string;
   hotelId: string;
@@ -41,6 +53,7 @@ export interface OpenCashierShiftNatsRequest {
   staffName: string;
   openingBalance: number;
   timezone?: string;
+  shiftConfig?: ShiftConfig;
 }
 
 /**

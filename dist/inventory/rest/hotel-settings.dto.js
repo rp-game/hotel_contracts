@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HotelSettingsResponseDto = exports.UpdateHotelSettingsRequestDto = exports.HotelOperationSettingsDto = exports.TaxConfigurationDto = void 0;
+exports.HotelSettingsResponseDto = exports.UpdateHotelSettingsRequestDto = exports.HotelOperationSettingsDto = exports.ShiftConfigDto = exports.ShiftTimeRangeDto = exports.TaxConfigurationDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -61,6 +61,74 @@ __decorate([
     __metadata("design:type", String)
 ], TaxConfigurationDto.prototype, "taxDisplayMode", void 0);
 /**
+ * Single shift time range definition
+ */
+class ShiftTimeRangeDto {
+    start;
+    end;
+    label;
+}
+exports.ShiftTimeRangeDto = ShiftTimeRangeDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Shift start time (HH:mm)', example: '06:00' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ShiftTimeRangeDto.prototype, "start", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Shift end time (HH:mm)', example: '14:00' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ShiftTimeRangeDto.prototype, "end", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Display label', example: 'Morning' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ShiftTimeRangeDto.prototype, "label", void 0);
+/**
+ * Cashier Shift Configuration DTO
+ * Defines shift time ranges for the hotel
+ */
+class ShiftConfigDto {
+    morning;
+    afternoon;
+    night;
+}
+exports.ShiftConfigDto = ShiftConfigDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Morning shift time range',
+        type: ShiftTimeRangeDto,
+        example: { start: '06:00', end: '14:00', label: 'Morning' },
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => ShiftTimeRangeDto),
+    __metadata("design:type", ShiftTimeRangeDto)
+], ShiftConfigDto.prototype, "morning", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Afternoon shift time range',
+        type: ShiftTimeRangeDto,
+        example: { start: '14:00', end: '22:00', label: 'Afternoon' },
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => ShiftTimeRangeDto),
+    __metadata("design:type", ShiftTimeRangeDto)
+], ShiftConfigDto.prototype, "afternoon", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Night shift time range',
+        type: ShiftTimeRangeDto,
+        example: { start: '22:00', end: '06:00', label: 'Night' },
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => ShiftTimeRangeDto),
+    __metadata("design:type", ShiftTimeRangeDto)
+], ShiftConfigDto.prototype, "night", void 0);
+/**
  * Hotel Operation Settings - Unified DTO for REST and NATS
  * Single source of truth for operation settings across all layers
  */
@@ -76,6 +144,7 @@ class HotelOperationSettingsDto {
     preferBookingMode;
     businessHours;
     taxConfiguration;
+    shiftConfig;
 }
 exports.HotelOperationSettingsDto = HotelOperationSettingsDto;
 __decorate([
@@ -165,6 +234,16 @@ __decorate([
     (0, class_transformer_1.Type)(() => TaxConfigurationDto),
     __metadata("design:type", TaxConfigurationDto)
 ], HotelOperationSettingsDto.prototype, "taxConfiguration", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Cashier shift time configuration',
+        type: ShiftConfigDto,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => ShiftConfigDto),
+    __metadata("design:type", ShiftConfigDto)
+], HotelOperationSettingsDto.prototype, "shiftConfig", void 0);
 /**
  * Update Hotel Settings Request DTO
  * Used for POST /hotels/:id/settings endpoint

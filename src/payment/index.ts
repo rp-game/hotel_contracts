@@ -18,3 +18,4 @@
 export * from './nats';
 export * from './enums';
 export * from './inter-service';
+export * from './rest/cashier-shift.dto';

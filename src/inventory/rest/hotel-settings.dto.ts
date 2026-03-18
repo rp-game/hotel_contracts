@@ -43,6 +43,60 @@ export class TaxConfigurationDto {
 }
 
 /**
+ * Single shift time range definition
+ */
+export class ShiftTimeRangeDto {
+  @ApiProperty({ description: 'Shift start time (HH:mm)', example: '06:00' })
+  @IsString()
+  start: string;
+
+  @ApiProperty({ description: 'Shift end time (HH:mm)', example: '14:00' })
+  @IsString()
+  end: string;
+
+  @ApiPropertyOptional({ description: 'Display label', example: 'Morning' })
+  @IsOptional()
+  @IsString()
+  label?: string;
+}
+
+/**
+ * Cashier Shift Configuration DTO
+ * Defines shift time ranges for the hotel
+ */
+export class ShiftConfigDto {
+  @ApiPropertyOptional({
+    description: 'Morning shift time range',
+    type: ShiftTimeRangeDto,
+    example: { start: '06:00', end: '14:00', label: 'Morning' },
+  })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => ShiftTimeRangeDto)
+  morning?: ShiftTimeRangeDto;
+
+  @ApiPropertyOptional({
+    description: 'Afternoon shift time range',
+    type: ShiftTimeRangeDto,
+    example: { start: '14:00', end: '22:00', label: 'Afternoon' },
+  })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => ShiftTimeRangeDto)
+  afternoon?: ShiftTimeRangeDto;
+
+  @ApiPropertyOptional({
+    description: 'Night shift time range',
+    type: ShiftTimeRangeDto,
+    example: { start: '22:00', end: '06:00', label: 'Night' },
+  })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => ShiftTimeRangeDto)
+  night?: ShiftTimeRangeDto;
+}
+
+/**
  * Hotel Operation Settings - Unified DTO for REST and NATS
  * Single source of truth for operation settings across all layers
  */
@@ -125,6 +179,15 @@ export class HotelOperationSettingsDto {
   @ValidateNested()
   @Type(() => TaxConfigurationDto)
   taxConfiguration?: TaxConfigurationDto;
+
+  @ApiPropertyOptional({
+    description: 'Cashier shift time configuration',
+    type: ShiftConfigDto,
+  })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => ShiftConfigDto)
+  shiftConfig?: ShiftConfigDto;
 }
 
 /**

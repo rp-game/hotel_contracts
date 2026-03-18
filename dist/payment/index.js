@@ -33,4 +33,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./nats"), exports);
 __exportStar(require("./enums"), exports);
 __exportStar(require("./inter-service"), exports);
+__exportStar(require("./rest/cashier-shift.dto"), exports);
 //# sourceMappingURL=index.js.map

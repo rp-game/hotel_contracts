@@ -9,6 +9,23 @@ export declare class TaxConfigurationDto {
     taxDisplayMode?: 'inclusive' | 'exclusive';
 }
 /**
+ * Single shift time range definition
+ */
+export declare class ShiftTimeRangeDto {
+    start: string;
+    end: string;
+    label?: string;
+}
+/**
+ * Cashier Shift Configuration DTO
+ * Defines shift time ranges for the hotel
+ */
+export declare class ShiftConfigDto {
+    morning?: ShiftTimeRangeDto;
+    afternoon?: ShiftTimeRangeDto;
+    night?: ShiftTimeRangeDto;
+}
+/**
  * Hotel Operation Settings - Unified DTO for REST and NATS
  * Single source of truth for operation settings across all layers
  */
@@ -27,6 +44,7 @@ export declare class HotelOperationSettingsDto {
         end: string;
     };
     taxConfiguration?: TaxConfigurationDto;
+    shiftConfig?: ShiftConfigDto;
 }
 /**
  * Update Hotel Settings Request DTO
