@@ -310,6 +310,10 @@ class BookingResponseDto {
     balance;
     pricingBreakdown;
     ratePlanId;
+    // Group booking info
+    groupId;
+    groupName;
+    groupBlockCode;
     // Metadata
     createdAt;
     updatedAt;
@@ -468,6 +472,18 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Rate plan ID applied to this booking', format: 'uuid' }),
     __metadata("design:type", String)
 ], BookingResponseDto.prototype, "ratePlanId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Group block ID' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "groupId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Group name' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "groupName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Group block code' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "groupBlockCode", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Created date' }),
     __metadata("design:type", Date)

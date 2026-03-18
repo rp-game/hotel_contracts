@@ -172,6 +172,9 @@ export declare class BookingSummary {
      * For hourly bookings uses endTime on checkOutDate.
      */
     expectedCheckOutTime?: string;
+    groupId?: string | null;
+    groupName?: string | null;
+    groupBlockCode?: string | null;
 }
 /**
  * NATS request to find/list bookings with filters and pagination

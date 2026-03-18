@@ -255,6 +255,15 @@ export class BookingSummary {
    */
   @ApiPropertyOptional({ type: String, description: 'Expected check-out datetime (ISO 8601)' })
   expectedCheckOutTime?: string;
+
+  @ApiPropertyOptional({ description: 'Group block ID' })
+  groupId?: string | null;
+
+  @ApiPropertyOptional({ description: 'Group name' })
+  groupName?: string | null;
+
+  @ApiPropertyOptional({ description: 'Group block code' })
+  groupBlockCode?: string | null;
 }
 
 /**

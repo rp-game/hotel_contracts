@@ -197,6 +197,9 @@ class BookingSummary {
      * For hourly bookings uses endTime on checkOutDate.
      */
     expectedCheckOutTime;
+    groupId;
+    groupName;
+    groupBlockCode;
 }
 exports.BookingSummary = BookingSummary;
 __decorate([
@@ -353,6 +356,18 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ type: String, description: 'Expected check-out datetime (ISO 8601)' }),
     __metadata("design:type", String)
 ], BookingSummary.prototype, "expectedCheckOutTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Group block ID' }),
+    __metadata("design:type", Object)
+], BookingSummary.prototype, "groupId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Group name' }),
+    __metadata("design:type", Object)
+], BookingSummary.prototype, "groupName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Group block code' }),
+    __metadata("design:type", Object)
+], BookingSummary.prototype, "groupBlockCode", void 0);
 /**
  * Bookings list response - shared between NATS and REST API
  * Used by:

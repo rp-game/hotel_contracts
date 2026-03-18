@@ -280,6 +280,16 @@ export class BookingResponseDto {
   @ApiPropertyOptional({ description: 'Rate plan ID applied to this booking', format: 'uuid' })
   ratePlanId?: string;
 
+  // Group booking info
+  @ApiPropertyOptional({ description: 'Group block ID' })
+  groupId?: string | null;
+
+  @ApiPropertyOptional({ description: 'Group name' })
+  groupName?: string | null;
+
+  @ApiPropertyOptional({ description: 'Group block code' })
+  groupBlockCode?: string | null;
+
   // Metadata
   @ApiProperty({ description: 'Created date' })
   createdAt: Date;

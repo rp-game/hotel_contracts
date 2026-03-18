@@ -104,6 +104,9 @@ export declare class BookingResponseDto {
     balance?: number;
     pricingBreakdown?: PricingBreakdownDto;
     ratePlanId?: string;
+    groupId?: string | null;
+    groupName?: string | null;
+    groupBlockCode?: string | null;
     createdAt: Date;
     updatedAt: Date;
     createdBy?: string;
