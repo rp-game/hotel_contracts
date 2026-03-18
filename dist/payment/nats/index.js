@@ -24,6 +24,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./offline-payment.nats"), exports);
+__exportStar(require("./cashier-shift.nats"), exports);
 __exportStar(require("./gateway-inheritance.nats"), exports);
 __exportStar(require("./onepay.nats"), exports);
 __exportStar(require("./invoice.nats"), exports);
