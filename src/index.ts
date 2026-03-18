@@ -66,3 +66,4 @@ export * from './group-booking';
 export * from './cms';
 export * from './tenants';
 export * from './auth';
+export * from './stock';

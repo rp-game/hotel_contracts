@@ -1,6 +1,6 @@
 {
   "name": "@hotel/contracts",
-  "version": "0.1.483",
+  "version": "0.1.484",
   "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -348,6 +348,22 @@
     "./einvoice/types": {
       "types": "./dist/einvoice/types/index.d.ts",
       "default": "./dist/einvoice/types/index.js"
+    },
+    "./stock": {
+      "types": "./dist/stock/index.d.ts",
+      "default": "./dist/stock/index.js"
+    },
+    "./stock/enums": {
+      "types": "./dist/stock/enums/index.d.ts",
+      "default": "./dist/stock/enums/index.js"
+    },
+    "./stock/nats": {
+      "types": "./dist/stock/nats/index.d.ts",
+      "default": "./dist/stock/nats/index.js"
+    },
+    "./stock/rest": {
+      "types": "./dist/stock/rest/index.d.ts",
+      "default": "./dist/stock/rest/index.js"
     }
   },
   "typesVersions": {
@@ -597,6 +613,18 @@
       ],
       "einvoice/types": [
         "dist/einvoice/types/index.d.ts"
+      ],
+      "stock": [
+        "dist/stock/index.d.ts"
+      ],
+      "stock/enums": [
+        "dist/stock/enums/index.d.ts"
+      ],
+      "stock/nats": [
+        "dist/stock/nats/index.d.ts"
+      ],
+      "stock/rest": [
+        "dist/stock/rest/index.d.ts"
       ]
     }
   },

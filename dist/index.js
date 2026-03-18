@@ -80,4 +80,5 @@ __exportStar(require("./group-booking"), exports);
 __exportStar(require("./cms"), exports);
 __exportStar(require("./tenants"), exports);
 __exportStar(require("./auth"), exports);
+__exportStar(require("./stock"), exports);
 //# sourceMappingURL=index.js.map
