@@ -7,111 +7,90 @@
  * Used by: calendar page to fetch bookings for a date range
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 /**
- * Calendar event (booking) for display
+ * Room type information for calendar events
  */
-export interface CalendarEvent {
-  /**
-   * Unique event ID (booking ID)
-   */
+export class CalendarRoomTypeDto {
+  @ApiProperty({ description: 'Room type name' })
+  name: string;
+
+  @ApiProperty({ description: 'Room type ID' })
+  id: string;
+}
+
+/**
+ * Calendar event (booking) for display
+ * Used as Swagger DTO by api-gateway and as NATS response type by booking-service
+ */
+export class CalendarEventDto {
+  @ApiProperty({ description: 'Unique event ID (booking ID)' })
   id: string;
 
-  /**
-   * Booking code (e.g., BK2024123456)
-   */
+  @ApiProperty({ description: 'Booking code (e.g., BK2024123456)' })
   bookingCode: string;
 
-  /**
-   * Event title (guest name) - for calendar display
-   */
+  @ApiProperty({ description: 'Event title (guest name) - for calendar display' })
   title: string;
 
-  /**
-   * Guest name
-   */
+  @ApiProperty({ description: 'Guest name' })
   guestName: string;
 
-  /**
-   * Guest email (optional)
-   */
+  @ApiPropertyOptional({ description: 'Guest email' })
   guestEmail?: string;
 
-  /**
-   * Room number (e.g., "101")
-   */
+  @ApiProperty({ description: 'Room number (e.g., "101")' })
   roomNumber: string;
 
-  /**
-   * Room type information
-   */
-  roomType: {
-    /**
-     * Room type name
-     */
-    name: string;
-    /**
-     * Room type ID
-     */
-    id: string;
-  };
+  @ApiProperty({ description: 'Room type information', type: () => CalendarRoomTypeDto })
+  roomType: CalendarRoomTypeDto;
 
-  /**
-   * Check-in date (YYYY-MM-DD)
-   */
+  @ApiProperty({ description: 'Check-in date (YYYY-MM-DD)' })
   checkInDate: string;
 
-  /**
-   * Check-out date (YYYY-MM-DD)
-   */
+  @ApiProperty({ description: 'Check-out date (YYYY-MM-DD)' })
   checkOutDate: string;
 
-  /**
-   * Room ID for this booking
-   */
+  @ApiProperty({ description: 'Room ID for this booking' })
   roomId: string;
 
-  /**
-   * Booking status (PENDING, CONFIRMED, CHECKED_IN, CHECKED_OUT, CANCELLED)
-   */
+  @ApiProperty({ description: 'Booking status', enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'CHECKED_OUT', 'CANCELLED'] })
   status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
 
-  /**
-   * Total booking amount (as string for precision)
-   */
+  @ApiProperty({ description: 'Total booking amount (as string for precision)' })
   totalAmount: string;
 
-  /**
-   * Number of adults
-   */
+  @ApiProperty({ description: 'Number of adults' })
   adultCount: number;
 
-  /**
-   * Number of children
-   */
+  @ApiProperty({ description: 'Number of children' })
   childCount: number;
 
-  /**
-   * Room assignment status
-   */
+  @ApiPropertyOptional({ description: 'Room assignment status' })
   assignmentStatus?: string;
 
-  /**
-   * Special requests from guest
-   */
+  @ApiPropertyOptional({ description: 'Special requests from guest' })
   specialRequests?: string;
 
-  /**
-   * Booking source (DIRECT, OTA, etc.)
-   */
+  @ApiPropertyOptional({ description: 'Booking source (DIRECT, OTA, etc.)' })
   source?: string;
 
-  /**
-   * Creation timestamp
-   */
+  @ApiPropertyOptional({ description: 'Creation timestamp' })
   createdAt?: Date;
+
+  @ApiPropertyOptional({ description: 'Group block ID' })
+  groupId?: string | null;
+
+  @ApiPropertyOptional({ description: 'Group name' })
+  groupName?: string | null;
 }
+
+/**
+ * @deprecated Use CalendarEventDto instead
+ */
+export type CalendarEvent = CalendarEventDto;
 
 /**
  * Room occupancy metrics for a date range
@@ -195,12 +174,12 @@ export interface GetCalendarDataResponse {
   /**
    * Array of calendar events (bookings)
    */
-  calendar: CalendarEvent[];
+  calendar: CalendarEventDto[];
 
   /**
    * Array of events (duplicate of calendar, for compatibility)
    */
-  events: CalendarEvent[];
+  events: CalendarEventDto[];
 
   /**
    * Room occupancy metrics for the period
