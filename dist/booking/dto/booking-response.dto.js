@@ -318,6 +318,11 @@ class BookingResponseDto {
     travelAgentId;
     travelAgentName;
     agentReference;
+    // Corporate Account info
+    corporateId;
+    corporateName;
+    salesPersonId;
+    salesPersonName;
     // Metadata
     createdAt;
     updatedAt;
@@ -500,6 +505,22 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Agent reference code from TA' }),
     __metadata("design:type", Object)
 ], BookingResponseDto.prototype, "agentReference", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Corporate Account ID' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "corporateId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Corporate Account name' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "corporateName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales Person ID' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "salesPersonId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales Person name' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "salesPersonName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Created date' }),
     __metadata("design:type", Date)

@@ -300,6 +300,19 @@ export class BookingResponseDto {
   @ApiPropertyOptional({ description: 'Agent reference code from TA' })
   agentReference?: string | null;
 
+  // Corporate Account info
+  @ApiPropertyOptional({ description: 'Corporate Account ID' })
+  corporateId?: string | null;
+
+  @ApiPropertyOptional({ description: 'Corporate Account name' })
+  corporateName?: string | null;
+
+  @ApiPropertyOptional({ description: 'Sales Person ID' })
+  salesPersonId?: string | null;
+
+  @ApiPropertyOptional({ description: 'Sales Person name' })
+  salesPersonName?: string | null;
+
   // Metadata
   @ApiProperty({ description: 'Created date' })
   createdAt: Date;

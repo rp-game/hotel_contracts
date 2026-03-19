@@ -110,6 +110,10 @@ export declare class BookingResponseDto {
     travelAgentId?: string | null;
     travelAgentName?: string | null;
     agentReference?: string | null;
+    corporateId?: string | null;
+    corporateName?: string | null;
+    salesPersonId?: string | null;
+    salesPersonName?: string | null;
     createdAt: Date;
     updatedAt: Date;
     createdBy?: string;
