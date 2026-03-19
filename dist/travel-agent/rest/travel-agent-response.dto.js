@@ -34,6 +34,8 @@ class TravelAgentResponseDto {
     contractStartDate;
     contractEndDate;
     status;
+    salesPersonId;
+    salesPersonName;
     notes;
     createdByName;
     createdAt;
@@ -112,6 +114,14 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Status (ACTIVE, INACTIVE, SUSPENDED)' }),
     __metadata("design:type", String)
 ], TravelAgentResponseDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales person ID' }),
+    __metadata("design:type", String)
+], TravelAgentResponseDto.prototype, "salesPersonId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales person name' }),
+    __metadata("design:type", String)
+], TravelAgentResponseDto.prototype, "salesPersonName", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Notes' }),
     __metadata("design:type", String)

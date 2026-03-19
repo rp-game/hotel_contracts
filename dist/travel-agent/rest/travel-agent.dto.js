@@ -34,6 +34,8 @@ class CreateTravelAgentDto {
     contractNumber;
     contractStartDate;
     contractEndDate;
+    salesPersonId;
+    salesPersonName;
     notes;
 }
 exports.CreateTravelAgentDto = CreateTravelAgentDto;
@@ -141,6 +143,19 @@ __decorate([
     __metadata("design:type", String)
 ], CreateTravelAgentDto.prototype, "contractEndDate", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales person ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateTravelAgentDto.prototype, "salesPersonId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales person name' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(200),
+    __metadata("design:type", String)
+], CreateTravelAgentDto.prototype, "salesPersonName", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Internal notes' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -163,6 +178,8 @@ class UpdateTravelAgentDto {
     contractStartDate;
     contractEndDate;
     status;
+    salesPersonId;
+    salesPersonName;
     notes;
 }
 exports.UpdateTravelAgentDto = UpdateTravelAgentDto;
@@ -277,6 +294,19 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateTravelAgentDto.prototype, "status", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales person ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateTravelAgentDto.prototype, "salesPersonId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales person name' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(200),
+    __metadata("design:type", String)
+], UpdateTravelAgentDto.prototype, "salesPersonName", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Internal notes' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -288,6 +318,7 @@ class FindTravelAgentsQueryDto {
     page;
     limit;
     sortBy;
+    salesPersonId;
     sortOrder;
 }
 exports.FindTravelAgentsQueryDto = FindTravelAgentsQueryDto;
@@ -326,6 +357,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], FindTravelAgentsQueryDto.prototype, "sortBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by sales person ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindTravelAgentsQueryDto.prototype, "salesPersonId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Sort order', enum: ['ASC', 'DESC'] }),
     (0, class_validator_1.IsOptional)(),

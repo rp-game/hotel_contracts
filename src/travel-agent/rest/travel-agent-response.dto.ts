@@ -60,6 +60,12 @@ export class TravelAgentResponseDto {
   @ApiProperty({ description: 'Status (ACTIVE, INACTIVE, SUSPENDED)' })
   status: string;
 
+  @ApiPropertyOptional({ description: 'Sales person ID' })
+  salesPersonId?: string;
+
+  @ApiPropertyOptional({ description: 'Sales person name' })
+  salesPersonName?: string;
+
   @ApiPropertyOptional({ description: 'Notes' })
   notes?: string;
 

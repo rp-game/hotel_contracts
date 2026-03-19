@@ -10,6 +10,7 @@ export interface FindTravelAgentsNatsRequest {
     tenantId: string;
     search?: string;
     status?: string;
+    salesPersonId?: string;
     page?: number;
     limit?: number;
     sortBy?: string;

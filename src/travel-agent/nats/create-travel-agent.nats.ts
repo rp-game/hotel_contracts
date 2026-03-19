@@ -30,6 +30,8 @@ export interface CreateTravelAgentNatsRequest {
   contractStartDate?: string;
   contractEndDate?: string;
   notes?: string;
+  salesPersonId?: string;
+  salesPersonName?: string;
   createdBy: string;
   createdByName?: string;
 }

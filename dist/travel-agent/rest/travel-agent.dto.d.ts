@@ -19,6 +19,8 @@ export declare class CreateTravelAgentDto {
     contractNumber?: string;
     contractStartDate?: string;
     contractEndDate?: string;
+    salesPersonId?: string;
+    salesPersonName?: string;
     notes?: string;
 }
 export declare class UpdateTravelAgentDto {
@@ -38,6 +40,8 @@ export declare class UpdateTravelAgentDto {
     contractStartDate?: string;
     contractEndDate?: string;
     status?: TravelAgentStatus;
+    salesPersonId?: string;
+    salesPersonName?: string;
     notes?: string;
 }
 export declare class FindTravelAgentsQueryDto {
@@ -46,6 +50,7 @@ export declare class FindTravelAgentsQueryDto {
     page?: number;
     limit?: number;
     sortBy?: string;
+    salesPersonId?: string;
     sortOrder?: 'ASC' | 'DESC';
 }
 export declare class FindCommissionRecordsQueryDto {

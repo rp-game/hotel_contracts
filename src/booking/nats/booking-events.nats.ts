@@ -65,6 +65,9 @@ export class BookingCheckedOutEvent {
 
   @ApiPropertyOptional({ description: 'Travel Agent ID (if booking linked to TA)' })
   travelAgentId?: string;
+
+  @ApiPropertyOptional({ description: 'Sales person ID (if booking attributed to sales)' })
+  salesPersonId?: string;
 }
 
 export class BookingCancelledEvent {

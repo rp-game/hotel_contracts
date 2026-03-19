@@ -27,6 +27,8 @@ export interface UpdateTravelAgentNatsRequest {
     contractEndDate?: string;
     status?: TravelAgentStatus;
     notes?: string;
+    salesPersonId?: string;
+    salesPersonName?: string;
     updatedBy: string;
 }
 export type UpdateTravelAgentNatsResult = NatsResponse<any>;

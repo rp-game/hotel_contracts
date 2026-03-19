@@ -21,6 +21,8 @@ export declare class TravelAgentResponseDto {
     contractStartDate?: string;
     contractEndDate?: string;
     status: string;
+    salesPersonId?: string;
+    salesPersonName?: string;
     notes?: string;
     createdByName?: string;
     createdAt: Date;

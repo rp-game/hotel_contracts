@@ -3,4 +3,7 @@ export * from './find-corporate-accounts.nats';
 export * from './get-corporate-account.nats';
 export * from './update-corporate-account.nats';
 export * from './delete-corporate-account.nats';
+export * from './sales-activity.nats';
+export * from './sales-target.nats';
+export * from './get-sales-dashboard.nats';
 //# sourceMappingURL=index.d.ts.map

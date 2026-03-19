@@ -29,6 +29,7 @@ export declare class BookingCheckedOutEvent {
     checkOutDate: string;
     checkedOutAt: Date;
     travelAgentId?: string;
+    salesPersonId?: string;
 }
 export declare class BookingCancelledEvent {
     bookingId: string;

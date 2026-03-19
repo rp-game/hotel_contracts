@@ -107,6 +107,17 @@ export class CreateTravelAgentDto {
   @IsDateString()
   contractEndDate?: string;
 
+  @ApiPropertyOptional({ description: 'Sales person ID' })
+  @IsOptional()
+  @IsString()
+  salesPersonId?: string;
+
+  @ApiPropertyOptional({ description: 'Sales person name' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(200)
+  salesPersonName?: string;
+
   @ApiPropertyOptional({ description: 'Internal notes' })
   @IsOptional()
   @IsString()
@@ -208,6 +219,17 @@ export class UpdateTravelAgentDto {
   @IsEnum(TravelAgentStatus)
   status?: TravelAgentStatus;
 
+  @ApiPropertyOptional({ description: 'Sales person ID' })
+  @IsOptional()
+  @IsString()
+  salesPersonId?: string;
+
+  @ApiPropertyOptional({ description: 'Sales person name' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(200)
+  salesPersonName?: string;
+
   @ApiPropertyOptional({ description: 'Internal notes' })
   @IsOptional()
   @IsString()
@@ -244,6 +266,11 @@ export class FindTravelAgentsQueryDto {
   @IsOptional()
   @IsString()
   sortBy?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by sales person ID' })
+  @IsOptional()
+  @IsString()
+  salesPersonId?: string;
 
   @ApiPropertyOptional({ description: 'Sort order', enum: ['ASC', 'DESC'] })
   @IsOptional()
