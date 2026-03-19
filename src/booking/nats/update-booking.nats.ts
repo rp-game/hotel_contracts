@@ -239,6 +239,28 @@ export class UpdateBookingDto {
   updatedBy?: string;
 
   /**
+   * Travel Agent ID
+   */
+  @ApiPropertyOptional({
+    description: 'Travel Agent ID',
+    example: '550e8400-e29b-41d4-a716-446655440003',
+  })
+  @IsOptional()
+  @IsUUID()
+  travelAgentId?: string;
+
+  /**
+   * Agent reference code from travel agent
+   */
+  @ApiPropertyOptional({
+    description: 'Agent reference code from travel agent',
+    example: 'REF-2026-001',
+  })
+  @IsOptional()
+  @IsString()
+  agentReference?: string;
+
+  /**
    * Additional metadata
    */
   @ApiPropertyOptional({

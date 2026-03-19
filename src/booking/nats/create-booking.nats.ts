@@ -225,6 +225,16 @@ export interface CreateBookingRequest {
   blockAllocationId?: string;
 
   /**
+   * Travel Agent ID — links this booking to a travel agent
+   */
+  travelAgentId?: string;
+
+  /**
+   * Agent reference — external reference code from the travel agent
+   */
+  agentReference?: string;
+
+  /**
    * Additional metadata
    */
   metadata?: Record<string, any>;

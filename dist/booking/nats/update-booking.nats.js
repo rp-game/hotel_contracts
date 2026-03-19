@@ -93,6 +93,14 @@ class UpdateBookingDto {
      */
     updatedBy;
     /**
+     * Travel Agent ID
+     */
+    travelAgentId;
+    /**
+     * Agent reference code from travel agent
+     */
+    agentReference;
+    /**
      * Additional metadata
      */
     metadata;
@@ -238,6 +246,24 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], UpdateBookingDto.prototype, "updatedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Travel Agent ID',
+        example: '550e8400-e29b-41d4-a716-446655440003',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateBookingDto.prototype, "travelAgentId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Agent reference code from travel agent',
+        example: 'REF-2026-001',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateBookingDto.prototype, "agentReference", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Additional metadata',

@@ -70,6 +70,7 @@ class BookingCheckedOutEvent {
     checkInDate;
     checkOutDate;
     checkedOutAt;
+    travelAgentId;
 }
 exports.BookingCheckedOutEvent = BookingCheckedOutEvent;
 __decorate([
@@ -108,6 +109,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Actual check-out timestamp' }),
     __metadata("design:type", Date)
 ], BookingCheckedOutEvent.prototype, "checkedOutAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Travel Agent ID (if booking linked to TA)' }),
+    __metadata("design:type", String)
+], BookingCheckedOutEvent.prototype, "travelAgentId", void 0);
 class BookingCancelledEvent {
     bookingId;
     customerId;

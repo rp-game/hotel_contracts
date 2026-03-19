@@ -314,6 +314,10 @@ class BookingResponseDto {
     groupId;
     groupName;
     groupBlockCode;
+    // Travel Agent info
+    travelAgentId;
+    travelAgentName;
+    agentReference;
     // Metadata
     createdAt;
     updatedAt;
@@ -484,6 +488,18 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Group block code' }),
     __metadata("design:type", Object)
 ], BookingResponseDto.prototype, "groupBlockCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Travel Agent ID' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "travelAgentId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Travel Agent name' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "travelAgentName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Agent reference code from TA' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "agentReference", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Created date' }),
     __metadata("design:type", Date)

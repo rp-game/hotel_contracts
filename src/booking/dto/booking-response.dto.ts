@@ -290,6 +290,16 @@ export class BookingResponseDto {
   @ApiPropertyOptional({ description: 'Group block code' })
   groupBlockCode?: string | null;
 
+  // Travel Agent info
+  @ApiPropertyOptional({ description: 'Travel Agent ID' })
+  travelAgentId?: string | null;
+
+  @ApiPropertyOptional({ description: 'Travel Agent name' })
+  travelAgentName?: string | null;
+
+  @ApiPropertyOptional({ description: 'Agent reference code from TA' })
+  agentReference?: string | null;
+
   // Metadata
   @ApiProperty({ description: 'Created date' })
   createdAt: Date;

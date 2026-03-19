@@ -1,6 +1,6 @@
 {
   "name": "@hotel/contracts",
-  "version": "",
+  "version": "0.1.488",
   "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -364,6 +364,26 @@
     "./stock/rest": {
       "types": "./dist/stock/rest/index.d.ts",
       "default": "./dist/stock/rest/index.js"
+    },
+    "./travel-agent": {
+      "types": "./dist/travel-agent/index.d.ts",
+      "default": "./dist/travel-agent/index.js"
+    },
+    "./travel-agent/nats": {
+      "types": "./dist/travel-agent/nats/index.d.ts",
+      "default": "./dist/travel-agent/nats/index.js"
+    },
+    "./travel-agent/rest": {
+      "types": "./dist/travel-agent/rest/index.d.ts",
+      "default": "./dist/travel-agent/rest/index.js"
+    },
+    "./travel-agent/types": {
+      "types": "./dist/travel-agent/types/index.d.ts",
+      "default": "./dist/travel-agent/types/index.js"
+    },
+    "./travel-agent/enums": {
+      "types": "./dist/travel-agent/enums/index.d.ts",
+      "default": "./dist/travel-agent/enums/index.js"
     }
   },
   "typesVersions": {
@@ -625,6 +645,21 @@
       ],
       "stock/rest": [
         "dist/stock/rest/index.d.ts"
+      ],
+      "travel-agent": [
+        "dist/travel-agent/index.d.ts"
+      ],
+      "travel-agent/nats": [
+        "dist/travel-agent/nats/index.d.ts"
+      ],
+      "travel-agent/rest": [
+        "dist/travel-agent/rest/index.d.ts"
+      ],
+      "travel-agent/types": [
+        "dist/travel-agent/types/index.d.ts"
+      ],
+      "travel-agent/enums": [
+        "dist/travel-agent/enums/index.d.ts"
       ]
     }
   },

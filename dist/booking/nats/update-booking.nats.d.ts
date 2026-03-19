@@ -117,6 +117,14 @@ export declare class UpdateBookingDto {
      */
     updatedBy?: string;
     /**
+     * Travel Agent ID
+     */
+    travelAgentId?: string;
+    /**
+     * Agent reference code from travel agent
+     */
+    agentReference?: string;
+    /**
      * Additional metadata
      */
     metadata?: Record<string, any>;

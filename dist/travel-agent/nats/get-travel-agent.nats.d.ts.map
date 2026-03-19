@@ -1,0 +1,1 @@
+{"version":3,"file":"get-travel-agent.nats.d.ts","sourceRoot":"","sources":["../../../src/travel-agent/nats/get-travel-agent.nats.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,OAAO,EAAE,YAAY,EAAE,MAAM,sCAAsC,CAAC;AAEpE,MAAM,WAAW,yBAAyB;IACxC,QAAQ,EAAE,MAAM,CAAC;IACjB,aAAa,EAAE,MAAM,CAAC;CACvB;AAED,MAAM,MAAM,wBAAwB,GAAG,YAAY,CAAC,GAAG,CAAC,CAAC"}

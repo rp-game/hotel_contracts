@@ -175,6 +175,9 @@ export declare class BookingSummary {
     groupId?: string | null;
     groupName?: string | null;
     groupBlockCode?: string | null;
+    travelAgentId?: string | null;
+    travelAgentName?: string | null;
+    agentReference?: string | null;
 }
 /**
  * NATS request to find/list bookings with filters and pagination
@@ -249,6 +252,10 @@ export interface FindBookingsNatsRequest {
      * Booking type filter (OVERNIGHT, HOURLY)
      */
     bookingType?: 'OVERNIGHT' | 'HOURLY';
+    /**
+     * Travel Agent ID filter
+     */
+    travelAgentId?: string;
     /**
      * Pagination: page number (1-indexed, default: 1)
      */

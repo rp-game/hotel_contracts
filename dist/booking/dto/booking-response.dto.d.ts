@@ -107,6 +107,9 @@ export declare class BookingResponseDto {
     groupId?: string | null;
     groupName?: string | null;
     groupBlockCode?: string | null;
+    travelAgentId?: string | null;
+    travelAgentName?: string | null;
+    agentReference?: string | null;
     createdAt: Date;
     updatedAt: Date;
     createdBy?: string;

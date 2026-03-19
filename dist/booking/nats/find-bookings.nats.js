@@ -200,6 +200,9 @@ class BookingSummary {
     groupId;
     groupName;
     groupBlockCode;
+    travelAgentId;
+    travelAgentName;
+    agentReference;
 }
 exports.BookingSummary = BookingSummary;
 __decorate([
@@ -368,6 +371,18 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Group block code' }),
     __metadata("design:type", Object)
 ], BookingSummary.prototype, "groupBlockCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Travel Agent ID' }),
+    __metadata("design:type", Object)
+], BookingSummary.prototype, "travelAgentId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Travel Agent name' }),
+    __metadata("design:type", Object)
+], BookingSummary.prototype, "travelAgentName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Agent reference' }),
+    __metadata("design:type", Object)
+], BookingSummary.prototype, "agentReference", void 0);
 /**
  * Bookings list response - shared between NATS and REST API
  * Used by:

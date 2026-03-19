@@ -63,4 +63,5 @@ export * from './cms';
 export * from './tenants';
 export * from './auth';
 export * from './stock';
+export * from './travel-agent';
 //# sourceMappingURL=index.d.ts.map

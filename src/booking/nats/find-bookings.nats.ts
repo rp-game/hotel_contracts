@@ -264,6 +264,15 @@ export class BookingSummary {
 
   @ApiPropertyOptional({ description: 'Group block code' })
   groupBlockCode?: string | null;
+
+  @ApiPropertyOptional({ description: 'Travel Agent ID' })
+  travelAgentId?: string | null;
+
+  @ApiPropertyOptional({ description: 'Travel Agent name' })
+  travelAgentName?: string | null;
+
+  @ApiPropertyOptional({ description: 'Agent reference' })
+  agentReference?: string | null;
 }
 
 /**
@@ -355,6 +364,11 @@ export interface FindBookingsNatsRequest {
    * Booking type filter (OVERNIGHT, HOURLY)
    */
   bookingType?: 'OVERNIGHT' | 'HOURLY';
+
+  /**
+   * Travel Agent ID filter
+   */
+  travelAgentId?: string;
 
   /**
    * Pagination: page number (1-indexed, default: 1)

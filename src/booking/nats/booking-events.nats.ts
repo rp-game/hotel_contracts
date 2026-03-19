@@ -62,6 +62,9 @@ export class BookingCheckedOutEvent {
 
   @ApiProperty({ description: 'Actual check-out timestamp' })
   checkedOutAt: Date;
+
+  @ApiPropertyOptional({ description: 'Travel Agent ID (if booking linked to TA)' })
+  travelAgentId?: string;
 }
 
 export class BookingCancelledEvent {
