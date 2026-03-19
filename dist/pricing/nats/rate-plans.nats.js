@@ -162,6 +162,8 @@ __decorate([
 class ListRatePlansRequest {
     tenantId;
     hotelId;
+    corporateAccountId;
+    includeAllCorporate;
 }
 exports.ListRatePlansRequest = ListRatePlansRequest;
 __decorate([
@@ -180,6 +182,23 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], ListRatePlansRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Filter: include corporate plans for this account (plus public plans). If omitted, only public plans returned.',
+        example: '123e4567-e89b-12d3-a456-426614174099',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], ListRatePlansRequest.prototype, "corporateAccountId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'If true, include ALL plans (corporate + public). For admin/management views only.',
+        example: true,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], ListRatePlansRequest.prototype, "includeAllCorporate", void 0);
 class ListRatePlansResponse {
     data;
 }

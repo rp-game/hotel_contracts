@@ -156,6 +156,22 @@ export class CreateRatePlanRequest {
   @IsOptional()
   @IsNumber()
   depositPercent?: number | null;
+
+  @ApiPropertyOptional({
+    description: 'Corporate Account ID — if set, this rate plan is restricted to this corporate account. Only valid for DERIVED type.',
+    example: '123e4567-e89b-12d3-a456-426614174099',
+  })
+  @IsOptional()
+  @IsUUID()
+  corporateAccountId?: string;
+
+  @ApiPropertyOptional({
+    description: 'Corporate account name (denormalized for display). Set automatically from corporate account lookup.',
+    example: 'Samsung Vietnam',
+  })
+  @IsOptional()
+  @IsString()
+  corporateAccountName?: string;
 }
 
 /**
@@ -241,6 +257,18 @@ export class CreateRatePlanResponse {
     example: 50,
   })
   depositPercent?: number | null;
+
+  @ApiPropertyOptional({
+    description: 'Corporate Account ID — if set, this rate plan is restricted to this corporate account',
+    example: '123e4567-e89b-12d3-a456-426614174099',
+  })
+  corporateAccountId?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Corporate account name (denormalized)',
+    example: 'Samsung Vietnam',
+  })
+  corporateAccountName?: string | null;
 
   @ApiProperty({
     description: 'Whether the rate plan is active',

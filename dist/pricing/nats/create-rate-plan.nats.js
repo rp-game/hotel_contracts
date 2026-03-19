@@ -90,6 +90,8 @@ class CreateRatePlanRequest {
     mealPlan;
     paymentType;
     depositPercent;
+    corporateAccountId;
+    corporateAccountName;
 }
 exports.CreateRatePlanRequest = CreateRatePlanRequest;
 __decorate([
@@ -201,6 +203,24 @@ __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Object)
 ], CreateRatePlanRequest.prototype, "depositPercent", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Corporate Account ID — if set, this rate plan is restricted to this corporate account. Only valid for DERIVED type.',
+        example: '123e4567-e89b-12d3-a456-426614174099',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateRatePlanRequest.prototype, "corporateAccountId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Corporate account name (denormalized for display). Set automatically from corporate account lookup.',
+        example: 'Samsung Vietnam',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateRatePlanRequest.prototype, "corporateAccountName", void 0);
 /**
  * NATS response after creating rate plan
  */
@@ -218,6 +238,8 @@ class CreateRatePlanResponse {
     mealPlan;
     paymentType;
     depositPercent;
+    corporateAccountId;
+    corporateAccountName;
     isActive;
     createdAt;
     updatedAt;
@@ -316,6 +338,20 @@ __decorate([
     }),
     __metadata("design:type", Object)
 ], CreateRatePlanResponse.prototype, "depositPercent", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Corporate Account ID — if set, this rate plan is restricted to this corporate account',
+        example: '123e4567-e89b-12d3-a456-426614174099',
+    }),
+    __metadata("design:type", Object)
+], CreateRatePlanResponse.prototype, "corporateAccountId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Corporate account name (denormalized)',
+        example: 'Samsung Vietnam',
+    }),
+    __metadata("design:type", Object)
+], CreateRatePlanResponse.prototype, "corporateAccountName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Whether the rate plan is active',

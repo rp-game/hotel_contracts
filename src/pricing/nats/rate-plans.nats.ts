@@ -152,6 +152,21 @@ export class ListRatePlansRequest {
   })
   @IsUUID()
   hotelId: string;
+
+  @ApiPropertyOptional({
+    description: 'Filter: include corporate plans for this account (plus public plans). If omitted, only public plans returned.',
+    example: '123e4567-e89b-12d3-a456-426614174099',
+  })
+  @IsOptional()
+  @IsUUID()
+  corporateAccountId?: string;
+
+  @ApiPropertyOptional({
+    description: 'If true, include ALL plans (corporate + public). For admin/management views only.',
+    example: true,
+  })
+  @IsOptional()
+  includeAllCorporate?: boolean;
 }
 
 export class ListRatePlansResponse {

@@ -49,6 +49,8 @@ export type GetRatePlanNatsResponse = NatsResponse<GetRatePlanResponse>;
 export declare class ListRatePlansRequest {
     tenantId: string;
     hotelId: string;
+    corporateAccountId?: string;
+    includeAllCorporate?: boolean;
 }
 export declare class ListRatePlansResponse {
     data: CreateRatePlanResponse[];

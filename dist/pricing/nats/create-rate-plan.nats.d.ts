@@ -45,6 +45,8 @@ export declare class CreateRatePlanRequest {
     mealPlan?: string | null;
     paymentType?: string | null;
     depositPercent?: number | null;
+    corporateAccountId?: string;
+    corporateAccountName?: string;
 }
 /**
  * NATS response after creating rate plan
@@ -63,6 +65,8 @@ export declare class CreateRatePlanResponse {
     mealPlan?: string | null;
     paymentType?: string | null;
     depositPercent?: number | null;
+    corporateAccountId?: string | null;
+    corporateAccountName?: string | null;
     isActive: boolean;
     createdAt: string;
     updatedAt: string;
