@@ -1,0 +1,1 @@
+{"version":3,"file":"get-corporate-account.nats.d.ts","sourceRoot":"","sources":["../../../src/sales/nats/get-corporate-account.nats.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,OAAO,EAAE,YAAY,EAAE,MAAM,sCAAsC,CAAC;AAEpE,MAAM,WAAW,8BAA8B;IAC7C,QAAQ,EAAE,MAAM,CAAC;IACjB,kBAAkB,EAAE,MAAM,CAAC;CAC5B;AAED,MAAM,MAAM,6BAA6B,GAAG,YAAY,CAAC,GAAG,CAAC,CAAC"}

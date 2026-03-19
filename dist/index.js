@@ -82,4 +82,5 @@ __exportStar(require("./tenants"), exports);
 __exportStar(require("./auth"), exports);
 __exportStar(require("./stock"), exports);
 __exportStar(require("./travel-agent"), exports);
+__exportStar(require("./sales"), exports);
 //# sourceMappingURL=index.js.map
