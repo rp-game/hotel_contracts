@@ -342,6 +342,8 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Corporate Account ID — if set, this rate plan is restricted to this corporate account',
         example: '123e4567-e89b-12d3-a456-426614174099',
+        type: String,
+        nullable: true,
     }),
     __metadata("design:type", Object)
 ], CreateRatePlanResponse.prototype, "corporateAccountId", void 0);
@@ -349,6 +351,8 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Corporate account name (denormalized)',
         example: 'Samsung Vietnam',
+        type: String,
+        nullable: true,
     }),
     __metadata("design:type", Object)
 ], CreateRatePlanResponse.prototype, "corporateAccountName", void 0);
