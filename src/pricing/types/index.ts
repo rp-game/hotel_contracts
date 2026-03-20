@@ -14,3 +14,4 @@ export * from './rates.types';
 export * from './rates-core.types';
 export * from './room-type-base-rates.types';
 export * from './seasonal-adjustments.types';
+export * from './blackout-period.type';

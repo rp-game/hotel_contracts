@@ -12,6 +12,12 @@ export declare enum ARTransactionType {
     ADJUSTMENT = "ADJUSTMENT",
     WRITE_OFF = "WRITE_OFF"
 }
+export declare enum ContractStatus {
+    DRAFT = "DRAFT",
+    ACTIVE = "ACTIVE",
+    EXPIRED = "EXPIRED",
+    RENEWED = "RENEWED"
+}
 export declare enum SalesActivityType {
     CALL = "CALL",
     VISIT = "VISIT",

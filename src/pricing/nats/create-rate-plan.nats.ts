@@ -9,7 +9,9 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsEnum, IsOptional, IsNumber, IsUUID } from 'class-validator';
+import { IsString, IsEnum, IsOptional, IsNumber, IsUUID, IsDateString, IsArray, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+import { BlackoutPeriodDto } from '../types/blackout-period.type';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 export class CancellationPolicyDto {
@@ -172,6 +174,32 @@ export class CreateRatePlanRequest {
   @IsOptional()
   @IsString()
   corporateAccountName?: string;
+
+  @ApiPropertyOptional({
+    description: 'Rate plan valid from date (YYYY-MM-DD). If null, always valid.',
+    example: '2026-01-01',
+  })
+  @IsOptional()
+  @IsDateString()
+  validFrom?: string;
+
+  @ApiPropertyOptional({
+    description: 'Rate plan valid to date (YYYY-MM-DD). If null, no expiry.',
+    example: '2026-12-31',
+  })
+  @IsOptional()
+  @IsDateString()
+  validTo?: string;
+
+  @ApiPropertyOptional({
+    description: 'Blackout periods — date ranges when this rate plan is hidden from booking',
+    type: [BlackoutPeriodDto],
+  })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => BlackoutPeriodDto)
+  blackoutPeriods?: BlackoutPeriodDto[];
 }
 
 /**
@@ -273,6 +301,24 @@ export class CreateRatePlanResponse {
     nullable: true,
   })
   corporateAccountName?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Rate plan valid from date',
+    example: '2026-01-01',
+  })
+  validFrom?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Rate plan valid to date',
+    example: '2026-12-31',
+  })
+  validTo?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Blackout periods',
+    type: [BlackoutPeriodDto],
+  })
+  blackoutPeriods?: BlackoutPeriodDto[] | null;
 
   @ApiProperty({
     description: 'Whether the rate plan is active',

@@ -29,4 +29,5 @@ __exportStar(require("./rates.types"), exports);
 __exportStar(require("./rates-core.types"), exports);
 __exportStar(require("./room-type-base-rates.types"), exports);
 __exportStar(require("./seasonal-adjustments.types"), exports);
+__exportStar(require("./blackout-period.type"), exports);
 //# sourceMappingURL=index.js.map

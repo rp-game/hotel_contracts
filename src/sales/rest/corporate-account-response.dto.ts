@@ -66,6 +66,18 @@ export class CorporateAccountResponseDto {
   @ApiPropertyOptional({ description: 'Notes' })
   notes?: string;
 
+  @ApiPropertyOptional({ description: 'Contract status (DRAFT, ACTIVE, EXPIRED, RENEWED)' })
+  contractStatus?: string;
+
+  @ApiPropertyOptional({ description: 'Contract file URL' })
+  contractFileUrl?: string;
+
+  @ApiPropertyOptional({ description: 'Contract notes' })
+  contractNotes?: string;
+
+  @ApiPropertyOptional({ description: 'Days before contract end to send renewal reminder' })
+  renewalReminderDays?: number;
+
   @ApiPropertyOptional({ description: 'Created by user name' })
   createdByName?: string;
 

@@ -20,7 +20,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteRatePlanResponse = exports.DeleteRatePlanRequest = exports.FindRatePlansByChannelResponse = exports.FindRatePlansByChannelRequest = exports.RemoveChannelMappingResponse = exports.RemoveChannelMappingRequest = exports.AddChannelMappingResponse = exports.AddChannelMappingRequest = exports.CreateChannelMappingDto = exports.GetChannelMappingsResponse = exports.ChannelRateMappingResponse = exports.GetChannelMappingsRequest = exports.CalculateRatePlanPriceResponse = exports.CalculateRatePlanPriceRequest = exports.ListRatePlansResponse = exports.ListRatePlansRequest = exports.GetRatePlanResponse = exports.GetRatePlanRequest = exports.UpdateRatePlanResponse = exports.UpdateRatePlanRequest = exports.UpdateRatePlanDto = exports.DerivationTypeEnum = exports.RatePlanTypeEnum = exports.CreateRatePlanResponse = exports.CreateRatePlanRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
 const create_rate_plan_nats_1 = require("./create-rate-plan.nats");
+const blackout_period_type_1 = require("../types/blackout-period.type");
 const create_rate_plan_nats_2 = require("./create-rate-plan.nats");
 Object.defineProperty(exports, "CreateRatePlanRequest", { enumerable: true, get: function () { return create_rate_plan_nats_2.CreateRatePlanRequest; } });
 Object.defineProperty(exports, "CreateRatePlanResponse", { enumerable: true, get: function () { return create_rate_plan_nats_2.CreateRatePlanResponse; } });
@@ -37,6 +39,9 @@ class UpdateRatePlanDto {
     mealPlan;
     paymentType;
     depositPercent;
+    validFrom;
+    validTo;
+    blackoutPeriods;
 }
 exports.UpdateRatePlanDto = UpdateRatePlanDto;
 __decorate([
@@ -99,6 +104,35 @@ __decorate([
     }),
     __metadata("design:type", Object)
 ], UpdateRatePlanDto.prototype, "depositPercent", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Rate plan valid from date (YYYY-MM-DD). Set null to remove.',
+        example: '2026-01-01',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", Object)
+], UpdateRatePlanDto.prototype, "validFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Rate plan valid to date (YYYY-MM-DD). Set null to remove.',
+        example: '2026-12-31',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", Object)
+], UpdateRatePlanDto.prototype, "validTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Blackout periods. Set null to remove all.',
+        type: [blackout_period_type_1.BlackoutPeriodDto],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => blackout_period_type_1.BlackoutPeriodDto),
+    __metadata("design:type", Object)
+], UpdateRatePlanDto.prototype, "blackoutPeriods", void 0);
 class UpdateRatePlanRequest {
     id;
     dto;
@@ -164,6 +198,8 @@ class ListRatePlansRequest {
     hotelId;
     corporateAccountId;
     includeAllCorporate;
+    checkInDate;
+    checkOutDate;
 }
 exports.ListRatePlansRequest = ListRatePlansRequest;
 __decorate([
@@ -199,6 +235,24 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], ListRatePlansRequest.prototype, "includeAllCorporate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Check-in date (YYYY-MM-DD) — filters out expired and blacked-out rate plans',
+        example: '2026-03-20',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], ListRatePlansRequest.prototype, "checkInDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Check-out date (YYYY-MM-DD) — used with checkInDate for blackout overlap check',
+        example: '2026-03-22',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], ListRatePlansRequest.prototype, "checkOutDate", void 0);
 class ListRatePlansResponse {
     data;
 }

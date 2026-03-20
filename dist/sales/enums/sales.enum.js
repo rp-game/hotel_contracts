@@ -3,7 +3,7 @@
  * Sales Domain Enums
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SalesActivityType = exports.ARTransactionType = exports.CorporateAccountStatus = void 0;
+exports.SalesActivityType = exports.ContractStatus = exports.ARTransactionType = exports.CorporateAccountStatus = void 0;
 var CorporateAccountStatus;
 (function (CorporateAccountStatus) {
     CorporateAccountStatus["ACTIVE"] = "ACTIVE";
@@ -17,6 +17,13 @@ var ARTransactionType;
     ARTransactionType["ADJUSTMENT"] = "ADJUSTMENT";
     ARTransactionType["WRITE_OFF"] = "WRITE_OFF";
 })(ARTransactionType || (exports.ARTransactionType = ARTransactionType = {}));
+var ContractStatus;
+(function (ContractStatus) {
+    ContractStatus["DRAFT"] = "DRAFT";
+    ContractStatus["ACTIVE"] = "ACTIVE";
+    ContractStatus["EXPIRED"] = "EXPIRED";
+    ContractStatus["RENEWED"] = "RENEWED";
+})(ContractStatus || (exports.ContractStatus = ContractStatus = {}));
 var SalesActivityType;
 (function (SalesActivityType) {
     SalesActivityType["CALL"] = "CALL";

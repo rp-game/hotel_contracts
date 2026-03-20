@@ -23,6 +23,10 @@ export declare class CorporateAccountResponseDto {
     projectedRoomNights?: number;
     status: string;
     notes?: string;
+    contractStatus?: string;
+    contractFileUrl?: string;
+    contractNotes?: string;
+    renewalReminderDays?: number;
     createdByName?: string;
     createdAt: Date;
     updatedAt: Date;

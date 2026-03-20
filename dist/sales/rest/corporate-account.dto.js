@@ -36,6 +36,10 @@ class CreateCorporateAccountDto {
     contractEndDate;
     projectedRoomNights;
     notes;
+    contractStatus;
+    contractFileUrl;
+    contractNotes;
+    renewalReminderDays;
 }
 exports.CreateCorporateAccountDto = CreateCorporateAccountDto;
 __decorate([
@@ -154,6 +158,32 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateCorporateAccountDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contract status', enum: sales_enum_1.ContractStatus }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(sales_enum_1.ContractStatus),
+    __metadata("design:type", String)
+], CreateCorporateAccountDto.prototype, "contractStatus", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contract file URL (uploaded via separate endpoint)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateCorporateAccountDto.prototype, "contractFileUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contract notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateCorporateAccountDto.prototype, "contractNotes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Days before contract end to send renewal reminder', example: 30, default: 30 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_transformer_1.Type)(() => Number),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], CreateCorporateAccountDto.prototype, "renewalReminderDays", void 0);
 class UpdateCorporateAccountDto {
     companyName;
     industry;
@@ -173,6 +203,10 @@ class UpdateCorporateAccountDto {
     projectedRoomNights;
     status;
     notes;
+    contractStatus;
+    contractFileUrl;
+    contractNotes;
+    renewalReminderDays;
 }
 exports.UpdateCorporateAccountDto = UpdateCorporateAccountDto;
 __decorate([
@@ -298,6 +332,32 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateCorporateAccountDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contract status', enum: sales_enum_1.ContractStatus }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(sales_enum_1.ContractStatus),
+    __metadata("design:type", String)
+], UpdateCorporateAccountDto.prototype, "contractStatus", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contract file URL' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateCorporateAccountDto.prototype, "contractFileUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contract notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateCorporateAccountDto.prototype, "contractNotes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Days before contract end to send renewal reminder' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_transformer_1.Type)(() => Number),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], UpdateCorporateAccountDto.prototype, "renewalReminderDays", void 0);
 class FindCorporateAccountsQueryDto {
     search;
     status;

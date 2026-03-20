@@ -2,7 +2,7 @@
  * Corporate Account REST DTOs
  * Used by api-gateway controllers for request validation
  */
-import { CorporateAccountStatus } from '../enums/sales.enum';
+import { CorporateAccountStatus, ContractStatus } from '../enums/sales.enum';
 export declare class CreateCorporateAccountDto {
     companyName: string;
     industry?: string;
@@ -21,6 +21,10 @@ export declare class CreateCorporateAccountDto {
     contractEndDate?: string;
     projectedRoomNights?: number;
     notes?: string;
+    contractStatus?: ContractStatus;
+    contractFileUrl?: string;
+    contractNotes?: string;
+    renewalReminderDays?: number;
 }
 export declare class UpdateCorporateAccountDto {
     companyName?: string;
@@ -41,6 +45,10 @@ export declare class UpdateCorporateAccountDto {
     projectedRoomNights?: number;
     status?: CorporateAccountStatus;
     notes?: string;
+    contractStatus?: ContractStatus;
+    contractFileUrl?: string;
+    contractNotes?: string;
+    renewalReminderDays?: number;
 }
 export declare class FindCorporateAccountsQueryDto {
     search?: string;

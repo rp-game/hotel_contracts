@@ -8,8 +8,10 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsBoolean, IsOptional, IsNumber, IsUUID } from 'class-validator';
+import { IsString, IsBoolean, IsOptional, IsNumber, IsUUID, IsDateString, IsArray, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 import { CancellationPolicyDto } from './create-rate-plan.nats';
+import { BlackoutPeriodDto } from '../types/blackout-period.type';
 import { NatsResponse } from '../../common/nats-response.interface';
 import {
   CreateRatePlanRequest,
@@ -86,6 +88,32 @@ export class UpdateRatePlanDto {
     example: 50,
   })
   depositPercent?: number | null;
+
+  @ApiPropertyOptional({
+    description: 'Rate plan valid from date (YYYY-MM-DD). Set null to remove.',
+    example: '2026-01-01',
+  })
+  @IsOptional()
+  @IsDateString()
+  validFrom?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Rate plan valid to date (YYYY-MM-DD). Set null to remove.',
+    example: '2026-12-31',
+  })
+  @IsOptional()
+  @IsDateString()
+  validTo?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Blackout periods. Set null to remove all.',
+    type: [BlackoutPeriodDto],
+  })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => BlackoutPeriodDto)
+  blackoutPeriods?: BlackoutPeriodDto[] | null;
 }
 
 export class UpdateRatePlanRequest {
@@ -167,6 +195,22 @@ export class ListRatePlansRequest {
   })
   @IsOptional()
   includeAllCorporate?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'Check-in date (YYYY-MM-DD) — filters out expired and blacked-out rate plans',
+    example: '2026-03-20',
+  })
+  @IsOptional()
+  @IsDateString()
+  checkInDate?: string;
+
+  @ApiPropertyOptional({
+    description: 'Check-out date (YYYY-MM-DD) — used with checkInDate for blackout overlap check',
+    example: '2026-03-22',
+  })
+  @IsOptional()
+  @IsDateString()
+  checkOutDate?: string;
 }
 
 export class ListRatePlansResponse {

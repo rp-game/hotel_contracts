@@ -30,6 +30,10 @@ export interface CreateCorporateAccountNatsRequest {
   contractEndDate?: string;
   projectedRoomNights?: number;
   notes?: string;
+  contractStatus?: string;
+  contractFileUrl?: string;
+  contractNotes?: string;
+  renewalReminderDays?: number;
   createdBy: string;
   createdByName?: string;
 }

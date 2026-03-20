@@ -7,6 +7,7 @@
  *
  * @updated 2026-02-12 - Aligned with actual BASE/DERIVED implementation
  */
+import { BlackoutPeriodDto } from '../types/blackout-period.type';
 import { NatsResponse } from '../../common/nats-response.interface';
 export declare class CancellationPolicyDto {
     type: 'FREE_CANCELLATION' | 'PARTIAL_REFUND' | 'NON_REFUNDABLE';
@@ -47,6 +48,9 @@ export declare class CreateRatePlanRequest {
     depositPercent?: number | null;
     corporateAccountId?: string;
     corporateAccountName?: string;
+    validFrom?: string;
+    validTo?: string;
+    blackoutPeriods?: BlackoutPeriodDto[];
 }
 /**
  * NATS response after creating rate plan
@@ -67,6 +71,9 @@ export declare class CreateRatePlanResponse {
     depositPercent?: number | null;
     corporateAccountId?: string | null;
     corporateAccountName?: string | null;
+    validFrom?: string | null;
+    validTo?: string | null;
+    blackoutPeriods?: BlackoutPeriodDto[] | null;
     isActive: boolean;
     createdAt: string;
     updatedAt: string;

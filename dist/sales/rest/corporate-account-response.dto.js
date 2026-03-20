@@ -36,6 +36,10 @@ class CorporateAccountResponseDto {
     projectedRoomNights;
     status;
     notes;
+    contractStatus;
+    contractFileUrl;
+    contractNotes;
+    renewalReminderDays;
     createdByName;
     createdAt;
     updatedAt;
@@ -121,6 +125,22 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Notes' }),
     __metadata("design:type", String)
 ], CorporateAccountResponseDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contract status (DRAFT, ACTIVE, EXPIRED, RENEWED)' }),
+    __metadata("design:type", String)
+], CorporateAccountResponseDto.prototype, "contractStatus", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contract file URL' }),
+    __metadata("design:type", String)
+], CorporateAccountResponseDto.prototype, "contractFileUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Contract notes' }),
+    __metadata("design:type", String)
+], CorporateAccountResponseDto.prototype, "contractNotes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Days before contract end to send renewal reminder' }),
+    __metadata("design:type", Number)
+], CorporateAccountResponseDto.prototype, "renewalReminderDays", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Created by user name' }),
     __metadata("design:type", String)

@@ -30,6 +30,10 @@ export interface UpdateCorporateAccountNatsRequest {
   projectedRoomNights?: number;
   status?: CorporateAccountStatus;
   notes?: string;
+  contractStatus?: string;
+  contractFileUrl?: string;
+  contractNotes?: string;
+  renewalReminderDays?: number;
   updatedBy: string;
 }
 

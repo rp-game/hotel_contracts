@@ -17,7 +17,7 @@ import {
   MaxLength,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { CorporateAccountStatus } from '../enums/sales.enum';
+import { CorporateAccountStatus, ContractStatus } from '../enums/sales.enum';
 
 export class CreateCorporateAccountDto {
   @ApiProperty({ description: 'Company name', example: 'Vingroup JSC' })
@@ -118,6 +118,28 @@ export class CreateCorporateAccountDto {
   @IsOptional()
   @IsString()
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Contract status', enum: ContractStatus })
+  @IsOptional()
+  @IsEnum(ContractStatus)
+  contractStatus?: ContractStatus;
+
+  @ApiPropertyOptional({ description: 'Contract file URL (uploaded via separate endpoint)' })
+  @IsOptional()
+  @IsString()
+  contractFileUrl?: string;
+
+  @ApiPropertyOptional({ description: 'Contract notes' })
+  @IsOptional()
+  @IsString()
+  contractNotes?: string;
+
+  @ApiPropertyOptional({ description: 'Days before contract end to send renewal reminder', example: 30, default: 30 })
+  @IsOptional()
+  @IsNumber()
+  @Type(() => Number)
+  @Min(1)
+  renewalReminderDays?: number;
 }
 
 export class UpdateCorporateAccountDto {
@@ -225,6 +247,28 @@ export class UpdateCorporateAccountDto {
   @IsOptional()
   @IsString()
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Contract status', enum: ContractStatus })
+  @IsOptional()
+  @IsEnum(ContractStatus)
+  contractStatus?: ContractStatus;
+
+  @ApiPropertyOptional({ description: 'Contract file URL' })
+  @IsOptional()
+  @IsString()
+  contractFileUrl?: string;
+
+  @ApiPropertyOptional({ description: 'Contract notes' })
+  @IsOptional()
+  @IsString()
+  contractNotes?: string;
+
+  @ApiPropertyOptional({ description: 'Days before contract end to send renewal reminder' })
+  @IsOptional()
+  @IsNumber()
+  @Type(() => Number)
+  @Min(1)
+  renewalReminderDays?: number;
 }
 
 export class FindCorporateAccountsQueryDto {

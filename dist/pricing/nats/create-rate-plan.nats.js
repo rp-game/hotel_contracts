@@ -21,6 +21,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateRatePlanResponse = exports.CreateRatePlanRequest = exports.DerivationTypeEnum = exports.RatePlanTypeEnum = exports.CancellationPolicyDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
+const blackout_period_type_1 = require("../types/blackout-period.type");
 class CancellationPolicyDto {
     type;
     deadlineHours;
@@ -92,6 +94,9 @@ class CreateRatePlanRequest {
     depositPercent;
     corporateAccountId;
     corporateAccountName;
+    validFrom;
+    validTo;
+    blackoutPeriods;
 }
 exports.CreateRatePlanRequest = CreateRatePlanRequest;
 __decorate([
@@ -221,6 +226,35 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateRatePlanRequest.prototype, "corporateAccountName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Rate plan valid from date (YYYY-MM-DD). If null, always valid.',
+        example: '2026-01-01',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], CreateRatePlanRequest.prototype, "validFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Rate plan valid to date (YYYY-MM-DD). If null, no expiry.',
+        example: '2026-12-31',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], CreateRatePlanRequest.prototype, "validTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Blackout periods — date ranges when this rate plan is hidden from booking',
+        type: [blackout_period_type_1.BlackoutPeriodDto],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => blackout_period_type_1.BlackoutPeriodDto),
+    __metadata("design:type", Array)
+], CreateRatePlanRequest.prototype, "blackoutPeriods", void 0);
 /**
  * NATS response after creating rate plan
  */
@@ -240,6 +274,9 @@ class CreateRatePlanResponse {
     depositPercent;
     corporateAccountId;
     corporateAccountName;
+    validFrom;
+    validTo;
+    blackoutPeriods;
     isActive;
     createdAt;
     updatedAt;
@@ -356,6 +393,27 @@ __decorate([
     }),
     __metadata("design:type", Object)
 ], CreateRatePlanResponse.prototype, "corporateAccountName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Rate plan valid from date',
+        example: '2026-01-01',
+    }),
+    __metadata("design:type", Object)
+], CreateRatePlanResponse.prototype, "validFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Rate plan valid to date',
+        example: '2026-12-31',
+    }),
+    __metadata("design:type", Object)
+], CreateRatePlanResponse.prototype, "validTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Blackout periods',
+        type: [blackout_period_type_1.BlackoutPeriodDto],
+    }),
+    __metadata("design:type", Object)
+], CreateRatePlanResponse.prototype, "blackoutPeriods", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Whether the rate plan is active',

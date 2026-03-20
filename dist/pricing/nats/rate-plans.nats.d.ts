@@ -7,6 +7,7 @@
  * @updated 2026-02-12 - Converted to classes with @ApiProperty for dual use (NATS + REST)
  */
 import { CancellationPolicyDto } from './create-rate-plan.nats';
+import { BlackoutPeriodDto } from '../types/blackout-period.type';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { CreateRatePlanRequest, CreateRatePlanResponse, CreateRatePlanNatsResponse, RatePlanTypeEnum, DerivationTypeEnum } from './create-rate-plan.nats';
 /**
@@ -24,6 +25,9 @@ export declare class UpdateRatePlanDto {
     mealPlan?: string | null;
     paymentType?: string | null;
     depositPercent?: number | null;
+    validFrom?: string | null;
+    validTo?: string | null;
+    blackoutPeriods?: BlackoutPeriodDto[] | null;
 }
 export declare class UpdateRatePlanRequest {
     id: string;
@@ -51,6 +55,8 @@ export declare class ListRatePlansRequest {
     hotelId: string;
     corporateAccountId?: string;
     includeAllCorporate?: boolean;
+    checkInDate?: string;
+    checkOutDate?: string;
 }
 export declare class ListRatePlansResponse {
     data: CreateRatePlanResponse[];

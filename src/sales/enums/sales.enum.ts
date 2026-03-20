@@ -15,6 +15,13 @@ export enum ARTransactionType {
   WRITE_OFF = 'WRITE_OFF',
 }
 
+export enum ContractStatus {
+  DRAFT = 'DRAFT',
+  ACTIVE = 'ACTIVE',
+  EXPIRED = 'EXPIRED',
+  RENEWED = 'RENEWED',
+}
+
 export enum SalesActivityType {
   CALL = 'CALL',
   VISIT = 'VISIT',
