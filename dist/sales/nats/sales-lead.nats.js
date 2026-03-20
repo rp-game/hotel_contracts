@@ -408,12 +408,12 @@ __decorate([
     __metadata("design:type", String)
 ], SalesLeadResponse.prototype, "contactPerson", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
-    __metadata("design:type", String)
+    (0, swagger_1.ApiPropertyOptional)({ nullable: true }),
+    __metadata("design:type", Object)
 ], SalesLeadResponse.prototype, "contactEmail", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
-    __metadata("design:type", String)
+    (0, swagger_1.ApiPropertyOptional)({ nullable: true }),
+    __metadata("design:type", Object)
 ], SalesLeadResponse.prototype, "contactPhone", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
@@ -424,12 +424,12 @@ __decorate([
     __metadata("design:type", String)
 ], SalesLeadResponse.prototype, "stage", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
-    __metadata("design:type", Number)
+    (0, swagger_1.ApiPropertyOptional)({ nullable: true }),
+    __metadata("design:type", Object)
 ], SalesLeadResponse.prototype, "estimatedRevenue", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
-    __metadata("design:type", Number)
+    (0, swagger_1.ApiPropertyOptional)({ nullable: true }),
+    __metadata("design:type", Object)
 ], SalesLeadResponse.prototype, "estimatedRoomNights", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
@@ -440,28 +440,28 @@ __decorate([
     __metadata("design:type", String)
 ], SalesLeadResponse.prototype, "salesPersonName", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
-    __metadata("design:type", String)
+    (0, swagger_1.ApiPropertyOptional)({ nullable: true }),
+    __metadata("design:type", Object)
 ], SalesLeadResponse.prototype, "expectedCloseDate", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
-    __metadata("design:type", String)
+    (0, swagger_1.ApiPropertyOptional)({ nullable: true }),
+    __metadata("design:type", Object)
 ], SalesLeadResponse.prototype, "lostReason", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
-    __metadata("design:type", String)
+    (0, swagger_1.ApiPropertyOptional)({ nullable: true }),
+    __metadata("design:type", Object)
 ], SalesLeadResponse.prototype, "convertedAccountId", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
-    __metadata("design:type", String)
+    (0, swagger_1.ApiPropertyOptional)({ nullable: true }),
+    __metadata("design:type", Object)
 ], SalesLeadResponse.prototype, "notes", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
-    __metadata("design:type", String)
+    (0, swagger_1.ApiPropertyOptional)({ nullable: true }),
+    __metadata("design:type", Object)
 ], SalesLeadResponse.prototype, "createdBy", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
-    __metadata("design:type", String)
+    (0, swagger_1.ApiPropertyOptional)({ nullable: true }),
+    __metadata("design:type", Object)
 ], SalesLeadResponse.prototype, "createdByName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
