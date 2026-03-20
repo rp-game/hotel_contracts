@@ -6,6 +6,12 @@ export declare enum CorporateAccountStatus {
     INACTIVE = "INACTIVE",
     SUSPENDED = "SUSPENDED"
 }
+export declare enum ARTransactionType {
+    CHARGE = "CHARGE",
+    PAYMENT = "PAYMENT",
+    ADJUSTMENT = "ADJUSTMENT",
+    WRITE_OFF = "WRITE_OFF"
+}
 export declare enum SalesActivityType {
     CALL = "CALL",
     VISIT = "VISIT",

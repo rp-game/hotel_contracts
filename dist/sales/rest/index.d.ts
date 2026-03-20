@@ -5,4 +5,6 @@ export * from './sales-activity-response.dto';
 export * from './sales-target.dto';
 export * from './sales-target-response.dto';
 export * from './sales-dashboard.dto';
+export * from './ar-transaction.dto';
+export * from './ar-transaction-response.dto';
 //# sourceMappingURL=index.d.ts.map

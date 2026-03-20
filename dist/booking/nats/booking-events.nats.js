@@ -72,6 +72,9 @@ class BookingCheckedOutEvent {
     checkedOutAt;
     travelAgentId;
     salesPersonId;
+    corporateId;
+    paidAmount;
+    bookingCode;
 }
 exports.BookingCheckedOutEvent = BookingCheckedOutEvent;
 __decorate([
@@ -118,6 +121,18 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Sales person ID (if booking attributed to sales)' }),
     __metadata("design:type", String)
 ], BookingCheckedOutEvent.prototype, "salesPersonId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Corporate Account ID (if corporate booking)' }),
+    __metadata("design:type", String)
+], BookingCheckedOutEvent.prototype, "corporateId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Amount already paid at checkout time' }),
+    __metadata("design:type", Number)
+], BookingCheckedOutEvent.prototype, "paidAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Human-readable booking code' }),
+    __metadata("design:type", String)
+], BookingCheckedOutEvent.prototype, "bookingCode", void 0);
 class BookingCancelledEvent {
     bookingId;
     customerId;
@@ -126,6 +141,8 @@ class BookingCancelledEvent {
     paidAmount;
     refundAmount;
     cancelledAt;
+    corporateId;
+    bookingCode;
 }
 exports.BookingCancelledEvent = BookingCancelledEvent;
 __decorate([
@@ -156,4 +173,12 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Cancellation timestamp' }),
     __metadata("design:type", Date)
 ], BookingCancelledEvent.prototype, "cancelledAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Corporate Account ID (if corporate booking)' }),
+    __metadata("design:type", String)
+], BookingCancelledEvent.prototype, "corporateId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Human-readable booking code' }),
+    __metadata("design:type", String)
+], BookingCancelledEvent.prototype, "bookingCode", void 0);
 //# sourceMappingURL=booking-events.nats.js.map

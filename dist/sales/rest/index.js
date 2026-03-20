@@ -21,4 +21,6 @@ __exportStar(require("./sales-activity-response.dto"), exports);
 __exportStar(require("./sales-target.dto"), exports);
 __exportStar(require("./sales-target-response.dto"), exports);
 __exportStar(require("./sales-dashboard.dto"), exports);
+__exportStar(require("./ar-transaction.dto"), exports);
+__exportStar(require("./ar-transaction-response.dto"), exports);
 //# sourceMappingURL=index.js.map

@@ -240,6 +240,16 @@ export interface CreateBookingRequest {
   corporateId?: string;
 
   /**
+   * Credit limit override — allow booking even if credit limit exceeded (advisory only)
+   */
+  creditLimitOverride?: boolean;
+
+  /**
+   * Reason for overriding credit limit
+   */
+  creditLimitOverrideReason?: string;
+
+  /**
    * Additional metadata
    */
   metadata?: Record<string, any>;

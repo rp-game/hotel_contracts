@@ -22,4 +22,5 @@ __exportStar(require("./delete-corporate-account.nats"), exports);
 __exportStar(require("./sales-activity.nats"), exports);
 __exportStar(require("./sales-target.nats"), exports);
 __exportStar(require("./get-sales-dashboard.nats"), exports);
+__exportStar(require("./ar-transaction.nats"), exports);
 //# sourceMappingURL=index.js.map

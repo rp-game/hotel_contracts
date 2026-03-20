@@ -30,6 +30,9 @@ export declare class BookingCheckedOutEvent {
     checkedOutAt: Date;
     travelAgentId?: string;
     salesPersonId?: string;
+    corporateId?: string;
+    paidAmount?: number;
+    bookingCode?: string;
 }
 export declare class BookingCancelledEvent {
     bookingId: string;
@@ -39,5 +42,7 @@ export declare class BookingCancelledEvent {
     paidAmount: number;
     refundAmount: number;
     cancelledAt: Date;
+    corporateId?: string;
+    bookingCode?: string;
 }
 //# sourceMappingURL=booking-events.nats.d.ts.map

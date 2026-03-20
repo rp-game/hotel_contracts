@@ -6,4 +6,5 @@ export * from './delete-corporate-account.nats';
 export * from './sales-activity.nats';
 export * from './sales-target.nats';
 export * from './get-sales-dashboard.nats';
+export * from './ar-transaction.nats';
 //# sourceMappingURL=index.d.ts.map

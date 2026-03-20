@@ -8,6 +8,13 @@ export enum CorporateAccountStatus {
   SUSPENDED = 'SUSPENDED',
 }
 
+export enum ARTransactionType {
+  CHARGE = 'CHARGE',
+  PAYMENT = 'PAYMENT',
+  ADJUSTMENT = 'ADJUSTMENT',
+  WRITE_OFF = 'WRITE_OFF',
+}
+
 export enum SalesActivityType {
   CALL = 'CALL',
   VISIT = 'VISIT',

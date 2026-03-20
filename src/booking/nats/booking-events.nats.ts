@@ -68,6 +68,15 @@ export class BookingCheckedOutEvent {
 
   @ApiPropertyOptional({ description: 'Sales person ID (if booking attributed to sales)' })
   salesPersonId?: string;
+
+  @ApiPropertyOptional({ description: 'Corporate Account ID (if corporate booking)' })
+  corporateId?: string;
+
+  @ApiPropertyOptional({ description: 'Amount already paid at checkout time' })
+  paidAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Human-readable booking code' })
+  bookingCode?: string;
 }
 
 export class BookingCancelledEvent {
@@ -91,4 +100,10 @@ export class BookingCancelledEvent {
 
   @ApiProperty({ description: 'Cancellation timestamp' })
   cancelledAt: Date;
+
+  @ApiPropertyOptional({ description: 'Corporate Account ID (if corporate booking)' })
+  corporateId?: string;
+
+  @ApiPropertyOptional({ description: 'Human-readable booking code' })
+  bookingCode?: string;
 }
