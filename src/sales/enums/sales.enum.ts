@@ -46,3 +46,9 @@ export enum LeadStage {
   WON = 'WON',
   LOST = 'LOST',
 }
+
+export enum SalesCommissionAppliesTo {
+  CORPORATE = 'CORPORATE',
+  TRAVEL_AGENT = 'TRAVEL_AGENT',
+  ALL = 'ALL',
+}

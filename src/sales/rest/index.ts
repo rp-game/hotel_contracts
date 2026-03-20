@@ -25,3 +25,22 @@ export {
   PipelineSummaryResponse,
   StageSummary,
 } from '../nats/sales-lead.nats';
+
+// Sales Commission - re-export from NATS (single source of truth)
+export {
+  CreateSalesCommissionRuleRequest,
+  UpdateSalesCommissionRuleDto,
+  UpdateSalesCommissionRuleRequest,
+  FindSalesCommissionRulesRequest,
+  GetSalesCommissionRuleRequest,
+  DeleteSalesCommissionRuleRequest,
+  SalesCommissionRuleResponse,
+  SalesCommissionRuleListResponse,
+  DeleteSalesCommissionRuleResponse,
+  FindSalesCommissionRecordsRequest,
+  SalesCommissionRecordResponse,
+  SalesCommissionRecordListResponse,
+  SalesCommissionSummaryRequest,
+  SalesPersonCommissionSummary,
+  SalesCommissionSummaryResponse,
+} from '../nats/sales-commission.nats';

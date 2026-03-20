@@ -8,4 +8,5 @@ export * from './sales-target.nats';
 export * from './get-sales-dashboard.nats';
 export * from './ar-transaction.nats';
 export * from './sales-lead.nats';
+export * from './sales-commission.nats';
 //# sourceMappingURL=index.d.ts.map

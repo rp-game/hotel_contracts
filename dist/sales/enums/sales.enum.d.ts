@@ -40,4 +40,9 @@ export declare enum LeadStage {
     WON = "WON",
     LOST = "LOST"
 }
+export declare enum SalesCommissionAppliesTo {
+    CORPORATE = "CORPORATE",
+    TRAVEL_AGENT = "TRAVEL_AGENT",
+    ALL = "ALL"
+}
 //# sourceMappingURL=sales.enum.d.ts.map
