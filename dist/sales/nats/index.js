@@ -23,4 +23,5 @@ __exportStar(require("./sales-activity.nats"), exports);
 __exportStar(require("./sales-target.nats"), exports);
 __exportStar(require("./get-sales-dashboard.nats"), exports);
 __exportStar(require("./ar-transaction.nats"), exports);
+__exportStar(require("./sales-lead.nats"), exports);
 //# sourceMappingURL=index.js.map

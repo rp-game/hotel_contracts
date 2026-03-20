@@ -26,4 +26,18 @@ export declare enum SalesActivityType {
     SITE_INSPECTION = "SITE_INSPECTION",
     OTHER = "OTHER"
 }
+export declare enum LeadSource {
+    REFERRAL = "REFERRAL",
+    COLD_CALL = "COLD_CALL",
+    WEBSITE = "WEBSITE",
+    EVENT = "EVENT",
+    OTHER = "OTHER"
+}
+export declare enum LeadStage {
+    INQUIRY = "INQUIRY",
+    PROPOSAL = "PROPOSAL",
+    NEGOTIATION = "NEGOTIATION",
+    WON = "WON",
+    LOST = "LOST"
+}
 //# sourceMappingURL=sales.enum.d.ts.map

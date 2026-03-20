@@ -30,3 +30,19 @@ export enum SalesActivityType {
   SITE_INSPECTION = 'SITE_INSPECTION',
   OTHER = 'OTHER',
 }
+
+export enum LeadSource {
+  REFERRAL = 'REFERRAL',
+  COLD_CALL = 'COLD_CALL',
+  WEBSITE = 'WEBSITE',
+  EVENT = 'EVENT',
+  OTHER = 'OTHER',
+}
+
+export enum LeadStage {
+  INQUIRY = 'INQUIRY',
+  PROPOSAL = 'PROPOSAL',
+  NEGOTIATION = 'NEGOTIATION',
+  WON = 'WON',
+  LOST = 'LOST',
+}

@@ -3,7 +3,7 @@
  * Sales Domain Enums
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SalesActivityType = exports.ContractStatus = exports.ARTransactionType = exports.CorporateAccountStatus = void 0;
+exports.LeadStage = exports.LeadSource = exports.SalesActivityType = exports.ContractStatus = exports.ARTransactionType = exports.CorporateAccountStatus = void 0;
 var CorporateAccountStatus;
 (function (CorporateAccountStatus) {
     CorporateAccountStatus["ACTIVE"] = "ACTIVE";
@@ -33,4 +33,20 @@ var SalesActivityType;
     SalesActivityType["SITE_INSPECTION"] = "SITE_INSPECTION";
     SalesActivityType["OTHER"] = "OTHER";
 })(SalesActivityType || (exports.SalesActivityType = SalesActivityType = {}));
+var LeadSource;
+(function (LeadSource) {
+    LeadSource["REFERRAL"] = "REFERRAL";
+    LeadSource["COLD_CALL"] = "COLD_CALL";
+    LeadSource["WEBSITE"] = "WEBSITE";
+    LeadSource["EVENT"] = "EVENT";
+    LeadSource["OTHER"] = "OTHER";
+})(LeadSource || (exports.LeadSource = LeadSource = {}));
+var LeadStage;
+(function (LeadStage) {
+    LeadStage["INQUIRY"] = "INQUIRY";
+    LeadStage["PROPOSAL"] = "PROPOSAL";
+    LeadStage["NEGOTIATION"] = "NEGOTIATION";
+    LeadStage["WON"] = "WON";
+    LeadStage["LOST"] = "LOST";
+})(LeadStage || (exports.LeadStage = LeadStage = {}));
 //# sourceMappingURL=sales.enum.js.map
