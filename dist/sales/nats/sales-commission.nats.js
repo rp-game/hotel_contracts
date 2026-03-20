@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SalesCommissionSummaryResponse = exports.SalesPersonCommissionSummary = exports.SalesCommissionSummaryRequest = exports.SalesCommissionRecordListResponse = exports.SalesCommissionRecordResponse = exports.FindSalesCommissionRecordsRequest = exports.DeleteSalesCommissionRuleResponse = exports.SalesCommissionRuleListResponse = exports.SalesCommissionRuleResponse = exports.DeleteSalesCommissionRuleRequest = exports.GetSalesCommissionRuleRequest = exports.FindSalesCommissionRulesRequest = exports.UpdateSalesCommissionRuleRequest = exports.UpdateSalesCommissionRuleDto = exports.CreateSalesCommissionRuleRequest = void 0;
+exports.SalesProductionResponse = exports.SalesPersonProduction = exports.SalesProductionRequest = exports.SalesCommissionSummaryResponse = exports.SalesPersonCommissionSummary = exports.SalesCommissionSummaryRequest = exports.SalesCommissionRecordListResponse = exports.SalesCommissionRecordResponse = exports.FindSalesCommissionRecordsRequest = exports.DeleteSalesCommissionRuleResponse = exports.SalesCommissionRuleListResponse = exports.SalesCommissionRuleResponse = exports.DeleteSalesCommissionRuleRequest = exports.GetSalesCommissionRuleRequest = exports.FindSalesCommissionRulesRequest = exports.UpdateSalesCommissionRuleRequest = exports.UpdateSalesCommissionRuleDto = exports.CreateSalesCommissionRuleRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -535,4 +535,117 @@ __decorate([
     (0, swagger_1.ApiProperty)({ type: [SalesPersonCommissionSummary] }),
     __metadata("design:type", Array)
 ], SalesCommissionSummaryResponse.prototype, "bySalesPerson", void 0);
+// === Sales Production (on-the-fly revenue aggregation) ===
+class SalesProductionRequest {
+    tenantId;
+    hotelId;
+    salesPersonId;
+    dateFrom;
+    dateTo;
+}
+exports.SalesProductionRequest = SalesProductionRequest;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], SalesProductionRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], SalesProductionRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], SalesProductionRequest.prototype, "salesPersonId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], SalesProductionRequest.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], SalesProductionRequest.prototype, "dateTo", void 0);
+class SalesPersonProduction {
+    salesPersonId;
+    salesPersonName;
+    totalRevenue;
+    totalRoomNights;
+    bookingCount;
+    totalCommission;
+    corporateBookings;
+    taBookings;
+    directBookings;
+}
+exports.SalesPersonProduction = SalesPersonProduction;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], SalesPersonProduction.prototype, "salesPersonId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], SalesPersonProduction.prototype, "salesPersonName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SalesPersonProduction.prototype, "totalRevenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SalesPersonProduction.prototype, "totalRoomNights", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SalesPersonProduction.prototype, "bookingCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SalesPersonProduction.prototype, "totalCommission", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SalesPersonProduction.prototype, "corporateBookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SalesPersonProduction.prototype, "taBookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SalesPersonProduction.prototype, "directBookings", void 0);
+class SalesProductionResponse {
+    totalRevenue;
+    totalRoomNights;
+    totalBookings;
+    totalCommission;
+    bySalesPerson;
+}
+exports.SalesProductionResponse = SalesProductionResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SalesProductionResponse.prototype, "totalRevenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SalesProductionResponse.prototype, "totalRoomNights", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SalesProductionResponse.prototype, "totalBookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SalesProductionResponse.prototype, "totalCommission", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [SalesPersonProduction] }),
+    __metadata("design:type", Array)
+], SalesProductionResponse.prototype, "bySalesPerson", void 0);
 //# sourceMappingURL=sales-commission.nats.js.map

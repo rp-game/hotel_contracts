@@ -116,4 +116,30 @@ export type FindSalesCommissionRulesNatsResponse = NatsResponse<SalesCommissionR
 export type DeleteSalesCommissionRuleNatsResponse = NatsResponse<DeleteSalesCommissionRuleResponse>;
 export type FindSalesCommissionRecordsNatsResponse = NatsResponse<SalesCommissionRecordListResponse>;
 export type SalesCommissionSummaryNatsResponse = NatsResponse<SalesCommissionSummaryResponse>;
+export declare class SalesProductionRequest {
+    tenantId?: string;
+    hotelId?: string;
+    salesPersonId?: string;
+    dateFrom: string;
+    dateTo: string;
+}
+export declare class SalesPersonProduction {
+    salesPersonId: string;
+    salesPersonName: string;
+    totalRevenue: number;
+    totalRoomNights: number;
+    bookingCount: number;
+    totalCommission: number;
+    corporateBookings: number;
+    taBookings: number;
+    directBookings: number;
+}
+export declare class SalesProductionResponse {
+    totalRevenue: number;
+    totalRoomNights: number;
+    totalBookings: number;
+    totalCommission: number;
+    bySalesPerson: SalesPersonProduction[];
+}
+export type SalesProductionNatsResponse = NatsResponse<SalesProductionResponse>;
 //# sourceMappingURL=sales-commission.nats.d.ts.map

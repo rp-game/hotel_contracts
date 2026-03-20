@@ -171,3 +171,35 @@ export type FindSalesCommissionRulesNatsResponse = NatsResponse<SalesCommissionR
 export type DeleteSalesCommissionRuleNatsResponse = NatsResponse<DeleteSalesCommissionRuleResponse>;
 export type FindSalesCommissionRecordsNatsResponse = NatsResponse<SalesCommissionRecordListResponse>;
 export type SalesCommissionSummaryNatsResponse = NatsResponse<SalesCommissionSummaryResponse>;
+
+// === Sales Production (on-the-fly revenue aggregation) ===
+
+export class SalesProductionRequest {
+  @ApiPropertyOptional() @IsOptional() @IsUUID() tenantId?: string;
+  @ApiPropertyOptional() @IsOptional() @IsUUID() hotelId?: string;
+  @ApiPropertyOptional() @IsOptional() @IsUUID() salesPersonId?: string;
+  @ApiProperty() @IsDateString() dateFrom: string;
+  @ApiProperty() @IsDateString() dateTo: string;
+}
+
+export class SalesPersonProduction {
+  @ApiProperty() salesPersonId: string;
+  @ApiProperty() salesPersonName: string;
+  @ApiProperty() totalRevenue: number;
+  @ApiProperty() totalRoomNights: number;
+  @ApiProperty() bookingCount: number;
+  @ApiProperty() totalCommission: number;
+  @ApiProperty() corporateBookings: number;
+  @ApiProperty() taBookings: number;
+  @ApiProperty() directBookings: number;
+}
+
+export class SalesProductionResponse {
+  @ApiProperty() totalRevenue: number;
+  @ApiProperty() totalRoomNights: number;
+  @ApiProperty() totalBookings: number;
+  @ApiProperty() totalCommission: number;
+  @ApiProperty({ type: [SalesPersonProduction] }) bySalesPerson: SalesPersonProduction[];
+}
+
+export type SalesProductionNatsResponse = NatsResponse<SalesProductionResponse>;

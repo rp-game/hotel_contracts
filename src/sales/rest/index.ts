@@ -43,4 +43,7 @@ export {
   SalesCommissionSummaryRequest,
   SalesPersonCommissionSummary,
   SalesCommissionSummaryResponse,
+  SalesProductionRequest,
+  SalesPersonProduction,
+  SalesProductionResponse,
 } from '../nats/sales-commission.nats';
