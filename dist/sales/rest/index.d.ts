@@ -7,5 +7,5 @@ export * from './sales-target-response.dto';
 export * from './sales-dashboard.dto';
 export * from './ar-transaction.dto';
 export * from './ar-transaction-response.dto';
-export { CreateSalesLeadRequest, UpdateSalesLeadDto, UpdateSalesLeadRequest, FindSalesLeadsRequest, GetSalesLeadRequest, DeleteSalesLeadRequest, SalesLeadResponse, SalesLeadListResponse, ConvertSalesLeadRequest, PipelineSummaryRequest, PipelineSummaryResponse, StageSummary, } from '../nats/sales-lead.nats';
+export { CreateSalesLeadRequest, UpdateSalesLeadDto, UpdateSalesLeadRequest, FindSalesLeadsRequest, GetSalesLeadRequest, DeleteSalesLeadRequest, SalesLeadResponse, SalesLeadListResponse, ConvertSalesLeadRequest, ConvertSalesLeadResponse, DeleteSalesLeadResponse, PipelineSummaryRequest, PipelineSummaryResponse, StageSummary, } from '../nats/sales-lead.nats';
 //# sourceMappingURL=index.d.ts.map

@@ -143,7 +143,17 @@ export class SalesLeadListResponse {
   @ApiProperty() totalPages: number;
 }
 
+// --- Delete Response ---
+export class DeleteSalesLeadResponse {
+  @ApiProperty() deleted: boolean;
+}
+
 // --- Convert ---
+export class ConvertSalesLeadResponse {
+  @ApiProperty({ type: SalesLeadResponse }) lead: SalesLeadResponse;
+  @ApiProperty({ description: 'Created corporate account' }) corporateAccount: any;
+}
+
 export class ConvertSalesLeadRequest {
   @ApiPropertyOptional() @IsOptional() @IsUUID() tenantId?: string;
   @ApiProperty() @IsUUID() leadId: string;

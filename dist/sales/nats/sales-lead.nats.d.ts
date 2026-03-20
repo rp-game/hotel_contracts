@@ -87,6 +87,13 @@ export declare class SalesLeadListResponse {
     limit: number;
     totalPages: number;
 }
+export declare class DeleteSalesLeadResponse {
+    deleted: boolean;
+}
+export declare class ConvertSalesLeadResponse {
+    lead: SalesLeadResponse;
+    corporateAccount: any;
+}
 export declare class ConvertSalesLeadRequest {
     tenantId?: string;
     leadId: string;

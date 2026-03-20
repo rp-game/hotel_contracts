@@ -19,6 +19,8 @@ export {
   SalesLeadResponse,
   SalesLeadListResponse,
   ConvertSalesLeadRequest,
+  ConvertSalesLeadResponse,
+  DeleteSalesLeadResponse,
   PipelineSummaryRequest,
   PipelineSummaryResponse,
   StageSummary,

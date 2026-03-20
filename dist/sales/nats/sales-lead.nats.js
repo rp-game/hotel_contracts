@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PipelineSummaryResponse = exports.StageSummary = exports.PipelineSummaryRequest = exports.ConvertSalesLeadRequest = exports.SalesLeadListResponse = exports.SalesLeadResponse = exports.DeleteSalesLeadRequest = exports.GetSalesLeadRequest = exports.FindSalesLeadsRequest = exports.UpdateSalesLeadRequest = exports.UpdateSalesLeadDto = exports.CreateSalesLeadRequest = void 0;
+exports.PipelineSummaryResponse = exports.StageSummary = exports.PipelineSummaryRequest = exports.ConvertSalesLeadRequest = exports.ConvertSalesLeadResponse = exports.DeleteSalesLeadResponse = exports.SalesLeadListResponse = exports.SalesLeadResponse = exports.DeleteSalesLeadRequest = exports.GetSalesLeadRequest = exports.FindSalesLeadsRequest = exports.UpdateSalesLeadRequest = exports.UpdateSalesLeadDto = exports.CreateSalesLeadRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -499,7 +499,29 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], SalesLeadListResponse.prototype, "totalPages", void 0);
+// --- Delete Response ---
+class DeleteSalesLeadResponse {
+    deleted;
+}
+exports.DeleteSalesLeadResponse = DeleteSalesLeadResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Boolean)
+], DeleteSalesLeadResponse.prototype, "deleted", void 0);
 // --- Convert ---
+class ConvertSalesLeadResponse {
+    lead;
+    corporateAccount;
+}
+exports.ConvertSalesLeadResponse = ConvertSalesLeadResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: SalesLeadResponse }),
+    __metadata("design:type", SalesLeadResponse)
+], ConvertSalesLeadResponse.prototype, "lead", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Created corporate account' }),
+    __metadata("design:type", Object)
+], ConvertSalesLeadResponse.prototype, "corporateAccount", void 0);
 class ConvertSalesLeadRequest {
     tenantId;
     leadId;
