@@ -305,6 +305,53 @@ export class SaveProviderConfigDto {
   defaultVatRate?: number;
 }
 
+export class CancelEInvoiceBodyDto {
+  @ApiProperty({ description: 'Reason for cancellation' })
+  @IsString()
+  reason: string;
+}
+
+export class AdjustEInvoiceBodyDto {
+  @ApiProperty({ description: 'Reason for adjustment' })
+  @IsString()
+  reason: string;
+
+  @ApiPropertyOptional({ description: 'Adjusted items (uses original items if not provided)', type: [CreateEInvoiceItemDto] })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateEInvoiceItemDto)
+  items?: CreateEInvoiceItemDto[];
+}
+
+export class ReplaceEInvoiceBodyDto {
+  @ApiProperty({ description: 'Reason for replacement' })
+  @IsString()
+  reason: string;
+
+  @ApiPropertyOptional({ description: 'Replacement items (uses original items if not provided)', type: [CreateEInvoiceItemDto] })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateEInvoiceItemDto)
+  items?: CreateEInvoiceItemDto[];
+
+  @ApiPropertyOptional({ description: 'Override customer name' })
+  @IsOptional()
+  @IsString()
+  customerName?: string;
+
+  @ApiPropertyOptional({ description: 'Override customer tax code' })
+  @IsOptional()
+  @IsString()
+  customerTaxCode?: string;
+
+  @ApiPropertyOptional({ description: 'Override customer address' })
+  @IsOptional()
+  @IsString()
+  customerAddress?: string;
+}
+
 // ============================================================================
 // RESPONSE DTOs
 // ============================================================================

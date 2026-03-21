@@ -128,6 +128,7 @@ export declare class UpdateBookingDto {
      * Additional metadata
      */
     metadata?: Record<string, any>;
+    requestInvoice?: boolean;
 }
 /**
  * NATS response containing updated booking

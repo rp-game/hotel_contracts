@@ -13,7 +13,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProviderConfigResponseDto = exports.EInvoiceSummaryDto = exports.EInvoiceResponseDto = exports.SaveProviderConfigDto = exports.FindEInvoicesQueryDto = exports.UpdateEInvoiceDto = exports.CreateEInvoiceFromInvoiceDto = exports.CreateEInvoiceDto = exports.CreateEInvoiceItemDto = void 0;
+exports.ProviderConfigResponseDto = exports.EInvoiceSummaryDto = exports.EInvoiceResponseDto = exports.ReplaceEInvoiceBodyDto = exports.AdjustEInvoiceBodyDto = exports.CancelEInvoiceBodyDto = exports.SaveProviderConfigDto = exports.FindEInvoicesQueryDto = exports.UpdateEInvoiceDto = exports.CreateEInvoiceFromInvoiceDto = exports.CreateEInvoiceDto = exports.CreateEInvoiceItemDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -436,6 +436,72 @@ __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], SaveProviderConfigDto.prototype, "defaultVatRate", void 0);
+class CancelEInvoiceBodyDto {
+    reason;
+}
+exports.CancelEInvoiceBodyDto = CancelEInvoiceBodyDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reason for cancellation' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CancelEInvoiceBodyDto.prototype, "reason", void 0);
+class AdjustEInvoiceBodyDto {
+    reason;
+    items;
+}
+exports.AdjustEInvoiceBodyDto = AdjustEInvoiceBodyDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reason for adjustment' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AdjustEInvoiceBodyDto.prototype, "reason", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Adjusted items (uses original items if not provided)', type: [CreateEInvoiceItemDto] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => CreateEInvoiceItemDto),
+    __metadata("design:type", Array)
+], AdjustEInvoiceBodyDto.prototype, "items", void 0);
+class ReplaceEInvoiceBodyDto {
+    reason;
+    items;
+    customerName;
+    customerTaxCode;
+    customerAddress;
+}
+exports.ReplaceEInvoiceBodyDto = ReplaceEInvoiceBodyDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reason for replacement' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ReplaceEInvoiceBodyDto.prototype, "reason", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Replacement items (uses original items if not provided)', type: [CreateEInvoiceItemDto] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => CreateEInvoiceItemDto),
+    __metadata("design:type", Array)
+], ReplaceEInvoiceBodyDto.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Override customer name' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ReplaceEInvoiceBodyDto.prototype, "customerName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Override customer tax code' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ReplaceEInvoiceBodyDto.prototype, "customerTaxCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Override customer address' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ReplaceEInvoiceBodyDto.prototype, "customerAddress", void 0);
 // ============================================================================
 // RESPONSE DTOs
 // ============================================================================

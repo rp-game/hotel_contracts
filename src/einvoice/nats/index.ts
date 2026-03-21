@@ -293,6 +293,9 @@ export const EINVOICE_PATTERNS = {
   GET_HTML: 'einvoice.get_html',
   PROVIDER_CONFIG_SAVE: 'einvoice.provider_config.save',
   PROVIDER_CONFIG_GET: 'einvoice.provider_config.get',
+  CANCEL: 'einvoice.cancel',
+  ADJUST: 'einvoice.adjust',
+  REPLACE: 'einvoice.replace',
 } as const;
 
 // ============================================================================
@@ -589,6 +592,85 @@ export class GetProviderConfigNatsRequest {
 }
 
 // ============================================================================
+// CANCEL / ADJUST / REPLACE REQUEST TYPES
+// ============================================================================
+
+export class CancelEInvoiceNatsRequest {
+  @ApiProperty({ description: 'E-Invoice ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'Reason for cancellation' })
+  reason: string;
+
+  @ApiPropertyOptional({ description: 'User ID' })
+  userId?: string;
+
+  @ApiPropertyOptional({ description: 'User name' })
+  userName?: string;
+}
+
+export class AdjustEInvoiceNatsRequest {
+  @ApiProperty({ description: 'Original E-Invoice ID to adjust' })
+  originalEInvoiceId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'Reason for adjustment' })
+  reason: string;
+
+  @ApiPropertyOptional({ description: 'Adjusted items (if changing line items)', type: [EInvoiceItemInput] })
+  items?: EInvoiceItemInput[];
+
+  @ApiPropertyOptional({ description: 'User ID' })
+  userId?: string;
+
+  @ApiPropertyOptional({ description: 'User name' })
+  userName?: string;
+}
+
+export class ReplaceEInvoiceNatsRequest {
+  @ApiProperty({ description: 'Original E-Invoice ID to replace' })
+  originalEInvoiceId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'Reason for replacement' })
+  reason: string;
+
+  @ApiPropertyOptional({ description: 'Replacement items (if changing line items)', type: [EInvoiceItemInput] })
+  items?: EInvoiceItemInput[];
+
+  @ApiPropertyOptional({ description: 'Override customer info' })
+  customerName?: string;
+
+  @ApiPropertyOptional()
+  customerTaxCode?: string;
+
+  @ApiPropertyOptional()
+  customerAddress?: string;
+
+  @ApiPropertyOptional({ description: 'User ID' })
+  userId?: string;
+
+  @ApiPropertyOptional({ description: 'User name' })
+  userName?: string;
+}
+
+// ============================================================================
 // RESPONSE TYPES
 // ============================================================================
 
@@ -603,3 +685,6 @@ export type GetEInvoicePdfNatsResponse = NatsResponse<{ pdf: string }>; // base6
 export type GetEInvoiceHtmlNatsResponse = NatsResponse<{ html: string }>;
 export type SaveProviderConfigNatsResponse = NatsResponse<ProviderConfigData>;
 export type GetProviderConfigNatsResponse = NatsResponse<ProviderConfigData>;
+export type CancelEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
+export type AdjustEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
+export type ReplaceEInvoiceNatsResponse = NatsResponse<EInvoiceData>;

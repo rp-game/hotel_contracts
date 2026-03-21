@@ -210,6 +210,10 @@ export interface CreateBookingRequest {
      */
     creditLimitOverrideReason?: string;
     /**
+     * Request VAT invoice on checkout
+     */
+    requestInvoice?: boolean;
+    /**
      * Additional metadata
      */
     metadata?: Record<string, any>;

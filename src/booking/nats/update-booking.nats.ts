@@ -270,6 +270,10 @@ export class UpdateBookingDto {
   })
   @IsOptional()
   metadata?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Request VAT invoice on checkout' })
+  @IsOptional()
+  requestInvoice?: boolean;
 }
 
 /**

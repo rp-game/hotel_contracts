@@ -46,22 +46,53 @@ export enum InteractionChannel {
  * Create Interaction Request
  * Pattern: crm.interaction.create
  */
-export interface CreateInteractionNatsRequest {
+export class CreateInteractionNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
   hotelId?: string;
+
+  @ApiProperty({ description: 'Customer ID' })
   customerId: string;
+
+  @ApiProperty({ description: 'Type of interaction', enum: InteractionType })
   interactionType: InteractionType | string;
+
+  @ApiProperty({ description: 'Interaction channel', enum: InteractionChannel })
   channel: InteractionChannel | string;
+
+  @ApiPropertyOptional({ description: 'Interaction date (ISO string)' })
   interactionDate?: string;
+
+  @ApiPropertyOptional({ description: 'Subject/title' })
   subject?: string;
+
+  @ApiPropertyOptional({ description: 'Detailed notes' })
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Staff member ID' })
   staffId?: string;
+
+  @ApiPropertyOptional({ description: 'Staff member name' })
   staffName?: string;
+
+  @ApiPropertyOptional({ description: 'Satisfaction rating (1-5)', minimum: 1, maximum: 5 })
   satisfactionRating?: number;
+
+  @ApiPropertyOptional({ description: 'Resolution status', enum: ['OPEN', 'IN_PROGRESS', 'RESOLVED', 'CLOSED'], default: 'OPEN' })
   resolutionStatus?: string;
+
+  @ApiPropertyOptional({ description: 'Whether follow-up is required' })
   followUpRequired?: boolean;
+
+  @ApiPropertyOptional({ description: 'Follow-up date (ISO string)' })
   followUpDate?: string;
+
+  @ApiPropertyOptional({ description: 'Tags for categorization', type: [String] })
   tags?: string[];
+
+  @ApiPropertyOptional({ description: 'Created by user ID' })
   createdBy?: string;
 }
 

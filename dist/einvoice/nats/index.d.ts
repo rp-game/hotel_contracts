@@ -126,6 +126,9 @@ export declare const EINVOICE_PATTERNS: {
     readonly GET_HTML: "einvoice.get_html";
     readonly PROVIDER_CONFIG_SAVE: "einvoice.provider_config.save";
     readonly PROVIDER_CONFIG_GET: "einvoice.provider_config.get";
+    readonly CANCEL: "einvoice.cancel";
+    readonly ADJUST: "einvoice.adjust";
+    readonly REPLACE: "einvoice.replace";
 };
 export declare class CreateEInvoiceNatsRequest {
     tenantId: string;
@@ -238,6 +241,35 @@ export declare class GetProviderConfigNatsRequest {
     tenantId: string;
     hotelId: string;
 }
+export declare class CancelEInvoiceNatsRequest {
+    id: string;
+    tenantId: string;
+    hotelId: string;
+    reason: string;
+    userId?: string;
+    userName?: string;
+}
+export declare class AdjustEInvoiceNatsRequest {
+    originalEInvoiceId: string;
+    tenantId: string;
+    hotelId: string;
+    reason: string;
+    items?: EInvoiceItemInput[];
+    userId?: string;
+    userName?: string;
+}
+export declare class ReplaceEInvoiceNatsRequest {
+    originalEInvoiceId: string;
+    tenantId: string;
+    hotelId: string;
+    reason: string;
+    items?: EInvoiceItemInput[];
+    customerName?: string;
+    customerTaxCode?: string;
+    customerAddress?: string;
+    userId?: string;
+    userName?: string;
+}
 export type CreateEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
 export type CreateEInvoiceFromInvoiceNatsResponse = NatsResponse<EInvoiceData>;
 export type UpdateEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
@@ -255,4 +287,7 @@ export type GetEInvoiceHtmlNatsResponse = NatsResponse<{
 }>;
 export type SaveProviderConfigNatsResponse = NatsResponse<ProviderConfigData>;
 export type GetProviderConfigNatsResponse = NatsResponse<ProviderConfigData>;
+export type CancelEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
+export type AdjustEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
+export type ReplaceEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
 //# sourceMappingURL=index.d.ts.map

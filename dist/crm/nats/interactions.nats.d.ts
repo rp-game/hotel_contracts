@@ -41,7 +41,7 @@ export declare enum InteractionChannel {
  * Create Interaction Request
  * Pattern: crm.interaction.create
  */
-export interface CreateInteractionNatsRequest {
+export declare class CreateInteractionNatsRequest {
     tenantId: string;
     hotelId?: string;
     customerId: string;

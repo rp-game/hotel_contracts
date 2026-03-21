@@ -73,6 +73,20 @@ export declare class SaveProviderConfigDto {
     defaultCurrency?: string;
     defaultVatRate?: number;
 }
+export declare class CancelEInvoiceBodyDto {
+    reason: string;
+}
+export declare class AdjustEInvoiceBodyDto {
+    reason: string;
+    items?: CreateEInvoiceItemDto[];
+}
+export declare class ReplaceEInvoiceBodyDto {
+    reason: string;
+    items?: CreateEInvoiceItemDto[];
+    customerName?: string;
+    customerTaxCode?: string;
+    customerAddress?: string;
+}
 export { EInvoiceData as EInvoiceResponseDto } from '../nats';
 export { EInvoiceSummary as EInvoiceSummaryDto } from '../nats';
 export { ProviderConfigData as ProviderConfigResponseDto } from '../nats';

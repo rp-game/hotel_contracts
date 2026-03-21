@@ -22,7 +22,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InteractionsListNatsResponse = exports.CustomerInteractionNatsResponse = exports.AttachmentNatsResponse = exports.InteractionChannel = exports.InteractionType = void 0;
+exports.InteractionsListNatsResponse = exports.CustomerInteractionNatsResponse = exports.AttachmentNatsResponse = exports.CreateInteractionNatsRequest = exports.InteractionChannel = exports.InteractionType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Interaction Type Enum — unified across all layers
@@ -51,6 +51,93 @@ var InteractionChannel;
     InteractionChannel["SOCIAL_MEDIA"] = "SOCIAL_MEDIA";
     InteractionChannel["SMS"] = "SMS";
 })(InteractionChannel || (exports.InteractionChannel = InteractionChannel = {}));
+/**
+ * Create Interaction Request
+ * Pattern: crm.interaction.create
+ */
+class CreateInteractionNatsRequest {
+    tenantId;
+    hotelId;
+    customerId;
+    interactionType;
+    channel;
+    interactionDate;
+    subject;
+    notes;
+    staffId;
+    staffName;
+    satisfactionRating;
+    resolutionStatus;
+    followUpRequired;
+    followUpDate;
+    tags;
+    createdBy;
+}
+exports.CreateInteractionNatsRequest = CreateInteractionNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Type of interaction', enum: InteractionType }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "interactionType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Interaction channel', enum: InteractionChannel }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "channel", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Interaction date (ISO string)' }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "interactionDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Subject/title' }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "subject", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Detailed notes' }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Staff member ID' }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Staff member name' }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "staffName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Satisfaction rating (1-5)', minimum: 1, maximum: 5 }),
+    __metadata("design:type", Number)
+], CreateInteractionNatsRequest.prototype, "satisfactionRating", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Resolution status', enum: ['OPEN', 'IN_PROGRESS', 'RESOLVED', 'CLOSED'], default: 'OPEN' }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "resolutionStatus", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether follow-up is required' }),
+    __metadata("design:type", Boolean)
+], CreateInteractionNatsRequest.prototype, "followUpRequired", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Follow-up date (ISO string)' }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "followUpDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tags for categorization', type: [String] }),
+    __metadata("design:type", Array)
+], CreateInteractionNatsRequest.prototype, "tags", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Created by user ID' }),
+    __metadata("design:type", String)
+], CreateInteractionNatsRequest.prototype, "createdBy", void 0);
 /**
  * Attachment Response
  */

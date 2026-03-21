@@ -104,6 +104,7 @@ class UpdateBookingDto {
      * Additional metadata
      */
     metadata;
+    requestInvoice;
 }
 exports.UpdateBookingDto = UpdateBookingDto;
 __decorate([
@@ -273,4 +274,9 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Object)
 ], UpdateBookingDto.prototype, "metadata", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Request VAT invoice on checkout' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], UpdateBookingDto.prototype, "requestInvoice", void 0);
 //# sourceMappingURL=update-booking.nats.js.map

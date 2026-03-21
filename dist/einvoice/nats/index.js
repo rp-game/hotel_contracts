@@ -27,7 +27,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetProviderConfigNatsRequest = exports.SaveProviderConfigNatsRequest = exports.GetEInvoiceHtmlNatsRequest = exports.GetEInvoicePdfNatsRequest = exports.FindEInvoiceNatsRequest = exports.FindEInvoicesNatsRequest = exports.DeleteEInvoiceNatsRequest = exports.IssueEInvoiceNatsRequest = exports.UpdateEInvoiceNatsRequest = exports.CreateEInvoiceFromInvoiceNatsRequest = exports.CreateEInvoiceNatsRequest = exports.EINVOICE_PATTERNS = exports.ProviderConfigData = exports.EInvoiceSummary = exports.EInvoiceData = exports.EInvoiceHistoryData = exports.EInvoiceItemData = exports.EInvoiceItemInput = void 0;
+exports.ReplaceEInvoiceNatsRequest = exports.AdjustEInvoiceNatsRequest = exports.CancelEInvoiceNatsRequest = exports.GetProviderConfigNatsRequest = exports.SaveProviderConfigNatsRequest = exports.GetEInvoiceHtmlNatsRequest = exports.GetEInvoicePdfNatsRequest = exports.FindEInvoiceNatsRequest = exports.FindEInvoicesNatsRequest = exports.DeleteEInvoiceNatsRequest = exports.IssueEInvoiceNatsRequest = exports.UpdateEInvoiceNatsRequest = exports.CreateEInvoiceFromInvoiceNatsRequest = exports.CreateEInvoiceNatsRequest = exports.EINVOICE_PATTERNS = exports.ProviderConfigData = exports.EInvoiceSummary = exports.EInvoiceData = exports.EInvoiceHistoryData = exports.EInvoiceItemData = exports.EInvoiceItemInput = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const enums_1 = require("../enums");
 // ============================================================================
@@ -462,6 +462,9 @@ exports.EINVOICE_PATTERNS = {
     GET_HTML: 'einvoice.get_html',
     PROVIDER_CONFIG_SAVE: 'einvoice.provider_config.save',
     PROVIDER_CONFIG_GET: 'einvoice.provider_config.get',
+    CANCEL: 'einvoice.cancel',
+    ADJUST: 'einvoice.adjust',
+    REPLACE: 'einvoice.replace',
 };
 // ============================================================================
 // REQUEST TYPES
@@ -944,4 +947,131 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
     __metadata("design:type", String)
 ], GetProviderConfigNatsRequest.prototype, "hotelId", void 0);
+// ============================================================================
+// CANCEL / ADJUST / REPLACE REQUEST TYPES
+// ============================================================================
+class CancelEInvoiceNatsRequest {
+    id;
+    tenantId;
+    hotelId;
+    reason;
+    userId;
+    userName;
+}
+exports.CancelEInvoiceNatsRequest = CancelEInvoiceNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'E-Invoice ID' }),
+    __metadata("design:type", String)
+], CancelEInvoiceNatsRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], CancelEInvoiceNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], CancelEInvoiceNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reason for cancellation' }),
+    __metadata("design:type", String)
+], CancelEInvoiceNatsRequest.prototype, "reason", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID' }),
+    __metadata("design:type", String)
+], CancelEInvoiceNatsRequest.prototype, "userId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User name' }),
+    __metadata("design:type", String)
+], CancelEInvoiceNatsRequest.prototype, "userName", void 0);
+class AdjustEInvoiceNatsRequest {
+    originalEInvoiceId;
+    tenantId;
+    hotelId;
+    reason;
+    items;
+    userId;
+    userName;
+}
+exports.AdjustEInvoiceNatsRequest = AdjustEInvoiceNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Original E-Invoice ID to adjust' }),
+    __metadata("design:type", String)
+], AdjustEInvoiceNatsRequest.prototype, "originalEInvoiceId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], AdjustEInvoiceNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], AdjustEInvoiceNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reason for adjustment' }),
+    __metadata("design:type", String)
+], AdjustEInvoiceNatsRequest.prototype, "reason", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Adjusted items (if changing line items)', type: [EInvoiceItemInput] }),
+    __metadata("design:type", Array)
+], AdjustEInvoiceNatsRequest.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID' }),
+    __metadata("design:type", String)
+], AdjustEInvoiceNatsRequest.prototype, "userId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User name' }),
+    __metadata("design:type", String)
+], AdjustEInvoiceNatsRequest.prototype, "userName", void 0);
+class ReplaceEInvoiceNatsRequest {
+    originalEInvoiceId;
+    tenantId;
+    hotelId;
+    reason;
+    items;
+    customerName;
+    customerTaxCode;
+    customerAddress;
+    userId;
+    userName;
+}
+exports.ReplaceEInvoiceNatsRequest = ReplaceEInvoiceNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Original E-Invoice ID to replace' }),
+    __metadata("design:type", String)
+], ReplaceEInvoiceNatsRequest.prototype, "originalEInvoiceId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], ReplaceEInvoiceNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], ReplaceEInvoiceNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reason for replacement' }),
+    __metadata("design:type", String)
+], ReplaceEInvoiceNatsRequest.prototype, "reason", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Replacement items (if changing line items)', type: [EInvoiceItemInput] }),
+    __metadata("design:type", Array)
+], ReplaceEInvoiceNatsRequest.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Override customer info' }),
+    __metadata("design:type", String)
+], ReplaceEInvoiceNatsRequest.prototype, "customerName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], ReplaceEInvoiceNatsRequest.prototype, "customerTaxCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], ReplaceEInvoiceNatsRequest.prototype, "customerAddress", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID' }),
+    __metadata("design:type", String)
+], ReplaceEInvoiceNatsRequest.prototype, "userId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User name' }),
+    __metadata("design:type", String)
+], ReplaceEInvoiceNatsRequest.prototype, "userName", void 0);
 //# sourceMappingURL=index.js.map
