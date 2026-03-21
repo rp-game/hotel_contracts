@@ -32,6 +32,7 @@ class PromotionConditionsDto {
     minGuests;
     roomTypes;
     channels;
+    minRooms;
 }
 exports.PromotionConditionsDto = PromotionConditionsDto;
 __decorate([
@@ -66,6 +67,14 @@ __decorate([
     }),
     __metadata("design:type", Array)
 ], PromotionConditionsDto.prototype, "channels", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Minimum number of rooms required (group discount)',
+        example: 5,
+        minimum: 1
+    }),
+    __metadata("design:type", Number)
+], PromotionConditionsDto.prototype, "minRooms", void 0);
 /**
  * Promotion DTO
  * Matches database entity structure exactly

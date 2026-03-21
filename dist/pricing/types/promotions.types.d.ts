@@ -29,6 +29,7 @@ export declare class PromotionConditionsDto {
     minGuests?: number;
     roomTypes?: string[];
     channels?: string[];
+    minRooms?: number;
 }
 /**
  * Promotion DTO

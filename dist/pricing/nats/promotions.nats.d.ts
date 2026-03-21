@@ -110,6 +110,7 @@ export declare class ValidatePromotionRequest {
     bookingAmount: number;
     chainId?: string;
     customerId?: string;
+    totalRooms?: number;
 }
 /**
  * Validate promotion response
@@ -186,6 +187,27 @@ export type GetPromotionUsageNatsResponse = NatsResponse<{
     data: PromotionUsageDto[];
     total: number;
 }>;
+export declare class GetPromotionAnalyticsNatsRequest {
+    tenantId: string;
+    hotelId?: string;
+    dateFrom?: string;
+    dateTo?: string;
+    promotionId?: string;
+}
+export declare class PromotionAnalyticsTopItem {
+    promotionId: string;
+    code: string;
+    name: string;
+    usages: number;
+    totalDiscount: number;
+}
+export declare class PromotionAnalyticsDto {
+    totalUsages: number;
+    totalDiscount: number;
+    totalBookings: number;
+    topPromotions: PromotionAnalyticsTopItem[];
+}
+export type GetPromotionAnalyticsNatsResponse = NatsResponse<PromotionAnalyticsDto>;
 export type GetPromotionsRequest_Legacy = GetPromotionsRequest;
 export type GetPromotionsResponse = PromotionsPaginatedResponseDto;
 //# sourceMappingURL=promotions.nats.d.ts.map

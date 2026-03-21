@@ -57,6 +57,13 @@ export class PromotionConditionsDto {
     example: ['BOOKING_COM', 'EXPEDIA']
   })
   channels?: string[];
+
+  @ApiPropertyOptional({
+    description: 'Minimum number of rooms required (group discount)',
+    example: 5,
+    minimum: 1
+  })
+  minRooms?: number;
 }
 
 /**

@@ -454,6 +454,12 @@ export class ValidatePromotionRequest {
   @IsOptional()
   @IsUUID()
   customerId?: string;
+
+  @ApiPropertyOptional({ description: 'Total rooms in booking (for group discount minRooms check)' })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  totalRooms?: number;
 }
 
 /**
@@ -599,6 +605,53 @@ export type ValidatePromotionNatsResponse = NatsResponse<ValidatePromotionRespon
 export type UsePromotionNatsResponse = NatsResponse<{ promotionId: string; currentUses: number; maxUses: number; isActive: boolean }>;
 export type UnusePromotionNatsResponse = NatsResponse<{ promotionId: string; currentUses: number; isActive: boolean }>;
 export type GetPromotionUsageNatsResponse = NatsResponse<{ data: PromotionUsageDto[]; total: number }>;
+
+// ============================================================================
+// ANALYTICS
+// ============================================================================
+
+export class GetPromotionAnalyticsNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Date from (ISO)' })
+  @IsOptional()
+  @IsString()
+  dateFrom?: string;
+
+  @ApiPropertyOptional({ description: 'Date to (ISO)' })
+  @IsOptional()
+  @IsString()
+  dateTo?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by promotion ID' })
+  @IsOptional()
+  @IsUUID()
+  promotionId?: string;
+}
+
+export class PromotionAnalyticsTopItem {
+  @ApiProperty() promotionId: string;
+  @ApiProperty() code: string;
+  @ApiProperty() name: string;
+  @ApiProperty() usages: number;
+  @ApiProperty() totalDiscount: number;
+}
+
+export class PromotionAnalyticsDto {
+  @ApiProperty() totalUsages: number;
+  @ApiProperty() totalDiscount: number;
+  @ApiProperty() totalBookings: number;
+  @ApiProperty({ type: [PromotionAnalyticsTopItem] }) topPromotions: PromotionAnalyticsTopItem[];
+}
+
+export type GetPromotionAnalyticsNatsResponse = NatsResponse<PromotionAnalyticsDto>;
 
 // ============================================================================
 // Legacy exports for backward compatibility

@@ -19,7 +19,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PromotionUsageDto = exports.GetPromotionUsageNatsRequest = exports.UnusePromotionNatsRequest = exports.UsePromotionNatsRequest = exports.DeletePromotionResponse = exports.ValidatePromotionResponse = exports.ValidatePromotionRequest = exports.DeletePromotionRequest = exports.UpdatePromotionRequest = exports.CreatePromotionRequest = exports.GetPromotionsRequest = void 0;
+exports.PromotionAnalyticsDto = exports.PromotionAnalyticsTopItem = exports.GetPromotionAnalyticsNatsRequest = exports.PromotionUsageDto = exports.GetPromotionUsageNatsRequest = exports.UnusePromotionNatsRequest = exports.UsePromotionNatsRequest = exports.DeletePromotionResponse = exports.ValidatePromotionResponse = exports.ValidatePromotionRequest = exports.DeletePromotionRequest = exports.UpdatePromotionRequest = exports.CreatePromotionRequest = exports.GetPromotionsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -556,6 +556,7 @@ class ValidatePromotionRequest {
     bookingAmount;
     chainId;
     customerId;
+    totalRooms;
 }
 exports.ValidatePromotionRequest = ValidatePromotionRequest;
 __decorate([
@@ -606,6 +607,13 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], ValidatePromotionRequest.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Total rooms in booking (for group discount minRooms check)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], ValidatePromotionRequest.prototype, "totalRooms", void 0);
 /**
  * Validate promotion response
  */
@@ -813,4 +821,95 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'When usage was reversed (if cancelled)' }),
     __metadata("design:type", String)
 ], PromotionUsageDto.prototype, "reversedAt", void 0);
+// ============================================================================
+// ANALYTICS
+// ============================================================================
+class GetPromotionAnalyticsNatsRequest {
+    tenantId;
+    hotelId;
+    dateFrom;
+    dateTo;
+    promotionId;
+}
+exports.GetPromotionAnalyticsNatsRequest = GetPromotionAnalyticsNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetPromotionAnalyticsNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetPromotionAnalyticsNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Date from (ISO)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetPromotionAnalyticsNatsRequest.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Date to (ISO)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetPromotionAnalyticsNatsRequest.prototype, "dateTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by promotion ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetPromotionAnalyticsNatsRequest.prototype, "promotionId", void 0);
+class PromotionAnalyticsTopItem {
+    promotionId;
+    code;
+    name;
+    usages;
+    totalDiscount;
+}
+exports.PromotionAnalyticsTopItem = PromotionAnalyticsTopItem;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], PromotionAnalyticsTopItem.prototype, "promotionId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], PromotionAnalyticsTopItem.prototype, "code", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], PromotionAnalyticsTopItem.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], PromotionAnalyticsTopItem.prototype, "usages", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], PromotionAnalyticsTopItem.prototype, "totalDiscount", void 0);
+class PromotionAnalyticsDto {
+    totalUsages;
+    totalDiscount;
+    totalBookings;
+    topPromotions;
+}
+exports.PromotionAnalyticsDto = PromotionAnalyticsDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], PromotionAnalyticsDto.prototype, "totalUsages", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], PromotionAnalyticsDto.prototype, "totalDiscount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], PromotionAnalyticsDto.prototype, "totalBookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [PromotionAnalyticsTopItem] }),
+    __metadata("design:type", Array)
+], PromotionAnalyticsDto.prototype, "topPromotions", void 0);
 //# sourceMappingURL=promotions.nats.js.map
