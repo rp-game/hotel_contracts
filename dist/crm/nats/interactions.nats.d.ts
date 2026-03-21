@@ -13,19 +13,29 @@
  */
 import { NatsResponse } from '../../common';
 /**
- * Interaction Type Enum
+ * Interaction Type Enum — unified across all layers
  */
 export declare enum InteractionType {
+    NOTE = "NOTE",
+    INQUIRY = "INQUIRY",
+    COMPLAINT = "COMPLAINT",
+    FEEDBACK = "FEEDBACK",
+    STAY = "STAY",
+    SERVICE_USAGE = "SERVICE_USAGE",
+    LOYALTY_ACTION = "LOYALTY_ACTION",
+    MARKETING_ENGAGEMENT = "MARKETING_ENGAGEMENT"
+}
+/**
+ * Interaction Channel Enum — unified across all layers
+ */
+export declare enum InteractionChannel {
+    PHONE_CALL = "PHONE_CALL",
     EMAIL = "EMAIL",
-    CALL = "CALL",
-    SMS = "SMS",
+    WALK_IN = "WALK_IN",
     IN_PERSON = "IN_PERSON",
     CHAT = "CHAT",
     SOCIAL_MEDIA = "SOCIAL_MEDIA",
-    BOOKING = "BOOKING",
-    FEEDBACK = "FEEDBACK",
-    COMPLAINT = "COMPLAINT",
-    INQUIRY = "INQUIRY"
+    SMS = "SMS"
 }
 /**
  * Create Interaction Request
@@ -33,15 +43,21 @@ export declare enum InteractionType {
  */
 export interface CreateInteractionNatsRequest {
     tenantId: string;
+    hotelId?: string;
     customerId: string;
-    type: InteractionType;
+    interactionType: InteractionType | string;
+    channel: InteractionChannel | string;
+    interactionDate?: string;
     subject?: string;
-    description: string;
-    channel: string;
-    status?: string;
-    priority?: string;
-    assignedTo?: string;
-    metadata?: Record<string, any>;
+    notes?: string;
+    staffId?: string;
+    staffName?: string;
+    satisfactionRating?: number;
+    resolutionStatus?: string;
+    followUpRequired?: boolean;
+    followUpDate?: string;
+    tags?: string[];
+    createdBy?: string;
 }
 /**
  * Update Interaction Request

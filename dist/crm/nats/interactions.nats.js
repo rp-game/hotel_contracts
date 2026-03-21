@@ -22,24 +22,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InteractionsListNatsResponse = exports.CustomerInteractionNatsResponse = exports.AttachmentNatsResponse = exports.InteractionType = void 0;
+exports.InteractionsListNatsResponse = exports.CustomerInteractionNatsResponse = exports.AttachmentNatsResponse = exports.InteractionChannel = exports.InteractionType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
- * Interaction Type Enum
+ * Interaction Type Enum — unified across all layers
  */
 var InteractionType;
 (function (InteractionType) {
-    InteractionType["EMAIL"] = "EMAIL";
-    InteractionType["CALL"] = "CALL";
-    InteractionType["SMS"] = "SMS";
-    InteractionType["IN_PERSON"] = "IN_PERSON";
-    InteractionType["CHAT"] = "CHAT";
-    InteractionType["SOCIAL_MEDIA"] = "SOCIAL_MEDIA";
-    InteractionType["BOOKING"] = "BOOKING";
-    InteractionType["FEEDBACK"] = "FEEDBACK";
-    InteractionType["COMPLAINT"] = "COMPLAINT";
+    InteractionType["NOTE"] = "NOTE";
     InteractionType["INQUIRY"] = "INQUIRY";
+    InteractionType["COMPLAINT"] = "COMPLAINT";
+    InteractionType["FEEDBACK"] = "FEEDBACK";
+    InteractionType["STAY"] = "STAY";
+    InteractionType["SERVICE_USAGE"] = "SERVICE_USAGE";
+    InteractionType["LOYALTY_ACTION"] = "LOYALTY_ACTION";
+    InteractionType["MARKETING_ENGAGEMENT"] = "MARKETING_ENGAGEMENT";
 })(InteractionType || (exports.InteractionType = InteractionType = {}));
+/**
+ * Interaction Channel Enum — unified across all layers
+ */
+var InteractionChannel;
+(function (InteractionChannel) {
+    InteractionChannel["PHONE_CALL"] = "PHONE_CALL";
+    InteractionChannel["EMAIL"] = "EMAIL";
+    InteractionChannel["WALK_IN"] = "WALK_IN";
+    InteractionChannel["IN_PERSON"] = "IN_PERSON";
+    InteractionChannel["CHAT"] = "CHAT";
+    InteractionChannel["SOCIAL_MEDIA"] = "SOCIAL_MEDIA";
+    InteractionChannel["SMS"] = "SMS";
+})(InteractionChannel || (exports.InteractionChannel = InteractionChannel = {}));
 /**
  * Attachment Response
  */
@@ -135,14 +146,14 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Interaction type',
-        enum: ['INQUIRY', 'COMPLAINT', 'COMPLIMENT', 'BOOKING', 'CANCELLATION', 'SUPPORT', 'FEEDBACK', 'FOLLOW_UP']
+        enum: InteractionType,
     }),
     __metadata("design:type", String)
 ], CustomerInteractionNatsResponse.prototype, "interactionType", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Interaction channel',
-        enum: ['EMAIL', 'PHONE', 'IN_PERSON', 'WEBSITE', 'SOCIAL_MEDIA', 'CHAT', 'MOBILE_APP']
+        enum: InteractionChannel,
     }),
     __metadata("design:type", String)
 ], CustomerInteractionNatsResponse.prototype, "channel", void 0);
