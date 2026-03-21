@@ -27,7 +27,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ReplaceEInvoiceNatsRequest = exports.AdjustEInvoiceNatsRequest = exports.CancelEInvoiceNatsRequest = exports.GetProviderConfigNatsRequest = exports.SaveProviderConfigNatsRequest = exports.GetEInvoiceHtmlNatsRequest = exports.GetEInvoicePdfNatsRequest = exports.FindEInvoiceNatsRequest = exports.FindEInvoicesNatsRequest = exports.DeleteEInvoiceNatsRequest = exports.IssueEInvoiceNatsRequest = exports.UpdateEInvoiceNatsRequest = exports.CreateEInvoiceFromInvoiceNatsRequest = exports.CreateEInvoiceNatsRequest = exports.EINVOICE_PATTERNS = exports.ProviderConfigData = exports.EInvoiceSummary = exports.EInvoiceData = exports.EInvoiceHistoryData = exports.EInvoiceItemData = exports.EInvoiceItemInput = void 0;
+exports.ReplaceEInvoiceNatsRequest = exports.AdjustEInvoiceNatsRequest = exports.CancelEInvoiceNatsRequest = exports.ProviderConfigStatusData = exports.DeleteProviderConfigNatsRequest = exports.GetProviderConfigStatusNatsRequest = exports.GetProviderConfigNatsRequest = exports.SaveProviderConfigNatsRequest = exports.GetEInvoiceHtmlNatsRequest = exports.GetEInvoicePdfNatsRequest = exports.FindEInvoiceNatsRequest = exports.FindEInvoicesNatsRequest = exports.DeleteEInvoiceNatsRequest = exports.IssueEInvoiceNatsRequest = exports.UpdateEInvoiceNatsRequest = exports.CreateEInvoiceFromInvoiceNatsRequest = exports.CreateEInvoiceNatsRequest = exports.EINVOICE_PATTERNS = exports.ProviderConfigData = exports.EInvoiceSummary = exports.EInvoiceData = exports.EInvoiceHistoryData = exports.EInvoiceItemData = exports.EInvoiceItemInput = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const enums_1 = require("../enums");
 // ============================================================================
@@ -396,7 +396,7 @@ __decorate([
     __metadata("design:type", String)
 ], ProviderConfigData.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (null = chain-level config)' }),
     __metadata("design:type", String)
 ], ProviderConfigData.prototype, "hotelId", void 0);
 __decorate([
@@ -462,6 +462,8 @@ exports.EINVOICE_PATTERNS = {
     GET_HTML: 'einvoice.get_html',
     PROVIDER_CONFIG_SAVE: 'einvoice.provider_config.save',
     PROVIDER_CONFIG_GET: 'einvoice.provider_config.get',
+    PROVIDER_CONFIG_STATUS: 'einvoice.provider_config.status',
+    PROVIDER_CONFIG_DELETE: 'einvoice.provider_config.delete',
     CANCEL: 'einvoice.cancel',
     ADJUST: 'einvoice.adjust',
     REPLACE: 'einvoice.replace',
@@ -864,6 +866,7 @@ __decorate([
 class SaveProviderConfigNatsRequest {
     tenantId;
     hotelId;
+    scope;
     providerType;
     apiUrl;
     username;
@@ -883,9 +886,13 @@ __decorate([
     __metadata("design:type", String)
 ], SaveProviderConfigNatsRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (omit for chain-level config)' }),
     __metadata("design:type", String)
 ], SaveProviderConfigNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Scope: "chain" to save as chain-level config' }),
+    __metadata("design:type", String)
+], SaveProviderConfigNatsRequest.prototype, "scope", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Provider type', enum: enums_1.ProviderType }),
     __metadata("design:type", String)
@@ -947,6 +954,55 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
     __metadata("design:type", String)
 ], GetProviderConfigNatsRequest.prototype, "hotelId", void 0);
+class GetProviderConfigStatusNatsRequest {
+    tenantId;
+    hotelId;
+}
+exports.GetProviderConfigStatusNatsRequest = GetProviderConfigStatusNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetProviderConfigStatusNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], GetProviderConfigStatusNatsRequest.prototype, "hotelId", void 0);
+class DeleteProviderConfigNatsRequest {
+    tenantId;
+    hotelId;
+}
+exports.DeleteProviderConfigNatsRequest = DeleteProviderConfigNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], DeleteProviderConfigNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], DeleteProviderConfigNatsRequest.prototype, "hotelId", void 0);
+class ProviderConfigStatusData {
+    source;
+    config;
+    chainConfig;
+    hasOwnConfig;
+}
+exports.ProviderConfigStatusData = ProviderConfigStatusData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Config source: HOTEL, CHAIN, or NONE', enum: ['HOTEL', 'CHAIN', 'NONE'] }),
+    __metadata("design:type", String)
+], ProviderConfigStatusData.prototype, "source", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Active config (hotel or chain fallback)', type: ProviderConfigData }),
+    __metadata("design:type", Object)
+], ProviderConfigStatusData.prototype, "config", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Chain-level config if exists', type: ProviderConfigData }),
+    __metadata("design:type", Object)
+], ProviderConfigStatusData.prototype, "chainConfig", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether hotel has its own config override' }),
+    __metadata("design:type", Boolean)
+], ProviderConfigStatusData.prototype, "hasOwnConfig", void 0);
 // ============================================================================
 // CANCEL / ADJUST / REPLACE REQUEST TYPES
 // ============================================================================

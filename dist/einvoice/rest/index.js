@@ -13,7 +13,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProviderConfigResponseDto = exports.EInvoiceSummaryDto = exports.EInvoiceResponseDto = exports.ReplaceEInvoiceBodyDto = exports.AdjustEInvoiceBodyDto = exports.CancelEInvoiceBodyDto = exports.SaveProviderConfigDto = exports.FindEInvoicesQueryDto = exports.UpdateEInvoiceDto = exports.CreateEInvoiceFromInvoiceDto = exports.CreateEInvoiceDto = exports.CreateEInvoiceItemDto = void 0;
+exports.ProviderConfigStatusDto = exports.ProviderConfigResponseDto = exports.EInvoiceSummaryDto = exports.EInvoiceResponseDto = exports.ReplaceEInvoiceBodyDto = exports.AdjustEInvoiceBodyDto = exports.CancelEInvoiceBodyDto = exports.SaveProviderConfigDto = exports.FindEInvoicesQueryDto = exports.UpdateEInvoiceDto = exports.CreateEInvoiceFromInvoiceDto = exports.CreateEInvoiceDto = exports.CreateEInvoiceItemDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -511,4 +511,6 @@ var nats_2 = require("../nats");
 Object.defineProperty(exports, "EInvoiceSummaryDto", { enumerable: true, get: function () { return nats_2.EInvoiceSummary; } });
 var nats_3 = require("../nats");
 Object.defineProperty(exports, "ProviderConfigResponseDto", { enumerable: true, get: function () { return nats_3.ProviderConfigData; } });
+var nats_4 = require("../nats");
+Object.defineProperty(exports, "ProviderConfigStatusDto", { enumerable: true, get: function () { return nats_4.ProviderConfigStatusData; } });
 //# sourceMappingURL=index.js.map

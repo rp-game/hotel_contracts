@@ -237,8 +237,8 @@ export class ProviderConfigData {
   @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
 
-  @ApiProperty({ description: 'Hotel ID' })
-  hotelId: string;
+  @ApiPropertyOptional({ description: 'Hotel ID (null = chain-level config)' })
+  hotelId?: string;
 
   @ApiProperty({ description: 'Provider type', enum: ProviderType })
   providerType: ProviderType;
@@ -293,6 +293,8 @@ export const EINVOICE_PATTERNS = {
   GET_HTML: 'einvoice.get_html',
   PROVIDER_CONFIG_SAVE: 'einvoice.provider_config.save',
   PROVIDER_CONFIG_GET: 'einvoice.provider_config.get',
+  PROVIDER_CONFIG_STATUS: 'einvoice.provider_config.status',
+  PROVIDER_CONFIG_DELETE: 'einvoice.provider_config.delete',
   CANCEL: 'einvoice.cancel',
   ADJUST: 'einvoice.adjust',
   REPLACE: 'einvoice.replace',
@@ -543,8 +545,11 @@ export class SaveProviderConfigNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
 
-  @ApiProperty({ description: 'Hotel ID' })
-  hotelId: string;
+  @ApiPropertyOptional({ description: 'Hotel ID (omit for chain-level config)' })
+  hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Scope: "chain" to save as chain-level config' })
+  scope?: 'chain';
 
   @ApiProperty({ description: 'Provider type', enum: ProviderType })
   providerType: ProviderType;
@@ -589,6 +594,36 @@ export class GetProviderConfigNatsRequest {
 
   @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
+}
+
+export class GetProviderConfigStatusNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+}
+
+export class DeleteProviderConfigNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+}
+
+export class ProviderConfigStatusData {
+  @ApiProperty({ description: 'Config source: HOTEL, CHAIN, or NONE', enum: ['HOTEL', 'CHAIN', 'NONE'] })
+  source: 'HOTEL' | 'CHAIN' | 'NONE';
+
+  @ApiPropertyOptional({ description: 'Active config (hotel or chain fallback)', type: ProviderConfigData })
+  config?: ProviderConfigData | null;
+
+  @ApiPropertyOptional({ description: 'Chain-level config if exists', type: ProviderConfigData })
+  chainConfig?: ProviderConfigData | null;
+
+  @ApiProperty({ description: 'Whether hotel has its own config override' })
+  hasOwnConfig: boolean;
 }
 
 // ============================================================================
@@ -685,6 +720,8 @@ export type GetEInvoicePdfNatsResponse = NatsResponse<{ pdf: string }>; // base6
 export type GetEInvoiceHtmlNatsResponse = NatsResponse<{ html: string }>;
 export type SaveProviderConfigNatsResponse = NatsResponse<ProviderConfigData>;
 export type GetProviderConfigNatsResponse = NatsResponse<ProviderConfigData>;
+export type GetProviderConfigStatusNatsResponse = NatsResponse<ProviderConfigStatusData>;
+export type DeleteProviderConfigNatsResponse = NatsResponse<{ deleted: boolean }>;
 export type CancelEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
 export type AdjustEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
 export type ReplaceEInvoiceNatsResponse = NatsResponse<EInvoiceData>;

@@ -100,7 +100,7 @@ export declare class EInvoiceSummary {
 export declare class ProviderConfigData {
     id: string;
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
     providerType: ProviderType;
     isActive: boolean;
     apiUrl: string;
@@ -126,6 +126,8 @@ export declare const EINVOICE_PATTERNS: {
     readonly GET_HTML: "einvoice.get_html";
     readonly PROVIDER_CONFIG_SAVE: "einvoice.provider_config.save";
     readonly PROVIDER_CONFIG_GET: "einvoice.provider_config.get";
+    readonly PROVIDER_CONFIG_STATUS: "einvoice.provider_config.status";
+    readonly PROVIDER_CONFIG_DELETE: "einvoice.provider_config.delete";
     readonly CANCEL: "einvoice.cancel";
     readonly ADJUST: "einvoice.adjust";
     readonly REPLACE: "einvoice.replace";
@@ -223,7 +225,8 @@ export declare class GetEInvoiceHtmlNatsRequest {
 }
 export declare class SaveProviderConfigNatsRequest {
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
+    scope?: 'chain';
     providerType: ProviderType;
     apiUrl: string;
     username: string;
@@ -240,6 +243,20 @@ export declare class SaveProviderConfigNatsRequest {
 export declare class GetProviderConfigNatsRequest {
     tenantId: string;
     hotelId: string;
+}
+export declare class GetProviderConfigStatusNatsRequest {
+    tenantId: string;
+    hotelId: string;
+}
+export declare class DeleteProviderConfigNatsRequest {
+    tenantId: string;
+    hotelId: string;
+}
+export declare class ProviderConfigStatusData {
+    source: 'HOTEL' | 'CHAIN' | 'NONE';
+    config?: ProviderConfigData | null;
+    chainConfig?: ProviderConfigData | null;
+    hasOwnConfig: boolean;
 }
 export declare class CancelEInvoiceNatsRequest {
     id: string;
@@ -287,6 +304,10 @@ export type GetEInvoiceHtmlNatsResponse = NatsResponse<{
 }>;
 export type SaveProviderConfigNatsResponse = NatsResponse<ProviderConfigData>;
 export type GetProviderConfigNatsResponse = NatsResponse<ProviderConfigData>;
+export type GetProviderConfigStatusNatsResponse = NatsResponse<ProviderConfigStatusData>;
+export type DeleteProviderConfigNatsResponse = NatsResponse<{
+    deleted: boolean;
+}>;
 export type CancelEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
 export type AdjustEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
 export type ReplaceEInvoiceNatsResponse = NatsResponse<EInvoiceData>;

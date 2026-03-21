@@ -90,4 +90,5 @@ export declare class ReplaceEInvoiceBodyDto {
 export { EInvoiceData as EInvoiceResponseDto } from '../nats';
 export { EInvoiceSummary as EInvoiceSummaryDto } from '../nats';
 export { ProviderConfigData as ProviderConfigResponseDto } from '../nats';
+export { ProviderConfigStatusData as ProviderConfigStatusDto } from '../nats';
 //# sourceMappingURL=index.d.ts.map
