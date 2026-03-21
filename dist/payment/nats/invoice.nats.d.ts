@@ -241,4 +241,8 @@ export declare class VoidInvoiceNatsRequest {
     performedByName?: string;
 }
 export type VoidInvoiceNatsResponse = NatsResponse<PaymentInvoice>;
+/** REST body DTO for POST /financial/invoices/:id/void */
+export declare class VoidInvoiceBodyDto {
+    reason: string;
+}
 //# sourceMappingURL=invoice.nats.d.ts.map

@@ -608,3 +608,9 @@ export class VoidInvoiceNatsRequest {
 }
 
 export type VoidInvoiceNatsResponse = NatsResponse<PaymentInvoice>;
+
+/** REST body DTO for POST /financial/invoices/:id/void */
+export class VoidInvoiceBodyDto {
+  @ApiProperty({ description: 'Reason for voiding the invoice' })
+  reason: string;
+}

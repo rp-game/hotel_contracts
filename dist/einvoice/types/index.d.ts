@@ -9,6 +9,8 @@ export interface ProviderInvoiceResult {
     pattern?: string;
     serial?: string;
     taxOfCode?: string;
+    taxAuthorityCode?: string;
+    digitalSignatureSerial?: string;
     errorCode?: string;
     errorMessage?: string;
     rawResponse?: any;

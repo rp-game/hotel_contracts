@@ -26,7 +26,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VoidInvoiceNatsRequest = exports.UpdateInvoiceStatusData = exports.UpdateInvoiceStatusNatsRequest = exports.DownloadInvoicePdfData = exports.DownloadInvoicePdfNatsRequest = exports.SendInvoiceData = exports.SendInvoiceNatsRequest = exports.GetInvoiceData = exports.GetInvoiceNatsRequest = exports.GetPaymentInvoicesData = exports.GetInvoicesNatsRequest = exports.PaymentCreateManualInvoiceNatsRequest = exports.CreateInvoiceData = exports.PaymentCreateInvoiceNatsRequest = exports.InvoiceDataItem = exports.InvoiceItemData = exports.PaymentInvoice = exports.PaymentInvoiceStatus = exports.CreateInvoiceItemRequest = exports.PaymentInvoiceItem = void 0;
+exports.VoidInvoiceBodyDto = exports.VoidInvoiceNatsRequest = exports.UpdateInvoiceStatusData = exports.UpdateInvoiceStatusNatsRequest = exports.DownloadInvoicePdfData = exports.DownloadInvoicePdfNatsRequest = exports.SendInvoiceData = exports.SendInvoiceNatsRequest = exports.GetInvoiceData = exports.GetInvoiceNatsRequest = exports.GetPaymentInvoicesData = exports.GetInvoicesNatsRequest = exports.PaymentCreateManualInvoiceNatsRequest = exports.CreateInvoiceData = exports.PaymentCreateInvoiceNatsRequest = exports.InvoiceDataItem = exports.InvoiceItemData = exports.PaymentInvoice = exports.PaymentInvoiceStatus = exports.CreateInvoiceItemRequest = exports.PaymentInvoiceItem = void 0;
 const swagger_1 = require("@nestjs/swagger");
 // ============================================================================
 // SHARED TYPES
@@ -924,4 +924,13 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'User name who performed the void action' }),
     __metadata("design:type", String)
 ], VoidInvoiceNatsRequest.prototype, "performedByName", void 0);
+/** REST body DTO for POST /financial/invoices/:id/void */
+class VoidInvoiceBodyDto {
+    reason;
+}
+exports.VoidInvoiceBodyDto = VoidInvoiceBodyDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reason for voiding the invoice' }),
+    __metadata("design:type", String)
+], VoidInvoiceBodyDto.prototype, "reason", void 0);
 //# sourceMappingURL=invoice.nats.js.map
