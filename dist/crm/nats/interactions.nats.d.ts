@@ -45,8 +45,8 @@ export declare class CreateInteractionNatsRequest {
     tenantId: string;
     hotelId?: string;
     customerId: string;
-    interactionType: InteractionType | string;
-    channel: InteractionChannel | string;
+    interactionType: InteractionType;
+    channel: InteractionChannel;
     interactionDate?: string;
     subject?: string;
     notes?: string;
@@ -81,37 +81,31 @@ export declare class AttachmentNatsResponse {
     uploadedAt: string;
 }
 /**
- * Customer Interaction Response (Extended for API Gateway compatibility)
+ * Customer Interaction Response
+ * Matches CustomerInteraction entity in crm-service
  */
 export declare class CustomerInteractionNatsResponse {
     id: string;
     tenantId: string;
-    hotelId?: string;
+    hotelId: string;
     customerId: string;
-    interactionType: string;
-    channel: string;
-    interactionDate: string;
+    interactionType: InteractionType;
+    channel: InteractionChannel;
+    interactionDate: Date;
     subject: string;
     notes?: string;
     staffId?: string;
     staffName?: string;
     satisfactionRating?: number;
     followUpRequired: boolean;
-    followUpDate?: string;
+    followUpDate?: Date;
     resolutionStatus: string;
     resolutionNotes?: string;
     tags?: string[];
-    attachments?: AttachmentNatsResponse[];
-    createdAt: string | Date;
-    updatedAt: string | Date;
+    createdAt: Date;
+    updatedAt: Date;
     createdBy?: string;
     updatedBy?: string;
-    type: InteractionType;
-    description?: string;
-    status: string;
-    priority?: string;
-    assignedTo?: string;
-    metadata?: Record<string, any>;
 }
 /**
  * Interactions List Response (for CRM customer interactions endpoint)

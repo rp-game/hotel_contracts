@@ -57,10 +57,10 @@ export class CreateInteractionNatsRequest {
   customerId: string;
 
   @ApiProperty({ description: 'Type of interaction', enum: InteractionType })
-  interactionType: InteractionType | string;
+  interactionType: InteractionType;
 
   @ApiProperty({ description: 'Interaction channel', enum: InteractionChannel })
-  channel: InteractionChannel | string;
+  channel: InteractionChannel;
 
   @ApiPropertyOptional({ description: 'Interaction date (ISO string)' })
   interactionDate?: string;
@@ -133,107 +133,72 @@ export class AttachmentNatsResponse {
 }
 
 /**
- * Customer Interaction Response (Extended for API Gateway compatibility)
+ * Customer Interaction Response
+ * Matches CustomerInteraction entity in crm-service
  */
 export class CustomerInteractionNatsResponse {
   @ApiProperty({ description: 'Interaction ID' })
-  id!: string;
+  id: string;
 
   @ApiProperty({ description: 'Tenant ID' })
-  tenantId!: string;
+  tenantId: string;
 
-  @ApiPropertyOptional({ description: 'Hotel ID' })
-  hotelId?: string;
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
 
   @ApiProperty({ description: 'Customer ID' })
-  customerId!: string;
+  customerId: string;
 
-  @ApiProperty({
-    description: 'Interaction type',
-    enum: InteractionType,
-  })
-  interactionType!: string;
+  @ApiProperty({ description: 'Interaction type', enum: InteractionType })
+  interactionType: InteractionType;
 
-  @ApiProperty({
-    description: 'Interaction channel',
-    enum: InteractionChannel,
-  })
-  channel!: string;
+  @ApiProperty({ description: 'Interaction channel', enum: InteractionChannel })
+  channel: InteractionChannel;
 
-  @ApiProperty({ description: 'Interaction date (ISO string)' })
-  interactionDate!: string;
+  @ApiProperty({ description: 'Interaction date' })
+  interactionDate: Date;
 
   @ApiProperty({ description: 'Interaction subject' })
-  subject!: string;
+  subject: string;
 
-  @ApiPropertyOptional({ description: 'Detailed notes about the interaction' })
+  @ApiPropertyOptional({ description: 'Detailed notes' })
   notes?: string;
 
-  @ApiPropertyOptional({ description: 'Staff member ID who handled the interaction' })
+  @ApiPropertyOptional({ description: 'Staff member ID' })
   staffId?: string;
 
   @ApiPropertyOptional({ description: 'Staff member name' })
   staffName?: string;
 
-  @ApiPropertyOptional({
-    description: 'Customer satisfaction rating (1-5 scale)',
-    minimum: 1,
-    maximum: 5
-  })
+  @ApiPropertyOptional({ description: 'Satisfaction rating (1-5)', minimum: 1, maximum: 5 })
   satisfactionRating?: number;
 
   @ApiProperty({ description: 'Whether follow-up is required' })
-  followUpRequired!: boolean;
+  followUpRequired: boolean;
 
-  @ApiPropertyOptional({ description: 'Follow-up date (ISO string)' })
-  followUpDate?: string;
+  @ApiPropertyOptional({ description: 'Follow-up date' })
+  followUpDate?: Date;
 
-  @ApiProperty({
-    description: 'Resolution status',
-    enum: ['OPEN', 'IN_PROGRESS', 'RESOLVED', 'CLOSED'],
-    default: 'OPEN'
-  })
-  resolutionStatus!: string;
+  @ApiProperty({ description: 'Resolution status', enum: ['OPEN', 'IN_PROGRESS', 'RESOLVED', 'CLOSED'], default: 'OPEN' })
+  resolutionStatus: string;
 
   @ApiPropertyOptional({ description: 'Resolution notes' })
   resolutionNotes?: string;
 
-  @ApiPropertyOptional({ description: 'Tags associated with the interaction', type: [String] })
+  @ApiPropertyOptional({ description: 'Tags', type: [String] })
   tags?: string[];
 
-  @ApiPropertyOptional({ description: 'File attachments', type: [AttachmentNatsResponse] })
-  attachments?: AttachmentNatsResponse[];
+  @ApiProperty({ description: 'Creation timestamp' })
+  createdAt: Date;
 
-  @ApiProperty({ description: 'Creation timestamp (ISO string)', type: String })
-  createdAt!: string | Date;
-
-  @ApiProperty({ description: 'Last update timestamp (ISO string)', type: String })
-  updatedAt!: string | Date;
+  @ApiProperty({ description: 'Last update timestamp' })
+  updatedAt: Date;
 
   @ApiPropertyOptional({ description: 'Created by user ID' })
   createdBy?: string;
 
   @ApiPropertyOptional({ description: 'Updated by user ID' })
   updatedBy?: string;
-
-  // Legacy fields for backward compatibility
-  @ApiProperty({ enum: InteractionType, description: 'Interaction type (legacy)' })
-  type!: InteractionType;
-
-  @ApiPropertyOptional({ description: 'Description (legacy)' })
-  description?: string;
-
-  @ApiProperty({ description: 'Status (legacy)' })
-  status!: string;
-
-  @ApiPropertyOptional({ description: 'Priority level (legacy)' })
-  priority?: string;
-
-  @ApiPropertyOptional({ description: 'Assigned to user ID (legacy)' })
-  assignedTo?: string;
-
-  @ApiPropertyOptional({ description: 'Metadata (legacy)' })
-  metadata?: Record<string, any>;
 }
 
 /**
