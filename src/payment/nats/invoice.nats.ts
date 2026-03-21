@@ -264,6 +264,12 @@ export class InvoiceDataItem {
   @ApiProperty({ description: 'Updated at timestamp' })
   updatedAt: string;
 
+  @ApiPropertyOptional({ description: 'Created by user ID' })
+  createdBy?: string;
+
+  @ApiPropertyOptional({ description: 'Created by user name' })
+  createdByName?: string;
+
   @ApiProperty({ description: 'Invoice items', type: [InvoiceItemData], required: false })
   items?: InvoiceItemData[];
 }
@@ -299,6 +305,12 @@ export class PaymentCreateInvoiceNatsRequest {
 
   @ApiProperty({ description: 'Invoice line items', type: [PaymentInvoiceItem] })
   items: PaymentInvoiceItem[];
+
+  @ApiPropertyOptional({ description: 'Created by user ID' })
+  createdBy?: string;
+
+  @ApiPropertyOptional({ description: 'Created by user name' })
+  createdByName?: string;
 }
 
 export class CreateInvoiceData {
@@ -360,6 +372,12 @@ export class PaymentCreateManualInvoiceNatsRequest {
 
   @ApiProperty({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] })
   items: CreateInvoiceItemRequest[];
+
+  @ApiPropertyOptional({ description: 'Created by user ID' })
+  createdBy?: string;
+
+  @ApiPropertyOptional({ description: 'Created by user name' })
+  createdByName?: string;
 }
 
 export type PaymentCreateManualInvoiceNatsResponse = NatsResponse<CreateInvoiceData>;
@@ -395,6 +413,9 @@ export class GetInvoicesNatsRequest {
 
   @ApiPropertyOptional({ description: 'Number of items per page', default: 10 })
   limit?: number;
+
+  @ApiPropertyOptional({ description: 'Filter by creator user ID (ownership filter)' })
+  createdBy?: string;
 }
 
 export class GetPaymentInvoicesData {

@@ -115,6 +115,8 @@ export declare class InvoiceDataItem {
     hotelId?: string;
     createdAt: string;
     updatedAt: string;
+    createdBy?: string;
+    createdByName?: string;
     items?: InvoiceItemData[];
 }
 export declare class PaymentCreateInvoiceNatsRequest {
@@ -127,6 +129,8 @@ export declare class PaymentCreateInvoiceNatsRequest {
     currency: string;
     dueDate: string;
     items: PaymentInvoiceItem[];
+    createdBy?: string;
+    createdByName?: string;
 }
 export declare class CreateInvoiceData {
     id: string;
@@ -149,6 +153,8 @@ export declare class PaymentCreateManualInvoiceNatsRequest {
     currency: string;
     dueDate: string;
     items: CreateInvoiceItemRequest[];
+    createdBy?: string;
+    createdByName?: string;
 }
 export type PaymentCreateManualInvoiceNatsResponse = NatsResponse<CreateInvoiceData>;
 export declare class GetInvoicesNatsRequest {
@@ -161,6 +167,7 @@ export declare class GetInvoicesNatsRequest {
     dateTo?: string;
     page?: number;
     limit?: number;
+    createdBy?: string;
 }
 export declare class GetPaymentInvoicesData {
     data: InvoiceDataItem[];

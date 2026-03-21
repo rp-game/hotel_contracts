@@ -282,6 +282,8 @@ class InvoiceDataItem {
     hotelId;
     createdAt;
     updatedAt;
+    createdBy;
+    createdByName;
     items;
 }
 exports.InvoiceDataItem = InvoiceDataItem;
@@ -414,6 +416,14 @@ __decorate([
     __metadata("design:type", String)
 ], InvoiceDataItem.prototype, "updatedAt", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Created by user ID' }),
+    __metadata("design:type", String)
+], InvoiceDataItem.prototype, "createdBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Created by user name' }),
+    __metadata("design:type", String)
+], InvoiceDataItem.prototype, "createdByName", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Invoice items', type: [InvoiceItemData], required: false }),
     __metadata("design:type", Array)
 ], InvoiceDataItem.prototype, "items", void 0);
@@ -430,6 +440,8 @@ class PaymentCreateInvoiceNatsRequest {
     currency;
     dueDate;
     items;
+    createdBy;
+    createdByName;
 }
 exports.PaymentCreateInvoiceNatsRequest = PaymentCreateInvoiceNatsRequest;
 __decorate([
@@ -468,6 +480,14 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [PaymentInvoiceItem] }),
     __metadata("design:type", Array)
 ], PaymentCreateInvoiceNatsRequest.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Created by user ID' }),
+    __metadata("design:type", String)
+], PaymentCreateInvoiceNatsRequest.prototype, "createdBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Created by user name' }),
+    __metadata("design:type", String)
+], PaymentCreateInvoiceNatsRequest.prototype, "createdByName", void 0);
 class CreateInvoiceData {
     id;
     tenantId;
@@ -532,6 +552,8 @@ class PaymentCreateManualInvoiceNatsRequest {
     currency;
     dueDate;
     items;
+    createdBy;
+    createdByName;
 }
 exports.PaymentCreateManualInvoiceNatsRequest = PaymentCreateManualInvoiceNatsRequest;
 __decorate([
@@ -562,6 +584,14 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] }),
     __metadata("design:type", Array)
 ], PaymentCreateManualInvoiceNatsRequest.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Created by user ID' }),
+    __metadata("design:type", String)
+], PaymentCreateManualInvoiceNatsRequest.prototype, "createdBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Created by user name' }),
+    __metadata("design:type", String)
+], PaymentCreateManualInvoiceNatsRequest.prototype, "createdByName", void 0);
 // ============================================================================
 // GET INVOICES (GET /invoices)
 // ============================================================================
@@ -575,6 +605,7 @@ class GetInvoicesNatsRequest {
     dateTo;
     page;
     limit;
+    createdBy;
 }
 exports.GetInvoicesNatsRequest = GetInvoicesNatsRequest;
 __decorate([
@@ -613,6 +644,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Number of items per page', default: 10 }),
     __metadata("design:type", Number)
 ], GetInvoicesNatsRequest.prototype, "limit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by creator user ID (ownership filter)' }),
+    __metadata("design:type", String)
+], GetInvoicesNatsRequest.prototype, "createdBy", void 0);
 class GetPaymentInvoicesData {
     data;
     total;
