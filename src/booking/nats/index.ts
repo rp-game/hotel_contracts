@@ -65,3 +65,6 @@ export * from './assign-room.nats';
 export * from './payment-events.nats';
 export * from './occupancy.nats';
 export * from './member-revenue.nats';
+
+// Refer Code NATS contracts
+export * from './refer-code.nats';

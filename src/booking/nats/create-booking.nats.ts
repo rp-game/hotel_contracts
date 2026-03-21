@@ -235,6 +235,11 @@ export interface CreateBookingRequest {
   agentReference?: string;
 
   /**
+   * Refer code — resolves to CA/TA/Staff entity for auto-linking
+   */
+  referCode?: string;
+
+  /**
    * Corporate Account ID — links this booking to a corporate account
    */
   corporateId?: string;
