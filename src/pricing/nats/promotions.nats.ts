@@ -85,8 +85,8 @@ export class GetPromotionsRequest {
 
   @ApiPropertyOptional({ description: 'Filter by discount type' })
   @IsOptional()
-  @IsEnum(['PERCENTAGE', 'FIXED'])
-  discountType?: 'PERCENTAGE' | 'FIXED';
+  @IsEnum(['PERCENTAGE', 'FIXED', 'FREE_NIGHT'])
+  discountType?: 'PERCENTAGE' | 'FIXED' | 'FREE_NIGHT';
 
   @ApiPropertyOptional({ description: 'Search by name or code' })
   @IsOptional()
@@ -153,14 +153,26 @@ export class CreatePromotionRequest {
   @IsDateString()
   endDate: string;
 
-  @ApiProperty({ description: 'Discount type', enum: ['PERCENTAGE', 'FIXED'] })
-  @IsEnum(['PERCENTAGE', 'FIXED'])
-  discountType: 'PERCENTAGE' | 'FIXED';
+  @ApiProperty({ description: 'Discount type', enum: ['PERCENTAGE', 'FIXED', 'FREE_NIGHT'] })
+  @IsEnum(['PERCENTAGE', 'FIXED', 'FREE_NIGHT'])
+  discountType: 'PERCENTAGE' | 'FIXED' | 'FREE_NIGHT';
 
-  @ApiProperty({ description: 'Discount value' })
+  @ApiProperty({ description: 'Discount value (not used for FREE_NIGHT)' })
   @IsNumber()
   @Min(0)
   discountValue: number;
+
+  @ApiPropertyOptional({ description: 'Minimum nights to qualify for free night (FREE_NIGHT only)', example: 3, minimum: 2 })
+  @IsOptional()
+  @IsNumber()
+  @Min(2)
+  freeNightStayRequired?: number;
+
+  @ApiPropertyOptional({ description: 'Number of free nights to award (FREE_NIGHT only)', example: 1, minimum: 1, default: 1 })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  freeNightCount?: number;
 
   @ApiPropertyOptional({ description: 'Applicable room type IDs', type: [String] })
   @IsOptional()
@@ -283,16 +295,28 @@ export class UpdatePromotionRequest {
   @IsDateString()
   endDate?: string;
 
-  @ApiPropertyOptional({ description: 'Updated discount type', enum: ['PERCENTAGE', 'FIXED'] })
+  @ApiPropertyOptional({ description: 'Updated discount type', enum: ['PERCENTAGE', 'FIXED', 'FREE_NIGHT'] })
   @IsOptional()
-  @IsEnum(['PERCENTAGE', 'FIXED'])
-  discountType?: 'PERCENTAGE' | 'FIXED';
+  @IsEnum(['PERCENTAGE', 'FIXED', 'FREE_NIGHT'])
+  discountType?: 'PERCENTAGE' | 'FIXED' | 'FREE_NIGHT';
 
   @ApiPropertyOptional({ description: 'Updated discount value', minimum: 0 })
   @IsOptional()
   @IsNumber()
   @Min(0)
   discountValue?: number;
+
+  @ApiPropertyOptional({ description: 'Minimum nights to qualify for free night (FREE_NIGHT only)', minimum: 2 })
+  @IsOptional()
+  @IsNumber()
+  @Min(2)
+  freeNightStayRequired?: number;
+
+  @ApiPropertyOptional({ description: 'Number of free nights to award (FREE_NIGHT only)', minimum: 1 })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  freeNightCount?: number;
 
   @ApiPropertyOptional({ description: 'Updated applicable room types', type: [String] })
   @IsOptional()
@@ -445,8 +469,8 @@ export class ValidatePromotionResponse {
   @ApiProperty({ description: 'Promotion code' })
   promoCode: string;
 
-  @ApiPropertyOptional({ description: 'Discount type if valid', enum: ['PERCENTAGE', 'FIXED'] })
-  discountType?: 'PERCENTAGE' | 'FIXED';
+  @ApiPropertyOptional({ description: 'Discount type if valid', enum: ['PERCENTAGE', 'FIXED', 'FREE_NIGHT'] })
+  discountType?: 'PERCENTAGE' | 'FIXED' | 'FREE_NIGHT';
 
   @ApiPropertyOptional({ description: 'Discount value if valid' })
   discountValue?: number;

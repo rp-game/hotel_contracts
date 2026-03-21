@@ -23,7 +23,7 @@ export declare class GetPromotionsRequest {
     promoCode?: string;
     status?: PromotionStatus;
     isActive?: boolean;
-    discountType?: 'PERCENTAGE' | 'FIXED';
+    discountType?: 'PERCENTAGE' | 'FIXED' | 'FREE_NIGHT';
     search?: string;
     page?: number;
     limit?: number;
@@ -40,8 +40,10 @@ export declare class CreatePromotionRequest {
     description?: string;
     startDate: string;
     endDate: string;
-    discountType: 'PERCENTAGE' | 'FIXED';
+    discountType: 'PERCENTAGE' | 'FIXED' | 'FREE_NIGHT';
     discountValue: number;
+    freeNightStayRequired?: number;
+    freeNightCount?: number;
     applicableRoomTypes?: string[];
     applicableChannels?: string[];
     minimumStay?: number;
@@ -69,8 +71,10 @@ export declare class UpdatePromotionRequest {
     description?: string;
     startDate?: string;
     endDate?: string;
-    discountType?: 'PERCENTAGE' | 'FIXED';
+    discountType?: 'PERCENTAGE' | 'FIXED' | 'FREE_NIGHT';
     discountValue?: number;
+    freeNightStayRequired?: number;
+    freeNightCount?: number;
     applicableRoomTypes?: string[];
     applicableChannels?: string[];
     minimumStay?: number;
@@ -114,7 +118,7 @@ export declare class ValidatePromotionResponse {
     isValid: boolean;
     promotionId?: string;
     promoCode: string;
-    discountType?: 'PERCENTAGE' | 'FIXED';
+    discountType?: 'PERCENTAGE' | 'FIXED' | 'FREE_NIGHT';
     discountValue?: number;
     message?: string;
     applicableAmount?: number;

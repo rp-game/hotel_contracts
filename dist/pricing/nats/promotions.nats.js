@@ -105,7 +105,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by discount type' }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(['PERCENTAGE', 'FIXED']),
+    (0, class_validator_1.IsEnum)(['PERCENTAGE', 'FIXED', 'FREE_NIGHT']),
     __metadata("design:type", String)
 ], GetPromotionsRequest.prototype, "discountType", void 0);
 __decorate([
@@ -145,6 +145,8 @@ class CreatePromotionRequest {
     endDate;
     discountType;
     discountValue;
+    freeNightStayRequired;
+    freeNightCount;
     applicableRoomTypes;
     applicableChannels;
     minimumStay;
@@ -209,16 +211,30 @@ __decorate([
     __metadata("design:type", String)
 ], CreatePromotionRequest.prototype, "endDate", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Discount type', enum: ['PERCENTAGE', 'FIXED'] }),
-    (0, class_validator_1.IsEnum)(['PERCENTAGE', 'FIXED']),
+    (0, swagger_1.ApiProperty)({ description: 'Discount type', enum: ['PERCENTAGE', 'FIXED', 'FREE_NIGHT'] }),
+    (0, class_validator_1.IsEnum)(['PERCENTAGE', 'FIXED', 'FREE_NIGHT']),
     __metadata("design:type", String)
 ], CreatePromotionRequest.prototype, "discountType", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Discount value' }),
+    (0, swagger_1.ApiProperty)({ description: 'Discount value (not used for FREE_NIGHT)' }),
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.Min)(0),
     __metadata("design:type", Number)
 ], CreatePromotionRequest.prototype, "discountValue", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Minimum nights to qualify for free night (FREE_NIGHT only)', example: 3, minimum: 2 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(2),
+    __metadata("design:type", Number)
+], CreatePromotionRequest.prototype, "freeNightStayRequired", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of free nights to award (FREE_NIGHT only)', example: 1, minimum: 1, default: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], CreatePromotionRequest.prototype, "freeNightCount", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Applicable room type IDs', type: [String] }),
     (0, class_validator_1.IsOptional)(),
@@ -322,6 +338,8 @@ class UpdatePromotionRequest {
     endDate;
     discountType;
     discountValue;
+    freeNightStayRequired;
+    freeNightCount;
     applicableRoomTypes;
     applicableChannels;
     minimumStay;
@@ -386,9 +404,9 @@ __decorate([
     __metadata("design:type", String)
 ], UpdatePromotionRequest.prototype, "endDate", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Updated discount type', enum: ['PERCENTAGE', 'FIXED'] }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Updated discount type', enum: ['PERCENTAGE', 'FIXED', 'FREE_NIGHT'] }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(['PERCENTAGE', 'FIXED']),
+    (0, class_validator_1.IsEnum)(['PERCENTAGE', 'FIXED', 'FREE_NIGHT']),
     __metadata("design:type", String)
 ], UpdatePromotionRequest.prototype, "discountType", void 0);
 __decorate([
@@ -398,6 +416,20 @@ __decorate([
     (0, class_validator_1.Min)(0),
     __metadata("design:type", Number)
 ], UpdatePromotionRequest.prototype, "discountValue", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Minimum nights to qualify for free night (FREE_NIGHT only)', minimum: 2 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(2),
+    __metadata("design:type", Number)
+], UpdatePromotionRequest.prototype, "freeNightStayRequired", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of free nights to award (FREE_NIGHT only)', minimum: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], UpdatePromotionRequest.prototype, "freeNightCount", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Updated applicable room types', type: [String] }),
     (0, class_validator_1.IsOptional)(),
@@ -601,7 +633,7 @@ __decorate([
     __metadata("design:type", String)
 ], ValidatePromotionResponse.prototype, "promoCode", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Discount type if valid', enum: ['PERCENTAGE', 'FIXED'] }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Discount type if valid', enum: ['PERCENTAGE', 'FIXED', 'FREE_NIGHT'] }),
     __metadata("design:type", String)
 ], ValidatePromotionResponse.prototype, "discountType", void 0);
 __decorate([

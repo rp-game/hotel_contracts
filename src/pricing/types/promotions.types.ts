@@ -132,17 +132,29 @@ export class PromotionDto {
 
   @ApiProperty({
     description: 'Discount type',
-    enum: ['PERCENTAGE', 'FIXED'],
+    enum: ['PERCENTAGE', 'FIXED', 'FREE_NIGHT'],
     example: 'PERCENTAGE'
   })
-  discountType: 'PERCENTAGE' | 'FIXED';
+  discountType: 'PERCENTAGE' | 'FIXED' | 'FREE_NIGHT';
 
   @ApiProperty({
-    description: 'Discount value (percentage or fixed amount)',
+    description: 'Discount value (percentage or fixed amount, not used for FREE_NIGHT)',
     example: 20,
     type: Number
   })
   discountValue: number;
+
+  @ApiPropertyOptional({
+    description: 'Minimum nights to qualify for free night (FREE_NIGHT only)',
+    example: 3
+  })
+  freeNightStayRequired?: number;
+
+  @ApiPropertyOptional({
+    description: 'Number of free nights awarded (FREE_NIGHT only)',
+    example: 1
+  })
+  freeNightCount?: number;
 
   @ApiPropertyOptional({
     description: 'Room type IDs this promotion applies to (null = all room types)',
