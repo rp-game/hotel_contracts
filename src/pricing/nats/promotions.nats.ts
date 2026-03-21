@@ -210,6 +210,22 @@ export class CreatePromotionRequest {
   @Min(0)
   usageLimit?: number;
 
+  @ApiPropertyOptional({ description: 'Max usage per customer (null = unlimited)', minimum: 0 })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  maxUsagePerCustomer?: number;
+
+  @ApiPropertyOptional({ description: 'Flash sale start time in hotel local time (HH:mm)', example: '10:00' })
+  @IsOptional()
+  @IsString()
+  flashSaleStartTime?: string;
+
+  @ApiPropertyOptional({ description: 'Flash sale end time in hotel local time (HH:mm)', example: '14:00' })
+  @IsOptional()
+  @IsString()
+  flashSaleEndTime?: string;
+
   @ApiPropertyOptional({ description: 'Additional conditions', type: () => PromotionConditionsDto })
   @IsOptional()
   @ValidateNested()
@@ -326,6 +342,22 @@ export class UpdatePromotionRequest {
   @Min(0)
   usageLimit?: number;
 
+  @ApiPropertyOptional({ description: 'Max usage per customer (null = unlimited)', minimum: 0 })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  maxUsagePerCustomer?: number;
+
+  @ApiPropertyOptional({ description: 'Flash sale start time in hotel local time (HH:mm)', example: '10:00' })
+  @IsOptional()
+  @IsString()
+  flashSaleStartTime?: string;
+
+  @ApiPropertyOptional({ description: 'Flash sale end time in hotel local time (HH:mm)', example: '14:00' })
+  @IsOptional()
+  @IsString()
+  flashSaleEndTime?: string;
+
   @ApiPropertyOptional({ description: 'Updated conditions', type: () => PromotionConditionsDto })
   @IsOptional()
   @ValidateNested()
@@ -393,6 +425,11 @@ export class ValidatePromotionRequest {
   @IsOptional()
   @IsUUID()
   chainId?: string;
+
+  @ApiPropertyOptional({ description: 'Customer ID — for per-customer usage limit check' })
+  @IsOptional()
+  @IsUUID()
+  customerId?: string;
 }
 
 /**

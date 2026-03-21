@@ -57,6 +57,9 @@ export declare class PromotionDto {
     blackoutDates?: string[];
     usageLimit: number;
     usageCount: number;
+    maxUsagePerCustomer?: number;
+    flashSaleStartTime?: string;
+    flashSaleEndTime?: string;
     conditions?: PromotionConditionsDto;
     isActive: boolean;
     status: PromotionStatus;

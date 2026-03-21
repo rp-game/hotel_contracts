@@ -50,6 +50,9 @@ export declare class CreatePromotionRequest {
     maximumAdvanceBookingDays?: number;
     blackoutDates?: string[];
     usageLimit?: number;
+    maxUsagePerCustomer?: number;
+    flashSaleStartTime?: string;
+    flashSaleEndTime?: string;
     conditions?: PromotionConditionsDto;
     isActive?: boolean;
 }
@@ -76,6 +79,9 @@ export declare class UpdatePromotionRequest {
     maximumAdvanceBookingDays?: number;
     blackoutDates?: string[];
     usageLimit?: number;
+    maxUsagePerCustomer?: number;
+    flashSaleStartTime?: string;
+    flashSaleEndTime?: string;
     conditions?: PromotionConditionsDto;
     isActive?: boolean;
 }
@@ -99,6 +105,7 @@ export declare class ValidatePromotionRequest {
     checkOut: string;
     bookingAmount: number;
     chainId?: string;
+    customerId?: string;
 }
 /**
  * Validate promotion response

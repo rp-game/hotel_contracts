@@ -93,6 +93,9 @@ class PromotionDto {
     blackoutDates;
     usageLimit;
     usageCount;
+    maxUsagePerCustomer;
+    flashSaleStartTime;
+    flashSaleEndTime;
     conditions;
     isActive;
     status;
@@ -265,6 +268,27 @@ __decorate([
     }),
     __metadata("design:type", Number)
 ], PromotionDto.prototype, "usageCount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Max usage per customer (null = unlimited)',
+        example: 1
+    }),
+    __metadata("design:type", Number)
+], PromotionDto.prototype, "maxUsagePerCustomer", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Flash sale start time in hotel local time (HH:mm)',
+        example: '10:00'
+    }),
+    __metadata("design:type", String)
+], PromotionDto.prototype, "flashSaleStartTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Flash sale end time in hotel local time (HH:mm)',
+        example: '14:00'
+    }),
+    __metadata("design:type", String)
+], PromotionDto.prototype, "flashSaleEndTime", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Additional promotion conditions',

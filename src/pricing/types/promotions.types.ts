@@ -210,6 +210,24 @@ export class PromotionDto {
   usageCount: number;
 
   @ApiPropertyOptional({
+    description: 'Max usage per customer (null = unlimited)',
+    example: 1
+  })
+  maxUsagePerCustomer?: number;
+
+  @ApiPropertyOptional({
+    description: 'Flash sale start time in hotel local time (HH:mm)',
+    example: '10:00'
+  })
+  flashSaleStartTime?: string;
+
+  @ApiPropertyOptional({
+    description: 'Flash sale end time in hotel local time (HH:mm)',
+    example: '14:00'
+  })
+  flashSaleEndTime?: string;
+
+  @ApiPropertyOptional({
     description: 'Additional promotion conditions',
     type: () => PromotionConditionsDto
   })

@@ -153,6 +153,9 @@ class CreatePromotionRequest {
     maximumAdvanceBookingDays;
     blackoutDates;
     usageLimit;
+    maxUsagePerCustomer;
+    flashSaleStartTime;
+    flashSaleEndTime;
     conditions;
     isActive;
 }
@@ -273,6 +276,25 @@ __decorate([
     __metadata("design:type", Number)
 ], CreatePromotionRequest.prototype, "usageLimit", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Max usage per customer (null = unlimited)', minimum: 0 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], CreatePromotionRequest.prototype, "maxUsagePerCustomer", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Flash sale start time in hotel local time (HH:mm)', example: '10:00' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePromotionRequest.prototype, "flashSaleStartTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Flash sale end time in hotel local time (HH:mm)', example: '14:00' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePromotionRequest.prototype, "flashSaleEndTime", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Additional conditions', type: () => types_1.PromotionConditionsDto }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.ValidateNested)(),
@@ -308,6 +330,9 @@ class UpdatePromotionRequest {
     maximumAdvanceBookingDays;
     blackoutDates;
     usageLimit;
+    maxUsagePerCustomer;
+    flashSaleStartTime;
+    flashSaleEndTime;
     conditions;
     isActive;
 }
@@ -430,6 +455,25 @@ __decorate([
     __metadata("design:type", Number)
 ], UpdatePromotionRequest.prototype, "usageLimit", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Max usage per customer (null = unlimited)', minimum: 0 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], UpdatePromotionRequest.prototype, "maxUsagePerCustomer", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Flash sale start time in hotel local time (HH:mm)', example: '10:00' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdatePromotionRequest.prototype, "flashSaleStartTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Flash sale end time in hotel local time (HH:mm)', example: '14:00' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdatePromotionRequest.prototype, "flashSaleEndTime", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Updated conditions', type: () => types_1.PromotionConditionsDto }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.ValidateNested)(),
@@ -479,6 +523,7 @@ class ValidatePromotionRequest {
     checkOut;
     bookingAmount;
     chainId;
+    customerId;
 }
 exports.ValidatePromotionRequest = ValidatePromotionRequest;
 __decorate([
@@ -523,6 +568,12 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], ValidatePromotionRequest.prototype, "chainId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer ID — for per-customer usage limit check' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], ValidatePromotionRequest.prototype, "customerId", void 0);
 /**
  * Validate promotion response
  */
