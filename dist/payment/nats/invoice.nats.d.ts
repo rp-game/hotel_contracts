@@ -36,11 +36,13 @@ export declare class CreateInvoiceItemRequest {
     referenceId?: string;
 }
 export declare enum PaymentInvoiceStatus {
-    DRAFT = "draft",
-    SENT = "sent",
-    PAID = "paid",
-    OVERDUE = "overdue",
-    CANCELLED = "cancelled"
+    DRAFT = "DRAFT",
+    ISSUED = "ISSUED",
+    PAID = "PAID",
+    PARTIALLY_PAID = "PARTIALLY_PAID",
+    OVERDUE = "OVERDUE",
+    CANCELLED = "CANCELLED",
+    VOIDED = "VOIDED"
 }
 export declare class PaymentInvoice {
     id: string;
@@ -230,4 +232,13 @@ export declare class UpdateInvoiceStatusData {
     updatedAt: string;
 }
 export type UpdateInvoiceStatusNatsResponse = NatsResponse<UpdateInvoiceStatusData>;
+export declare class VoidInvoiceNatsRequest {
+    id: string;
+    tenantId: string;
+    hotelId?: string;
+    reason: string;
+    performedBy?: string;
+    performedByName?: string;
+}
+export type VoidInvoiceNatsResponse = NatsResponse<PaymentInvoice>;
 //# sourceMappingURL=invoice.nats.d.ts.map

@@ -26,7 +26,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateInvoiceStatusData = exports.UpdateInvoiceStatusNatsRequest = exports.DownloadInvoicePdfData = exports.DownloadInvoicePdfNatsRequest = exports.SendInvoiceData = exports.SendInvoiceNatsRequest = exports.GetInvoiceData = exports.GetInvoiceNatsRequest = exports.GetPaymentInvoicesData = exports.GetInvoicesNatsRequest = exports.PaymentCreateManualInvoiceNatsRequest = exports.CreateInvoiceData = exports.PaymentCreateInvoiceNatsRequest = exports.InvoiceDataItem = exports.InvoiceItemData = exports.PaymentInvoice = exports.PaymentInvoiceStatus = exports.CreateInvoiceItemRequest = exports.PaymentInvoiceItem = void 0;
+exports.VoidInvoiceNatsRequest = exports.UpdateInvoiceStatusData = exports.UpdateInvoiceStatusNatsRequest = exports.DownloadInvoicePdfData = exports.DownloadInvoicePdfNatsRequest = exports.SendInvoiceData = exports.SendInvoiceNatsRequest = exports.GetInvoiceData = exports.GetInvoiceNatsRequest = exports.GetPaymentInvoicesData = exports.GetInvoicesNatsRequest = exports.PaymentCreateManualInvoiceNatsRequest = exports.CreateInvoiceData = exports.PaymentCreateInvoiceNatsRequest = exports.InvoiceDataItem = exports.InvoiceItemData = exports.PaymentInvoice = exports.PaymentInvoiceStatus = exports.CreateInvoiceItemRequest = exports.PaymentInvoiceItem = void 0;
 const swagger_1 = require("@nestjs/swagger");
 // ============================================================================
 // SHARED TYPES
@@ -98,11 +98,13 @@ __decorate([
 ], CreateInvoiceItemRequest.prototype, "referenceId", void 0);
 var PaymentInvoiceStatus;
 (function (PaymentInvoiceStatus) {
-    PaymentInvoiceStatus["DRAFT"] = "draft";
-    PaymentInvoiceStatus["SENT"] = "sent";
-    PaymentInvoiceStatus["PAID"] = "paid";
-    PaymentInvoiceStatus["OVERDUE"] = "overdue";
-    PaymentInvoiceStatus["CANCELLED"] = "cancelled";
+    PaymentInvoiceStatus["DRAFT"] = "DRAFT";
+    PaymentInvoiceStatus["ISSUED"] = "ISSUED";
+    PaymentInvoiceStatus["PAID"] = "PAID";
+    PaymentInvoiceStatus["PARTIALLY_PAID"] = "PARTIALLY_PAID";
+    PaymentInvoiceStatus["OVERDUE"] = "OVERDUE";
+    PaymentInvoiceStatus["CANCELLED"] = "CANCELLED";
+    PaymentInvoiceStatus["VOIDED"] = "VOIDED";
 })(PaymentInvoiceStatus || (exports.PaymentInvoiceStatus = PaymentInvoiceStatus = {}));
 class PaymentInvoice {
     id;
@@ -885,4 +887,41 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Update timestamp', example: '2024-01-15T10:30:00.000Z' }),
     __metadata("design:type", String)
 ], UpdateInvoiceStatusData.prototype, "updatedAt", void 0);
+// ============================================================================
+// VOID INVOICE
+// Pattern: payment.invoice.void
+// ============================================================================
+class VoidInvoiceNatsRequest {
+    id;
+    tenantId;
+    hotelId;
+    reason;
+    performedBy;
+    performedByName;
+}
+exports.VoidInvoiceNatsRequest = VoidInvoiceNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Invoice ID' }),
+    __metadata("design:type", String)
+], VoidInvoiceNatsRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], VoidInvoiceNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], VoidInvoiceNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reason for voiding the invoice' }),
+    __metadata("design:type", String)
+], VoidInvoiceNatsRequest.prototype, "reason", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID who performed the void action' }),
+    __metadata("design:type", String)
+], VoidInvoiceNatsRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User name who performed the void action' }),
+    __metadata("design:type", String)
+], VoidInvoiceNatsRequest.prototype, "performedByName", void 0);
 //# sourceMappingURL=invoice.nats.js.map

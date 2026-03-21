@@ -66,11 +66,13 @@ export class CreateInvoiceItemRequest {
 }
 
 export enum PaymentInvoiceStatus {
-  DRAFT = 'draft',
-  SENT = 'sent',
-  PAID = 'paid',
-  OVERDUE = 'overdue',
-  CANCELLED = 'cancelled',
+  DRAFT = 'DRAFT',
+  ISSUED = 'ISSUED',
+  PAID = 'PAID',
+  PARTIALLY_PAID = 'PARTIALLY_PAID',
+  OVERDUE = 'OVERDUE',
+  CANCELLED = 'CANCELLED',
+  VOIDED = 'VOIDED',
 }
 
 export class PaymentInvoice {
@@ -579,3 +581,30 @@ export class UpdateInvoiceStatusData {
 }
 
 export type UpdateInvoiceStatusNatsResponse = NatsResponse<UpdateInvoiceStatusData>;
+
+// ============================================================================
+// VOID INVOICE
+// Pattern: payment.invoice.void
+// ============================================================================
+
+export class VoidInvoiceNatsRequest {
+  @ApiProperty({ description: 'Invoice ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  hotelId?: string;
+
+  @ApiProperty({ description: 'Reason for voiding the invoice' })
+  reason: string;
+
+  @ApiPropertyOptional({ description: 'User ID who performed the void action' })
+  performedBy?: string;
+
+  @ApiPropertyOptional({ description: 'User name who performed the void action' })
+  performedByName?: string;
+}
+
+export type VoidInvoiceNatsResponse = NatsResponse<PaymentInvoice>;
