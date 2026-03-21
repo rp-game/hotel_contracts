@@ -202,6 +202,10 @@ export interface CreateBookingRequest {
      */
     referCode?: string;
     /**
+     * Promotion/voucher code to apply discount
+     */
+    promoCode?: string;
+    /**
      * Corporate Account ID — links this booking to a corporate account
      */
     corporateId?: string;

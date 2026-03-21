@@ -120,12 +120,61 @@ export declare class DeletePromotionResponse {
     success: boolean;
     message?: string;
 }
+export declare class UsePromotionNatsRequest {
+    tenantId: string;
+    promotionId: string;
+    bookingId: string;
+    customerId?: string;
+    hotelId: string;
+    discountAmount: number;
+    discountType: string;
+    originalAmount: number;
+}
+export declare class UnusePromotionNatsRequest {
+    tenantId: string;
+    promotionId: string;
+    bookingId: string;
+}
+export declare class GetPromotionUsageNatsRequest {
+    tenantId: string;
+    promotionId: string;
+    page?: number;
+    limit?: number;
+}
+export declare class PromotionUsageDto {
+    id: string;
+    promotionId: string;
+    bookingId: string;
+    customerId?: string;
+    hotelId: string;
+    discountAmount: number;
+    discountType: string;
+    originalAmount: number;
+    status: string;
+    usedAt: string;
+    reversedAt?: string;
+}
 export type GetPromotionsNatsResponse = NatsResponse<PromotionsPaginatedResponseDto>;
 export type GetPromotionByIdNatsResponse = NatsResponse<PromotionDto>;
 export type CreatePromotionNatsResponse = NatsResponse<PromotionDto>;
 export type UpdatePromotionNatsResponse = NatsResponse<PromotionDto>;
 export type DeletePromotionNatsResponse = NatsResponse<DeletePromotionResponse>;
 export type ValidatePromotionNatsResponse = NatsResponse<ValidatePromotionResponse>;
+export type UsePromotionNatsResponse = NatsResponse<{
+    promotionId: string;
+    currentUses: number;
+    maxUses: number;
+    isActive: boolean;
+}>;
+export type UnusePromotionNatsResponse = NatsResponse<{
+    promotionId: string;
+    currentUses: number;
+    isActive: boolean;
+}>;
+export type GetPromotionUsageNatsResponse = NatsResponse<{
+    data: PromotionUsageDto[];
+    total: number;
+}>;
 export type GetPromotionsRequest_Legacy = GetPromotionsRequest;
 export type GetPromotionsResponse = PromotionsPaginatedResponseDto;
 //# sourceMappingURL=promotions.nats.d.ts.map

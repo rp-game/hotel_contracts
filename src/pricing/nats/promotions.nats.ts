@@ -436,6 +436,96 @@ export class DeletePromotionResponse {
 }
 
 // ============================================================================
+// USE / UNUSE / USAGE REQUEST TYPES
+// ============================================================================
+
+export class UsePromotionNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Promotion ID' })
+  promotionId: string;
+
+  @ApiProperty({ description: 'Booking ID that used this promotion' })
+  bookingId: string;
+
+  @ApiPropertyOptional({ description: 'Customer ID' })
+  customerId?: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'Discount amount applied' })
+  discountAmount: number;
+
+  @ApiProperty({ description: 'Discount type (PERCENTAGE or FIXED)' })
+  discountType: string;
+
+  @ApiProperty({ description: 'Original amount before discount' })
+  originalAmount: number;
+}
+
+export class UnusePromotionNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Promotion ID' })
+  promotionId: string;
+
+  @ApiProperty({ description: 'Booking ID to reverse usage for' })
+  bookingId: string;
+}
+
+export class GetPromotionUsageNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Promotion ID' })
+  promotionId: string;
+
+  @ApiPropertyOptional({ description: 'Page number', default: 1 })
+  page?: number;
+
+  @ApiPropertyOptional({ description: 'Items per page', default: 20 })
+  limit?: number;
+}
+
+export class PromotionUsageDto {
+  @ApiProperty({ description: 'Usage record ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Promotion ID' })
+  promotionId: string;
+
+  @ApiProperty({ description: 'Booking ID' })
+  bookingId: string;
+
+  @ApiPropertyOptional({ description: 'Customer ID' })
+  customerId?: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'Discount amount applied' })
+  discountAmount: number;
+
+  @ApiProperty({ description: 'Discount type' })
+  discountType: string;
+
+  @ApiProperty({ description: 'Original amount before discount' })
+  originalAmount: number;
+
+  @ApiProperty({ description: 'Usage status (ACTIVE or REVERSED)' })
+  status: string;
+
+  @ApiProperty({ description: 'When promotion was used' })
+  usedAt: string;
+
+  @ApiPropertyOptional({ description: 'When usage was reversed (if cancelled)' })
+  reversedAt?: string;
+}
+
+// ============================================================================
 // NATS Response Type Definitions
 // ============================================================================
 
@@ -445,6 +535,9 @@ export type CreatePromotionNatsResponse = NatsResponse<PromotionDto>;
 export type UpdatePromotionNatsResponse = NatsResponse<PromotionDto>;
 export type DeletePromotionNatsResponse = NatsResponse<DeletePromotionResponse>;
 export type ValidatePromotionNatsResponse = NatsResponse<ValidatePromotionResponse>;
+export type UsePromotionNatsResponse = NatsResponse<{ promotionId: string; currentUses: number; maxUses: number; isActive: boolean }>;
+export type UnusePromotionNatsResponse = NatsResponse<{ promotionId: string; currentUses: number; isActive: boolean }>;
+export type GetPromotionUsageNatsResponse = NatsResponse<{ data: PromotionUsageDto[]; total: number }>;
 
 // ============================================================================
 // Legacy exports for backward compatibility

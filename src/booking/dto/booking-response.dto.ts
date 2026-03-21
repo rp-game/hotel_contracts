@@ -280,6 +280,16 @@ export class BookingResponseDto {
   @ApiPropertyOptional({ description: 'Rate plan ID applied to this booking', format: 'uuid' })
   ratePlanId?: string;
 
+  // Promotion info
+  @ApiPropertyOptional({ description: 'Applied promotion/voucher code' })
+  promoCode?: string | null;
+
+  @ApiPropertyOptional({ description: 'Applied promotion ID' })
+  promotionId?: string | null;
+
+  @ApiPropertyOptional({ description: 'Promotion discount amount' })
+  promotionDiscount?: number;
+
   // Group booking info
   @ApiPropertyOptional({ description: 'Group block ID' })
   groupId?: string | null;

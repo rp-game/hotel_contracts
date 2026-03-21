@@ -60,6 +60,8 @@ export interface CalculateRateRequest {
     channel?: string;
     promoCode?: string;
     promotionCodes?: string[];
+    /** Pre-validated promotion ID — skips auto-find, uses this specific promotion */
+    promotionId?: string;
     corporateId?: string;
     loyaltyId?: string;
     bookingType?: string;

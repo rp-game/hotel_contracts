@@ -19,7 +19,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeletePromotionResponse = exports.ValidatePromotionResponse = exports.ValidatePromotionRequest = exports.DeletePromotionRequest = exports.UpdatePromotionRequest = exports.CreatePromotionRequest = exports.GetPromotionsRequest = void 0;
+exports.PromotionUsageDto = exports.GetPromotionUsageNatsRequest = exports.UnusePromotionNatsRequest = exports.UsePromotionNatsRequest = exports.DeletePromotionResponse = exports.ValidatePromotionResponse = exports.ValidatePromotionRequest = exports.DeletePromotionRequest = exports.UpdatePromotionRequest = exports.CreatePromotionRequest = exports.GetPromotionsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -585,4 +585,149 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Message about deletion' }),
     __metadata("design:type", String)
 ], DeletePromotionResponse.prototype, "message", void 0);
+// ============================================================================
+// USE / UNUSE / USAGE REQUEST TYPES
+// ============================================================================
+class UsePromotionNatsRequest {
+    tenantId;
+    promotionId;
+    bookingId;
+    customerId;
+    hotelId;
+    discountAmount;
+    discountType;
+    originalAmount;
+}
+exports.UsePromotionNatsRequest = UsePromotionNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], UsePromotionNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Promotion ID' }),
+    __metadata("design:type", String)
+], UsePromotionNatsRequest.prototype, "promotionId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Booking ID that used this promotion' }),
+    __metadata("design:type", String)
+], UsePromotionNatsRequest.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], UsePromotionNatsRequest.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], UsePromotionNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Discount amount applied' }),
+    __metadata("design:type", Number)
+], UsePromotionNatsRequest.prototype, "discountAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Discount type (PERCENTAGE or FIXED)' }),
+    __metadata("design:type", String)
+], UsePromotionNatsRequest.prototype, "discountType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Original amount before discount' }),
+    __metadata("design:type", Number)
+], UsePromotionNatsRequest.prototype, "originalAmount", void 0);
+class UnusePromotionNatsRequest {
+    tenantId;
+    promotionId;
+    bookingId;
+}
+exports.UnusePromotionNatsRequest = UnusePromotionNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], UnusePromotionNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Promotion ID' }),
+    __metadata("design:type", String)
+], UnusePromotionNatsRequest.prototype, "promotionId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Booking ID to reverse usage for' }),
+    __metadata("design:type", String)
+], UnusePromotionNatsRequest.prototype, "bookingId", void 0);
+class GetPromotionUsageNatsRequest {
+    tenantId;
+    promotionId;
+    page;
+    limit;
+}
+exports.GetPromotionUsageNatsRequest = GetPromotionUsageNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetPromotionUsageNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Promotion ID' }),
+    __metadata("design:type", String)
+], GetPromotionUsageNatsRequest.prototype, "promotionId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Page number', default: 1 }),
+    __metadata("design:type", Number)
+], GetPromotionUsageNatsRequest.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Items per page', default: 20 }),
+    __metadata("design:type", Number)
+], GetPromotionUsageNatsRequest.prototype, "limit", void 0);
+class PromotionUsageDto {
+    id;
+    promotionId;
+    bookingId;
+    customerId;
+    hotelId;
+    discountAmount;
+    discountType;
+    originalAmount;
+    status;
+    usedAt;
+    reversedAt;
+}
+exports.PromotionUsageDto = PromotionUsageDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Usage record ID' }),
+    __metadata("design:type", String)
+], PromotionUsageDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Promotion ID' }),
+    __metadata("design:type", String)
+], PromotionUsageDto.prototype, "promotionId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Booking ID' }),
+    __metadata("design:type", String)
+], PromotionUsageDto.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], PromotionUsageDto.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], PromotionUsageDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Discount amount applied' }),
+    __metadata("design:type", Number)
+], PromotionUsageDto.prototype, "discountAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Discount type' }),
+    __metadata("design:type", String)
+], PromotionUsageDto.prototype, "discountType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Original amount before discount' }),
+    __metadata("design:type", Number)
+], PromotionUsageDto.prototype, "originalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Usage status (ACTIVE or REVERSED)' }),
+    __metadata("design:type", String)
+], PromotionUsageDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'When promotion was used' }),
+    __metadata("design:type", String)
+], PromotionUsageDto.prototype, "usedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'When usage was reversed (if cancelled)' }),
+    __metadata("design:type", String)
+], PromotionUsageDto.prototype, "reversedAt", void 0);
 //# sourceMappingURL=promotions.nats.js.map

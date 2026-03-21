@@ -310,6 +310,10 @@ class BookingResponseDto {
     balance;
     pricingBreakdown;
     ratePlanId;
+    // Promotion info
+    promoCode;
+    promotionId;
+    promotionDiscount;
     // Group booking info
     groupId;
     groupName;
@@ -481,6 +485,18 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Rate plan ID applied to this booking', format: 'uuid' }),
     __metadata("design:type", String)
 ], BookingResponseDto.prototype, "ratePlanId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Applied promotion/voucher code' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "promoCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Applied promotion ID' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "promotionId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Promotion discount amount' }),
+    __metadata("design:type", Number)
+], BookingResponseDto.prototype, "promotionDiscount", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Group block ID' }),
     __metadata("design:type", Object)
