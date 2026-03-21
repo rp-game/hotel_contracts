@@ -84,6 +84,8 @@ class PromotionDto {
     endDate;
     discountType;
     discountValue;
+    freeNightStayRequired;
+    freeNightCount;
     applicableRoomTypes;
     applicableChannels;
     minimumStay;
@@ -181,19 +183,33 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Discount type',
-        enum: ['PERCENTAGE', 'FIXED'],
+        enum: ['PERCENTAGE', 'FIXED', 'FREE_NIGHT'],
         example: 'PERCENTAGE'
     }),
     __metadata("design:type", String)
 ], PromotionDto.prototype, "discountType", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Discount value (percentage or fixed amount)',
+        description: 'Discount value (percentage or fixed amount, not used for FREE_NIGHT)',
         example: 20,
         type: Number
     }),
     __metadata("design:type", Number)
 ], PromotionDto.prototype, "discountValue", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Minimum nights to qualify for free night (FREE_NIGHT only)',
+        example: 3
+    }),
+    __metadata("design:type", Number)
+], PromotionDto.prototype, "freeNightStayRequired", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Number of free nights awarded (FREE_NIGHT only)',
+        example: 1
+    }),
+    __metadata("design:type", Number)
+], PromotionDto.prototype, "freeNightCount", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Room type IDs this promotion applies to (null = all room types)',

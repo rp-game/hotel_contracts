@@ -46,8 +46,10 @@ export declare class PromotionDto {
     description?: string;
     startDate: string;
     endDate: string;
-    discountType: 'PERCENTAGE' | 'FIXED';
+    discountType: 'PERCENTAGE' | 'FIXED' | 'FREE_NIGHT';
     discountValue: number;
+    freeNightStayRequired?: number;
+    freeNightCount?: number;
     applicableRoomTypes?: string[];
     applicableChannels?: string[];
     minimumStay?: number;
