@@ -16,9 +16,10 @@ import {
 import { Type } from 'class-transformer';
 
 export class CreateSalesTargetDto {
-  @ApiProperty({ description: 'Hotel ID' })
+  @ApiPropertyOptional({ description: 'Hotel ID (null = chain-level target)' })
+  @IsOptional()
   @IsUUID()
-  hotelId: string;
+  hotelId?: string;
 
   @ApiProperty({ description: 'Sales person ID' })
   @IsUUID()
@@ -124,9 +125,10 @@ export class FindSalesTargetsQueryDto {
 }
 
 export class RecalculateSalesTargetsDto {
-  @ApiProperty({ description: 'Hotel ID' })
+  @ApiPropertyOptional({ description: 'Hotel ID (null = recalculate chain-level targets)' })
+  @IsOptional()
   @IsUUID()
-  hotelId: string;
+  hotelId?: string;
 
   @ApiPropertyOptional({ description: 'Sales person ID (recalculate for specific person)' })
   @IsOptional()

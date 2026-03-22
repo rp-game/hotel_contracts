@@ -30,7 +30,8 @@ class CreateSalesTargetDto {
 }
 exports.CreateSalesTargetDto = CreateSalesTargetDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (null = chain-level target)' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateSalesTargetDto.prototype, "hotelId", void 0);
@@ -170,7 +171,8 @@ class RecalculateSalesTargetsDto {
 }
 exports.RecalculateSalesTargetsDto = RecalculateSalesTargetsDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (null = recalculate chain-level targets)' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], RecalculateSalesTargetsDto.prototype, "hotelId", void 0);

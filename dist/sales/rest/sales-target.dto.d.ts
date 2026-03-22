@@ -3,7 +3,7 @@
  * Used by api-gateway controllers for request validation
  */
 export declare class CreateSalesTargetDto {
-    hotelId: string;
+    hotelId?: string;
     salesPersonId: string;
     salesPersonName: string;
     year: number;
@@ -26,7 +26,7 @@ export declare class FindSalesTargetsQueryDto {
     month?: number;
 }
 export declare class RecalculateSalesTargetsDto {
-    hotelId: string;
+    hotelId?: string;
     salesPersonId?: string;
     year?: number;
     month?: number;

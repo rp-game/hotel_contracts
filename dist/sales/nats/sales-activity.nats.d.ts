@@ -14,7 +14,7 @@ import { NatsResponse } from '../../common/nats-response.interface';
 import { SalesActivityType } from '../enums/sales.enum';
 export interface CreateSalesActivityNatsRequest {
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
     salesPersonId: string;
     salesPersonName: string;
     activityType: SalesActivityType;

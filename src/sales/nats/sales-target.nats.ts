@@ -15,7 +15,7 @@ import { NatsResponse } from '../../common/nats-response.interface';
 
 export interface CreateSalesTargetNatsRequest {
   tenantId: string;
-  hotelId: string;
+  hotelId?: string; // NULL = chain-level target
   salesPersonId: string;
   salesPersonName: string;
   year: number;
@@ -52,7 +52,7 @@ export interface DeleteSalesTargetNatsRequest {
 
 export interface RecalculateSalesTargetNatsRequest {
   tenantId: string;
-  hotelId: string;
+  hotelId?: string; // NULL = recalculate chain-level targets
   salesPersonId?: string;
   year?: number;
   month?: number;
