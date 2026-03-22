@@ -114,7 +114,7 @@ export class DeleteSalesLeadRequest {
 export class SalesLeadResponse {
   @ApiProperty() id: string;
   @ApiProperty() tenantId: string;
-  @ApiProperty() hotelId: string;
+  @ApiPropertyOptional() hotelId?: string | null;
   @ApiProperty() companyName: string;
   @ApiProperty() contactPerson: string;
   @ApiPropertyOptional({ nullable: true }) contactEmail: string | null;

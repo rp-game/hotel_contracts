@@ -60,7 +60,7 @@ export declare class DeleteSalesLeadRequest {
 export declare class SalesLeadResponse {
     id: string;
     tenantId: string;
-    hotelId: string;
+    hotelId?: string | null;
     companyName: string;
     contactPerson: string;
     contactEmail: string | null;

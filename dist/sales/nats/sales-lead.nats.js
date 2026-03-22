@@ -396,8 +396,8 @@ __decorate([
     __metadata("design:type", String)
 ], SalesLeadResponse.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", String)
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
 ], SalesLeadResponse.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
