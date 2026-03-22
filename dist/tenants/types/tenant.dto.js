@@ -94,7 +94,6 @@ __decorate([
 class CreateTenantDto {
     name;
     type;
-    code;
     slug;
     description;
     hotels;
@@ -118,11 +117,6 @@ __decorate([
     (0, class_validator_1.IsEnum)(tenant_types_1.TenantType),
     __metadata("design:type", String)
 ], CreateTenantDto.prototype, "type", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Numeric tenant code (auto-generated if not provided)', example: 1010 }),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Number)
-], CreateTenantDto.prototype, "code", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'URL-friendly slug (lowercase, hyphens)', example: 'grand-hotel-chain', maxLength: 100 }),
     (0, class_validator_1.IsOptional)(),
