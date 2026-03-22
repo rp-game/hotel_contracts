@@ -9,4 +9,5 @@ export * from './error.interface';
 export * from './query.dto';
 export * from './date-utils';
 export * from './hotel-timezone-cache';
+export * from './validators';
 //# sourceMappingURL=index.d.ts.map

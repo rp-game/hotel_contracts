@@ -24,8 +24,9 @@ class GetSalesDashboardQueryDto {
 }
 exports.GetSalesDashboardQueryDto = GetSalesDashboardQueryDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
-    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (or "null" for chain-level)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetSalesDashboardQueryDto.prototype, "hotelId", void 0);
 __decorate([

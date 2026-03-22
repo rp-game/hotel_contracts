@@ -3,7 +3,7 @@
  * Used by api-gateway controllers for request validation and Swagger docs
  */
 export declare class GetSalesDashboardQueryDto {
-    hotelId: string;
+    hotelId?: string;
     year: number;
     month: number;
 }
