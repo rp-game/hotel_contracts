@@ -69,6 +69,10 @@ export class CreateTenantDto {
   @IsEnum(TenantType)
   type: TenantType;
 
+  @ApiPropertyOptional({ description: 'Numeric tenant code (auto-generated if not provided)', example: 1010 })
+  @IsOptional()
+  code?: number;
+
   @ApiPropertyOptional({ description: 'URL-friendly slug (lowercase, hyphens)', example: 'grand-hotel-chain', maxLength: 100 })
   @IsOptional()
   @IsString()

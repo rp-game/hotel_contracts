@@ -19,6 +19,7 @@ export declare class TenantResponseDto {
 export declare class CreateTenantDto {
     name: string;
     type: TenantType;
+    code?: number;
     slug?: string;
     description?: string;
     hotels?: string[];
