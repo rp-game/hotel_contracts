@@ -88,7 +88,7 @@ export class UpdateSalesLeadRequest {
 // --- Find ---
 export class FindSalesLeadsRequest {
   @ApiPropertyOptional() @IsOptional() @IsUUID() tenantId?: string;
-  @ApiPropertyOptional() @IsOptional() @IsUUID() hotelId?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() hotelId?: string;
   @ApiPropertyOptional() @IsOptional() @IsString() stage?: string;
   @ApiPropertyOptional() @IsOptional() @IsString() source?: string;
   @ApiPropertyOptional() @IsOptional() @IsUUID() salesPersonId?: string;

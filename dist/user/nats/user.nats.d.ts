@@ -38,7 +38,7 @@ export declare class RemoveUserRequestDto {
     id: string;
 }
 export declare class FindStaffRequestDto {
-    hotelId?: string | null;
+    hotelId?: string;
     roles?: string[];
     staffStatus?: StaffStatus;
     page?: number;

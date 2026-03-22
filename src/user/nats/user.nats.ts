@@ -83,8 +83,8 @@ export class RemoveUserRequestDto {
 // ============= Staff-specific Request DTOs =============
 
 export class FindStaffRequestDto {
-  @ApiPropertyOptional({ description: 'Hotel ID (null = chain-level staff with no hotel)' })
-  hotelId?: string | null;
+  @ApiPropertyOptional({ description: 'Hotel ID (or "null" for chain-level staff)' })
+  hotelId?: string;
 
   @ApiPropertyOptional({ description: 'Roles filter', type: [String] })
   roles?: string[];

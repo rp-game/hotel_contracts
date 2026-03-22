@@ -30,9 +30,9 @@ class CreateSalesTargetDto {
 }
 exports.CreateSalesTargetDto = CreateSalesTargetDto;
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (null = chain-level target)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (omit or "null" for chain-level)' }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateSalesTargetDto.prototype, "hotelId", void 0);
 __decorate([
@@ -136,9 +136,9 @@ class FindSalesTargetsQueryDto {
 }
 exports.FindSalesTargetsQueryDto = FindSalesTargetsQueryDto;
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by hotel ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by hotel ID (or "null" for chain-level)' }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], FindSalesTargetsQueryDto.prototype, "hotelId", void 0);
 __decorate([
@@ -171,9 +171,9 @@ class RecalculateSalesTargetsDto {
 }
 exports.RecalculateSalesTargetsDto = RecalculateSalesTargetsDto;
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (null = recalculate chain-level targets)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (or "null" for chain-level)' }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], RecalculateSalesTargetsDto.prototype, "hotelId", void 0);
 __decorate([

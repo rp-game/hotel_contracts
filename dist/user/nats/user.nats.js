@@ -145,8 +145,8 @@ class FindStaffRequestDto {
 }
 exports.FindStaffRequestDto = FindStaffRequestDto;
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (null = chain-level staff with no hotel)' }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (or "null" for chain-level staff)' }),
+    __metadata("design:type", String)
 ], FindStaffRequestDto.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Roles filter', type: [String] }),
