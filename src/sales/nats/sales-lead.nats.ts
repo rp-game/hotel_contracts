@@ -9,11 +9,12 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import type { NatsResponse } from '../../common/nats-response.interface';
+import { IsNullableUUID } from '../../common/validators';
 
 // --- Create ---
 export class CreateSalesLeadRequest {
   @ApiPropertyOptional() @IsOptional() @IsUUID() tenantId?: string;
-  @ApiPropertyOptional() @IsOptional() @IsUUID() hotelId?: string;
+  @ApiPropertyOptional() @IsOptional() @IsNullableUUID() hotelId?: string;
 
   @ApiProperty({ description: 'Prospect company name' })
   @IsString()
@@ -88,7 +89,7 @@ export class UpdateSalesLeadRequest {
 // --- Find ---
 export class FindSalesLeadsRequest {
   @ApiPropertyOptional() @IsOptional() @IsUUID() tenantId?: string;
-  @ApiPropertyOptional() @IsOptional() @IsString() hotelId?: string;
+  @ApiPropertyOptional() @IsOptional() @IsNullableUUID() hotelId?: string;
   @ApiPropertyOptional() @IsOptional() @IsString() stage?: string;
   @ApiPropertyOptional() @IsOptional() @IsString() source?: string;
   @ApiPropertyOptional() @IsOptional() @IsUUID() salesPersonId?: string;
@@ -164,7 +165,7 @@ export class ConvertSalesLeadRequest {
 // --- Pipeline Summary ---
 export class PipelineSummaryRequest {
   @ApiPropertyOptional() @IsOptional() @IsUUID() tenantId?: string;
-  @ApiPropertyOptional() @IsOptional() @IsUUID() hotelId?: string;
+  @ApiPropertyOptional() @IsOptional() @IsNullableUUID() hotelId?: string;
 }
 
 export class StageSummary {

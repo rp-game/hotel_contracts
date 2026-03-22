@@ -13,12 +13,13 @@ import {
 import { Type } from 'class-transformer';
 import { SalesCommissionAppliesTo } from '../enums/sales.enum';
 import type { NatsResponse } from '../../common/nats-response.interface';
+import { IsNullableUUID } from '../../common/validators';
 
 // === Commission Rule CRUD ===
 
 export class CreateSalesCommissionRuleRequest {
   @ApiPropertyOptional() @IsOptional() @IsUUID() tenantId?: string;
-  @ApiPropertyOptional() @IsOptional() @IsUUID() hotelId?: string;
+  @ApiPropertyOptional() @IsOptional() @IsNullableUUID() hotelId?: string;
 
   @ApiProperty({ description: 'Sales person ID' })
   @IsUUID()
@@ -59,7 +60,7 @@ export class UpdateSalesCommissionRuleRequest {
 
 export class FindSalesCommissionRulesRequest {
   @ApiPropertyOptional() @IsOptional() @IsUUID() tenantId?: string;
-  @ApiPropertyOptional() @IsOptional() @IsUUID() hotelId?: string;
+  @ApiPropertyOptional() @IsOptional() @IsNullableUUID() hotelId?: string;
   @ApiPropertyOptional() @IsOptional() @IsUUID() salesPersonId?: string;
   @ApiPropertyOptional({ enum: SalesCommissionAppliesTo }) @IsOptional() @IsEnum(SalesCommissionAppliesTo) appliesTo?: SalesCommissionAppliesTo;
   @ApiPropertyOptional() @IsOptional() @IsBoolean() isActive?: boolean;
@@ -109,7 +110,7 @@ export class DeleteSalesCommissionRuleResponse {
 
 export class FindSalesCommissionRecordsRequest {
   @ApiPropertyOptional() @IsOptional() @IsUUID() tenantId?: string;
-  @ApiPropertyOptional() @IsOptional() @IsUUID() hotelId?: string;
+  @ApiPropertyOptional() @IsOptional() @IsNullableUUID() hotelId?: string;
   @ApiPropertyOptional() @IsOptional() @IsUUID() salesPersonId?: string;
   @ApiPropertyOptional() @IsOptional() @IsDateString() dateFrom?: string;
   @ApiPropertyOptional() @IsOptional() @IsDateString() dateTo?: string;
@@ -143,7 +144,7 @@ export class SalesCommissionRecordListResponse {
 
 export class SalesCommissionSummaryRequest {
   @ApiPropertyOptional() @IsOptional() @IsUUID() tenantId?: string;
-  @ApiPropertyOptional() @IsOptional() @IsUUID() hotelId?: string;
+  @ApiPropertyOptional() @IsOptional() @IsNullableUUID() hotelId?: string;
   @ApiPropertyOptional() @IsOptional() @IsUUID() salesPersonId?: string;
   @ApiPropertyOptional() @IsOptional() @IsDateString() dateFrom?: string;
   @ApiPropertyOptional() @IsOptional() @IsDateString() dateTo?: string;
@@ -176,7 +177,7 @@ export type SalesCommissionSummaryNatsResponse = NatsResponse<SalesCommissionSum
 
 export class SalesProductionRequest {
   @ApiPropertyOptional() @IsOptional() @IsUUID() tenantId?: string;
-  @ApiPropertyOptional() @IsOptional() @IsUUID() hotelId?: string;
+  @ApiPropertyOptional() @IsOptional() @IsNullableUUID() hotelId?: string;
   @ApiPropertyOptional() @IsOptional() @IsUUID() salesPersonId?: string;
   @ApiProperty() @IsDateString() dateFrom: string;
   @ApiProperty() @IsDateString() dateTo: string;

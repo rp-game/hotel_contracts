@@ -13,6 +13,7 @@ exports.PipelineSummaryResponse = exports.StageSummary = exports.PipelineSummary
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
+const validators_1 = require("../../common/validators");
 // --- Create ---
 class CreateSalesLeadRequest {
     tenantId;
@@ -42,7 +43,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], CreateSalesLeadRequest.prototype, "hotelId", void 0);
 __decorate([
@@ -276,7 +277,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], FindSalesLeadsRequest.prototype, "hotelId", void 0);
 __decorate([
@@ -565,7 +566,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], PipelineSummaryRequest.prototype, "hotelId", void 0);
 class StageSummary {

@@ -13,12 +13,13 @@ import {
   Max,
   MaxLength,
 } from 'class-validator';
+import { IsNullableUUID } from '../../common/validators';
 import { Type } from 'class-transformer';
 
 export class CreateSalesTargetDto {
   @ApiPropertyOptional({ description: 'Hotel ID (omit or "null" for chain-level)' })
   @IsOptional()
-  @IsString()
+  @IsNullableUUID()
   hotelId?: string;
 
   @ApiProperty({ description: 'Sales person ID' })
@@ -101,7 +102,7 @@ export class UpdateSalesTargetDto {
 export class FindSalesTargetsQueryDto {
   @ApiPropertyOptional({ description: 'Filter by hotel ID (or "null" for chain-level)' })
   @IsOptional()
-  @IsString()
+  @IsNullableUUID()
   hotelId?: string;
 
   @ApiPropertyOptional({ description: 'Filter by sales person ID' })
@@ -127,7 +128,7 @@ export class FindSalesTargetsQueryDto {
 export class RecalculateSalesTargetsDto {
   @ApiPropertyOptional({ description: 'Hotel ID (or "null" for chain-level)' })
   @IsOptional()
-  @IsString()
+  @IsNullableUUID()
   hotelId?: string;
 
   @ApiPropertyOptional({ description: 'Sales person ID (recalculate for specific person)' })

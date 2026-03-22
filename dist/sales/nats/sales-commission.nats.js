@@ -14,6 +14,7 @@ const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 const sales_enum_1 = require("../enums/sales.enum");
+const validators_1 = require("../../common/validators");
 // === Commission Rule CRUD ===
 class CreateSalesCommissionRuleRequest {
     tenantId;
@@ -36,7 +37,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], CreateSalesCommissionRuleRequest.prototype, "hotelId", void 0);
 __decorate([
@@ -152,7 +153,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], FindSalesCommissionRulesRequest.prototype, "hotelId", void 0);
 __decorate([
@@ -334,7 +335,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], FindSalesCommissionRecordsRequest.prototype, "hotelId", void 0);
 __decorate([
@@ -473,7 +474,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], SalesCommissionSummaryRequest.prototype, "hotelId", void 0);
 __decorate([
@@ -553,7 +554,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], SalesProductionRequest.prototype, "hotelId", void 0);
 __decorate([

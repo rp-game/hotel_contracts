@@ -17,6 +17,7 @@ exports.SalesDashboardResponseDto = exports.TopAccountDto = exports.TopPerformer
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
+const validators_1 = require("../../common/validators");
 class GetSalesDashboardQueryDto {
     hotelId;
     year;
@@ -26,7 +27,7 @@ exports.GetSalesDashboardQueryDto = GetSalesDashboardQueryDto;
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (or "null" for chain-level)' }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], GetSalesDashboardQueryDto.prototype, "hotelId", void 0);
 __decorate([

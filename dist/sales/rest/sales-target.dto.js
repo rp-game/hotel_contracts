@@ -16,6 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RecalculateSalesTargetsDto = exports.FindSalesTargetsQueryDto = exports.UpdateSalesTargetDto = exports.CreateSalesTargetDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const validators_1 = require("../../common/validators");
 const class_transformer_1 = require("class-transformer");
 class CreateSalesTargetDto {
     hotelId;
@@ -32,7 +33,7 @@ exports.CreateSalesTargetDto = CreateSalesTargetDto;
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (omit or "null" for chain-level)' }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], CreateSalesTargetDto.prototype, "hotelId", void 0);
 __decorate([
@@ -138,7 +139,7 @@ exports.FindSalesTargetsQueryDto = FindSalesTargetsQueryDto;
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by hotel ID (or "null" for chain-level)' }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], FindSalesTargetsQueryDto.prototype, "hotelId", void 0);
 __decorate([
@@ -173,7 +174,7 @@ exports.RecalculateSalesTargetsDto = RecalculateSalesTargetsDto;
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (or "null" for chain-level)' }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], RecalculateSalesTargetsDto.prototype, "hotelId", void 0);
 __decorate([

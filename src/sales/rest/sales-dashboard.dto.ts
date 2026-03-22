@@ -4,13 +4,14 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNumber, IsUUID, IsString, Min, Max, IsOptional } from 'class-validator';
+import { IsNumber, Min, Max, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
+import { IsNullableUUID } from '../../common/validators';
 
 export class GetSalesDashboardQueryDto {
   @ApiPropertyOptional({ description: 'Hotel ID (or "null" for chain-level)' })
   @IsOptional()
-  @IsString()
+  @IsNullableUUID()
   hotelId?: string;
 
   @ApiProperty({ description: 'Year', example: 2026 })
