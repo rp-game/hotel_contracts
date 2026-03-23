@@ -106,6 +106,45 @@ export interface CalculateRateRequest {
     vatRate: number;
     serviceChargeRate: number;
   };
+  /** Rate plan ID — if provided, pricing-service applies derivation in pipeline */
+  ratePlanId?: string;
+  /** Booking source (WALK_IN, WEBSITE, OTA, CORPORATE, TRAVEL_AGENT, DIRECT) */
+  source?: string;
+}
+
+/**
+ * Batch calculate rates for multiple rate plans at once.
+ * Used by frontend to display rate plan options with prices.
+ * NOTE: Does NOT apply promotions — only base + seasonal + dynamic + LOS + derivation.
+ */
+export interface CalculateRateForPlansRequest {
+  tenantId: string;
+  hotelId: string;
+  roomTypeId: string;
+  checkIn: string;
+  checkOut: string;
+  guests?: number;
+  ratePlanIds: string[];
+  source?: string;
+}
+
+export interface CalculateRateForPlansResponse {
+  baseRate: number;
+  nights: number;
+  taxConfiguration?: {
+    vatRate: number;
+    serviceChargeRate: number;
+  };
+  plans: Array<{
+    ratePlanId: string;
+    ratePlanName: string;
+    finalRate: number;
+    perNightRate: number;
+    derivation?: {
+      type: 'PERCENTAGE' | 'AMOUNT';
+      value: number;
+    };
+  }>;
 }
 
 export class CalculateRateResponse {

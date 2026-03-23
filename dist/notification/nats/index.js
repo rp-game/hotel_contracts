@@ -17,4 +17,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./staff-notification.nats"), exports);
 __exportStar(require("./provider-config.nats"), exports);
 __exportStar(require("./zalo-template.nats"), exports);
+__exportStar(require("./notification-template.nats"), exports);
 //# sourceMappingURL=index.js.map

@@ -31,4 +31,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./additional-services.nats"), exports);
 __exportStar(require("./service-bookings.nats"), exports);
 __exportStar(require("./analytics.nats"), exports);
+__exportStar(require("./payment-methods.nats"), exports);
 //# sourceMappingURL=index.js.map

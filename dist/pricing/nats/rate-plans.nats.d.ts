@@ -57,6 +57,8 @@ export declare class ListRatePlansRequest {
     includeAllCorporate?: boolean;
     checkInDate?: string;
     checkOutDate?: string;
+    accountId?: string;
+    accountType?: string;
 }
 export declare class ListRatePlansResponse {
     data: CreateRatePlanResponse[];

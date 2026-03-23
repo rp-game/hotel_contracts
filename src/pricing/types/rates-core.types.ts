@@ -161,6 +161,16 @@ export class RateBreakdown {
 
   @ApiProperty({ description: 'Gross amount (calculatedRate + taxes)', required: false })
   grossAmount?: number;
+
+  @ApiProperty({ description: 'Rate plan derivation adjustment details', required: false })
+  ratePlanAdjustment?: {
+    ratePlanId: string;
+    ratePlanName: string;
+    type: 'PERCENTAGE' | 'AMOUNT';
+    value: number;
+    originalAmount: number;
+    adjustedAmount: number;
+  };
 }
 
 /**

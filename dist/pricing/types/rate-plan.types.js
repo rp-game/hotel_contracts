@@ -30,6 +30,8 @@ class CreateRatePlanDto {
     derivationType;
     derivationValue;
     description;
+    accountId;
+    accountType;
 }
 exports.CreateRatePlanDto = CreateRatePlanDto;
 __decorate([
@@ -76,6 +78,18 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateRatePlanDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Account ID — generic reference for corporate, travel agent, or government. Only valid for DERIVED type.' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateRatePlanDto.prototype, "accountId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Account type', enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT'] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateRatePlanDto.prototype, "accountType", void 0);
 // ============================================================================
 // Response DTOs
 // ============================================================================

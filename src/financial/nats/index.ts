@@ -16,3 +16,4 @@
 export * from './additional-services.nats';
 export * from './service-bookings.nats';
 export * from './analytics.nats';
+export * from './payment-methods.nats';

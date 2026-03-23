@@ -89,6 +89,8 @@ export declare class CreateRatePlanDto {
     derivationType?: 'PERCENTAGE' | 'AMOUNT';
     derivationValue?: number;
     description?: string;
+    accountId?: string;
+    accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT';
 }
 /**
  * Rate plan response

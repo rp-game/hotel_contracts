@@ -129,6 +129,16 @@ export class CreateRatePlanDto {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @ApiPropertyOptional({ description: 'Account ID — generic reference for corporate, travel agent, or government. Only valid for DERIVED type.' })
+  @IsOptional()
+  @IsUUID()
+  accountId?: string;
+
+  @ApiPropertyOptional({ description: 'Account type', enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT'] })
+  @IsOptional()
+  @IsString()
+  accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT';
 }
 
 // ============================================================================

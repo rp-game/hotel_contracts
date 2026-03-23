@@ -84,6 +84,14 @@ export declare class RateBreakdown {
     taxes: number;
     taxBreakdown?: RateTaxBreakdown;
     grossAmount?: number;
+    ratePlanAdjustment?: {
+        ratePlanId: string;
+        ratePlanName: string;
+        type: 'PERCENTAGE' | 'AMOUNT';
+        value: number;
+        originalAmount: number;
+        adjustedAmount: number;
+    };
 }
 /**
  * Dynamic rate calculation result

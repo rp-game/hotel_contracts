@@ -176,6 +176,23 @@ export class CreateRatePlanRequest {
   corporateAccountName?: string;
 
   @ApiPropertyOptional({
+    description: 'Account ID — generic account reference for corporate, travel agent, or government rate plans. Only valid for DERIVED type.',
+    example: '123e4567-e89b-12d3-a456-426614174099',
+  })
+  @IsOptional()
+  @IsUUID()
+  accountId?: string;
+
+  @ApiPropertyOptional({
+    description: 'Account type — categorizes the rate plan for filtering. Only valid for DERIVED type.',
+    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT'],
+    example: 'CORPORATE',
+  })
+  @IsOptional()
+  @IsString()
+  accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT';
+
+  @ApiPropertyOptional({
     description: 'Rate plan valid from date (YYYY-MM-DD). If null, always valid.',
     example: '2026-01-01',
   })

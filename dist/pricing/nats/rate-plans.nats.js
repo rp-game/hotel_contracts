@@ -200,6 +200,8 @@ class ListRatePlansRequest {
     includeAllCorporate;
     checkInDate;
     checkOutDate;
+    accountId;
+    accountType;
 }
 exports.ListRatePlansRequest = ListRatePlansRequest;
 __decorate([
@@ -253,6 +255,24 @@ __decorate([
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], ListRatePlansRequest.prototype, "checkOutDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Filter by account ID (corporate, travel agent, or government account). Returns public plans + plans for this account.',
+        example: '123e4567-e89b-12d3-a456-426614174099',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], ListRatePlansRequest.prototype, "accountId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Filter by account type (CORPORATE, TRAVEL_AGENT, GOVERNMENT)',
+        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT'],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ListRatePlansRequest.prototype, "accountType", void 0);
 class ListRatePlansResponse {
     data;
 }

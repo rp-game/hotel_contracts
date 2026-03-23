@@ -211,6 +211,22 @@ export class ListRatePlansRequest {
   @IsOptional()
   @IsDateString()
   checkOutDate?: string;
+
+  @ApiPropertyOptional({
+    description: 'Filter by account ID (corporate, travel agent, or government account). Returns public plans + plans for this account.',
+    example: '123e4567-e89b-12d3-a456-426614174099',
+  })
+  @IsOptional()
+  @IsUUID()
+  accountId?: string;
+
+  @ApiPropertyOptional({
+    description: 'Filter by account type (CORPORATE, TRAVEL_AGENT, GOVERNMENT)',
+    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT'],
+  })
+  @IsOptional()
+  @IsString()
+  accountType?: string;
 }
 
 export class ListRatePlansResponse {

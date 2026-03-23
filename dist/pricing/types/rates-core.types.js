@@ -181,6 +181,7 @@ class RateBreakdown {
     taxes;
     taxBreakdown;
     grossAmount;
+    ratePlanAdjustment;
 }
 exports.RateBreakdown = RateBreakdown;
 __decorate([
@@ -227,6 +228,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Gross amount (calculatedRate + taxes)', required: false }),
     __metadata("design:type", Number)
 ], RateBreakdown.prototype, "grossAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Rate plan derivation adjustment details', required: false }),
+    __metadata("design:type", Object)
+], RateBreakdown.prototype, "ratePlanAdjustment", void 0);
 /**
  * Dynamic rate calculation result
  */

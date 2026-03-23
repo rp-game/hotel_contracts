@@ -94,6 +94,8 @@ class CreateRatePlanRequest {
     depositPercent;
     corporateAccountId;
     corporateAccountName;
+    accountId;
+    accountType;
     validFrom;
     validTo;
     blackoutPeriods;
@@ -226,6 +228,25 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateRatePlanRequest.prototype, "corporateAccountName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Account ID — generic account reference for corporate, travel agent, or government rate plans. Only valid for DERIVED type.',
+        example: '123e4567-e89b-12d3-a456-426614174099',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateRatePlanRequest.prototype, "accountId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Account type — categorizes the rate plan for filtering. Only valid for DERIVED type.',
+        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT'],
+        example: 'CORPORATE',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateRatePlanRequest.prototype, "accountType", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Rate plan valid from date (YYYY-MM-DD). If null, always valid.',

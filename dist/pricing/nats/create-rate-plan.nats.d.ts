@@ -48,6 +48,8 @@ export declare class CreateRatePlanRequest {
     depositPercent?: number | null;
     corporateAccountId?: string;
     corporateAccountName?: string;
+    accountId?: string;
+    accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT';
     validFrom?: string;
     validTo?: string;
     blackoutPeriods?: BlackoutPeriodDto[];
