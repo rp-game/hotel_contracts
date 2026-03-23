@@ -91,6 +91,10 @@ export declare class RateBreakdown {
         value: number;
         originalAmount: number;
         adjustedAmount: number;
+        /** @deprecated Use originalAmount. Kept for backward compatibility with e2e tests */
+        originalTotal?: number;
+        /** @deprecated Use adjustedAmount. Kept for backward compatibility with e2e tests */
+        adjustedTotal?: number;
     };
 }
 /**
