@@ -5,7 +5,7 @@
  * Core pricing module for room rates and restrictions.
  */
 
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsUUID } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { Rate, DynamicRateCalculation, BulkCreateRatesResult, BulkUpdateRatesResult } from '../types';
@@ -117,34 +117,67 @@ export interface CalculateRateRequest {
  * Used by frontend to display rate plan options with prices.
  * NOTE: Does NOT apply promotions — only base + seasonal + dynamic + LOS + derivation.
  */
-export interface CalculateRateForPlansRequest {
+export class CalculateRateForPlansRequest {
+  @ApiProperty({ description: 'Tenant ID', example: '550e8400-e29b-41d4-a716-446655440001' })
   tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID', example: '550e8400-e29b-41d4-a716-446655440010' })
   hotelId: string;
+
+  @ApiProperty({ description: 'Room type ID', example: '650e8400-e29b-41d4-a716-446655440101' })
   roomTypeId: string;
+
+  @ApiProperty({ description: 'Check-in date (YYYY-MM-DD)', example: '2026-04-01' })
   checkIn: string;
+
+  @ApiProperty({ description: 'Check-out date (YYYY-MM-DD)', example: '2026-04-05' })
   checkOut: string;
+
+  @ApiPropertyOptional({ description: 'Number of guests', example: 2 })
   guests?: number;
+
+  @ApiProperty({ description: 'List of rate plan IDs to calculate', type: [String] })
   ratePlanIds: string[];
+
+  @ApiPropertyOptional({ description: 'Booking source', example: 'DIRECT' })
   source?: string;
 }
 
-export interface CalculateRateForPlansResponse {
+export class CalculateRateForPlanItem {
+  @ApiProperty({ description: 'Rate plan ID' })
+  ratePlanId: string;
+
+  @ApiProperty({ description: 'Rate plan name' })
+  ratePlanName: string;
+
+  @ApiProperty({ description: 'Total price after derivation (pre-tax)' })
+  finalRate: number;
+
+  @ApiProperty({ description: 'Price per night (pre-tax)' })
+  perNightRate: number;
+
+  @ApiPropertyOptional({ description: 'Derivation details (if DERIVED plan)' })
+  derivation?: {
+    type: 'PERCENTAGE' | 'AMOUNT';
+    value: number;
+  };
+}
+
+export class CalculateRateForPlansResponse {
+  @ApiProperty({ description: 'Base rate without rate plan derivation (pre-tax)' })
   baseRate: number;
+
+  @ApiProperty({ description: 'Number of nights' })
   nights: number;
+
+  @ApiPropertyOptional({ description: 'Tax configuration for frontend display' })
   taxConfiguration?: {
     vatRate: number;
     serviceChargeRate: number;
   };
-  plans: Array<{
-    ratePlanId: string;
-    ratePlanName: string;
-    finalRate: number;
-    perNightRate: number;
-    derivation?: {
-      type: 'PERCENTAGE' | 'AMOUNT';
-      value: number;
-    };
-  }>;
+
+  @ApiProperty({ description: 'Calculated rates per plan', type: [CalculateRateForPlanItem] })
+  plans: CalculateRateForPlanItem[];
 }
 
 export class CalculateRateResponse {

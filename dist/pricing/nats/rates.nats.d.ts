@@ -82,7 +82,7 @@ export interface CalculateRateRequest {
  * Used by frontend to display rate plan options with prices.
  * NOTE: Does NOT apply promotions — only base + seasonal + dynamic + LOS + derivation.
  */
-export interface CalculateRateForPlansRequest {
+export declare class CalculateRateForPlansRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId: string;
@@ -92,23 +92,24 @@ export interface CalculateRateForPlansRequest {
     ratePlanIds: string[];
     source?: string;
 }
-export interface CalculateRateForPlansResponse {
+export declare class CalculateRateForPlanItem {
+    ratePlanId: string;
+    ratePlanName: string;
+    finalRate: number;
+    perNightRate: number;
+    derivation?: {
+        type: 'PERCENTAGE' | 'AMOUNT';
+        value: number;
+    };
+}
+export declare class CalculateRateForPlansResponse {
     baseRate: number;
     nights: number;
     taxConfiguration?: {
         vatRate: number;
         serviceChargeRate: number;
     };
-    plans: Array<{
-        ratePlanId: string;
-        ratePlanName: string;
-        finalRate: number;
-        perNightRate: number;
-        derivation?: {
-            type: 'PERCENTAGE' | 'AMOUNT';
-            value: number;
-        };
-    }>;
+    plans: CalculateRateForPlanItem[];
 }
 export declare class CalculateRateResponse {
     data: DynamicRateCalculation;
