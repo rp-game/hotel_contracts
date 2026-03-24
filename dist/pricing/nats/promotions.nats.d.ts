@@ -121,7 +121,9 @@ export declare class ValidatePromotionResponse {
     promoCode: string;
     discountType?: 'PERCENTAGE' | 'FIXED' | 'FREE_NIGHT';
     discountValue?: number;
+    errorCode?: string;
     message?: string;
+    params?: Record<string, any>;
     applicableAmount?: number;
     finalAmount?: number;
 }

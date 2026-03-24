@@ -623,7 +623,9 @@ class ValidatePromotionResponse {
     promoCode;
     discountType;
     discountValue;
+    errorCode;
     message;
+    params;
     applicableAmount;
     finalAmount;
 }
@@ -649,9 +651,17 @@ __decorate([
     __metadata("design:type", Number)
 ], ValidatePromotionResponse.prototype, "discountValue", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Error code for i18n mapping (e.g., NOT_FOUND, EXPIRED, MIN_STAY)' }),
+    __metadata("design:type", String)
+], ValidatePromotionResponse.prototype, "errorCode", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Message explaining validation result' }),
     __metadata("design:type", String)
 ], ValidatePromotionResponse.prototype, "message", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Parameters for i18n interpolation (e.g., { min: 3 } for MIN_STAY)' }),
+    __metadata("design:type", Object)
+], ValidatePromotionResponse.prototype, "params", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Applicable discount amount' }),
     __metadata("design:type", Number)

@@ -481,8 +481,14 @@ export class ValidatePromotionResponse {
   @ApiPropertyOptional({ description: 'Discount value if valid' })
   discountValue?: number;
 
+  @ApiPropertyOptional({ description: 'Error code for i18n mapping (e.g., NOT_FOUND, EXPIRED, MIN_STAY)' })
+  errorCode?: string;
+
   @ApiPropertyOptional({ description: 'Message explaining validation result' })
   message?: string;
+
+  @ApiPropertyOptional({ description: 'Parameters for i18n interpolation (e.g., { min: 3 } for MIN_STAY)' })
+  params?: Record<string, any>;
 
   @ApiPropertyOptional({ description: 'Applicable discount amount' })
   applicableAmount?: number;
