@@ -42,6 +42,7 @@ export declare class BookingPaymentResponseDto {
     paymentDate: Date;
     transactionId?: string;
     createdBy?: string;
+    payerName?: string;
     notes?: string;
 }
 export declare class BookingServiceResponseDto {

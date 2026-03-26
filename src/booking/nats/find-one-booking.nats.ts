@@ -89,6 +89,15 @@ export class BookingPayment {
 
   @ApiPropertyOptional({ description: 'Transaction reference' })
   transactionRef?: string;
+
+  @ApiPropertyOptional({ description: 'Payer name' })
+  payerName?: string;
+
+  @ApiPropertyOptional({ description: 'User ID who recorded the payment' })
+  createdBy?: string;
+
+  @ApiPropertyOptional({ description: 'Payment notes' })
+  notes?: string;
 }
 
 export class GetBookingByIdRequest {

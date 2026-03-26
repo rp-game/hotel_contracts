@@ -94,6 +94,9 @@ export class BookingPaymentResponseDto {
   @ApiPropertyOptional({ description: 'User ID who collected/created the payment' })
   createdBy?: string;
 
+  @ApiPropertyOptional({ description: 'Payer name' })
+  payerName?: string;
+
   @ApiPropertyOptional({ description: 'Payment notes' })
   notes?: string;
 }

@@ -132,6 +132,7 @@ class BookingPaymentResponseDto {
     paymentDate;
     transactionId;
     createdBy;
+    payerName;
     notes;
 }
 exports.BookingPaymentResponseDto = BookingPaymentResponseDto;
@@ -163,6 +164,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'User ID who collected/created the payment' }),
     __metadata("design:type", String)
 ], BookingPaymentResponseDto.prototype, "createdBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payer name' }),
+    __metadata("design:type", String)
+], BookingPaymentResponseDto.prototype, "payerName", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Payment notes' }),
     __metadata("design:type", String)

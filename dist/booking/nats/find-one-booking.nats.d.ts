@@ -37,6 +37,9 @@ export declare class BookingPayment {
     amount: number;
     paidAt?: string;
     transactionRef?: string;
+    payerName?: string;
+    createdBy?: string;
+    notes?: string;
 }
 export declare class GetBookingByIdRequest {
     tenantId: string;

@@ -120,6 +120,9 @@ class BookingPayment {
     amount;
     paidAt;
     transactionRef;
+    payerName;
+    createdBy;
+    notes;
 }
 exports.BookingPayment = BookingPayment;
 __decorate([
@@ -149,6 +152,18 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Transaction reference' }),
     __metadata("design:type", String)
 ], BookingPayment.prototype, "transactionRef", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payer name' }),
+    __metadata("design:type", String)
+], BookingPayment.prototype, "payerName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID who recorded the payment' }),
+    __metadata("design:type", String)
+], BookingPayment.prototype, "createdBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payment notes' }),
+    __metadata("design:type", String)
+], BookingPayment.prototype, "notes", void 0);
 class GetBookingByIdRequest {
     tenantId;
     hotelId;
