@@ -86,6 +86,11 @@ export interface CreateOfflinePaymentNatsRequest {
   receivedBy?: string;
 
   /**
+   * Display name of staff who received the payment
+   */
+  receivedByName?: string;
+
+  /**
    * Cashier shift ID (auto-linked if staff has an active shift)
    */
   cashierShiftId?: string;
