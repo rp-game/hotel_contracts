@@ -81,6 +81,7 @@ export interface OfflinePaymentConfirmedNatsRequest {
     tenantId: string;
     hotelId: string;
     receivedBy?: string;
+    receivedByName?: string;
     notes?: string;
 }
 //# sourceMappingURL=payment-events.nats.d.ts.map

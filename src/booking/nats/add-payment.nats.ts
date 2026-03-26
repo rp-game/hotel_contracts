@@ -11,6 +11,7 @@ export interface AddPaymentNatsRequest {
   paymentMethod: string;
   transactionId?: string;
   notes?: string;
+  payerName?: string;
   tenantId: string;
   hotelId: string;
   addedBy: string;

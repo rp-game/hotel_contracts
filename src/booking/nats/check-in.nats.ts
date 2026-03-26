@@ -74,6 +74,7 @@ export interface CheckOutBookingNatsRequest {
   additionalCharges?: number;
   notes?: string;
   checkedOutBy: string;
+  checkedOutByName?: string;
   finalAmount?: number;
   finalBillAmount?: string | number;
   paymentMethod?: string;
