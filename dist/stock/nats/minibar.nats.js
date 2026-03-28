@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MinibarCheckResponse = exports.MinibarChargedItem = exports.SubmitMinibarCheckRequest = exports.MinibarCheckItemDto = void 0;
+exports.MinibarCheckResponse = exports.MinibarRestockSuggestion = exports.MinibarChargedItem = exports.SubmitMinibarCheckRequest = exports.MinibarCheckItemDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -134,11 +134,40 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Boolean)
 ], MinibarChargedItem.prototype, "isComplimentary", void 0);
+class MinibarRestockSuggestion {
+    itemId;
+    itemName;
+    consumedQty;
+    standardQty;
+    suggestedRestockQty;
+}
+exports.MinibarRestockSuggestion = MinibarRestockSuggestion;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarRestockSuggestion.prototype, "itemId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarRestockSuggestion.prototype, "itemName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRestockSuggestion.prototype, "consumedQty", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRestockSuggestion.prototype, "standardQty", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRestockSuggestion.prototype, "suggestedRestockQty", void 0);
 class MinibarCheckResponse {
     issueId;
     chargedItems;
     totalCharged;
     bookingChargeSuccess;
+    restockSuggestions;
 }
 exports.MinibarCheckResponse = MinibarCheckResponse;
 __decorate([
@@ -157,4 +186,8 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Whether booking charge was successful' }),
     __metadata("design:type", Boolean)
 ], MinibarCheckResponse.prototype, "bookingChargeSuccess", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [MinibarRestockSuggestion], description: 'Restock suggestions based on minibar template' }),
+    __metadata("design:type", Array)
+], MinibarCheckResponse.prototype, "restockSuggestions", void 0);
 //# sourceMappingURL=minibar.nats.js.map

@@ -291,3 +291,96 @@ export class SupplierHistoryResponse {
 }
 
 export type SupplierHistoryNatsResponse = NatsResponse<SupplierHistoryResponse>;
+
+// ─── Minibar Revenue Report (Doanh thu minibar) ───
+
+export class MinibarRevenueRequest {
+  @ApiProperty() @IsUUID() tenantId: string;
+  @ApiProperty() @IsUUID() hotelId: string;
+  @ApiProperty() @IsDateString() dateFrom: string;
+  @ApiProperty() @IsDateString() dateTo: string;
+}
+
+export class MinibarRevenueItem {
+  @ApiProperty() itemId: string;
+  @ApiProperty() itemName: string;
+  @ApiProperty() unit: string;
+  @ApiProperty() consumedQty: number;
+  @ApiProperty() restockedQty: number;
+  @ApiProperty() costPrice: number;
+  @ApiProperty() sellingPrice: number;
+  @ApiProperty() totalCost: number;
+  @ApiProperty() totalRevenue: number;
+  @ApiProperty() profit: number;
+}
+
+export class MinibarRevenueResponse {
+  @ApiProperty() dateFrom: string;
+  @ApiProperty() dateTo: string;
+  @ApiProperty({ type: [MinibarRevenueItem] }) items: MinibarRevenueItem[];
+  @ApiProperty() totalCost: number;
+  @ApiProperty() totalRevenue: number;
+  @ApiProperty() totalProfit: number;
+}
+
+export type MinibarRevenueNatsResponse = NatsResponse<MinibarRevenueResponse>;
+
+// ─── Variance Report (Bao cao chenh lech kiem ke) ───
+
+export class VarianceReportRequest {
+  @ApiProperty() @IsUUID() tenantId: string;
+  @ApiProperty() @IsUUID() hotelId: string;
+  @ApiPropertyOptional() @IsOptional() @IsDateString() dateFrom?: string;
+  @ApiPropertyOptional() @IsOptional() @IsDateString() dateTo?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() status?: string;
+}
+
+export class VarianceReportItem {
+  @ApiProperty() takeNumber: string;
+  @ApiProperty() takeDate: string;
+  @ApiPropertyOptional() category?: string;
+  @ApiProperty() status: string;
+  @ApiProperty() totalItems: number;
+  @ApiProperty() itemsWithVariance: number;
+  @ApiProperty() totalPositiveVariance: number;
+  @ApiProperty() totalNegativeVariance: number;
+  @ApiProperty() totalVarianceValue: number;
+}
+
+export class VarianceReportResponse {
+  @ApiProperty({ type: [VarianceReportItem] }) items: VarianceReportItem[];
+  @ApiProperty() totalVarianceValue: number;
+}
+
+export type VarianceReportNatsResponse = NatsResponse<VarianceReportResponse>;
+
+// ─── Expiry Report (Bao cao han su dung) ───
+
+export class ExpiryReportRequest {
+  @ApiProperty() @IsUUID() tenantId: string;
+  @ApiProperty() @IsUUID() hotelId: string;
+  @ApiPropertyOptional({ description: 'Days ahead to check (default 30)', default: 30 })
+  @IsOptional() daysAhead?: number;
+}
+
+export class ExpiryReportItem {
+  @ApiProperty() itemId: string;
+  @ApiProperty() itemCode: string;
+  @ApiProperty() itemName: string;
+  @ApiProperty() unit: string;
+  @ApiProperty() batchQuantity: number;
+  @ApiProperty() expiryDate: string;
+  @ApiProperty() daysUntilExpiry: number;
+  @ApiPropertyOptional() receiptNumber?: string;
+  @ApiPropertyOptional() receiptDate?: string;
+  @ApiPropertyOptional() warehouseName?: string;
+}
+
+export class ExpiryReportResponse {
+  @ApiProperty({ type: [ExpiryReportItem] }) items: ExpiryReportItem[];
+  @ApiProperty() totalBatches: number;
+  @ApiProperty() expiredCount: number;
+  @ApiProperty() expiringCount: number;
+}
+
+export type ExpiryReportNatsResponse = NatsResponse<ExpiryReportResponse>;

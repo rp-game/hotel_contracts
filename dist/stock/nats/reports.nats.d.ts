@@ -158,4 +158,78 @@ export declare class SupplierHistoryResponse {
     totalAmount: number;
 }
 export type SupplierHistoryNatsResponse = NatsResponse<SupplierHistoryResponse>;
+export declare class MinibarRevenueRequest {
+    tenantId: string;
+    hotelId: string;
+    dateFrom: string;
+    dateTo: string;
+}
+export declare class MinibarRevenueItem {
+    itemId: string;
+    itemName: string;
+    unit: string;
+    consumedQty: number;
+    restockedQty: number;
+    costPrice: number;
+    sellingPrice: number;
+    totalCost: number;
+    totalRevenue: number;
+    profit: number;
+}
+export declare class MinibarRevenueResponse {
+    dateFrom: string;
+    dateTo: string;
+    items: MinibarRevenueItem[];
+    totalCost: number;
+    totalRevenue: number;
+    totalProfit: number;
+}
+export type MinibarRevenueNatsResponse = NatsResponse<MinibarRevenueResponse>;
+export declare class VarianceReportRequest {
+    tenantId: string;
+    hotelId: string;
+    dateFrom?: string;
+    dateTo?: string;
+    status?: string;
+}
+export declare class VarianceReportItem {
+    takeNumber: string;
+    takeDate: string;
+    category?: string;
+    status: string;
+    totalItems: number;
+    itemsWithVariance: number;
+    totalPositiveVariance: number;
+    totalNegativeVariance: number;
+    totalVarianceValue: number;
+}
+export declare class VarianceReportResponse {
+    items: VarianceReportItem[];
+    totalVarianceValue: number;
+}
+export type VarianceReportNatsResponse = NatsResponse<VarianceReportResponse>;
+export declare class ExpiryReportRequest {
+    tenantId: string;
+    hotelId: string;
+    daysAhead?: number;
+}
+export declare class ExpiryReportItem {
+    itemId: string;
+    itemCode: string;
+    itemName: string;
+    unit: string;
+    batchQuantity: number;
+    expiryDate: string;
+    daysUntilExpiry: number;
+    receiptNumber?: string;
+    receiptDate?: string;
+    warehouseName?: string;
+}
+export declare class ExpiryReportResponse {
+    items: ExpiryReportItem[];
+    totalBatches: number;
+    expiredCount: number;
+    expiringCount: number;
+}
+export type ExpiryReportNatsResponse = NatsResponse<ExpiryReportResponse>;
 //# sourceMappingURL=reports.nats.d.ts.map

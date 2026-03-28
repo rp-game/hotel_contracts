@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SupplierHistoryResponse = exports.SupplierHistoryItem = exports.SupplierHistoryRequest = exports.MovementDetailResponse = exports.MovementDetailItem = exports.MovementDetailRequest = exports.DepartmentCostResponse = exports.DepartmentCostItem = exports.DepartmentCostRequest = exports.CostPerRoomNightResponse = exports.CostPerRoomNightCategoryItem = exports.CostPerRoomNightRequest = exports.LowStockReportResponse = exports.LowStockReportItem = exports.LowStockReportRequest = exports.InOutBalanceResponse = exports.InOutBalanceCategoryGroup = exports.InOutBalanceItemRow = exports.InOutBalanceRequest = void 0;
+exports.ExpiryReportResponse = exports.ExpiryReportItem = exports.ExpiryReportRequest = exports.VarianceReportResponse = exports.VarianceReportItem = exports.VarianceReportRequest = exports.MinibarRevenueResponse = exports.MinibarRevenueItem = exports.MinibarRevenueRequest = exports.SupplierHistoryResponse = exports.SupplierHistoryItem = exports.SupplierHistoryRequest = exports.MovementDetailResponse = exports.MovementDetailItem = exports.MovementDetailRequest = exports.DepartmentCostResponse = exports.DepartmentCostItem = exports.DepartmentCostRequest = exports.CostPerRoomNightResponse = exports.CostPerRoomNightCategoryItem = exports.CostPerRoomNightRequest = exports.LowStockReportResponse = exports.LowStockReportItem = exports.LowStockReportRequest = exports.InOutBalanceResponse = exports.InOutBalanceCategoryGroup = exports.InOutBalanceItemRow = exports.InOutBalanceRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
@@ -688,4 +688,314 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], SupplierHistoryResponse.prototype, "totalAmount", void 0);
+// ─── Minibar Revenue Report (Doanh thu minibar) ───
+class MinibarRevenueRequest {
+    tenantId;
+    hotelId;
+    dateFrom;
+    dateTo;
+}
+exports.MinibarRevenueRequest = MinibarRevenueRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], MinibarRevenueRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], MinibarRevenueRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], MinibarRevenueRequest.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], MinibarRevenueRequest.prototype, "dateTo", void 0);
+class MinibarRevenueItem {
+    itemId;
+    itemName;
+    unit;
+    consumedQty;
+    restockedQty;
+    costPrice;
+    sellingPrice;
+    totalCost;
+    totalRevenue;
+    profit;
+}
+exports.MinibarRevenueItem = MinibarRevenueItem;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarRevenueItem.prototype, "itemId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarRevenueItem.prototype, "itemName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarRevenueItem.prototype, "unit", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRevenueItem.prototype, "consumedQty", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRevenueItem.prototype, "restockedQty", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRevenueItem.prototype, "costPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRevenueItem.prototype, "sellingPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRevenueItem.prototype, "totalCost", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRevenueItem.prototype, "totalRevenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRevenueItem.prototype, "profit", void 0);
+class MinibarRevenueResponse {
+    dateFrom;
+    dateTo;
+    items;
+    totalCost;
+    totalRevenue;
+    totalProfit;
+}
+exports.MinibarRevenueResponse = MinibarRevenueResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarRevenueResponse.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarRevenueResponse.prototype, "dateTo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [MinibarRevenueItem] }),
+    __metadata("design:type", Array)
+], MinibarRevenueResponse.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRevenueResponse.prototype, "totalCost", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRevenueResponse.prototype, "totalRevenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarRevenueResponse.prototype, "totalProfit", void 0);
+// ─── Variance Report (Bao cao chenh lech kiem ke) ───
+class VarianceReportRequest {
+    tenantId;
+    hotelId;
+    dateFrom;
+    dateTo;
+    status;
+}
+exports.VarianceReportRequest = VarianceReportRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], VarianceReportRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], VarianceReportRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], VarianceReportRequest.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], VarianceReportRequest.prototype, "dateTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], VarianceReportRequest.prototype, "status", void 0);
+class VarianceReportItem {
+    takeNumber;
+    takeDate;
+    category;
+    status;
+    totalItems;
+    itemsWithVariance;
+    totalPositiveVariance;
+    totalNegativeVariance;
+    totalVarianceValue;
+}
+exports.VarianceReportItem = VarianceReportItem;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], VarianceReportItem.prototype, "takeNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], VarianceReportItem.prototype, "takeDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], VarianceReportItem.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], VarianceReportItem.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], VarianceReportItem.prototype, "totalItems", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], VarianceReportItem.prototype, "itemsWithVariance", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], VarianceReportItem.prototype, "totalPositiveVariance", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], VarianceReportItem.prototype, "totalNegativeVariance", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], VarianceReportItem.prototype, "totalVarianceValue", void 0);
+class VarianceReportResponse {
+    items;
+    totalVarianceValue;
+}
+exports.VarianceReportResponse = VarianceReportResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [VarianceReportItem] }),
+    __metadata("design:type", Array)
+], VarianceReportResponse.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], VarianceReportResponse.prototype, "totalVarianceValue", void 0);
+// ─── Expiry Report (Bao cao han su dung) ───
+class ExpiryReportRequest {
+    tenantId;
+    hotelId;
+    daysAhead;
+}
+exports.ExpiryReportRequest = ExpiryReportRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], ExpiryReportRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], ExpiryReportRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Days ahead to check (default 30)', default: 30 }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], ExpiryReportRequest.prototype, "daysAhead", void 0);
+class ExpiryReportItem {
+    itemId;
+    itemCode;
+    itemName;
+    unit;
+    batchQuantity;
+    expiryDate;
+    daysUntilExpiry;
+    receiptNumber;
+    receiptDate;
+    warehouseName;
+}
+exports.ExpiryReportItem = ExpiryReportItem;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], ExpiryReportItem.prototype, "itemId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], ExpiryReportItem.prototype, "itemCode", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], ExpiryReportItem.prototype, "itemName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], ExpiryReportItem.prototype, "unit", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ExpiryReportItem.prototype, "batchQuantity", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], ExpiryReportItem.prototype, "expiryDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ExpiryReportItem.prototype, "daysUntilExpiry", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], ExpiryReportItem.prototype, "receiptNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], ExpiryReportItem.prototype, "receiptDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], ExpiryReportItem.prototype, "warehouseName", void 0);
+class ExpiryReportResponse {
+    items;
+    totalBatches;
+    expiredCount;
+    expiringCount;
+}
+exports.ExpiryReportResponse = ExpiryReportResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [ExpiryReportItem] }),
+    __metadata("design:type", Array)
+], ExpiryReportResponse.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ExpiryReportResponse.prototype, "totalBatches", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ExpiryReportResponse.prototype, "expiredCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ExpiryReportResponse.prototype, "expiringCount", void 0);
 //# sourceMappingURL=reports.nats.js.map

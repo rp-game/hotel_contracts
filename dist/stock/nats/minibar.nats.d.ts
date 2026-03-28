@@ -23,11 +23,19 @@ export declare class MinibarChargedItem {
     totalCharge: number;
     isComplimentary: boolean;
 }
+export declare class MinibarRestockSuggestion {
+    itemId: string;
+    itemName: string;
+    consumedQty: number;
+    standardQty: number;
+    suggestedRestockQty: number;
+}
 export declare class MinibarCheckResponse {
     issueId?: string;
     chargedItems: MinibarChargedItem[];
     totalCharged: number;
     bookingChargeSuccess?: boolean;
+    restockSuggestions?: MinibarRestockSuggestion[];
 }
 export type SubmitMinibarCheckNatsResponse = NatsResponse<MinibarCheckResponse>;
 //# sourceMappingURL=minibar.nats.d.ts.map

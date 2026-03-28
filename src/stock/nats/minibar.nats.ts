@@ -76,6 +76,14 @@ export class MinibarChargedItem {
   @ApiProperty() isComplimentary: boolean;
 }
 
+export class MinibarRestockSuggestion {
+  @ApiProperty() itemId: string;
+  @ApiProperty() itemName: string;
+  @ApiProperty() consumedQty: number;
+  @ApiProperty() standardQty: number;
+  @ApiProperty() suggestedRestockQty: number;
+}
+
 export class MinibarCheckResponse {
   @ApiPropertyOptional({ description: 'Stock issue ID created' })
   issueId?: string;
@@ -88,6 +96,9 @@ export class MinibarCheckResponse {
 
   @ApiPropertyOptional({ description: 'Whether booking charge was successful' })
   bookingChargeSuccess?: boolean;
+
+  @ApiPropertyOptional({ type: [MinibarRestockSuggestion], description: 'Restock suggestions based on minibar template' })
+  restockSuggestions?: MinibarRestockSuggestion[];
 }
 
 export type SubmitMinibarCheckNatsResponse = NatsResponse<MinibarCheckResponse>;
