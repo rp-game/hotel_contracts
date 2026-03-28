@@ -2,7 +2,6 @@ import { NatsResponse, NatsPaginatedResponse } from '../../common';
 import { ItemCategory } from '../enums';
 export declare class FindItemsRequest {
     tenantId: string;
-    hotelId: string;
     category?: ItemCategory;
     search?: string;
     lowStock?: boolean;
@@ -14,7 +13,6 @@ export declare class FindItemsRequest {
 export declare class ItemResponse {
     id: string;
     tenantId: string;
-    hotelId: string;
     code: string;
     name: string;
     category: ItemCategory;
@@ -39,7 +37,6 @@ export declare class ItemResponse {
 export type FindItemsNatsResponse = NatsPaginatedResponse<ItemResponse>;
 export declare class FindOneItemRequest {
     tenantId: string;
-    hotelId: string;
     id: string;
 }
 export declare class ItemDetailResponse extends ItemResponse {
@@ -48,7 +45,6 @@ export declare class ItemDetailResponse extends ItemResponse {
 export type FindOneItemNatsResponse = NatsResponse<ItemDetailResponse>;
 export declare class CreateItemRequest {
     tenantId: string;
-    hotelId: string;
     code?: string;
     name: string;
     category: ItemCategory;
@@ -69,7 +65,6 @@ export declare class CreateItemRequest {
 export type CreateItemNatsResponse = NatsResponse<ItemResponse>;
 export declare class UpdateItemRequest {
     tenantId: string;
-    hotelId: string;
     id: string;
     name?: string;
     category?: ItemCategory;
@@ -89,7 +84,6 @@ export declare class UpdateItemRequest {
 export type UpdateItemNatsResponse = NatsResponse<ItemResponse>;
 export declare class DeleteItemRequest {
     tenantId: string;
-    hotelId: string;
     id: string;
 }
 export type DeleteItemNatsResponse = NatsResponse<{

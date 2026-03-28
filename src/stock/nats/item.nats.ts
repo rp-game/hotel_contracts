@@ -10,10 +10,6 @@ export class FindItemsRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty()
-  @IsUUID()
-  hotelId: string;
-
   @ApiPropertyOptional({ enum: ItemCategory })
   @IsOptional()
   @IsEnum(ItemCategory)
@@ -56,9 +52,6 @@ export class ItemResponse {
 
   @ApiProperty()
   tenantId: string;
-
-  @ApiProperty()
-  hotelId: string;
 
   @ApiProperty()
   code: string;
@@ -132,10 +125,6 @@ export class FindOneItemRequest {
 
   @ApiProperty()
   @IsUUID()
-  hotelId: string;
-
-  @ApiProperty()
-  @IsUUID()
   id: string;
 }
 
@@ -152,10 +141,6 @@ export class CreateItemRequest {
   @ApiProperty()
   @IsUUID()
   tenantId: string;
-
-  @ApiProperty()
-  @IsUUID()
-  hotelId: string;
 
   @ApiPropertyOptional({ description: 'SKU code (auto-generated if not provided)' })
   @IsOptional()
@@ -249,10 +234,6 @@ export class UpdateItemRequest {
 
   @ApiProperty()
   @IsUUID()
-  hotelId: string;
-
-  @ApiProperty()
-  @IsUUID()
   id: string;
 
   @ApiPropertyOptional()
@@ -336,10 +317,6 @@ export class DeleteItemRequest {
   @ApiProperty()
   @IsUUID()
   tenantId: string;
-
-  @ApiProperty()
-  @IsUUID()
-  hotelId: string;
 
   @ApiProperty()
   @IsUUID()

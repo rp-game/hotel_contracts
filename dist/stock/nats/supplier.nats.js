@@ -15,7 +15,6 @@ const class_validator_1 = require("class-validator");
 // ─── Find Suppliers ───
 class FindSuppliersRequest {
     tenantId;
-    hotelId;
     search;
     isActive;
     page;
@@ -27,11 +26,6 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], FindSuppliersRequest.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], FindSuppliersRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Search by name' }),
     (0, class_validator_1.IsOptional)(),
@@ -59,7 +53,6 @@ __decorate([
 class SupplierResponse {
     id;
     tenantId;
-    hotelId;
     name;
     contactPerson;
     phone;
@@ -80,10 +73,6 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], SupplierResponse.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", String)
-], SupplierResponse.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
@@ -127,7 +116,6 @@ __decorate([
 // ─── Find One Supplier ───
 class FindOneSupplierRequest {
     tenantId;
-    hotelId;
     id;
 }
 exports.FindOneSupplierRequest = FindOneSupplierRequest;
@@ -140,16 +128,10 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
-], FindOneSupplierRequest.prototype, "hotelId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
 ], FindOneSupplierRequest.prototype, "id", void 0);
 // ─── Create Supplier ───
 class CreateSupplierRequest {
     tenantId;
-    hotelId;
     name;
     contactPerson;
     phone;
@@ -164,11 +146,6 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateSupplierRequest.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], CreateSupplierRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsString)(),
@@ -213,7 +190,6 @@ __decorate([
 // ─── Update Supplier ───
 class UpdateSupplierRequest {
     tenantId;
-    hotelId;
     id;
     name;
     contactPerson;
@@ -229,11 +205,6 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], UpdateSupplierRequest.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], UpdateSupplierRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsUUID)(),
@@ -284,7 +255,6 @@ __decorate([
 // ─── Delete Supplier ───
 class DeleteSupplierRequest {
     tenantId;
-    hotelId;
     id;
 }
 exports.DeleteSupplierRequest = DeleteSupplierRequest;
@@ -293,11 +263,6 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeleteSupplierRequest.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], DeleteSupplierRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsUUID)(),

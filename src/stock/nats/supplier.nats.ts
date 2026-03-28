@@ -9,10 +9,6 @@ export class FindSuppliersRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty()
-  @IsUUID()
-  hotelId: string;
-
   @ApiPropertyOptional({ description: 'Search by name' })
   @IsOptional()
   @IsString()
@@ -40,9 +36,6 @@ export class SupplierResponse {
 
   @ApiProperty()
   tenantId: string;
-
-  @ApiProperty()
-  hotelId: string;
 
   @ApiProperty()
   name: string;
@@ -86,10 +79,6 @@ export class FindOneSupplierRequest {
 
   @ApiProperty()
   @IsUUID()
-  hotelId: string;
-
-  @ApiProperty()
-  @IsUUID()
   id: string;
 }
 
@@ -101,10 +90,6 @@ export class CreateSupplierRequest {
   @ApiProperty()
   @IsUUID()
   tenantId: string;
-
-  @ApiProperty()
-  @IsUUID()
-  hotelId: string;
 
   @ApiProperty()
   @IsString()
@@ -149,10 +134,6 @@ export class UpdateSupplierRequest {
   @ApiProperty()
   @IsUUID()
   tenantId: string;
-
-  @ApiProperty()
-  @IsUUID()
-  hotelId: string;
 
   @ApiProperty()
   @IsUUID()
@@ -202,10 +183,6 @@ export class DeleteSupplierRequest {
   @ApiProperty()
   @IsUUID()
   tenantId: string;
-
-  @ApiProperty()
-  @IsUUID()
-  hotelId: string;
 
   @ApiProperty()
   @IsUUID()

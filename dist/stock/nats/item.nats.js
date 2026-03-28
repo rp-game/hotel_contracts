@@ -16,7 +16,6 @@ const enums_1 = require("../enums");
 // ─── Find Items ───
 class FindItemsRequest {
     tenantId;
-    hotelId;
     category;
     search;
     lowStock;
@@ -31,11 +30,6 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], FindItemsRequest.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], FindItemsRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ enum: enums_1.ItemCategory }),
     (0, class_validator_1.IsOptional)(),
@@ -81,7 +75,6 @@ __decorate([
 class ItemResponse {
     id;
     tenantId;
-    hotelId;
     code;
     name;
     category;
@@ -112,10 +105,6 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], ItemResponse.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", String)
-], ItemResponse.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
@@ -199,7 +188,6 @@ __decorate([
 // ─── Find One Item ───
 class FindOneItemRequest {
     tenantId;
-    hotelId;
     id;
 }
 exports.FindOneItemRequest = FindOneItemRequest;
@@ -208,11 +196,6 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], FindOneItemRequest.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], FindOneItemRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsUUID)(),
@@ -229,7 +212,6 @@ __decorate([
 // ─── Create Item ───
 class CreateItemRequest {
     tenantId;
-    hotelId;
     code;
     name;
     category;
@@ -253,11 +235,6 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateItemRequest.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], CreateItemRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'SKU code (auto-generated if not provided)' }),
     (0, class_validator_1.IsOptional)(),
@@ -357,7 +334,6 @@ __decorate([
 // ─── Update Item ───
 class UpdateItemRequest {
     tenantId;
-    hotelId;
     id;
     name;
     category;
@@ -380,11 +356,6 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], UpdateItemRequest.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], UpdateItemRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsUUID)(),
@@ -479,7 +450,6 @@ __decorate([
 // ─── Delete Item ───
 class DeleteItemRequest {
     tenantId;
-    hotelId;
     id;
 }
 exports.DeleteItemRequest = DeleteItemRequest;
@@ -488,11 +458,6 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeleteItemRequest.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], DeleteItemRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsUUID)(),
