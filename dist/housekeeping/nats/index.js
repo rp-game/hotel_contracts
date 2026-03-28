@@ -25,4 +25,5 @@ __exportStar(require("./analytics.nats"), exports);
 __exportStar(require("./task-photos.nats"), exports);
 __exportStar(require("./timers.nats"), exports);
 __exportStar(require("./cleaning-tasks-extended.nats"), exports);
+__exportStar(require("./events.nats"), exports);
 //# sourceMappingURL=index.js.map

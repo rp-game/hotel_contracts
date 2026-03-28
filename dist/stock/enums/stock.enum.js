@@ -28,6 +28,7 @@ var StockIssueType;
     StockIssueType["MAINTENANCE"] = "MAINTENANCE";
     StockIssueType["F_AND_B"] = "F_AND_B";
     StockIssueType["SUPPLY_KIT"] = "SUPPLY_KIT";
+    StockIssueType["MINIBAR_RESTOCK"] = "MINIBAR_RESTOCK";
     StockIssueType["OTHER"] = "OTHER";
 })(StockIssueType || (exports.StockIssueType = StockIssueType = {}));
 var StockAdjustmentType;

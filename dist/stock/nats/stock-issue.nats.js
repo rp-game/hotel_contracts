@@ -65,6 +65,8 @@ class CreateStockIssueRequest {
     issuedBy;
     issuedByName;
     warehouseId;
+    forceOverride;
+    overrideAuthorizedBy;
     items;
 }
 exports.CreateStockIssueRequest = CreateStockIssueRequest;
@@ -135,6 +137,17 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateStockIssueRequest.prototype, "warehouseId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Manager override: allow issue exceeding available stock' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], CreateStockIssueRequest.prototype, "forceOverride", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Manager ID who authorized the override' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateStockIssueRequest.prototype, "overrideAuthorizedBy", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ type: [StockIssueItemDto] }),
     (0, class_validator_1.IsArray)(),
@@ -212,6 +225,8 @@ class StockIssueResponse {
     totalCost;
     warehouseId;
     warehouseName;
+    isOverride;
+    overrideAuthorizedBy;
     items;
     createdAt;
 }
@@ -280,6 +295,14 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", String)
 ], StockIssueResponse.prototype, "warehouseName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Manager override was used' }),
+    __metadata("design:type", Boolean)
+], StockIssueResponse.prototype, "isOverride", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Manager who authorized override' }),
+    __metadata("design:type", String)
+], StockIssueResponse.prototype, "overrideAuthorizedBy", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ type: [StockIssueItemResponse] }),
     __metadata("design:type", Array)

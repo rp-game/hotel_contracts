@@ -20,6 +20,8 @@ export declare class CreateStockIssueRequest {
     issuedBy: string;
     issuedByName?: string;
     warehouseId?: string;
+    forceOverride?: boolean;
+    overrideAuthorizedBy?: string;
     items: StockIssueItemDto[];
 }
 export declare class StockIssueItemResponse {
@@ -51,6 +53,8 @@ export declare class StockIssueResponse {
     totalCost: number;
     warehouseId?: string;
     warehouseName?: string;
+    isOverride?: boolean;
+    overrideAuthorizedBy?: string;
     items: StockIssueItemResponse[];
     createdAt: Date;
 }

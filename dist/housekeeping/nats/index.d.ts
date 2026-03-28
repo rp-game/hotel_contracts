@@ -9,4 +9,5 @@ export * from './analytics.nats';
 export * from './task-photos.nats';
 export * from './timers.nats';
 export * from './cleaning-tasks-extended.nats';
+export * from './events.nats';
 //# sourceMappingURL=index.d.ts.map

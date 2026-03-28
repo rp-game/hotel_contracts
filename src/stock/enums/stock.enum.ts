@@ -24,6 +24,7 @@ export enum StockIssueType {
   MAINTENANCE = 'MAINTENANCE',
   F_AND_B = 'F_AND_B',
   SUPPLY_KIT = 'SUPPLY_KIT',
+  MINIBAR_RESTOCK = 'MINIBAR_RESTOCK',
   OTHER = 'OTHER',
 }
 

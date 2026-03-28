@@ -88,6 +88,15 @@ export class CreateStockIssueRequest {
   @IsUUID()
   warehouseId?: string;
 
+  @ApiPropertyOptional({ description: 'Manager override: allow issue exceeding available stock' })
+  @IsOptional()
+  forceOverride?: boolean;
+
+  @ApiPropertyOptional({ description: 'Manager ID who authorized the override' })
+  @IsOptional()
+  @IsString()
+  overrideAuthorizedBy?: string;
+
   @ApiProperty({ type: [StockIssueItemDto] })
   @IsArray()
   @ValidateNested({ each: true })
@@ -175,6 +184,12 @@ export class StockIssueResponse {
 
   @ApiPropertyOptional()
   warehouseName?: string;
+
+  @ApiPropertyOptional({ description: 'Manager override was used' })
+  isOverride?: boolean;
+
+  @ApiPropertyOptional({ description: 'Manager who authorized override' })
+  overrideAuthorizedBy?: string;
 
   @ApiProperty({ type: [StockIssueItemResponse] })
   items: StockIssueItemResponse[];
