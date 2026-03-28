@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BatchStockIssueResponse = exports.BatchStockIssueRequest = exports.BatchIssueRoomDto = exports.FindOneStockIssueRequest = exports.FindStockIssuesRequest = exports.IssueSupplyKitRequest = exports.StockIssueResponse = exports.StockIssueItemResponse = exports.CreateStockIssueRequest = exports.StockIssueItemDto = void 0;
+exports.BatchStockIssueResponse = exports.BatchStockIssueRequest = exports.BatchIssueRoomDto = exports.FindOneStockIssueRequest = exports.FindStockIssuesRequest = exports.IssueSupplyKitRequest = exports.CreateStockIssueResponseData = exports.LowStockWarningItem = exports.StockIssueResponse = exports.StockIssueItemResponse = exports.CreateStockIssueRequest = exports.StockIssueItemDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -311,6 +311,37 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Date)
 ], StockIssueResponse.prototype, "createdAt", void 0);
+class LowStockWarningItem {
+    itemId;
+    itemName;
+    currentStock;
+    reorderLevel;
+}
+exports.LowStockWarningItem = LowStockWarningItem;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], LowStockWarningItem.prototype, "itemId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], LowStockWarningItem.prototype, "itemName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], LowStockWarningItem.prototype, "currentStock", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], LowStockWarningItem.prototype, "reorderLevel", void 0);
+class CreateStockIssueResponseData extends StockIssueResponse {
+    lowStockWarnings;
+}
+exports.CreateStockIssueResponseData = CreateStockIssueResponseData;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [LowStockWarningItem] }),
+    __metadata("design:type", Array)
+], CreateStockIssueResponseData.prototype, "lowStockWarnings", void 0);
 // ─── Issue Supply Kit ───
 class IssueSupplyKitRequest {
     tenantId;

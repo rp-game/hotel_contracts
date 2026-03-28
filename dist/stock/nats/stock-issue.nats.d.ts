@@ -58,14 +58,16 @@ export declare class StockIssueResponse {
     items: StockIssueItemResponse[];
     createdAt: Date;
 }
-export type CreateStockIssueNatsResponse = NatsResponse<StockIssueResponse & {
-    lowStockWarnings?: Array<{
-        itemId: string;
-        itemName: string;
-        currentStock: number;
-        reorderLevel: number;
-    }>;
-}>;
+export declare class LowStockWarningItem {
+    itemId: string;
+    itemName: string;
+    currentStock: number;
+    reorderLevel: number;
+}
+export declare class CreateStockIssueResponseData extends StockIssueResponse {
+    lowStockWarnings?: LowStockWarningItem[];
+}
+export type CreateStockIssueNatsResponse = NatsResponse<CreateStockIssueResponseData>;
 export declare class IssueSupplyKitRequest {
     tenantId: string;
     hotelId: string;

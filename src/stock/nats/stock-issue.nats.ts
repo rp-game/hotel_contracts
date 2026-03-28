@@ -198,7 +198,19 @@ export class StockIssueResponse {
   createdAt: Date;
 }
 
-export type CreateStockIssueNatsResponse = NatsResponse<StockIssueResponse & { lowStockWarnings?: Array<{ itemId: string; itemName: string; currentStock: number; reorderLevel: number }> }>;
+export class LowStockWarningItem {
+  @ApiProperty() itemId: string;
+  @ApiProperty() itemName: string;
+  @ApiProperty() currentStock: number;
+  @ApiProperty() reorderLevel: number;
+}
+
+export class CreateStockIssueResponseData extends StockIssueResponse {
+  @ApiPropertyOptional({ type: [LowStockWarningItem] })
+  lowStockWarnings?: LowStockWarningItem[];
+}
+
+export type CreateStockIssueNatsResponse = NatsResponse<CreateStockIssueResponseData>;
 
 // ─── Issue Supply Kit ───
 
