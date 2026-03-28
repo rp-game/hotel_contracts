@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CostPerRoomNightResponse = exports.CostPerRoomNightCategoryItem = exports.CostPerRoomNightRequest = exports.LowStockReportResponse = exports.LowStockReportItem = exports.LowStockReportRequest = exports.InOutBalanceResponse = exports.InOutBalanceCategoryGroup = exports.InOutBalanceItemRow = exports.InOutBalanceRequest = void 0;
+exports.SupplierHistoryResponse = exports.SupplierHistoryItem = exports.SupplierHistoryRequest = exports.MovementDetailResponse = exports.MovementDetailItem = exports.MovementDetailRequest = exports.DepartmentCostResponse = exports.DepartmentCostItem = exports.DepartmentCostRequest = exports.CostPerRoomNightResponse = exports.CostPerRoomNightCategoryItem = exports.CostPerRoomNightRequest = exports.LowStockReportResponse = exports.LowStockReportItem = exports.LowStockReportRequest = exports.InOutBalanceResponse = exports.InOutBalanceCategoryGroup = exports.InOutBalanceItemRow = exports.InOutBalanceRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
@@ -344,4 +344,348 @@ __decorate([
     (0, swagger_1.ApiProperty)({ type: [CostPerRoomNightCategoryItem] }),
     __metadata("design:type", Array)
 ], CostPerRoomNightResponse.prototype, "byIssueType", void 0);
+// ─── Department Cost Report (Chi phi bo phan) ───
+class DepartmentCostRequest {
+    tenantId;
+    hotelId;
+    dateFrom;
+    dateTo;
+    department;
+}
+exports.DepartmentCostRequest = DepartmentCostRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], DepartmentCostRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], DepartmentCostRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], DepartmentCostRequest.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], DepartmentCostRequest.prototype, "dateTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DepartmentCostRequest.prototype, "department", void 0);
+class DepartmentCostItem {
+    department;
+    issueType;
+    totalCost;
+    issueCount;
+}
+exports.DepartmentCostItem = DepartmentCostItem;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: '"Không xác định" when department is null' }),
+    __metadata("design:type", String)
+], DepartmentCostItem.prototype, "department", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], DepartmentCostItem.prototype, "issueType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DepartmentCostItem.prototype, "totalCost", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DepartmentCostItem.prototype, "issueCount", void 0);
+class DepartmentCostResponse {
+    dateFrom;
+    dateTo;
+    items;
+    totalCost;
+}
+exports.DepartmentCostResponse = DepartmentCostResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], DepartmentCostResponse.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], DepartmentCostResponse.prototype, "dateTo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [DepartmentCostItem] }),
+    __metadata("design:type", Array)
+], DepartmentCostResponse.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DepartmentCostResponse.prototype, "totalCost", void 0);
+// ─── Movement Detail Report (Lich su xuat nhap) ───
+class MovementDetailRequest {
+    tenantId;
+    hotelId;
+    dateFrom;
+    dateTo;
+    itemId;
+    movementType;
+    warehouseId;
+    page;
+    limit;
+}
+exports.MovementDetailRequest = MovementDetailRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], MovementDetailRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], MovementDetailRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], MovementDetailRequest.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], MovementDetailRequest.prototype, "dateTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], MovementDetailRequest.prototype, "itemId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'RECEIPT | ISSUE | ADJUSTMENT | TRANSFER' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], MovementDetailRequest.prototype, "movementType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], MovementDetailRequest.prototype, "warehouseId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ default: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], MovementDetailRequest.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ default: 50 }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], MovementDetailRequest.prototype, "limit", void 0);
+class MovementDetailItem {
+    date;
+    movementType;
+    documentNumber;
+    itemId;
+    itemCode;
+    itemName;
+    unit;
+    quantityIn;
+    quantityOut;
+    unitPrice;
+    totalAmount;
+    warehouseName;
+    supplierName;
+    department;
+    notes;
+}
+exports.MovementDetailItem = MovementDetailItem;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MovementDetailItem.prototype, "date", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MovementDetailItem.prototype, "movementType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MovementDetailItem.prototype, "documentNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MovementDetailItem.prototype, "itemId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MovementDetailItem.prototype, "itemCode", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MovementDetailItem.prototype, "itemName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MovementDetailItem.prototype, "unit", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MovementDetailItem.prototype, "quantityIn", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MovementDetailItem.prototype, "quantityOut", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MovementDetailItem.prototype, "unitPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MovementDetailItem.prototype, "totalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], MovementDetailItem.prototype, "warehouseName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], MovementDetailItem.prototype, "supplierName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], MovementDetailItem.prototype, "department", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], MovementDetailItem.prototype, "notes", void 0);
+class MovementDetailResponse {
+    dateFrom;
+    dateTo;
+    items;
+    total;
+    page;
+    limit;
+}
+exports.MovementDetailResponse = MovementDetailResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MovementDetailResponse.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MovementDetailResponse.prototype, "dateTo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [MovementDetailItem] }),
+    __metadata("design:type", Array)
+], MovementDetailResponse.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MovementDetailResponse.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MovementDetailResponse.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MovementDetailResponse.prototype, "limit", void 0);
+// ─── Supplier Purchase History (Mua hang NCC) ───
+class SupplierHistoryRequest {
+    tenantId;
+    hotelId;
+    dateFrom;
+    dateTo;
+    supplierId;
+}
+exports.SupplierHistoryRequest = SupplierHistoryRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], SupplierHistoryRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], SupplierHistoryRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], SupplierHistoryRequest.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], SupplierHistoryRequest.prototype, "dateTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SupplierHistoryRequest.prototype, "supplierId", void 0);
+class SupplierHistoryItem {
+    supplierId;
+    supplierName;
+    receiptCount;
+    totalAmount;
+    totalVat;
+    lastReceiptDate;
+}
+exports.SupplierHistoryItem = SupplierHistoryItem;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], SupplierHistoryItem.prototype, "supplierId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], SupplierHistoryItem.prototype, "supplierName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SupplierHistoryItem.prototype, "receiptCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SupplierHistoryItem.prototype, "totalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SupplierHistoryItem.prototype, "totalVat", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], SupplierHistoryItem.prototype, "lastReceiptDate", void 0);
+class SupplierHistoryResponse {
+    dateFrom;
+    dateTo;
+    items;
+    totalAmount;
+}
+exports.SupplierHistoryResponse = SupplierHistoryResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], SupplierHistoryResponse.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], SupplierHistoryResponse.prototype, "dateTo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [SupplierHistoryItem] }),
+    __metadata("design:type", Array)
+], SupplierHistoryResponse.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], SupplierHistoryResponse.prototype, "totalAmount", void 0);
 //# sourceMappingURL=reports.nats.js.map

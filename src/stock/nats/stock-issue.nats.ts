@@ -273,3 +273,37 @@ export class FindOneStockIssueRequest {
 }
 
 export type FindOneStockIssueNatsResponse = NatsResponse<StockIssueResponse>;
+
+// ─── Batch Stock Issue (multiple rooms) ───
+
+export class BatchIssueRoomDto {
+  @ApiProperty() @IsUUID() roomId: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() roomNumber?: string;
+  @ApiPropertyOptional() @IsOptional() @IsUUID() bookingId?: string;
+  @ApiProperty({ type: [StockIssueItemDto] })
+  @IsArray() @ValidateNested({ each: true }) @Type(() => StockIssueItemDto)
+  items: StockIssueItemDto[];
+}
+
+export class BatchStockIssueRequest {
+  @ApiProperty() @IsUUID() tenantId: string;
+  @ApiProperty() @IsUUID() hotelId: string;
+  @ApiProperty({ enum: StockIssueType }) @IsEnum(StockIssueType) issueType: StockIssueType;
+  @ApiPropertyOptional() @IsOptional() @IsString() department?: string;
+  @ApiPropertyOptional() @IsOptional() @IsUUID() warehouseId?: string;
+  @ApiProperty() @IsDateString() issueDate: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() notes?: string;
+  @ApiProperty() @IsUUID() issuedBy: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() issuedByName?: string;
+  @ApiProperty({ type: [BatchIssueRoomDto] })
+  @IsArray() @ValidateNested({ each: true }) @Type(() => BatchIssueRoomDto)
+  rooms: BatchIssueRoomDto[];
+}
+
+export class BatchStockIssueResponse {
+  @ApiProperty() issueCount: number;
+  @ApiProperty({ type: [String] }) issueIds: string[];
+  @ApiPropertyOptional({ type: [String] }) errors?: string[];
+}
+
+export type BatchStockIssueNatsResponse = NatsResponse<BatchStockIssueResponse>;

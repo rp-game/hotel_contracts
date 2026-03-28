@@ -186,3 +186,108 @@ export class CostPerRoomNightResponse {
 }
 
 export type CostPerRoomNightNatsResponse = NatsResponse<CostPerRoomNightResponse>;
+
+// ─── Department Cost Report (Chi phi bo phan) ───
+
+export class DepartmentCostRequest {
+  @ApiProperty() @IsUUID() tenantId: string;
+  @ApiProperty() @IsUUID() hotelId: string;
+  @ApiProperty() @IsDateString() dateFrom: string;
+  @ApiProperty() @IsDateString() dateTo: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() department?: string;
+}
+
+export class DepartmentCostItem {
+  @ApiProperty({ description: '"Không xác định" when department is null' })
+  department: string;
+
+  @ApiProperty()
+  issueType: string;
+
+  @ApiProperty()
+  totalCost: number;
+
+  @ApiProperty()
+  issueCount: number;
+}
+
+export class DepartmentCostResponse {
+  @ApiProperty() dateFrom: string;
+  @ApiProperty() dateTo: string;
+  @ApiProperty({ type: [DepartmentCostItem] }) items: DepartmentCostItem[];
+  @ApiProperty() totalCost: number;
+}
+
+export type DepartmentCostNatsResponse = NatsResponse<DepartmentCostResponse>;
+
+// ─── Movement Detail Report (Lich su xuat nhap) ───
+
+export class MovementDetailRequest {
+  @ApiProperty() @IsUUID() tenantId: string;
+  @ApiProperty() @IsUUID() hotelId: string;
+  @ApiProperty() @IsDateString() dateFrom: string;
+  @ApiProperty() @IsDateString() dateTo: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() itemId?: string;
+  @ApiPropertyOptional({ description: 'RECEIPT | ISSUE | ADJUSTMENT | TRANSFER' })
+  @IsOptional() @IsString() movementType?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() warehouseId?: string;
+  @ApiPropertyOptional({ default: 1 }) @IsOptional() page?: number;
+  @ApiPropertyOptional({ default: 50 }) @IsOptional() limit?: number;
+}
+
+export class MovementDetailItem {
+  @ApiProperty() date: string;
+  @ApiProperty() movementType: string;
+  @ApiProperty() documentNumber: string;
+  @ApiProperty() itemId: string;
+  @ApiProperty() itemCode: string;
+  @ApiProperty() itemName: string;
+  @ApiProperty() unit: string;
+  @ApiProperty() quantityIn: number;
+  @ApiProperty() quantityOut: number;
+  @ApiProperty() unitPrice: number;
+  @ApiProperty() totalAmount: number;
+  @ApiPropertyOptional() warehouseName?: string;
+  @ApiPropertyOptional() supplierName?: string;
+  @ApiPropertyOptional() department?: string;
+  @ApiPropertyOptional() notes?: string;
+}
+
+export class MovementDetailResponse {
+  @ApiProperty() dateFrom: string;
+  @ApiProperty() dateTo: string;
+  @ApiProperty({ type: [MovementDetailItem] }) items: MovementDetailItem[];
+  @ApiProperty() total: number;
+  @ApiProperty() page: number;
+  @ApiProperty() limit: number;
+}
+
+export type MovementDetailNatsResponse = NatsResponse<MovementDetailResponse>;
+
+// ─── Supplier Purchase History (Mua hang NCC) ───
+
+export class SupplierHistoryRequest {
+  @ApiProperty() @IsUUID() tenantId: string;
+  @ApiProperty() @IsUUID() hotelId: string;
+  @ApiProperty() @IsDateString() dateFrom: string;
+  @ApiProperty() @IsDateString() dateTo: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() supplierId?: string;
+}
+
+export class SupplierHistoryItem {
+  @ApiProperty() supplierId: string;
+  @ApiProperty() supplierName: string;
+  @ApiProperty() receiptCount: number;
+  @ApiProperty() totalAmount: number;
+  @ApiProperty() totalVat: number;
+  @ApiPropertyOptional() lastReceiptDate?: string;
+}
+
+export class SupplierHistoryResponse {
+  @ApiProperty() dateFrom: string;
+  @ApiProperty() dateTo: string;
+  @ApiProperty({ type: [SupplierHistoryItem] }) items: SupplierHistoryItem[];
+  @ApiProperty() totalAmount: number;
+}
+
+export type SupplierHistoryNatsResponse = NatsResponse<SupplierHistoryResponse>;

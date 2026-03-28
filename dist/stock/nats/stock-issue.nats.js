@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FindOneStockIssueRequest = exports.FindStockIssuesRequest = exports.IssueSupplyKitRequest = exports.StockIssueResponse = exports.StockIssueItemResponse = exports.CreateStockIssueRequest = exports.StockIssueItemDto = void 0;
+exports.BatchStockIssueResponse = exports.BatchStockIssueRequest = exports.BatchIssueRoomDto = exports.FindOneStockIssueRequest = exports.FindStockIssuesRequest = exports.IssueSupplyKitRequest = exports.StockIssueResponse = exports.StockIssueItemResponse = exports.CreateStockIssueRequest = exports.StockIssueItemDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -403,4 +403,123 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], FindOneStockIssueRequest.prototype, "id", void 0);
+// ─── Batch Stock Issue (multiple rooms) ───
+class BatchIssueRoomDto {
+    roomId;
+    roomNumber;
+    bookingId;
+    items;
+}
+exports.BatchIssueRoomDto = BatchIssueRoomDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], BatchIssueRoomDto.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BatchIssueRoomDto.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], BatchIssueRoomDto.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [StockIssueItemDto] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => StockIssueItemDto),
+    __metadata("design:type", Array)
+], BatchIssueRoomDto.prototype, "items", void 0);
+class BatchStockIssueRequest {
+    tenantId;
+    hotelId;
+    issueType;
+    department;
+    warehouseId;
+    issueDate;
+    notes;
+    issuedBy;
+    issuedByName;
+    rooms;
+}
+exports.BatchStockIssueRequest = BatchStockIssueRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], BatchStockIssueRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], BatchStockIssueRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: enums_1.StockIssueType }),
+    (0, class_validator_1.IsEnum)(enums_1.StockIssueType),
+    __metadata("design:type", String)
+], BatchStockIssueRequest.prototype, "issueType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BatchStockIssueRequest.prototype, "department", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], BatchStockIssueRequest.prototype, "warehouseId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], BatchStockIssueRequest.prototype, "issueDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BatchStockIssueRequest.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], BatchStockIssueRequest.prototype, "issuedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BatchStockIssueRequest.prototype, "issuedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [BatchIssueRoomDto] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => BatchIssueRoomDto),
+    __metadata("design:type", Array)
+], BatchStockIssueRequest.prototype, "rooms", void 0);
+class BatchStockIssueResponse {
+    issueCount;
+    issueIds;
+    errors;
+}
+exports.BatchStockIssueResponse = BatchStockIssueResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], BatchStockIssueResponse.prototype, "issueCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [String] }),
+    __metadata("design:type", Array)
+], BatchStockIssueResponse.prototype, "issueIds", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [String] }),
+    __metadata("design:type", Array)
+], BatchStockIssueResponse.prototype, "errors", void 0);
 //# sourceMappingURL=stock-issue.nats.js.map

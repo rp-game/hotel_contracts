@@ -87,4 +87,28 @@ export declare class FindOneStockIssueRequest {
     id: string;
 }
 export type FindOneStockIssueNatsResponse = NatsResponse<StockIssueResponse>;
+export declare class BatchIssueRoomDto {
+    roomId: string;
+    roomNumber?: string;
+    bookingId?: string;
+    items: StockIssueItemDto[];
+}
+export declare class BatchStockIssueRequest {
+    tenantId: string;
+    hotelId: string;
+    issueType: StockIssueType;
+    department?: string;
+    warehouseId?: string;
+    issueDate: string;
+    notes?: string;
+    issuedBy: string;
+    issuedByName?: string;
+    rooms: BatchIssueRoomDto[];
+}
+export declare class BatchStockIssueResponse {
+    issueCount: number;
+    issueIds: string[];
+    errors?: string[];
+}
+export type BatchStockIssueNatsResponse = NatsResponse<BatchStockIssueResponse>;
 //# sourceMappingURL=stock-issue.nats.d.ts.map

@@ -79,4 +79,83 @@ export declare class CostPerRoomNightResponse {
     byIssueType: CostPerRoomNightCategoryItem[];
 }
 export type CostPerRoomNightNatsResponse = NatsResponse<CostPerRoomNightResponse>;
+export declare class DepartmentCostRequest {
+    tenantId: string;
+    hotelId: string;
+    dateFrom: string;
+    dateTo: string;
+    department?: string;
+}
+export declare class DepartmentCostItem {
+    department: string;
+    issueType: string;
+    totalCost: number;
+    issueCount: number;
+}
+export declare class DepartmentCostResponse {
+    dateFrom: string;
+    dateTo: string;
+    items: DepartmentCostItem[];
+    totalCost: number;
+}
+export type DepartmentCostNatsResponse = NatsResponse<DepartmentCostResponse>;
+export declare class MovementDetailRequest {
+    tenantId: string;
+    hotelId: string;
+    dateFrom: string;
+    dateTo: string;
+    itemId?: string;
+    movementType?: string;
+    warehouseId?: string;
+    page?: number;
+    limit?: number;
+}
+export declare class MovementDetailItem {
+    date: string;
+    movementType: string;
+    documentNumber: string;
+    itemId: string;
+    itemCode: string;
+    itemName: string;
+    unit: string;
+    quantityIn: number;
+    quantityOut: number;
+    unitPrice: number;
+    totalAmount: number;
+    warehouseName?: string;
+    supplierName?: string;
+    department?: string;
+    notes?: string;
+}
+export declare class MovementDetailResponse {
+    dateFrom: string;
+    dateTo: string;
+    items: MovementDetailItem[];
+    total: number;
+    page: number;
+    limit: number;
+}
+export type MovementDetailNatsResponse = NatsResponse<MovementDetailResponse>;
+export declare class SupplierHistoryRequest {
+    tenantId: string;
+    hotelId: string;
+    dateFrom: string;
+    dateTo: string;
+    supplierId?: string;
+}
+export declare class SupplierHistoryItem {
+    supplierId: string;
+    supplierName: string;
+    receiptCount: number;
+    totalAmount: number;
+    totalVat: number;
+    lastReceiptDate?: string;
+}
+export declare class SupplierHistoryResponse {
+    dateFrom: string;
+    dateTo: string;
+    items: SupplierHistoryItem[];
+    totalAmount: number;
+}
+export type SupplierHistoryNatsResponse = NatsResponse<SupplierHistoryResponse>;
 //# sourceMappingURL=reports.nats.d.ts.map
