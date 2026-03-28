@@ -9,4 +9,6 @@ export * from './alerts.nats';
 export * from './warehouse.nats';
 export * from './stock-transfer.nats';
 export * from './minibar.nats';
+export * from './stock-take.nats';
+export * from './minibar-template.nats';
 //# sourceMappingURL=index.d.ts.map
