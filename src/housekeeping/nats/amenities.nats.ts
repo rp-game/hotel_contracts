@@ -29,6 +29,9 @@ export class Amenity {
   @ApiProperty({ description: 'Whether amenity is available' })
   isAvailable!: boolean;
 
+  @ApiPropertyOptional({ description: 'Reference to stock-service Item ID for physical item tracking' })
+  stockItemId?: string;
+
   @ApiProperty({ description: 'Tenant ID' })
   tenantId!: string;
 
@@ -50,6 +53,7 @@ export interface CreateAmenityNatsRequest {
   cost?: number;
   estimatedTime?: number;
   isAvailable?: boolean;
+  stockItemId?: string;
   tenantId: string;
   hotelId: string;
 }
@@ -96,6 +100,7 @@ export interface UpdateAmenityNatsRequest {
     cost?: number;
     estimatedTime?: number;
     isAvailable?: boolean;
+    stockItemId?: string;
   };
   tenantId: string;
   hotelId: string;

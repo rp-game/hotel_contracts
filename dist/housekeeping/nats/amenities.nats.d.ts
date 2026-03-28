@@ -11,6 +11,7 @@ export declare class Amenity {
     cost?: number;
     estimatedTime?: number;
     isAvailable: boolean;
+    stockItemId?: string;
     tenantId: string;
     hotelId: string;
     createdAt: string | Date;
@@ -23,6 +24,7 @@ export interface CreateAmenityNatsRequest {
     cost?: number;
     estimatedTime?: number;
     isAvailable?: boolean;
+    stockItemId?: string;
     tenantId: string;
     hotelId: string;
 }
@@ -56,6 +58,7 @@ export interface UpdateAmenityNatsRequest {
         cost?: number;
         estimatedTime?: number;
         isAvailable?: boolean;
+        stockItemId?: string;
     };
     tenantId: string;
     hotelId: string;

@@ -24,6 +24,7 @@ class Amenity {
     cost;
     estimatedTime;
     isAvailable;
+    stockItemId;
     tenantId;
     hotelId;
     createdAt; // Accept both for compatibility during conversion
@@ -58,6 +59,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Whether amenity is available' }),
     __metadata("design:type", Boolean)
 ], Amenity.prototype, "isAvailable", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Reference to stock-service Item ID for physical item tracking' }),
+    __metadata("design:type", String)
+], Amenity.prototype, "stockItemId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
     __metadata("design:type", String)
