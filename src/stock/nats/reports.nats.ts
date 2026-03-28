@@ -94,3 +94,95 @@ export class InOutBalanceResponse {
 }
 
 export type InOutBalanceNatsResponse = NatsResponse<InOutBalanceResponse>;
+
+// ─── Low-Stock Report (Canh bao het hang) ───
+
+export class LowStockReportRequest {
+  @ApiProperty()
+  @IsUUID()
+  tenantId: string;
+
+  @ApiProperty()
+  @IsUUID()
+  hotelId: string;
+
+  @ApiPropertyOptional({ enum: ItemCategory })
+  @IsOptional()
+  @IsEnum(ItemCategory)
+  category?: ItemCategory;
+}
+
+export class LowStockReportItem {
+  @ApiProperty() itemId: string;
+  @ApiProperty() itemCode: string;
+  @ApiProperty() itemName: string;
+  @ApiProperty() unit: string;
+  @ApiProperty({ enum: ItemCategory }) category: ItemCategory;
+  @ApiProperty() currentStock: number;
+  @ApiProperty() reorderLevel: number;
+  @ApiProperty() averageCostPrice: number;
+  @ApiProperty({ description: 'currentStock × averageCostPrice' }) stockValue: number;
+  @ApiPropertyOptional({ description: 'Estimated days of supply based on recent consumption' }) daysOfSupply?: number;
+  @ApiPropertyOptional() supplierName?: string;
+  @ApiPropertyOptional() supplierPhone?: string;
+}
+
+export class LowStockReportResponse {
+  @ApiProperty({ type: [LowStockReportItem] })
+  items: LowStockReportItem[];
+
+  @ApiProperty()
+  totalCount: number;
+
+  @ApiProperty({ description: 'Total value of low-stock items' })
+  totalValue: number;
+}
+
+export type LowStockReportNatsResponse = NatsResponse<LowStockReportResponse>;
+
+// ─── Cost-per-Room-Night Report (Chi phi vat tu / dem phong) ───
+
+export class CostPerRoomNightRequest {
+  @ApiProperty()
+  @IsUUID()
+  tenantId: string;
+
+  @ApiProperty()
+  @IsUUID()
+  hotelId: string;
+
+  @ApiProperty()
+  @IsDateString()
+  dateFrom: string;
+
+  @ApiProperty()
+  @IsDateString()
+  dateTo: string;
+
+  @ApiPropertyOptional({ description: 'Filter by stock issue type' })
+  @IsOptional()
+  @IsString()
+  issueType?: string;
+}
+
+export class CostPerRoomNightCategoryItem {
+  @ApiProperty({ description: 'Issue type (ROOM_AMENITY, MINIBAR_CONSUMPTION, HOUSEKEEPING, etc.)' })
+  issueType: string;
+
+  @ApiProperty()
+  totalCost: number;
+
+  @ApiPropertyOptional()
+  costPerRoomNight?: number;
+}
+
+export class CostPerRoomNightResponse {
+  @ApiProperty() dateFrom: string;
+  @ApiProperty() dateTo: string;
+  @ApiProperty({ description: 'Total occupied room nights in period' }) roomNights: number;
+  @ApiProperty({ description: 'Total stock issue cost in period' }) totalStockCost: number;
+  @ApiProperty({ description: 'totalStockCost / roomNights' }) costPerRoomNight: number;
+  @ApiProperty({ type: [CostPerRoomNightCategoryItem] }) byIssueType: CostPerRoomNightCategoryItem[];
+}
+
+export type CostPerRoomNightNatsResponse = NatsResponse<CostPerRoomNightResponse>;

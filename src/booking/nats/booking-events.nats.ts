@@ -33,6 +33,18 @@ export class BookingCheckedInEvent {
 
   @ApiProperty({ description: 'Expected check-out date (ISO string)' })
   checkOutDate: string;
+
+  @ApiPropertyOptional({ description: 'Room ID (from room assignment)' })
+  roomId?: string;
+
+  @ApiPropertyOptional({ description: 'Room Type ID (from room assignment)' })
+  roomTypeId?: string;
+
+  @ApiPropertyOptional({ description: 'Number of guests in this room' })
+  guestCount?: number;
+
+  @ApiPropertyOptional({ description: 'Room number (denormalized)' })
+  roomNumber?: string;
 }
 
 export class BookingCheckedOutEvent {

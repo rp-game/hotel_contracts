@@ -24,4 +24,5 @@ __exportStar(require("./reports.nats"), exports);
 __exportStar(require("./alerts.nats"), exports);
 __exportStar(require("./warehouse.nats"), exports);
 __exportStar(require("./stock-transfer.nats"), exports);
+__exportStar(require("./minibar.nats"), exports);
 //# sourceMappingURL=index.js.map

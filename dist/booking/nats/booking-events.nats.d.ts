@@ -17,6 +17,10 @@ export declare class BookingCheckedInEvent {
     totalAmount: number;
     checkInDate: string;
     checkOutDate: string;
+    roomId?: string;
+    roomTypeId?: string;
+    guestCount?: number;
+    roomNumber?: string;
 }
 export declare class BookingCheckedOutEvent {
     bookingId: string;

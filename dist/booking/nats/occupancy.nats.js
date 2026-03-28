@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HotelOccupancyNatsResponseData = exports.GetHotelOccupancyNatsRequest = void 0;
+exports.GetRoomNightsResponseData = exports.GetRoomNightsRequest = exports.HotelOccupancyNatsResponseData = exports.GetHotelOccupancyNatsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * NATS Pattern: booking.occupancy.current
@@ -70,4 +70,39 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Rooms being cleaned' }),
     __metadata("design:type", Number)
 ], HotelOccupancyNatsResponseData.prototype, "cleaning", void 0);
+/**
+ * NATS Pattern: bookings.stats.roomNights
+ * Returns total occupied room nights in a date range
+ */
+class GetRoomNightsRequest {
+    tenantId;
+    hotelId;
+    dateFrom;
+    dateTo;
+}
+exports.GetRoomNightsRequest = GetRoomNightsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetRoomNightsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], GetRoomNightsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Period start (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], GetRoomNightsRequest.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Period end (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], GetRoomNightsRequest.prototype, "dateTo", void 0);
+class GetRoomNightsResponseData {
+    roomNights;
+}
+exports.GetRoomNightsResponseData = GetRoomNightsResponseData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total occupied room nights in the period' }),
+    __metadata("design:type", Number)
+], GetRoomNightsResponseData.prototype, "roomNights", void 0);
 //# sourceMappingURL=occupancy.nats.js.map

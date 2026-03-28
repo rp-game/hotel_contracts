@@ -8,3 +8,4 @@ export * from './reports.nats';
 export * from './alerts.nats';
 export * from './warehouse.nats';
 export * from './stock-transfer.nats';
+export * from './minibar.nats';

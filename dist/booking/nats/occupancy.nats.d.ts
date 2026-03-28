@@ -17,4 +17,18 @@ export declare class HotelOccupancyNatsResponseData {
     cleaning: number;
 }
 export type GetHotelOccupancyNatsResponse = NatsResponse<HotelOccupancyNatsResponseData>;
+/**
+ * NATS Pattern: bookings.stats.roomNights
+ * Returns total occupied room nights in a date range
+ */
+export declare class GetRoomNightsRequest {
+    tenantId: string;
+    hotelId: string;
+    dateFrom: string;
+    dateTo: string;
+}
+export declare class GetRoomNightsResponseData {
+    roomNights: number;
+}
+export type GetRoomNightsNatsResponse = NatsResponse<GetRoomNightsResponseData>;
 //# sourceMappingURL=occupancy.nats.d.ts.map

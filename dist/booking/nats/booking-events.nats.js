@@ -30,6 +30,10 @@ class BookingCheckedInEvent {
     totalAmount;
     checkInDate;
     checkOutDate;
+    roomId;
+    roomTypeId;
+    guestCount;
+    roomNumber;
 }
 exports.BookingCheckedInEvent = BookingCheckedInEvent;
 __decorate([
@@ -60,6 +64,22 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Expected check-out date (ISO string)' }),
     __metadata("design:type", String)
 ], BookingCheckedInEvent.prototype, "checkOutDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room ID (from room assignment)' }),
+    __metadata("design:type", String)
+], BookingCheckedInEvent.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room Type ID (from room assignment)' }),
+    __metadata("design:type", String)
+], BookingCheckedInEvent.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of guests in this room' }),
+    __metadata("design:type", Number)
+], BookingCheckedInEvent.prototype, "guestCount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room number (denormalized)' }),
+    __metadata("design:type", String)
+], BookingCheckedInEvent.prototype, "roomNumber", void 0);
 class BookingCheckedOutEvent {
     bookingId;
     customerId;
