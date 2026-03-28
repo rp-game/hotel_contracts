@@ -17,6 +17,7 @@ const class_transformer_1 = require("class-transformer");
 class GoodsReceiptItemDto {
     itemId;
     quantity;
+    purchaseQty;
     unitPrice;
     expiryDate;
 }
@@ -27,13 +28,21 @@ __decorate([
     __metadata("design:type", String)
 ], GoodsReceiptItemDto.prototype, "itemId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Base unit qty. Required if purchaseQty is not provided.' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
-    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.Min)(0.0001),
     __metadata("design:type", Number)
 ], GoodsReceiptItemDto.prototype, "quantity", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Purchase price per unit' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Qty in purchase unit (e.g. 3 thùng). Auto-converted to base units by service. Required if quantity is not provided.' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0.0001),
+    __metadata("design:type", Number)
+], GoodsReceiptItemDto.prototype, "purchaseQty", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Price per purchase unit when purchaseQty is used, or price per base unit otherwise' }),
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.Min)(0),
     __metadata("design:type", Number)
@@ -141,6 +150,8 @@ class GoodsReceiptItemResponse {
     itemName;
     itemCode;
     quantity;
+    purchaseQty;
+    purchaseUnit;
     unitPrice;
     totalPrice;
     expiryDate;
@@ -166,6 +177,14 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], GoodsReceiptItemResponse.prototype, "quantity", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Original purchase qty (e.g. 3 thùng)' }),
+    __metadata("design:type", Number)
+], GoodsReceiptItemResponse.prototype, "purchaseQty", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Purchase unit at time of receipt (e.g. "thùng")' }),
+    __metadata("design:type", String)
+], GoodsReceiptItemResponse.prototype, "purchaseUnit", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)

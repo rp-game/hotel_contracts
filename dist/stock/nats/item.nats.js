@@ -98,6 +98,8 @@ class ItemResponse {
     hasExpiry;
     imageUrl;
     notes;
+    purchaseUnit;
+    purchaseConversionFactor;
     createdAt;
     updatedAt;
 }
@@ -179,6 +181,14 @@ __decorate([
     __metadata("design:type", String)
 ], ItemResponse.prototype, "notes", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], ItemResponse.prototype, "purchaseUnit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], ItemResponse.prototype, "purchaseConversionFactor", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Date)
 ], ItemResponse.prototype, "createdAt", void 0);
@@ -234,6 +244,8 @@ class CreateItemRequest {
     hasExpiry;
     imageUrl;
     notes;
+    purchaseUnit;
+    purchaseConversionFactor;
 }
 exports.CreateItemRequest = CreateItemRequest;
 __decorate([
@@ -329,6 +341,19 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateItemRequest.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Purchase/packaging unit, e.g. "thùng", "két"' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateItemRequest.prototype, "purchaseUnit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'How many base units in 1 purchase unit, e.g. 24' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0.0001),
+    __metadata("design:type", Number)
+], CreateItemRequest.prototype, "purchaseConversionFactor", void 0);
 // ─── Update Item ───
 class UpdateItemRequest {
     tenantId;
@@ -346,6 +371,8 @@ class UpdateItemRequest {
     hasExpiry;
     imageUrl;
     notes;
+    purchaseUnit;
+    purchaseConversionFactor;
 }
 exports.UpdateItemRequest = UpdateItemRequest;
 __decorate([
@@ -436,6 +463,19 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateItemRequest.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Purchase/packaging unit, e.g. "thùng", "két"' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateItemRequest.prototype, "purchaseUnit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'How many base units in 1 purchase unit, e.g. 24' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0.0001),
+    __metadata("design:type", Number)
+], UpdateItemRequest.prototype, "purchaseConversionFactor", void 0);
 // ─── Delete Item ───
 class DeleteItemRequest {
     tenantId;

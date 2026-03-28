@@ -31,6 +31,8 @@ export declare class ItemResponse {
     hasExpiry?: boolean;
     imageUrl?: string;
     notes?: string;
+    purchaseUnit?: string;
+    purchaseConversionFactor?: number;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -61,6 +63,8 @@ export declare class CreateItemRequest {
     hasExpiry?: boolean;
     imageUrl?: string;
     notes?: string;
+    purchaseUnit?: string;
+    purchaseConversionFactor?: number;
 }
 export type CreateItemNatsResponse = NatsResponse<ItemResponse>;
 export declare class UpdateItemRequest {
@@ -79,6 +83,8 @@ export declare class UpdateItemRequest {
     hasExpiry?: boolean;
     imageUrl?: string;
     notes?: string;
+    purchaseUnit?: string;
+    purchaseConversionFactor?: number;
 }
 export type UpdateItemNatsResponse = NatsResponse<ItemResponse>;
 export declare class DeleteItemRequest {

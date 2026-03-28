@@ -1,7 +1,8 @@
 import { NatsResponse, NatsPaginatedResponse } from '../../common';
 export declare class GoodsReceiptItemDto {
     itemId: string;
-    quantity: number;
+    quantity?: number;
+    purchaseQty?: number;
     unitPrice: number;
     expiryDate?: string;
 }
@@ -26,6 +27,8 @@ export declare class GoodsReceiptItemResponse {
     itemName?: string;
     itemCode?: string;
     quantity: number;
+    purchaseQty?: number;
+    purchaseUnit?: string;
     unitPrice: number;
     totalPrice: number;
     expiryDate?: string;

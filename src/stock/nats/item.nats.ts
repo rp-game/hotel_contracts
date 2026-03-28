@@ -108,6 +108,12 @@ export class ItemResponse {
   @ApiPropertyOptional()
   notes?: string;
 
+  @ApiPropertyOptional()
+  purchaseUnit?: string;
+
+  @ApiPropertyOptional()
+  purchaseConversionFactor?: number;
+
   @ApiProperty()
   createdAt: Date;
 
@@ -219,6 +225,17 @@ export class CreateItemRequest {
   @IsOptional()
   @IsString()
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Purchase/packaging unit, e.g. "thùng", "két"' })
+  @IsOptional()
+  @IsString()
+  purchaseUnit?: string;
+
+  @ApiPropertyOptional({ description: 'How many base units in 1 purchase unit, e.g. 24' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0.0001)
+  purchaseConversionFactor?: number;
 }
 
 export type CreateItemNatsResponse = NatsResponse<ItemResponse>;
@@ -298,6 +315,17 @@ export class UpdateItemRequest {
   @IsOptional()
   @IsString()
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Purchase/packaging unit, e.g. "thùng", "két"' })
+  @IsOptional()
+  @IsString()
+  purchaseUnit?: string;
+
+  @ApiPropertyOptional({ description: 'How many base units in 1 purchase unit, e.g. 24' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0.0001)
+  purchaseConversionFactor?: number;
 }
 
 export type UpdateItemNatsResponse = NatsResponse<ItemResponse>;

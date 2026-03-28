@@ -10,12 +10,19 @@ export class GoodsReceiptItemDto {
   @IsUUID()
   itemId: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional({ description: 'Base unit qty. Required if purchaseQty is not provided.' })
+  @IsOptional()
   @IsNumber()
-  @Min(1)
-  quantity: number;
+  @Min(0.0001)
+  quantity?: number;
 
-  @ApiProperty({ description: 'Purchase price per unit' })
+  @ApiPropertyOptional({ description: 'Qty in purchase unit (e.g. 3 thùng). Auto-converted to base units by service. Required if quantity is not provided.' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0.0001)
+  purchaseQty?: number;
+
+  @ApiProperty({ description: 'Price per purchase unit when purchaseQty is used, or price per base unit otherwise' })
   @IsNumber()
   @Min(0)
   unitPrice: number;
@@ -105,6 +112,12 @@ export class GoodsReceiptItemResponse {
 
   @ApiProperty()
   quantity: number;
+
+  @ApiPropertyOptional({ description: 'Original purchase qty (e.g. 3 thùng)' })
+  purchaseQty?: number;
+
+  @ApiPropertyOptional({ description: 'Purchase unit at time of receipt (e.g. "thùng")' })
+  purchaseUnit?: string;
 
   @ApiProperty()
   unitPrice: number;
