@@ -188,6 +188,14 @@ export class HotelOperationSettingsDto {
   @ValidateNested()
   @Type(() => ShiftConfigDto)
   shiftConfig?: ShiftConfigDto;
+
+  @ApiPropertyOptional({
+    description: 'Enable multi-warehouse stock tracking. When true, goods receipts, issues, and adjustments require a warehouse selection.',
+    example: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  isMultiWarehouse?: boolean;
 }
 
 /**

@@ -145,6 +145,7 @@ class HotelOperationSettingsDto {
     businessHours;
     taxConfiguration;
     shiftConfig;
+    isMultiWarehouse;
 }
 exports.HotelOperationSettingsDto = HotelOperationSettingsDto;
 __decorate([
@@ -244,6 +245,15 @@ __decorate([
     (0, class_transformer_1.Type)(() => ShiftConfigDto),
     __metadata("design:type", ShiftConfigDto)
 ], HotelOperationSettingsDto.prototype, "shiftConfig", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Enable multi-warehouse stock tracking. When true, goods receipts, issues, and adjustments require a warehouse selection.',
+        example: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], HotelOperationSettingsDto.prototype, "isMultiWarehouse", void 0);
 /**
  * Update Hotel Settings Request DTO
  * Used for POST /hotels/:id/settings endpoint

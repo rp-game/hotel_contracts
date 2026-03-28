@@ -6,3 +6,5 @@ export * from './stock-adjustment.nats';
 export * from './supply-kit.nats';
 export * from './reports.nats';
 export * from './alerts.nats';
+export * from './warehouse.nats';
+export * from './stock-transfer.nats';

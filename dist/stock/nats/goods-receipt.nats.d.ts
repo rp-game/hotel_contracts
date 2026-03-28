@@ -19,6 +19,7 @@ export declare class CreateGoodsReceiptRequest {
     notes?: string;
     receivedBy: string;
     receivedByName?: string;
+    warehouseId?: string;
     items: GoodsReceiptItemDto[];
 }
 export declare class GoodsReceiptItemResponse {
@@ -51,6 +52,8 @@ export declare class GoodsReceiptResponse {
     notes?: string;
     receivedBy: string;
     receivedByName?: string;
+    warehouseId?: string;
+    warehouseName?: string;
     items: GoodsReceiptItemResponse[];
     createdAt: Date;
 }

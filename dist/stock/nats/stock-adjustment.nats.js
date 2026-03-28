@@ -54,6 +54,7 @@ class CreateStockAdjustmentRequest {
     notes;
     performedBy;
     performedByName;
+    warehouseId;
     items;
 }
 exports.CreateStockAdjustmentRequest = CreateStockAdjustmentRequest;
@@ -106,6 +107,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateStockAdjustmentRequest.prototype, "performedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Warehouse for this adjustment (auto-resolves to default if not provided)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateStockAdjustmentRequest.prototype, "warehouseId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ type: [StockAdjustmentItemDto] }),
     (0, class_validator_1.IsArray)(),
@@ -164,6 +171,8 @@ class StockAdjustmentResponse {
     notes;
     performedBy;
     performedByName;
+    warehouseId;
+    warehouseName;
     items;
     createdAt;
 }
@@ -216,6 +225,14 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", String)
 ], StockAdjustmentResponse.prototype, "performedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], StockAdjustmentResponse.prototype, "warehouseId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], StockAdjustmentResponse.prototype, "warehouseName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ type: [StockAdjustmentItemResponse] }),
     __metadata("design:type", Array)

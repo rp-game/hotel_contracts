@@ -66,6 +66,7 @@ class CreateGoodsReceiptRequest {
     notes;
     receivedBy;
     receivedByName;
+    warehouseId;
     items;
 }
 exports.CreateGoodsReceiptRequest = CreateGoodsReceiptRequest;
@@ -137,6 +138,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateGoodsReceiptRequest.prototype, "receivedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Target warehouse (auto-resolves to default if not provided)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateGoodsReceiptRequest.prototype, "warehouseId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ type: [GoodsReceiptItemDto] }),
     (0, class_validator_1.IsArray)(),
@@ -215,6 +222,8 @@ class GoodsReceiptResponse {
     notes;
     receivedBy;
     receivedByName;
+    warehouseId;
+    warehouseName;
     items;
     createdAt;
 }
@@ -287,6 +296,14 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", String)
 ], GoodsReceiptResponse.prototype, "receivedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], GoodsReceiptResponse.prototype, "warehouseId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], GoodsReceiptResponse.prototype, "warehouseName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ type: [GoodsReceiptItemResponse] }),
     __metadata("design:type", Array)

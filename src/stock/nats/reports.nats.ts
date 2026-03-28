@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsUUID, IsOptional, IsDateString, IsEnum } from 'class-validator';
+import { IsUUID, IsOptional, IsDateString, IsEnum, IsString } from 'class-validator';
 import { NatsResponse } from '../../common';
 import { ItemCategory } from '../enums';
 
@@ -26,6 +26,11 @@ export class InOutBalanceRequest {
   @IsOptional()
   @IsEnum(ItemCategory)
   category?: ItemCategory;
+
+  @ApiPropertyOptional({ description: 'Filter report by specific warehouse' })
+  @IsOptional()
+  @IsString()
+  warehouseId?: string;
 }
 
 export class InOutBalanceItemRow {

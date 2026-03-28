@@ -16,6 +16,7 @@ export declare class CreateStockAdjustmentRequest {
     notes?: string;
     performedBy: string;
     performedByName?: string;
+    warehouseId?: string;
     items: StockAdjustmentItemDto[];
 }
 export declare class StockAdjustmentItemResponse {
@@ -40,6 +41,8 @@ export declare class StockAdjustmentResponse {
     notes?: string;
     performedBy: string;
     performedByName?: string;
+    warehouseId?: string;
+    warehouseName?: string;
     items: StockAdjustmentItemResponse[];
     createdAt: Date;
 }

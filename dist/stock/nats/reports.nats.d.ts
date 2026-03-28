@@ -6,6 +6,7 @@ export declare class InOutBalanceRequest {
     dateFrom: string;
     dateTo: string;
     category?: ItemCategory;
+    warehouseId?: string;
 }
 export declare class InOutBalanceItemRow {
     itemId: string;

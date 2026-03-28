@@ -64,6 +64,7 @@ class CreateStockIssueRequest {
     notes;
     issuedBy;
     issuedByName;
+    warehouseId;
     items;
 }
 exports.CreateStockIssueRequest = CreateStockIssueRequest;
@@ -128,6 +129,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateStockIssueRequest.prototype, "issuedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Source warehouse (auto-resolves to default if not provided)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateStockIssueRequest.prototype, "warehouseId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ type: [StockIssueItemDto] }),
     (0, class_validator_1.IsArray)(),
@@ -203,6 +210,8 @@ class StockIssueResponse {
     issuedBy;
     issuedByName;
     totalCost;
+    warehouseId;
+    warehouseName;
     items;
     createdAt;
 }
@@ -263,6 +272,14 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], StockIssueResponse.prototype, "totalCost", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], StockIssueResponse.prototype, "warehouseId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], StockIssueResponse.prototype, "warehouseName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ type: [StockIssueItemResponse] }),
     __metadata("design:type", Array)

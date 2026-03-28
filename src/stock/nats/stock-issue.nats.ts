@@ -83,6 +83,11 @@ export class CreateStockIssueRequest {
   @IsString()
   issuedByName?: string;
 
+  @ApiPropertyOptional({ description: 'Source warehouse (auto-resolves to default if not provided)' })
+  @IsOptional()
+  @IsUUID()
+  warehouseId?: string;
+
   @ApiProperty({ type: [StockIssueItemDto] })
   @IsArray()
   @ValidateNested({ each: true })
@@ -164,6 +169,12 @@ export class StockIssueResponse {
 
   @ApiProperty()
   totalCost: number;
+
+  @ApiPropertyOptional()
+  warehouseId?: string;
+
+  @ApiPropertyOptional()
+  warehouseName?: string;
 
   @ApiProperty({ type: [StockIssueItemResponse] })
   items: StockIssueItemResponse[];

@@ -90,6 +90,11 @@ export class CreateGoodsReceiptRequest {
   @IsString()
   receivedByName?: string;
 
+  @ApiPropertyOptional({ description: 'Target warehouse (auto-resolves to default if not provided)' })
+  @IsOptional()
+  @IsUUID()
+  warehouseId?: string;
+
   @ApiProperty({ type: [GoodsReceiptItemDto] })
   @IsArray()
   @ValidateNested({ each: true })
@@ -180,6 +185,12 @@ export class GoodsReceiptResponse {
 
   @ApiPropertyOptional()
   receivedByName?: string;
+
+  @ApiPropertyOptional()
+  warehouseId?: string;
+
+  @ApiPropertyOptional()
+  warehouseName?: string;
 
   @ApiProperty({ type: [GoodsReceiptItemResponse] })
   items: GoodsReceiptItemResponse[];

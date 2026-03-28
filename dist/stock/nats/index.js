@@ -22,4 +22,6 @@ __exportStar(require("./stock-adjustment.nats"), exports);
 __exportStar(require("./supply-kit.nats"), exports);
 __exportStar(require("./reports.nats"), exports);
 __exportStar(require("./alerts.nats"), exports);
+__exportStar(require("./warehouse.nats"), exports);
+__exportStar(require("./stock-transfer.nats"), exports);
 //# sourceMappingURL=index.js.map

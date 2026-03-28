@@ -45,6 +45,7 @@ export declare class HotelOperationSettingsDto {
     };
     taxConfiguration?: TaxConfigurationDto;
     shiftConfig?: ShiftConfigDto;
+    isMultiWarehouse?: boolean;
 }
 /**
  * Update Hotel Settings Request DTO

@@ -139,6 +139,7 @@ export class HotelDto {
       start: string;
       end: string;
     };
+    isMultiWarehouse?: boolean;
   };
 
   @ApiPropertyOptional({ description: 'Brand standards configuration' })

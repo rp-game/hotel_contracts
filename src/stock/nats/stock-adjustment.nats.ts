@@ -67,6 +67,11 @@ export class CreateStockAdjustmentRequest {
   @IsString()
   performedByName?: string;
 
+  @ApiPropertyOptional({ description: 'Warehouse for this adjustment (auto-resolves to default if not provided)' })
+  @IsOptional()
+  @IsUUID()
+  warehouseId?: string;
+
   @ApiProperty({ type: [StockAdjustmentItemDto] })
   @IsArray()
   @ValidateNested({ each: true })
@@ -133,6 +138,12 @@ export class StockAdjustmentResponse {
 
   @ApiPropertyOptional()
   performedByName?: string;
+
+  @ApiPropertyOptional()
+  warehouseId?: string;
+
+  @ApiPropertyOptional()
+  warehouseName?: string;
 
   @ApiProperty({ type: [StockAdjustmentItemResponse] })
   items: StockAdjustmentItemResponse[];
