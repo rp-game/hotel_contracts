@@ -1,6 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsUUID, IsString, IsOptional, IsBoolean, IsNumber } from 'class-validator';
+import { IsUUID, IsString, IsOptional, IsBoolean, IsNumber, IsEnum } from 'class-validator';
 import { NatsResponse, NatsPaginatedResponse } from '../../common';
+import { WarehouseScope } from '../enums';
 
 // ─── Create Warehouse ───
 
@@ -9,9 +10,10 @@ export class CreateWarehouseRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional({ description: 'Hotel ID (null for chain warehouse)' })
+  @IsOptional()
   @IsUUID()
-  hotelId: string;
+  hotelId?: string;
 
   @ApiProperty()
   @IsString()
@@ -26,6 +28,16 @@ export class CreateWarehouseRequest {
   @IsOptional()
   @IsBoolean()
   isDefault?: boolean;
+
+  @ApiPropertyOptional({ enum: WarehouseScope, default: WarehouseScope.HOTEL })
+  @IsOptional()
+  @IsEnum(WarehouseScope)
+  scope?: WarehouseScope;
+
+  @ApiPropertyOptional({ description: 'Location/city for chain warehouses' })
+  @IsOptional()
+  @IsString()
+  location?: string;
 }
 
 // ─── Update Warehouse ───
@@ -35,9 +47,10 @@ export class UpdateWarehouseRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsOptional()
   @IsUUID()
-  hotelId: string;
+  hotelId?: string;
 
   @ApiProperty()
   @IsUUID()
@@ -62,6 +75,11 @@ export class UpdateWarehouseRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional({ description: 'Location/city for chain warehouses' })
+  @IsOptional()
+  @IsString()
+  location?: string;
 }
 
 // ─── Find Warehouses ───
@@ -71,14 +89,20 @@ export class FindWarehousesRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsOptional()
   @IsUUID()
-  hotelId: string;
+  hotelId?: string;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional({ enum: WarehouseScope })
+  @IsOptional()
+  @IsEnum(WarehouseScope)
+  scope?: WarehouseScope;
 }
 
 // ─── Delete Warehouse ───
@@ -88,9 +112,10 @@ export class DeleteWarehouseRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsOptional()
   @IsUUID()
-  hotelId: string;
+  hotelId?: string;
 
   @ApiProperty()
   @IsUUID()
@@ -122,8 +147,8 @@ export class WarehouseResponse {
   @ApiProperty()
   tenantId: string;
 
-  @ApiProperty()
-  hotelId: string;
+  @ApiPropertyOptional()
+  hotelId?: string;
 
   @ApiProperty()
   name: string;
@@ -136,6 +161,12 @@ export class WarehouseResponse {
 
   @ApiProperty()
   isActive: boolean;
+
+  @ApiProperty({ enum: WarehouseScope })
+  scope: WarehouseScope;
+
+  @ApiPropertyOptional()
+  location?: string;
 
   @ApiProperty()
   createdAt: Date;

@@ -1,28 +1,33 @@
 import { NatsResponse } from '../../common';
+import { WarehouseScope } from '../enums';
 export declare class CreateWarehouseRequest {
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
     name: string;
     description?: string;
     isDefault?: boolean;
+    scope?: WarehouseScope;
+    location?: string;
 }
 export declare class UpdateWarehouseRequest {
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
     id: string;
     name?: string;
     description?: string;
     isDefault?: boolean;
     isActive?: boolean;
+    location?: string;
 }
 export declare class FindWarehousesRequest {
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
     isActive?: boolean;
+    scope?: WarehouseScope;
 }
 export declare class DeleteWarehouseRequest {
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
     id: string;
 }
 export declare class GetItemWarehouseStockRequest {
@@ -33,11 +38,13 @@ export declare class GetItemWarehouseStockRequest {
 export declare class WarehouseResponse {
     id: string;
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
     name: string;
     description?: string;
     isDefault: boolean;
     isActive: boolean;
+    scope: WarehouseScope;
+    location?: string;
     createdAt: Date;
     updatedAt: Date;
 }

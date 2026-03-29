@@ -25,7 +25,26 @@ export enum StockIssueType {
   F_AND_B = 'F_AND_B',
   SUPPLY_KIT = 'SUPPLY_KIT',
   MINIBAR_RESTOCK = 'MINIBAR_RESTOCK',
+  INTER_HOTEL_TRANSFER = 'INTER_HOTEL_TRANSFER',
   OTHER = 'OTHER',
+}
+
+export enum WarehouseScope {
+  HOTEL = 'HOTEL',
+  CHAIN = 'CHAIN',
+}
+
+export enum InterHotelTransferStatus {
+  REQUESTED = 'REQUESTED',
+  APPROVED = 'APPROVED',
+  IN_TRANSIT = 'IN_TRANSIT',
+  RECEIVED = 'RECEIVED',
+  REJECTED = 'REJECTED',
+}
+
+export enum TransferType {
+  INTERNAL_TRANSFER = 'INTERNAL_TRANSFER',
+  INTER_COMPANY_SALE = 'INTER_COMPANY_SALE',
 }
 
 export enum StockAdjustmentType {

@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsUUID, IsString, IsOptional, IsNumber, IsBoolean, IsEnum, Min } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
 import { NatsResponse, NatsPaginatedResponse } from '../../common';
 import { ItemCategory, ItemUnit } from '../enums';
 

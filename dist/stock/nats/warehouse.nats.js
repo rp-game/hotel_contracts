@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WarehouseStockItemResponse = exports.WarehouseResponse = exports.GetItemWarehouseStockRequest = exports.DeleteWarehouseRequest = exports.FindWarehousesRequest = exports.UpdateWarehouseRequest = exports.CreateWarehouseRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const enums_1 = require("../enums");
 // ─── Create Warehouse ───
 class CreateWarehouseRequest {
     tenantId;
@@ -19,6 +20,8 @@ class CreateWarehouseRequest {
     name;
     description;
     isDefault;
+    scope;
+    location;
 }
 exports.CreateWarehouseRequest = CreateWarehouseRequest;
 __decorate([
@@ -27,7 +30,8 @@ __decorate([
     __metadata("design:type", String)
 ], CreateWarehouseRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (null for chain warehouse)' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateWarehouseRequest.prototype, "hotelId", void 0);
@@ -48,6 +52,18 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateWarehouseRequest.prototype, "isDefault", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: enums_1.WarehouseScope, default: enums_1.WarehouseScope.HOTEL }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(enums_1.WarehouseScope),
+    __metadata("design:type", String)
+], CreateWarehouseRequest.prototype, "scope", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Location/city for chain warehouses' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateWarehouseRequest.prototype, "location", void 0);
 // ─── Update Warehouse ───
 class UpdateWarehouseRequest {
     tenantId;
@@ -57,6 +73,7 @@ class UpdateWarehouseRequest {
     description;
     isDefault;
     isActive;
+    location;
 }
 exports.UpdateWarehouseRequest = UpdateWarehouseRequest;
 __decorate([
@@ -65,7 +82,8 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateWarehouseRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], UpdateWarehouseRequest.prototype, "hotelId", void 0);
@@ -98,11 +116,18 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdateWarehouseRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Location/city for chain warehouses' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateWarehouseRequest.prototype, "location", void 0);
 // ─── Find Warehouses ───
 class FindWarehousesRequest {
     tenantId;
     hotelId;
     isActive;
+    scope;
 }
 exports.FindWarehousesRequest = FindWarehousesRequest;
 __decorate([
@@ -111,7 +136,8 @@ __decorate([
     __metadata("design:type", String)
 ], FindWarehousesRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], FindWarehousesRequest.prototype, "hotelId", void 0);
@@ -121,6 +147,12 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], FindWarehousesRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: enums_1.WarehouseScope }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(enums_1.WarehouseScope),
+    __metadata("design:type", String)
+], FindWarehousesRequest.prototype, "scope", void 0);
 // ─── Delete Warehouse ───
 class DeleteWarehouseRequest {
     tenantId;
@@ -134,7 +166,8 @@ __decorate([
     __metadata("design:type", String)
 ], DeleteWarehouseRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeleteWarehouseRequest.prototype, "hotelId", void 0);
@@ -174,6 +207,8 @@ class WarehouseResponse {
     description;
     isDefault;
     isActive;
+    scope;
+    location;
     createdAt;
     updatedAt;
 }
@@ -187,7 +222,7 @@ __decorate([
     __metadata("design:type", String)
 ], WarehouseResponse.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", String)
 ], WarehouseResponse.prototype, "hotelId", void 0);
 __decorate([
@@ -206,6 +241,14 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Boolean)
 ], WarehouseResponse.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: enums_1.WarehouseScope }),
+    __metadata("design:type", String)
+], WarehouseResponse.prototype, "scope", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], WarehouseResponse.prototype, "location", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Date)

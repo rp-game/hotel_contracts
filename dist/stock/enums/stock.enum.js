@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StockAdjustmentType = exports.StockIssueType = exports.ItemUnit = exports.ItemCategory = void 0;
+exports.StockAdjustmentType = exports.TransferType = exports.InterHotelTransferStatus = exports.WarehouseScope = exports.StockIssueType = exports.ItemUnit = exports.ItemCategory = void 0;
 var ItemCategory;
 (function (ItemCategory) {
     ItemCategory["AMENITY"] = "AMENITY";
@@ -29,8 +29,27 @@ var StockIssueType;
     StockIssueType["F_AND_B"] = "F_AND_B";
     StockIssueType["SUPPLY_KIT"] = "SUPPLY_KIT";
     StockIssueType["MINIBAR_RESTOCK"] = "MINIBAR_RESTOCK";
+    StockIssueType["INTER_HOTEL_TRANSFER"] = "INTER_HOTEL_TRANSFER";
     StockIssueType["OTHER"] = "OTHER";
 })(StockIssueType || (exports.StockIssueType = StockIssueType = {}));
+var WarehouseScope;
+(function (WarehouseScope) {
+    WarehouseScope["HOTEL"] = "HOTEL";
+    WarehouseScope["CHAIN"] = "CHAIN";
+})(WarehouseScope || (exports.WarehouseScope = WarehouseScope = {}));
+var InterHotelTransferStatus;
+(function (InterHotelTransferStatus) {
+    InterHotelTransferStatus["REQUESTED"] = "REQUESTED";
+    InterHotelTransferStatus["APPROVED"] = "APPROVED";
+    InterHotelTransferStatus["IN_TRANSIT"] = "IN_TRANSIT";
+    InterHotelTransferStatus["RECEIVED"] = "RECEIVED";
+    InterHotelTransferStatus["REJECTED"] = "REJECTED";
+})(InterHotelTransferStatus || (exports.InterHotelTransferStatus = InterHotelTransferStatus = {}));
+var TransferType;
+(function (TransferType) {
+    TransferType["INTERNAL_TRANSFER"] = "INTERNAL_TRANSFER";
+    TransferType["INTER_COMPANY_SALE"] = "INTER_COMPANY_SALE";
+})(TransferType || (exports.TransferType = TransferType = {}));
 var StockAdjustmentType;
 (function (StockAdjustmentType) {
     StockAdjustmentType["STOCK_TAKE"] = "STOCK_TAKE";
