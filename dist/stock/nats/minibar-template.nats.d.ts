@@ -23,7 +23,7 @@ export declare class UpdateMinibarTemplateRequest {
 }
 export declare class FindMinibarTemplatesRequest {
     tenantId: string;
-    hotelId: string;
+    hotelId?: string;
     roomTypeId?: string;
     isActive?: boolean;
 }

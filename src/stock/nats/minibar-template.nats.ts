@@ -42,7 +42,7 @@ export class UpdateMinibarTemplateRequest {
 
 export class FindMinibarTemplatesRequest {
   @ApiProperty() @IsUUID() tenantId: string;
-  @ApiProperty() @IsUUID() hotelId: string;
+  @ApiPropertyOptional() @IsOptional() @IsUUID() hotelId?: string;
   @ApiPropertyOptional() @IsOptional() @IsUUID() roomTypeId?: string;
   @ApiPropertyOptional() @IsOptional() @IsBoolean() isActive?: boolean;
 }
