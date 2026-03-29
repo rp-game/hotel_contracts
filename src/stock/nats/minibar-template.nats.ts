@@ -61,14 +61,21 @@ export class DeleteMinibarTemplateRequest {
 
 // ─── Response ───
 
+export class MinibarTemplateItemResponseItem {
+  @ApiProperty() id: string;
+  @ApiProperty() name: string;
+  @ApiProperty() code: string;
+  @ApiProperty() unit: string;
+  @ApiPropertyOptional() sellingPrice?: number;
+}
+
 export class MinibarTemplateItemResponse {
   @ApiProperty() id: string;
   @ApiProperty() itemId: string;
-  @ApiProperty() itemCode: string;
-  @ApiProperty() itemName: string;
-  @ApiProperty() unit: string;
   @ApiProperty() standardQuantity: number;
   @ApiProperty() sellingPrice: number;
+  @ApiPropertyOptional({ type: () => MinibarTemplateItemResponseItem })
+  item?: MinibarTemplateItemResponseItem;
 }
 
 export class MinibarTemplateResponse {

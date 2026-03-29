@@ -37,14 +37,19 @@ export declare class DeleteMinibarTemplateRequest {
     hotelId: string;
     id: string;
 }
+export declare class MinibarTemplateItemResponseItem {
+    id: string;
+    name: string;
+    code: string;
+    unit: string;
+    sellingPrice?: number;
+}
 export declare class MinibarTemplateItemResponse {
     id: string;
     itemId: string;
-    itemCode: string;
-    itemName: string;
-    unit: string;
     standardQuantity: number;
     sellingPrice: number;
+    item?: MinibarTemplateItemResponseItem;
 }
 export declare class MinibarTemplateResponse {
     id: string;

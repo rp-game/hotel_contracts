@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MinibarTemplateResponse = exports.MinibarTemplateItemResponse = exports.DeleteMinibarTemplateRequest = exports.FindOneMinibarTemplateRequest = exports.FindMinibarTemplatesRequest = exports.UpdateMinibarTemplateRequest = exports.CreateMinibarTemplateRequest = exports.MinibarTemplateItemDto = void 0;
+exports.MinibarTemplateResponse = exports.MinibarTemplateItemResponse = exports.MinibarTemplateItemResponseItem = exports.DeleteMinibarTemplateRequest = exports.FindOneMinibarTemplateRequest = exports.FindMinibarTemplatesRequest = exports.UpdateMinibarTemplateRequest = exports.CreateMinibarTemplateRequest = exports.MinibarTemplateItemDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -206,14 +206,40 @@ __decorate([
     __metadata("design:type", String)
 ], DeleteMinibarTemplateRequest.prototype, "id", void 0);
 // ─── Response ───
+class MinibarTemplateItemResponseItem {
+    id;
+    name;
+    code;
+    unit;
+    sellingPrice;
+}
+exports.MinibarTemplateItemResponseItem = MinibarTemplateItemResponseItem;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarTemplateItemResponseItem.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarTemplateItemResponseItem.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarTemplateItemResponseItem.prototype, "code", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarTemplateItemResponseItem.prototype, "unit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], MinibarTemplateItemResponseItem.prototype, "sellingPrice", void 0);
 class MinibarTemplateItemResponse {
     id;
     itemId;
-    itemCode;
-    itemName;
-    unit;
     standardQuantity;
     sellingPrice;
+    item;
 }
 exports.MinibarTemplateItemResponse = MinibarTemplateItemResponse;
 __decorate([
@@ -226,24 +252,16 @@ __decorate([
 ], MinibarTemplateItemResponse.prototype, "itemId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", String)
-], MinibarTemplateItemResponse.prototype, "itemCode", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", String)
-], MinibarTemplateItemResponse.prototype, "itemName", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", String)
-], MinibarTemplateItemResponse.prototype, "unit", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], MinibarTemplateItemResponse.prototype, "standardQuantity", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], MinibarTemplateItemResponse.prototype, "sellingPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: () => MinibarTemplateItemResponseItem }),
+    __metadata("design:type", MinibarTemplateItemResponseItem)
+], MinibarTemplateItemResponse.prototype, "item", void 0);
 class MinibarTemplateResponse {
     id;
     tenantId;
