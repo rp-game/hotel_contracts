@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WarehouseStockItemResponse = exports.WarehouseResponse = exports.GetItemWarehouseStockRequest = exports.DeleteWarehouseRequest = exports.FindWarehousesRequest = exports.UpdateWarehouseRequest = exports.CreateWarehouseRequest = void 0;
+exports.GetWarehouseItemsResponse = exports.WarehouseItemRow = exports.GetWarehouseItemsRequest = exports.WarehouseStockItemResponse = exports.WarehouseResponse = exports.GetItemWarehouseStockRequest = exports.DeleteWarehouseRequest = exports.FindWarehousesRequest = exports.UpdateWarehouseRequest = exports.CreateWarehouseRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
@@ -280,4 +280,117 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], WarehouseStockItemResponse.prototype, "averageCostPrice", void 0);
+// ─── Get Items in Warehouse ───
+class GetWarehouseItemsRequest {
+    tenantId;
+    warehouseId;
+    search;
+    category;
+    page;
+    limit;
+}
+exports.GetWarehouseItemsRequest = GetWarehouseItemsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetWarehouseItemsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetWarehouseItemsRequest.prototype, "warehouseId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetWarehouseItemsRequest.prototype, "search", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetWarehouseItemsRequest.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ default: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], GetWarehouseItemsRequest.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ default: 50 }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], GetWarehouseItemsRequest.prototype, "limit", void 0);
+class WarehouseItemRow {
+    itemId;
+    itemCode;
+    itemName;
+    unit;
+    category;
+    currentStock;
+    averageCostPrice;
+    stockValue;
+    reorderLevel;
+}
+exports.WarehouseItemRow = WarehouseItemRow;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], WarehouseItemRow.prototype, "itemId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], WarehouseItemRow.prototype, "itemCode", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], WarehouseItemRow.prototype, "itemName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], WarehouseItemRow.prototype, "unit", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], WarehouseItemRow.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], WarehouseItemRow.prototype, "currentStock", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], WarehouseItemRow.prototype, "averageCostPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], WarehouseItemRow.prototype, "stockValue", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], WarehouseItemRow.prototype, "reorderLevel", void 0);
+class GetWarehouseItemsResponse {
+    items;
+    total;
+    page;
+    limit;
+}
+exports.GetWarehouseItemsResponse = GetWarehouseItemsResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [WarehouseItemRow] }),
+    __metadata("design:type", Array)
+], GetWarehouseItemsResponse.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GetWarehouseItemsResponse.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GetWarehouseItemsResponse.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GetWarehouseItemsResponse.prototype, "limit", void 0);
 //# sourceMappingURL=warehouse.nats.js.map

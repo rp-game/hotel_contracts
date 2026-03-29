@@ -41,6 +41,11 @@ export declare enum TransferType {
     INTERNAL_TRANSFER = "INTERNAL_TRANSFER",
     INTER_COMPANY_SALE = "INTER_COMPANY_SALE"
 }
+export declare enum ProcurementMode {
+    SELF = "SELF",
+    CHAIN_ONLY = "CHAIN_ONLY",
+    BOTH = "BOTH"
+}
 export declare enum StockAdjustmentType {
     STOCK_TAKE = "STOCK_TAKE",
     DAMAGE = "DAMAGE",

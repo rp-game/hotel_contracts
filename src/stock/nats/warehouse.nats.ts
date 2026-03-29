@@ -194,3 +194,35 @@ export type UpdateWarehouseNatsResponse = NatsResponse<WarehouseResponse>;
 export type FindWarehousesNatsResponse = NatsResponse<WarehouseResponse[]>;
 export type DeleteWarehouseNatsResponse = NatsResponse<{ success: boolean }>;
 export type GetItemWarehouseStockNatsResponse = NatsResponse<WarehouseStockItemResponse[]>;
+
+// ─── Get Items in Warehouse ───
+
+export class GetWarehouseItemsRequest {
+  @ApiProperty() @IsUUID() tenantId: string;
+  @ApiProperty() @IsUUID() warehouseId: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() search?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() category?: string;
+  @ApiPropertyOptional({ default: 1 }) @IsOptional() page?: number;
+  @ApiPropertyOptional({ default: 50 }) @IsOptional() limit?: number;
+}
+
+export class WarehouseItemRow {
+  @ApiProperty() itemId: string;
+  @ApiProperty() itemCode: string;
+  @ApiProperty() itemName: string;
+  @ApiProperty() unit: string;
+  @ApiProperty() category: string;
+  @ApiProperty() currentStock: number;
+  @ApiProperty() averageCostPrice: number;
+  @ApiProperty() stockValue: number;
+  @ApiPropertyOptional() reorderLevel?: number;
+}
+
+export class GetWarehouseItemsResponse {
+  @ApiProperty({ type: [WarehouseItemRow] }) items: WarehouseItemRow[];
+  @ApiProperty() total: number;
+  @ApiProperty() page: number;
+  @ApiProperty() limit: number;
+}
+
+export type GetWarehouseItemsNatsResponse = NatsResponse<GetWarehouseItemsResponse>;

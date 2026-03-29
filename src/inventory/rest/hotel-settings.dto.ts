@@ -196,6 +196,15 @@ export class HotelOperationSettingsDto {
   @IsOptional()
   @IsBoolean()
   isMultiWarehouse?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'Procurement mode: SELF = hotel buys from suppliers, CHAIN_ONLY = only receives from chain warehouse, BOTH = both (default)',
+    enum: ['SELF', 'CHAIN_ONLY', 'BOTH'],
+    default: 'BOTH',
+  })
+  @IsOptional()
+  @IsString()
+  procurementMode?: string;
 }
 
 /**

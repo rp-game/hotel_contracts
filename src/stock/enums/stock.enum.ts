@@ -47,6 +47,12 @@ export enum TransferType {
   INTER_COMPANY_SALE = 'INTER_COMPANY_SALE',
 }
 
+export enum ProcurementMode {
+  SELF = 'SELF',
+  CHAIN_ONLY = 'CHAIN_ONLY',
+  BOTH = 'BOTH',
+}
+
 export enum StockAdjustmentType {
   STOCK_TAKE = 'STOCK_TAKE',
   DAMAGE = 'DAMAGE',

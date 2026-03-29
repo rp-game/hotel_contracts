@@ -61,4 +61,30 @@ export type DeleteWarehouseNatsResponse = NatsResponse<{
     success: boolean;
 }>;
 export type GetItemWarehouseStockNatsResponse = NatsResponse<WarehouseStockItemResponse[]>;
+export declare class GetWarehouseItemsRequest {
+    tenantId: string;
+    warehouseId: string;
+    search?: string;
+    category?: string;
+    page?: number;
+    limit?: number;
+}
+export declare class WarehouseItemRow {
+    itemId: string;
+    itemCode: string;
+    itemName: string;
+    unit: string;
+    category: string;
+    currentStock: number;
+    averageCostPrice: number;
+    stockValue: number;
+    reorderLevel?: number;
+}
+export declare class GetWarehouseItemsResponse {
+    items: WarehouseItemRow[];
+    total: number;
+    page: number;
+    limit: number;
+}
+export type GetWarehouseItemsNatsResponse = NatsResponse<GetWarehouseItemsResponse>;
 //# sourceMappingURL=warehouse.nats.d.ts.map

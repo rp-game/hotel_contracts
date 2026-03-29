@@ -146,6 +146,7 @@ class HotelOperationSettingsDto {
     taxConfiguration;
     shiftConfig;
     isMultiWarehouse;
+    procurementMode;
 }
 exports.HotelOperationSettingsDto = HotelOperationSettingsDto;
 __decorate([
@@ -254,6 +255,16 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], HotelOperationSettingsDto.prototype, "isMultiWarehouse", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Procurement mode: SELF = hotel buys from suppliers, CHAIN_ONLY = only receives from chain warehouse, BOTH = both (default)',
+        enum: ['SELF', 'CHAIN_ONLY', 'BOTH'],
+        default: 'BOTH',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], HotelOperationSettingsDto.prototype, "procurementMode", void 0);
 /**
  * Update Hotel Settings Request DTO
  * Used for POST /hotels/:id/settings endpoint

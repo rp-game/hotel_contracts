@@ -140,6 +140,7 @@ export class HotelDto {
       end: string;
     };
     isMultiWarehouse?: boolean;
+    procurementMode?: string; // 'SELF' | 'CHAIN_ONLY' | 'BOTH'
   };
 
   @ApiPropertyOptional({ description: 'Brand standards configuration' })

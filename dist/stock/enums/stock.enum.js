@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StockAdjustmentType = exports.TransferType = exports.InterHotelTransferStatus = exports.WarehouseScope = exports.StockIssueType = exports.ItemUnit = exports.ItemCategory = void 0;
+exports.StockAdjustmentType = exports.ProcurementMode = exports.TransferType = exports.InterHotelTransferStatus = exports.WarehouseScope = exports.StockIssueType = exports.ItemUnit = exports.ItemCategory = void 0;
 var ItemCategory;
 (function (ItemCategory) {
     ItemCategory["AMENITY"] = "AMENITY";
@@ -50,6 +50,12 @@ var TransferType;
     TransferType["INTERNAL_TRANSFER"] = "INTERNAL_TRANSFER";
     TransferType["INTER_COMPANY_SALE"] = "INTER_COMPANY_SALE";
 })(TransferType || (exports.TransferType = TransferType = {}));
+var ProcurementMode;
+(function (ProcurementMode) {
+    ProcurementMode["SELF"] = "SELF";
+    ProcurementMode["CHAIN_ONLY"] = "CHAIN_ONLY";
+    ProcurementMode["BOTH"] = "BOTH";
+})(ProcurementMode || (exports.ProcurementMode = ProcurementMode = {}));
 var StockAdjustmentType;
 (function (StockAdjustmentType) {
     StockAdjustmentType["STOCK_TAKE"] = "STOCK_TAKE";
