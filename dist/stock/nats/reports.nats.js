@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChainStockOverviewResponse = exports.ChainWarehouseStockSummary = exports.HotelStockSummary = exports.ChainStockOverviewRequest = exports.ExpiryReportResponse = exports.ExpiryReportItem = exports.ExpiryReportRequest = exports.VarianceReportResponse = exports.VarianceReportItem = exports.VarianceReportRequest = exports.MinibarRevenueResponse = exports.MinibarRevenueItem = exports.MinibarRevenueRequest = exports.SupplierHistoryResponse = exports.SupplierHistoryItem = exports.SupplierHistoryRequest = exports.MovementDetailResponse = exports.MovementDetailItem = exports.MovementDetailRequest = exports.DepartmentCostResponse = exports.DepartmentCostItem = exports.DepartmentCostRequest = exports.CostPerRoomNightResponse = exports.CostPerRoomNightCategoryItem = exports.CostPerRoomNightRequest = exports.LowStockReportResponse = exports.LowStockReportItem = exports.LowStockReportRequest = exports.InOutBalanceResponse = exports.InOutBalanceCategoryGroup = exports.InOutBalanceItemRow = exports.InOutBalanceRequest = void 0;
+exports.HotelOverviewResponse = exports.WarehouseBreakdown = exports.HotelOverviewRequest = exports.ChainStockOverviewResponse = exports.ChainWarehouseStockSummary = exports.HotelStockSummary = exports.ChainStockOverviewRequest = exports.ExpiryReportResponse = exports.ExpiryReportItem = exports.ExpiryReportRequest = exports.VarianceReportResponse = exports.VarianceReportItem = exports.VarianceReportRequest = exports.MinibarRevenueResponse = exports.MinibarRevenueItem = exports.MinibarRevenueRequest = exports.SupplierHistoryResponse = exports.SupplierHistoryItem = exports.SupplierHistoryRequest = exports.MovementDetailResponse = exports.MovementDetailItem = exports.MovementDetailRequest = exports.DepartmentCostResponse = exports.DepartmentCostItem = exports.DepartmentCostRequest = exports.CostPerRoomNightResponse = exports.CostPerRoomNightCategoryItem = exports.CostPerRoomNightRequest = exports.LowStockReportResponse = exports.LowStockReportItem = exports.LowStockReportRequest = exports.InOutBalanceResponse = exports.InOutBalanceCategoryGroup = exports.InOutBalanceItemRow = exports.InOutBalanceRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
@@ -1092,4 +1092,114 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], ChainStockOverviewResponse.prototype, "totalLowStockItems", void 0);
+// ─── Hotel Overview (Dashboard KPIs + Warehouse Breakdown) ───
+class HotelOverviewRequest {
+    tenantId;
+    hotelId;
+    warehouseId;
+}
+exports.HotelOverviewRequest = HotelOverviewRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], HotelOverviewRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (null = chain owner sees all)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], HotelOverviewRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter to specific warehouse' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], HotelOverviewRequest.prototype, "warehouseId", void 0);
+class WarehouseBreakdown {
+    warehouseId;
+    warehouseName;
+    scope;
+    totalItems;
+    totalStockValue;
+    lowStockCount;
+}
+exports.WarehouseBreakdown = WarehouseBreakdown;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], WarehouseBreakdown.prototype, "warehouseId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], WarehouseBreakdown.prototype, "warehouseName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], WarehouseBreakdown.prototype, "scope", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], WarehouseBreakdown.prototype, "totalItems", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], WarehouseBreakdown.prototype, "totalStockValue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], WarehouseBreakdown.prototype, "lowStockCount", void 0);
+class HotelOverviewResponse {
+    hotelId;
+    totalStockValue;
+    totalItems;
+    lowStockCount;
+    expiringSoonCount;
+    todayReceiptsCount;
+    todayReceiptsValue;
+    todayIssuesCount;
+    todayIssuesValue;
+    warehouses;
+}
+exports.HotelOverviewResponse = HotelOverviewResponse;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], HotelOverviewResponse.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HotelOverviewResponse.prototype, "totalStockValue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HotelOverviewResponse.prototype, "totalItems", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HotelOverviewResponse.prototype, "lowStockCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HotelOverviewResponse.prototype, "expiringSoonCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HotelOverviewResponse.prototype, "todayReceiptsCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HotelOverviewResponse.prototype, "todayReceiptsValue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HotelOverviewResponse.prototype, "todayIssuesCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HotelOverviewResponse.prototype, "todayIssuesValue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [WarehouseBreakdown] }),
+    __metadata("design:type", Array)
+], HotelOverviewResponse.prototype, "warehouses", void 0);
 //# sourceMappingURL=reports.nats.js.map

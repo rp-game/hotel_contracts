@@ -416,3 +416,37 @@ export class ChainStockOverviewResponse {
 }
 
 export type ChainStockOverviewNatsResponse = NatsResponse<ChainStockOverviewResponse>;
+
+// ─── Hotel Overview (Dashboard KPIs + Warehouse Breakdown) ───
+
+export class HotelOverviewRequest {
+  @ApiProperty() @IsUUID() tenantId: string;
+  @ApiPropertyOptional({ description: 'Hotel ID (null = chain owner sees all)' })
+  @IsOptional() @IsUUID() hotelId?: string;
+  @ApiPropertyOptional({ description: 'Filter to specific warehouse' })
+  @IsOptional() @IsUUID() warehouseId?: string;
+}
+
+export class WarehouseBreakdown {
+  @ApiProperty() warehouseId: string;
+  @ApiProperty() warehouseName: string;
+  @ApiPropertyOptional() scope?: string;
+  @ApiProperty() totalItems: number;
+  @ApiProperty() totalStockValue: number;
+  @ApiProperty() lowStockCount: number;
+}
+
+export class HotelOverviewResponse {
+  @ApiPropertyOptional() hotelId?: string;
+  @ApiProperty() totalStockValue: number;
+  @ApiProperty() totalItems: number;
+  @ApiProperty() lowStockCount: number;
+  @ApiProperty() expiringSoonCount: number;
+  @ApiProperty() todayReceiptsCount: number;
+  @ApiProperty() todayReceiptsValue: number;
+  @ApiProperty() todayIssuesCount: number;
+  @ApiProperty() todayIssuesValue: number;
+  @ApiProperty({ type: [WarehouseBreakdown] }) warehouses: WarehouseBreakdown[];
+}
+
+export type HotelOverviewNatsResponse = NatsResponse<HotelOverviewResponse>;

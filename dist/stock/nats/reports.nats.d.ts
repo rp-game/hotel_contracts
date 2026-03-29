@@ -257,4 +257,30 @@ export declare class ChainStockOverviewResponse {
     totalLowStockItems: number;
 }
 export type ChainStockOverviewNatsResponse = NatsResponse<ChainStockOverviewResponse>;
+export declare class HotelOverviewRequest {
+    tenantId: string;
+    hotelId?: string;
+    warehouseId?: string;
+}
+export declare class WarehouseBreakdown {
+    warehouseId: string;
+    warehouseName: string;
+    scope?: string;
+    totalItems: number;
+    totalStockValue: number;
+    lowStockCount: number;
+}
+export declare class HotelOverviewResponse {
+    hotelId?: string;
+    totalStockValue: number;
+    totalItems: number;
+    lowStockCount: number;
+    expiringSoonCount: number;
+    todayReceiptsCount: number;
+    todayReceiptsValue: number;
+    todayIssuesCount: number;
+    todayIssuesValue: number;
+    warehouses: WarehouseBreakdown[];
+}
+export type HotelOverviewNatsResponse = NatsResponse<HotelOverviewResponse>;
 //# sourceMappingURL=reports.nats.d.ts.map
