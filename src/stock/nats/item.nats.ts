@@ -124,9 +124,10 @@ export class FindOneItemRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional({ description: 'Item ID (from path param in REST, required in NATS)' })
+  @IsOptional()
   @IsUUID()
-  id: string;
+  id?: string;
 }
 
 export class ItemDetailResponse extends ItemResponse {
@@ -319,7 +320,8 @@ export class DeleteItemRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional({ description: 'Item ID (from path param)' })
+  @IsOptional()
   @IsUUID()
   id: string;
 }

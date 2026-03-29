@@ -197,7 +197,8 @@ __decorate([
     __metadata("design:type", String)
 ], FindOneItemRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Item ID (from path param in REST, required in NATS)' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], FindOneItemRequest.prototype, "id", void 0);
@@ -459,7 +460,8 @@ __decorate([
     __metadata("design:type", String)
 ], DeleteItemRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Item ID (from path param)' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeleteItemRequest.prototype, "id", void 0);

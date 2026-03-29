@@ -37,7 +37,7 @@ export declare class ItemResponse {
 export type FindItemsNatsResponse = NatsPaginatedResponse<ItemResponse>;
 export declare class FindOneItemRequest {
     tenantId: string;
-    id: string;
+    id?: string;
 }
 export declare class ItemDetailResponse extends ItemResponse {
     movements?: any[];

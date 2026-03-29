@@ -23,7 +23,7 @@ export declare class SupplierResponse {
 export type FindSuppliersNatsResponse = NatsPaginatedResponse<SupplierResponse>;
 export declare class FindOneSupplierRequest {
     tenantId: string;
-    id: string;
+    id?: string;
 }
 export type FindOneSupplierNatsResponse = NatsResponse<SupplierResponse>;
 export declare class CreateSupplierRequest {
@@ -51,7 +51,7 @@ export declare class UpdateSupplierRequest {
 export type UpdateSupplierNatsResponse = NatsResponse<SupplierResponse>;
 export declare class DeleteSupplierRequest {
     tenantId: string;
-    id: string;
+    id?: string;
 }
 export type DeleteSupplierNatsResponse = NatsResponse<{
     success: boolean;

@@ -77,9 +77,10 @@ export class FindOneSupplierRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional({ description: 'Supplier ID (from path param)' })
+  @IsOptional()
   @IsUUID()
-  id: string;
+  id?: string;
 }
 
 export type FindOneSupplierNatsResponse = NatsResponse<SupplierResponse>;
@@ -184,9 +185,10 @@ export class DeleteSupplierRequest {
   @IsUUID()
   tenantId: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional({ description: 'Supplier ID (from path param)' })
+  @IsOptional()
   @IsUUID()
-  id: string;
+  id?: string;
 }
 
 export type DeleteSupplierNatsResponse = NatsResponse<{ success: boolean }>;
