@@ -384,3 +384,35 @@ export class ExpiryReportResponse {
 }
 
 export type ExpiryReportNatsResponse = NatsResponse<ExpiryReportResponse>;
+
+// ─── Chain Stock Overview ───
+
+export class ChainStockOverviewRequest {
+  @ApiProperty() @IsUUID() tenantId: string;
+}
+
+export class HotelStockSummary {
+  @ApiProperty() hotelId: string;
+  @ApiPropertyOptional() hotelName?: string;
+  @ApiProperty() warehouseCount: number;
+  @ApiProperty() totalItems: number;
+  @ApiProperty() totalStockValue: number;
+  @ApiProperty() lowStockCount: number;
+}
+
+export class ChainWarehouseStockSummary {
+  @ApiProperty() warehouseId: string;
+  @ApiProperty() warehouseName: string;
+  @ApiPropertyOptional() location?: string;
+  @ApiProperty() totalItems: number;
+  @ApiProperty() totalStockValue: number;
+}
+
+export class ChainStockOverviewResponse {
+  @ApiProperty({ type: [HotelStockSummary] }) hotels: HotelStockSummary[];
+  @ApiProperty({ type: [ChainWarehouseStockSummary] }) chainWarehouses: ChainWarehouseStockSummary[];
+  @ApiProperty() totalStockValue: number;
+  @ApiProperty() totalLowStockItems: number;
+}
+
+export type ChainStockOverviewNatsResponse = NatsResponse<ChainStockOverviewResponse>;

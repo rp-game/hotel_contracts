@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ExpiryReportResponse = exports.ExpiryReportItem = exports.ExpiryReportRequest = exports.VarianceReportResponse = exports.VarianceReportItem = exports.VarianceReportRequest = exports.MinibarRevenueResponse = exports.MinibarRevenueItem = exports.MinibarRevenueRequest = exports.SupplierHistoryResponse = exports.SupplierHistoryItem = exports.SupplierHistoryRequest = exports.MovementDetailResponse = exports.MovementDetailItem = exports.MovementDetailRequest = exports.DepartmentCostResponse = exports.DepartmentCostItem = exports.DepartmentCostRequest = exports.CostPerRoomNightResponse = exports.CostPerRoomNightCategoryItem = exports.CostPerRoomNightRequest = exports.LowStockReportResponse = exports.LowStockReportItem = exports.LowStockReportRequest = exports.InOutBalanceResponse = exports.InOutBalanceCategoryGroup = exports.InOutBalanceItemRow = exports.InOutBalanceRequest = void 0;
+exports.ChainStockOverviewResponse = exports.ChainWarehouseStockSummary = exports.HotelStockSummary = exports.ChainStockOverviewRequest = exports.ExpiryReportResponse = exports.ExpiryReportItem = exports.ExpiryReportRequest = exports.VarianceReportResponse = exports.VarianceReportItem = exports.VarianceReportRequest = exports.MinibarRevenueResponse = exports.MinibarRevenueItem = exports.MinibarRevenueRequest = exports.SupplierHistoryResponse = exports.SupplierHistoryItem = exports.SupplierHistoryRequest = exports.MovementDetailResponse = exports.MovementDetailItem = exports.MovementDetailRequest = exports.DepartmentCostResponse = exports.DepartmentCostItem = exports.DepartmentCostRequest = exports.CostPerRoomNightResponse = exports.CostPerRoomNightCategoryItem = exports.CostPerRoomNightRequest = exports.LowStockReportResponse = exports.LowStockReportItem = exports.LowStockReportRequest = exports.InOutBalanceResponse = exports.InOutBalanceCategoryGroup = exports.InOutBalanceItemRow = exports.InOutBalanceRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
@@ -998,4 +998,98 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], ExpiryReportResponse.prototype, "expiringCount", void 0);
+// ─── Chain Stock Overview ───
+class ChainStockOverviewRequest {
+    tenantId;
+}
+exports.ChainStockOverviewRequest = ChainStockOverviewRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], ChainStockOverviewRequest.prototype, "tenantId", void 0);
+class HotelStockSummary {
+    hotelId;
+    hotelName;
+    warehouseCount;
+    totalItems;
+    totalStockValue;
+    lowStockCount;
+}
+exports.HotelStockSummary = HotelStockSummary;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], HotelStockSummary.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], HotelStockSummary.prototype, "hotelName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HotelStockSummary.prototype, "warehouseCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HotelStockSummary.prototype, "totalItems", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HotelStockSummary.prototype, "totalStockValue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], HotelStockSummary.prototype, "lowStockCount", void 0);
+class ChainWarehouseStockSummary {
+    warehouseId;
+    warehouseName;
+    location;
+    totalItems;
+    totalStockValue;
+}
+exports.ChainWarehouseStockSummary = ChainWarehouseStockSummary;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], ChainWarehouseStockSummary.prototype, "warehouseId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], ChainWarehouseStockSummary.prototype, "warehouseName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], ChainWarehouseStockSummary.prototype, "location", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ChainWarehouseStockSummary.prototype, "totalItems", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ChainWarehouseStockSummary.prototype, "totalStockValue", void 0);
+class ChainStockOverviewResponse {
+    hotels;
+    chainWarehouses;
+    totalStockValue;
+    totalLowStockItems;
+}
+exports.ChainStockOverviewResponse = ChainStockOverviewResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [HotelStockSummary] }),
+    __metadata("design:type", Array)
+], ChainStockOverviewResponse.prototype, "hotels", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [ChainWarehouseStockSummary] }),
+    __metadata("design:type", Array)
+], ChainStockOverviewResponse.prototype, "chainWarehouses", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ChainStockOverviewResponse.prototype, "totalStockValue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ChainStockOverviewResponse.prototype, "totalLowStockItems", void 0);
 //# sourceMappingURL=reports.nats.js.map

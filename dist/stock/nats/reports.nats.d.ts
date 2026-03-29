@@ -232,4 +232,29 @@ export declare class ExpiryReportResponse {
     expiringCount: number;
 }
 export type ExpiryReportNatsResponse = NatsResponse<ExpiryReportResponse>;
+export declare class ChainStockOverviewRequest {
+    tenantId: string;
+}
+export declare class HotelStockSummary {
+    hotelId: string;
+    hotelName?: string;
+    warehouseCount: number;
+    totalItems: number;
+    totalStockValue: number;
+    lowStockCount: number;
+}
+export declare class ChainWarehouseStockSummary {
+    warehouseId: string;
+    warehouseName: string;
+    location?: string;
+    totalItems: number;
+    totalStockValue: number;
+}
+export declare class ChainStockOverviewResponse {
+    hotels: HotelStockSummary[];
+    chainWarehouses: ChainWarehouseStockSummary[];
+    totalStockValue: number;
+    totalLowStockItems: number;
+}
+export type ChainStockOverviewNatsResponse = NatsResponse<ChainStockOverviewResponse>;
 //# sourceMappingURL=reports.nats.d.ts.map

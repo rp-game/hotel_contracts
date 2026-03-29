@@ -28,4 +28,5 @@ __exportStar(require("./minibar.nats"), exports);
 __exportStar(require("./stock-take.nats"), exports);
 __exportStar(require("./minibar-template.nats"), exports);
 __exportStar(require("./inter-hotel-transfer.nats"), exports);
+__exportStar(require("./requisition.nats"), exports);
 //# sourceMappingURL=index.js.map

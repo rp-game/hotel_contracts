@@ -12,3 +12,4 @@ export * from './minibar.nats';
 export * from './stock-take.nats';
 export * from './minibar-template.nats';
 export * from './inter-hotel-transfer.nats';
+export * from './requisition.nats';
