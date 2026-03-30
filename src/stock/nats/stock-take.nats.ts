@@ -18,7 +18,7 @@ export class CreateStockTakeRequest {
   @ApiPropertyOptional({ enum: ItemCategory }) @IsOptional() @IsEnum(ItemCategory) category?: ItemCategory;
   @ApiProperty() @IsDateString() takeDate: string;
   @ApiPropertyOptional() @IsOptional() @IsString() notes?: string;
-  @ApiProperty() @IsUUID() performedBy: string;
+  @ApiPropertyOptional() @IsOptional() @IsUUID() performedBy?: string;
   @ApiPropertyOptional() @IsOptional() @IsString() performedByName?: string;
   @ApiProperty({ type: [StockTakeItemDto] })
   @IsArray() @ValidateNested({ each: true }) @Type(() => StockTakeItemDto)

@@ -11,7 +11,7 @@ export declare class CreateStockTakeRequest {
     category?: ItemCategory;
     takeDate: string;
     notes?: string;
-    performedBy: string;
+    performedBy?: string;
     performedByName?: string;
     items: StockTakeItemDto[];
 }
