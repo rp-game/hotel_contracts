@@ -86,6 +86,7 @@ export declare class CleaningTaskNatsResponse {
     isAutomated?: boolean;
     eventTriggered?: boolean;
     roomType?: string;
+    roomTypeId?: string;
     floor?: number;
     building?: string;
     assignedAt?: string;

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MinibarCheckResponse = exports.MinibarRestockSuggestion = exports.MinibarChargedItem = exports.SubmitMinibarCheckRequest = exports.MinibarCheckItemDto = void 0;
+exports.MinibarHistoryResponse = exports.MinibarHistoryEntry = exports.GetMinibarHistoryRequest = exports.MinibarStatusResponse = exports.GetMinibarStatusRequest = exports.MinibarCheckResponse = exports.MinibarRestockSuggestion = exports.MinibarChargedItem = exports.SubmitMinibarCheckRequest = exports.MinibarCheckItemDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -26,9 +26,9 @@ __decorate([
     __metadata("design:type", String)
 ], MinibarCheckItemDto.prototype, "itemId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Quantity consumed' }),
+    (0, swagger_1.ApiProperty)({ description: 'Quantity consumed (0 = not consumed / skip)' }),
     (0, class_validator_1.IsNumber)(),
-    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.Min)(0),
     __metadata("design:type", Number)
 ], MinibarCheckItemDto.prototype, "consumedQty", void 0);
 __decorate([
@@ -90,7 +90,8 @@ __decorate([
     __metadata("design:type", Array)
 ], SubmitMinibarCheckRequest.prototype, "items", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Staff who performed the check' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Staff who performed the check (injected from JWT by gateway)' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], SubmitMinibarCheckRequest.prototype, "checkedBy", void 0);
@@ -190,4 +191,185 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ type: [MinibarRestockSuggestion], description: 'Restock suggestions based on minibar template' }),
     __metadata("design:type", Array)
 ], MinibarCheckResponse.prototype, "restockSuggestions", void 0);
+// ─── Minibar Status ───
+class GetMinibarStatusRequest {
+    tenantId;
+    hotelId;
+    roomId;
+    bookingId;
+}
+exports.GetMinibarStatusRequest = GetMinibarStatusRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetMinibarStatusRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetMinibarStatusRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetMinibarStatusRequest.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking ID — exact match to avoid cross-booking false positive' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetMinibarStatusRequest.prototype, "bookingId", void 0);
+class MinibarStatusResponse {
+    checked;
+    lastCheckedAt;
+    lastCheckedBy;
+    totalCharged;
+    issueId;
+}
+exports.MinibarStatusResponse = MinibarStatusResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether minibar has been checked for this booking/room' }),
+    __metadata("design:type", Boolean)
+], MinibarStatusResponse.prototype, "checked", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'When minibar was last checked (ISO timestamp)' }),
+    __metadata("design:type", String)
+], MinibarStatusResponse.prototype, "lastCheckedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Name of staff who performed the check' }),
+    __metadata("design:type", String)
+], MinibarStatusResponse.prototype, "lastCheckedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Total amount charged to guest' }),
+    __metadata("design:type", Number)
+], MinibarStatusResponse.prototype, "totalCharged", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Stock issue ID of the consumption record' }),
+    __metadata("design:type", String)
+], MinibarStatusResponse.prototype, "issueId", void 0);
+// ─── Minibar History ───
+class GetMinibarHistoryRequest {
+    tenantId;
+    hotelId;
+    roomId;
+    dateFrom;
+    dateTo;
+    page;
+    limit;
+}
+exports.GetMinibarHistoryRequest = GetMinibarHistoryRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetMinibarHistoryRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetMinibarHistoryRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by room ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetMinibarHistoryRequest.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Start date filter (ISO date string)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetMinibarHistoryRequest.prototype, "dateFrom", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'End date filter (ISO date string)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetMinibarHistoryRequest.prototype, "dateTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ minimum: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], GetMinibarHistoryRequest.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ minimum: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], GetMinibarHistoryRequest.prototype, "limit", void 0);
+class MinibarHistoryEntry {
+    issueId;
+    roomId;
+    roomNumber;
+    bookingId;
+    checkedAt;
+    checkedBy;
+    checkedByName;
+    totalCharged;
+    itemCount;
+}
+exports.MinibarHistoryEntry = MinibarHistoryEntry;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarHistoryEntry.prototype, "issueId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarHistoryEntry.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], MinibarHistoryEntry.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], MinibarHistoryEntry.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarHistoryEntry.prototype, "checkedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], MinibarHistoryEntry.prototype, "checkedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], MinibarHistoryEntry.prototype, "checkedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarHistoryEntry.prototype, "totalCharged", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarHistoryEntry.prototype, "itemCount", void 0);
+class MinibarHistoryResponse {
+    data;
+    total;
+    page;
+    limit;
+}
+exports.MinibarHistoryResponse = MinibarHistoryResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [MinibarHistoryEntry] }),
+    __metadata("design:type", Array)
+], MinibarHistoryResponse.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarHistoryResponse.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarHistoryResponse.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], MinibarHistoryResponse.prototype, "limit", void 0);
 //# sourceMappingURL=minibar.nats.js.map

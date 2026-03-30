@@ -10,9 +10,9 @@ export class MinibarCheckItemDto {
   @IsUUID()
   itemId: string;
 
-  @ApiProperty({ description: 'Quantity consumed' })
+  @ApiProperty({ description: 'Quantity consumed (0 = not consumed / skip)' })
   @IsNumber()
-  @Min(1)
+  @Min(0)
   consumedQty: number;
 
   @ApiPropertyOptional({ description: 'Complimentary (free for guest)' })
@@ -55,9 +55,10 @@ export class SubmitMinibarCheckRequest {
   @Type(() => MinibarCheckItemDto)
   items: MinibarCheckItemDto[];
 
-  @ApiProperty({ description: 'Staff who performed the check' })
+  @ApiPropertyOptional({ description: 'Staff who performed the check (injected from JWT by gateway)' })
+  @IsOptional()
   @IsUUID()
-  checkedBy: string;
+  checkedBy?: string;
 
   @ApiPropertyOptional({ description: 'Staff name (denormalized)' })
   @IsOptional()
@@ -102,3 +103,105 @@ export class MinibarCheckResponse {
 }
 
 export type SubmitMinibarCheckNatsResponse = NatsResponse<MinibarCheckResponse>;
+
+// ─── Minibar Status ───
+
+export class GetMinibarStatusRequest {
+  @ApiProperty()
+  @IsUUID()
+  tenantId: string;
+
+  @ApiProperty()
+  @IsUUID()
+  hotelId: string;
+
+  @ApiProperty({ description: 'Room ID' })
+  @IsUUID()
+  roomId: string;
+
+  @ApiPropertyOptional({ description: 'Booking ID — exact match to avoid cross-booking false positive' })
+  @IsOptional()
+  @IsUUID()
+  bookingId?: string;
+}
+
+export class MinibarStatusResponse {
+  @ApiProperty({ description: 'Whether minibar has been checked for this booking/room' })
+  checked: boolean;
+
+  @ApiPropertyOptional({ description: 'When minibar was last checked (ISO timestamp)' })
+  lastCheckedAt?: string;
+
+  @ApiPropertyOptional({ description: 'Name of staff who performed the check' })
+  lastCheckedBy?: string;
+
+  @ApiPropertyOptional({ description: 'Total amount charged to guest' })
+  totalCharged?: number;
+
+  @ApiPropertyOptional({ description: 'Stock issue ID of the consumption record' })
+  issueId?: string;
+}
+
+export type GetMinibarStatusNatsResponse = NatsResponse<MinibarStatusResponse>;
+
+// ─── Minibar History ───
+
+export class GetMinibarHistoryRequest {
+  @ApiProperty()
+  @IsUUID()
+  tenantId: string;
+
+  @ApiProperty()
+  @IsUUID()
+  hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Filter by room ID' })
+  @IsOptional()
+  @IsUUID()
+  roomId?: string;
+
+  @ApiPropertyOptional({ description: 'Start date filter (ISO date string)' })
+  @IsOptional()
+  @IsString()
+  dateFrom?: string;
+
+  @ApiPropertyOptional({ description: 'End date filter (ISO date string)' })
+  @IsOptional()
+  @IsString()
+  dateTo?: string;
+
+  @ApiPropertyOptional({ minimum: 1 })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  page?: number;
+
+  @ApiPropertyOptional({ minimum: 1 })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  limit?: number;
+}
+
+export class MinibarHistoryEntry {
+  @ApiProperty() issueId: string;
+  @ApiProperty() roomId: string;
+  @ApiPropertyOptional() roomNumber?: string;
+  @ApiPropertyOptional() bookingId?: string;
+  @ApiProperty() checkedAt: string;
+  @ApiProperty() checkedBy: string;
+  @ApiPropertyOptional() checkedByName?: string;
+  @ApiProperty() totalCharged: number;
+  @ApiProperty() itemCount: number;
+}
+
+export class MinibarHistoryResponse {
+  @ApiProperty({ type: [MinibarHistoryEntry] })
+  data: MinibarHistoryEntry[];
+
+  @ApiProperty() total: number;
+  @ApiProperty() page: number;
+  @ApiProperty() limit: number;
+}
+
+export type GetMinibarHistoryNatsResponse = NatsResponse<MinibarHistoryResponse>;

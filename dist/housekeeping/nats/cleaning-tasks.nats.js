@@ -144,6 +144,7 @@ class CleaningTaskNatsResponse {
     isAutomated;
     eventTriggered;
     roomType;
+    roomTypeId;
     floor;
     building;
     assignedAt;
@@ -247,6 +248,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Room type resolved from inventory-service' }),
     __metadata("design:type", String)
 ], CleaningTaskNatsResponse.prototype, "roomType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room type ID (UUID) — used for minibar template lookup' }),
+    __metadata("design:type", String)
+], CleaningTaskNatsResponse.prototype, "roomTypeId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Floor number resolved from inventory-service' }),
     __metadata("design:type", Number)

@@ -167,6 +167,9 @@ export class CleaningTaskNatsResponse {
   @ApiPropertyOptional({ description: 'Room type resolved from inventory-service' })
   roomType?: string;
 
+  @ApiPropertyOptional({ description: 'Room type ID (UUID) — used for minibar template lookup' })
+  roomTypeId?: string;
+
   @ApiPropertyOptional({ description: 'Floor number resolved from inventory-service' })
   floor?: number;
 
