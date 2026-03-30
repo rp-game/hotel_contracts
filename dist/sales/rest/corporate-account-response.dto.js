@@ -43,6 +43,7 @@ class CorporateAccountResponseDto {
     createdByName;
     createdAt;
     updatedAt;
+    lastActiveDate;
 }
 exports.CorporateAccountResponseDto = CorporateAccountResponseDto;
 __decorate([
@@ -153,6 +154,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Updated at' }),
     __metadata("design:type", Date)
 ], CorporateAccountResponseDto.prototype, "updatedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Last activity or booking date for this CA (for inactivity tracking)' }),
+    __metadata("design:type", Object)
+], CorporateAccountResponseDto.prototype, "lastActiveDate", void 0);
 class CorporateAccountListResponseDto {
     corporateAccounts;
     total;

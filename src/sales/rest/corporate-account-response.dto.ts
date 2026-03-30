@@ -86,6 +86,9 @@ export class CorporateAccountResponseDto {
 
   @ApiProperty({ description: 'Updated at' })
   updatedAt: Date;
+
+  @ApiPropertyOptional({ description: 'Last activity or booking date for this CA (for inactivity tracking)' })
+  lastActiveDate?: string | null;
 }
 
 export class CorporateAccountListResponseDto {

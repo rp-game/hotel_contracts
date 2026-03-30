@@ -30,6 +30,7 @@ export declare class CorporateAccountResponseDto {
     createdByName?: string;
     createdAt: Date;
     updatedAt: Date;
+    lastActiveDate?: string | null;
 }
 export declare class CorporateAccountListResponseDto {
     corporateAccounts: CorporateAccountResponseDto[];

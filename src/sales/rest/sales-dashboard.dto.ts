@@ -55,6 +55,30 @@ export class TopAccountDto {
   @ApiProperty() bookingCount: number;
 }
 
+export class GetPickupReportDto {
+  @ApiPropertyOptional({ description: 'Set by controller from req.user' })
+  @IsOptional()
+  tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID (or "null" for chain-level)' })
+  @IsOptional()
+  @IsNullableUUID()
+  hotelId?: string;
+
+  @ApiProperty({ description: 'Days lookback (1, 7, or 30)', example: 7 })
+  @IsNumber()
+  @Type(() => Number)
+  @Min(1)
+  @Max(90)
+  days: number;
+}
+
+export class PickupReportResponseDto {
+  @ApiProperty() count: number;
+  @ApiProperty() totalAmount: number;
+  @ApiProperty() roomNights: number;
+}
+
 export class SalesDashboardResponseDto {
   @ApiProperty() hotelRevenue: number;
   @ApiProperty() salesAttributedRevenue: number;

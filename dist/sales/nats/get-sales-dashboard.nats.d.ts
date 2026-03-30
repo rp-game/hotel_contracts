@@ -46,4 +46,10 @@ export interface SalesDashboardData {
     topAccounts: TopAccountItem[];
 }
 export type GetSalesDashboardNatsResult = NatsResponse<SalesDashboardData>;
+export interface PickupReportData {
+    count: number;
+    totalAmount: number;
+    roomNights: number;
+}
+export type GetPickupReportNatsResult = NatsResponse<PickupReportData>;
 //# sourceMappingURL=get-sales-dashboard.nats.d.ts.map

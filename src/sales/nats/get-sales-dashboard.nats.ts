@@ -53,3 +53,11 @@ export interface SalesDashboardData {
 }
 
 export type GetSalesDashboardNatsResult = NatsResponse<SalesDashboardData>;
+
+export interface PickupReportData {
+  count: number;
+  totalAmount: number;
+  roomNights: number;
+}
+
+export type GetPickupReportNatsResult = NatsResponse<PickupReportData>;

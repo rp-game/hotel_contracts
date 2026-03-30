@@ -30,6 +30,16 @@ export declare class TopAccountDto {
     roomNights: number;
     bookingCount: number;
 }
+export declare class GetPickupReportDto {
+    tenantId?: string;
+    hotelId?: string;
+    days: number;
+}
+export declare class PickupReportResponseDto {
+    count: number;
+    totalAmount: number;
+    roomNights: number;
+}
 export declare class SalesDashboardResponseDto {
     hotelRevenue: number;
     salesAttributedRevenue: number;

@@ -13,7 +13,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SalesDashboardResponseDto = exports.TopAccountDto = exports.TopPerformerDto = exports.ChannelBreakdownDto = exports.GetSalesDashboardQueryDto = void 0;
+exports.SalesDashboardResponseDto = exports.PickupReportResponseDto = exports.GetPickupReportDto = exports.TopAccountDto = exports.TopPerformerDto = exports.ChannelBreakdownDto = exports.GetSalesDashboardQueryDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -140,6 +140,49 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], TopAccountDto.prototype, "bookingCount", void 0);
+class GetPickupReportDto {
+    tenantId;
+    hotelId;
+    days;
+}
+exports.GetPickupReportDto = GetPickupReportDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Set by controller from req.user' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], GetPickupReportDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (or "null" for chain-level)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, validators_1.IsNullableUUID)(),
+    __metadata("design:type", String)
+], GetPickupReportDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Days lookback (1, 7, or 30)', example: 7 }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_transformer_1.Type)(() => Number),
+    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.Max)(90),
+    __metadata("design:type", Number)
+], GetPickupReportDto.prototype, "days", void 0);
+class PickupReportResponseDto {
+    count;
+    totalAmount;
+    roomNights;
+}
+exports.PickupReportResponseDto = PickupReportResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], PickupReportResponseDto.prototype, "count", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], PickupReportResponseDto.prototype, "totalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], PickupReportResponseDto.prototype, "roomNights", void 0);
 class SalesDashboardResponseDto {
     hotelRevenue;
     salesAttributedRevenue;
