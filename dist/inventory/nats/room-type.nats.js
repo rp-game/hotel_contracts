@@ -44,6 +44,7 @@ class CreateRoomTypeRequest {
     size;
     category;
     images;
+    bedType;
 }
 exports.CreateRoomTypeRequest = CreateRoomTypeRequest;
 __decorate([
@@ -125,6 +126,12 @@ __decorate([
     (0, class_validator_1.IsArray)(),
     __metadata("design:type", Array)
 ], CreateRoomTypeRequest.prototype, "images", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Bed type: SINGLE | DOUBLE | TWIN | TRIPLE | KING | QUEEN | BUNK | SOFA_BED' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateRoomTypeRequest.prototype, "bedType", void 0);
 /**
  * Update Room Type Request
  * Pattern: inventory.roomTypes.update
@@ -145,6 +152,7 @@ class UpdateRoomTypeRequest {
     category;
     images;
     isActive;
+    bedType;
 }
 exports.UpdateRoomTypeRequest = UpdateRoomTypeRequest;
 __decorate([
@@ -240,6 +248,12 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdateRoomTypeRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Bed type: SINGLE | DOUBLE | TWIN | TRIPLE | KING | QUEEN | BUNK | SOFA_BED' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateRoomTypeRequest.prototype, "bedType", void 0);
 /**
  * Add Image to Room Type Request
  * Pattern: inventory.room-types.images.add

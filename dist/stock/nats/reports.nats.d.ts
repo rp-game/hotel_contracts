@@ -212,6 +212,8 @@ export declare class ExpiryReportRequest {
     tenantId: string;
     hotelId: string;
     daysAhead?: number;
+    category?: string;
+    warehouseId?: string;
 }
 export declare class ExpiryReportItem {
     itemId: string;

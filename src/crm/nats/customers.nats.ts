@@ -35,6 +35,8 @@ import {
   ValidateNested,
   IsArray,
   ArrayMaxSize,
+  IsUUID,
+  IsBoolean,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common';
@@ -310,6 +312,16 @@ export class CreateCustomerNatsRequest {
   @IsOptional()
   @IsString()
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Service alert note (VIP, allergies, special occasion, etc.)' })
+  @IsOptional()
+  @IsString()
+  serviceAlertNote?: string;
+
+  @ApiPropertyOptional({ description: 'Service alert level: INFO | WARNING | CRITICAL' })
+  @IsOptional()
+  @IsString()
+  serviceAlertLevel?: string;
 }
 
 /**
@@ -325,6 +337,33 @@ export class UpdateCustomerNatsRequest {
 
   @ApiProperty({ description: 'Customer update data' })
   updateDto!: Partial<CreateCustomerNatsRequest>;
+}
+
+/**
+ * Blacklist / Unblacklist Customer Request
+ * Pattern: crm.customer.blacklist
+ */
+export class BlacklistCustomerRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Customer ID' })
+  @IsUUID()
+  customerId!: string;
+
+  @ApiProperty({ description: 'Set to true to blacklist, false to unblacklist' })
+  isBlacklisted!: boolean;
+
+  @ApiPropertyOptional({ description: 'Reason for blacklisting' })
+  @IsOptional()
+  @IsString()
+  reason?: string;
+
+  @ApiPropertyOptional({ description: 'Name of staff performing the action' })
+  @IsOptional()
+  @IsString()
+  updatedByName?: string;
 }
 
 /**
@@ -449,6 +488,26 @@ export class CustomerNatsResponse {
 
   @ApiPropertyOptional({ type: [Object], description: 'Loyalty program memberships (legacy - multiple memberships)' })
   loyaltyMembers?: any[];
+
+  // ─── Blacklist ───
+  @ApiPropertyOptional({ description: 'Whether customer is blacklisted' })
+  isBlacklisted?: boolean;
+
+  @ApiPropertyOptional({ description: 'Reason for blacklisting' })
+  blacklistReason?: string;
+
+  @ApiPropertyOptional({ description: 'Timestamp when customer was blacklisted' })
+  blacklistedAt?: string;
+
+  @ApiPropertyOptional({ description: 'Name of staff who blacklisted the customer' })
+  blacklistedByName?: string;
+
+  // ─── Service Alert ───
+  @ApiPropertyOptional({ description: 'Service alert note (VIP, allergies, special occasion, etc.)' })
+  serviceAlertNote?: string;
+
+  @ApiPropertyOptional({ description: 'Service alert level: INFO | WARNING | CRITICAL', default: 'WARNING' })
+  serviceAlertLevel?: string;
 }
 
 /**

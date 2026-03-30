@@ -104,6 +104,7 @@ export declare class PendingCheckinBooking {
     remainingAmount: number;
     loyaltyPoints?: number;
     loyaltyTier?: string;
+    customerId?: string;
 }
 /**
  * Pending Check-ins List Response Data

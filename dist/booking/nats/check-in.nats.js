@@ -42,6 +42,7 @@ class PendingCheckinBooking {
     remainingAmount;
     loyaltyPoints;
     loyaltyTier;
+    customerId;
 }
 exports.PendingCheckinBooking = PendingCheckinBooking;
 __decorate([
@@ -128,6 +129,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Customer loyalty tier (e.g., GOLD, SILVER, BRONZE)', required: false }),
     __metadata("design:type", String)
 ], PendingCheckinBooking.prototype, "loyaltyTier", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'CRM Customer ID (UUID) — used to lookup guest profile', required: false }),
+    __metadata("design:type", String)
+], PendingCheckinBooking.prototype, "customerId", void 0);
 /**
  * Pending Check-ins List Response Data
  */

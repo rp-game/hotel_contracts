@@ -163,6 +163,9 @@ export class PendingCheckinBooking {
 
   @ApiProperty({ description: 'Customer loyalty tier (e.g., GOLD, SILVER, BRONZE)', required: false })
   loyaltyTier?: string;
+
+  @ApiProperty({ description: 'CRM Customer ID (UUID) — used to lookup guest profile', required: false })
+  customerId?: string;
 }
 
 /**

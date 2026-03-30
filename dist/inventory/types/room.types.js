@@ -34,6 +34,7 @@ class RoomType {
     amenities;
     features;
     isActive;
+    bedType;
     createdAt;
     updatedAt;
 }
@@ -105,6 +106,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Whether the room type is active', required: false }),
     __metadata("design:type", Boolean)
 ], RoomType.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Bed type: SINGLE | DOUBLE | TWIN | TRIPLE | KING | QUEEN | BUNK | SOFA_BED', required: false }),
+    __metadata("design:type", String)
+], RoomType.prototype, "bedType", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Creation timestamp (ISO format)' }),
     __metadata("design:type", String)

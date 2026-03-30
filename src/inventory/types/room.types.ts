@@ -67,6 +67,9 @@ export class RoomType {
   @ApiProperty({ description: 'Whether the room type is active', required: false })
   isActive?: boolean;
 
+  @ApiProperty({ description: 'Bed type: SINGLE | DOUBLE | TWIN | TRIPLE | KING | QUEEN | BUNK | SOFA_BED', required: false })
+  bedType?: string;
+
   @ApiProperty({ description: 'Creation timestamp (ISO format)' })
   createdAt: string;
 

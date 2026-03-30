@@ -59,6 +59,7 @@ export declare class CreateRoomTypeRequest {
     size?: number;
     category?: string;
     images?: string[];
+    bedType?: string;
 }
 export type CreateRoomTypeResponse = RoomType;
 export type CreateRoomTypeNatsResponse = NatsResponse<CreateRoomTypeResponse>;
@@ -82,6 +83,7 @@ export declare class UpdateRoomTypeRequest {
     category?: string;
     images?: string[];
     isActive?: boolean;
+    bedType?: string;
 }
 export type UpdateRoomTypeResponse = RoomType | null;
 export type UpdateRoomTypeNatsResponse = NatsResponse<UpdateRoomTypeResponse>;

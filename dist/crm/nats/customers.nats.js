@@ -33,7 +33,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ExportDownloadData = exports.ExportStatusData = exports.ExportJobData = exports.FindAdvancedCustomersNatsRequest = exports.AdvancedCustomersListData = exports.AdvancedCustomerDto = exports.SegmentMembershipSummary = exports.CustomerSegmentSummary = exports.CustomerStatsData = exports.RecentCustomerInfo = exports.TopCustomerInfo = exports.MembershipDistribution = exports.CustomerStatsOverview = exports.RecalculateAllBookingStatsData = exports.RecalculateAllBookingStatsResultItem = exports.RecalculateBookingStatsData = exports.UpdateCustomerStatsResponseData = exports.FindOneCustomerNatsRequest = exports.CustomersListData = exports.CustomerNatsResponse = exports.UpdateCustomerNatsRequest = exports.CreateCustomerNatsRequest = exports.CommunicationPreferencesDto = exports.AddressRequest = exports.LoyaltyMemberInfo = exports.LoyaltyTierInfo = exports.EmergencyContact = exports.CustomerPreferences = exports.IdentificationInfo = exports.AddressInfo = exports.CommunicationChannel = exports.NationalIdType = exports.IdentificationType = exports.CustomerType = exports.Gender = void 0;
+exports.ExportDownloadData = exports.ExportStatusData = exports.ExportJobData = exports.FindAdvancedCustomersNatsRequest = exports.AdvancedCustomersListData = exports.AdvancedCustomerDto = exports.SegmentMembershipSummary = exports.CustomerSegmentSummary = exports.CustomerStatsData = exports.RecentCustomerInfo = exports.TopCustomerInfo = exports.MembershipDistribution = exports.CustomerStatsOverview = exports.RecalculateAllBookingStatsData = exports.RecalculateAllBookingStatsResultItem = exports.RecalculateBookingStatsData = exports.UpdateCustomerStatsResponseData = exports.FindOneCustomerNatsRequest = exports.CustomersListData = exports.CustomerNatsResponse = exports.BlacklistCustomerRequest = exports.UpdateCustomerNatsRequest = exports.CreateCustomerNatsRequest = exports.CommunicationPreferencesDto = exports.AddressRequest = exports.LoyaltyMemberInfo = exports.LoyaltyTierInfo = exports.EmergencyContact = exports.CustomerPreferences = exports.IdentificationInfo = exports.AddressInfo = exports.CommunicationChannel = exports.NationalIdType = exports.IdentificationType = exports.CustomerType = exports.Gender = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -314,6 +314,8 @@ class CreateCustomerNatsRequest {
     communicationPreferences;
     tags;
     notes;
+    serviceAlertNote;
+    serviceAlertLevel;
 }
 exports.CreateCustomerNatsRequest = CreateCustomerNatsRequest;
 __decorate([
@@ -419,6 +421,18 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateCustomerNatsRequest.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service alert note (VIP, allergies, special occasion, etc.)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateCustomerNatsRequest.prototype, "serviceAlertNote", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service alert level: INFO | WARNING | CRITICAL' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateCustomerNatsRequest.prototype, "serviceAlertLevel", void 0);
 /**
  * Update Customer Request
  * Pattern: crm.customer.update
@@ -441,6 +455,44 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Customer update data' }),
     __metadata("design:type", Object)
 ], UpdateCustomerNatsRequest.prototype, "updateDto", void 0);
+/**
+ * Blacklist / Unblacklist Customer Request
+ * Pattern: crm.customer.blacklist
+ */
+class BlacklistCustomerRequest {
+    tenantId;
+    customerId;
+    isBlacklisted;
+    reason;
+    updatedByName;
+}
+exports.BlacklistCustomerRequest = BlacklistCustomerRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], BlacklistCustomerRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], BlacklistCustomerRequest.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Set to true to blacklist, false to unblacklist' }),
+    __metadata("design:type", Boolean)
+], BlacklistCustomerRequest.prototype, "isBlacklisted", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Reason for blacklisting' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BlacklistCustomerRequest.prototype, "reason", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Name of staff performing the action' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BlacklistCustomerRequest.prototype, "updatedByName", void 0);
 /**
  * Customer Response
  */
@@ -483,6 +535,14 @@ class CustomerNatsResponse {
     loyaltyPoints;
     loyaltyMember;
     loyaltyMembers;
+    // ─── Blacklist ───
+    isBlacklisted;
+    blacklistReason;
+    blacklistedAt;
+    blacklistedByName;
+    // ─── Service Alert ───
+    serviceAlertNote;
+    serviceAlertLevel;
 }
 exports.CustomerNatsResponse = CustomerNatsResponse;
 __decorate([
@@ -637,6 +697,30 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ type: [Object], description: 'Loyalty program memberships (legacy - multiple memberships)' }),
     __metadata("design:type", Array)
 ], CustomerNatsResponse.prototype, "loyaltyMembers", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether customer is blacklisted' }),
+    __metadata("design:type", Boolean)
+], CustomerNatsResponse.prototype, "isBlacklisted", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Reason for blacklisting' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "blacklistReason", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Timestamp when customer was blacklisted' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "blacklistedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Name of staff who blacklisted the customer' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "blacklistedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service alert note (VIP, allergies, special occasion, etc.)' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "serviceAlertNote", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service alert level: INFO | WARNING | CRITICAL', default: 'WARNING' }),
+    __metadata("design:type", String)
+], CustomerNatsResponse.prototype, "serviceAlertLevel", void 0);
 /**
  * Customers List Data (for paginated responses)
  */

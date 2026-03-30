@@ -905,6 +905,8 @@ class ExpiryReportRequest {
     tenantId;
     hotelId;
     daysAhead;
+    category;
+    warehouseId;
 }
 exports.ExpiryReportRequest = ExpiryReportRequest;
 __decorate([
@@ -922,6 +924,18 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
 ], ExpiryReportRequest.prototype, "daysAhead", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by item category' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ExpiryReportRequest.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by warehouse ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], ExpiryReportRequest.prototype, "warehouseId", void 0);
 class ExpiryReportItem {
     itemId;
     itemCode;

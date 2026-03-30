@@ -127,6 +127,8 @@ export declare class CreateCustomerNatsRequest {
     communicationPreferences?: CommunicationPreferencesDto;
     tags?: string[];
     notes?: string;
+    serviceAlertNote?: string;
+    serviceAlertLevel?: string;
 }
 /**
  * Update Customer Request
@@ -136,6 +138,17 @@ export declare class UpdateCustomerNatsRequest {
     tenantId: string;
     customerId: string;
     updateDto: Partial<CreateCustomerNatsRequest>;
+}
+/**
+ * Blacklist / Unblacklist Customer Request
+ * Pattern: crm.customer.blacklist
+ */
+export declare class BlacklistCustomerRequest {
+    tenantId: string;
+    customerId: string;
+    isBlacklisted: boolean;
+    reason?: string;
+    updatedByName?: string;
 }
 /**
  * Update Customer Response
@@ -183,6 +196,12 @@ export declare class CustomerNatsResponse {
     loyaltyPoints: number;
     loyaltyMember?: LoyaltyMemberInfo;
     loyaltyMembers?: any[];
+    isBlacklisted?: boolean;
+    blacklistReason?: string;
+    blacklistedAt?: string;
+    blacklistedByName?: string;
+    serviceAlertNote?: string;
+    serviceAlertLevel?: string;
 }
 /**
  * Create Customer Response

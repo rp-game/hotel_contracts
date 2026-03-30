@@ -120,6 +120,11 @@ export class CreateRoomTypeRequest {
   @IsOptional()
   @IsArray()
   images?: string[];
+
+  @ApiPropertyOptional({ description: 'Bed type: SINGLE | DOUBLE | TWIN | TRIPLE | KING | QUEEN | BUNK | SOFA_BED' })
+  @IsOptional()
+  @IsString()
+  bedType?: string;
 }
 
 export type CreateRoomTypeResponse = RoomType;
@@ -207,6 +212,11 @@ export class UpdateRoomTypeRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional({ description: 'Bed type: SINGLE | DOUBLE | TWIN | TRIPLE | KING | QUEEN | BUNK | SOFA_BED' })
+  @IsOptional()
+  @IsString()
+  bedType?: string;
 }
 
 export type UpdateRoomTypeResponse = RoomType | null;

@@ -361,6 +361,10 @@ export class ExpiryReportRequest {
   @ApiProperty() @IsUUID() hotelId: string;
   @ApiPropertyOptional({ description: 'Days ahead to check (default 30)', default: 30 })
   @IsOptional() daysAhead?: number;
+  @ApiPropertyOptional({ description: 'Filter by item category' })
+  @IsOptional() @IsString() category?: string;
+  @ApiPropertyOptional({ description: 'Filter by warehouse ID' })
+  @IsOptional() @IsUUID() warehouseId?: string;
 }
 
 export class ExpiryReportItem {
