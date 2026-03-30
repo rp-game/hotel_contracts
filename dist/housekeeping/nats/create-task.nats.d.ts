@@ -6,7 +6,8 @@
  * Called by: api-gateway, inventory-service
  */
 import { NatsResponse } from '../../common';
-import { TaskType, TaskStatus } from '../enums';
+import { TaskStatus } from '../enums';
+import { CleaningTaskType } from './cleaning-tasks.nats';
 import { HousekeepingTask } from '../types';
 /**
  * NATS request to create a housekeeping task
@@ -16,7 +17,7 @@ export interface CreateHousekeepingTaskRequest {
     hotelId: string;
     roomId: string;
     roomNumber: string;
-    taskType: TaskType;
+    taskType: CleaningTaskType;
     priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
     dueDate: string;
     description?: string;

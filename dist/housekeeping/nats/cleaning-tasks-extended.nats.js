@@ -854,7 +854,7 @@ __decorate([
     __metadata("design:type", String)
 ], MobileTaskDto.prototype, "assignedToId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Task type', enum: enums_1.TaskType }),
+    (0, swagger_1.ApiProperty)({ description: 'Task type', enum: cleaning_tasks_nats_1.CleaningTaskType }),
     __metadata("design:type", String)
 ], MobileTaskDto.prototype, "taskType", void 0);
 __decorate([

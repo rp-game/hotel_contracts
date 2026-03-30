@@ -6,8 +6,8 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsNumber, IsArray, IsDateString, IsBoolean, IsEnum } from 'class-validator';
 import { NatsResponse } from '../../common';
-import { TaskStatus, TaskType, TaskPriority } from '../enums';
-import { CleaningTaskNatsResponse } from './cleaning-tasks.nats';
+import { TaskStatus, TaskPriority } from '../enums';
+import { CleaningTaskNatsResponse, CleaningTaskType } from './cleaning-tasks.nats';
 
 // FIND TASK BY ID
 export class FindTaskByIdNatsRequest {
@@ -556,8 +556,8 @@ export class MobileTaskDto {
   @ApiPropertyOptional({ description: 'Assigned staff ID (UUID)' })
   assignedToId?: string;
 
-  @ApiProperty({ description: 'Task type', enum: TaskType })
-  taskType: TaskType;
+  @ApiProperty({ description: 'Task type', enum: CleaningTaskType })
+  taskType: CleaningTaskType;
 
   @ApiProperty({ description: 'Task status', enum: TaskStatus })
   status: TaskStatus;

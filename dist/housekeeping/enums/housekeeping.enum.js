@@ -3,7 +3,7 @@
  * Housekeeping Task Status Enum
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ActiveShiftStatus = exports.TaskPriority = exports.TaskType = exports.TaskStatus = void 0;
+exports.ActiveShiftStatus = exports.TaskPriority = exports.TaskStatus = void 0;
 var TaskStatus;
 (function (TaskStatus) {
     TaskStatus["PENDING"] = "PENDING";
@@ -17,29 +17,6 @@ var TaskStatus;
     TaskStatus["CANCELLED"] = "CANCELLED";
     TaskStatus["OVERDUE"] = "OVERDUE";
 })(TaskStatus || (exports.TaskStatus = TaskStatus = {}));
-/**
- * Housekeeping Task Type Enum
- */
-var TaskType;
-(function (TaskType) {
-    TaskType["ROOM_CLEANING"] = "ROOM_CLEANING";
-    TaskType["REGULAR_CLEANING"] = "REGULAR_CLEANING";
-    TaskType["LINEN_CHANGE"] = "LINEN_CHANGE";
-    TaskType["INVENTORY_CHECK"] = "INVENTORY_CHECK";
-    TaskType["MAINTENANCE_REPORT"] = "MAINTENANCE_REPORT";
-    TaskType["MAINTENANCE"] = "MAINTENANCE";
-    TaskType["CHECKOUT_CLEANING"] = "CHECKOUT_CLEANING";
-    TaskType["CHECKIN_PREPARATION"] = "CHECKIN_PREPARATION";
-    TaskType["DEEP_CLEANING"] = "DEEP_CLEANING";
-    TaskType["CARPET_CLEANING"] = "CARPET_CLEANING";
-    TaskType["WINDOW_CLEANING"] = "WINDOW_CLEANING";
-    TaskType["INSPECTION"] = "INSPECTION";
-    TaskType["TURNOVER"] = "TURNOVER";
-    TaskType["LAUNDRY"] = "LAUNDRY";
-    TaskType["REGULAR"] = "REGULAR";
-    TaskType["CHECKOUT_CLEAN"] = "CHECKOUT_CLEAN";
-    TaskType["MAINTENANCE_CLEAN"] = "MAINTENANCE_CLEAN";
-})(TaskType || (exports.TaskType = TaskType = {}));
 /**
  * Housekeeping Task Priority Enum
  */

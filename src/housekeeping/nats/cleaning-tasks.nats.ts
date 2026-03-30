@@ -28,13 +28,16 @@ export enum CleaningTaskStatus {
 }
 
 /**
- * Cleaning Task Type Enum
+ * Cleaning Task Type Enum — canonical values, single source of truth
  */
 export enum CleaningTaskType {
-  CLEANING = 'CLEANING',
-  MAINTENANCE = 'MAINTENANCE',
-  INSPECTION = 'INSPECTION',
-  DEEP_CLEAN = 'DEEP_CLEAN',
+  REGULAR_CLEANING  = 'REGULAR_CLEANING',
+  CHECKOUT_CLEANING = 'CHECKOUT_CLEANING',
+  DEEP_CLEANING     = 'DEEP_CLEANING',
+  MAINTENANCE       = 'MAINTENANCE',
+  MAINTENANCE_CLEAN = 'MAINTENANCE_CLEAN',
+  INSPECTION        = 'INSPECTION',
+  TURNOVER          = 'TURNOVER',
 }
 
 /**
@@ -110,7 +113,7 @@ export class CleaningTaskNatsResponse {
   @ApiProperty({
     description: 'Task type',
     enum: CleaningTaskType,
-    example: CleaningTaskType.CLEANING
+    example: CleaningTaskType.REGULAR_CLEANING
   })
   taskType: CleaningTaskType;
 

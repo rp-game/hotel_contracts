@@ -37,14 +37,17 @@ var CleaningTaskStatus;
     CleaningTaskStatus["OVERDUE"] = "OVERDUE";
 })(CleaningTaskStatus || (exports.CleaningTaskStatus = CleaningTaskStatus = {}));
 /**
- * Cleaning Task Type Enum
+ * Cleaning Task Type Enum — canonical values, single source of truth
  */
 var CleaningTaskType;
 (function (CleaningTaskType) {
-    CleaningTaskType["CLEANING"] = "CLEANING";
+    CleaningTaskType["REGULAR_CLEANING"] = "REGULAR_CLEANING";
+    CleaningTaskType["CHECKOUT_CLEANING"] = "CHECKOUT_CLEANING";
+    CleaningTaskType["DEEP_CLEANING"] = "DEEP_CLEANING";
     CleaningTaskType["MAINTENANCE"] = "MAINTENANCE";
+    CleaningTaskType["MAINTENANCE_CLEAN"] = "MAINTENANCE_CLEAN";
     CleaningTaskType["INSPECTION"] = "INSPECTION";
-    CleaningTaskType["DEEP_CLEAN"] = "DEEP_CLEAN";
+    CleaningTaskType["TURNOVER"] = "TURNOVER";
 })(CleaningTaskType || (exports.CleaningTaskType = CleaningTaskType = {}));
 /**
  * Cleaning Task Priority Enum
@@ -176,7 +179,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Task type',
         enum: CleaningTaskType,
-        example: CleaningTaskType.CLEANING
+        example: CleaningTaskType.REGULAR_CLEANING
     }),
     __metadata("design:type", String)
 ], CleaningTaskNatsResponse.prototype, "taskType", void 0);

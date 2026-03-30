@@ -1,7 +1,8 @@
 /**
  * Housekeeping Domain Types
  */
-import { TaskStatus, TaskType } from '../enums';
+import { TaskStatus } from '../enums';
+import { CleaningTaskType } from '../nats/cleaning-tasks.nats';
 /**
  * Housekeeping Task entity
  */
@@ -11,7 +12,7 @@ export interface HousekeepingTask {
     hotelId: string;
     roomId: string;
     roomNumber: string;
-    taskType: TaskType;
+    taskType: CleaningTaskType;
     status: TaskStatus;
     assignedTo?: string;
     priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';

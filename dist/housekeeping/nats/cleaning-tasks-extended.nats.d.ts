@@ -3,8 +3,8 @@
  * Patterns: housekeeping.tasks.* (mobile and extended patterns)
  */
 import { NatsResponse } from '../../common';
-import { TaskStatus, TaskType, TaskPriority } from '../enums';
-import { CleaningTaskNatsResponse } from './cleaning-tasks.nats';
+import { TaskStatus, TaskPriority } from '../enums';
+import { CleaningTaskNatsResponse, CleaningTaskType } from './cleaning-tasks.nats';
 export declare class FindTaskByIdNatsRequest {
     id: string;
     tenantId: string;
@@ -219,7 +219,7 @@ export declare class MobileTaskDto {
     deletedAt?: string;
     roomId: string;
     assignedToId?: string;
-    taskType: TaskType;
+    taskType: CleaningTaskType;
     status: TaskStatus;
     priority: TaskPriority;
     instructions?: string;

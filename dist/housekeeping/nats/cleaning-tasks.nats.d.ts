@@ -23,13 +23,16 @@ export declare enum CleaningTaskStatus {
     OVERDUE = "OVERDUE"
 }
 /**
- * Cleaning Task Type Enum
+ * Cleaning Task Type Enum — canonical values, single source of truth
  */
 export declare enum CleaningTaskType {
-    CLEANING = "CLEANING",
+    REGULAR_CLEANING = "REGULAR_CLEANING",
+    CHECKOUT_CLEANING = "CHECKOUT_CLEANING",
+    DEEP_CLEANING = "DEEP_CLEANING",
     MAINTENANCE = "MAINTENANCE",
+    MAINTENANCE_CLEAN = "MAINTENANCE_CLEAN",
     INSPECTION = "INSPECTION",
-    DEEP_CLEAN = "DEEP_CLEAN"
+    TURNOVER = "TURNOVER"
 }
 /**
  * Cleaning Task Priority Enum
