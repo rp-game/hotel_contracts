@@ -9,7 +9,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsEnum, IsOptional, IsNumber, IsUUID, IsDateString, IsArray, ValidateNested } from 'class-validator';
+import { IsString, IsEnum, IsOptional, IsNumber, IsUUID, IsDateString, IsArray, ValidateNested, IsBoolean } from 'class-validator';
 import { Type } from 'class-transformer';
 import { BlackoutPeriodDto } from '../types/blackout-period.type';
 import { NatsResponse } from '../../common/nats-response.interface';
@@ -217,6 +217,14 @@ export class CreateRatePlanRequest {
   @ValidateNested({ each: true })
   @Type(() => BlackoutPeriodDto)
   blackoutPeriods?: BlackoutPeriodDto[];
+
+  @ApiPropertyOptional({
+    description: 'Allotment/contract rate — only visible when partner has an active allotment',
+    example: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  isAllotmentRate?: boolean;
 }
 
 /**
@@ -342,6 +350,12 @@ export class CreateRatePlanResponse {
     example: true,
   })
   isActive: boolean;
+
+  @ApiProperty({
+    description: 'Allotment/contract rate — only visible when partner has an active allotment',
+    example: false,
+  })
+  isAllotmentRate: boolean;
 
   @ApiProperty({
     description: 'Creation timestamp',

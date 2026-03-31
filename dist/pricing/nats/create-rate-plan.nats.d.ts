@@ -53,6 +53,7 @@ export declare class CreateRatePlanRequest {
     validFrom?: string;
     validTo?: string;
     blackoutPeriods?: BlackoutPeriodDto[];
+    isAllotmentRate?: boolean;
 }
 /**
  * NATS response after creating rate plan
@@ -77,6 +78,7 @@ export declare class CreateRatePlanResponse {
     validTo?: string | null;
     blackoutPeriods?: BlackoutPeriodDto[] | null;
     isActive: boolean;
+    isAllotmentRate: boolean;
     createdAt: string;
     updatedAt: string;
 }

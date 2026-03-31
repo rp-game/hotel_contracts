@@ -202,6 +202,7 @@ class ListRatePlansRequest {
     checkOutDate;
     accountId;
     accountType;
+    allotmentRatePlanIds;
 }
 exports.ListRatePlansRequest = ListRatePlansRequest;
 __decorate([
@@ -273,6 +274,16 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ListRatePlansRequest.prototype, "accountType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Active allotment rate plan IDs for the partner context — allotment rates are only included if their ID is in this list',
+        type: [String],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsUUID)('4', { each: true }),
+    __metadata("design:type", Array)
+], ListRatePlansRequest.prototype, "allotmentRatePlanIds", void 0);
 class ListRatePlansResponse {
     data;
 }

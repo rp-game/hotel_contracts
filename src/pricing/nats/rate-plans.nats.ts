@@ -227,6 +227,15 @@ export class ListRatePlansRequest {
   @IsOptional()
   @IsString()
   accountType?: string;
+
+  @ApiPropertyOptional({
+    description: 'Active allotment rate plan IDs for the partner context — allotment rates are only included if their ID is in this list',
+    type: [String],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsUUID('4', { each: true })
+  allotmentRatePlanIds?: string[];
 }
 
 export class ListRatePlansResponse {

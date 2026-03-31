@@ -59,6 +59,7 @@ export declare class ListRatePlansRequest {
     checkOutDate?: string;
     accountId?: string;
     accountType?: string;
+    allotmentRatePlanIds?: string[];
 }
 export declare class ListRatePlansResponse {
     data: CreateRatePlanResponse[];

@@ -99,6 +99,7 @@ class CreateRatePlanRequest {
     validFrom;
     validTo;
     blackoutPeriods;
+    isAllotmentRate;
 }
 exports.CreateRatePlanRequest = CreateRatePlanRequest;
 __decorate([
@@ -276,6 +277,15 @@ __decorate([
     (0, class_transformer_1.Type)(() => blackout_period_type_1.BlackoutPeriodDto),
     __metadata("design:type", Array)
 ], CreateRatePlanRequest.prototype, "blackoutPeriods", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Allotment/contract rate — only visible when partner has an active allotment',
+        example: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreateRatePlanRequest.prototype, "isAllotmentRate", void 0);
 /**
  * NATS response after creating rate plan
  */
@@ -299,6 +309,7 @@ class CreateRatePlanResponse {
     validTo;
     blackoutPeriods;
     isActive;
+    isAllotmentRate;
     createdAt;
     updatedAt;
 }
@@ -442,6 +453,13 @@ __decorate([
     }),
     __metadata("design:type", Boolean)
 ], CreateRatePlanResponse.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Allotment/contract rate — only visible when partner has an active allotment',
+        example: false,
+    }),
+    __metadata("design:type", Boolean)
+], CreateRatePlanResponse.prototype, "isAllotmentRate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Creation timestamp',
