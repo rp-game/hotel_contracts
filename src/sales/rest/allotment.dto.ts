@@ -18,7 +18,7 @@ import {
   ValidateNested,
   ArrayMinSize,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Type, Transform } from 'class-transformer';
 import { AllotmentStatus, AllotmentInventoryControl, AllotmentPartnerType } from '../enums/allotment.enum';
 
 // --- Nested DTO for allotment details ---
@@ -160,7 +160,8 @@ export class CheckAllotmentAvailabilityQueryDto {
   @ApiProperty() @IsUUID() partnerId: string;
   @ApiProperty({ enum: AllotmentPartnerType }) @IsEnum(AllotmentPartnerType) partnerType: string;
   @ApiProperty() @IsUUID() roomTypeId: string;
-  @ApiProperty({ description: 'Stay dates', example: ['2026-04-10', '2026-04-11'] })
+  @ApiProperty({ description: 'Stay dates', example: ['2026-04-10', '2026-04-11'], type: [String] })
+  @Transform(({ value }) => Array.isArray(value) ? value : [value])
   @IsArray()
   @IsDateString({}, { each: true })
   stayDates: string[];

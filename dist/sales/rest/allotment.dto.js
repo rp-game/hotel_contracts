@@ -313,7 +313,8 @@ __decorate([
     __metadata("design:type", String)
 ], CheckAllotmentAvailabilityQueryDto.prototype, "roomTypeId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Stay dates', example: ['2026-04-10', '2026-04-11'] }),
+    (0, swagger_1.ApiProperty)({ description: 'Stay dates', example: ['2026-04-10', '2026-04-11'], type: [String] }),
+    (0, class_transformer_1.Transform)(({ value }) => Array.isArray(value) ? value : [value]),
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsDateString)({}, { each: true }),
     __metadata("design:type", Array)
