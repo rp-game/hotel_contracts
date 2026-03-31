@@ -51,6 +51,7 @@ __decorate([
 ], AllotmentDetailDto.prototype, "daysOfWeek", void 0);
 // --- Create ---
 class CreateAllotmentDto {
+    hotelId;
     partnerId;
     partnerType;
     partnerName;
@@ -64,6 +65,12 @@ class CreateAllotmentDto {
     details;
 }
 exports.CreateAllotmentDto = CreateAllotmentDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (required for CHAIN_OWNER, inferred from token for hotel-scoped users)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateAllotmentDto.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Partner ID (corporate account or travel agent)' }),
     (0, class_validator_1.IsUUID)(),

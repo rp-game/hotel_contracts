@@ -47,6 +47,11 @@ export class AllotmentDetailDto {
 // --- Create ---
 
 export class CreateAllotmentDto {
+  @ApiPropertyOptional({ description: 'Hotel ID (required for CHAIN_OWNER, inferred from token for hotel-scoped users)' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+
   @ApiProperty({ description: 'Partner ID (corporate account or travel agent)' })
   @IsUUID()
   partnerId: string;

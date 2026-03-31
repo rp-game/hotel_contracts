@@ -9,6 +9,7 @@ export declare class AllotmentDetailDto {
     daysOfWeek?: number[] | null;
 }
 export declare class CreateAllotmentDto {
+    hotelId?: string;
     partnerId: string;
     partnerType: string;
     partnerName: string;
