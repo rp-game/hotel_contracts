@@ -15,4 +15,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./sales.enum"), exports);
+__exportStar(require("./allotment.enum"), exports);
 //# sourceMappingURL=index.js.map
