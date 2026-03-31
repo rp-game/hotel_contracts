@@ -9,6 +9,8 @@
  */
 import { NatsResponse } from '../../common';
 import { TenantType } from '../types/tenant.types';
+import { HotelOperationSettingsDto } from '../../inventory/rest/hotel-settings.dto';
+export { HotelOperationSettingsDto };
 /**
  * Hotel Operation Settings
  */
@@ -177,24 +179,6 @@ export declare class UpdateTenantRequestDto {
  */
 export declare class DeleteTenantRequestDto {
     id: string;
-}
-/**
- * Hotel Operation Settings DTO (Class-based for Swagger)
- */
-export declare class HotelOperationSettingsDto {
-    checkInTime?: string;
-    checkOutTime?: string;
-    timezone?: string;
-    currency?: string;
-    defaultCleaningDuration?: number;
-    gracePeriodMinutes?: number;
-    autoAssignRooms?: boolean;
-    hourlyBooking?: boolean;
-    preferBookingMode?: 'hourly' | 'daily';
-    businessHours?: {
-        start: string;
-        end: string;
-    };
 }
 /**
  * Tenant Response DTO (Class-based for Swagger and type safety)

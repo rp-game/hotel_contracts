@@ -18,10 +18,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TenantResponseDto = exports.HotelOperationSettingsDto = exports.DeleteTenantRequestDto = exports.UpdateTenantRequestDto = exports.CreateTenantRequestDto = void 0;
+exports.TenantResponseDto = exports.DeleteTenantRequestDto = exports.UpdateTenantRequestDto = exports.CreateTenantRequestDto = exports.HotelOperationSettingsDto = void 0;
 const tenant_types_1 = require("../types/tenant.types");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const hotel_settings_dto_1 = require("../../inventory/rest/hotel-settings.dto");
+Object.defineProperty(exports, "HotelOperationSettingsDto", { enumerable: true, get: function () { return hotel_settings_dto_1.HotelOperationSettingsDto; } });
 /**
  * Create Tenant Request (Class-based for both REST and NATS)
  * Pattern: tenants.create
@@ -154,7 +156,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Hotel operation settings',
-        type: () => HotelOperationSettingsDto
+        type: () => hotel_settings_dto_1.HotelOperationSettingsDto
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsObject)(),
@@ -251,7 +253,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Hotel operation settings',
-        type: () => HotelOperationSettingsDto
+        type: () => hotel_settings_dto_1.HotelOperationSettingsDto
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsObject)(),
@@ -275,65 +277,6 @@ __decorate([
     __metadata("design:type", String)
 ], DeleteTenantRequestDto.prototype, "id", void 0);
 // ============= Response DTOs =============
-/**
- * Hotel Operation Settings DTO (Class-based for Swagger)
- */
-class HotelOperationSettingsDto {
-    checkInTime;
-    checkOutTime;
-    timezone;
-    currency;
-    defaultCleaningDuration;
-    gracePeriodMinutes;
-    autoAssignRooms;
-    hourlyBooking;
-    preferBookingMode;
-    businessHours;
-}
-exports.HotelOperationSettingsDto = HotelOperationSettingsDto;
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Default check-in time', example: '14:00' }),
-    __metadata("design:type", String)
-], HotelOperationSettingsDto.prototype, "checkInTime", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Default check-out time', example: '12:00' }),
-    __metadata("design:type", String)
-], HotelOperationSettingsDto.prototype, "checkOutTime", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel timezone', example: 'Asia/Ho_Chi_Minh' }),
-    __metadata("design:type", String)
-], HotelOperationSettingsDto.prototype, "timezone", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel currency', example: 'USD' }),
-    __metadata("design:type", String)
-], HotelOperationSettingsDto.prototype, "currency", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Default cleaning duration in minutes', example: 60 }),
-    __metadata("design:type", Number)
-], HotelOperationSettingsDto.prototype, "defaultCleaningDuration", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Grace period for late check-out in minutes', example: 15 }),
-    __metadata("design:type", Number)
-], HotelOperationSettingsDto.prototype, "gracePeriodMinutes", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Auto assign rooms on booking confirmation', example: false }),
-    __metadata("design:type", Boolean)
-], HotelOperationSettingsDto.prototype, "autoAssignRooms", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Enable hourly booking', example: false }),
-    __metadata("design:type", Boolean)
-], HotelOperationSettingsDto.prototype, "hourlyBooking", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Preferred booking mode', enum: ['hourly', 'daily'] }),
-    __metadata("design:type", String)
-], HotelOperationSettingsDto.prototype, "preferBookingMode", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Business hours',
-        example: { start: '06:00', end: '23:00' }
-    }),
-    __metadata("design:type", Object)
-], HotelOperationSettingsDto.prototype, "businessHours", void 0);
 /**
  * Tenant Response DTO (Class-based for Swagger and type safety)
  */
@@ -414,8 +357,8 @@ __decorate([
     __metadata("design:type", String)
 ], TenantResponseDto.prototype, "contactPhone", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel operation settings', type: () => HotelOperationSettingsDto, nullable: true }),
-    __metadata("design:type", HotelOperationSettingsDto)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel operation settings', type: () => hotel_settings_dto_1.HotelOperationSettingsDto, nullable: true }),
+    __metadata("design:type", hotel_settings_dto_1.HotelOperationSettingsDto)
 ], TenantResponseDto.prototype, "operationSettings", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Created at', type: String }),

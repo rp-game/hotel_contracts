@@ -4,6 +4,7 @@
  */
 
 import { NatsResponse } from '../../common';
+import { ApiProperty } from '@nestjs/swagger';
 
 // NOTE: Dates are strings because they're serialized over NATS
 // Type and Priority are enum strings (NotificationType/NotificationPriority values)
@@ -193,4 +194,8 @@ export interface DeleteNotificationNatsRequest {
   tenantId: string;
   hotelId: string;
 }
-export type DeleteNotificationNatsResponse = NatsResponse<{ message: string }>;
+export class HousekeepingDeleteNotificationResponse {
+  @ApiProperty({ description: 'Result message', example: 'Notification deleted successfully' })
+  message: string;
+}
+export type DeleteNotificationNatsResponse = NatsResponse<HousekeepingDeleteNotificationResponse>;

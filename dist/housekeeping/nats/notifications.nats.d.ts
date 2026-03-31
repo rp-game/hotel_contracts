@@ -166,7 +166,8 @@ export interface DeleteNotificationNatsRequest {
     tenantId: string;
     hotelId: string;
 }
-export type DeleteNotificationNatsResponse = NatsResponse<{
+export declare class HousekeepingDeleteNotificationResponse {
     message: string;
-}>;
+}
+export type DeleteNotificationNatsResponse = NatsResponse<HousekeepingDeleteNotificationResponse>;
 //# sourceMappingURL=notifications.nats.d.ts.map

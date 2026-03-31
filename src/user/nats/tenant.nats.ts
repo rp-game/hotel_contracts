@@ -12,6 +12,8 @@ import { NatsResponse } from '../../common';
 import { TenantType } from '../types/tenant.types';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsEnum, IsOptional, IsEmail, IsArray, IsObject } from 'class-validator';
+import { HotelOperationSettingsDto } from '../../inventory/rest/hotel-settings.dto';
+export { HotelOperationSettingsDto };
 
 /**
  * Hotel Operation Settings
@@ -358,46 +360,6 @@ export class DeleteTenantRequestDto {
 
 // ============= Response DTOs =============
 
-/**
- * Hotel Operation Settings DTO (Class-based for Swagger)
- */
-export class HotelOperationSettingsDto {
-  @ApiPropertyOptional({ description: 'Default check-in time', example: '14:00' })
-  checkInTime?: string;
-
-  @ApiPropertyOptional({ description: 'Default check-out time', example: '12:00' })
-  checkOutTime?: string;
-
-  @ApiPropertyOptional({ description: 'Hotel timezone', example: 'Asia/Ho_Chi_Minh' })
-  timezone?: string;
-
-  @ApiPropertyOptional({ description: 'Hotel currency', example: 'USD' })
-  currency?: string;
-
-  @ApiPropertyOptional({ description: 'Default cleaning duration in minutes', example: 60 })
-  defaultCleaningDuration?: number;
-
-  @ApiPropertyOptional({ description: 'Grace period for late check-out in minutes', example: 15 })
-  gracePeriodMinutes?: number;
-
-  @ApiPropertyOptional({ description: 'Auto assign rooms on booking confirmation', example: false })
-  autoAssignRooms?: boolean;
-
-  @ApiPropertyOptional({ description: 'Enable hourly booking', example: false })
-  hourlyBooking?: boolean;
-
-  @ApiPropertyOptional({ description: 'Preferred booking mode', enum: ['hourly', 'daily'] })
-  preferBookingMode?: 'hourly' | 'daily';
-
-  @ApiPropertyOptional({
-    description: 'Business hours',
-    example: { start: '06:00', end: '23:00' }
-  })
-  businessHours?: {
-    start: string;
-    end: string;
-  };
-}
 
 /**
  * Tenant Response DTO (Class-based for Swagger and type safety)
