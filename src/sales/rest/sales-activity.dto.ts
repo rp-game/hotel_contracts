@@ -17,11 +17,13 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { SalesActivityType } from '../enums/sales.enum';
+import { IsNullableUUID } from '../../common/validators';
 
 export class CreateSalesActivityDto {
-  @ApiProperty({ description: 'Hotel ID', example: 'uuid' })
-  @IsUUID()
-  hotelId: string;
+  @ApiPropertyOptional({ description: 'Hotel ID (omit for chain-level)', example: 'uuid' })
+  @IsOptional()
+  @IsNullableUUID()
+  hotelId?: string;
 
   @ApiProperty({ description: 'Sales person ID' })
   @IsUUID()

@@ -18,6 +18,7 @@ const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 const sales_enum_1 = require("../enums/sales.enum");
+const validators_1 = require("../../common/validators");
 class CreateSalesActivityDto {
     hotelId;
     salesPersonId;
@@ -35,8 +36,9 @@ class CreateSalesActivityDto {
 }
 exports.CreateSalesActivityDto = CreateSalesActivityDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID', example: 'uuid' }),
-    (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (omit for chain-level)', example: 'uuid' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, validators_1.IsNullableUUID)(),
     __metadata("design:type", String)
 ], CreateSalesActivityDto.prototype, "hotelId", void 0);
 __decorate([
