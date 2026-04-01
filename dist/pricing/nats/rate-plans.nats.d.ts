@@ -35,6 +35,8 @@ export declare class UpdateRatePlanDto {
 export declare class UpdateRatePlanRequest {
     id: string;
     dto: UpdateRatePlanDto;
+    performedById?: string;
+    performedByName?: string;
 }
 export declare class UpdateRatePlanResponse {
     data: CreateRatePlanResponse;

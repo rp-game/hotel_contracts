@@ -100,6 +100,8 @@ class CreateRatePlanRequest {
     validTo;
     blackoutPeriods;
     isAllotmentRate;
+    performedById;
+    performedByName;
 }
 exports.CreateRatePlanRequest = CreateRatePlanRequest;
 __decorate([
@@ -286,6 +288,24 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateRatePlanRequest.prototype, "isAllotmentRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'User ID who performed this action (extracted from JWT token by API Gateway)',
+        example: '550e8400-e29b-41d4-a716-446655440052',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateRatePlanRequest.prototype, "performedById", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'User name who performed this action (extracted from JWT token by API Gateway)',
+        example: 'manager@grandhotelchain.com',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateRatePlanRequest.prototype, "performedByName", void 0);
 /**
  * NATS response after creating rate plan
  */

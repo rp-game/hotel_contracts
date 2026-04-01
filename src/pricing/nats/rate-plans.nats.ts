@@ -153,6 +153,22 @@ export class UpdateRatePlanRequest {
     type: () => UpdateRatePlanDto,
   })
   dto!: UpdateRatePlanDto;
+
+  @ApiPropertyOptional({
+    description: 'User ID who performed this action (extracted from JWT token by API Gateway)',
+    example: '550e8400-e29b-41d4-a716-446655440052',
+  })
+  @IsOptional()
+  @IsUUID()
+  performedById?: string;
+
+  @ApiPropertyOptional({
+    description: 'User name who performed this action (extracted from JWT token by API Gateway)',
+    example: 'manager@grandhotelchain.com',
+  })
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class UpdateRatePlanResponse {

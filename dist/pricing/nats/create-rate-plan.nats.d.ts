@@ -54,6 +54,8 @@ export declare class CreateRatePlanRequest {
     validTo?: string;
     blackoutPeriods?: BlackoutPeriodDto[];
     isAllotmentRate?: boolean;
+    performedById?: string;
+    performedByName?: string;
 }
 /**
  * NATS response after creating rate plan

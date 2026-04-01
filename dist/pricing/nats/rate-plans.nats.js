@@ -166,6 +166,8 @@ __decorate([
 class UpdateRatePlanRequest {
     id;
     dto;
+    performedById;
+    performedByName;
 }
 exports.UpdateRatePlanRequest = UpdateRatePlanRequest;
 __decorate([
@@ -183,6 +185,24 @@ __decorate([
     }),
     __metadata("design:type", UpdateRatePlanDto)
 ], UpdateRatePlanRequest.prototype, "dto", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'User ID who performed this action (extracted from JWT token by API Gateway)',
+        example: '550e8400-e29b-41d4-a716-446655440052',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateRatePlanRequest.prototype, "performedById", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'User name who performed this action (extracted from JWT token by API Gateway)',
+        example: 'manager@grandhotelchain.com',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateRatePlanRequest.prototype, "performedByName", void 0);
 class UpdateRatePlanResponse {
     data;
 }
