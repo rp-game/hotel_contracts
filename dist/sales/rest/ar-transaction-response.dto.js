@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreditCheckResponseDto = exports.ARSummaryResponseDto = exports.AgingBreakdownDto = exports.ARTransactionListResponseDto = exports.ARTransactionResponseDto = void 0;
+exports.ARBySalesResponseDto = exports.ARBySalesItemDto = exports.AROverviewResponseDto = exports.AROverviewSummaryDto = exports.AROverviewItemDto = exports.AROverviewAgingDto = exports.CreditCheckResponseDto = exports.ARSummaryResponseDto = exports.AgingBreakdownDto = exports.ARTransactionListResponseDto = exports.ARTransactionResponseDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 class ARTransactionResponseDto {
     id;
@@ -236,4 +236,177 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], CreditCheckResponseDto.prototype, "availableCredit", void 0);
+class AROverviewAgingDto {
+    current;
+    days30;
+    days60;
+    days90;
+    over120;
+}
+exports.AROverviewAgingDto = AROverviewAgingDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Within NET 30 days — not yet overdue' }),
+    __metadata("design:type", Number)
+], AROverviewAgingDto.prototype, "current", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Overdue 1–30 days (31–60 days from charge)' }),
+    __metadata("design:type", Number)
+], AROverviewAgingDto.prototype, "days30", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Overdue 31–60 days (61–90 days from charge)' }),
+    __metadata("design:type", Number)
+], AROverviewAgingDto.prototype, "days60", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Overdue 61–90 days (91–120 days from charge)' }),
+    __metadata("design:type", Number)
+], AROverviewAgingDto.prototype, "days90", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Overdue >90 days (>120 days) — write-off risk' }),
+    __metadata("design:type", Number)
+], AROverviewAgingDto.prototype, "over120", void 0);
+class AROverviewItemDto {
+    partnerId;
+    partnerName;
+    partnerType;
+    balance;
+    overdueAmount;
+    lastTransactionDate;
+    oldestUnpaidDate;
+    salesPersonId;
+    salesPersonName;
+    agingBuckets;
+}
+exports.AROverviewItemDto = AROverviewItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], AROverviewItemDto.prototype, "partnerId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], AROverviewItemDto.prototype, "partnerName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: ['CORPORATE', 'TRAVEL_AGENT'] }),
+    __metadata("design:type", String)
+], AROverviewItemDto.prototype, "partnerType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], AROverviewItemDto.prototype, "balance", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Amount in days30+ buckets' }),
+    __metadata("design:type", Number)
+], AROverviewItemDto.prototype, "overdueAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], AROverviewItemDto.prototype, "lastTransactionDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], AROverviewItemDto.prototype, "oldestUnpaidDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], AROverviewItemDto.prototype, "salesPersonId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], AROverviewItemDto.prototype, "salesPersonName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: AROverviewAgingDto }),
+    __metadata("design:type", AROverviewAgingDto)
+], AROverviewItemDto.prototype, "agingBuckets", void 0);
+class AROverviewSummaryDto {
+    totalReceivable;
+    totalOverdue;
+    partnerCount;
+    aging;
+}
+exports.AROverviewSummaryDto = AROverviewSummaryDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], AROverviewSummaryDto.prototype, "totalReceivable", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], AROverviewSummaryDto.prototype, "totalOverdue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], AROverviewSummaryDto.prototype, "partnerCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: AROverviewAgingDto }),
+    __metadata("design:type", AROverviewAgingDto)
+], AROverviewSummaryDto.prototype, "aging", void 0);
+class AROverviewResponseDto {
+    summary;
+    items;
+    total;
+    page;
+    limit;
+}
+exports.AROverviewResponseDto = AROverviewResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: AROverviewSummaryDto }),
+    __metadata("design:type", AROverviewSummaryDto)
+], AROverviewResponseDto.prototype, "summary", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [AROverviewItemDto] }),
+    __metadata("design:type", Array)
+], AROverviewResponseDto.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], AROverviewResponseDto.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], AROverviewResponseDto.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], AROverviewResponseDto.prototype, "limit", void 0);
+class ARBySalesItemDto {
+    salesPersonId;
+    salesPersonName;
+    partnerCount;
+    totalBalance;
+    overdueAmount;
+    overduePercent;
+}
+exports.ARBySalesItemDto = ARBySalesItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], ARBySalesItemDto.prototype, "salesPersonId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], ARBySalesItemDto.prototype, "salesPersonName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ARBySalesItemDto.prototype, "partnerCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ARBySalesItemDto.prototype, "totalBalance", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ARBySalesItemDto.prototype, "overdueAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ARBySalesItemDto.prototype, "overduePercent", void 0);
+class ARBySalesResponseDto {
+    items;
+}
+exports.ARBySalesResponseDto = ARBySalesResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [ARBySalesItemDto] }),
+    __metadata("design:type", Array)
+], ARBySalesResponseDto.prototype, "items", void 0);
 //# sourceMappingURL=ar-transaction-response.dto.js.map

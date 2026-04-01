@@ -6,6 +6,8 @@
  *   - ar-transaction.find_all
  *   - ar-summary.get
  *   - ar-statement.generate
+ *   - ar-overview.get
+ *   - ar-by-sales.get
  */
 export declare class CreateARTransactionNatsRequest {
     tenantId: string;
@@ -20,6 +22,8 @@ export declare class CreateARTransactionNatsRequest {
     dueDate?: string;
     createdBy: string;
     createdByName?: string;
+    partnerType?: 'CORPORATE' | 'TRAVEL_AGENT';
+    travelAgentId?: string;
 }
 export declare class FindARTransactionsNatsRequest {
     tenantId: string;
@@ -40,5 +44,19 @@ export declare class GenerateARStatementNatsRequest {
     corporateAccountId: string;
     dateFrom: string;
     dateTo: string;
+}
+export declare class GetAROverviewNatsRequest {
+    tenantId: string;
+    hotelId?: string;
+    partnerType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'ALL';
+    salesPersonId?: string;
+    agingBucket?: 'current' | 'days30' | 'days60' | 'days90' | 'over120';
+    search?: string;
+    page?: number;
+    limit?: number;
+}
+export declare class GetARBySalesNatsRequest {
+    tenantId: string;
+    hotelId?: string;
 }
 //# sourceMappingURL=ar-transaction.nats.d.ts.map

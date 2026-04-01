@@ -58,3 +58,52 @@ export class CreditCheckResponseDto {
   @ApiProperty() exceedsLimit: boolean;
   @ApiProperty() availableCredit: number;
 }
+
+export class AROverviewAgingDto {
+  @ApiProperty({ description: 'Within NET 30 days — not yet overdue' }) current: number;
+  @ApiProperty({ description: 'Overdue 1–30 days (31–60 days from charge)' }) days30: number;
+  @ApiProperty({ description: 'Overdue 31–60 days (61–90 days from charge)' }) days60: number;
+  @ApiProperty({ description: 'Overdue 61–90 days (91–120 days from charge)' }) days90: number;
+  @ApiProperty({ description: 'Overdue >90 days (>120 days) — write-off risk' }) over120: number;
+}
+
+export class AROverviewItemDto {
+  @ApiProperty() partnerId: string;
+  @ApiProperty() partnerName: string;
+  @ApiProperty({ enum: ['CORPORATE', 'TRAVEL_AGENT'] }) partnerType: string;
+  @ApiProperty() balance: number;
+  @ApiProperty({ description: 'Amount in days30+ buckets' }) overdueAmount: number;
+  @ApiPropertyOptional() lastTransactionDate?: string;
+  @ApiPropertyOptional() oldestUnpaidDate?: string;
+  @ApiPropertyOptional() salesPersonId?: string;
+  @ApiPropertyOptional() salesPersonName?: string;
+  @ApiProperty({ type: AROverviewAgingDto }) agingBuckets: AROverviewAgingDto;
+}
+
+export class AROverviewSummaryDto {
+  @ApiProperty() totalReceivable: number;
+  @ApiProperty() totalOverdue: number;
+  @ApiProperty() partnerCount: number;
+  @ApiProperty({ type: AROverviewAgingDto }) aging: AROverviewAgingDto;
+}
+
+export class AROverviewResponseDto {
+  @ApiProperty({ type: AROverviewSummaryDto }) summary: AROverviewSummaryDto;
+  @ApiProperty({ type: [AROverviewItemDto] }) items: AROverviewItemDto[];
+  @ApiProperty() total: number;
+  @ApiProperty() page: number;
+  @ApiProperty() limit: number;
+}
+
+export class ARBySalesItemDto {
+  @ApiProperty() salesPersonId: string;
+  @ApiProperty() salesPersonName: string;
+  @ApiProperty() partnerCount: number;
+  @ApiProperty() totalBalance: number;
+  @ApiProperty() overdueAmount: number;
+  @ApiProperty() overduePercent: number;
+}
+
+export class ARBySalesResponseDto {
+  @ApiProperty({ type: [ARBySalesItemDto] }) items: ARBySalesItemDto[];
+}

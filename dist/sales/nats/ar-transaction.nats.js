@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GenerateARStatementNatsRequest = exports.GetARSummaryNatsRequest = exports.FindARTransactionsNatsRequest = exports.CreateARTransactionNatsRequest = void 0;
+exports.GetARBySalesNatsRequest = exports.GetAROverviewNatsRequest = exports.GenerateARStatementNatsRequest = exports.GetARSummaryNatsRequest = exports.FindARTransactionsNatsRequest = exports.CreateARTransactionNatsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * AR Transaction NATS Contracts
@@ -19,6 +19,8 @@ const swagger_1 = require("@nestjs/swagger");
  *   - ar-transaction.find_all
  *   - ar-summary.get
  *   - ar-statement.generate
+ *   - ar-overview.get
+ *   - ar-by-sales.get
  */
 class CreateARTransactionNatsRequest {
     tenantId;
@@ -33,6 +35,8 @@ class CreateARTransactionNatsRequest {
     dueDate;
     createdBy;
     createdByName;
+    partnerType;
+    travelAgentId;
 }
 exports.CreateARTransactionNatsRequest = CreateARTransactionNatsRequest;
 __decorate([
@@ -83,6 +87,14 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", String)
 ], CreateARTransactionNatsRequest.prototype, "createdByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateARTransactionNatsRequest.prototype, "partnerType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateARTransactionNatsRequest.prototype, "travelAgentId", void 0);
 class FindARTransactionsNatsRequest {
     tenantId;
     corporateAccountId;
@@ -162,4 +174,60 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], GenerateARStatementNatsRequest.prototype, "dateTo", void 0);
+class GetAROverviewNatsRequest {
+    tenantId;
+    hotelId;
+    partnerType;
+    salesPersonId;
+    agingBucket;
+    search;
+    page;
+    limit;
+}
+exports.GetAROverviewNatsRequest = GetAROverviewNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GetAROverviewNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], GetAROverviewNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], GetAROverviewNatsRequest.prototype, "partnerType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], GetAROverviewNatsRequest.prototype, "salesPersonId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], GetAROverviewNatsRequest.prototype, "agingBucket", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], GetAROverviewNatsRequest.prototype, "search", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], GetAROverviewNatsRequest.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], GetAROverviewNatsRequest.prototype, "limit", void 0);
+class GetARBySalesNatsRequest {
+    tenantId;
+    hotelId;
+}
+exports.GetARBySalesNatsRequest = GetARBySalesNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GetARBySalesNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], GetARBySalesNatsRequest.prototype, "hotelId", void 0);
 //# sourceMappingURL=ar-transaction.nats.js.map

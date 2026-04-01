@@ -50,4 +50,47 @@ export declare class CreditCheckResponseDto {
     exceedsLimit: boolean;
     availableCredit: number;
 }
+export declare class AROverviewAgingDto {
+    current: number;
+    days30: number;
+    days60: number;
+    days90: number;
+    over120: number;
+}
+export declare class AROverviewItemDto {
+    partnerId: string;
+    partnerName: string;
+    partnerType: string;
+    balance: number;
+    overdueAmount: number;
+    lastTransactionDate?: string;
+    oldestUnpaidDate?: string;
+    salesPersonId?: string;
+    salesPersonName?: string;
+    agingBuckets: AROverviewAgingDto;
+}
+export declare class AROverviewSummaryDto {
+    totalReceivable: number;
+    totalOverdue: number;
+    partnerCount: number;
+    aging: AROverviewAgingDto;
+}
+export declare class AROverviewResponseDto {
+    summary: AROverviewSummaryDto;
+    items: AROverviewItemDto[];
+    total: number;
+    page: number;
+    limit: number;
+}
+export declare class ARBySalesItemDto {
+    salesPersonId: string;
+    salesPersonName: string;
+    partnerCount: number;
+    totalBalance: number;
+    overdueAmount: number;
+    overduePercent: number;
+}
+export declare class ARBySalesResponseDto {
+    items: ARBySalesItemDto[];
+}
 //# sourceMappingURL=ar-transaction-response.dto.d.ts.map
