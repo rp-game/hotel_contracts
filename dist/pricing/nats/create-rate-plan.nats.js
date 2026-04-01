@@ -429,6 +429,7 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Rate plan valid from date',
         example: '2026-01-01',
+        type: String,
     }),
     __metadata("design:type", Object)
 ], CreateRatePlanResponse.prototype, "validFrom", void 0);
@@ -436,6 +437,7 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Rate plan valid to date',
         example: '2026-12-31',
+        type: String,
     }),
     __metadata("design:type", Object)
 ], CreateRatePlanResponse.prototype, "validTo", void 0);

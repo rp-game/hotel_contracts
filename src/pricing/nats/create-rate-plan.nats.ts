@@ -330,12 +330,14 @@ export class CreateRatePlanResponse {
   @ApiPropertyOptional({
     description: 'Rate plan valid from date',
     example: '2026-01-01',
+    type: String,
   })
   validFrom?: string | null;
 
   @ApiPropertyOptional({
     description: 'Rate plan valid to date',
     example: '2026-12-31',
+    type: String,
   })
   validTo?: string | null;
 
