@@ -60,6 +60,11 @@ export class CreateSalesActivityDto {
   @IsUUID()
   travelAgentId?: string;
 
+  @ApiPropertyOptional({ description: 'Sales lead ID' })
+  @IsOptional()
+  @IsUUID()
+  leadId?: string;
+
   @ApiPropertyOptional({ description: 'Contact person name', example: 'Tran Thi B' })
   @IsOptional()
   @IsString()
@@ -153,6 +158,11 @@ export class FindSalesActivitiesQueryDto {
   @IsOptional()
   @IsUUID()
   travelAgentId?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by sales lead ID' })
+  @IsOptional()
+  @IsUUID()
+  leadId?: string;
 
   @ApiPropertyOptional({ description: 'Date from (YYYY-MM-DD)' })
   @IsOptional()

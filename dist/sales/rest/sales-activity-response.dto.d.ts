@@ -13,6 +13,7 @@ export declare class SalesActivityResponseDto {
     activityDate: string;
     corporateAccountId?: string;
     travelAgentId?: string;
+    leadId?: string;
     contactName?: string;
     outcome?: string;
     followUpDate?: string;

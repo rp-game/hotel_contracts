@@ -28,6 +28,7 @@ class CreateSalesActivityDto {
     activityDate;
     corporateAccountId;
     travelAgentId;
+    leadId;
     contactName;
     outcome;
     followUpDate;
@@ -83,6 +84,12 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateSalesActivityDto.prototype, "travelAgentId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales lead ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateSalesActivityDto.prototype, "leadId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Contact person name', example: 'Tran Thi B' }),
     (0, class_validator_1.IsOptional)(),
@@ -178,6 +185,7 @@ class FindSalesActivitiesQueryDto {
     activityType;
     corporateAccountId;
     travelAgentId;
+    leadId;
     dateFrom;
     dateTo;
     search;
@@ -215,6 +223,12 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], FindSalesActivitiesQueryDto.prototype, "travelAgentId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by sales lead ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindSalesActivitiesQueryDto.prototype, "leadId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Date from (YYYY-MM-DD)' }),
     (0, class_validator_1.IsOptional)(),

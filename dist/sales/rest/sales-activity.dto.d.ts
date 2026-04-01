@@ -13,6 +13,7 @@ export declare class CreateSalesActivityDto {
     activityDate: string;
     corporateAccountId?: string;
     travelAgentId?: string;
+    leadId?: string;
     contactName?: string;
     outcome?: string;
     followUpDate?: string;
@@ -34,6 +35,7 @@ export declare class FindSalesActivitiesQueryDto {
     activityType?: SalesActivityType;
     corporateAccountId?: string;
     travelAgentId?: string;
+    leadId?: string;
     dateFrom?: string;
     dateTo?: string;
     search?: string;

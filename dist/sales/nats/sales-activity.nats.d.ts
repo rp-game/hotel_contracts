@@ -23,6 +23,7 @@ export interface CreateSalesActivityNatsRequest {
     activityDate: string;
     corporateAccountId?: string;
     travelAgentId?: string;
+    leadId?: string;
     contactName?: string;
     outcome?: string;
     followUpDate?: string;
@@ -36,6 +37,7 @@ export interface FindSalesActivitiesNatsRequest {
     activityType?: SalesActivityType;
     corporateAccountId?: string;
     travelAgentId?: string;
+    leadId?: string;
     dateFrom?: string;
     dateTo?: string;
     search?: string;

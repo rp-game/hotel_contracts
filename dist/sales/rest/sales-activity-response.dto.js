@@ -26,6 +26,7 @@ class SalesActivityResponseDto {
     activityDate;
     corporateAccountId;
     travelAgentId;
+    leadId;
     contactName;
     outcome;
     followUpDate;
@@ -75,6 +76,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Travel agent ID' }),
     __metadata("design:type", String)
 ], SalesActivityResponseDto.prototype, "travelAgentId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales lead ID' }),
+    __metadata("design:type", String)
+], SalesActivityResponseDto.prototype, "leadId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Contact person name' }),
     __metadata("design:type", String)

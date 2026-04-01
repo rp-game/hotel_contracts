@@ -36,6 +36,9 @@ export class SalesActivityResponseDto {
   @ApiPropertyOptional({ description: 'Travel agent ID' })
   travelAgentId?: string;
 
+  @ApiPropertyOptional({ description: 'Sales lead ID' })
+  leadId?: string;
+
   @ApiPropertyOptional({ description: 'Contact person name' })
   contactName?: string;
 
