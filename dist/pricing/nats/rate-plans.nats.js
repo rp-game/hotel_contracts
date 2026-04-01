@@ -17,7 +17,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteRatePlanResponse = exports.DeleteRatePlanRequest = exports.FindRatePlansByChannelResponse = exports.FindRatePlansByChannelRequest = exports.RemoveChannelMappingResponse = exports.RemoveChannelMappingRequest = exports.AddChannelMappingResponse = exports.AddChannelMappingRequest = exports.CreateChannelMappingDto = exports.GetChannelMappingsResponse = exports.ChannelRateMappingResponse = exports.GetChannelMappingsRequest = exports.CalculateRatePlanPriceResponse = exports.CalculateRatePlanPriceRequest = exports.ListRatePlansResponse = exports.ListRatePlansRequest = exports.GetRatePlanResponse = exports.GetRatePlanRequest = exports.UpdateRatePlanResponse = exports.UpdateRatePlanRequest = exports.UpdateRatePlanDto = exports.DerivationTypeEnum = exports.RatePlanTypeEnum = exports.CreateRatePlanResponse = exports.CreateRatePlanRequest = void 0;
+exports.GetRatePlanHistoryResponseDto = exports.RatePlanHistoryItemDto = exports.GetRatePlanHistoryRequest = exports.DeleteRatePlanResponse = exports.DeleteRatePlanRequest = exports.FindRatePlansByChannelResponse = exports.FindRatePlansByChannelRequest = exports.RemoveChannelMappingResponse = exports.RemoveChannelMappingRequest = exports.AddChannelMappingResponse = exports.AddChannelMappingRequest = exports.CreateChannelMappingDto = exports.GetChannelMappingsResponse = exports.ChannelRateMappingResponse = exports.GetChannelMappingsRequest = exports.CalculateRatePlanPriceResponse = exports.CalculateRatePlanPriceRequest = exports.ListRatePlansResponse = exports.ListRatePlansRequest = exports.GetRatePlanResponse = exports.GetRatePlanRequest = exports.UpdateRatePlanResponse = exports.UpdateRatePlanRequest = exports.UpdateRatePlanDto = exports.DerivationTypeEnum = exports.RatePlanTypeEnum = exports.CreateRatePlanResponse = exports.CreateRatePlanRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -643,4 +643,131 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], DeleteRatePlanResponse.prototype, "message", void 0);
+// ─── Rate Plan History ────────────────────────────────────────────────────────
+class GetRatePlanHistoryRequest {
+    tenantId;
+    hotelId;
+    ratePlanId;
+    action;
+    startDate;
+    endDate;
+    page;
+    limit;
+}
+exports.GetRatePlanHistoryRequest = GetRatePlanHistoryRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetRatePlanHistoryRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetRatePlanHistoryRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by specific rate plan ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetRatePlanHistoryRequest.prototype, "ratePlanId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by action (CREATE/UPDATE/DELETE)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetRatePlanHistoryRequest.prototype, "action", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Start date YYYY-MM-DD' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], GetRatePlanHistoryRequest.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'End date YYYY-MM-DD' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], GetRatePlanHistoryRequest.prototype, "endDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ default: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], GetRatePlanHistoryRequest.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ default: 50 }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], GetRatePlanHistoryRequest.prototype, "limit", void 0);
+class RatePlanHistoryItemDto {
+    id;
+    ratePlanId;
+    ratePlanName;
+    action;
+    previousData;
+    newData;
+    performedBy;
+    performedByName;
+    createdAt;
+}
+exports.RatePlanHistoryItemDto = RatePlanHistoryItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], RatePlanHistoryItemDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], RatePlanHistoryItemDto.prototype, "ratePlanId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], RatePlanHistoryItemDto.prototype, "ratePlanName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], RatePlanHistoryItemDto.prototype, "action", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Object)
+], RatePlanHistoryItemDto.prototype, "previousData", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Object)
+], RatePlanHistoryItemDto.prototype, "newData", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], RatePlanHistoryItemDto.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], RatePlanHistoryItemDto.prototype, "performedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Date)
+], RatePlanHistoryItemDto.prototype, "createdAt", void 0);
+class GetRatePlanHistoryResponseDto {
+    items;
+    total;
+    page;
+    limit;
+}
+exports.GetRatePlanHistoryResponseDto = GetRatePlanHistoryResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: () => [RatePlanHistoryItemDto] }),
+    __metadata("design:type", Array)
+], GetRatePlanHistoryResponseDto.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GetRatePlanHistoryResponseDto.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GetRatePlanHistoryResponseDto.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GetRatePlanHistoryResponseDto.prototype, "limit", void 0);
 //# sourceMappingURL=rate-plans.nats.js.map

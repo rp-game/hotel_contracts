@@ -525,3 +525,66 @@ export class DeleteRatePlanResponse {
 }
 
 export type DeleteRatePlanNatsResponse = NatsResponse<DeleteRatePlanResponse>;
+
+// ─── Rate Plan History ────────────────────────────────────────────────────────
+
+export class GetRatePlanHistoryRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
+  hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Filter by specific rate plan ID' })
+  @IsOptional()
+  @IsString()
+  ratePlanId?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by action (CREATE/UPDATE/DELETE)' })
+  @IsOptional()
+  @IsString()
+  action?: string;
+
+  @ApiPropertyOptional({ description: 'Start date YYYY-MM-DD' })
+  @IsOptional()
+  @IsDateString()
+  startDate?: string;
+
+  @ApiPropertyOptional({ description: 'End date YYYY-MM-DD' })
+  @IsOptional()
+  @IsDateString()
+  endDate?: string;
+
+  @ApiPropertyOptional({ default: 1 })
+  @IsOptional()
+  page?: number;
+
+  @ApiPropertyOptional({ default: 50 })
+  @IsOptional()
+  limit?: number;
+}
+
+export class RatePlanHistoryItemDto {
+  @ApiProperty() id: string;
+  @ApiProperty() ratePlanId: string;
+  @ApiProperty() ratePlanName: string;
+  @ApiProperty() action: string;
+  @ApiProperty() previousData: Record<string, any>;
+  @ApiProperty() newData: Record<string, any>;
+  @ApiProperty() performedBy: string;
+  @ApiProperty() performedByName: string;
+  @ApiProperty() createdAt: Date;
+}
+
+export class GetRatePlanHistoryResponseDto {
+  @ApiProperty({ type: () => [RatePlanHistoryItemDto] })
+  items: RatePlanHistoryItemDto[];
+
+  @ApiProperty() total: number;
+  @ApiProperty() page: number;
+  @ApiProperty() limit: number;
+}
+
+export type GetRatePlanHistoryNatsResponse = NatsResponse<GetRatePlanHistoryResponseDto>;

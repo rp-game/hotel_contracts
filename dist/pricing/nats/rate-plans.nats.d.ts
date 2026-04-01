@@ -151,4 +151,32 @@ export declare class DeleteRatePlanResponse {
     message: string;
 }
 export type DeleteRatePlanNatsResponse = NatsResponse<DeleteRatePlanResponse>;
+export declare class GetRatePlanHistoryRequest {
+    tenantId: string;
+    hotelId: string;
+    ratePlanId?: string;
+    action?: string;
+    startDate?: string;
+    endDate?: string;
+    page?: number;
+    limit?: number;
+}
+export declare class RatePlanHistoryItemDto {
+    id: string;
+    ratePlanId: string;
+    ratePlanName: string;
+    action: string;
+    previousData: Record<string, any>;
+    newData: Record<string, any>;
+    performedBy: string;
+    performedByName: string;
+    createdAt: Date;
+}
+export declare class GetRatePlanHistoryResponseDto {
+    items: RatePlanHistoryItemDto[];
+    total: number;
+    page: number;
+    limit: number;
+}
+export type GetRatePlanHistoryNatsResponse = NatsResponse<GetRatePlanHistoryResponseDto>;
 //# sourceMappingURL=rate-plans.nats.d.ts.map
