@@ -68,3 +68,6 @@ export * from './member-revenue.nats';
 
 // Refer Code NATS contracts
 export * from './refer-code.nats';
+
+// Booking window analytics
+export * from './booking-window.nats';

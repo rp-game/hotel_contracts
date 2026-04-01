@@ -74,4 +74,6 @@ __exportStar(require("./occupancy.nats"), exports);
 __exportStar(require("./member-revenue.nats"), exports);
 // Refer Code NATS contracts
 __exportStar(require("./refer-code.nats"), exports);
+// Booking window analytics
+__exportStar(require("./booking-window.nats"), exports);
 //# sourceMappingURL=index.js.map

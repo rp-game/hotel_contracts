@@ -49,4 +49,5 @@ export * from './payment-events.nats';
 export * from './occupancy.nats';
 export * from './member-revenue.nats';
 export * from './refer-code.nats';
+export * from './booking-window.nats';
 //# sourceMappingURL=index.d.ts.map
