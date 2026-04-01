@@ -42,6 +42,7 @@ class UpdateRatePlanDto {
     validFrom;
     validTo;
     blackoutPeriods;
+    isAllotmentRate;
 }
 exports.UpdateRatePlanDto = UpdateRatePlanDto;
 __decorate([
@@ -133,6 +134,15 @@ __decorate([
     (0, class_transformer_1.Type)(() => blackout_period_type_1.BlackoutPeriodDto),
     __metadata("design:type", Object)
 ], UpdateRatePlanDto.prototype, "blackoutPeriods", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Mark as contract/allotment rate (only visible when partner has active allotment)',
+        example: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdateRatePlanDto.prototype, "isAllotmentRate", void 0);
 class UpdateRatePlanRequest {
     id;
     dto;

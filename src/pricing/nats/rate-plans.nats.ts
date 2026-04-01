@@ -114,6 +114,14 @@ export class UpdateRatePlanDto {
   @ValidateNested({ each: true })
   @Type(() => BlackoutPeriodDto)
   blackoutPeriods?: BlackoutPeriodDto[] | null;
+
+  @ApiPropertyOptional({
+    description: 'Mark as contract/allotment rate (only visible when partner has active allotment)',
+    example: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  isAllotmentRate?: boolean;
 }
 
 export class UpdateRatePlanRequest {

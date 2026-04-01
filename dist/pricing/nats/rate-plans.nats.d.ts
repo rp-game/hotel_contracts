@@ -28,6 +28,7 @@ export declare class UpdateRatePlanDto {
     validFrom?: string | null;
     validTo?: string | null;
     blackoutPeriods?: BlackoutPeriodDto[] | null;
+    isAllotmentRate?: boolean;
 }
 export declare class UpdateRatePlanRequest {
     id: string;
