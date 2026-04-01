@@ -35,6 +35,8 @@ class UpdateRatePlanDto {
     name;
     description;
     isActive;
+    derivationType;
+    derivationValue;
     cancellationPolicy;
     mealPlan;
     paymentType;
@@ -72,6 +74,24 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdateRatePlanDto.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Derivation type for DERIVED rate plans (PERCENTAGE or AMOUNT)',
+        enum: create_rate_plan_nats_2.DerivationTypeEnum,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(create_rate_plan_nats_2.DerivationTypeEnum),
+    __metadata("design:type", String)
+], UpdateRatePlanDto.prototype, "derivationType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Derivation value for DERIVED rate plans',
+        example: 10,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateRatePlanDto.prototype, "derivationValue", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Cancellation policy details',

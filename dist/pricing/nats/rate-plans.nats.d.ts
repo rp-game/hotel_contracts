@@ -21,6 +21,8 @@ export declare class UpdateRatePlanDto {
     name?: string;
     description?: string;
     isActive?: boolean;
+    derivationType?: DerivationTypeEnum;
+    derivationValue?: number;
     cancellationPolicy?: CancellationPolicyDto | null;
     mealPlan?: string | null;
     paymentType?: string | null;

@@ -8,7 +8,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsBoolean, IsOptional, IsNumber, IsUUID, IsDateString, IsArray, ValidateNested } from 'class-validator';
+import { IsString, IsBoolean, IsOptional, IsNumber, IsUUID, IsDateString, IsArray, ValidateNested, IsEnum } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CancellationPolicyDto } from './create-rate-plan.nats';
 import { BlackoutPeriodDto } from '../types/blackout-period.type';
@@ -59,6 +59,22 @@ export class UpdateRatePlanDto {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'Derivation type for DERIVED rate plans (PERCENTAGE or AMOUNT)',
+    enum: DerivationTypeEnum,
+  })
+  @IsOptional()
+  @IsEnum(DerivationTypeEnum)
+  derivationType?: DerivationTypeEnum;
+
+  @ApiPropertyOptional({
+    description: 'Derivation value for DERIVED rate plans',
+    example: 10,
+  })
+  @IsOptional()
+  @IsNumber()
+  derivationValue?: number;
 
   @ApiPropertyOptional({
     description: 'Cancellation policy details',
