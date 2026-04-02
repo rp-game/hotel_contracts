@@ -20,6 +20,8 @@ __exportStar(require("./cleaning-tasks.nats"), exports);
 __exportStar(require("./create-task.nats"), exports);
 __exportStar(require("./quality-standards.nats"), exports);
 __exportStar(require("./amenities.nats"), exports);
+__exportStar(require("./amenity-requests-sla.nats"), exports);
+__exportStar(require("./amenity-sla-config.nats"), exports);
 __exportStar(require("./notifications.nats"), exports);
 __exportStar(require("./analytics.nats"), exports);
 __exportStar(require("./task-photos.nats"), exports);

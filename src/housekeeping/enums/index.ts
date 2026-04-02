@@ -3,3 +3,5 @@
  */
 
 export * from './housekeeping.enum';
+export * from './amenity-request-status.enum';
+export * from './amenity-alert.enum';

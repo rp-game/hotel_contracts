@@ -4,6 +4,8 @@ export * from './cleaning-tasks.nats';
 export * from './create-task.nats';
 export * from './quality-standards.nats';
 export * from './amenities.nats';
+export * from './amenity-requests-sla.nats';
+export * from './amenity-sla-config.nats';
 export * from './notifications.nats';
 export * from './analytics.nats';
 export * from './task-photos.nats';
