@@ -21,7 +21,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetQualityStandardsStatisticsQueryDto = exports.GetAllQualityStandardsQueryDto = exports.UpdateQualityStandardDto = exports.CreateQualityStandardDto = exports.TimerReportDataDto = exports.TimerReportTimerItemDto = exports.TimerReportTaskDto = exports.TimerReportStaffStatsDto = exports.TimerReportSummaryDto = exports.AutomationSettingsDto = exports.AutomationLastRunTimesDto = exports.OverdueMonitoringSettingsDto = exports.AutoAssignmentSettingsDto = exports.CheckinAutomationSettingsDto = exports.CheckoutAutomationSettingsDto = exports.LastRunTimesDto = exports.AutomationStatsDto = exports.ActiveRulesDto = exports.AutomationStatusDto = void 0;
+exports.AmenitySLAConfigResponseDto = exports.CreateAmenitySLAConfigDto = exports.HousekeepingAmenityRequestWithSLAStatusDto = exports.HousekeepingAmenityRequestResponseDto = exports.UpdateHousekeepingAmenityRequestDto = exports.CreateHousekeepingAmenityRequestDto = exports.GetQualityStandardsStatisticsQueryDto = exports.GetAllQualityStandardsQueryDto = exports.UpdateQualityStandardDto = exports.CreateQualityStandardDto = exports.TimerReportDataDto = exports.TimerReportTimerItemDto = exports.TimerReportTaskDto = exports.TimerReportStaffStatsDto = exports.TimerReportSummaryDto = exports.AutomationSettingsDto = exports.AutomationLastRunTimesDto = exports.OverdueMonitoringSettingsDto = exports.AutoAssignmentSettingsDto = exports.CheckinAutomationSettingsDto = exports.CheckoutAutomationSettingsDto = exports.LastRunTimesDto = exports.AutomationStatsDto = exports.ActiveRulesDto = exports.AutomationStatusDto = void 0;
 // Shared automation DTOs with @ApiProperty for Swagger documentation
 var automation_rest_1 = require("./automation.rest");
 Object.defineProperty(exports, "AutomationStatusDto", { enumerable: true, get: function () { return automation_rest_1.AutomationStatusDto; } });
@@ -51,6 +51,16 @@ Object.defineProperty(exports, "GetAllQualityStandardsQueryDto", { enumerable: t
 Object.defineProperty(exports, "GetQualityStandardsStatisticsQueryDto", { enumerable: true, get: function () { return quality_standards_rest_1.GetQualityStandardsStatisticsQueryDto; } });
 // Quick Complete Task DTOs
 __exportStar(require("./quick-complete-task.rest"), exports);
+// Housekeeping Amenity Request REST DTOs
+var amenity_request_rest_1 = require("./amenity-request.rest");
+Object.defineProperty(exports, "CreateHousekeepingAmenityRequestDto", { enumerable: true, get: function () { return amenity_request_rest_1.CreateHousekeepingAmenityRequestDto; } });
+Object.defineProperty(exports, "UpdateHousekeepingAmenityRequestDto", { enumerable: true, get: function () { return amenity_request_rest_1.UpdateHousekeepingAmenityRequestDto; } });
+Object.defineProperty(exports, "HousekeepingAmenityRequestResponseDto", { enumerable: true, get: function () { return amenity_request_rest_1.HousekeepingAmenityRequestResponseDto; } });
+Object.defineProperty(exports, "HousekeepingAmenityRequestWithSLAStatusDto", { enumerable: true, get: function () { return amenity_request_rest_1.HousekeepingAmenityRequestWithSLAStatusDto; } });
+// Amenity SLA Configuration DTOs
+var amenity_sla_config_rest_1 = require("./amenity-sla-config.rest");
+Object.defineProperty(exports, "CreateAmenitySLAConfigDto", { enumerable: true, get: function () { return amenity_sla_config_rest_1.CreateAmenitySLAConfigDto; } });
+Object.defineProperty(exports, "AmenitySLAConfigResponseDto", { enumerable: true, get: function () { return amenity_sla_config_rest_1.AmenitySLAConfigResponseDto; } });
 // Re-export NATS contracts for internal use
 __exportStar(require("../nats"), exports);
 //# sourceMappingURL=index.js.map

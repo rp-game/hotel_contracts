@@ -44,5 +44,19 @@ export {
 // Quick Complete Task DTOs
 export * from './quick-complete-task.rest';
 
+// Housekeeping Amenity Request REST DTOs
+export {
+  CreateHousekeepingAmenityRequestDto,
+  UpdateHousekeepingAmenityRequestDto,
+  HousekeepingAmenityRequestResponseDto,
+  HousekeepingAmenityRequestWithSLAStatusDto,
+} from './amenity-request.rest';
+
+// Amenity SLA Configuration DTOs
+export {
+  CreateAmenitySLAConfigDto,
+  AmenitySLAConfigResponseDto,
+} from './amenity-sla-config.rest';
+
 // Re-export NATS contracts for internal use
 export * from '../nats';

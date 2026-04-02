@@ -10,5 +10,7 @@ export { CheckoutAutomationSettingsDto, CheckinAutomationSettingsDto, AutoAssign
 export { TimerReportSummaryDto, TimerReportStaffStatsDto, TimerReportTaskDto, TimerReportTimerItemDto, TimerReportDataDto, } from './timers.rest';
 export { CreateQualityStandardDto, UpdateQualityStandardDto, GetAllQualityStandardsQueryDto, GetQualityStandardsStatisticsQueryDto, } from './quality-standards.rest';
 export * from './quick-complete-task.rest';
+export { CreateHousekeepingAmenityRequestDto, UpdateHousekeepingAmenityRequestDto, HousekeepingAmenityRequestResponseDto, HousekeepingAmenityRequestWithSLAStatusDto, } from './amenity-request.rest';
+export { CreateAmenitySLAConfigDto, AmenitySLAConfigResponseDto, } from './amenity-sla-config.rest';
 export * from '../nats';
 //# sourceMappingURL=index.d.ts.map
