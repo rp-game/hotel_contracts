@@ -7,7 +7,7 @@
  * Trend data point for time-series metrics
  * Phase 1: Empty in most reports, included in type for future Phase 2 implementation
  */
-export interface TrendDataPoint {
+export declare class TrendDataPoint {
     date: string;
     value: number;
 }
@@ -15,7 +15,7 @@ export interface TrendDataPoint {
  * Win/Loss Summary Report
  * High-level overview of deal outcomes and performance metrics
  */
-export interface WinLossSummaryReport {
+export declare class WinLossSummaryReport {
     totalDeals: number;
     wonCount: number;
     lostCount: number;
@@ -23,7 +23,7 @@ export interface WinLossSummaryReport {
     winRate: number;
     avgWonValue: number;
     avgLostValue: number;
-    trendData: Array<{
+    trendData?: Array<{
         date: string;
         winRate: number;
     }>;
@@ -32,7 +32,7 @@ export interface WinLossSummaryReport {
  * Loss Reason Type
  * Detailed breakdown of deal loss reasons with trend analysis
  */
-export interface LossReason {
+export declare class LossReason {
     reasonId: string;
     reasonCode: string;
     reasonLabel: string;
@@ -48,7 +48,7 @@ export interface LossReason {
  * Loss Analysis Report
  * Comprehensive analysis of why deals are lost, by reason and by staff member
  */
-export interface LossAnalysisReport {
+export declare class LossAnalysisReport {
     lossReasons: LossReason[];
     lossReasonByStaff: Array<{
         staffId: string;
@@ -61,7 +61,7 @@ export interface LossAnalysisReport {
  * Sales Rep Performance Metrics
  * Individual sales representative performance and activity metrics
  */
-export interface SalesRepPerformance {
+export declare class SalesRepPerformance {
     staffId: string;
     staffName: string;
     wonCount: number;
@@ -71,7 +71,7 @@ export interface SalesRepPerformance {
     totalRevenue: number;
     avgDealValue: number;
     closeTime: number;
-    trend: Array<{
+    trend?: Array<{
         period: string;
         winRate: number;
     }>;
@@ -80,9 +80,9 @@ export interface SalesRepPerformance {
  * Win Analysis Report
  * Top performing sales representatives and team trends
  */
-export interface WinAnalysisReport {
+export declare class WinAnalysisReport {
     topPerformers: SalesRepPerformance[];
-    trend: Array<{
+    trend?: Array<{
         date: string;
         teamWinRate: number;
     }>;
@@ -91,7 +91,7 @@ export interface WinAnalysisReport {
  * Stuck Deal
  * Deal that has been open for an extended period
  */
-export interface StuckDeal {
+export declare class StuckDeal {
     dealId: string;
     createdAt: string;
     daysOpen: number;
@@ -100,14 +100,14 @@ export interface StuckDeal {
  * Pipeline Forecast Report
  * Revenue pipeline analysis and deal velocity metrics
  */
-export interface PipelineForecastReport {
+export declare class PipelineForecastReport {
     pipelineValue: number;
     openDealCount: number;
     globalWinRate: number;
     forecastRevenue: number;
     pipelineVelocity: number;
     stuckDeals: StuckDeal[];
-    trend: Array<{
+    trend?: Array<{
         date: string;
         pipelineValue: number;
     }>;
@@ -117,7 +117,7 @@ export interface PipelineForecastReport {
  * Performance Scorecard Item
  * Comprehensive performance metrics for a single team member
  */
-export interface ScorecardItem {
+export declare class ScorecardItem {
     staffId: string;
     staffName: string;
     wonCount: number;
@@ -128,7 +128,7 @@ export interface ScorecardItem {
     pipelineValue: number;
     closeTime: number;
     responseTime: number;
-    trend: Array<{
+    trend?: Array<{
         period: string;
         winRate: number;
     }>;
@@ -137,7 +137,7 @@ export interface ScorecardItem {
  * Performance Scorecard Report
  * Team-wide performance scorecard with individual metrics
  */
-export interface PerformanceScorecardReport {
+export declare class PerformanceScorecardReport {
     scorecard: ScorecardItem[];
 }
 //# sourceMappingURL=sales-report.types.d.ts.map
