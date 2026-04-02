@@ -8,6 +8,9 @@ export * from './sales-dashboard.dto';
 export * from './ar-transaction.dto';
 export * from './ar-transaction-response.dto';
 export * from './allotment.dto';
+export * from './report-filters.dto';
+export * from './mark-won.dto';
+export * from './mark-lost.dto';
 
 // Sales Lead - re-export from NATS (single source of truth, fix A2)
 export {

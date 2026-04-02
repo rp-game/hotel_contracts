@@ -25,6 +25,9 @@ __exportStar(require("./sales-dashboard.dto"), exports);
 __exportStar(require("./ar-transaction.dto"), exports);
 __exportStar(require("./ar-transaction-response.dto"), exports);
 __exportStar(require("./allotment.dto"), exports);
+__exportStar(require("./report-filters.dto"), exports);
+__exportStar(require("./mark-won.dto"), exports);
+__exportStar(require("./mark-lost.dto"), exports);
 // Sales Lead - re-export from NATS (single source of truth, fix A2)
 var sales_lead_nats_1 = require("../nats/sales-lead.nats");
 Object.defineProperty(exports, "CreateSalesLeadRequest", { enumerable: true, get: function () { return sales_lead_nats_1.CreateSalesLeadRequest; } });
