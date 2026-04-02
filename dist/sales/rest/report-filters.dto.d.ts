@@ -3,6 +3,7 @@
  * Used by sales report endpoints for query parameters
  */
 export declare class ReportFiltersDto {
+    tenantId?: string;
     startDate?: string;
     endDate?: string;
     hotelId?: string;

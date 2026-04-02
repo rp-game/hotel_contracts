@@ -17,12 +17,19 @@ exports.ReportFiltersDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class ReportFiltersDto {
+    tenantId;
     startDate;
     endDate;
     hotelId;
     staffId;
 }
 exports.ReportFiltersDto = ReportFiltersDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID (injected by gateway)', example: 'tenant-001' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ReportFiltersDto.prototype, "tenantId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Report start date in ISO 8601 format',

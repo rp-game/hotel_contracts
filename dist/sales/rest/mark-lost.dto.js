@@ -17,10 +17,24 @@ exports.MarkLostDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class MarkLostDto {
+    tenantId;
+    leadId;
     lossReasonId;
     lostNotes;
 }
 exports.MarkLostDto = MarkLostDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID (injected by gateway)', example: 'tenant-001' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], MarkLostDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales Lead ID (from URL param)', example: '550e8400-e29b-41d4-a716-446655440000' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], MarkLostDto.prototype, "leadId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Loss reason ID from sales_loss_reasons table (UUID)',

@@ -7,6 +7,16 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsUUID, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
 
 export class MarkWonDto {
+  @ApiPropertyOptional({ description: 'Tenant ID (injected by gateway)', example: 'tenant-001' })
+  @IsOptional()
+  @IsString()
+  tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Sales Lead ID (from URL param)', example: '550e8400-e29b-41d4-a716-446655440000' })
+  @IsOptional()
+  @IsUUID()
+  leadId?: string;
+
   @ApiProperty({
     description: 'Booking ID that won the deal (UUID)',
     example: '550e8400-e29b-41d4-a716-446655440000',

@@ -10,4 +10,3 @@ export * from './ar-transaction.nats';
 export * from './sales-lead.nats';
 export * from './sales-commission.nats';
 export * from './allotment.nats';
-export * from './sales-report.nats';

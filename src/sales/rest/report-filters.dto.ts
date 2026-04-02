@@ -4,9 +4,14 @@
  */
 
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsDateString, IsUUID } from 'class-validator';
+import { IsOptional, IsDateString, IsUUID, IsString } from 'class-validator';
 
 export class ReportFiltersDto {
+  @ApiPropertyOptional({ description: 'Tenant ID (injected by gateway)', example: 'tenant-001' })
+  @IsOptional()
+  @IsString()
+  tenantId?: string;
+
   @ApiPropertyOptional({
     description: 'Report start date in ISO 8601 format',
     example: '2026-01-01',

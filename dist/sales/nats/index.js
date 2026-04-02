@@ -26,5 +26,4 @@ __exportStar(require("./ar-transaction.nats"), exports);
 __exportStar(require("./sales-lead.nats"), exports);
 __exportStar(require("./sales-commission.nats"), exports);
 __exportStar(require("./allotment.nats"), exports);
-__exportStar(require("./sales-report.nats"), exports);
 //# sourceMappingURL=index.js.map
