@@ -14,6 +14,7 @@ export declare class CreateEInvoiceItemDto {
     discount?: number;
 }
 export declare class CreateEInvoiceDto {
+    hotelId?: string;
     customerType: CustomerType;
     customerName?: string;
     customerTaxCode?: string;

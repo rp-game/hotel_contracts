@@ -79,6 +79,7 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateEInvoiceItemDto.prototype, "discount", void 0);
 class CreateEInvoiceDto {
+    hotelId;
     customerType;
     customerName;
     customerTaxCode;
@@ -92,6 +93,12 @@ class CreateEInvoiceDto {
     items;
 }
 exports.CreateEInvoiceDto = CreateEInvoiceDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (required for chain-level users who must select a hotel context)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateEInvoiceDto.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Customer type', enum: enums_1.CustomerType }),
     (0, class_validator_1.IsEnum)(enums_1.CustomerType),

@@ -53,6 +53,11 @@ export class CreateEInvoiceItemDto {
 }
 
 export class CreateEInvoiceDto {
+  @ApiPropertyOptional({ description: 'Hotel ID (required for chain-level users who must select a hotel context)' })
+  @IsOptional()
+  @IsString()
+  hotelId?: string;
+
   @ApiProperty({ description: 'Customer type', enum: CustomerType })
   @IsEnum(CustomerType)
   customerType: CustomerType;
