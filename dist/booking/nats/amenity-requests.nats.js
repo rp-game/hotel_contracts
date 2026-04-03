@@ -100,6 +100,7 @@ class CreateAmenityRequestDto {
     tenantId;
     hotelId;
     guestId;
+    bookingId;
     guestName;
     roomNumber;
     amenityType;
@@ -131,6 +132,12 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], CreateAmenityRequestDto.prototype, "guestId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking ID this amenity request is linked to', example: '550e8400-e29b-41d4-a716-446655440003' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateAmenityRequestDto.prototype, "bookingId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Guest name', example: 'John Doe' }),
     (0, class_validator_1.IsString)(),
@@ -221,6 +228,7 @@ class FindAllAmenityRequestsNatsRequest {
     search;
     amenityType;
     assignedTo;
+    bookingId;
     requestCategory;
     startDate;
     endDate;
@@ -274,6 +282,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], FindAllAmenityRequestsNatsRequest.prototype, "assignedTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by booking ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindAllAmenityRequestsNatsRequest.prototype, "bookingId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by request category', enum: SpecialRequestCategory }),
     (0, class_validator_1.IsOptional)(),

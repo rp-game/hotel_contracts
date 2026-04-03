@@ -118,6 +118,7 @@ export declare class CreateAmenityRequestDto {
     tenantId: string;
     hotelId: string;
     guestId?: string;
+    bookingId?: string;
     guestName: string;
     roomNumber: string;
     amenityType: string;
@@ -156,6 +157,7 @@ export declare class FindAllAmenityRequestsNatsRequest {
     search?: string;
     amenityType?: string;
     assignedTo?: string;
+    bookingId?: string;
     requestCategory?: SpecialRequestCategory;
     startDate?: string;
     endDate?: string;

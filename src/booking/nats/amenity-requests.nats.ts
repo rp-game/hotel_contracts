@@ -146,6 +146,11 @@ export class CreateAmenityRequestDto {
   @IsUUID()
   guestId?: string;
 
+  @ApiPropertyOptional({ description: 'Booking ID this amenity request is linked to', example: '550e8400-e29b-41d4-a716-446655440003' })
+  @IsOptional()
+  @IsUUID()
+  bookingId?: string;
+
   @ApiProperty({ description: 'Guest name', example: 'John Doe' })
   @IsString()
   @IsNotEmpty()
@@ -264,6 +269,11 @@ export class FindAllAmenityRequestsNatsRequest {
   @IsOptional()
   @IsString()
   assignedTo?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by booking ID' })
+  @IsOptional()
+  @IsUUID()
+  bookingId?: string;
 
   @ApiPropertyOptional({ description: 'Filter by request category', enum: SpecialRequestCategory })
   @IsOptional()
