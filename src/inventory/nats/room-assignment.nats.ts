@@ -71,7 +71,7 @@ export type AutoAssignBookingsNatsResponse = NatsResponse<AutoAssignBookingsResp
  * Pattern: rooms.assignment.available
  */
 export interface GetAvailableRoomsRequest {
-  roomTypeId: string;
+  roomTypeId?: string;
   hotelId: string;
   checkIn: string; // YYYY-MM-DD
   checkOut: string; // YYYY-MM-DD
