@@ -32,6 +32,7 @@ __exportStar(require("./smart-search.nats"), exports);
 __exportStar(require("./bookings-timeline.nats"), exports);
 __exportStar(require("./timeline-action.nats"), exports);
 __exportStar(require("./timeline-room-details.nats"), exports);
+__exportStar(require("./timeline-weekly.nats"), exports);
 __exportStar(require("./check-in.nats"), exports);
 __exportStar(require("./mobile-checkout.nats"), exports);
 __exportStar(require("./analytics.nats"), exports);

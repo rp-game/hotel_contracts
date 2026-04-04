@@ -16,6 +16,7 @@ export * from './smart-search.nats';
 export * from './bookings-timeline.nats';
 export * from './timeline-action.nats';
 export * from './timeline-room-details.nats';
+export * from './timeline-weekly.nats';
 export * from './check-in.nats';
 export * from './mobile-checkout.nats';
 export * from './analytics.nats';
