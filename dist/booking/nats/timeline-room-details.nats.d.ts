@@ -39,6 +39,7 @@ export interface TimelineBlock {
         childCount?: number;
         specialRequests?: string;
         totalAmount?: number;
+        updatedAt?: string;
     };
 }
 /**
