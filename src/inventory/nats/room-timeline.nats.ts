@@ -92,6 +92,18 @@ export class TimelineEvent {
 
   @ApiPropertyOptional({ description: 'Booking type', enum: ['HOURLY', 'OVERNIGHT'] })
   bookingType?: 'HOURLY' | 'OVERNIGHT';
+
+  @ApiPropertyOptional({ description: 'Booking metadata for timeline rendering' })
+  bookingData?: {
+    checkInTime?: string;
+    checkOutTime?: string;
+    actualCheckInTime?: string;
+    bookingCode?: string;
+    totalAmount?: number;
+    specialRequests?: string;
+    updatedAt?: string;
+    roomTypeId?: string;
+  };
 }
 
 export interface BookingTimelineItem {

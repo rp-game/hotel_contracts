@@ -62,6 +62,16 @@ export declare class TimelineEvent {
     guestCount?: number;
     specialRequests?: string;
     bookingType?: 'HOURLY' | 'OVERNIGHT';
+    bookingData?: {
+        checkInTime?: string;
+        checkOutTime?: string;
+        actualCheckInTime?: string;
+        bookingCode?: string;
+        totalAmount?: number;
+        specialRequests?: string;
+        updatedAt?: string;
+        roomTypeId?: string;
+    };
 }
 export interface BookingTimelineItem {
     id: string;

@@ -59,6 +59,7 @@ class TimelineEvent {
     guestCount;
     specialRequests;
     bookingType;
+    bookingData;
 }
 exports.TimelineEvent = TimelineEvent;
 __decorate([
@@ -109,6 +110,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Booking type', enum: ['HOURLY', 'OVERNIGHT'] }),
     __metadata("design:type", String)
 ], TimelineEvent.prototype, "bookingType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking metadata for timeline rendering' }),
+    __metadata("design:type", Object)
+], TimelineEvent.prototype, "bookingData", void 0);
 /**
  * Room Timeline Item DTO
  * Shared DTO for both NATS messages and REST API responses
