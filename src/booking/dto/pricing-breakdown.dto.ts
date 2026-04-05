@@ -145,12 +145,6 @@ export class PricingBreakdownDto {
   nights: number;
 
   @ApiProperty({
-    description: 'List of applied pricing rules',
-    example: ['SEASONAL', 'ADVANCE_BOOKING', 'LOS'],
-  })
-  appliedRules: string[];
-
-  @ApiProperty({
     description: 'Final calculated price in VND',
     example: 2736000,
   })

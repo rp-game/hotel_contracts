@@ -213,7 +213,6 @@ __decorate([
 ], RoomPricingEntryDto.prototype, "breakdown", void 0);
 class PricingBreakdownDto {
     nights;
-    appliedRules;
     finalPrice;
     currency;
     calculatedAt;
@@ -229,13 +228,6 @@ __decorate([
     }),
     __metadata("design:type", Number)
 ], PricingBreakdownDto.prototype, "nights", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'List of applied pricing rules',
-        example: ['SEASONAL', 'ADVANCE_BOOKING', 'LOS'],
-    }),
-    __metadata("design:type", Array)
-], PricingBreakdownDto.prototype, "appliedRules", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Final calculated price in VND',

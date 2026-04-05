@@ -48,7 +48,6 @@ export declare class RoomPricingEntryDto {
 }
 export declare class PricingBreakdownDto {
     nights: number;
-    appliedRules: string[];
     finalPrice: number;
     currency: string;
     calculatedAt: Date;
