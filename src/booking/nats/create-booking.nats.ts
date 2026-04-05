@@ -185,6 +185,11 @@ export interface CreateBookingRequest {
        * Total room units
        */
       totalUnits: number;
+
+      /**
+       * Rate plan ID for this room (optional, overrides booking-level ratePlanId)
+       */
+      ratePlanId?: string;
     }>;
   };
 
