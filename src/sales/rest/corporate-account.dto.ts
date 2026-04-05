@@ -17,9 +17,14 @@ import {
   MaxLength,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { CorporateAccountStatus, ContractStatus } from '../enums/sales.enum';
+import { CorporateAccountStatus, CorporateAccountType, ContractStatus } from '../enums/sales.enum';
 
 export class CreateCorporateAccountDto {
+  @ApiPropertyOptional({ description: 'Account type', enum: CorporateAccountType, default: CorporateAccountType.CORPORATE })
+  @IsOptional()
+  @IsEnum(CorporateAccountType)
+  accountType?: CorporateAccountType;
+
   @ApiProperty({ description: 'Company name', example: 'Vingroup JSC' })
   @IsString()
   @MaxLength(200)
@@ -143,6 +148,11 @@ export class CreateCorporateAccountDto {
 }
 
 export class UpdateCorporateAccountDto {
+  @ApiPropertyOptional({ description: 'Account type', enum: CorporateAccountType })
+  @IsOptional()
+  @IsEnum(CorporateAccountType)
+  accountType?: CorporateAccountType;
+
   @ApiPropertyOptional({ description: 'Company name' })
   @IsOptional()
   @IsString()
@@ -276,6 +286,11 @@ export class FindCorporateAccountsQueryDto {
   @IsOptional()
   @IsString()
   search?: string;
+
+  @ApiPropertyOptional({ description: 'Filter by account type', enum: CorporateAccountType })
+  @IsOptional()
+  @IsEnum(CorporateAccountType)
+  accountType?: CorporateAccountType;
 
   @ApiPropertyOptional({ description: 'Filter by status', enum: CorporateAccountStatus })
   @IsOptional()

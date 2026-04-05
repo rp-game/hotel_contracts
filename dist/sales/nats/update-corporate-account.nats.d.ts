@@ -10,6 +10,7 @@ import { CorporateAccountStatus } from '../enums/sales.enum';
 export interface UpdateCorporateAccountNatsRequest {
     tenantId: string;
     corporateAccountId: string;
+    accountType?: string;
     companyName?: string;
     industry?: string;
     taxCode?: string;

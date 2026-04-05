@@ -2,6 +2,11 @@
  * Sales Domain Enums
  */
 
+export enum CorporateAccountType {
+  CORPORATE = 'CORPORATE',
+  INDIVIDUAL = 'INDIVIDUAL',
+}
+
 export enum CorporateAccountStatus {
   ACTIVE = 'ACTIVE',
   INACTIVE = 'INACTIVE',

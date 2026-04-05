@@ -66,6 +66,7 @@ export interface CheckOutBookingNatsRequest {
     finalBillAmount?: string | number;
     paymentMethod?: string;
     paymentAmount?: number;
+    corporateAccountId?: string;
     billItems?: BillItem[];
 }
 export type CheckOutBookingNatsResponse = NatsResponse<BookingResponseDto>;

@@ -3,7 +3,12 @@
  * Sales Domain Enums
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SalesCommissionAppliesTo = exports.LeadStage = exports.LeadSource = exports.SalesActivityType = exports.ContractStatus = exports.ARTransactionType = exports.CorporateAccountStatus = void 0;
+exports.SalesCommissionAppliesTo = exports.LeadStage = exports.LeadSource = exports.SalesActivityType = exports.ContractStatus = exports.ARTransactionType = exports.CorporateAccountStatus = exports.CorporateAccountType = void 0;
+var CorporateAccountType;
+(function (CorporateAccountType) {
+    CorporateAccountType["CORPORATE"] = "CORPORATE";
+    CorporateAccountType["INDIVIDUAL"] = "INDIVIDUAL";
+})(CorporateAccountType || (exports.CorporateAccountType = CorporateAccountType = {}));
 var CorporateAccountStatus;
 (function (CorporateAccountStatus) {
     CorporateAccountStatus["ACTIVE"] = "ACTIVE";

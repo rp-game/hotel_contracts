@@ -79,6 +79,7 @@ export interface CheckOutBookingNatsRequest {
   finalBillAmount?: string | number;
   paymentMethod?: string;
   paymentAmount?: number;
+  corporateAccountId?: string; // Required when paymentMethod = COMPANY_ACCOUNT
   billItems?: BillItem[];
 }
 

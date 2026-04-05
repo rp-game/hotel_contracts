@@ -9,6 +9,7 @@ import { NatsResponse } from '../../common/nats-response.interface';
 export interface FindCorporateAccountsNatsRequest {
     tenantId: string;
     search?: string;
+    accountType?: string;
     status?: string;
     salesPersonId?: string;
     page?: number;

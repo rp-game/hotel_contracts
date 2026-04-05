@@ -19,6 +19,7 @@ const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 const sales_enum_1 = require("../enums/sales.enum");
 class CreateCorporateAccountDto {
+    accountType;
     companyName;
     industry;
     taxCode;
@@ -42,6 +43,12 @@ class CreateCorporateAccountDto {
     renewalReminderDays;
 }
 exports.CreateCorporateAccountDto = CreateCorporateAccountDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Account type', enum: sales_enum_1.CorporateAccountType, default: sales_enum_1.CorporateAccountType.CORPORATE }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(sales_enum_1.CorporateAccountType),
+    __metadata("design:type", String)
+], CreateCorporateAccountDto.prototype, "accountType", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Company name', example: 'Vingroup JSC' }),
     (0, class_validator_1.IsString)(),
@@ -185,6 +192,7 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateCorporateAccountDto.prototype, "renewalReminderDays", void 0);
 class UpdateCorporateAccountDto {
+    accountType;
     companyName;
     industry;
     taxCode;
@@ -209,6 +217,12 @@ class UpdateCorporateAccountDto {
     renewalReminderDays;
 }
 exports.UpdateCorporateAccountDto = UpdateCorporateAccountDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Account type', enum: sales_enum_1.CorporateAccountType }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(sales_enum_1.CorporateAccountType),
+    __metadata("design:type", String)
+], UpdateCorporateAccountDto.prototype, "accountType", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Company name' }),
     (0, class_validator_1.IsOptional)(),
@@ -360,6 +374,7 @@ __decorate([
 ], UpdateCorporateAccountDto.prototype, "renewalReminderDays", void 0);
 class FindCorporateAccountsQueryDto {
     search;
+    accountType;
     status;
     salesPersonId;
     page;
@@ -374,6 +389,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], FindCorporateAccountsQueryDto.prototype, "search", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by account type', enum: sales_enum_1.CorporateAccountType }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(sales_enum_1.CorporateAccountType),
+    __metadata("design:type", String)
+], FindCorporateAccountsQueryDto.prototype, "accountType", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by status', enum: sales_enum_1.CorporateAccountStatus }),
     (0, class_validator_1.IsOptional)(),

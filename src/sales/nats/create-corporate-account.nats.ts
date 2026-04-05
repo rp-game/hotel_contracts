@@ -13,6 +13,7 @@ import { NatsResponse } from '../../common/nats-response.interface';
  */
 export interface CreateCorporateAccountNatsRequest {
   tenantId: string;
+  accountType?: string; // 'CORPORATE' | 'INDIVIDUAL', default 'CORPORATE'
   companyName: string;
   industry?: string;
   taxCode?: string;
