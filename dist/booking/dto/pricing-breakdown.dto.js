@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookingPricingBreakdownResponseDto = exports.PricingBreakdownDto = exports.RatePlanAdjustmentDto = exports.RatePlanSnapshotDto = exports.PricingBreakdownDetailDto = void 0;
+exports.BookingPricingBreakdownResponseDto = exports.PricingBreakdownDto = exports.RoomPricingEntryDto = exports.RatePlanAdjustmentDto = exports.RatePlanSnapshotDto = exports.PricingBreakdownDetailDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 class PricingBreakdownDetailDto {
     baseAmount;
@@ -178,24 +178,50 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total after rate plan adjustment', example: 3240000 }),
     __metadata("design:type", Number)
 ], RatePlanAdjustmentDto.prototype, "adjustedTotal", void 0);
-class PricingBreakdownDto {
+class RoomPricingEntryDto {
+    roomTypeId;
+    roomTypeName;
     baseRate;
+    calculatedRate;
+    quantity;
+    breakdown;
+}
+exports.RoomPricingEntryDto = RoomPricingEntryDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type ID', format: 'uuid' }),
+    __metadata("design:type", String)
+], RoomPricingEntryDto.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type name' }),
+    __metadata("design:type", String)
+], RoomPricingEntryDto.prototype, "roomTypeName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Base rate per unit in VND', example: 1200000 }),
+    __metadata("design:type", Number)
+], RoomPricingEntryDto.prototype, "baseRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Calculated rate after adjustments', example: 1080000 }),
+    __metadata("design:type", Number)
+], RoomPricingEntryDto.prototype, "calculatedRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of rooms of this type', example: 1 }),
+    __metadata("design:type", Number)
+], RoomPricingEntryDto.prototype, "quantity", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Detailed breakdown', type: PricingBreakdownDetailDto }),
+    __metadata("design:type", PricingBreakdownDetailDto)
+], RoomPricingEntryDto.prototype, "breakdown", void 0);
+class PricingBreakdownDto {
     nights;
     appliedRules;
-    breakdown;
     finalPrice;
+    currency;
     calculatedAt;
+    rooms;
     ratePlanSnapshot;
     ratePlanAdjustment;
 }
 exports.PricingBreakdownDto = PricingBreakdownDto;
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Base rate per night in VND',
-        example: 1200000,
-    }),
-    __metadata("design:type", Number)
-], PricingBreakdownDto.prototype, "baseRate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Number of nights',
@@ -212,13 +238,6 @@ __decorate([
 ], PricingBreakdownDto.prototype, "appliedRules", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Detailed breakdown of each pricing component',
-        type: PricingBreakdownDetailDto,
-    }),
-    __metadata("design:type", PricingBreakdownDetailDto)
-], PricingBreakdownDto.prototype, "breakdown", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
         description: 'Final calculated price in VND',
         example: 2736000,
     }),
@@ -226,11 +245,25 @@ __decorate([
 ], PricingBreakdownDto.prototype, "finalPrice", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
+        description: 'Currency code',
+        example: 'VND',
+    }),
+    __metadata("design:type", String)
+], PricingBreakdownDto.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
         description: 'Timestamp when price was calculated',
         example: '2026-02-24T10:30:00Z',
     }),
     __metadata("design:type", Date)
 ], PricingBreakdownDto.prototype, "calculatedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Per-room pricing breakdown',
+        type: [RoomPricingEntryDto],
+    }),
+    __metadata("design:type", Array)
+], PricingBreakdownDto.prototype, "rooms", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Snapshot of rate plan applied at booking time',

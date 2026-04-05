@@ -38,13 +38,21 @@ export declare class RatePlanAdjustmentDto {
     originalTotal: number;
     adjustedTotal: number;
 }
-export declare class PricingBreakdownDto {
+export declare class RoomPricingEntryDto {
+    roomTypeId: string;
+    roomTypeName: string;
     baseRate: number;
+    calculatedRate: number;
+    quantity: number;
+    breakdown?: PricingBreakdownDetailDto;
+}
+export declare class PricingBreakdownDto {
     nights: number;
     appliedRules: string[];
-    breakdown: PricingBreakdownDetailDto;
     finalPrice: number;
+    currency: string;
     calculatedAt: Date;
+    rooms: RoomPricingEntryDto[];
     ratePlanSnapshot?: RatePlanSnapshotDto;
     ratePlanAdjustment?: RatePlanAdjustmentDto;
 }

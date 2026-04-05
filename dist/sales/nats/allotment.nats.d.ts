@@ -91,6 +91,7 @@ export interface CheckAllotmentAvailabilityNatsRequest {
     partnerType: string;
     roomTypeId: string;
     stayDates: string[];
+    quantity?: number;
 }
 export interface GetAllotmentSummaryNatsRequest {
     tenantId: string;

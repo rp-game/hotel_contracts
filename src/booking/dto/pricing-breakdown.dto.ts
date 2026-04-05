@@ -117,13 +117,27 @@ export class RatePlanAdjustmentDto {
   adjustedTotal: number;
 }
 
-export class PricingBreakdownDto {
-  @ApiProperty({
-    description: 'Base rate per night in VND',
-    example: 1200000,
-  })
+export class RoomPricingEntryDto {
+  @ApiProperty({ description: 'Room type ID', format: 'uuid' })
+  roomTypeId: string;
+
+  @ApiProperty({ description: 'Room type name' })
+  roomTypeName: string;
+
+  @ApiProperty({ description: 'Base rate per unit in VND', example: 1200000 })
   baseRate: number;
 
+  @ApiProperty({ description: 'Calculated rate after adjustments', example: 1080000 })
+  calculatedRate: number;
+
+  @ApiProperty({ description: 'Number of rooms of this type', example: 1 })
+  quantity: number;
+
+  @ApiPropertyOptional({ description: 'Detailed breakdown', type: PricingBreakdownDetailDto })
+  breakdown?: PricingBreakdownDetailDto;
+}
+
+export class PricingBreakdownDto {
   @ApiProperty({
     description: 'Number of nights',
     example: 3,
@@ -137,22 +151,28 @@ export class PricingBreakdownDto {
   appliedRules: string[];
 
   @ApiProperty({
-    description: 'Detailed breakdown of each pricing component',
-    type: PricingBreakdownDetailDto,
-  })
-  breakdown: PricingBreakdownDetailDto;
-
-  @ApiProperty({
     description: 'Final calculated price in VND',
     example: 2736000,
   })
   finalPrice: number;
 
   @ApiProperty({
+    description: 'Currency code',
+    example: 'VND',
+  })
+  currency: string;
+
+  @ApiProperty({
     description: 'Timestamp when price was calculated',
     example: '2026-02-24T10:30:00Z',
   })
   calculatedAt: Date;
+
+  @ApiProperty({
+    description: 'Per-room pricing breakdown',
+    type: [RoomPricingEntryDto],
+  })
+  rooms: RoomPricingEntryDto[];
 
   @ApiPropertyOptional({
     description: 'Snapshot of rate plan applied at booking time',
