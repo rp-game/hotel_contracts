@@ -105,6 +105,20 @@ class UpdateBookingDto {
      */
     metadata;
     requestInvoice;
+    /**
+     * Pricing mode when dates change:
+     * - 'keep_rate_plan': recalculate using original rate plan (default)
+     * - 'custom_rate_plan': use a different rate plan for new dates
+     */
+    pricingMode;
+    /**
+     * Rate plan ID to use when pricingMode = 'custom_rate_plan'
+     */
+    newRatePlanId;
+    /**
+     * Whether to keep applying original promotion to new dates
+     */
+    keepPromotion;
 }
 exports.UpdateBookingDto = UpdateBookingDto;
 __decorate([
@@ -279,4 +293,31 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], UpdateBookingDto.prototype, "requestInvoice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Pricing recalculation mode when dates change',
+        enum: ['keep_rate_plan', 'custom_rate_plan'],
+        example: 'keep_rate_plan',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateBookingDto.prototype, "pricingMode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Rate plan ID for custom pricing (when pricingMode = custom_rate_plan)',
+        example: '550e8400-e29b-41d4-a716-446655440010',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateBookingDto.prototype, "newRatePlanId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Keep original promotion applied to new dates',
+        example: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], UpdateBookingDto.prototype, "keepPromotion", void 0);
 //# sourceMappingURL=update-booking.nats.js.map

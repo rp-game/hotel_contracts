@@ -129,6 +129,20 @@ export declare class UpdateBookingDto {
      */
     metadata?: Record<string, any>;
     requestInvoice?: boolean;
+    /**
+     * Pricing mode when dates change:
+     * - 'keep_rate_plan': recalculate using original rate plan (default)
+     * - 'custom_rate_plan': use a different rate plan for new dates
+     */
+    pricingMode?: 'keep_rate_plan' | 'custom_rate_plan';
+    /**
+     * Rate plan ID to use when pricingMode = 'custom_rate_plan'
+     */
+    newRatePlanId?: string;
+    /**
+     * Whether to keep applying original promotion to new dates
+     */
+    keepPromotion?: boolean;
 }
 /**
  * NATS response containing updated booking

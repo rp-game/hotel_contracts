@@ -274,6 +274,41 @@ export class UpdateBookingDto {
   @ApiPropertyOptional({ description: 'Request VAT invoice on checkout' })
   @IsOptional()
   requestInvoice?: boolean;
+
+  /**
+   * Pricing mode when dates change:
+   * - 'keep_rate_plan': recalculate using original rate plan (default)
+   * - 'custom_rate_plan': use a different rate plan for new dates
+   */
+  @ApiPropertyOptional({
+    description: 'Pricing recalculation mode when dates change',
+    enum: ['keep_rate_plan', 'custom_rate_plan'],
+    example: 'keep_rate_plan',
+  })
+  @IsOptional()
+  @IsString()
+  pricingMode?: 'keep_rate_plan' | 'custom_rate_plan';
+
+  /**
+   * Rate plan ID to use when pricingMode = 'custom_rate_plan'
+   */
+  @ApiPropertyOptional({
+    description: 'Rate plan ID for custom pricing (when pricingMode = custom_rate_plan)',
+    example: '550e8400-e29b-41d4-a716-446655440010',
+  })
+  @IsOptional()
+  @IsUUID()
+  newRatePlanId?: string;
+
+  /**
+   * Whether to keep applying original promotion to new dates
+   */
+  @ApiPropertyOptional({
+    description: 'Keep original promotion applied to new dates',
+    example: false,
+  })
+  @IsOptional()
+  keepPromotion?: boolean;
 }
 
 /**
