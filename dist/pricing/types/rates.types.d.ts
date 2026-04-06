@@ -240,6 +240,10 @@ export declare class CalculateRateRequestDto extends PricingRequestBaseDto {
     bookingType?: 'OVERNIGHT' | 'HOURLY';
     startTime?: string;
     endTime?: string;
+    taxConfiguration?: {
+        vatRate: number;
+        serviceChargeRate: number;
+    };
 }
 /**
  * Update rate request (for specific date)

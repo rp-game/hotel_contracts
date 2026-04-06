@@ -566,6 +566,13 @@ export class CalculateRateRequestDto extends PricingRequestBaseDto {
   @IsOptional()
   @IsString()
   endTime?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel tax configuration (injected by API gateway)', example: { vatRate: 8, serviceChargeRate: 5 } })
+  @IsOptional()
+  taxConfiguration?: {
+    vatRate: number;
+    serviceChargeRate: number;
+  };
 }
 
 /**

@@ -757,6 +757,7 @@ class CalculateRateRequestDto extends PricingRequestBaseDto {
     bookingType;
     startTime;
     endTime;
+    taxConfiguration;
 }
 exports.CalculateRateRequestDto = CalculateRateRequestDto;
 __decorate([
@@ -811,6 +812,11 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CalculateRateRequestDto.prototype, "endTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel tax configuration (injected by API gateway)', example: { vatRate: 8, serviceChargeRate: 5 } }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], CalculateRateRequestDto.prototype, "taxConfiguration", void 0);
 /**
  * Update rate request (for specific date)
  */
