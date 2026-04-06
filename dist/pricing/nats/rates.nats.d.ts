@@ -91,6 +91,10 @@ export declare class CalculateRateForPlansRequest {
     guests?: number;
     ratePlanIds: string[];
     source?: string;
+    taxConfiguration?: {
+        vatRate: number;
+        serviceChargeRate: number;
+    };
 }
 export declare class CalculateRateForPlanItem {
     ratePlanId: string;

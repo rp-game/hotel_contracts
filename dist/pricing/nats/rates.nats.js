@@ -112,6 +112,7 @@ class CalculateRateForPlansRequest {
     guests;
     ratePlanIds;
     source;
+    taxConfiguration;
 }
 exports.CalculateRateForPlansRequest = CalculateRateForPlansRequest;
 __decorate([
@@ -146,6 +147,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Booking source', example: 'DIRECT' }),
     __metadata("design:type", String)
 ], CalculateRateForPlansRequest.prototype, "source", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel tax configuration (injected by API gateway)', example: { vatRate: 8, serviceChargeRate: 5 } }),
+    __metadata("design:type", Object)
+], CalculateRateForPlansRequest.prototype, "taxConfiguration", void 0);
 class CalculateRateForPlanItem {
     ratePlanId;
     ratePlanName;

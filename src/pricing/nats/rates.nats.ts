@@ -141,6 +141,12 @@ export class CalculateRateForPlansRequest {
 
   @ApiPropertyOptional({ description: 'Booking source', example: 'DIRECT' })
   source?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel tax configuration (injected by API gateway)', example: { vatRate: 8, serviceChargeRate: 5 } })
+  taxConfiguration?: {
+    vatRate: number;
+    serviceChargeRate: number;
+  };
 }
 
 export class CalculateRateForPlanItem {
