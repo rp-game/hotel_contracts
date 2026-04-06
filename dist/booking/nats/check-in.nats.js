@@ -141,11 +141,11 @@ __decorate([
     __metadata("design:type", String)
 ], PendingCheckinBooking.prototype, "estimatedCheckOutTime", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Early check-in fee captured at booking creation (will be posted to folio on check-in)', required: false }),
+    (0, swagger_1.ApiProperty)({ description: 'Early check-in fee captured at booking creation (will be posted to folio on check-in)', required: false, type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], PendingCheckinBooking.prototype, "earlyCheckInFee", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Late check-out fee captured at booking creation (will be posted to folio on check-in)', required: false }),
+    (0, swagger_1.ApiProperty)({ description: 'Late check-out fee captured at booking creation (will be posted to folio on check-in)', required: false, type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], PendingCheckinBooking.prototype, "lateCheckOutFee", void 0);
 /**

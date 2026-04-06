@@ -171,10 +171,10 @@ export class PendingCheckinBooking {
   @ApiProperty({ description: 'Estimated check-out time (ISO 8601 format)', required: false })
   estimatedCheckOutTime?: string;
 
-  @ApiProperty({ description: 'Early check-in fee captured at booking creation (will be posted to folio on check-in)', required: false })
+  @ApiProperty({ description: 'Early check-in fee captured at booking creation (will be posted to folio on check-in)', required: false, type: Number, nullable: true })
   earlyCheckInFee?: number | null;
 
-  @ApiProperty({ description: 'Late check-out fee captured at booking creation (will be posted to folio on check-in)', required: false })
+  @ApiProperty({ description: 'Late check-out fee captured at booking creation (will be posted to folio on check-in)', required: false, type: Number, nullable: true })
   lateCheckOutFee?: number | null;
 }
 
