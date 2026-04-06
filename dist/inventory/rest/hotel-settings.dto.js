@@ -22,6 +22,7 @@ class TaxConfigurationDto {
     vatRate;
     serviceChargeRate;
     taxDisplayMode;
+    priceInputMode;
 }
 exports.TaxConfigurationDto = TaxConfigurationDto;
 __decorate([
@@ -60,6 +61,17 @@ __decorate([
     (0, class_validator_1.IsEnum)(['inclusive', 'exclusive']),
     __metadata("design:type", String)
 ], TaxConfigurationDto.prototype, "taxDisplayMode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        enum: ['pre_tax', 'post_tax'],
+        description: 'How prices are inputted: pre_tax means staff enter net price (tax calculated on top), post_tax means staff enter gross price (system back-calculates net before storing)',
+        example: 'pre_tax',
+        default: 'pre_tax',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(['pre_tax', 'post_tax']),
+    __metadata("design:type", String)
+], TaxConfigurationDto.prototype, "priceInputMode", void 0);
 /**
  * Single shift time range definition
  */

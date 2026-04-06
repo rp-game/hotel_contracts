@@ -7,6 +7,7 @@ export declare class TaxConfigurationDto {
     vatRate?: number;
     serviceChargeRate?: number;
     taxDisplayMode?: 'inclusive' | 'exclusive';
+    priceInputMode?: 'pre_tax' | 'post_tax';
 }
 /**
  * Single shift time range definition

@@ -40,6 +40,16 @@ export class TaxConfigurationDto {
   @IsOptional()
   @IsEnum(['inclusive', 'exclusive'])
   taxDisplayMode?: 'inclusive' | 'exclusive';
+
+  @ApiPropertyOptional({
+    enum: ['pre_tax', 'post_tax'],
+    description: 'How prices are inputted: pre_tax means staff enter net price (tax calculated on top), post_tax means staff enter gross price (system back-calculates net before storing)',
+    example: 'pre_tax',
+    default: 'pre_tax',
+  })
+  @IsOptional()
+  @IsEnum(['pre_tax', 'post_tax'])
+  priceInputMode?: 'pre_tax' | 'post_tax';
 }
 
 /**
