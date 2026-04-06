@@ -43,6 +43,8 @@ var ServiceCategory;
     ServiceCategory["WELLNESS"] = "WELLNESS";
     ServiceCategory["TOURS"] = "TOURS";
     ServiceCategory["OTHER"] = "OTHER";
+    ServiceCategory["EARLY_CHECKIN"] = "EARLY_CHECKIN";
+    ServiceCategory["LATE_CHECKOUT"] = "LATE_CHECKOUT";
 })(ServiceCategory || (exports.ServiceCategory = ServiceCategory = {}));
 /**
  * Booking Service Status Enum

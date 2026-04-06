@@ -16,9 +16,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AddServiceNatsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const services_nats_1 = require("./services.nats");
 class AddServiceNatsRequest {
     bookingId;
     serviceId;
+    serviceCategory;
     serviceName;
     quantity;
     unitPrice;
@@ -36,10 +38,17 @@ __decorate([
     __metadata("design:type", String)
 ], AddServiceNatsRequest.prototype, "bookingId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Service ID', format: 'uuid' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service ID (omit for ad-hoc charges like early check-in/late check-out)', format: 'uuid' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], AddServiceNatsRequest.prototype, "serviceId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service category (for ad-hoc charges without serviceId)', enum: services_nats_1.ServiceCategory }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(services_nats_1.ServiceCategory),
+    __metadata("design:type", String)
+], AddServiceNatsRequest.prototype, "serviceCategory", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Service name for display in booking folio' }),
     (0, class_validator_1.IsOptional)(),

@@ -32,6 +32,8 @@ export enum ServiceCategory {
   WELLNESS = 'WELLNESS',
   TOURS = 'TOURS',
   OTHER = 'OTHER',
+  EARLY_CHECKIN = 'EARLY_CHECKIN',
+  LATE_CHECKOUT = 'LATE_CHECKOUT',
 }
 
 /**

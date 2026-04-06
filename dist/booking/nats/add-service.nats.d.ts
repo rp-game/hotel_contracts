@@ -2,10 +2,12 @@
  * Add Service to Booking NATS Contracts
  * Pattern: booking.add_service
  */
+import { ServiceCategory } from './services.nats';
 import { NatsResponse } from '../../common';
 export declare class AddServiceNatsRequest {
     bookingId: string;
-    serviceId: string;
+    serviceId?: string;
+    serviceCategory?: ServiceCategory;
     serviceName?: string;
     quantity: number;
     unitPrice?: number;

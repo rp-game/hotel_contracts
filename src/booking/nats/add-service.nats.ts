@@ -4,7 +4,8 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNumber, IsOptional, IsUUID, Min } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsUUID, IsEnum, Min } from 'class-validator';
+import { ServiceCategory } from './services.nats';
 import { NatsResponse } from '../../common';
 
 export class AddServiceNatsRequest {
@@ -12,9 +13,15 @@ export class AddServiceNatsRequest {
   @IsUUID()
   bookingId: string;
 
-  @ApiProperty({ description: 'Service ID', format: 'uuid' })
+  @ApiPropertyOptional({ description: 'Service ID (omit for ad-hoc charges like early check-in/late check-out)', format: 'uuid' })
+  @IsOptional()
   @IsUUID()
-  serviceId: string;
+  serviceId?: string;
+
+  @ApiPropertyOptional({ description: 'Service category (for ad-hoc charges without serviceId)', enum: ServiceCategory })
+  @IsOptional()
+  @IsEnum(ServiceCategory)
+  serviceCategory?: ServiceCategory;
 
   @ApiPropertyOptional({ description: 'Service name for display in booking folio' })
   @IsOptional()
