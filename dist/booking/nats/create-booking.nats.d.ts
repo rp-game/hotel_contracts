@@ -226,6 +226,22 @@ export interface CreateBookingRequest {
      */
     requestInvoice?: boolean;
     /**
+     * Requested check-in time override (ISO string). When provided, overrides hotel default.
+     */
+    estimatedCheckInTime?: string;
+    /**
+     * Requested check-out time override (ISO string). When provided, overrides hotel default.
+     */
+    estimatedCheckOutTime?: string;
+    /**
+     * Early check-in fee entered by receptionist (VND). Stored in additionalCharges.
+     */
+    earlyCheckInFee?: number;
+    /**
+     * Late check-out fee entered by receptionist (VND). Stored in additionalCharges.
+     */
+    lateCheckOutFee?: number;
+    /**
      * Additional metadata
      */
     metadata?: Record<string, any>;
