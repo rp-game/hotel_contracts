@@ -43,6 +43,9 @@ class PendingCheckinBooking {
     loyaltyPoints;
     loyaltyTier;
     customerId;
+    estimatedCheckOutTime;
+    earlyCheckInFee;
+    lateCheckOutFee;
 }
 exports.PendingCheckinBooking = PendingCheckinBooking;
 __decorate([
@@ -133,6 +136,18 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'CRM Customer ID (UUID) — used to lookup guest profile', required: false }),
     __metadata("design:type", String)
 ], PendingCheckinBooking.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Estimated check-out time (ISO 8601 format)', required: false }),
+    __metadata("design:type", String)
+], PendingCheckinBooking.prototype, "estimatedCheckOutTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Early check-in fee captured at booking creation (will be posted to folio on check-in)', required: false }),
+    __metadata("design:type", Object)
+], PendingCheckinBooking.prototype, "earlyCheckInFee", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Late check-out fee captured at booking creation (will be posted to folio on check-in)', required: false }),
+    __metadata("design:type", Object)
+], PendingCheckinBooking.prototype, "lateCheckOutFee", void 0);
 /**
  * Pending Check-ins List Response Data
  */

@@ -167,6 +167,15 @@ export class PendingCheckinBooking {
 
   @ApiProperty({ description: 'CRM Customer ID (UUID) — used to lookup guest profile', required: false })
   customerId?: string;
+
+  @ApiProperty({ description: 'Estimated check-out time (ISO 8601 format)', required: false })
+  estimatedCheckOutTime?: string;
+
+  @ApiProperty({ description: 'Early check-in fee captured at booking creation (will be posted to folio on check-in)', required: false })
+  earlyCheckInFee?: number | null;
+
+  @ApiProperty({ description: 'Late check-out fee captured at booking creation (will be posted to folio on check-in)', required: false })
+  lateCheckOutFee?: number | null;
 }
 
 /**
