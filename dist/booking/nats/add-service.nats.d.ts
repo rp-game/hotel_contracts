@@ -21,7 +21,7 @@ export declare class AddServiceNatsRequest {
 export interface ServiceData {
     id: string;
     bookingId: string;
-    serviceId: string;
+    serviceId?: string | null;
     quantity: number;
     unitPrice?: number;
     notes?: string;

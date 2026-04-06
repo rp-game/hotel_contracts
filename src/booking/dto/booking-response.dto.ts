@@ -105,8 +105,8 @@ export class BookingServiceResponseDto {
   @ApiProperty({ description: 'Service ID' })
   id: string;
 
-  @ApiProperty({ description: 'Service ID reference' })
-  serviceId: string;
+  @ApiPropertyOptional({ description: 'Service ID reference (null for ad-hoc charges)' })
+  serviceId?: string | null;
 
   @ApiProperty({ description: 'Service name' })
   serviceName: string;

@@ -47,7 +47,7 @@ export declare class BookingPaymentResponseDto {
 }
 export declare class BookingServiceResponseDto {
     id: string;
-    serviceId: string;
+    serviceId?: string | null;
     serviceName: string;
     quantity: number;
     price: number;

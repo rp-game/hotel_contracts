@@ -188,8 +188,8 @@ __decorate([
     __metadata("design:type", String)
 ], BookingServiceResponseDto.prototype, "id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Service ID reference' }),
-    __metadata("design:type", String)
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service ID reference (null for ad-hoc charges)' }),
+    __metadata("design:type", Object)
 ], BookingServiceResponseDto.prototype, "serviceId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Service name' }),
