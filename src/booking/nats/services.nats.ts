@@ -34,6 +34,7 @@ export enum ServiceCategory {
   OTHER = 'OTHER',
   EARLY_CHECKIN = 'EARLY_CHECKIN',
   LATE_CHECKOUT = 'LATE_CHECKOUT',
+  ROOM_EXTENSION = 'ROOM_EXTENSION',
 }
 
 /**

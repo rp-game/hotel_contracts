@@ -28,7 +28,8 @@ export declare enum ServiceCategory {
     TOURS = "TOURS",
     OTHER = "OTHER",
     EARLY_CHECKIN = "EARLY_CHECKIN",
-    LATE_CHECKOUT = "LATE_CHECKOUT"
+    LATE_CHECKOUT = "LATE_CHECKOUT",
+    ROOM_EXTENSION = "ROOM_EXTENSION"
 }
 /**
  * Booking Service Status Enum
