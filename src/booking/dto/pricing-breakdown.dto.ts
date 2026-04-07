@@ -179,6 +179,30 @@ export class PricingBreakdownDto {
     type: RatePlanAdjustmentDto,
   })
   ratePlanAdjustment?: RatePlanAdjustmentDto;
+
+  @ApiPropertyOptional({
+    description: 'Early check-in fee (net, no tax). Folded into booking grossAmount.',
+    example: 200000,
+  })
+  earlyCheckInFee?: number;
+
+  @ApiPropertyOptional({
+    description: 'Late check-out fee (net, no tax). Folded into booking grossAmount.',
+    example: 300000,
+  })
+  lateCheckOutFee?: number;
+
+  @ApiPropertyOptional({
+    description: 'Additional charges accumulated on the booking (net, no tax).',
+    example: 0,
+  })
+  additionalCharges?: number;
+
+  @ApiPropertyOptional({
+    description: 'Sum of earlyCheckInFee + lateCheckOutFee + additionalCharges.',
+    example: 500000,
+  })
+  feeTotal?: number;
 }
 
 export class BookingPricingBreakdownResponseDto {

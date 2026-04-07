@@ -219,6 +219,10 @@ class PricingBreakdownDto {
     rooms;
     ratePlanSnapshot;
     ratePlanAdjustment;
+    earlyCheckInFee;
+    lateCheckOutFee;
+    additionalCharges;
+    feeTotal;
 }
 exports.PricingBreakdownDto = PricingBreakdownDto;
 __decorate([
@@ -270,6 +274,34 @@ __decorate([
     }),
     __metadata("design:type", RatePlanAdjustmentDto)
 ], PricingBreakdownDto.prototype, "ratePlanAdjustment", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Early check-in fee (net, no tax). Folded into booking grossAmount.',
+        example: 200000,
+    }),
+    __metadata("design:type", Number)
+], PricingBreakdownDto.prototype, "earlyCheckInFee", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Late check-out fee (net, no tax). Folded into booking grossAmount.',
+        example: 300000,
+    }),
+    __metadata("design:type", Number)
+], PricingBreakdownDto.prototype, "lateCheckOutFee", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Additional charges accumulated on the booking (net, no tax).',
+        example: 0,
+    }),
+    __metadata("design:type", Number)
+], PricingBreakdownDto.prototype, "additionalCharges", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Sum of earlyCheckInFee + lateCheckOutFee + additionalCharges.',
+        example: 500000,
+    }),
+    __metadata("design:type", Number)
+], PricingBreakdownDto.prototype, "feeTotal", void 0);
 class BookingPricingBreakdownResponseDto {
     bookingId;
     roomTypeId;

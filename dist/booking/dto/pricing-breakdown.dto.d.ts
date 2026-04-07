@@ -54,6 +54,10 @@ export declare class PricingBreakdownDto {
     rooms: RoomPricingEntryDto[];
     ratePlanSnapshot?: RatePlanSnapshotDto;
     ratePlanAdjustment?: RatePlanAdjustmentDto;
+    earlyCheckInFee?: number;
+    lateCheckOutFee?: number;
+    additionalCharges?: number;
+    feeTotal?: number;
 }
 export declare class BookingPricingBreakdownResponseDto {
     bookingId: string;
