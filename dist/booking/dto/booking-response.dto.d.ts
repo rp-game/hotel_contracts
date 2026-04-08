@@ -48,10 +48,15 @@ export declare class BookingPaymentResponseDto {
 export declare class BookingServiceResponseDto {
     id: string;
     serviceId?: string | null;
+    category?: string | null;
     serviceName: string;
     quantity: number;
     price: number;
     totalPrice: number;
+    taxRate?: number;
+    serviceChargeRate?: number;
+    taxAmount?: number;
+    grossAmount?: number;
     serviceDate: Date;
     isPaid: boolean;
 }

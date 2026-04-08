@@ -4,6 +4,7 @@
  */
 import { ServiceCategory } from './services.nats';
 import { NatsResponse } from '../../common';
+export type PriceInputMode = 'pre_tax' | 'post_tax';
 export declare class AddServiceNatsRequest {
     bookingId: string;
     serviceId?: string;
@@ -17,6 +18,9 @@ export declare class AddServiceNatsRequest {
     addedBy: string;
     bookingRoomId?: string;
     guestId?: string;
+    taxRate?: number;
+    serviceChargeRate?: number;
+    priceInputMode?: PriceInputMode;
 }
 export interface ServiceData {
     id: string;

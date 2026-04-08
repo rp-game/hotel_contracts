@@ -108,17 +108,32 @@ export class BookingServiceResponseDto {
   @ApiPropertyOptional({ description: 'Service ID reference (null for ad-hoc charges)' })
   serviceId?: string | null;
 
+  @ApiPropertyOptional({ description: 'Service category (e.g. ROOM_EXTENSION, EARLY_CHECKIN)' })
+  category?: string | null;
+
   @ApiProperty({ description: 'Service name' })
   serviceName: string;
 
   @ApiProperty({ description: 'Quantity' })
   quantity: number;
 
-  @ApiProperty({ description: 'Price' })
+  @ApiProperty({ description: 'Unit price (net, pre-tax)' })
   price: number;
 
-  @ApiProperty({ description: 'Total price' })
+  @ApiProperty({ description: 'Line total (net, pre-tax) = quantity × price' })
   totalPrice: number;
+
+  @ApiPropertyOptional({ description: 'VAT rate (%) applied at creation time' })
+  taxRate?: number;
+
+  @ApiPropertyOptional({ description: 'Service charge rate (%) applied at creation time' })
+  serviceChargeRate?: number;
+
+  @ApiPropertyOptional({ description: 'Tax amount (SC + VAT) for this line' })
+  taxAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Gross amount = totalPrice + taxAmount' })
+  grossAmount?: number;
 
   @ApiProperty({ description: 'Service date' })
   serviceDate: Date;

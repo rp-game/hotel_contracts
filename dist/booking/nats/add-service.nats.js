@@ -30,6 +30,9 @@ class AddServiceNatsRequest {
     addedBy;
     bookingRoomId;
     guestId;
+    taxRate;
+    serviceChargeRate;
+    priceInputMode;
 }
 exports.AddServiceNatsRequest = AddServiceNatsRequest;
 __decorate([
@@ -100,4 +103,26 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], AddServiceNatsRequest.prototype, "guestId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Override VAT rate (%). If omitted, falls back to service catalog then hotel default.' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(100),
+    __metadata("design:type", Number)
+], AddServiceNatsRequest.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Override service charge rate (%). If omitted, falls back to service catalog then hotel default.' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(100),
+    __metadata("design:type", Number)
+], AddServiceNatsRequest.prototype, "serviceChargeRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether unitPrice is pre-tax (net) or post-tax (gross). Default: pre_tax.', enum: ['pre_tax', 'post_tax'] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsIn)(['pre_tax', 'post_tax']),
+    __metadata("design:type", String)
+], AddServiceNatsRequest.prototype, "priceInputMode", void 0);
 //# sourceMappingURL=add-service.nats.js.map

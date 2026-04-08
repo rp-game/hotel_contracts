@@ -4,9 +4,11 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNumber, IsOptional, IsUUID, IsEnum, Min } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsUUID, IsEnum, Min, Max, IsIn } from 'class-validator';
 import { ServiceCategory } from './services.nats';
 import { NatsResponse } from '../../common';
+
+export type PriceInputMode = 'pre_tax' | 'post_tax';
 
 export class AddServiceNatsRequest {
   @ApiProperty({ description: 'Booking ID', format: 'uuid' })
@@ -64,6 +66,25 @@ export class AddServiceNatsRequest {
   @IsOptional()
   @IsUUID()
   guestId?: string;
+
+  @ApiPropertyOptional({ description: 'Override VAT rate (%). If omitted, falls back to service catalog then hotel default.' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  taxRate?: number;
+
+  @ApiPropertyOptional({ description: 'Override service charge rate (%). If omitted, falls back to service catalog then hotel default.' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  serviceChargeRate?: number;
+
+  @ApiPropertyOptional({ description: 'Whether unitPrice is pre-tax (net) or post-tax (gross). Default: pre_tax.', enum: ['pre_tax', 'post_tax'] })
+  @IsOptional()
+  @IsIn(['pre_tax', 'post_tax'])
+  priceInputMode?: PriceInputMode;
 }
 
 export interface ServiceData {

@@ -52,6 +52,8 @@ export declare class BookingServiceNatsResponse {
     status: BookingServiceStatus;
     basePrice: number;
     currency: string;
+    taxRate?: number | null;
+    serviceChargeRate?: number | null;
     durationMinutes: number;
     maxCapacity: number;
     advanceBookingHours: number;
@@ -81,6 +83,8 @@ export declare class CreateServiceNatsRequest {
     category: ServiceCategory;
     basePrice: number;
     currency?: string;
+    taxRate?: number | null;
+    serviceChargeRate?: number | null;
     durationMinutes?: number;
     maxCapacity?: number;
     advanceBookingHours?: number;

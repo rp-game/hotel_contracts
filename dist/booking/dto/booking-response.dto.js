@@ -175,10 +175,15 @@ __decorate([
 class BookingServiceResponseDto {
     id;
     serviceId;
+    category;
     serviceName;
     quantity;
     price;
     totalPrice;
+    taxRate;
+    serviceChargeRate;
+    taxAmount;
+    grossAmount;
     serviceDate;
     isPaid;
 }
@@ -192,6 +197,10 @@ __decorate([
     __metadata("design:type", Object)
 ], BookingServiceResponseDto.prototype, "serviceId", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service category (e.g. ROOM_EXTENSION, EARLY_CHECKIN)' }),
+    __metadata("design:type", Object)
+], BookingServiceResponseDto.prototype, "category", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Service name' }),
     __metadata("design:type", String)
 ], BookingServiceResponseDto.prototype, "serviceName", void 0);
@@ -200,13 +209,29 @@ __decorate([
     __metadata("design:type", Number)
 ], BookingServiceResponseDto.prototype, "quantity", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Price' }),
+    (0, swagger_1.ApiProperty)({ description: 'Unit price (net, pre-tax)' }),
     __metadata("design:type", Number)
 ], BookingServiceResponseDto.prototype, "price", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Total price' }),
+    (0, swagger_1.ApiProperty)({ description: 'Line total (net, pre-tax) = quantity × price' }),
     __metadata("design:type", Number)
 ], BookingServiceResponseDto.prototype, "totalPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate (%) applied at creation time' }),
+    __metadata("design:type", Number)
+], BookingServiceResponseDto.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service charge rate (%) applied at creation time' }),
+    __metadata("design:type", Number)
+], BookingServiceResponseDto.prototype, "serviceChargeRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax amount (SC + VAT) for this line' }),
+    __metadata("design:type", Number)
+], BookingServiceResponseDto.prototype, "taxAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Gross amount = totalPrice + taxAmount' }),
+    __metadata("design:type", Number)
+], BookingServiceResponseDto.prototype, "grossAmount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Service date' }),
     __metadata("design:type", Date)

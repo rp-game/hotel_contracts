@@ -40,4 +40,20 @@ export declare const DEFAULT_TAX_CONFIG: TaxConfig;
  * @returns Full tax breakdown with amounts and rates
  */
 export declare function calculateTax(netAmount: number, taxConfig?: Partial<TaxConfig>): TaxCalculationResult;
+/**
+ * Reverse tax calculation: given a gross (tax-inclusive) amount,
+ * back-compute the net amount and tax breakdown.
+ *
+ * Formula (inverse of Vietnam compound):
+ *   net = gross / ((1 + sc/100) × (1 + vat/100))
+ *
+ * Then the exact SC/VAT amounts are recomputed via calculateTax(net) to keep
+ * rounding consistent with forward calculation. The returned grossAmount may
+ * differ from the input by ±1 VND due to rounding, which is acceptable.
+ *
+ * @param grossAmount - Tax-inclusive amount (what the guest sees/agrees to)
+ * @param taxConfig - Hotel's tax configuration
+ * @returns Full tax breakdown where netAmount is the back-computed pre-tax price
+ */
+export declare function reverseTax(grossAmount: number, taxConfig?: Partial<TaxConfig>): TaxCalculationResult;
 //# sourceMappingURL=tax-calculator.d.ts.map

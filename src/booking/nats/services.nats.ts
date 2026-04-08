@@ -79,6 +79,13 @@ export class BookingServiceNatsResponse {
   @ApiProperty({ description: 'Currency code', default: 'USD' })
   currency: string;
 
+  // Tax declaration (null = fall back to hotel default)
+  @ApiPropertyOptional({ description: 'VAT rate for this service (%). Null = inherit hotel default.' })
+  taxRate?: number | null;
+
+  @ApiPropertyOptional({ description: 'Service charge rate for this service (%). Null = inherit hotel default.' })
+  serviceChargeRate?: number | null;
+
   // Timing & Capacity
   @ApiProperty({ description: 'Duration in minutes', default: 60 })
   durationMinutes: number;
@@ -160,6 +167,20 @@ export class CreateServiceNatsRequest {
   @IsOptional()
   @IsString()
   currency?: string;
+
+  @ApiPropertyOptional({ description: 'VAT rate for this service (%). Null = inherit hotel default.' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  taxRate?: number | null;
+
+  @ApiPropertyOptional({ description: 'Service charge rate for this service (%). Null = inherit hotel default.' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  serviceChargeRate?: number | null;
 
   @ApiPropertyOptional({ description: 'Duration in minutes', default: 60 })
   @IsOptional()

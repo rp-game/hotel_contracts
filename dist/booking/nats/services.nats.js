@@ -71,6 +71,9 @@ class BookingServiceNatsResponse {
     // Pricing
     basePrice;
     currency;
+    // Tax declaration (null = fall back to hotel default)
+    taxRate;
+    serviceChargeRate;
     // Timing & Capacity
     durationMinutes;
     maxCapacity;
@@ -126,6 +129,14 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Currency code', default: 'USD' }),
     __metadata("design:type", String)
 ], BookingServiceNatsResponse.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate for this service (%). Null = inherit hotel default.' }),
+    __metadata("design:type", Object)
+], BookingServiceNatsResponse.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service charge rate for this service (%). Null = inherit hotel default.' }),
+    __metadata("design:type", Object)
+], BookingServiceNatsResponse.prototype, "serviceChargeRate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Duration in minutes', default: 60 }),
     __metadata("design:type", Number)
@@ -190,6 +201,8 @@ class CreateServiceNatsRequest {
     category;
     basePrice;
     currency;
+    taxRate;
+    serviceChargeRate;
     durationMinutes;
     maxCapacity;
     advanceBookingHours;
@@ -241,6 +254,22 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate for this service (%). Null = inherit hotel default.' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(100),
+    __metadata("design:type", Object)
+], CreateServiceNatsRequest.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service charge rate for this service (%). Null = inherit hotel default.' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(100),
+    __metadata("design:type", Object)
+], CreateServiceNatsRequest.prototype, "serviceChargeRate", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Duration in minutes', default: 60 }),
     (0, class_validator_1.IsOptional)(),

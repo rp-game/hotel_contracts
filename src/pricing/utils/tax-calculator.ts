@@ -61,3 +61,38 @@ export function calculateTax(
     grossAmount: netAmount + totalTax,
   };
 }
+
+/**
+ * Reverse tax calculation: given a gross (tax-inclusive) amount,
+ * back-compute the net amount and tax breakdown.
+ *
+ * Formula (inverse of Vietnam compound):
+ *   net = gross / ((1 + sc/100) × (1 + vat/100))
+ *
+ * Then the exact SC/VAT amounts are recomputed via calculateTax(net) to keep
+ * rounding consistent with forward calculation. The returned grossAmount may
+ * differ from the input by ±1 VND due to rounding, which is acceptable.
+ *
+ * @param grossAmount - Tax-inclusive amount (what the guest sees/agrees to)
+ * @param taxConfig - Hotel's tax configuration
+ * @returns Full tax breakdown where netAmount is the back-computed pre-tax price
+ */
+export function reverseTax(
+  grossAmount: number,
+  taxConfig?: Partial<TaxConfig>,
+): TaxCalculationResult {
+  const config: TaxConfig = {
+    vatRate: taxConfig?.vatRate ?? DEFAULT_TAX_CONFIG.vatRate,
+    serviceChargeRate: taxConfig?.serviceChargeRate ?? DEFAULT_TAX_CONFIG.serviceChargeRate,
+  };
+
+  const scMultiplier = 1 + config.serviceChargeRate / 100;
+  const vatMultiplier = 1 + config.vatRate / 100;
+  const divisor = scMultiplier * vatMultiplier;
+
+  // Avoid divide-by-zero when both rates are 0
+  const netAmount = divisor > 0 ? Math.round(grossAmount / divisor) : grossAmount;
+
+  // Recompute forward to keep tax amounts consistent with calculateTax()
+  return calculateTax(netAmount, config);
+}
