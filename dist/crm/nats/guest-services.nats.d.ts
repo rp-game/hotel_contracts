@@ -290,6 +290,7 @@ export declare class FindAllServiceBookingsNatsRequest {
     guestId?: string;
     serviceId?: string;
     status?: ServiceBookingStatus;
+    bookingId?: string;
     serviceType?: string;
     page?: number;
     limit?: number;

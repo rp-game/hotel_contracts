@@ -80,11 +80,11 @@ export class BookingServiceNatsResponse {
   currency: string;
 
   // Tax declaration (null = fall back to hotel default)
-  @ApiPropertyOptional({ description: 'VAT rate for this service (%). Null = inherit hotel default.', type: Number, nullable: true })
-  taxRate?: number | null;
+  @ApiPropertyOptional({ description: 'VAT rate for this service (%). Null = inherit hotel default.', type: String, nullable: true })
+  taxRate?: string | number | null;
 
-  @ApiPropertyOptional({ description: 'Service charge rate for this service (%). Null = inherit hotel default.', type: Number, nullable: true })
-  serviceChargeRate?: number | null;
+  @ApiPropertyOptional({ description: 'Service charge rate for this service (%). Null = inherit hotel default.', type: String, nullable: true })
+  serviceChargeRate?: string | number | null;
 
   // Timing & Capacity
   @ApiProperty({ description: 'Duration in minutes', default: 60 })

@@ -460,6 +460,7 @@ class FindAllServiceBookingsNatsRequest {
     guestId; // FIXED: Use guestId (frontend expectation)
     serviceId;
     status;
+    bookingId;
     serviceType;
     page;
     limit;
@@ -496,6 +497,12 @@ __decorate([
     (0, class_validator_1.IsEnum)(ServiceBookingStatus),
     __metadata("design:type", String)
 ], FindAllServiceBookingsNatsRequest.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by room booking ID (roomBookingId)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FindAllServiceBookingsNatsRequest.prototype, "bookingId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Service type filter' }),
     (0, class_validator_1.IsOptional)(),

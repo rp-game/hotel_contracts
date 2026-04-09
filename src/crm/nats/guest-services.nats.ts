@@ -541,6 +541,11 @@ export class FindAllServiceBookingsNatsRequest {
   @IsEnum(ServiceBookingStatus)
   status?: ServiceBookingStatus;
 
+  @ApiPropertyOptional({ description: 'Filter by room booking ID (roomBookingId)' })
+  @IsOptional()
+  @IsUUID()
+  bookingId?: string;
+
   @ApiPropertyOptional({ description: 'Service type filter' })
   @IsOptional()
   @IsString()

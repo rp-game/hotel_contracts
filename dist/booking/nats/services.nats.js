@@ -130,11 +130,11 @@ __decorate([
     __metadata("design:type", String)
 ], BookingServiceNatsResponse.prototype, "currency", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate for this service (%). Null = inherit hotel default.', type: Number, nullable: true }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate for this service (%). Null = inherit hotel default.', type: String, nullable: true }),
     __metadata("design:type", Object)
 ], BookingServiceNatsResponse.prototype, "taxRate", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Service charge rate for this service (%). Null = inherit hotel default.', type: Number, nullable: true }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service charge rate for this service (%). Null = inherit hotel default.', type: String, nullable: true }),
     __metadata("design:type", Object)
 ], BookingServiceNatsResponse.prototype, "serviceChargeRate", void 0);
 __decorate([
