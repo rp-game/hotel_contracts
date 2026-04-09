@@ -130,11 +130,11 @@ __decorate([
     __metadata("design:type", String)
 ], BookingServiceNatsResponse.prototype, "currency", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate for this service (%). Null = inherit hotel default.' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate for this service (%). Null = inherit hotel default.', type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], BookingServiceNatsResponse.prototype, "taxRate", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Service charge rate for this service (%). Null = inherit hotel default.' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service charge rate for this service (%). Null = inherit hotel default.', type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], BookingServiceNatsResponse.prototype, "serviceChargeRate", void 0);
 __decorate([
@@ -255,7 +255,7 @@ __decorate([
     __metadata("design:type", String)
 ], CreateServiceNatsRequest.prototype, "currency", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate for this service (%). Null = inherit hotel default.' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate for this service (%). Null = inherit hotel default.', type: Number, nullable: true }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.Min)(0),
@@ -263,7 +263,7 @@ __decorate([
     __metadata("design:type", Object)
 ], CreateServiceNatsRequest.prototype, "taxRate", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Service charge rate for this service (%). Null = inherit hotel default.' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service charge rate for this service (%). Null = inherit hotel default.', type: Number, nullable: true }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.Min)(0),
