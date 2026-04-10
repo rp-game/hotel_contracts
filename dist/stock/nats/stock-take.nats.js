@@ -332,7 +332,8 @@ __decorate([
     __metadata("design:type", String)
 ], ApproveStockTakeRequest.prototype, "id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], ApproveStockTakeRequest.prototype, "approvedBy", void 0);

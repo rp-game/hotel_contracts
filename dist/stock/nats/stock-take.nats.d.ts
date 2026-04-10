@@ -64,7 +64,7 @@ export declare class ApproveStockTakeRequest {
     tenantId: string;
     hotelId: string;
     id: string;
-    approvedBy: string;
+    approvedBy?: string;
     approvedByName?: string;
 }
 export type CreateStockTakeNatsResponse = NatsResponse<StockTakeResponse>;

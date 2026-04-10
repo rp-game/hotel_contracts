@@ -84,7 +84,7 @@ export class ApproveStockTakeRequest {
   @ApiProperty() @IsUUID() tenantId: string;
   @ApiProperty() @IsUUID() hotelId: string;
   @ApiProperty() @IsUUID() id: string;
-  @ApiProperty() @IsUUID() approvedBy: string;
+  @ApiPropertyOptional() @IsOptional() @IsUUID() approvedBy?: string;
   @ApiPropertyOptional() @IsOptional() @IsString() approvedByName?: string;
 }
 
