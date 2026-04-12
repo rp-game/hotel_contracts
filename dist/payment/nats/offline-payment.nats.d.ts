@@ -83,6 +83,21 @@ export interface CreateOfflinePaymentNatsRequest {
      * When true, payment-service confirms the payment atomically in the same transaction.
      */
     autoConfirm?: boolean;
+    /**
+     * Original amount in foreign currency (e.g. 100 for 100 USD).
+     * When provided, backend calculates amount = round(originalAmount * exchangeRate).
+     */
+    originalAmount?: number;
+    /**
+     * Original currency code (e.g. 'USD', 'EUR').
+     * Must be accompanied by exchangeRate.
+     */
+    originalCurrency?: string;
+    /**
+     * Exchange rate from originalCurrency to VND (e.g. 25000 for 1 USD = 25000 VND).
+     * Required when originalCurrency is provided.
+     */
+    exchangeRate?: number;
 }
 /**
  * Offline payment response data
@@ -144,6 +159,18 @@ export interface OfflinePaymentData {
      * Additional notes
      */
     notes?: string;
+    /**
+     * Original amount in foreign currency (null if paid in VND)
+     */
+    originalAmount?: number;
+    /**
+     * Original currency code (null if paid in VND)
+     */
+    originalCurrency?: string;
+    /**
+     * Exchange rate used: originalCurrency → VND
+     */
+    exchangeRate?: number;
     /**
      * Record creation date
      */

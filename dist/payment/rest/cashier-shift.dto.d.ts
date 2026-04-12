@@ -9,10 +9,17 @@ export declare class ForceCloseCashierShiftDto {
     closingBalance?: number;
     reason: string;
 }
+export declare class CashierShiftCurrencyBreakdownDto {
+    currency: string;
+    totalOriginalAmount: number;
+    totalVndAmount: number;
+    count: number;
+}
 export declare class CashierShiftPaymentSummaryDto {
     method: string;
     count: number;
     total: number;
+    currencyBreakdown?: CashierShiftCurrencyBreakdownDto[];
 }
 export declare class CashierShiftDto {
     id: string;

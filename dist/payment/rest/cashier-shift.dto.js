@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CashierShiftDetailDto = exports.CashierShiftDto = exports.CashierShiftPaymentSummaryDto = exports.ForceCloseCashierShiftDto = exports.CloseCashierShiftDto = exports.OpenCashierShiftDto = void 0;
+exports.CashierShiftDetailDto = exports.CashierShiftDto = exports.CashierShiftPaymentSummaryDto = exports.CashierShiftCurrencyBreakdownDto = exports.ForceCloseCashierShiftDto = exports.CloseCashierShiftDto = exports.OpenCashierShiftDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 // ─── Request DTOs ───────────────────────────────────────────────────
@@ -58,10 +58,34 @@ __decorate([
     __metadata("design:type", String)
 ], ForceCloseCashierShiftDto.prototype, "reason", void 0);
 // ─── Response DTOs ──────────────────────────────────────────────────
+class CashierShiftCurrencyBreakdownDto {
+    currency;
+    totalOriginalAmount;
+    totalVndAmount;
+    count;
+}
+exports.CashierShiftCurrencyBreakdownDto = CashierShiftCurrencyBreakdownDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Original currency code (e.g. USD, EUR)' }),
+    __metadata("design:type", String)
+], CashierShiftCurrencyBreakdownDto.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total original amount received in this currency' }),
+    __metadata("design:type", Number)
+], CashierShiftCurrencyBreakdownDto.prototype, "totalOriginalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Equivalent VND amount' }),
+    __metadata("design:type", Number)
+], CashierShiftCurrencyBreakdownDto.prototype, "totalVndAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of transactions' }),
+    __metadata("design:type", Number)
+], CashierShiftCurrencyBreakdownDto.prototype, "count", void 0);
 class CashierShiftPaymentSummaryDto {
     method;
     count;
     total;
+    currencyBreakdown;
 }
 exports.CashierShiftPaymentSummaryDto = CashierShiftPaymentSummaryDto;
 __decorate([
@@ -76,6 +100,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total amount' }),
     __metadata("design:type", Number)
 ], CashierShiftPaymentSummaryDto.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [CashierShiftCurrencyBreakdownDto], description: 'Foreign currency breakdown' }),
+    __metadata("design:type", Array)
+], CashierShiftPaymentSummaryDto.prototype, "currencyBreakdown", void 0);
 class CashierShiftDto {
     id;
     staffId;

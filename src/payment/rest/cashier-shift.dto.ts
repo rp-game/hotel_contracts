@@ -36,6 +36,20 @@ export class ForceCloseCashierShiftDto {
 
 // ─── Response DTOs ──────────────────────────────────────────────────
 
+export class CashierShiftCurrencyBreakdownDto {
+  @ApiProperty({ description: 'Original currency code (e.g. USD, EUR)' })
+  currency: string;
+
+  @ApiProperty({ description: 'Total original amount received in this currency' })
+  totalOriginalAmount: number;
+
+  @ApiProperty({ description: 'Equivalent VND amount' })
+  totalVndAmount: number;
+
+  @ApiProperty({ description: 'Number of transactions' })
+  count: number;
+}
+
 export class CashierShiftPaymentSummaryDto {
   @ApiProperty({ description: 'Payment method' })
   method: string;
@@ -45,6 +59,9 @@ export class CashierShiftPaymentSummaryDto {
 
   @ApiProperty({ description: 'Total amount' })
   total: number;
+
+  @ApiPropertyOptional({ type: [CashierShiftCurrencyBreakdownDto], description: 'Foreign currency breakdown' })
+  currencyBreakdown?: CashierShiftCurrencyBreakdownDto[];
 }
 
 export class CashierShiftDto {

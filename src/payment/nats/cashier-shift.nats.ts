@@ -120,12 +120,28 @@ export interface GetActiveCashierShiftNatsRequest {
 // ─── Response Data Interfaces ───────────────────────────────────────
 
 /**
+ * Foreign currency breakdown for a shift
+ */
+export interface CashierShiftCurrencyBreakdown {
+  /** Original currency code (e.g. 'USD', 'EUR') */
+  currency: string;
+  /** Total original amount received in this currency */
+  totalOriginalAmount: number;
+  /** Equivalent VND amount (sum of amount field) */
+  totalVndAmount: number;
+  /** Number of transactions */
+  count: number;
+}
+
+/**
  * Payment summary breakdown by method
  */
 export interface CashierShiftPaymentSummary {
   method: string;
   count: number;
   total: number;
+  /** Foreign currency breakdown (only present if multi-currency payments exist) */
+  currencyBreakdown?: CashierShiftCurrencyBreakdown[];
 }
 
 /**
