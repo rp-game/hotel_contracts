@@ -13,8 +13,75 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PendingCheckinsListData = exports.PendingCheckinBooking = void 0;
+exports.PendingCheckinsListData = exports.PendingCheckinBooking = exports.CheckInBookingDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
+/**
+ * REST DTO for check-in endpoint (shared across api-gateway and booking-service)
+ */
+class CheckInBookingDto {
+    tenantId;
+    hotelId;
+    actualCheckInTime;
+    primaryGuest;
+    additionalGuests;
+    keyCardNumbers;
+    depositAmount;
+    notes;
+    checkedInBy;
+    earlyCheckInFee;
+    lateCheckOutFee;
+}
+exports.CheckInBookingDto = CheckInBookingDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID', format: 'uuid' }),
+    __metadata("design:type", String)
+], CheckInBookingDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID', format: 'uuid' }),
+    __metadata("design:type", String)
+], CheckInBookingDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Actual check-in time (ISO 8601)' }),
+    __metadata("design:type", String)
+], CheckInBookingDto.prototype, "actualCheckInTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Primary guest information' }),
+    __metadata("design:type", Object)
+], CheckInBookingDto.prototype, "primaryGuest", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional guests', type: [Object] }),
+    __metadata("design:type", Array)
+], CheckInBookingDto.prototype, "additionalGuests", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Key card numbers issued' }),
+    __metadata("design:type", String)
+], CheckInBookingDto.prototype, "keyCardNumbers", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Deposit amount collected (VND)', minimum: 0 }),
+    __metadata("design:type", Number)
+], CheckInBookingDto.prototype, "depositAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Check-in notes' }),
+    __metadata("design:type", String)
+], CheckInBookingDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID who processed check-in', format: 'uuid' }),
+    __metadata("design:type", String)
+], CheckInBookingDto.prototype, "checkedInBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Early check-in fee (VND). Overrides value set at booking creation. Set to 0 to waive.',
+        minimum: 0,
+    }),
+    __metadata("design:type", Number)
+], CheckInBookingDto.prototype, "earlyCheckInFee", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Late check-out fee (VND). Overrides value set at booking creation. Set to 0 to waive.',
+        minimum: 0,
+    }),
+    __metadata("design:type", Number)
+], CheckInBookingDto.prototype, "lateCheckOutFee", void 0);
 /**
  * Pending Check-in Booking Information
  * Used for both NATS response and REST API response

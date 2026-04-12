@@ -3,7 +3,7 @@
  * Patterns: booking.check_in, booking.check_out, booking.pending_checkins
  */
 
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 import { BookingResponseDto } from '../dto/booking-response.dto';
 import { BillItem } from './mobile-checkout.nats';
@@ -32,6 +32,52 @@ export interface CheckInBookingNatsRequest {
   depositAmount?: number;
   notes?: string;
   checkedInBy: string;
+  earlyCheckInFee?: number;
+  lateCheckOutFee?: number;
+}
+
+/**
+ * REST DTO for check-in endpoint (shared across api-gateway and booking-service)
+ */
+export class CheckInBookingDto {
+  @ApiPropertyOptional({ description: 'Tenant ID', format: 'uuid' })
+  tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID', format: 'uuid' })
+  hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Actual check-in time (ISO 8601)' })
+  actualCheckInTime?: string;
+
+  @ApiPropertyOptional({ description: 'Primary guest information' })
+  primaryGuest?: PrimaryGuestData;
+
+  @ApiPropertyOptional({ description: 'Additional guests', type: [Object] })
+  additionalGuests?: any[];
+
+  @ApiPropertyOptional({ description: 'Key card numbers issued' })
+  keyCardNumbers?: string;
+
+  @ApiPropertyOptional({ description: 'Deposit amount collected (VND)', minimum: 0 })
+  depositAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Check-in notes' })
+  notes?: string;
+
+  @ApiPropertyOptional({ description: 'User ID who processed check-in', format: 'uuid' })
+  checkedInBy?: string;
+
+  @ApiPropertyOptional({
+    description: 'Early check-in fee (VND). Overrides value set at booking creation. Set to 0 to waive.',
+    minimum: 0,
+  })
+  earlyCheckInFee?: number;
+
+  @ApiPropertyOptional({
+    description: 'Late check-out fee (VND). Overrides value set at booking creation. Set to 0 to waive.',
+    minimum: 0,
+  })
+  lateCheckOutFee?: number;
 }
 
 export interface BookingData {

@@ -26,6 +26,24 @@ export interface CheckInBookingNatsRequest {
     depositAmount?: number;
     notes?: string;
     checkedInBy: string;
+    earlyCheckInFee?: number;
+    lateCheckOutFee?: number;
+}
+/**
+ * REST DTO for check-in endpoint (shared across api-gateway and booking-service)
+ */
+export declare class CheckInBookingDto {
+    tenantId?: string;
+    hotelId?: string;
+    actualCheckInTime?: string;
+    primaryGuest?: PrimaryGuestData;
+    additionalGuests?: any[];
+    keyCardNumbers?: string;
+    depositAmount?: number;
+    notes?: string;
+    checkedInBy?: string;
+    earlyCheckInFee?: number;
+    lateCheckOutFee?: number;
 }
 export interface BookingData {
     id: string;
