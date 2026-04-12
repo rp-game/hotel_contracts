@@ -257,9 +257,10 @@ export class CreatePromotionRequest {
  * All fields optional except ID
  */
 export class UpdatePromotionRequest {
-  @ApiProperty({ description: 'Promotion ID to update' })
+  @ApiProperty({ description: 'Promotion ID to update', required: false })
+  @IsOptional()
   @IsUUID()
-  id: string;
+  id?: string;
 
   @ApiProperty({ description: 'Tenant ID' })
   @IsUUID()

@@ -63,7 +63,7 @@ export declare class CreatePromotionRequest {
  * All fields optional except ID
  */
 export declare class UpdatePromotionRequest {
-    id: string;
+    id?: string;
     tenantId: string;
     hotelId?: string;
     name?: string;

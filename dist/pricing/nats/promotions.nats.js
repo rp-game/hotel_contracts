@@ -358,7 +358,8 @@ class UpdatePromotionRequest {
 }
 exports.UpdatePromotionRequest = UpdatePromotionRequest;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Promotion ID to update' }),
+    (0, swagger_1.ApiProperty)({ description: 'Promotion ID to update', required: false }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], UpdatePromotionRequest.prototype, "id", void 0);
