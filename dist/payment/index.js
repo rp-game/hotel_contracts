@@ -34,4 +34,5 @@ __exportStar(require("./nats"), exports);
 __exportStar(require("./enums"), exports);
 __exportStar(require("./inter-service"), exports);
 __exportStar(require("./rest/cashier-shift.dto"), exports);
+__exportStar(require("./rest/offline-payment.dto"), exports);
 //# sourceMappingURL=index.js.map
