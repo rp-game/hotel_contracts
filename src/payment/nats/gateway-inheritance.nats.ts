@@ -106,12 +106,23 @@ export class ResolvedConfigMetadata {
 /**
  * Gateway configuration nested object
  */
+export class GatewayCurrencyConfig {
+  @ApiProperty({ description: 'Currency code, e.g. USD, EUR' })
+  code: string;
+
+  @ApiProperty({ description: 'Exchange rate to VND, e.g. 25000 for 1 USD = 25000 VND' })
+  rate: number;
+
+  @ApiPropertyOptional({ description: 'Rounding unit, e.g. 1 for VND, 0.01 for USD cents' })
+  rounding?: number;
+}
+
 export class GatewayConfiguration {
   @ApiPropertyOptional({ description: 'Execution environment (SANDBOX, PRODUCTION)' })
   environment?: string;
 
-  @ApiPropertyOptional({ description: 'Supported currencies (string[] for simple list, or {code,rate,rounding?}[] for multi-currency with exchange rates)' })
-  currencies?: string[] | { code: string; rate: number; rounding?: number }[];
+  @ApiPropertyOptional({ type: [GatewayCurrencyConfig], description: 'Configured currencies with exchange rates' })
+  currencies?: GatewayCurrencyConfig[];
 
   @ApiPropertyOptional({ description: 'OnePay-specific: access code' })
   accessCode?: string;
@@ -455,8 +466,8 @@ export class UpdateGatewayConfigPayload {
   @ApiPropertyOptional({ description: 'Environment (SANDBOX, PRODUCTION)' })
   environment?: string;
 
-  @ApiPropertyOptional({ description: 'Supported currencies (string[] for simple list, or {code,rate,rounding?}[] for multi-currency with exchange rates)' })
-  currencies?: string[] | { code: string; rate: number; rounding?: number }[];
+  @ApiPropertyOptional({ type: [GatewayCurrencyConfig], description: 'Configured currencies with exchange rates' })
+  currencies?: GatewayCurrencyConfig[];
 
   @ApiPropertyOptional({ description: 'Supported payment methods', type: [String] })
   supportedMethods?: string[];
@@ -619,7 +630,7 @@ export interface UpdateGatewayRequest {
    */
   configuration?: {
     environment?: string;
-    currencies?: string[] | { code: string; rate: number; rounding?: number }[];
+    currencies?: GatewayCurrencyConfig[];
     accessCode?: string;
     url?: string;
     returnUrl?: string;

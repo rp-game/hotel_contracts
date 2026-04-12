@@ -26,7 +26,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TestPaymentGatewayData = exports.TestPaymentGatewayNatsRequest = exports.BulkUpdateGatewayResponseData = exports.BulkUpdateGatewayResult = exports.BulkUpdatePaymentGatewayNatsRequest = exports.BulkGatewayUpdateFields = exports.UpdateGatewayPayload = exports.UpdateGatewayConfigPayload = exports.UpdateGatewayFees = exports.ResolvedGatewayConfigData = exports.GatewayStatistics = exports.GatewayConfigData = exports.GatewayConfiguration = exports.ResolvedConfigMetadata = exports.InheritanceConfig = exports.GatewaySyncStatus = exports.GatewayType = exports.ConfigLevel = void 0;
+exports.TestPaymentGatewayData = exports.TestPaymentGatewayNatsRequest = exports.BulkUpdateGatewayResponseData = exports.BulkUpdateGatewayResult = exports.BulkUpdatePaymentGatewayNatsRequest = exports.BulkGatewayUpdateFields = exports.UpdateGatewayPayload = exports.UpdateGatewayConfigPayload = exports.UpdateGatewayFees = exports.ResolvedGatewayConfigData = exports.GatewayStatistics = exports.GatewayConfigData = exports.GatewayConfiguration = exports.GatewayCurrencyConfig = exports.ResolvedConfigMetadata = exports.InheritanceConfig = exports.GatewaySyncStatus = exports.GatewayType = exports.ConfigLevel = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
@@ -141,6 +141,24 @@ __decorate([
 /**
  * Gateway configuration nested object
  */
+class GatewayCurrencyConfig {
+    code;
+    rate;
+    rounding;
+}
+exports.GatewayCurrencyConfig = GatewayCurrencyConfig;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Currency code, e.g. USD, EUR' }),
+    __metadata("design:type", String)
+], GatewayCurrencyConfig.prototype, "code", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Exchange rate to VND, e.g. 25000 for 1 USD = 25000 VND' }),
+    __metadata("design:type", Number)
+], GatewayCurrencyConfig.prototype, "rate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Rounding unit, e.g. 1 for VND, 0.01 for USD cents' }),
+    __metadata("design:type", Number)
+], GatewayCurrencyConfig.prototype, "rounding", void 0);
 class GatewayConfiguration {
     environment;
     currencies;
@@ -165,7 +183,7 @@ __decorate([
     __metadata("design:type", String)
 ], GatewayConfiguration.prototype, "environment", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Supported currencies (string[] for simple list, or {code,rate,rounding?}[] for multi-currency with exchange rates)' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: [GatewayCurrencyConfig], description: 'Configured currencies with exchange rates' }),
     __metadata("design:type", Array)
 ], GatewayConfiguration.prototype, "currencies", void 0);
 __decorate([
@@ -411,7 +429,7 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateGatewayConfigPayload.prototype, "environment", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Supported currencies (string[] for simple list, or {code,rate,rounding?}[] for multi-currency with exchange rates)' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: [GatewayCurrencyConfig], description: 'Configured currencies with exchange rates' }),
     __metadata("design:type", Array)
 ], UpdateGatewayConfigPayload.prototype, "currencies", void 0);
 __decorate([
