@@ -212,36 +212,36 @@ export class GetBookingByIdResponse {
   ratePlanId?: string;
 
   // Corporate account info
-  @ApiPropertyOptional({ description: 'Corporate account ID', format: 'uuid' })
+  @ApiPropertyOptional({ description: 'Corporate account ID', type: String, nullable: true, format: 'uuid' })
   corporateId?: string | null;
 
-  @ApiPropertyOptional({ description: 'Corporate account name' })
+  @ApiPropertyOptional({ description: 'Corporate account name', type: String, nullable: true })
   corporateName?: string | null;
 
-  @ApiPropertyOptional({ description: 'Sales person ID', format: 'uuid' })
+  @ApiPropertyOptional({ description: 'Sales person ID', type: String, nullable: true, format: 'uuid' })
   salesPersonId?: string | null;
 
-  @ApiPropertyOptional({ description: 'Sales person name' })
+  @ApiPropertyOptional({ description: 'Sales person name', type: String, nullable: true })
   salesPersonName?: string | null;
 
   // Travel agent info
-  @ApiPropertyOptional({ description: 'Travel agent ID', format: 'uuid' })
+  @ApiPropertyOptional({ description: 'Travel agent ID', type: String, nullable: true, format: 'uuid' })
   travelAgentId?: string | null;
 
-  @ApiPropertyOptional({ description: 'Travel agent name' })
+  @ApiPropertyOptional({ description: 'Travel agent name', type: String, nullable: true })
   travelAgentName?: string | null;
 
-  @ApiPropertyOptional({ description: 'Agent reference number' })
+  @ApiPropertyOptional({ description: 'Agent reference number', type: String, nullable: true })
   agentReference?: string | null;
 
   // Group booking info
-  @ApiPropertyOptional({ description: 'Group booking ID', format: 'uuid' })
+  @ApiPropertyOptional({ description: 'Group booking ID', type: String, nullable: true, format: 'uuid' })
   groupId?: string | null;
 
-  @ApiPropertyOptional({ description: 'Group booking name' })
+  @ApiPropertyOptional({ description: 'Group booking name', type: String, nullable: true })
   groupName?: string | null;
 
-  @ApiPropertyOptional({ description: 'Group block code' })
+  @ApiPropertyOptional({ description: 'Group block code', type: String, nullable: true })
   groupBlockCode?: string | null;
 }
 
