@@ -216,6 +216,19 @@ class GetBookingByIdResponse {
     actualCheckOutTime;
     pricingBreakdown;
     ratePlanId;
+    // Corporate account info
+    corporateId;
+    corporateName;
+    salesPersonId;
+    salesPersonName;
+    // Travel agent info
+    travelAgentId;
+    travelAgentName;
+    agentReference;
+    // Group booking info
+    groupId;
+    groupName;
+    groupBlockCode;
 }
 exports.GetBookingByIdResponse = GetBookingByIdResponse;
 __decorate([
@@ -344,4 +357,44 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Rate plan ID applied to this booking', format: 'uuid' }),
     __metadata("design:type", String)
 ], GetBookingByIdResponse.prototype, "ratePlanId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Corporate account ID', format: 'uuid' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "corporateId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Corporate account name' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "corporateName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales person ID', format: 'uuid' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "salesPersonId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales person name' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "salesPersonName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Travel agent ID', format: 'uuid' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "travelAgentId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Travel agent name' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "travelAgentName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Agent reference number' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "agentReference", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Group booking ID', format: 'uuid' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "groupId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Group booking name' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "groupName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Group block code' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "groupBlockCode", void 0);
 //# sourceMappingURL=find-one-booking.nats.js.map

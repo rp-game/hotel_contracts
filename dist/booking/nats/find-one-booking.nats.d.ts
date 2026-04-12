@@ -77,6 +77,16 @@ export declare class GetBookingByIdResponse {
     actualCheckOutTime?: string;
     pricingBreakdown?: PricingBreakdownDto;
     ratePlanId?: string;
+    corporateId?: string | null;
+    corporateName?: string | null;
+    salesPersonId?: string | null;
+    salesPersonName?: string | null;
+    travelAgentId?: string | null;
+    travelAgentName?: string | null;
+    agentReference?: string | null;
+    groupId?: string | null;
+    groupName?: string | null;
+    groupBlockCode?: string | null;
 }
 export type GetBookingByIdNatsResponse = NatsResponse<GetBookingByIdResponse>;
 //# sourceMappingURL=find-one-booking.nats.d.ts.map
