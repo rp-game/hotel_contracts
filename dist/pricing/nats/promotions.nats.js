@@ -160,6 +160,8 @@ class CreatePromotionRequest {
     flashSaleEndTime;
     conditions;
     isActive;
+    performedBy;
+    performedByName;
 }
 exports.CreatePromotionRequest = CreatePromotionRequest;
 __decorate([
@@ -325,6 +327,18 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreatePromotionRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID performing the action (for audit log)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePromotionRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User name performing the action (for audit log)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePromotionRequest.prototype, "performedByName", void 0);
 /**
  * Update promotion request
  * All fields optional except ID
@@ -355,6 +369,8 @@ class UpdatePromotionRequest {
     flashSaleEndTime;
     conditions;
     isActive;
+    performedBy;
+    performedByName;
 }
 exports.UpdatePromotionRequest = UpdatePromotionRequest;
 __decorate([
@@ -521,6 +537,18 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdatePromotionRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID performing the action (for audit log)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdatePromotionRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User name performing the action (for audit log)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdatePromotionRequest.prototype, "performedByName", void 0);
 /**
  * Delete promotion request
  */
@@ -528,6 +556,8 @@ class DeletePromotionRequest {
     id;
     tenantId;
     hotelId;
+    performedBy;
+    performedByName;
 }
 exports.DeletePromotionRequest = DeletePromotionRequest;
 __decorate([
@@ -546,6 +576,18 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeletePromotionRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID performing the action (for audit log)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeletePromotionRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User name performing the action (for audit log)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeletePromotionRequest.prototype, "performedByName", void 0);
 /**
  * Validate promotion code request
  */

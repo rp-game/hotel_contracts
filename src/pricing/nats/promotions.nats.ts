@@ -250,6 +250,16 @@ export class CreatePromotionRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional({ description: 'User ID performing the action (for audit log)' })
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional({ description: 'User name performing the action (for audit log)' })
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 /**
@@ -395,6 +405,16 @@ export class UpdatePromotionRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional({ description: 'User ID performing the action (for audit log)' })
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional({ description: 'User name performing the action (for audit log)' })
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 /**
@@ -413,6 +433,16 @@ export class DeletePromotionRequest {
   @IsOptional()
   @IsUUID()
   hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'User ID performing the action (for audit log)' })
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional({ description: 'User name performing the action (for audit log)' })
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 /**

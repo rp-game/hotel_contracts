@@ -57,6 +57,8 @@ export declare class CreatePromotionRequest {
     flashSaleEndTime?: string;
     conditions?: PromotionConditionsDto;
     isActive?: boolean;
+    performedBy?: string;
+    performedByName?: string;
 }
 /**
  * Update promotion request
@@ -88,6 +90,8 @@ export declare class UpdatePromotionRequest {
     flashSaleEndTime?: string;
     conditions?: PromotionConditionsDto;
     isActive?: boolean;
+    performedBy?: string;
+    performedByName?: string;
 }
 /**
  * Delete promotion request
@@ -96,6 +100,8 @@ export declare class DeletePromotionRequest {
     id: string;
     tenantId: string;
     hotelId?: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 /**
  * Validate promotion code request
