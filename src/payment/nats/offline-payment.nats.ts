@@ -118,6 +118,13 @@ export interface CreateOfflinePaymentNatsRequest {
    * Required when originalCurrency is provided.
    */
   exchangeRate?: number;
+
+  /**
+   * Rounding unit for the converted VND amount (e.g. 1 for VND, 0.01 for USD cents).
+   * Defaults to 1 (round to nearest VND) when not provided.
+   * Formula: Math.round(originalAmount * exchangeRate / rounding) * rounding
+   */
+  rounding?: number;
 }
 
 /**

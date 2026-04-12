@@ -70,7 +70,11 @@ export declare class ResolvedConfigMetadata {
  */
 export declare class GatewayConfiguration {
     environment?: string;
-    currencies?: string[];
+    currencies?: string[] | {
+        code: string;
+        rate: number;
+        rounding?: number;
+    }[];
     accessCode?: string;
     url?: string;
     returnUrl?: string;
@@ -291,7 +295,11 @@ export declare class UpdateGatewayFees {
 export declare class UpdateGatewayConfigPayload {
     webhook?: string;
     environment?: string;
-    currencies?: string[];
+    currencies?: string[] | {
+        code: string;
+        rate: number;
+        rounding?: number;
+    }[];
     supportedMethods?: string[];
     [key: string]: any;
 }
@@ -410,7 +418,11 @@ export interface UpdateGatewayRequest {
      */
     configuration?: {
         environment?: string;
-        currencies?: string[];
+        currencies?: string[] | {
+            code: string;
+            rate: number;
+            rounding?: number;
+        }[];
         accessCode?: string;
         url?: string;
         returnUrl?: string;

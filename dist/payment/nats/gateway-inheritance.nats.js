@@ -165,7 +165,7 @@ __decorate([
     __metadata("design:type", String)
 ], GatewayConfiguration.prototype, "environment", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Supported currencies', type: [String] }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Supported currencies (string[] for simple list, or {code,rate,rounding?}[] for multi-currency with exchange rates)' }),
     __metadata("design:type", Array)
 ], GatewayConfiguration.prototype, "currencies", void 0);
 __decorate([
@@ -411,7 +411,7 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateGatewayConfigPayload.prototype, "environment", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Supported currencies', type: [String] }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Supported currencies (string[] for simple list, or {code,rate,rounding?}[] for multi-currency with exchange rates)' }),
     __metadata("design:type", Array)
 ], UpdateGatewayConfigPayload.prototype, "currencies", void 0);
 __decorate([

@@ -110,8 +110,8 @@ export class GatewayConfiguration {
   @ApiPropertyOptional({ description: 'Execution environment (SANDBOX, PRODUCTION)' })
   environment?: string;
 
-  @ApiPropertyOptional({ description: 'Supported currencies', type: [String] })
-  currencies?: string[];
+  @ApiPropertyOptional({ description: 'Supported currencies (string[] for simple list, or {code,rate,rounding?}[] for multi-currency with exchange rates)' })
+  currencies?: string[] | { code: string; rate: number; rounding?: number }[];
 
   @ApiPropertyOptional({ description: 'OnePay-specific: access code' })
   accessCode?: string;
@@ -455,8 +455,8 @@ export class UpdateGatewayConfigPayload {
   @ApiPropertyOptional({ description: 'Environment (SANDBOX, PRODUCTION)' })
   environment?: string;
 
-  @ApiPropertyOptional({ description: 'Supported currencies', type: [String] })
-  currencies?: string[];
+  @ApiPropertyOptional({ description: 'Supported currencies (string[] for simple list, or {code,rate,rounding?}[] for multi-currency with exchange rates)' })
+  currencies?: string[] | { code: string; rate: number; rounding?: number }[];
 
   @ApiPropertyOptional({ description: 'Supported payment methods', type: [String] })
   supportedMethods?: string[];
@@ -619,7 +619,7 @@ export interface UpdateGatewayRequest {
    */
   configuration?: {
     environment?: string;
-    currencies?: string[];
+    currencies?: string[] | { code: string; rate: number; rounding?: number }[];
     accessCode?: string;
     url?: string;
     returnUrl?: string;
