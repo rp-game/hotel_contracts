@@ -125,10 +125,12 @@ export class CreatePromotionRequest {
   @ApiProperty({
     description: 'Promotion scope: HOTEL = specific hotel only, CHAIN = all hotels in chain',
     enum: ['HOTEL', 'CHAIN'],
-    default: 'HOTEL'
+    default: 'HOTEL',
+    required: false
   })
+  @IsOptional()
   @IsEnum(['HOTEL', 'CHAIN'])
-  promotionScope: PromotionScope;
+  promotionScope?: PromotionScope;
 
   @ApiProperty({ description: 'Promotion name', maxLength: 100 })
   @IsString()

@@ -34,7 +34,7 @@ export declare class GetPromotionsRequest {
 export declare class CreatePromotionRequest {
     tenantId: string;
     hotelId?: string;
-    promotionScope: PromotionScope;
+    promotionScope?: PromotionScope;
     name: string;
     code: string;
     description?: string;

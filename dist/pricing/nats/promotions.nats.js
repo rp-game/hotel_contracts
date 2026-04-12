@@ -177,8 +177,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Promotion scope: HOTEL = specific hotel only, CHAIN = all hotels in chain',
         enum: ['HOTEL', 'CHAIN'],
-        default: 'HOTEL'
+        default: 'HOTEL',
+        required: false
     }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(['HOTEL', 'CHAIN']),
     __metadata("design:type", String)
 ], CreatePromotionRequest.prototype, "promotionScope", void 0);
