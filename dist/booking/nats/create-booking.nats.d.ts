@@ -350,6 +350,11 @@ export interface CreateBookingResponse {
      * Amount already paid/deposited
      */
     paidAmount: number;
+    corporateId?: string | null;
+    corporateName?: string | null;
+    travelAgentId?: string | null;
+    travelAgentName?: string | null;
+    agentReference?: string | null;
 }
 /**
  * Full NATS response type for create booking

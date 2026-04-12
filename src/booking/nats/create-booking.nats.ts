@@ -423,6 +423,13 @@ export interface CreateBookingResponse {
    * Amount already paid/deposited
    */
   paidAmount: number;
+
+  // Corporate / travel agent info
+  corporateId?: string | null;
+  corporateName?: string | null;
+  travelAgentId?: string | null;
+  travelAgentName?: string | null;
+  agentReference?: string | null;
 }
 
 /**
