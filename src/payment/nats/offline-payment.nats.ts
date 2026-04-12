@@ -94,6 +94,12 @@ export interface CreateOfflinePaymentNatsRequest {
    * Cashier shift ID (auto-linked if staff has an active shift)
    */
   cashierShiftId?: string;
+
+  /**
+   * Auto-confirm the payment immediately after creation (SIMPLE bank transfer mode).
+   * When true, payment-service confirms the payment atomically in the same transaction.
+   */
+  autoConfirm?: boolean;
 }
 
 /**
@@ -242,3 +248,34 @@ export interface FindOfflinePaymentsNatsRequest {
  * Full NATS response type for find offline payments
  */
 export type FindOfflinePaymentsNatsResponse = NatsResponse<OfflinePaymentData[]>;
+
+/**
+ * NATS request to confirm an offline payment (bank transfer verification)
+ * Pattern: offline-payment.confirm
+ * Used by: api-gateway → accountant confirm flow
+ */
+export interface ConfirmOfflinePaymentNatsRequest {
+  id: string;
+  tenantId: string;
+  hotelId: string;
+  confirmedBy: string;
+  transactionId?: string;
+  notes?: string;
+}
+
+export type ConfirmOfflinePaymentNatsResponse = NatsResponse<OfflinePaymentData>;
+
+/**
+ * NATS request to reject an offline payment
+ * Pattern: offline-payment.reject
+ * Used by: api-gateway → accountant reject flow
+ */
+export interface RejectOfflinePaymentNatsRequest {
+  id: string;
+  tenantId: string;
+  hotelId: string;
+  rejectedBy: string;
+  notes?: string;
+}
+
+export type RejectOfflinePaymentNatsResponse = NatsResponse<OfflinePaymentData>;

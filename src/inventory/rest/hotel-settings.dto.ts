@@ -215,6 +215,15 @@ export class HotelOperationSettingsDto {
   @IsOptional()
   @IsString()
   procurementMode?: string;
+
+  @ApiPropertyOptional({
+    description: 'Bank transfer verification mode. SIMPLE = receptionist confirms immediately (no transaction ID required). VERIFIED = payment stays PENDING until accountant enters transaction ID.',
+    enum: ['SIMPLE', 'VERIFIED'],
+    default: 'VERIFIED',
+  })
+  @IsOptional()
+  @IsEnum(['SIMPLE', 'VERIFIED'])
+  bankTransferVerificationMode?: 'SIMPLE' | 'VERIFIED';
 }
 
 /**

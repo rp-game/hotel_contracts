@@ -159,6 +159,7 @@ class HotelOperationSettingsDto {
     shiftConfig;
     isMultiWarehouse;
     procurementMode;
+    bankTransferVerificationMode;
 }
 exports.HotelOperationSettingsDto = HotelOperationSettingsDto;
 __decorate([
@@ -277,6 +278,16 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], HotelOperationSettingsDto.prototype, "procurementMode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Bank transfer verification mode. SIMPLE = receptionist confirms immediately (no transaction ID required). VERIFIED = payment stays PENDING until accountant enters transaction ID.',
+        enum: ['SIMPLE', 'VERIFIED'],
+        default: 'VERIFIED',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(['SIMPLE', 'VERIFIED']),
+    __metadata("design:type", String)
+], HotelOperationSettingsDto.prototype, "bankTransferVerificationMode", void 0);
 /**
  * Update Hotel Settings Request DTO
  * Used for POST /hotels/:id/settings endpoint

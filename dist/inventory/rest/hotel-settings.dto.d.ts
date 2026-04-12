@@ -48,6 +48,7 @@ export declare class HotelOperationSettingsDto {
     shiftConfig?: ShiftConfigDto;
     isMultiWarehouse?: boolean;
     procurementMode?: string;
+    bankTransferVerificationMode?: 'SIMPLE' | 'VERIFIED';
 }
 /**
  * Update Hotel Settings Request DTO
