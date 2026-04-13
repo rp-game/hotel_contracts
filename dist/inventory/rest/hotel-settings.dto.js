@@ -149,6 +149,7 @@ class HotelOperationSettingsDto {
     checkOutTime;
     timezone;
     currency;
+    currencyRounding;
     defaultCleaningDuration;
     gracePeriodMinutes;
     autoAssignRooms;
@@ -186,6 +187,13 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], HotelOperationSettingsDto.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Rounding unit for monetary amounts (e.g. 1 for VND, 0.01 for USD)', example: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0.000001),
+    __metadata("design:type", Number)
+], HotelOperationSettingsDto.prototype, "currencyRounding", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Default cleaning duration in minutes', example: 60 }),
     (0, class_validator_1.IsOptional)(),

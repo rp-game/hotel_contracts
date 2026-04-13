@@ -35,6 +35,7 @@ export declare class HotelOperationSettingsDto {
     checkOutTime?: string;
     timezone?: string;
     currency?: string;
+    currencyRounding?: number;
     defaultCleaningDuration?: number;
     gracePeriodMinutes?: number;
     autoAssignRooms?: boolean;

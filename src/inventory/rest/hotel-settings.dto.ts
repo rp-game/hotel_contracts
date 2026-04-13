@@ -131,6 +131,12 @@ export class HotelOperationSettingsDto {
   @IsString()
   currency?: string;
 
+  @ApiPropertyOptional({ description: 'Rounding unit for monetary amounts (e.g. 1 for VND, 0.01 for USD)', example: 1 })
+  @IsOptional()
+  @IsNumber()
+  @Min(0.000001)
+  currencyRounding?: number;
+
   @ApiPropertyOptional({ description: 'Default cleaning duration in minutes', example: 60 })
   @IsOptional()
   @IsNumber()

@@ -19,6 +19,7 @@ export interface HotelOperationSettings {
     checkOutTime?: string;
     timezone?: string;
     currency?: string;
+    currencyRounding?: number;
     defaultCleaningDuration?: number;
     gracePeriodMinutes?: number;
     autoAssignRooms?: boolean;
@@ -95,6 +96,7 @@ export interface UpdateHotelSettingsPayload {
         checkOutTime?: string;
         timezone?: string;
         currency?: string;
+        currencyRounding?: number;
         defaultCleaningDuration?: number;
         gracePeriodMinutes?: number;
         autoAssignRooms?: boolean;
