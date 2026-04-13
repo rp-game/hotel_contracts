@@ -42,6 +42,9 @@ export declare class TimelineBookingDataDto {
     specialRequests?: string;
     updatedAt?: string;
     roomTypeId?: string;
+    corporateName?: string;
+    salesPersonName?: string;
+    travelAgentName?: string;
 }
 /**
  * A single time block within a room's timeline

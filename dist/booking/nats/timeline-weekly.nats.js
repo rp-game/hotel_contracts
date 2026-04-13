@@ -130,6 +130,9 @@ class TimelineBookingDataDto {
     specialRequests;
     updatedAt;
     roomTypeId;
+    corporateName;
+    salesPersonName;
+    travelAgentName;
 }
 exports.TimelineBookingDataDto = TimelineBookingDataDto;
 __decorate([
@@ -164,6 +167,18 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Room type ID' }),
     __metadata("design:type", String)
 ], TimelineBookingDataDto.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Corporate account name' }),
+    __metadata("design:type", String)
+], TimelineBookingDataDto.prototype, "corporateName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Sales person name' }),
+    __metadata("design:type", String)
+], TimelineBookingDataDto.prototype, "salesPersonName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Travel agent name' }),
+    __metadata("design:type", String)
+], TimelineBookingDataDto.prototype, "travelAgentName", void 0);
 /**
  * A single time block within a room's timeline
  */

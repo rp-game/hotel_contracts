@@ -113,6 +113,15 @@ export class TimelineBookingDataDto {
 
   @ApiPropertyOptional({ description: 'Room type ID' })
   roomTypeId?: string;
+
+  @ApiPropertyOptional({ description: 'Corporate account name' })
+  corporateName?: string;
+
+  @ApiPropertyOptional({ description: 'Sales person name' })
+  salesPersonName?: string;
+
+  @ApiPropertyOptional({ description: 'Travel agent name' })
+  travelAgentName?: string;
 }
 
 /**
