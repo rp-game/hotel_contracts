@@ -103,6 +103,9 @@ export class TimelineEvent {
     specialRequests?: string;
     updatedAt?: string;
     roomTypeId?: string;
+    corporateName?: string;
+    salesPersonName?: string;
+    travelAgentName?: string;
   };
 }
 

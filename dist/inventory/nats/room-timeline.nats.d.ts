@@ -71,6 +71,9 @@ export declare class TimelineEvent {
         specialRequests?: string;
         updatedAt?: string;
         roomTypeId?: string;
+        corporateName?: string;
+        salesPersonName?: string;
+        travelAgentName?: string;
     };
 }
 export interface BookingTimelineItem {

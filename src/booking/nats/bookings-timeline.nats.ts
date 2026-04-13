@@ -29,6 +29,7 @@ export interface GetBookingsTimelinePayload {
  */
 export interface BookingTimelineData {
   id: string;
+  bookingCode?: string;
   guestName: string;
   roomTypeId: string;
   roomTypeName?: string;
@@ -41,6 +42,10 @@ export interface BookingTimelineData {
   adultCount?: number;
   childCount?: number;
   specialRequests?: string;
+  totalAmount?: number;
+  corporateName?: string;
+  salesPersonName?: string;
+  travelAgentName?: string;
 }
 
 export type GetBookingsTimelineResponse = BookingTimelineData[];
