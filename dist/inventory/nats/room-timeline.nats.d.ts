@@ -74,6 +74,7 @@ export declare class TimelineEvent {
         corporateName?: string;
         salesPersonName?: string;
         travelAgentName?: string;
+        source?: string;
     };
 }
 export interface BookingTimelineItem {

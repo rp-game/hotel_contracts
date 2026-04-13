@@ -46,6 +46,7 @@ export interface BookingTimelineData {
   corporateName?: string;
   salesPersonName?: string;
   travelAgentName?: string;
+  source?: string;
 }
 
 export type GetBookingsTimelineResponse = BookingTimelineData[];

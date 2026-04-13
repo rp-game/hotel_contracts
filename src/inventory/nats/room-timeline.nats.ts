@@ -106,6 +106,7 @@ export class TimelineEvent {
     corporateName?: string;
     salesPersonName?: string;
     travelAgentName?: string;
+    source?: string;
   };
 }
 
