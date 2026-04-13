@@ -325,6 +325,11 @@ export interface FindBookingsNatsRequest {
   bookingReference?: string;
 
   /**
+   * Full-text search across bookingCode, guestName, email, phone (OR condition, min 3 chars)
+   */
+  search?: string;
+
+  /**
    * Check-in date start filter (YYYY-MM-DD)
    */
   checkInDateStart?: string;
