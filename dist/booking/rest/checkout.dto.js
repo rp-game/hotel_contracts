@@ -15,11 +15,181 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MobileCheckoutResponseDto = exports.CheckoutInfoResponseDto = exports.QRCheckoutRequestDto = exports.MobileCheckoutRequestDto = exports.GpsLocationDto = exports.RoomInspectionDto = exports.DamageReportDto = exports.CheckoutStatus = exports.RoomCondition = exports.SearchCheckoutsResponseDto = exports.ValidateQRCodeRequestDto = exports.CheckoutItemsResponseDto = exports.CheckoutHistoryResponseDto = exports.CheckoutHistoryItemDto = exports.CompleteCheckoutResponseDto = exports.StartCheckoutResponseDto = exports.CompleteCheckoutRequestDto = exports.StartCheckoutRequestDto = void 0;
+exports.MobileCheckoutResponseDto = exports.CheckoutInfoResponseDto = exports.QRCheckoutRequestDto = exports.MobileCheckoutRequestDto = exports.GpsLocationDto = exports.RoomInspectionDto = exports.DamageReportDto = exports.CheckoutStatus = exports.RoomCondition = exports.SearchCheckoutsResponseDto = exports.ValidateQRCodeRequestDto = exports.CheckoutItemsResponseDto = exports.CheckoutHistoryResponseDto = exports.CheckoutHistoryItemDto = exports.CompleteCheckoutResponseDto = exports.StartCheckoutResponseDto = exports.CompleteCheckoutRequestDto = exports.StartCheckoutRequestDto = exports.CheckOutBookingDto = exports.BillItemDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 const mobile_checkout_nats_1 = require("../nats/mobile-checkout.nats");
+// ============= SHARED CHECKOUT DTO (used by api-gateway + booking-service) =============
+class BillItemDto {
+    description;
+    quantity;
+    unitPrice;
+    totalPrice;
+    category;
+}
+exports.BillItemDto = BillItemDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Item description' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], BillItemDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Quantity' }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], BillItemDto.prototype, "quantity", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Unit price' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], BillItemDto.prototype, "unitPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Total price' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], BillItemDto.prototype, "totalPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Item category', enum: ['ROOM', 'SERVICE', 'TAX', 'DEPOSIT'] }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], BillItemDto.prototype, "category", void 0);
+class CheckOutBookingDto {
+    tenantId;
+    hotelId;
+    bookingId;
+    actualCheckOutTime;
+    additionalCharges;
+    notes;
+    checkedOutBy;
+    finalAmount;
+    finalBillAmount;
+    paymentMethod;
+    paymentAmount;
+    corporateAccountId;
+    billItems;
+    roomInspectionNotes;
+    lateCheckOutFee;
+    lateCheckOutFeeGross;
+    lateCheckOutFeeVatRate;
+    lateCheckOutFeeServiceChargeRate;
+}
+exports.CheckOutBookingDto = CheckOutBookingDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Actual check-out time' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "actualCheckOutTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional charges (net amount)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CheckOutBookingDto.prototype, "additionalCharges", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Special notes for check-out' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID who processed check-out' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "checkedOutBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Final bill amount' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CheckOutBookingDto.prototype, "finalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Final bill amount from frontend calculation', type: String }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumberString)(),
+    __metadata("design:type", Object)
+], CheckOutBookingDto.prototype, "finalBillAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payment method for checkout' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "paymentMethod", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payment amount collected at checkout' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CheckOutBookingDto.prototype, "paymentAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Corporate account ID (required when paymentMethod = COMPANY_ACCOUNT)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "corporateAccountId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Bill items breakdown', type: [BillItemDto] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => BillItemDto),
+    __metadata("design:type", Array)
+], CheckOutBookingDto.prototype, "billItems", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room inspection notes from frontend' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "roomInspectionNotes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Late check-out fee (net, pre-tax)', type: Number }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CheckOutBookingDto.prototype, "lateCheckOutFee", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Late check-out fee gross (including VAT + service charge)', type: Number }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CheckOutBookingDto.prototype, "lateCheckOutFeeGross", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate applied to late check-out fee', type: Number }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CheckOutBookingDto.prototype, "lateCheckOutFeeVatRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service charge rate applied to late check-out fee', type: Number }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CheckOutBookingDto.prototype, "lateCheckOutFeeServiceChargeRate", void 0);
 // ============= REQUEST DTOs =============
 class StartCheckoutRequestDto {
     bookingId;

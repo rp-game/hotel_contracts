@@ -5,6 +5,33 @@
  * Response DTOs: what Swagger shows (string dates, no internal fields)
  */
 import { CheckoutRoomItem, CheckoutBookingSummary } from '../nats/mobile-checkout.nats';
+export declare class BillItemDto {
+    description?: string;
+    quantity?: number;
+    unitPrice?: string;
+    totalPrice?: string;
+    category?: 'ROOM' | 'SERVICE' | 'TAX' | 'DEPOSIT';
+}
+export declare class CheckOutBookingDto {
+    tenantId?: string;
+    hotelId?: string;
+    bookingId?: string;
+    actualCheckOutTime?: string;
+    additionalCharges?: number;
+    notes?: string;
+    checkedOutBy?: string;
+    finalAmount?: number;
+    finalBillAmount?: string | number;
+    paymentMethod?: string;
+    paymentAmount?: number;
+    corporateAccountId?: string;
+    billItems?: BillItemDto[];
+    roomInspectionNotes?: string;
+    lateCheckOutFee?: number;
+    lateCheckOutFeeGross?: number;
+    lateCheckOutFeeVatRate?: number;
+    lateCheckOutFeeServiceChargeRate?: number;
+}
 export declare class StartCheckoutRequestDto {
     bookingId: string;
 }

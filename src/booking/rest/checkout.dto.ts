@@ -6,9 +6,132 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsOptional, IsArray, IsNumber, IsBoolean, IsEnum, IsDateString } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsArray, IsNumber, IsBoolean, IsEnum, IsDateString, IsUUID, IsNumberString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CheckoutRoomItem, CheckoutBookingSummary } from '../nats/mobile-checkout.nats';
+
+// ============= SHARED CHECKOUT DTO (used by api-gateway + booking-service) =============
+
+export class BillItemDto {
+  @ApiPropertyOptional({ description: 'Item description' })
+  @IsString()
+  @IsOptional()
+  description?: string;
+
+  @ApiPropertyOptional({ description: 'Quantity' })
+  @IsNumber()
+  @IsOptional()
+  quantity?: number;
+
+  @ApiPropertyOptional({ description: 'Unit price' })
+  @IsString()
+  @IsOptional()
+  unitPrice?: string;
+
+  @ApiPropertyOptional({ description: 'Total price' })
+  @IsString()
+  @IsOptional()
+  totalPrice?: string;
+
+  @ApiPropertyOptional({ description: 'Item category', enum: ['ROOM', 'SERVICE', 'TAX', 'DEPOSIT'] })
+  @IsString()
+  @IsOptional()
+  category?: 'ROOM' | 'SERVICE' | 'TAX' | 'DEPOSIT';
+}
+
+export class CheckOutBookingDto {
+  @ApiPropertyOptional({ description: 'Tenant ID' })
+  @IsOptional()
+  @IsUUID()
+  tenantId?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID' })
+  @IsOptional()
+  @IsUUID()
+  hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Booking ID' })
+  @IsOptional()
+  @IsUUID()
+  bookingId?: string;
+
+  @ApiPropertyOptional({ description: 'Actual check-out time' })
+  @IsOptional()
+  @IsString()
+  actualCheckOutTime?: string;
+
+  @ApiPropertyOptional({ description: 'Additional charges (net amount)' })
+  @IsOptional()
+  @IsNumber()
+  additionalCharges?: number;
+
+  @ApiPropertyOptional({ description: 'Special notes for check-out' })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+
+  @ApiPropertyOptional({ description: 'User ID who processed check-out' })
+  @IsOptional()
+  @IsUUID()
+  checkedOutBy?: string;
+
+  @ApiPropertyOptional({ description: 'Final bill amount' })
+  @IsOptional()
+  @IsNumber()
+  finalAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Final bill amount from frontend calculation', type: String })
+  @IsOptional()
+  @IsNumberString()
+  finalBillAmount?: string | number;
+
+  @ApiPropertyOptional({ description: 'Payment method for checkout' })
+  @IsOptional()
+  @IsString()
+  paymentMethod?: string;
+
+  @ApiPropertyOptional({ description: 'Payment amount collected at checkout' })
+  @IsOptional()
+  @IsNumber()
+  paymentAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Corporate account ID (required when paymentMethod = COMPANY_ACCOUNT)' })
+  @IsOptional()
+  @IsUUID()
+  corporateAccountId?: string;
+
+  @ApiPropertyOptional({ description: 'Bill items breakdown', type: [BillItemDto] })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => BillItemDto)
+  billItems?: BillItemDto[];
+
+  @ApiPropertyOptional({ description: 'Room inspection notes from frontend' })
+  @IsOptional()
+  @IsString()
+  roomInspectionNotes?: string;
+
+  @ApiPropertyOptional({ description: 'Late check-out fee (net, pre-tax)', type: Number })
+  @IsOptional()
+  @IsNumber()
+  lateCheckOutFee?: number;
+
+  @ApiPropertyOptional({ description: 'Late check-out fee gross (including VAT + service charge)', type: Number })
+  @IsOptional()
+  @IsNumber()
+  lateCheckOutFeeGross?: number;
+
+  @ApiPropertyOptional({ description: 'VAT rate applied to late check-out fee', type: Number })
+  @IsOptional()
+  @IsNumber()
+  lateCheckOutFeeVatRate?: number;
+
+  @ApiPropertyOptional({ description: 'Service charge rate applied to late check-out fee', type: Number })
+  @IsOptional()
+  @IsNumber()
+  lateCheckOutFeeServiceChargeRate?: number;
+}
 
 // ============= REQUEST DTOs =============
 
