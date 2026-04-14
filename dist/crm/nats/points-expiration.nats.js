@@ -304,6 +304,7 @@ __decorate([
  */
 class MemberWithExpiringPointsNatsResponse {
     memberId;
+    expirationId;
     customerId;
     customerName;
     customerEmail;
@@ -322,6 +323,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Member ID' }),
     __metadata("design:type", String)
 ], MemberWithExpiringPointsNatsResponse.prototype, "memberId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Earliest points expiration record ID' }),
+    __metadata("design:type", String)
+], MemberWithExpiringPointsNatsResponse.prototype, "expirationId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Customer ID' }),
     __metadata("design:type", String)

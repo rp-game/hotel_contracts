@@ -532,6 +532,7 @@ export type SendNotificationRemindersNatsResponse = NatsResponse<SendRemindersRe
  */
 export declare class MemberWithExpiringPointsNatsResponse {
     memberId: string;
+    expirationId?: string;
     customerId: string;
     customerName: string;
     customerEmail: string;

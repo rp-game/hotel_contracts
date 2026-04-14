@@ -677,6 +677,9 @@ export class MemberWithExpiringPointsNatsResponse {
   @ApiProperty({ description: 'Member ID' })
   memberId: string;
 
+  @ApiPropertyOptional({ description: 'Earliest points expiration record ID' })
+  expirationId?: string;
+
   @ApiProperty({ description: 'Customer ID' })
   customerId: string;
 
