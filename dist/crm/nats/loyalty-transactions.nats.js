@@ -23,7 +23,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FindAllTransactionsByTenantNatsRequest = exports.ListLoyaltyTransactionsNatsResponse = exports.LoyaltyTransactionNatsResponse = exports.LoyaltyTransactionType = void 0;
+exports.FindAllTransactionsByTenantNatsRequest = exports.ListLoyaltyTransactionsNatsResponse = exports.LoyaltyTransactionNatsResponse = exports.CreateLoyaltyTransactionNatsRequest = exports.LoyaltyTransactionType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Loyalty Transaction Type Enum
@@ -40,6 +40,73 @@ var LoyaltyTransactionType;
     LoyaltyTransactionType["TIER_DOWNGRADE"] = "TIER_DOWNGRADE";
     LoyaltyTransactionType["JOIN_PROGRAM"] = "JOIN_PROGRAM";
 })(LoyaltyTransactionType || (exports.LoyaltyTransactionType = LoyaltyTransactionType = {}));
+/**
+ * Create Loyalty Transaction Request
+ * Pattern: crm.loyalty_transaction.create
+ */
+class CreateLoyaltyTransactionNatsRequest {
+    tenantId;
+    memberId;
+    transactionType;
+    pointsChanged;
+    transactionDate;
+    description;
+    relatedInteractionId;
+    staffId;
+    pointsExpirationDate;
+    referenceId;
+    referenceType;
+    metadata;
+}
+exports.CreateLoyaltyTransactionNatsRequest = CreateLoyaltyTransactionNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], CreateLoyaltyTransactionNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Loyalty Member ID' }),
+    __metadata("design:type", String)
+], CreateLoyaltyTransactionNatsRequest.prototype, "memberId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: LoyaltyTransactionType, description: 'Transaction type' }),
+    __metadata("design:type", String)
+], CreateLoyaltyTransactionNatsRequest.prototype, "transactionType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Points changed (positive = add, negative = deduct)' }),
+    __metadata("design:type", Number)
+], CreateLoyaltyTransactionNatsRequest.prototype, "pointsChanged", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Transaction date (ISO format)', type: String, format: 'date-time' }),
+    __metadata("design:type", String)
+], CreateLoyaltyTransactionNatsRequest.prototype, "transactionDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Description' }),
+    __metadata("design:type", String)
+], CreateLoyaltyTransactionNatsRequest.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Related interaction ID' }),
+    __metadata("design:type", String)
+], CreateLoyaltyTransactionNatsRequest.prototype, "relatedInteractionId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Staff ID who processed the transaction' }),
+    __metadata("design:type", String)
+], CreateLoyaltyTransactionNatsRequest.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Points expiration date (ISO format)', type: String, format: 'date-time' }),
+    __metadata("design:type", String)
+], CreateLoyaltyTransactionNatsRequest.prototype, "pointsExpirationDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Reference ID (e.g. booking ID)' }),
+    __metadata("design:type", String)
+], CreateLoyaltyTransactionNatsRequest.prototype, "referenceId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Reference type (e.g. BOOKING)' }),
+    __metadata("design:type", String)
+], CreateLoyaltyTransactionNatsRequest.prototype, "referenceType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional metadata' }),
+    __metadata("design:type", Object)
+], CreateLoyaltyTransactionNatsRequest.prototype, "metadata", void 0);
 /**
  * Loyalty Transaction Response
  */

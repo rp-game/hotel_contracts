@@ -35,18 +35,41 @@ export enum LoyaltyTransactionType {
  * Create Loyalty Transaction Request
  * Pattern: crm.loyalty_transaction.create
  */
-export interface CreateLoyaltyTransactionNatsRequest {
-  tenantId: string;
-  memberId: string;
-  transactionType: LoyaltyTransactionType;
-  pointsChanged: number;
-  transactionDate: string; // ISO format date string
+export class CreateLoyaltyTransactionNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiProperty({ description: 'Loyalty Member ID' })
+  memberId!: string;
+
+  @ApiProperty({ enum: LoyaltyTransactionType, description: 'Transaction type' })
+  transactionType!: LoyaltyTransactionType;
+
+  @ApiProperty({ description: 'Points changed (positive = add, negative = deduct)' })
+  pointsChanged!: number;
+
+  @ApiProperty({ description: 'Transaction date (ISO format)', type: String, format: 'date-time' })
+  transactionDate!: string;
+
+  @ApiPropertyOptional({ description: 'Description' })
   description?: string;
+
+  @ApiPropertyOptional({ description: 'Related interaction ID' })
   relatedInteractionId?: string;
+
+  @ApiPropertyOptional({ description: 'Staff ID who processed the transaction' })
   staffId?: string;
-  pointsExpirationDate?: string; // ISO format date string
+
+  @ApiPropertyOptional({ description: 'Points expiration date (ISO format)', type: String, format: 'date-time' })
+  pointsExpirationDate?: string;
+
+  @ApiPropertyOptional({ description: 'Reference ID (e.g. booking ID)' })
   referenceId?: string;
+
+  @ApiPropertyOptional({ description: 'Reference type (e.g. BOOKING)' })
   referenceType?: string;
+
+  @ApiPropertyOptional({ description: 'Additional metadata' })
   metadata?: Record<string, any>;
 }
 

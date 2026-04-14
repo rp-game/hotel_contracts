@@ -31,7 +31,7 @@ export declare enum LoyaltyTransactionType {
  * Create Loyalty Transaction Request
  * Pattern: crm.loyalty_transaction.create
  */
-export interface CreateLoyaltyTransactionNatsRequest {
+export declare class CreateLoyaltyTransactionNatsRequest {
     tenantId: string;
     memberId: string;
     transactionType: LoyaltyTransactionType;
