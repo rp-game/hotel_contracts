@@ -21,4 +21,5 @@ export * from './marketing-automation.nats';
 export * from './email-marketing.nats';
 export * from './sms-marketing.nats';
 export * from './guest-services.nats';
+export * from './service-alerts.nats';
 //# sourceMappingURL=index.d.ts.map

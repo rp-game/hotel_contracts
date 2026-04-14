@@ -38,3 +38,6 @@ export * from './sms-marketing.nats';
 
 // Guest Services
 export * from './guest-services.nats';
+
+// Service Alerts
+export * from './service-alerts.nats';

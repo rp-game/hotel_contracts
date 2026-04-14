@@ -46,4 +46,6 @@ __exportStar(require("./email-marketing.nats"), exports);
 __exportStar(require("./sms-marketing.nats"), exports);
 // Guest Services
 __exportStar(require("./guest-services.nats"), exports);
+// Service Alerts
+__exportStar(require("./service-alerts.nats"), exports);
 //# sourceMappingURL=index.js.map

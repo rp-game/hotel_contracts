@@ -9,6 +9,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsOptional, IsArray, IsNumber, IsBoolean, IsEnum, IsDateString, IsUUID, IsNumberString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CheckoutRoomItem, CheckoutBookingSummary } from '../nats/mobile-checkout.nats';
+import { PaymentMethod } from '../../payment/enums/payment.enum';
 
 // ============= SHARED CHECKOUT DTO (used by api-gateway + booking-service) =============
 
@@ -18,10 +19,10 @@ export class FinalPaymentDto {
   @IsNotEmpty()
   amount: number;
 
-  @ApiProperty({ description: 'Payment method' })
-  @IsString()
+  @ApiProperty({ description: 'Payment method', enum: PaymentMethod })
+  @IsEnum(PaymentMethod)
   @IsNotEmpty()
-  paymentMethod: string;
+  paymentMethod: PaymentMethod;
 
   @ApiPropertyOptional({ description: 'Payment notes' })
   @IsOptional()

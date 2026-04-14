@@ -5,9 +5,10 @@
  * Response DTOs: what Swagger shows (string dates, no internal fields)
  */
 import { CheckoutRoomItem, CheckoutBookingSummary } from '../nats/mobile-checkout.nats';
+import { PaymentMethod } from '../../payment/enums/payment.enum';
 export declare class FinalPaymentDto {
     amount: number;
-    paymentMethod: string;
+    paymentMethod: PaymentMethod;
     notes?: string;
     corporateAccountId?: string;
 }

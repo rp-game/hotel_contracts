@@ -20,6 +20,7 @@ const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 const mobile_checkout_nats_1 = require("../nats/mobile-checkout.nats");
+const payment_enum_1 = require("../../payment/enums/payment.enum");
 // ============= SHARED CHECKOUT DTO (used by api-gateway + booking-service) =============
 class FinalPaymentDto {
     amount;
@@ -35,8 +36,8 @@ __decorate([
     __metadata("design:type", Number)
 ], FinalPaymentDto.prototype, "amount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Payment method' }),
-    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ description: 'Payment method', enum: payment_enum_1.PaymentMethod }),
+    (0, class_validator_1.IsEnum)(payment_enum_1.PaymentMethod),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], FinalPaymentDto.prototype, "paymentMethod", void 0);
