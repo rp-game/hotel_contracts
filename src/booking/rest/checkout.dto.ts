@@ -12,6 +12,28 @@ import { CheckoutRoomItem, CheckoutBookingSummary } from '../nats/mobile-checkou
 
 // ============= SHARED CHECKOUT DTO (used by api-gateway + booking-service) =============
 
+export class FinalPaymentDto {
+  @ApiProperty({ description: 'Payment amount' })
+  @IsNumber()
+  @IsNotEmpty()
+  amount: number;
+
+  @ApiProperty({ description: 'Payment method' })
+  @IsString()
+  @IsNotEmpty()
+  paymentMethod: string;
+
+  @ApiPropertyOptional({ description: 'Payment notes' })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+
+  @ApiPropertyOptional({ description: 'Corporate account ID (required when paymentMethod = COMPANY_ACCOUNT)' })
+  @IsOptional()
+  @IsUUID()
+  corporateAccountId?: string;
+}
+
 export class BillItemDto {
   @ApiPropertyOptional({ description: 'Item description' })
   @IsString()
@@ -111,6 +133,13 @@ export class CheckOutBookingDto {
   @IsOptional()
   @IsString()
   roomInspectionNotes?: string;
+
+  @ApiPropertyOptional({ description: 'Final payments breakdown', type: [FinalPaymentDto] })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => FinalPaymentDto)
+  finalPayments?: FinalPaymentDto[];
 
   @ApiPropertyOptional({ description: 'Late check-out fee (net, pre-tax)', type: Number })
   @IsOptional()

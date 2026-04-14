@@ -15,12 +15,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MobileCheckoutResponseDto = exports.CheckoutInfoResponseDto = exports.QRCheckoutRequestDto = exports.MobileCheckoutRequestDto = exports.GpsLocationDto = exports.RoomInspectionDto = exports.DamageReportDto = exports.CheckoutStatus = exports.RoomCondition = exports.SearchCheckoutsResponseDto = exports.ValidateQRCodeRequestDto = exports.CheckoutItemsResponseDto = exports.CheckoutHistoryResponseDto = exports.CheckoutHistoryItemDto = exports.CompleteCheckoutResponseDto = exports.StartCheckoutResponseDto = exports.CompleteCheckoutRequestDto = exports.StartCheckoutRequestDto = exports.CheckOutBookingDto = exports.BillItemDto = void 0;
+exports.MobileCheckoutResponseDto = exports.CheckoutInfoResponseDto = exports.QRCheckoutRequestDto = exports.MobileCheckoutRequestDto = exports.GpsLocationDto = exports.RoomInspectionDto = exports.DamageReportDto = exports.CheckoutStatus = exports.RoomCondition = exports.SearchCheckoutsResponseDto = exports.ValidateQRCodeRequestDto = exports.CheckoutItemsResponseDto = exports.CheckoutHistoryResponseDto = exports.CheckoutHistoryItemDto = exports.CompleteCheckoutResponseDto = exports.StartCheckoutResponseDto = exports.CompleteCheckoutRequestDto = exports.StartCheckoutRequestDto = exports.CheckOutBookingDto = exports.BillItemDto = exports.FinalPaymentDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 const mobile_checkout_nats_1 = require("../nats/mobile-checkout.nats");
 // ============= SHARED CHECKOUT DTO (used by api-gateway + booking-service) =============
+class FinalPaymentDto {
+    amount;
+    paymentMethod;
+    notes;
+    corporateAccountId;
+}
+exports.FinalPaymentDto = FinalPaymentDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Payment amount' }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], FinalPaymentDto.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Payment method' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], FinalPaymentDto.prototype, "paymentMethod", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payment notes' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FinalPaymentDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Corporate account ID (required when paymentMethod = COMPANY_ACCOUNT)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], FinalPaymentDto.prototype, "corporateAccountId", void 0);
 class BillItemDto {
     description;
     quantity;
@@ -74,6 +105,7 @@ class CheckOutBookingDto {
     corporateAccountId;
     billItems;
     roomInspectionNotes;
+    finalPayments;
     lateCheckOutFee;
     lateCheckOutFeeGross;
     lateCheckOutFeeVatRate;
@@ -166,6 +198,14 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CheckOutBookingDto.prototype, "roomInspectionNotes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Final payments breakdown', type: [FinalPaymentDto] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => FinalPaymentDto),
+    __metadata("design:type", Array)
+], CheckOutBookingDto.prototype, "finalPayments", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Late check-out fee (net, pre-tax)', type: Number }),
     (0, class_validator_1.IsOptional)(),
