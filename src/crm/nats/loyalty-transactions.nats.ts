@@ -141,11 +141,24 @@ export type CreateLoyaltyTransactionNatsResponse = NatsResponse<LoyaltyTransacti
  * Find All Transactions By Tenant Request
  * Pattern: crm.loyalty_transaction.findAllByTenant
  */
-export interface FindAllTransactionsByTenantNatsRequest {
-  tenantId: string;
+export class FindAllTransactionsByTenantNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId!: string;
+
+  @ApiPropertyOptional({ description: 'Page number for pagination' })
   page?: number;
+
+  @ApiPropertyOptional({ description: 'Number of items per page' })
   limit?: number;
+
+  @ApiPropertyOptional({ enum: LoyaltyTransactionType, description: 'Filter by transaction type' })
   type?: LoyaltyTransactionType;
+
+  @ApiPropertyOptional({ description: 'Start date filter (ISO format)' })
+  startDate?: string;
+
+  @ApiPropertyOptional({ description: 'End date filter (ISO format)' })
+  endDate?: string;
 }
 
 /**

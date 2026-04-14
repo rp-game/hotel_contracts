@@ -87,11 +87,13 @@ export type CreateLoyaltyTransactionNatsResponse = NatsResponse<LoyaltyTransacti
  * Find All Transactions By Tenant Request
  * Pattern: crm.loyalty_transaction.findAllByTenant
  */
-export interface FindAllTransactionsByTenantNatsRequest {
+export declare class FindAllTransactionsByTenantNatsRequest {
     tenantId: string;
     page?: number;
     limit?: number;
     type?: LoyaltyTransactionType;
+    startDate?: string;
+    endDate?: string;
 }
 /**
  * Find All Transactions By Tenant Response

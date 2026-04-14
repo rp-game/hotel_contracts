@@ -23,7 +23,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ListLoyaltyTransactionsNatsResponse = exports.LoyaltyTransactionNatsResponse = exports.LoyaltyTransactionType = void 0;
+exports.FindAllTransactionsByTenantNatsRequest = exports.ListLoyaltyTransactionsNatsResponse = exports.LoyaltyTransactionNatsResponse = exports.LoyaltyTransactionType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * Loyalty Transaction Type Enum
@@ -172,4 +172,41 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Number of items per page' }),
     __metadata("design:type", Number)
 ], ListLoyaltyTransactionsNatsResponse.prototype, "limit", void 0);
+/**
+ * Find All Transactions By Tenant Request
+ * Pattern: crm.loyalty_transaction.findAllByTenant
+ */
+class FindAllTransactionsByTenantNatsRequest {
+    tenantId;
+    page;
+    limit;
+    type;
+    startDate;
+    endDate;
+}
+exports.FindAllTransactionsByTenantNatsRequest = FindAllTransactionsByTenantNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], FindAllTransactionsByTenantNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Page number for pagination' }),
+    __metadata("design:type", Number)
+], FindAllTransactionsByTenantNatsRequest.prototype, "page", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of items per page' }),
+    __metadata("design:type", Number)
+], FindAllTransactionsByTenantNatsRequest.prototype, "limit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ enum: LoyaltyTransactionType, description: 'Filter by transaction type' }),
+    __metadata("design:type", String)
+], FindAllTransactionsByTenantNatsRequest.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Start date filter (ISO format)' }),
+    __metadata("design:type", String)
+], FindAllTransactionsByTenantNatsRequest.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'End date filter (ISO format)' }),
+    __metadata("design:type", String)
+], FindAllTransactionsByTenantNatsRequest.prototype, "endDate", void 0);
 //# sourceMappingURL=loyalty-transactions.nats.js.map
