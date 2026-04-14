@@ -773,17 +773,6 @@ export class SyncExpirationRecordsNatsRequest {
   })
   tenantId?: string;
 
-  @ApiPropertyOptional({
-    description: 'If true, seed test expiration records directly (bypasses points_validity_period check). For dev/testing only.',
-    example: true,
-  })
-  seedMode?: boolean;
-
-  @ApiPropertyOptional({
-    description: 'Days until expiration for seeded records (used when seedMode=true). Defaults to 7.',
-    example: 7,
-  })
-  daysUntilExpiration?: number;
 }
 
 /**

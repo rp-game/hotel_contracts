@@ -414,8 +414,6 @@ __decorate([
  */
 class SyncExpirationRecordsNatsRequest {
     tenantId;
-    seedMode;
-    daysUntilExpiration;
 }
 exports.SyncExpirationRecordsNatsRequest = SyncExpirationRecordsNatsRequest;
 __decorate([
@@ -425,20 +423,6 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], SyncExpirationRecordsNatsRequest.prototype, "tenantId", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'If true, seed test expiration records directly (bypasses points_validity_period check). For dev/testing only.',
-        example: true,
-    }),
-    __metadata("design:type", Boolean)
-], SyncExpirationRecordsNatsRequest.prototype, "seedMode", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Days until expiration for seeded records (used when seedMode=true). Defaults to 7.',
-        example: 7,
-    }),
-    __metadata("design:type", Number)
-], SyncExpirationRecordsNatsRequest.prototype, "daysUntilExpiration", void 0);
 /**
  * Sync Expiration Records Result
  * Returned when syncing a single tenant (tenantId provided).

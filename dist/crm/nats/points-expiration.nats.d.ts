@@ -580,8 +580,6 @@ export type FindAllMembersExpiringPointsNatsResponse = NatsResponse<FindAllMembe
  */
 export declare class SyncExpirationRecordsNatsRequest {
     tenantId?: string;
-    seedMode?: boolean;
-    daysUntilExpiration?: number;
 }
 /**
  * Sync Expiration Records Result
