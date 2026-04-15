@@ -35,7 +35,7 @@ export declare class FindOneMinibarTemplateRequest {
 export declare class DeleteMinibarTemplateRequest {
     tenantId: string;
     hotelId: string;
-    id: string;
+    id?: string;
 }
 export declare class MinibarTemplateItemResponseItem {
     id: string;

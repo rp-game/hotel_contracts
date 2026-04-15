@@ -56,7 +56,7 @@ export class FindOneMinibarTemplateRequest {
 export class DeleteMinibarTemplateRequest {
   @ApiProperty() @IsUUID() tenantId: string;
   @ApiProperty() @IsUUID() hotelId: string;
-  @ApiProperty() @IsUUID() id: string;
+  @ApiPropertyOptional() @IsOptional() @IsUUID() id?: string;
 }
 
 // ─── Response ───
