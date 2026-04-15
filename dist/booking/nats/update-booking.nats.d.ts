@@ -129,6 +129,14 @@ export declare class UpdateBookingDto {
      */
     metadata?: Record<string, any>;
     requestInvoice?: boolean;
+    earlyCheckInFee?: number;
+    earlyCheckInFeeGross?: number;
+    earlyCheckInFeeVatRate?: number;
+    earlyCheckInFeeServiceChargeRate?: number;
+    lateCheckOutFee?: number;
+    lateCheckOutFeeGross?: number;
+    lateCheckOutFeeVatRate?: number;
+    lateCheckOutFeeServiceChargeRate?: number;
     /**
      * Pricing mode when dates change:
      * - 'keep_rate_plan': recalculate using original rate plan (default)

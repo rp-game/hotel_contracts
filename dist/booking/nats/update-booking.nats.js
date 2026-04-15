@@ -105,6 +105,14 @@ class UpdateBookingDto {
      */
     metadata;
     requestInvoice;
+    earlyCheckInFee;
+    earlyCheckInFeeGross;
+    earlyCheckInFeeVatRate;
+    earlyCheckInFeeServiceChargeRate;
+    lateCheckOutFee;
+    lateCheckOutFeeGross;
+    lateCheckOutFeeVatRate;
+    lateCheckOutFeeServiceChargeRate;
     /**
      * Pricing mode when dates change:
      * - 'keep_rate_plan': recalculate using original rate plan (default)
@@ -293,6 +301,54 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], UpdateBookingDto.prototype, "requestInvoice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Early check-in fee (net/pre-tax)', type: 'number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateBookingDto.prototype, "earlyCheckInFee", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Early check-in fee gross (post-tax)', type: 'number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateBookingDto.prototype, "earlyCheckInFeeGross", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate applied to early check-in fee', type: 'number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateBookingDto.prototype, "earlyCheckInFeeVatRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service charge rate applied to early check-in fee', type: 'number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateBookingDto.prototype, "earlyCheckInFeeServiceChargeRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Late check-out fee (net/pre-tax)', type: 'number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateBookingDto.prototype, "lateCheckOutFee", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Late check-out fee gross (post-tax)', type: 'number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateBookingDto.prototype, "lateCheckOutFeeGross", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'VAT rate applied to late check-out fee', type: 'number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateBookingDto.prototype, "lateCheckOutFeeVatRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Service charge rate applied to late check-out fee', type: 'number' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateBookingDto.prototype, "lateCheckOutFeeServiceChargeRate", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Pricing recalculation mode when dates change',

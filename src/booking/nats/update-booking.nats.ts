@@ -275,6 +275,46 @@ export class UpdateBookingDto {
   @IsOptional()
   requestInvoice?: boolean;
 
+  @ApiPropertyOptional({ description: 'Early check-in fee (net/pre-tax)', type: 'number' })
+  @IsOptional()
+  @IsNumber()
+  earlyCheckInFee?: number;
+
+  @ApiPropertyOptional({ description: 'Early check-in fee gross (post-tax)', type: 'number' })
+  @IsOptional()
+  @IsNumber()
+  earlyCheckInFeeGross?: number;
+
+  @ApiPropertyOptional({ description: 'VAT rate applied to early check-in fee', type: 'number' })
+  @IsOptional()
+  @IsNumber()
+  earlyCheckInFeeVatRate?: number;
+
+  @ApiPropertyOptional({ description: 'Service charge rate applied to early check-in fee', type: 'number' })
+  @IsOptional()
+  @IsNumber()
+  earlyCheckInFeeServiceChargeRate?: number;
+
+  @ApiPropertyOptional({ description: 'Late check-out fee (net/pre-tax)', type: 'number' })
+  @IsOptional()
+  @IsNumber()
+  lateCheckOutFee?: number;
+
+  @ApiPropertyOptional({ description: 'Late check-out fee gross (post-tax)', type: 'number' })
+  @IsOptional()
+  @IsNumber()
+  lateCheckOutFeeGross?: number;
+
+  @ApiPropertyOptional({ description: 'VAT rate applied to late check-out fee', type: 'number' })
+  @IsOptional()
+  @IsNumber()
+  lateCheckOutFeeVatRate?: number;
+
+  @ApiPropertyOptional({ description: 'Service charge rate applied to late check-out fee', type: 'number' })
+  @IsOptional()
+  @IsNumber()
+  lateCheckOutFeeServiceChargeRate?: number;
+
   /**
    * Pricing mode when dates change:
    * - 'keep_rate_plan': recalculate using original rate plan (default)
