@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID, Min } from 'class-validator';
+
 
 /**
  * Request body for confirming a pending offline payment (bank transfer)
@@ -35,4 +36,19 @@ export class RejectOfflinePaymentDto {
   @IsString()
   @IsOptional()
   notes?: string;
+}
+
+/**
+ * Request body for refunding a confirmed offline payment (partial or full)
+ */
+export class RefundOfflinePaymentDto {
+  @ApiProperty({ description: 'Refund amount (partial or full)', minimum: 1 })
+  @IsNumber()
+  @Min(1)
+  amount: number;
+
+  @ApiProperty({ description: 'Reason for the refund' })
+  @IsString()
+  @IsNotEmpty()
+  reason: string;
 }
