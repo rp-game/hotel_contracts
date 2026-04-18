@@ -17,6 +17,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 // ============================================================================
@@ -305,6 +306,7 @@ export class PaymentCreateInvoiceNatsRequest {
   dueDate: string;
 
   @ApiProperty({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] })
+  @Type(() => CreateInvoiceItemRequest)
   items: CreateInvoiceItemRequest[];
 
   @ApiPropertyOptional({ description: 'Created by user ID' })
@@ -400,6 +402,7 @@ export class PaymentCreateManualInvoiceNatsRequest {
   notes?: string;
 
   @ApiProperty({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] })
+  @Type(() => CreateInvoiceItemRequest)
   items: CreateInvoiceItemRequest[];
 
   @ApiPropertyOptional({ description: 'Created by user ID' })

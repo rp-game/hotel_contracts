@@ -28,6 +28,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VoidInvoiceBodyDto = exports.VoidInvoiceNatsRequest = exports.UpdateInvoiceStatusData = exports.UpdateInvoiceStatusNatsRequest = exports.DownloadInvoicePdfData = exports.DownloadInvoicePdfNatsRequest = exports.SendInvoiceData = exports.SendInvoiceNatsRequest = exports.GetInvoiceData = exports.GetInvoiceNatsRequest = exports.GetPaymentInvoicesData = exports.GetInvoicesNatsRequest = exports.PaymentCreateManualInvoiceNatsRequest = exports.CreateInvoiceData = exports.PaymentCreateInvoiceNatsRequest = exports.InvoiceDataItem = exports.InvoiceItemData = exports.PaymentInvoice = exports.PaymentInvoiceStatus = exports.CreateInvoiceItemRequest = exports.PaymentInvoiceItem = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_transformer_1 = require("class-transformer");
 // ============================================================================
 // SHARED TYPES
 // ============================================================================
@@ -518,6 +519,7 @@ __decorate([
 ], PaymentCreateInvoiceNatsRequest.prototype, "dueDate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] }),
+    (0, class_transformer_1.Type)(() => CreateInvoiceItemRequest),
     __metadata("design:type", Array)
 ], PaymentCreateInvoiceNatsRequest.prototype, "items", void 0);
 __decorate([
@@ -757,6 +759,7 @@ __decorate([
 ], PaymentCreateManualInvoiceNatsRequest.prototype, "notes", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] }),
+    (0, class_transformer_1.Type)(() => CreateInvoiceItemRequest),
     __metadata("design:type", Array)
 ], PaymentCreateManualInvoiceNatsRequest.prototype, "items", void 0);
 __decorate([
