@@ -28,6 +28,7 @@ export declare class CreateEInvoiceDto {
     items: CreateEInvoiceItemDto[];
 }
 export declare class CreateEInvoiceFromInvoiceDto {
+    hotelId?: string;
     customerType: CustomerType;
     customerName?: string;
     customerTaxCode?: string;
