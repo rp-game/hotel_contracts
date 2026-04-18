@@ -136,7 +136,7 @@ export declare class PaymentCreateInvoiceNatsRequest {
     amount: number;
     currency: string;
     dueDate: string;
-    items: PaymentInvoiceItem[];
+    items: CreateInvoiceItemRequest[];
     createdBy?: string;
     createdByName?: string;
 }

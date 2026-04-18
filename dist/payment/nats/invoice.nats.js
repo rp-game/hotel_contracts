@@ -517,7 +517,7 @@ __decorate([
     __metadata("design:type", String)
 ], PaymentCreateInvoiceNatsRequest.prototype, "dueDate", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [PaymentInvoiceItem] }),
+    (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] }),
     __metadata("design:type", Array)
 ], PaymentCreateInvoiceNatsRequest.prototype, "items", void 0);
 __decorate([

@@ -304,8 +304,8 @@ export class PaymentCreateInvoiceNatsRequest {
   @ApiProperty({ description: 'Invoice due date (YYYY-MM-DD)' })
   dueDate: string;
 
-  @ApiProperty({ description: 'Invoice line items', type: [PaymentInvoiceItem] })
-  items: PaymentInvoiceItem[];
+  @ApiProperty({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] })
+  items: CreateInvoiceItemRequest[];
 
   @ApiPropertyOptional({ description: 'Created by user ID' })
   createdBy?: string;
