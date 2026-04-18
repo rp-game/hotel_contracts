@@ -352,23 +352,53 @@ export type PaymentCreateInvoiceNatsResponse = NatsResponse<CreateInvoiceData>;
 // ============================================================================
 
 export class PaymentCreateManualInvoiceNatsRequest {
-  @ApiProperty({ description: 'Tenant ID', example: '123e4567-e89b-12d3-a456-426614174001' })
+  @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
 
-  @ApiProperty({ description: 'Hotel ID', example: '123e4567-e89b-12d3-a456-426614174002' })
+  @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 
-  @ApiProperty({ description: 'Invoice number', example: 'INV-2024-001' })
-  invoiceNumber: string;
+  @ApiPropertyOptional({ description: 'Booking ID' })
+  bookingId?: string;
 
-  @ApiProperty({ description: 'Invoice total amount', example: 1500000 })
-  amount: number;
+  @ApiPropertyOptional({ description: 'Customer ID' })
+  customerId?: string;
 
-  @ApiProperty({ description: 'Currency code', example: 'VND' })
-  currency: string;
+  @ApiPropertyOptional({ description: 'Customer name' })
+  customerName?: string;
 
-  @ApiProperty({ description: 'Invoice due date', example: '2024-02-15' })
-  dueDate: string;
+  @ApiPropertyOptional({ description: 'Customer email' })
+  customerEmail?: string;
+
+  @ApiPropertyOptional({ description: 'Customer phone' })
+  customerPhone?: string;
+
+  @ApiPropertyOptional({ description: 'Customer address' })
+  customerAddress?: string;
+
+  @ApiPropertyOptional({ description: 'Customer tax code' })
+  customerTaxCode?: string;
+
+  @ApiPropertyOptional({ description: 'Invoice number — auto-generated if omitted' })
+  invoiceNumber?: string;
+
+  @ApiPropertyOptional({ description: 'Invoice total amount — calculated from items if omitted' })
+  amount?: number;
+
+  @ApiPropertyOptional({ description: 'Tax rate percentage', default: 0 })
+  taxRate?: number;
+
+  @ApiPropertyOptional({ description: 'Discount amount', default: 0 })
+  discount?: number;
+
+  @ApiPropertyOptional({ description: 'Currency code', default: 'VND' })
+  currency?: string;
+
+  @ApiPropertyOptional({ description: 'Due date (YYYY-MM-DD) — defaults to today + 30 days' })
+  dueDate?: string;
+
+  @ApiPropertyOptional({ description: 'Invoice notes' })
+  notes?: string;
 
   @ApiProperty({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] })
   items: CreateInvoiceItemRequest[];

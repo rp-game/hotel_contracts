@@ -547,39 +547,89 @@ __decorate([
 class PaymentCreateManualInvoiceNatsRequest {
     tenantId;
     hotelId;
+    bookingId;
+    customerId;
+    customerName;
+    customerEmail;
+    customerPhone;
+    customerAddress;
+    customerTaxCode;
     invoiceNumber;
     amount;
+    taxRate;
+    discount;
     currency;
     dueDate;
+    notes;
     items;
     createdBy;
     createdByName;
 }
 exports.PaymentCreateManualInvoiceNatsRequest = PaymentCreateManualInvoiceNatsRequest;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Tenant ID', example: '123e4567-e89b-12d3-a456-426614174001' }),
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
     __metadata("design:type", String)
 ], PaymentCreateManualInvoiceNatsRequest.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID', example: '123e4567-e89b-12d3-a456-426614174002' }),
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
     __metadata("design:type", String)
 ], PaymentCreateManualInvoiceNatsRequest.prototype, "hotelId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Invoice number', example: 'INV-2024-001' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking ID' }),
+    __metadata("design:type", String)
+], PaymentCreateManualInvoiceNatsRequest.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer ID' }),
+    __metadata("design:type", String)
+], PaymentCreateManualInvoiceNatsRequest.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer name' }),
+    __metadata("design:type", String)
+], PaymentCreateManualInvoiceNatsRequest.prototype, "customerName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer email' }),
+    __metadata("design:type", String)
+], PaymentCreateManualInvoiceNatsRequest.prototype, "customerEmail", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer phone' }),
+    __metadata("design:type", String)
+], PaymentCreateManualInvoiceNatsRequest.prototype, "customerPhone", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer address' }),
+    __metadata("design:type", String)
+], PaymentCreateManualInvoiceNatsRequest.prototype, "customerAddress", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Customer tax code' }),
+    __metadata("design:type", String)
+], PaymentCreateManualInvoiceNatsRequest.prototype, "customerTaxCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Invoice number — auto-generated if omitted' }),
     __metadata("design:type", String)
 ], PaymentCreateManualInvoiceNatsRequest.prototype, "invoiceNumber", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Invoice total amount', example: 1500000 }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Invoice total amount — calculated from items if omitted' }),
     __metadata("design:type", Number)
 ], PaymentCreateManualInvoiceNatsRequest.prototype, "amount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Currency code', example: 'VND' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax rate percentage', default: 0 }),
+    __metadata("design:type", Number)
+], PaymentCreateManualInvoiceNatsRequest.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Discount amount', default: 0 }),
+    __metadata("design:type", Number)
+], PaymentCreateManualInvoiceNatsRequest.prototype, "discount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Currency code', default: 'VND' }),
     __metadata("design:type", String)
 ], PaymentCreateManualInvoiceNatsRequest.prototype, "currency", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Invoice due date', example: '2024-02-15' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Due date (YYYY-MM-DD) — defaults to today + 30 days' }),
     __metadata("design:type", String)
 ], PaymentCreateManualInvoiceNatsRequest.prototype, "dueDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Invoice notes' }),
+    __metadata("design:type", String)
+], PaymentCreateManualInvoiceNatsRequest.prototype, "notes", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [CreateInvoiceItemRequest] }),
     __metadata("design:type", Array)
