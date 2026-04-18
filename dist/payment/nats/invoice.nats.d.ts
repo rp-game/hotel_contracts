@@ -17,10 +17,18 @@
  */
 import { NatsResponse } from '../../common/nats-response.interface';
 export declare class PaymentInvoiceItem {
+    id: string;
     description: string;
     quantity: number;
     unitPrice: number;
-    amount: number;
+    discount?: number;
+    taxRate?: number;
+    taxAmount?: number;
+    subtotal?: number;
+    total: number;
+    unit?: string;
+    type?: string;
+    referenceId?: string;
 }
 /**
  * Invoice item for create/update requests
@@ -137,12 +145,29 @@ export declare class CreateInvoiceData {
     tenantId: string;
     hotelId: string;
     invoiceNumber: string;
-    amount: number;
+    bookingId?: string;
+    customerId?: string;
+    customerName?: string;
+    customerAddress?: string;
+    customerTaxCode?: string;
+    subtotal: number;
+    taxAmount: number;
+    taxRate: number;
+    discount: number;
+    total: number;
     currency: string;
     status: string;
-    dueDate: string;
-    items: PaymentInvoiceItem[];
+    paymentStatus?: string;
+    dueDate?: string;
+    issuedAt?: string;
+    paidAt?: string;
+    notes?: string;
+    voidReason?: string;
+    createdBy?: string;
+    createdByName?: string;
     createdAt: string;
+    updatedAt?: string;
+    items: PaymentInvoiceItem[];
 }
 export type PaymentCreateInvoiceNatsResponse = NatsResponse<CreateInvoiceData>;
 export declare class PaymentCreateManualInvoiceNatsRequest {

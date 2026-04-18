@@ -32,28 +32,68 @@ const swagger_1 = require("@nestjs/swagger");
 // SHARED TYPES
 // ============================================================================
 class PaymentInvoiceItem {
+    id;
     description;
     quantity;
     unitPrice;
-    amount;
+    discount;
+    taxRate;
+    taxAmount;
+    subtotal;
+    total;
+    unit;
+    type;
+    referenceId;
 }
 exports.PaymentInvoiceItem = PaymentInvoiceItem;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Item description' }),
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], PaymentInvoiceItem.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], PaymentInvoiceItem.prototype, "description", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Item quantity' }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], PaymentInvoiceItem.prototype, "quantity", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Unit price' }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], PaymentInvoiceItem.prototype, "unitPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Total amount for this item' }),
+    (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", Number)
-], PaymentInvoiceItem.prototype, "amount", void 0);
+], PaymentInvoiceItem.prototype, "discount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], PaymentInvoiceItem.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], PaymentInvoiceItem.prototype, "taxAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], PaymentInvoiceItem.prototype, "subtotal", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], PaymentInvoiceItem.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], PaymentInvoiceItem.prototype, "unit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], PaymentInvoiceItem.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], PaymentInvoiceItem.prototype, "referenceId", void 0);
 /**
  * Invoice item for create/update requests
  * Matches payment service CreateInvoiceItemDto
@@ -493,54 +533,139 @@ class CreateInvoiceData {
     tenantId;
     hotelId;
     invoiceNumber;
-    amount;
+    bookingId;
+    customerId;
+    customerName;
+    customerAddress;
+    customerTaxCode;
+    subtotal;
+    taxAmount;
+    taxRate;
+    discount;
+    total;
     currency;
     status;
+    paymentStatus;
     dueDate;
-    items;
+    issuedAt;
+    paidAt;
+    notes;
+    voidReason;
+    createdBy;
+    createdByName;
     createdAt;
+    updatedAt;
+    items;
 }
 exports.CreateInvoiceData = CreateInvoiceData;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Invoice ID' }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], CreateInvoiceData.prototype, "id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], CreateInvoiceData.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], CreateInvoiceData.prototype, "hotelId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Invoice number' }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], CreateInvoiceData.prototype, "invoiceNumber", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Total invoice amount' }),
-    __metadata("design:type", Number)
-], CreateInvoiceData.prototype, "amount", void 0);
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "bookingId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Currency code' }),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "customerId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "customerName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "customerAddress", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "customerTaxCode", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], CreateInvoiceData.prototype, "subtotal", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], CreateInvoiceData.prototype, "taxAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], CreateInvoiceData.prototype, "taxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], CreateInvoiceData.prototype, "discount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], CreateInvoiceData.prototype, "total", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], CreateInvoiceData.prototype, "currency", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Invoice status' }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], CreateInvoiceData.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Invoice due date' }),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "paymentStatus", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", String)
 ], CreateInvoiceData.prototype, "dueDate", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Invoice line items', type: [PaymentInvoiceItem] }),
-    __metadata("design:type", Array)
-], CreateInvoiceData.prototype, "items", void 0);
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "issuedAt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Created timestamp' }),
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "paidAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "voidReason", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "createdBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "createdByName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], CreateInvoiceData.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CreateInvoiceData.prototype, "updatedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [PaymentInvoiceItem] }),
+    __metadata("design:type", Array)
+], CreateInvoiceData.prototype, "items", void 0);
 // ============================================================================
 // CREATE MANUAL INVOICE (POST /invoices/manual)
 // ============================================================================

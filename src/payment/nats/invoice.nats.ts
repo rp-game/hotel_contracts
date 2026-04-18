@@ -24,17 +24,18 @@ import { NatsResponse } from '../../common/nats-response.interface';
 // ============================================================================
 
 export class PaymentInvoiceItem {
-  @ApiProperty({ description: 'Item description' })
-  description: string;
-
-  @ApiProperty({ description: 'Item quantity' })
-  quantity: number;
-
-  @ApiProperty({ description: 'Unit price' })
-  unitPrice: number;
-
-  @ApiProperty({ description: 'Total amount for this item' })
-  amount: number;
+  @ApiProperty() id: string;
+  @ApiProperty() description: string;
+  @ApiProperty() quantity: number;
+  @ApiProperty() unitPrice: number;
+  @ApiPropertyOptional() discount?: number;
+  @ApiPropertyOptional() taxRate?: number;
+  @ApiPropertyOptional() taxAmount?: number;
+  @ApiPropertyOptional() subtotal?: number;
+  @ApiProperty() total: number;
+  @ApiPropertyOptional() unit?: string;
+  @ApiPropertyOptional() type?: string;
+  @ApiPropertyOptional() referenceId?: string;
 }
 
 
@@ -314,35 +315,33 @@ export class PaymentCreateInvoiceNatsRequest {
 }
 
 export class CreateInvoiceData {
-  @ApiProperty({ description: 'Invoice ID' })
-  id: string;
-
-  @ApiProperty({ description: 'Tenant ID' })
-  tenantId: string;
-
-  @ApiProperty({ description: 'Hotel ID' })
-  hotelId: string;
-
-  @ApiProperty({ description: 'Invoice number' })
-  invoiceNumber: string;
-
-  @ApiProperty({ description: 'Total invoice amount' })
-  amount: number;
-
-  @ApiProperty({ description: 'Currency code' })
-  currency: string;
-
-  @ApiProperty({ description: 'Invoice status' })
-  status: string;
-
-  @ApiProperty({ description: 'Invoice due date' })
-  dueDate: string;
-
-  @ApiProperty({ description: 'Invoice line items', type: [PaymentInvoiceItem] })
-  items: PaymentInvoiceItem[];
-
-  @ApiProperty({ description: 'Created timestamp' })
-  createdAt: string;
+  @ApiProperty() id: string;
+  @ApiProperty() tenantId: string;
+  @ApiProperty() hotelId: string;
+  @ApiProperty() invoiceNumber: string;
+  @ApiPropertyOptional() bookingId?: string;
+  @ApiPropertyOptional() customerId?: string;
+  @ApiPropertyOptional() customerName?: string;
+  @ApiPropertyOptional() customerAddress?: string;
+  @ApiPropertyOptional() customerTaxCode?: string;
+  @ApiProperty() subtotal: number;
+  @ApiProperty() taxAmount: number;
+  @ApiProperty() taxRate: number;
+  @ApiProperty() discount: number;
+  @ApiProperty() total: number;
+  @ApiProperty() currency: string;
+  @ApiProperty() status: string;
+  @ApiPropertyOptional() paymentStatus?: string;
+  @ApiPropertyOptional() dueDate?: string;
+  @ApiPropertyOptional() issuedAt?: string;
+  @ApiPropertyOptional() paidAt?: string;
+  @ApiPropertyOptional() notes?: string;
+  @ApiPropertyOptional() voidReason?: string;
+  @ApiPropertyOptional() createdBy?: string;
+  @ApiPropertyOptional() createdByName?: string;
+  @ApiProperty() createdAt: string;
+  @ApiPropertyOptional() updatedAt?: string;
+  @ApiProperty({ type: [PaymentInvoiceItem] }) items: PaymentInvoiceItem[];
 }
 
 export type PaymentCreateInvoiceNatsResponse = NatsResponse<CreateInvoiceData>;
