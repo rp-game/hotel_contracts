@@ -78,6 +78,39 @@ export interface PaymentExpiredNatsRequest {
 }
 
 /**
+ * NATS Pattern: payment.offline.created
+ * Sent by payment-service when an offline payment is created (PENDING state)
+ */
+export interface OfflinePaymentCreatedNatsRequest {
+  paymentId: string;
+  bookingId: string;
+  amount: number;
+  currency: string;
+  method: string;
+  instructions?: string;
+  dueDate?: string;
+  createdAt: string;
+  tenantId: string;
+  hotelId: string;
+}
+
+/**
+ * NATS Pattern: payment.offline.rejected
+ * Sent by payment-service when an offline payment is rejected
+ */
+export interface OfflinePaymentRejectedNatsRequest {
+  paymentId: string;
+  bookingId: string;
+  amount: number;
+  currency: string;
+  method: string;
+  reason: string;
+  rejectedAt: string;
+  tenantId: string;
+  hotelId: string;
+}
+
+/**
  * NATS Pattern: payment.offline.confirmed
  * Sent by payment-service when an offline payment is confirmed
  */
@@ -94,4 +127,20 @@ export interface OfflinePaymentConfirmedNatsRequest {
   receivedBy?: string;
   receivedByName?: string;
   notes?: string;
+  offlinePaymentId?: string;
+}
+
+/**
+ * NATS Pattern: payment.offline.refunded
+ * Sent by payment-service when an offline payment is refunded
+ */
+export interface OfflinePaymentRefundedNatsRequest {
+  offlinePaymentId: string;
+  bookingId: string;
+  tenantId: string;
+  hotelId: string;
+  refundAmount: number;
+  reason: string;
+  refundedBy: string;
+  refundedAt: string;
 }
