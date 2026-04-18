@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RejectOfflinePaymentDto = exports.ConfirmOfflinePaymentDto = void 0;
+exports.RefundOfflinePaymentDto = exports.RejectOfflinePaymentDto = exports.ConfirmOfflinePaymentDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 /**
@@ -60,4 +60,24 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], RejectOfflinePaymentDto.prototype, "notes", void 0);
+/**
+ * Request body for refunding a confirmed offline payment (partial or full)
+ */
+class RefundOfflinePaymentDto {
+    amount;
+    reason;
+}
+exports.RefundOfflinePaymentDto = RefundOfflinePaymentDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Refund amount (partial or full)', minimum: 1 }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], RefundOfflinePaymentDto.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reason for the refund' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], RefundOfflinePaymentDto.prototype, "reason", void 0);
 //# sourceMappingURL=offline-payment.dto.js.map

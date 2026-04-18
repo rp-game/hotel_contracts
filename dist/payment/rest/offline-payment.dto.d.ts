@@ -14,4 +14,11 @@ export declare class RejectOfflinePaymentDto {
     rejectedBy: string;
     notes?: string;
 }
+/**
+ * Request body for refunding a confirmed offline payment (partial or full)
+ */
+export declare class RefundOfflinePaymentDto {
+    amount: number;
+    reason: string;
+}
 //# sourceMappingURL=offline-payment.dto.d.ts.map

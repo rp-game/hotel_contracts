@@ -20,7 +20,8 @@ export declare enum OfflinePaymentMethod {
 export declare enum OfflinePaymentStatus {
     PENDING = "PENDING",
     CONFIRMED = "CONFIRMED",
-    REJECTED = "REJECTED"
+    REJECTED = "REJECTED",
+    REFUNDED = "REFUNDED"
 }
 /**
  * NATS request to create offline payment
@@ -265,4 +266,33 @@ export interface RejectOfflinePaymentNatsRequest {
     notes?: string;
 }
 export type RejectOfflinePaymentNatsResponse = NatsResponse<OfflinePaymentData>;
+/**
+ * NATS request to refund a confirmed offline payment (partial or full)
+ * Pattern: offline-payment.refund
+ * Used by: api-gateway → refund flow
+ */
+export interface RefundOfflinePaymentNatsRequest {
+    id: string;
+    tenantId: string;
+    hotelId: string;
+    amount: number;
+    reason: string;
+    refundedBy: string;
+}
+export type RefundOfflinePaymentNatsResponse = NatsResponse<OfflinePaymentData>;
+/**
+ * Event emitted by payment-service after successful refund
+ * Pattern: payment.offline.refunded
+ * Consumed by: booking-service to update paidAmount and BookingPayment status
+ */
+export interface PaymentOfflineRefundedEventPayload {
+    offlinePaymentId: string;
+    bookingId: string;
+    tenantId: string;
+    hotelId: string;
+    refundAmount: number;
+    reason: string;
+    refundedBy: string;
+    refundedAt: string;
+}
 //# sourceMappingURL=offline-payment.nats.d.ts.map
