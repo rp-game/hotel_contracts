@@ -25,6 +25,21 @@ export interface TimelineActionResult {
   };
 }
 
+export interface TimelineActionData {
+  notes?: string;
+  reason?: string;
+  extendToDate?: string;
+  guestDetails?: {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    phone?: string;
+    nationality?: string;
+    idNumber?: string;
+    [key: string]: any;
+  };
+}
+
 /**
  * Perform Timeline Action Request
  * Pattern: booking.timeline.action
@@ -35,7 +50,7 @@ export interface PerformTimelineActionNatsRequest {
   roomId: string;
   action: string;
   bookingId?: string;
-  actionData?: any;
+  actionData?: TimelineActionData;
 }
 
 export type PerformTimelineActionNatsResponse = NatsResponse<TimelineActionResult>;
