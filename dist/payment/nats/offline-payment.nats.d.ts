@@ -137,7 +137,7 @@ export interface OfflinePaymentData {
     /**
      * Status of offline payment (PENDING, CONFIRMED, REJECTED)
      */
-    status: OfflinePaymentStatus | string;
+    status: OfflinePaymentStatus;
     /**
      * Bank reference number
      */
