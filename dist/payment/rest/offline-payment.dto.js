@@ -9,9 +9,134 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RefundOfflinePaymentDto = exports.RejectOfflinePaymentDto = exports.ConfirmOfflinePaymentDto = void 0;
+exports.RefundOfflinePaymentDto = exports.RejectOfflinePaymentDto = exports.ConfirmOfflinePaymentDto = exports.OfflinePaymentListResponseDto = exports.OfflinePaymentResponseDto = exports.OfflinePaymentDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const offline_payment_nats_1 = require("../nats/offline-payment.nats");
+class OfflinePaymentDto {
+    id;
+    paymentId;
+    bookingId;
+    method;
+    amount;
+    currency;
+    status;
+    referenceNumber;
+    receiptNumber;
+    receivedAt;
+    receivedBy;
+    receivedByName;
+    confirmedAt;
+    confirmedBy;
+    notes;
+    createdAt;
+    updatedAt;
+}
+exports.OfflinePaymentDto = OfflinePaymentDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "paymentId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: ['CASH', 'BANK_TRANSFER'] }),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "method", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OfflinePaymentDto.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: offline_payment_nats_1.OfflinePaymentStatus }),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "referenceNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "receiptNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "receivedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "receivedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "receivedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "confirmedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "confirmedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], OfflinePaymentDto.prototype, "updatedAt", void 0);
+class OfflinePaymentResponseDto {
+    status;
+    message;
+    data;
+}
+exports.OfflinePaymentResponseDto = OfflinePaymentResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], OfflinePaymentResponseDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], OfflinePaymentResponseDto.prototype, "message", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: OfflinePaymentDto }),
+    __metadata("design:type", OfflinePaymentDto)
+], OfflinePaymentResponseDto.prototype, "data", void 0);
+class OfflinePaymentListResponseDto {
+    status;
+    message;
+    data;
+}
+exports.OfflinePaymentListResponseDto = OfflinePaymentListResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], OfflinePaymentListResponseDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], OfflinePaymentListResponseDto.prototype, "message", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [OfflinePaymentDto] }),
+    __metadata("design:type", Array)
+], OfflinePaymentListResponseDto.prototype, "data", void 0);
 /**
  * Request body for confirming a pending offline payment (bank transfer)
  * Used by accountant to confirm BANK_TRANSFER payments in VERIFIED mode

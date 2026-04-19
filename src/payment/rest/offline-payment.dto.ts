@@ -1,5 +1,38 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID, Min } from 'class-validator';
+import { OfflinePaymentStatus } from '../nats/offline-payment.nats';
+
+export class OfflinePaymentDto {
+  @ApiProperty() id: string;
+  @ApiProperty() paymentId: string;
+  @ApiProperty() bookingId: string;
+  @ApiProperty({ enum: ['CASH', 'BANK_TRANSFER'] }) method: string;
+  @ApiProperty() amount: number;
+  @ApiProperty() currency: string;
+  @ApiProperty({ enum: OfflinePaymentStatus }) status: OfflinePaymentStatus;
+  @ApiPropertyOptional() referenceNumber?: string;
+  @ApiPropertyOptional() receiptNumber?: string;
+  @ApiPropertyOptional() receivedAt?: string;
+  @ApiPropertyOptional() receivedBy?: string;
+  @ApiPropertyOptional() receivedByName?: string;
+  @ApiPropertyOptional() confirmedAt?: string;
+  @ApiPropertyOptional() confirmedBy?: string;
+  @ApiPropertyOptional() notes?: string;
+  @ApiProperty() createdAt: string;
+  @ApiProperty() updatedAt: string;
+}
+
+export class OfflinePaymentResponseDto {
+  @ApiProperty() status: string;
+  @ApiProperty() message: string;
+  @ApiProperty({ type: OfflinePaymentDto }) data: OfflinePaymentDto;
+}
+
+export class OfflinePaymentListResponseDto {
+  @ApiProperty() status: string;
+  @ApiProperty() message: string;
+  @ApiProperty({ type: [OfflinePaymentDto] }) data: OfflinePaymentDto[];
+}
 
 
 /**
