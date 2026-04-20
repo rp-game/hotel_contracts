@@ -23,6 +23,7 @@ export declare class ListPricingAuditLogRequest {
     hotelId?: string;
     resourceType?: string;
     resourceId?: string;
+    action?: string;
     from?: string;
     to?: string;
     page?: number;

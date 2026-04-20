@@ -63,6 +63,11 @@ export class ListPricingAuditLogRequest {
   @IsString()
   resourceId?: string;
 
+  @ApiPropertyOptional({ description: 'Action filter (CREATED, UPDATED, DELETED, ACTIVATED, DEACTIVATED)', example: 'UPDATED' })
+  @IsOptional()
+  @IsString()
+  action?: string;
+
   @ApiPropertyOptional({ description: 'Start date (ISO 8601)', example: '2026-01-01T00:00:00.000Z' })
   @IsOptional()
   @IsDateString()

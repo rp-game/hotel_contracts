@@ -79,6 +79,7 @@ class ListPricingAuditLogRequest {
     hotelId;
     resourceType;
     resourceId;
+    action;
     from;
     to;
     page;
@@ -108,6 +109,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ListPricingAuditLogRequest.prototype, "resourceId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Action filter (CREATED, UPDATED, DELETED, ACTIVATED, DEACTIVATED)', example: 'UPDATED' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ListPricingAuditLogRequest.prototype, "action", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Start date (ISO 8601)', example: '2026-01-01T00:00:00.000Z' }),
     (0, class_validator_1.IsOptional)(),
