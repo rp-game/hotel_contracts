@@ -72,3 +72,5 @@ export * from './refer-code.nats';
 
 // Booking window analytics
 export * from './booking-window.nats';
+
+export * from './revenue-summary.nats';
