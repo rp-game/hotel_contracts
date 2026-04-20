@@ -19,4 +19,5 @@ export * from './room-move-pricing.nats';
 export * from './room-type-base-rates.nats';
 export * from './seasonal-adjustments.nats';
 export * from './vouchers.nats';
+export * from './pricing-audit-log.nats';
 //# sourceMappingURL=index.d.ts.map

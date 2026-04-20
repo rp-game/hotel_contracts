@@ -35,4 +35,5 @@ __exportStar(require("./room-move-pricing.nats"), exports);
 __exportStar(require("./room-type-base-rates.nats"), exports);
 __exportStar(require("./seasonal-adjustments.nats"), exports);
 __exportStar(require("./vouchers.nats"), exports);
+__exportStar(require("./pricing-audit-log.nats"), exports);
 //# sourceMappingURL=index.js.map
