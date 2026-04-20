@@ -112,6 +112,8 @@ class UpsertRoomTypeBaseRateRequest {
     hourlyRate;
     currency;
     isActive;
+    performedBy;
+    performedByName;
 }
 exports.UpsertRoomTypeBaseRateRequest = UpsertRoomTypeBaseRateRequest;
 __decorate([
@@ -200,6 +202,18 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpsertRoomTypeBaseRateRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpsertRoomTypeBaseRateRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpsertRoomTypeBaseRateRequest.prototype, "performedByName", void 0);
 class UpsertRoomTypeBaseRateResponse {
     data;
     message;
@@ -226,6 +240,8 @@ class RemoveRoomTypeBaseRateRequest {
     tenantId;
     hotelId;
     roomTypeId;
+    performedBy;
+    performedByName;
 }
 exports.RemoveRoomTypeBaseRateRequest = RemoveRoomTypeBaseRateRequest;
 __decorate([
@@ -252,6 +268,18 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], RemoveRoomTypeBaseRateRequest.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RemoveRoomTypeBaseRateRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], RemoveRoomTypeBaseRateRequest.prototype, "performedByName", void 0);
 class RemoveRoomTypeBaseRateResponse {
     message;
 }

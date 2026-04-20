@@ -46,6 +46,8 @@ export declare class CreateExtraPersonChargeRequest {
     childMaxAge?: number;
     currency?: string;
     isActive?: boolean;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class CreateExtraPersonChargeResponse {
     data: ExtraPersonChargeResponse;
@@ -62,6 +64,8 @@ export declare class UpdateExtraPersonChargeRequest {
     childMaxAge?: number;
     currency?: string;
     isActive?: boolean;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class UpdateExtraPersonChargeResponse {
     data: ExtraPersonChargeResponse;
@@ -71,6 +75,8 @@ export type UpdateExtraPersonChargeNatsResponse = NatsResponse<UpdateExtraPerson
 export declare class DeleteExtraPersonChargeRequest {
     id: string;
     tenantId: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class DeleteExtraPersonChargeResponse {
     message: string;

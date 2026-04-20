@@ -117,6 +117,16 @@ export class CreateLosDiscountRequest {
   @IsBoolean()
   @IsOptional()
   isActive?: boolean;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class CreateLosDiscountResponse {
@@ -187,6 +197,16 @@ export class UpdateLosDiscountRequest {
   @IsBoolean()
   @IsOptional()
   isActive?: boolean;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class UpdateLosDiscountResponse {
@@ -209,6 +229,16 @@ export class DeleteLosDiscountRequest {
   @ApiProperty({ description: 'Tenant ID', example: '550e8400-e29b-41d4-a716-446655440000' })
   @IsUUID()
   tenantId: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class DeleteLosDiscountResponse {

@@ -32,6 +32,8 @@ export declare class CreateHourlyPricingRuleRequest {
     tenantId: string;
     hotelId: string;
     dto: CreateHourlyPricingRuleDto;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class CreateHourlyPricingRuleResponse {
     data: HourlyPricingRule;
@@ -54,6 +56,8 @@ export declare class UpdateHourlyPricingRuleDto {
 export declare class UpdateHourlyPricingRuleRequest {
     id: string;
     dto: UpdateHourlyPricingRuleDto;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class UpdateHourlyPricingRuleResponse {
     data: HourlyPricingRule;
@@ -78,6 +82,8 @@ export declare class FindAllHourlyPricingRulesResponse {
 export type FindAllHourlyPricingRulesNatsResponse = NatsResponse<FindAllHourlyPricingRulesResponse>;
 export declare class DeleteHourlyPricingRuleRequest {
     id: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class DeleteHourlyPricingRuleResponse {
     message: string;
@@ -98,6 +104,8 @@ export declare class CreatePeakPeriodRequest {
     hotelId: string;
     ruleId: string;
     dto: CreatePeakPeriodDto;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class CreatePeakPeriodResponse {
     data: PeakPeriod;
@@ -117,6 +125,8 @@ export declare class UpdatePeakPeriodDto {
 export declare class UpdatePeakPeriodRequest {
     periodId: string;
     dto: UpdatePeakPeriodDto;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class UpdatePeakPeriodResponse {
     data: PeakPeriod;
@@ -124,6 +134,8 @@ export declare class UpdatePeakPeriodResponse {
 export type UpdatePeakPeriodNatsResponse = NatsResponse<UpdatePeakPeriodResponse>;
 export declare class DeletePeakPeriodRequest {
     periodId: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class DeletePeakPeriodResponse {
     message: string;

@@ -113,6 +113,16 @@ export class CreateSeasonalAdjustmentRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class CreateSeasonalAdjustmentResponse {
@@ -198,6 +208,16 @@ export class UpdateSeasonalAdjustmentRequest {
   @ApiProperty({ description: 'Update data', type: UpdateSeasonalAdjustmentDto })
   @Type(() => UpdateSeasonalAdjustmentDto)
   dto: UpdateSeasonalAdjustmentDto;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class UpdateSeasonalAdjustmentResponse {
@@ -222,6 +242,16 @@ export class DeleteSeasonalAdjustmentRequest {
   @ApiProperty({ description: 'Tenant ID', example: '550e8400-e29b-41d4-a716-446655440000' })
   @IsUUID()
   tenantId: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class DeleteSeasonalAdjustmentResponse {

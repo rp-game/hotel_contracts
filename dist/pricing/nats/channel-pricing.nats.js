@@ -130,6 +130,8 @@ __decorate([
 class UpdateChannelPricingConfigRequest extends UpdateChannelPricingConfigDto {
     id;
     tenantId;
+    performedBy;
+    performedByName;
 }
 exports.UpdateChannelPricingConfigRequest = UpdateChannelPricingConfigRequest;
 __decorate([
@@ -142,6 +144,18 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], UpdateChannelPricingConfigRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateChannelPricingConfigRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateChannelPricingConfigRequest.prototype, "performedByName", void 0);
 /**
  * NATS Pattern: pricing.channel-pricing.clearConfig
  *

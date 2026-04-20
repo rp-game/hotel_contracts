@@ -118,6 +118,16 @@ export class CreateSpecificDateRateRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 /**
@@ -213,6 +223,16 @@ export class UpdateDateRateRequest {
   @ValidateNested()
   @Type(() => UpdateDateRateDto)
   dto: UpdateDateRateDto;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 /**
@@ -226,6 +246,16 @@ export class DeleteDateRateRequest {
   @ApiProperty({ description: 'Tenant ID', example: '550e8400-e29b-41d4-a716-446655440000' })
   @IsUUID()
   tenantId: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 // ============================================================================

@@ -159,8 +159,8 @@ export class UpdateRatePlanRequest {
     example: '550e8400-e29b-41d4-a716-446655440052',
   })
   @IsOptional()
-  @IsUUID()
-  performedById?: string;
+  @IsString()
+  performedBy?: string;
 
   @ApiPropertyOptional({
     description: 'User name who performed this action (extracted from JWT token by API Gateway)',

@@ -48,6 +48,8 @@ export declare class UpdateChannelPricingConfigDto {
 export declare class UpdateChannelPricingConfigRequest extends UpdateChannelPricingConfigDto {
     id: string;
     tenantId: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 export interface UpdateChannelPricingConfigResponse {
     data: ChannelRateMapping;

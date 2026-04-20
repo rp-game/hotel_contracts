@@ -214,6 +214,8 @@ class CreateExtraPersonChargeRequest {
     childMaxAge;
     currency;
     isActive;
+    performedBy;
+    performedByName;
 }
 exports.CreateExtraPersonChargeRequest = CreateExtraPersonChargeRequest;
 __decorate([
@@ -315,6 +317,18 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateExtraPersonChargeRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateExtraPersonChargeRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateExtraPersonChargeRequest.prototype, "performedByName", void 0);
 class CreateExtraPersonChargeResponse {
     data;
     message;
@@ -347,6 +361,8 @@ class UpdateExtraPersonChargeRequest {
     childMaxAge;
     currency;
     isActive;
+    performedBy;
+    performedByName;
 }
 exports.UpdateExtraPersonChargeRequest = UpdateExtraPersonChargeRequest;
 __decorate([
@@ -440,6 +456,18 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdateExtraPersonChargeRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateExtraPersonChargeRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateExtraPersonChargeRequest.prototype, "performedByName", void 0);
 class UpdateExtraPersonChargeResponse {
     data;
     message;
@@ -465,6 +493,8 @@ __decorate([
 class DeleteExtraPersonChargeRequest {
     id;
     tenantId;
+    performedBy;
+    performedByName;
 }
 exports.DeleteExtraPersonChargeRequest = DeleteExtraPersonChargeRequest;
 __decorate([
@@ -483,6 +513,18 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeleteExtraPersonChargeRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeleteExtraPersonChargeRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeleteExtraPersonChargeRequest.prototype, "performedByName", void 0);
 class DeleteExtraPersonChargeResponse {
     message;
 }

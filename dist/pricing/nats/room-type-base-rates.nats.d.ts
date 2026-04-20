@@ -33,6 +33,8 @@ export declare class UpsertRoomTypeBaseRateRequest {
     hourlyRate?: number;
     currency?: string;
     isActive?: boolean;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class UpsertRoomTypeBaseRateResponse {
     data: RoomTypeBaseRate;
@@ -43,6 +45,8 @@ export declare class RemoveRoomTypeBaseRateRequest {
     tenantId: string;
     hotelId: string;
     roomTypeId: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class RemoveRoomTypeBaseRateResponse {
     message: string;

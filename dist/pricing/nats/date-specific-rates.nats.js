@@ -111,6 +111,8 @@ class CreateSpecificDateRateRequest {
     currency;
     notes;
     isActive;
+    performedBy;
+    performedByName;
 }
 exports.CreateSpecificDateRateRequest = CreateSpecificDateRateRequest;
 __decorate([
@@ -157,6 +159,18 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateSpecificDateRateRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSpecificDateRateRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSpecificDateRateRequest.prototype, "performedByName", void 0);
 /**
  * Single date-rate entry for bulk create
  */
@@ -266,6 +280,8 @@ class UpdateDateRateRequest {
     id;
     tenantId;
     dto;
+    performedBy;
+    performedByName;
 }
 exports.UpdateDateRateRequest = UpdateDateRateRequest;
 __decorate([
@@ -284,12 +300,26 @@ __decorate([
     (0, class_transformer_1.Type)(() => UpdateDateRateDto),
     __metadata("design:type", UpdateDateRateDto)
 ], UpdateDateRateRequest.prototype, "dto", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateDateRateRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateDateRateRequest.prototype, "performedByName", void 0);
 /**
  * Request to delete a date-specific rate
  */
 class DeleteDateRateRequest {
     id;
     tenantId;
+    performedBy;
+    performedByName;
 }
 exports.DeleteDateRateRequest = DeleteDateRateRequest;
 __decorate([
@@ -302,6 +332,18 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeleteDateRateRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeleteDateRateRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeleteDateRateRequest.prototype, "performedByName", void 0);
 // ============================================================================
 // Response Classes
 // ============================================================================

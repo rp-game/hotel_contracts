@@ -40,6 +40,8 @@ export declare class CreateSpecificDateRateRequest {
     currency?: string;
     notes?: string;
     isActive?: boolean;
+    performedBy?: string;
+    performedByName?: string;
 }
 /**
  * Single date-rate entry for bulk create
@@ -74,6 +76,8 @@ export declare class UpdateDateRateRequest {
     id: string;
     tenantId: string;
     dto: UpdateDateRateDto;
+    performedBy?: string;
+    performedByName?: string;
 }
 /**
  * Request to delete a date-specific rate
@@ -81,6 +85,8 @@ export declare class UpdateDateRateRequest {
 export declare class DeleteDateRateRequest {
     id: string;
     tenantId: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 /**
  * Response for finding all date-specific rates

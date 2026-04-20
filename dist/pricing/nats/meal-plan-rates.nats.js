@@ -110,6 +110,8 @@ class CreateMealPlanRateRequest {
     currency;
     description;
     isActive;
+    performedBy;
+    performedByName;
 }
 exports.CreateMealPlanRateRequest = CreateMealPlanRateRequest;
 __decorate([
@@ -183,6 +185,18 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateMealPlanRateRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateMealPlanRateRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateMealPlanRateRequest.prototype, "performedByName", void 0);
 class CreateMealPlanRateResponse {
     data;
     message;
@@ -212,6 +226,8 @@ class UpdateMealPlanRateRequest {
     additionalCharge;
     description;
     isActive;
+    performedBy;
+    performedByName;
 }
 exports.UpdateMealPlanRateRequest = UpdateMealPlanRateRequest;
 __decorate([
@@ -269,6 +285,18 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdateMealPlanRateRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateMealPlanRateRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateMealPlanRateRequest.prototype, "performedByName", void 0);
 class UpdateMealPlanRateResponse {
     data;
     message;
@@ -294,6 +322,8 @@ __decorate([
 class DeleteMealPlanRateRequest {
     id;
     tenantId;
+    performedBy;
+    performedByName;
 }
 exports.DeleteMealPlanRateRequest = DeleteMealPlanRateRequest;
 __decorate([
@@ -312,6 +342,18 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], DeleteMealPlanRateRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeleteMealPlanRateRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeleteMealPlanRateRequest.prototype, "performedByName", void 0);
 class DeleteMealPlanRateResponse {
     message;
 }

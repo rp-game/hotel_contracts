@@ -247,6 +247,16 @@ export class CreateExtraPersonChargeRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class CreateExtraPersonChargeResponse {
@@ -351,6 +361,16 @@ export class UpdateExtraPersonChargeRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class UpdateExtraPersonChargeResponse {
@@ -387,6 +407,16 @@ export class DeleteExtraPersonChargeRequest {
   })
   @IsUUID()
   tenantId: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class DeleteExtraPersonChargeResponse {

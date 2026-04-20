@@ -144,6 +144,16 @@ export class CreateMealPlanRateRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class CreateMealPlanRateResponse {
@@ -215,6 +225,16 @@ export class UpdateMealPlanRateRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class UpdateMealPlanRateResponse {
@@ -251,6 +271,16 @@ export class DeleteMealPlanRateRequest {
   })
   @IsString()
   tenantId: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class DeleteMealPlanRateResponse {

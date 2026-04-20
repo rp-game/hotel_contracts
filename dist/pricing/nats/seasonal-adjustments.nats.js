@@ -90,6 +90,8 @@ class CreateSeasonalAdjustmentRequest {
     adjustmentValue;
     description;
     isActive;
+    performedBy;
+    performedByName;
 }
 exports.CreateSeasonalAdjustmentRequest = CreateSeasonalAdjustmentRequest;
 __decorate([
@@ -156,6 +158,18 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateSeasonalAdjustmentRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSeasonalAdjustmentRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSeasonalAdjustmentRequest.prototype, "performedByName", void 0);
 class CreateSeasonalAdjustmentResponse {
     data;
     message;
@@ -248,6 +262,8 @@ class UpdateSeasonalAdjustmentRequest {
     id;
     tenantId;
     dto;
+    performedBy;
+    performedByName;
 }
 exports.UpdateSeasonalAdjustmentRequest = UpdateSeasonalAdjustmentRequest;
 __decorate([
@@ -265,6 +281,18 @@ __decorate([
     (0, class_transformer_1.Type)(() => UpdateSeasonalAdjustmentDto),
     __metadata("design:type", UpdateSeasonalAdjustmentDto)
 ], UpdateSeasonalAdjustmentRequest.prototype, "dto", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateSeasonalAdjustmentRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateSeasonalAdjustmentRequest.prototype, "performedByName", void 0);
 class UpdateSeasonalAdjustmentResponse {
     data;
     message;
@@ -284,6 +312,8 @@ __decorate([
 class DeleteSeasonalAdjustmentRequest {
     id;
     tenantId;
+    performedBy;
+    performedByName;
 }
 exports.DeleteSeasonalAdjustmentRequest = DeleteSeasonalAdjustmentRequest;
 __decorate([
@@ -296,6 +326,18 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeleteSeasonalAdjustmentRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeleteSeasonalAdjustmentRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeleteSeasonalAdjustmentRequest.prototype, "performedByName", void 0);
 class DeleteSeasonalAdjustmentResponse {
     message;
 }

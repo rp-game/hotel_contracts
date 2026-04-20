@@ -241,6 +241,8 @@ class CreateHourlyPricingRuleRequest {
     tenantId;
     hotelId;
     dto;
+    performedBy;
+    performedByName;
 }
 exports.CreateHourlyPricingRuleRequest = CreateHourlyPricingRuleRequest;
 __decorate([
@@ -259,6 +261,18 @@ __decorate([
     (0, class_transformer_1.Type)(() => CreateHourlyPricingRuleDto),
     __metadata("design:type", CreateHourlyPricingRuleDto)
 ], CreateHourlyPricingRuleRequest.prototype, "dto", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateHourlyPricingRuleRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateHourlyPricingRuleRequest.prototype, "performedByName", void 0);
 class CreateHourlyPricingRuleResponse {
     data;
 }
@@ -400,6 +414,8 @@ __decorate([
 class UpdateHourlyPricingRuleRequest {
     id;
     dto;
+    performedBy;
+    performedByName;
 }
 exports.UpdateHourlyPricingRuleRequest = UpdateHourlyPricingRuleRequest;
 __decorate([
@@ -413,6 +429,18 @@ __decorate([
     (0, class_transformer_1.Type)(() => UpdateHourlyPricingRuleDto),
     __metadata("design:type", UpdateHourlyPricingRuleDto)
 ], UpdateHourlyPricingRuleRequest.prototype, "dto", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHourlyPricingRuleRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateHourlyPricingRuleRequest.prototype, "performedByName", void 0);
 class UpdateHourlyPricingRuleResponse {
     data;
 }
@@ -484,6 +512,8 @@ __decorate([
 // ============================================
 class DeleteHourlyPricingRuleRequest {
     id;
+    performedBy;
+    performedByName;
 }
 exports.DeleteHourlyPricingRuleRequest = DeleteHourlyPricingRuleRequest;
 __decorate([
@@ -491,6 +521,18 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeleteHourlyPricingRuleRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeleteHourlyPricingRuleRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeleteHourlyPricingRuleRequest.prototype, "performedByName", void 0);
 class DeleteHourlyPricingRuleResponse {
     message;
 }
@@ -596,6 +638,8 @@ class CreatePeakPeriodRequest {
     hotelId;
     ruleId;
     dto;
+    performedBy;
+    performedByName;
 }
 exports.CreatePeakPeriodRequest = CreatePeakPeriodRequest;
 __decorate([
@@ -619,6 +663,18 @@ __decorate([
     (0, class_transformer_1.Type)(() => CreatePeakPeriodDto),
     __metadata("design:type", CreatePeakPeriodDto)
 ], CreatePeakPeriodRequest.prototype, "dto", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePeakPeriodRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePeakPeriodRequest.prototype, "performedByName", void 0);
 class CreatePeakPeriodResponse {
     data;
 }
@@ -731,6 +787,8 @@ __decorate([
 class UpdatePeakPeriodRequest {
     periodId;
     dto;
+    performedBy;
+    performedByName;
 }
 exports.UpdatePeakPeriodRequest = UpdatePeakPeriodRequest;
 __decorate([
@@ -744,6 +802,18 @@ __decorate([
     (0, class_transformer_1.Type)(() => UpdatePeakPeriodDto),
     __metadata("design:type", UpdatePeakPeriodDto)
 ], UpdatePeakPeriodRequest.prototype, "dto", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdatePeakPeriodRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdatePeakPeriodRequest.prototype, "performedByName", void 0);
 class UpdatePeakPeriodResponse {
     data;
 }
@@ -757,6 +827,8 @@ __decorate([
 // ============================================
 class DeletePeakPeriodRequest {
     periodId;
+    performedBy;
+    performedByName;
 }
 exports.DeletePeakPeriodRequest = DeletePeakPeriodRequest;
 __decorate([
@@ -764,6 +836,18 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeletePeakPeriodRequest.prototype, "periodId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeletePeakPeriodRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeletePeakPeriodRequest.prototype, "performedByName", void 0);
 class DeletePeakPeriodResponse {
     message;
 }

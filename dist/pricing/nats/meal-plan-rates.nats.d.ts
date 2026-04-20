@@ -31,6 +31,8 @@ export declare class CreateMealPlanRateRequest {
     currency: string;
     description?: string;
     isActive?: boolean;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class CreateMealPlanRateResponse {
     data: MealPlanRate;
@@ -44,6 +46,8 @@ export declare class UpdateMealPlanRateRequest {
     additionalCharge?: number;
     description?: string;
     isActive?: boolean;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class UpdateMealPlanRateResponse {
     data: MealPlanRate;
@@ -53,6 +57,8 @@ export type UpdateMealPlanRateNatsResponse = NatsResponse<UpdateMealPlanRateResp
 export declare class DeleteMealPlanRateRequest {
     id: string;
     tenantId: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class DeleteMealPlanRateResponse {
     message: string;

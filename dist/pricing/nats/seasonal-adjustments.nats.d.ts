@@ -31,6 +31,8 @@ export declare class CreateSeasonalAdjustmentRequest {
     adjustmentValue: number;
     description?: string;
     isActive?: boolean;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class CreateSeasonalAdjustmentResponse {
     data: SeasonalAdjustment;
@@ -58,6 +60,8 @@ export declare class UpdateSeasonalAdjustmentRequest {
     id: string;
     tenantId: string;
     dto: UpdateSeasonalAdjustmentDto;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class UpdateSeasonalAdjustmentResponse {
     data: SeasonalAdjustment;
@@ -67,6 +71,8 @@ export type UpdateSeasonalAdjustmentNatsResponse = NatsResponse<UpdateSeasonalAd
 export declare class DeleteSeasonalAdjustmentRequest {
     id: string;
     tenantId: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class DeleteSeasonalAdjustmentResponse {
     message: string;

@@ -54,7 +54,7 @@ export declare class CreateRatePlanRequest {
     validTo?: string;
     blackoutPeriods?: BlackoutPeriodDto[];
     isAllotmentRate?: boolean;
-    performedById?: string;
+    performedBy?: string;
     performedByName?: string;
 }
 /**

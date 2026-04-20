@@ -157,6 +157,16 @@ export class UpsertRoomTypeBaseRateRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class UpsertRoomTypeBaseRateResponse {
@@ -200,6 +210,16 @@ export class RemoveRoomTypeBaseRateRequest {
   })
   @IsString()
   roomTypeId: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class RemoveRoomTypeBaseRateResponse {

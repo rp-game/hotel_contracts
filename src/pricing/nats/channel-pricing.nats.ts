@@ -114,6 +114,16 @@ export class UpdateChannelPricingConfigRequest extends UpdateChannelPricingConfi
   @ApiProperty({ description: 'Tenant ID (multi-tenant isolation)' })
   @IsUUID()
   tenantId: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export interface UpdateChannelPricingConfigResponse {

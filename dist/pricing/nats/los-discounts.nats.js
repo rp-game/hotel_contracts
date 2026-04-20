@@ -86,6 +86,8 @@ class CreateLosDiscountRequest {
     validFrom;
     validTo;
     isActive;
+    performedBy;
+    performedByName;
 }
 exports.CreateLosDiscountRequest = CreateLosDiscountRequest;
 __decorate([
@@ -164,6 +166,18 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], CreateLosDiscountRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateLosDiscountRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateLosDiscountRequest.prototype, "performedByName", void 0);
 class CreateLosDiscountResponse {
     data;
     message;
@@ -190,6 +204,8 @@ class UpdateLosDiscountRequest {
     validFrom;
     validTo;
     isActive;
+    performedBy;
+    performedByName;
 }
 exports.UpdateLosDiscountRequest = UpdateLosDiscountRequest;
 __decorate([
@@ -259,6 +275,18 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], UpdateLosDiscountRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateLosDiscountRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateLosDiscountRequest.prototype, "performedByName", void 0);
 class UpdateLosDiscountResponse {
     data;
     message;
@@ -276,6 +304,8 @@ __decorate([
 class DeleteLosDiscountRequest {
     id;
     tenantId;
+    performedBy;
+    performedByName;
 }
 exports.DeleteLosDiscountRequest = DeleteLosDiscountRequest;
 __decorate([
@@ -288,6 +318,18 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], DeleteLosDiscountRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeleteLosDiscountRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DeleteLosDiscountRequest.prototype, "performedByName", void 0);
 class DeleteLosDiscountResponse {
     message;
 }

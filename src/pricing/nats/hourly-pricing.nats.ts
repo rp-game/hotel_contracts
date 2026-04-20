@@ -220,6 +220,16 @@ export class CreateHourlyPricingRuleRequest {
   @ValidateNested()
   @Type(() => CreateHourlyPricingRuleDto)
   dto: CreateHourlyPricingRuleDto;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class CreateHourlyPricingRuleResponse {
@@ -344,6 +354,16 @@ export class UpdateHourlyPricingRuleRequest {
   @ValidateNested()
   @Type(() => UpdateHourlyPricingRuleDto)
   dto: UpdateHourlyPricingRuleDto;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class UpdateHourlyPricingRuleResponse {
@@ -407,6 +427,16 @@ export class DeleteHourlyPricingRuleRequest {
   @ApiProperty({ description: 'Hourly pricing rule ID' })
   @IsUUID()
   id: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class DeleteHourlyPricingRuleResponse {
@@ -510,6 +540,16 @@ export class CreatePeakPeriodRequest {
   @ValidateNested()
   @Type(() => CreatePeakPeriodDto)
   dto: CreatePeakPeriodDto;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class CreatePeakPeriodResponse {
@@ -611,6 +651,16 @@ export class UpdatePeakPeriodRequest {
   @ValidateNested()
   @Type(() => UpdatePeakPeriodDto)
   dto: UpdatePeakPeriodDto;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class UpdatePeakPeriodResponse {
@@ -628,6 +678,16 @@ export class DeletePeakPeriodRequest {
   @ApiProperty({ description: 'Peak period ID' })
   @IsUUID()
   periodId: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class DeletePeakPeriodResponse {

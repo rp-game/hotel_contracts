@@ -100,7 +100,7 @@ class CreateRatePlanRequest {
     validTo;
     blackoutPeriods;
     isAllotmentRate;
-    performedById;
+    performedBy;
     performedByName;
 }
 exports.CreateRatePlanRequest = CreateRatePlanRequest;
@@ -294,9 +294,9 @@ __decorate([
         example: '550e8400-e29b-41d4-a716-446655440052',
     }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateRatePlanRequest.prototype, "performedById", void 0);
+], CreateRatePlanRequest.prototype, "performedBy", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'User name who performed this action (extracted from JWT token by API Gateway)',

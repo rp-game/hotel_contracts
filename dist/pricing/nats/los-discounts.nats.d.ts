@@ -34,6 +34,8 @@ export declare class CreateLosDiscountRequest {
     validFrom?: string;
     validTo?: string;
     isActive?: boolean;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class CreateLosDiscountResponse {
     data: LosDiscount;
@@ -52,6 +54,8 @@ export declare class UpdateLosDiscountRequest {
     validFrom?: string;
     validTo?: string;
     isActive?: boolean;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class UpdateLosDiscountResponse {
     data: LosDiscount;
@@ -61,6 +65,8 @@ export type UpdateLosDiscountNatsResponse = NatsResponse<UpdateLosDiscountRespon
 export declare class DeleteLosDiscountRequest {
     id: string;
     tenantId: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class DeleteLosDiscountResponse {
     message: string;
