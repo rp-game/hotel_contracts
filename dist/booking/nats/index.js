@@ -77,4 +77,5 @@ __exportStar(require("./member-revenue.nats"), exports);
 __exportStar(require("./refer-code.nats"), exports);
 // Booking window analytics
 __exportStar(require("./booking-window.nats"), exports);
+__exportStar(require("./revenue-summary.nats"), exports);
 //# sourceMappingURL=index.js.map

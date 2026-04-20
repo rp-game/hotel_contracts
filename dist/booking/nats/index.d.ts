@@ -51,4 +51,5 @@ export * from './occupancy.nats';
 export * from './member-revenue.nats';
 export * from './refer-code.nats';
 export * from './booking-window.nats';
+export * from './revenue-summary.nats';
 //# sourceMappingURL=index.d.ts.map
