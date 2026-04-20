@@ -283,6 +283,16 @@ export class BulkUpsertRoomTypeBaseRatesRequest {
   @ValidateNested({ each: true })
   @Type(() => BulkRateItem)
   rates: BulkRateItem[];
+
+  @ApiPropertyOptional({ description: 'User ID performing the action' })
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional({ description: 'Display name of the user performing the action' })
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export class BulkUpsertRoomTypeBaseRatesResponse {

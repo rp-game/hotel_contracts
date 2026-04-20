@@ -329,6 +329,8 @@ class BulkUpsertRoomTypeBaseRatesRequest {
     tenantId;
     hotelId;
     rates;
+    performedBy;
+    performedByName;
 }
 exports.BulkUpsertRoomTypeBaseRatesRequest = BulkUpsertRoomTypeBaseRatesRequest;
 __decorate([
@@ -357,6 +359,18 @@ __decorate([
     (0, class_transformer_1.Type)(() => BulkRateItem),
     __metadata("design:type", Array)
 ], BulkUpsertRoomTypeBaseRatesRequest.prototype, "rates", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID performing the action' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BulkUpsertRoomTypeBaseRatesRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Display name of the user performing the action' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BulkUpsertRoomTypeBaseRatesRequest.prototype, "performedByName", void 0);
 class BulkUpsertRoomTypeBaseRatesResponse {
     data;
     message;

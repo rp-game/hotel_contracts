@@ -61,6 +61,8 @@ export declare class BulkUpsertRoomTypeBaseRatesRequest {
     tenantId: string;
     hotelId: string;
     rates: BulkRateItem[];
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class BulkUpsertRoomTypeBaseRatesResponse {
     data: RoomTypeBaseRate[];
