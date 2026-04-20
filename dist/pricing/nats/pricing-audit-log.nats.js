@@ -169,11 +169,11 @@ __decorate([
     __metadata("design:type", String)
 ], PricingAuditLogEntry.prototype, "resourceType", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ example: '550e8400-e29b-41d4-a716-446655440001' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: String, example: '550e8400-e29b-41d4-a716-446655440001' }),
     __metadata("design:type", Object)
 ], PricingAuditLogEntry.prototype, "resourceId", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ example: 'Best Available Rate' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: String, example: 'Best Available Rate' }),
     __metadata("design:type", Object)
 ], PricingAuditLogEntry.prototype, "resourceName", void 0);
 __decorate([
@@ -189,11 +189,11 @@ __decorate([
     __metadata("design:type", Object)
 ], PricingAuditLogEntry.prototype, "newData", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ example: '550e8400-e29b-41d4-a716-446655440010' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: String, example: '550e8400-e29b-41d4-a716-446655440010' }),
     __metadata("design:type", Object)
 ], PricingAuditLogEntry.prototype, "performedBy", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ example: 'Nguyen Van A' }),
+    (0, swagger_1.ApiPropertyOptional)({ type: String, example: 'Nguyen Van A' }),
     __metadata("design:type", Object)
 ], PricingAuditLogEntry.prototype, "performedByName", void 0);
 __decorate([

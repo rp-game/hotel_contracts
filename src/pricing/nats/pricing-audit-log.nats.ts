@@ -102,10 +102,10 @@ export class PricingAuditLogEntry {
   @ApiProperty({ example: 'rate_plan' })
   resourceType: string;
 
-  @ApiPropertyOptional({ example: '550e8400-e29b-41d4-a716-446655440001' })
+  @ApiPropertyOptional({ type: String, example: '550e8400-e29b-41d4-a716-446655440001' })
   resourceId: string | null;
 
-  @ApiPropertyOptional({ example: 'Best Available Rate' })
+  @ApiPropertyOptional({ type: String, example: 'Best Available Rate' })
   resourceName: string | null;
 
   @ApiProperty({ example: 'UPDATED' })
@@ -117,10 +117,10 @@ export class PricingAuditLogEntry {
   @ApiPropertyOptional({ description: 'Data after the change' })
   newData: Record<string, any> | null;
 
-  @ApiPropertyOptional({ example: '550e8400-e29b-41d4-a716-446655440010' })
+  @ApiPropertyOptional({ type: String, example: '550e8400-e29b-41d4-a716-446655440010' })
   performedBy: string | null;
 
-  @ApiPropertyOptional({ example: 'Nguyen Van A' })
+  @ApiPropertyOptional({ type: String, example: 'Nguyen Van A' })
   performedByName: string | null;
 
   @ApiProperty({ example: '2026-04-20T08:00:00.000Z' })
