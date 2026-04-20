@@ -8,6 +8,38 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsNumber, IsUUID, IsDateString, Min, Max } from 'class-validator';
 import { Type } from 'class-transformer';
 
+export class RecordPricingAuditParams {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'Resource type (e.g. rate_plan, base_rate)' })
+  resourceType: string;
+
+  @ApiPropertyOptional({ description: 'Resource ID' })
+  resourceId?: string | null;
+
+  @ApiPropertyOptional({ description: 'Resource display name' })
+  resourceName?: string | null;
+
+  @ApiProperty({ description: 'Action performed (CREATED, UPDATED, DELETED, etc.)' })
+  action: string;
+
+  @ApiPropertyOptional({ description: 'Data snapshot before the change' })
+  previousData?: Record<string, any> | null;
+
+  @ApiPropertyOptional({ description: 'Data snapshot after the change' })
+  newData?: Record<string, any> | null;
+
+  @ApiPropertyOptional({ description: 'User ID who performed the action' })
+  performedBy?: string | null;
+
+  @ApiPropertyOptional({ description: 'Display name of the user who performed the action' })
+  performedByName?: string | null;
+}
+
 /**
  * NATS Pattern: pricing.audit-log.list
  */

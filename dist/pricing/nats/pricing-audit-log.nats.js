@@ -14,10 +14,63 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ListPricingAuditLogResponse = exports.PricingAuditLogEntry = exports.ListPricingAuditLogRequest = void 0;
+exports.ListPricingAuditLogResponse = exports.PricingAuditLogEntry = exports.ListPricingAuditLogRequest = exports.RecordPricingAuditParams = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
+class RecordPricingAuditParams {
+    tenantId;
+    hotelId;
+    resourceType;
+    resourceId;
+    resourceName;
+    action;
+    previousData;
+    newData;
+    performedBy;
+    performedByName;
+}
+exports.RecordPricingAuditParams = RecordPricingAuditParams;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], RecordPricingAuditParams.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], RecordPricingAuditParams.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Resource type (e.g. rate_plan, base_rate)' }),
+    __metadata("design:type", String)
+], RecordPricingAuditParams.prototype, "resourceType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Resource ID' }),
+    __metadata("design:type", Object)
+], RecordPricingAuditParams.prototype, "resourceId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Resource display name' }),
+    __metadata("design:type", Object)
+], RecordPricingAuditParams.prototype, "resourceName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Action performed (CREATED, UPDATED, DELETED, etc.)' }),
+    __metadata("design:type", String)
+], RecordPricingAuditParams.prototype, "action", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Data snapshot before the change' }),
+    __metadata("design:type", Object)
+], RecordPricingAuditParams.prototype, "previousData", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Data snapshot after the change' }),
+    __metadata("design:type", Object)
+], RecordPricingAuditParams.prototype, "newData", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID who performed the action' }),
+    __metadata("design:type", Object)
+], RecordPricingAuditParams.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Display name of the user who performed the action' }),
+    __metadata("design:type", Object)
+], RecordPricingAuditParams.prototype, "performedByName", void 0);
 /**
  * NATS Pattern: pricing.audit-log.list
  */

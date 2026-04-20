@@ -184,6 +184,16 @@ export class BulkCreateSpecificDateRatesRequest {
   @IsOptional()
   @IsString()
   currency?: string;
+
+  @ApiPropertyOptional({ description: 'User ID performing the action' })
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional({ description: 'Display name of the user performing the action' })
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 /**

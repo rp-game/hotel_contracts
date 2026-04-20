@@ -3,6 +3,18 @@
  *
  * @nats_pattern pricing.audit-log.list
  */
+export declare class RecordPricingAuditParams {
+    tenantId: string;
+    hotelId: string;
+    resourceType: string;
+    resourceId?: string | null;
+    resourceName?: string | null;
+    action: string;
+    previousData?: Record<string, any> | null;
+    newData?: Record<string, any> | null;
+    performedBy?: string | null;
+    performedByName?: string | null;
+}
 /**
  * NATS Pattern: pricing.audit-log.list
  */

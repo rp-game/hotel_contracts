@@ -146,6 +146,16 @@ export class ClearChannelPricingConfigRequest {
   @ApiProperty({ description: 'Tenant ID (multi-tenant isolation)' })
   @IsUUID()
   tenantId: string;
+
+  @ApiPropertyOptional({ description: 'User ID performing the action' })
+  @IsOptional()
+  @IsString()
+  performedBy?: string;
+
+  @ApiPropertyOptional({ description: 'Display name of the user performing the action' })
+  @IsOptional()
+  @IsString()
+  performedByName?: string;
 }
 
 export interface ClearChannelPricingConfigResponse {

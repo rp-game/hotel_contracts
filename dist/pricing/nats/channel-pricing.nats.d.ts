@@ -64,6 +64,8 @@ export type UpdateChannelPricingConfigNatsResponse = NatsResponse<UpdateChannelP
 export declare class ClearChannelPricingConfigRequest {
     id: string;
     tenantId: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 export interface ClearChannelPricingConfigResponse {
     data: ChannelRateMapping;

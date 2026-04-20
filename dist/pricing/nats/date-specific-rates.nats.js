@@ -206,6 +206,8 @@ class BulkCreateSpecificDateRatesRequest {
     roomTypeId;
     rates;
     currency;
+    performedBy;
+    performedByName;
 }
 exports.BulkCreateSpecificDateRatesRequest = BulkCreateSpecificDateRatesRequest;
 __decorate([
@@ -245,6 +247,18 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], BulkCreateSpecificDateRatesRequest.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID performing the action' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BulkCreateSpecificDateRatesRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Display name of the user performing the action' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BulkCreateSpecificDateRatesRequest.prototype, "performedByName", void 0);
 /**
  * DTO for update body (partial fields only)
  */

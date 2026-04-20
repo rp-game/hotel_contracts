@@ -60,6 +60,8 @@ export declare class BulkCreateSpecificDateRatesRequest {
     roomTypeId: string;
     rates: DateRateEntry[];
     currency?: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 /**
  * DTO for update body (partial fields only)

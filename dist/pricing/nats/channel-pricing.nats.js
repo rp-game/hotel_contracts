@@ -164,6 +164,8 @@ __decorate([
 class ClearChannelPricingConfigRequest {
     id;
     tenantId;
+    performedBy;
+    performedByName;
 }
 exports.ClearChannelPricingConfigRequest = ClearChannelPricingConfigRequest;
 __decorate([
@@ -176,4 +178,16 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], ClearChannelPricingConfigRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID performing the action' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ClearChannelPricingConfigRequest.prototype, "performedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Display name of the user performing the action' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ClearChannelPricingConfigRequest.prototype, "performedByName", void 0);
 //# sourceMappingURL=channel-pricing.nats.js.map
