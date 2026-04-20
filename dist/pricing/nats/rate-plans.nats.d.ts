@@ -150,6 +150,8 @@ export type FindRatePlansByChannelNatsResponse = NatsResponse<FindRatePlansByCha
  */
 export declare class DeleteRatePlanRequest {
     id: string;
+    performedBy?: string;
+    performedByName?: string;
 }
 export declare class DeleteRatePlanResponse {
     message: string;
