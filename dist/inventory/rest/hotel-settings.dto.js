@@ -161,6 +161,9 @@ class HotelOperationSettingsDto {
     isMultiWarehouse;
     procurementMode;
     bankTransferVerificationMode;
+    guestNameFormat;
+    requireNationality;
+    requireIdentityDocument;
 }
 exports.HotelOperationSettingsDto = HotelOperationSettingsDto;
 __decorate([
@@ -296,6 +299,34 @@ __decorate([
     (0, class_validator_1.IsEnum)(['SIMPLE', 'VERIFIED']),
     __metadata("design:type", String)
 ], HotelOperationSettingsDto.prototype, "bankTransferVerificationMode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Guest name input format: separate first/last name fields or single full name field',
+        enum: ['separate', 'fullname'],
+        default: 'separate',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(['separate', 'fullname']),
+    __metadata("design:type", String)
+], HotelOperationSettingsDto.prototype, "guestNameFormat", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Whether nationality is required when creating/checking in a guest',
+        default: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], HotelOperationSettingsDto.prototype, "requireNationality", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Whether identity document (CCCD/Passport) is required for guests',
+        default: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], HotelOperationSettingsDto.prototype, "requireIdentityDocument", void 0);
 /**
  * Update Hotel Settings Request DTO
  * Used for POST /hotels/:id/settings endpoint

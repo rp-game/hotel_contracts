@@ -230,6 +230,31 @@ export class HotelOperationSettingsDto {
   @IsOptional()
   @IsEnum(['SIMPLE', 'VERIFIED'])
   bankTransferVerificationMode?: 'SIMPLE' | 'VERIFIED';
+
+  @ApiPropertyOptional({
+    description: 'Guest name input format: separate first/last name fields or single full name field',
+    enum: ['separate', 'fullname'],
+    default: 'separate',
+  })
+  @IsOptional()
+  @IsEnum(['separate', 'fullname'])
+  guestNameFormat?: 'separate' | 'fullname';
+
+  @ApiPropertyOptional({
+    description: 'Whether nationality is required when creating/checking in a guest',
+    default: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  requireNationality?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'Whether identity document (CCCD/Passport) is required for guests',
+    default: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  requireIdentityDocument?: boolean;
 }
 
 /**

@@ -50,6 +50,9 @@ export declare class HotelOperationSettingsDto {
     isMultiWarehouse?: boolean;
     procurementMode?: string;
     bankTransferVerificationMode?: 'SIMPLE' | 'VERIFIED';
+    guestNameFormat?: 'separate' | 'fullname';
+    requireNationality?: boolean;
+    requireIdentityDocument?: boolean;
 }
 /**
  * Update Hotel Settings Request DTO
