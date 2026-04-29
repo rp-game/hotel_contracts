@@ -1,1 +1,1 @@
-export {};
+export * from './delete-hotel.nats';
