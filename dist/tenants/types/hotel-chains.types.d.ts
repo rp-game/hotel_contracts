@@ -117,6 +117,7 @@ export declare class BrandStandardsDto {
  * (Unique to tenants - not duplicated elsewhere)
  */
 export declare class CreateHotelDto {
+    id?: string;
     name: string;
     description?: string;
     address: string;

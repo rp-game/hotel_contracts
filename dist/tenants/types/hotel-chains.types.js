@@ -367,6 +367,7 @@ __decorate([
  * (Unique to tenants - not duplicated elsewhere)
  */
 class CreateHotelDto {
+    id;
     name;
     description;
     address;
@@ -388,6 +389,12 @@ class CreateHotelDto {
     analytics;
 }
 exports.CreateHotelDto = CreateHotelDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Pre-generated hotel UUID (tenant.id = hotel.id convention)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CreateHotelDto.prototype, "id", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel name' }),
     (0, class_validator_1.IsString)(),

@@ -14,7 +14,7 @@ const swagger_1 = require("@nestjs/swagger");
 class HotelHardDeleteNatsRequest {
     hotelId;
     tenantId;
-    tenantType; // 'HOTEL' | 'HOTEL_CHAIN' | 'PLATFORM'
+    tenantType; // TenantType enum: INDIVIDUAL_HOTEL | HOTEL_CHAIN | HOTEL_CHAIN_SUB | PLATFORM | AGENCY
     requestedBy;
     timestamp;
 }

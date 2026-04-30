@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class HotelHardDeleteNatsRequest {
   @ApiProperty() hotelId: string;
   @ApiProperty() tenantId: string;
-  @ApiProperty() tenantType: string; // 'HOTEL' | 'HOTEL_CHAIN' | 'PLATFORM'
+  @ApiProperty() tenantType: string; // TenantType enum: INDIVIDUAL_HOTEL | HOTEL_CHAIN | HOTEL_CHAIN_SUB | PLATFORM | AGENCY
   @ApiProperty() requestedBy: string;
   @ApiProperty() timestamp: string;
 }
