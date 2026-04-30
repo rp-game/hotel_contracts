@@ -162,6 +162,9 @@ export class RateBreakdown {
   @ApiProperty({ description: 'Gross amount (calculatedRate + taxes)', required: false })
   grossAmount?: number;
 
+  @ApiProperty({ description: 'Per-night net rates used in calculation', type: [Number], required: false })
+  perNightRates?: number[];
+
   @ApiProperty({ description: 'Rate plan derivation adjustment details', required: false })
   ratePlanAdjustment?: {
     ratePlanId: string;

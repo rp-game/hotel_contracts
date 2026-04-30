@@ -84,6 +84,7 @@ export declare class RateBreakdown {
     taxes: number;
     taxBreakdown?: RateTaxBreakdown;
     grossAmount?: number;
+    perNightRates?: number[];
     ratePlanAdjustment?: {
         ratePlanId: string;
         ratePlanName: string;

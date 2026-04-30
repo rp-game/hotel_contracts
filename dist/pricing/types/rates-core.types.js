@@ -181,6 +181,7 @@ class RateBreakdown {
     taxes;
     taxBreakdown;
     grossAmount;
+    perNightRates;
     ratePlanAdjustment;
 }
 exports.RateBreakdown = RateBreakdown;
@@ -228,6 +229,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Gross amount (calculatedRate + taxes)', required: false }),
     __metadata("design:type", Number)
 ], RateBreakdown.prototype, "grossAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Per-night net rates used in calculation', type: [Number], required: false }),
+    __metadata("design:type", Array)
+], RateBreakdown.prototype, "perNightRates", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Rate plan derivation adjustment details', required: false }),
     __metadata("design:type", Object)
