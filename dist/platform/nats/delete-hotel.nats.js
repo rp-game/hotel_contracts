@@ -14,6 +14,7 @@ const swagger_1 = require("@nestjs/swagger");
 class HotelHardDeleteNatsRequest {
     hotelId;
     tenantId;
+    tenantType; // 'HOTEL' | 'HOTEL_CHAIN' | 'PLATFORM'
     requestedBy;
     timestamp;
 }
@@ -26,6 +27,10 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], HotelHardDeleteNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], HotelHardDeleteNatsRequest.prototype, "tenantType", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)

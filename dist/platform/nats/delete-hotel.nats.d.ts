@@ -1,6 +1,7 @@
 export declare class HotelHardDeleteNatsRequest {
     hotelId: string;
     tenantId: string;
+    tenantType: string;
     requestedBy: string;
     timestamp: string;
 }
