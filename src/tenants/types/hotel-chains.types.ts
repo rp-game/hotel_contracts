@@ -281,6 +281,11 @@ export class BrandStandardsDto {
  * (Unique to tenants - not duplicated elsewhere)
  */
 export class CreateHotelDto {
+  @ApiPropertyOptional({ description: 'Pre-generated hotel UUID (tenant.id = hotel.id convention)' })
+  @IsOptional()
+  @IsUUID()
+  id?: string;
+
   @ApiProperty({ description: 'Hotel name' })
   @IsString()
   name: string;
