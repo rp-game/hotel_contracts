@@ -149,6 +149,69 @@ export class CalculateRateForPlansRequest {
   };
 }
 
+export class PerNightDetail {
+  @ApiProperty({ description: 'Ngày (YYYY-MM-DD)', example: '2026-05-02' })
+  date: string;
+
+  @ApiProperty({ description: 'Thứ trong tuần (tiếng Việt)', example: 'Thứ Bảy' })
+  dayOfWeek: string;
+
+  @ApiProperty({ description: 'Loại ngày', example: 'Cuối tuần' })
+  dayType: 'Cuối tuần' | 'Ngày thường';
+
+  @ApiProperty({ description: 'Giá net (chưa thuế)', example: 925926 })
+  netRate: number;
+
+  @ApiProperty({ description: 'Giá gross (đã bao gồm thuế)', example: 1000000 })
+  grossRate: number;
+}
+
+export class AdjustmentDetail {
+  @ApiProperty({ description: 'Tên rule', example: 'Giảm giá đặt sớm' })
+  name: string;
+
+  @ApiProperty({ description: 'Mô tả', example: 'Đặt trước 7 ngày: giảm 10%' })
+  description: string;
+
+  @ApiProperty({ description: 'Phần trăm điều chỉnh', example: -10 })
+  percentage: number;
+
+  @ApiProperty({ description: 'Số tiền điều chỉnh (net)', example: -89506 })
+  amount: number;
+}
+
+export class RateForPlansBreakdown {
+  @ApiProperty({ description: 'Chi tiết giá từng đêm', type: [PerNightDetail] })
+  perNightDetails: PerNightDetail[];
+
+  @ApiProperty({ description: 'Các điều chỉnh giá áp dụng', type: [AdjustmentDetail] })
+  adjustments: AdjustmentDetail[];
+
+  @ApiProperty({ description: 'SC rate %', example: 0 })
+  serviceChargeRate: number;
+
+  @ApiProperty({ description: 'SC amount', example: 0 })
+  serviceChargeAmount: number;
+
+  @ApiProperty({ description: 'VAT rate %', example: 8 })
+  vatRate: number;
+
+  @ApiProperty({ description: 'VAT amount', example: 204074 })
+  vatAmount: number;
+
+  @ApiProperty({ description: 'Tổng thuế', example: 204074 })
+  totalTax: number;
+
+  @ApiProperty({ description: 'Tổng net (chưa thuế)', example: 2550926 })
+  totalNet: number;
+
+  @ApiProperty({ description: 'Tổng gross (đã thuế)', example: 2755000 })
+  totalGross: number;
+
+  @ApiProperty({ description: 'Tóm tắt human-readable', example: '2 đêm cuối tuần × 1.000.000đ + 1 đêm thường × 900.000đ = 2.900.000đ (đã thuế)' })
+  summary: string;
+}
+
 export class CalculateRateForPlanItem {
   @ApiProperty({ description: 'Rate plan ID' })
   ratePlanId: string;
@@ -167,6 +230,9 @@ export class CalculateRateForPlanItem {
     type: 'PERCENTAGE' | 'AMOUNT';
     value: number;
   };
+
+  @ApiPropertyOptional({ description: 'Chi tiết breakdown giá' })
+  breakdown?: RateForPlansBreakdown;
 }
 
 export class CalculateRateForPlansResponse {
@@ -184,6 +250,9 @@ export class CalculateRateForPlansResponse {
 
   @ApiProperty({ description: 'Calculated rates per plan', type: [CalculateRateForPlanItem] })
   plans: CalculateRateForPlanItem[];
+
+  @ApiPropertyOptional({ description: 'Breakdown giá base (không có rate plan derivation)' })
+  baseBreakdown?: RateForPlansBreakdown;
 }
 
 export class CalculateRateResponse {

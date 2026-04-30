@@ -15,7 +15,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteRateResponse = exports.DeleteRateRequest = exports.CreateRateResponse = exports.GetRateByIdResponse = exports.SyncRatesResponse = exports.SyncRatesData = exports.UpdateRateResponse = exports.CalculateRateResponse = exports.CalculateRateForPlansResponse = exports.CalculateRateForPlanItem = exports.CalculateRateForPlansRequest = exports.GetRatesResponse = exports.RoomRateResponse = exports.RateDetails = void 0;
+exports.DeleteRateResponse = exports.DeleteRateRequest = exports.CreateRateResponse = exports.GetRateByIdResponse = exports.SyncRatesResponse = exports.SyncRatesData = exports.UpdateRateResponse = exports.CalculateRateResponse = exports.CalculateRateForPlansResponse = exports.CalculateRateForPlanItem = exports.RateForPlansBreakdown = exports.AdjustmentDetail = exports.PerNightDetail = exports.CalculateRateForPlansRequest = exports.GetRatesResponse = exports.RoomRateResponse = exports.RateDetails = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const types_1 = require("../types");
@@ -151,12 +151,117 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel tax configuration (injected by API gateway)', example: { vatRate: 8, serviceChargeRate: 5 } }),
     __metadata("design:type", Object)
 ], CalculateRateForPlansRequest.prototype, "taxConfiguration", void 0);
+class PerNightDetail {
+    date;
+    dayOfWeek;
+    dayType;
+    netRate;
+    grossRate;
+}
+exports.PerNightDetail = PerNightDetail;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Ngày (YYYY-MM-DD)', example: '2026-05-02' }),
+    __metadata("design:type", String)
+], PerNightDetail.prototype, "date", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Thứ trong tuần (tiếng Việt)', example: 'Thứ Bảy' }),
+    __metadata("design:type", String)
+], PerNightDetail.prototype, "dayOfWeek", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Loại ngày', example: 'Cuối tuần' }),
+    __metadata("design:type", String)
+], PerNightDetail.prototype, "dayType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Giá net (chưa thuế)', example: 925926 }),
+    __metadata("design:type", Number)
+], PerNightDetail.prototype, "netRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Giá gross (đã bao gồm thuế)', example: 1000000 }),
+    __metadata("design:type", Number)
+], PerNightDetail.prototype, "grossRate", void 0);
+class AdjustmentDetail {
+    name;
+    description;
+    percentage;
+    amount;
+}
+exports.AdjustmentDetail = AdjustmentDetail;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tên rule', example: 'Giảm giá đặt sớm' }),
+    __metadata("design:type", String)
+], AdjustmentDetail.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Mô tả', example: 'Đặt trước 7 ngày: giảm 10%' }),
+    __metadata("design:type", String)
+], AdjustmentDetail.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Phần trăm điều chỉnh', example: -10 }),
+    __metadata("design:type", Number)
+], AdjustmentDetail.prototype, "percentage", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Số tiền điều chỉnh (net)', example: -89506 }),
+    __metadata("design:type", Number)
+], AdjustmentDetail.prototype, "amount", void 0);
+class RateForPlansBreakdown {
+    perNightDetails;
+    adjustments;
+    serviceChargeRate;
+    serviceChargeAmount;
+    vatRate;
+    vatAmount;
+    totalTax;
+    totalNet;
+    totalGross;
+    summary;
+}
+exports.RateForPlansBreakdown = RateForPlansBreakdown;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Chi tiết giá từng đêm', type: [PerNightDetail] }),
+    __metadata("design:type", Array)
+], RateForPlansBreakdown.prototype, "perNightDetails", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Các điều chỉnh giá áp dụng', type: [AdjustmentDetail] }),
+    __metadata("design:type", Array)
+], RateForPlansBreakdown.prototype, "adjustments", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'SC rate %', example: 0 }),
+    __metadata("design:type", Number)
+], RateForPlansBreakdown.prototype, "serviceChargeRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'SC amount', example: 0 }),
+    __metadata("design:type", Number)
+], RateForPlansBreakdown.prototype, "serviceChargeAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'VAT rate %', example: 8 }),
+    __metadata("design:type", Number)
+], RateForPlansBreakdown.prototype, "vatRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'VAT amount', example: 204074 }),
+    __metadata("design:type", Number)
+], RateForPlansBreakdown.prototype, "vatAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tổng thuế', example: 204074 }),
+    __metadata("design:type", Number)
+], RateForPlansBreakdown.prototype, "totalTax", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tổng net (chưa thuế)', example: 2550926 }),
+    __metadata("design:type", Number)
+], RateForPlansBreakdown.prototype, "totalNet", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tổng gross (đã thuế)', example: 2755000 }),
+    __metadata("design:type", Number)
+], RateForPlansBreakdown.prototype, "totalGross", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tóm tắt human-readable', example: '2 đêm cuối tuần × 1.000.000đ + 1 đêm thường × 900.000đ = 2.900.000đ (đã thuế)' }),
+    __metadata("design:type", String)
+], RateForPlansBreakdown.prototype, "summary", void 0);
 class CalculateRateForPlanItem {
     ratePlanId;
     ratePlanName;
     finalRate;
     perNightRate;
     derivation;
+    breakdown;
 }
 exports.CalculateRateForPlanItem = CalculateRateForPlanItem;
 __decorate([
@@ -179,11 +284,16 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Derivation details (if DERIVED plan)' }),
     __metadata("design:type", Object)
 ], CalculateRateForPlanItem.prototype, "derivation", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Chi tiết breakdown giá' }),
+    __metadata("design:type", RateForPlansBreakdown)
+], CalculateRateForPlanItem.prototype, "breakdown", void 0);
 class CalculateRateForPlansResponse {
     baseRate;
     nights;
     taxConfiguration;
     plans;
+    baseBreakdown;
 }
 exports.CalculateRateForPlansResponse = CalculateRateForPlansResponse;
 __decorate([
@@ -202,6 +312,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Calculated rates per plan', type: [CalculateRateForPlanItem] }),
     __metadata("design:type", Array)
 ], CalculateRateForPlansResponse.prototype, "plans", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Breakdown giá base (không có rate plan derivation)' }),
+    __metadata("design:type", RateForPlansBreakdown)
+], CalculateRateForPlansResponse.prototype, "baseBreakdown", void 0);
 class CalculateRateResponse {
     data;
 }

@@ -96,6 +96,31 @@ export declare class CalculateRateForPlansRequest {
         serviceChargeRate: number;
     };
 }
+export declare class PerNightDetail {
+    date: string;
+    dayOfWeek: string;
+    dayType: 'Cuối tuần' | 'Ngày thường';
+    netRate: number;
+    grossRate: number;
+}
+export declare class AdjustmentDetail {
+    name: string;
+    description: string;
+    percentage: number;
+    amount: number;
+}
+export declare class RateForPlansBreakdown {
+    perNightDetails: PerNightDetail[];
+    adjustments: AdjustmentDetail[];
+    serviceChargeRate: number;
+    serviceChargeAmount: number;
+    vatRate: number;
+    vatAmount: number;
+    totalTax: number;
+    totalNet: number;
+    totalGross: number;
+    summary: string;
+}
 export declare class CalculateRateForPlanItem {
     ratePlanId: string;
     ratePlanName: string;
@@ -105,6 +130,7 @@ export declare class CalculateRateForPlanItem {
         type: 'PERCENTAGE' | 'AMOUNT';
         value: number;
     };
+    breakdown?: RateForPlansBreakdown;
 }
 export declare class CalculateRateForPlansResponse {
     baseRate: number;
@@ -114,6 +140,7 @@ export declare class CalculateRateForPlansResponse {
         serviceChargeRate: number;
     };
     plans: CalculateRateForPlanItem[];
+    baseBreakdown?: RateForPlansBreakdown;
 }
 export declare class CalculateRateResponse {
     data: DynamicRateCalculation;
