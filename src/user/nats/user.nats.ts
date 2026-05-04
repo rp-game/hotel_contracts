@@ -27,8 +27,8 @@ export class CreateUserRequestDto {
   @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
 
-  @ApiProperty({ description: 'User roles', enum: UserRole, isArray: true })
-  roles: UserRole[];
+  @ApiProperty({ description: 'User roles', type: [String] })
+  roles: string[];
 
   @ApiPropertyOptional({ description: 'Is account active' })
   isActive?: boolean;
@@ -69,7 +69,7 @@ export class UpdateUserRequestDto {
   lastName?: string;
 
   @ApiPropertyOptional({ description: 'User roles', enum: UserRole, isArray: true })
-  roles?: UserRole[];
+  roles?: string[];
 
   @ApiPropertyOptional({ description: 'Is account active' })
   isActive?: boolean;
@@ -185,8 +185,8 @@ export class AssignRolesRequestDto {
   @ApiProperty({ description: 'User ID' })
   userId: string;
 
-  @ApiProperty({ description: 'Roles to assign', enum: UserRole, isArray: true })
-  roles: UserRole[];
+  @ApiProperty({ description: 'Roles to assign', type: [String] })
+  roles: string[];
 }
 
 export class ActivateUserRequestDto {
@@ -223,7 +223,7 @@ export class UserResponseDto {
   tenantId: string;
 
   @ApiProperty({ description: 'User roles', enum: UserRole, isArray: true })
-  roles: UserRole[];
+  roles: string[];
 
   @ApiProperty({ description: 'Is account active' })
   isActive: boolean;
@@ -255,7 +255,7 @@ export class StaffInfoResponseDto {
   email: string;
 
   @ApiProperty({ description: 'User roles', enum: UserRole, isArray: true })
-  roles: UserRole[];
+  roles: string[];
 
   @ApiPropertyOptional({ description: 'Staff status', enum: StaffStatus })
   staffStatus?: StaffStatus;

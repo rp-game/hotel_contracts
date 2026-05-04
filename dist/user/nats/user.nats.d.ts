@@ -3,7 +3,6 @@
  * All user-related NATS message payloads and responses
  * Exported from user-service
  */
-import { UserRole } from '../enums';
 import { StaffStatus } from '../enums';
 import { Department } from '../enums';
 export declare class CreateUserRequestDto {
@@ -12,7 +11,7 @@ export declare class CreateUserRequestDto {
     firstName: string;
     lastName: string;
     tenantId: string;
-    roles: UserRole[];
+    roles: string[];
     isActive?: boolean;
 }
 export declare class FindUserRequestDto {
@@ -31,7 +30,7 @@ export declare class UpdateUserRequestDto {
     id: string;
     firstName?: string;
     lastName?: string;
-    roles?: UserRole[];
+    roles?: string[];
     isActive?: boolean;
 }
 export declare class RemoveUserRequestDto {
@@ -82,7 +81,7 @@ export declare class GetUserStatsRequestDto {
 }
 export declare class AssignRolesRequestDto {
     userId: string;
-    roles: UserRole[];
+    roles: string[];
 }
 export declare class ActivateUserRequestDto {
     id: string;
@@ -99,7 +98,7 @@ export declare class UserResponseDto {
     firstName: string;
     lastName: string;
     tenantId: string;
-    roles: UserRole[];
+    roles: string[];
     isActive: boolean;
     staffStatus?: StaffStatus;
     hotelId?: string;
@@ -111,7 +110,7 @@ export declare class StaffInfoResponseDto {
     firstName: string;
     lastName: string;
     email: string;
-    roles: UserRole[];
+    roles: string[];
     staffStatus?: StaffStatus;
     hotelId?: string;
 }

@@ -51,7 +51,7 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUserRequestDto.prototype, "tenantId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'User roles', enum: enums_1.UserRole, isArray: true }),
+    (0, swagger_1.ApiProperty)({ description: 'User roles', type: [String] }),
     __metadata("design:type", Array)
 ], CreateUserRequestDto.prototype, "roles", void 0);
 __decorate([
@@ -304,7 +304,7 @@ __decorate([
     __metadata("design:type", String)
 ], AssignRolesRequestDto.prototype, "userId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Roles to assign', enum: enums_1.UserRole, isArray: true }),
+    (0, swagger_1.ApiProperty)({ description: 'Roles to assign', type: [String] }),
     __metadata("design:type", Array)
 ], AssignRolesRequestDto.prototype, "roles", void 0);
 class ActivateUserRequestDto {
