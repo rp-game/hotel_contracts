@@ -41,7 +41,8 @@ export declare enum UserRole {
     SECURITY_STAFF = "SECURITY_STAFF",
     GUEST = "GUEST",
     VENDOR = "VENDOR",
-    NIGHT_SHIFT = "NIGHT_SHIFT"
+    NIGHT_SHIFT = "NIGHT_SHIFT",// Alias for NIGHT_AUDITOR
+    OVERRIDE_PRICE = "OVERRIDE_PRICE"
 }
 /**
  * Enum representing staff status in the SaziHotel system

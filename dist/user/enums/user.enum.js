@@ -60,6 +60,8 @@ var UserRole;
     UserRole["VENDOR"] = "VENDOR";
     // === LEGACY ROLES (for backward compatibility) ===
     UserRole["NIGHT_SHIFT"] = "NIGHT_SHIFT";
+    // === PERMISSION ROLES ===
+    UserRole["OVERRIDE_PRICE"] = "OVERRIDE_PRICE";
 })(UserRole || (exports.UserRole = UserRole = {}));
 /**
  * Enum representing staff status in the SaziHotel system

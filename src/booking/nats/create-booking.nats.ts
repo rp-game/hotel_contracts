@@ -190,8 +190,20 @@ export interface CreateBookingRequest {
        * Rate plan ID for this room (optional, overrides booking-level ratePlanId)
        */
       ratePlanId?: string;
+
+      /**
+       * Manual price override — only honored when user has OVERRIDE_PRICE role.
+       * Replaces the rate-plan calculated price (net or gross depending on hotel priceInputMode).
+       */
+      priceOverride?: number;
     }>;
   };
+
+  /**
+   * Name of the user who performed the price override (passed by api-gateway from JWT).
+   * Only present when at least one room has priceOverride.
+   */
+  overriddenByName?: string;
 
   /**
    * Optional payment information

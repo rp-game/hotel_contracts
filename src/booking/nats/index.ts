@@ -53,6 +53,9 @@ export * from './room-assignment.nats';
 // Reassign room NATS contracts
 export * from './reassign-room.nats';
 
+// Booking history NATS contracts
+export * from './get-booking-history.nats';
+
 // Add service NATS contracts
 export * from './add-service.nats';
 

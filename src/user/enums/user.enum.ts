@@ -70,6 +70,9 @@ export enum UserRole {
 
   // === LEGACY ROLES (for backward compatibility) ===
   NIGHT_SHIFT = 'NIGHT_SHIFT', // Alias for NIGHT_AUDITOR
+
+  // === PERMISSION ROLES ===
+  OVERRIDE_PRICE = 'OVERRIDE_PRICE', // Can manually override booking room price
 }
 
 /**

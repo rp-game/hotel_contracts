@@ -62,6 +62,8 @@ __exportStar(require("./delete-conflict.nats"), exports);
 __exportStar(require("./room-assignment.nats"), exports);
 // Reassign room NATS contracts
 __exportStar(require("./reassign-room.nats"), exports);
+// Booking history NATS contracts
+__exportStar(require("./get-booking-history.nats"), exports);
 // Add service NATS contracts
 __exportStar(require("./add-service.nats"), exports);
 // Add payment NATS contracts

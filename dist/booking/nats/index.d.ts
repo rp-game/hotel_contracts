@@ -41,6 +41,7 @@ export * from './update-conflict.nats';
 export * from './delete-conflict.nats';
 export * from './room-assignment.nats';
 export * from './reassign-room.nats';
+export * from './get-booking-history.nats';
 export * from './add-service.nats';
 export * from './add-payment.nats';
 export * from './cancel-booking.nats';
