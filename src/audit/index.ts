@@ -4,3 +4,4 @@
  */
 
 export * from './audit-activity.event';
+export * from './api-log.event';

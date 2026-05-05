@@ -3,4 +3,5 @@
  * @description Cross-service audit logging types and DTOs
  */
 export * from './audit-activity.event';
+export * from './api-log.event';
 //# sourceMappingURL=index.d.ts.map
