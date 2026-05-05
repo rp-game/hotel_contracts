@@ -185,6 +185,8 @@ class RoomPricingEntryDto {
     calculatedRate;
     quantity;
     breakdown;
+    isOverride;
+    originalRate;
 }
 exports.RoomPricingEntryDto = RoomPricingEntryDto;
 __decorate([
@@ -211,6 +213,14 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Detailed breakdown', type: PricingBreakdownDetailDto }),
     __metadata("design:type", PricingBreakdownDetailDto)
 ], RoomPricingEntryDto.prototype, "breakdown", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether this room price was manually overridden', example: true }),
+    __metadata("design:type", Boolean)
+], RoomPricingEntryDto.prototype, "isOverride", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Original rate plan rate before manual override', example: 1100000 }),
+    __metadata("design:type", Number)
+], RoomPricingEntryDto.prototype, "originalRate", void 0);
 class PricingBreakdownDto {
     nights;
     finalPrice;

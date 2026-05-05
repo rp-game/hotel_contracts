@@ -135,6 +135,12 @@ export class RoomPricingEntryDto {
 
   @ApiPropertyOptional({ description: 'Detailed breakdown', type: PricingBreakdownDetailDto })
   breakdown?: PricingBreakdownDetailDto;
+
+  @ApiPropertyOptional({ description: 'Whether this room price was manually overridden', example: true })
+  isOverride?: boolean;
+
+  @ApiPropertyOptional({ description: 'Original rate plan rate before manual override', example: 1100000 })
+  originalRate?: number;
 }
 
 export class PricingBreakdownDto {

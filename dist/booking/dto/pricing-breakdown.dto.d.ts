@@ -45,6 +45,8 @@ export declare class RoomPricingEntryDto {
     calculatedRate: number;
     quantity: number;
     breakdown?: PricingBreakdownDetailDto;
+    isOverride?: boolean;
+    originalRate?: number;
 }
 export declare class PricingBreakdownDto {
     nights: number;
