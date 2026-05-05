@@ -11,7 +11,7 @@ export interface GetBookingHistoryRequest {
     tenantId: string;
     hotelId: string;
 }
-export interface BookingHistoryDto {
+export declare class BookingHistoryDto {
     id: string;
     bookingId: string;
     action: string;

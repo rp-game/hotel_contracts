@@ -6,6 +6,7 @@
  * Called by: api-gateway
  */
 
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 export interface GetBookingHistoryRequest {
@@ -14,19 +15,19 @@ export interface GetBookingHistoryRequest {
   hotelId: string;
 }
 
-export interface BookingHistoryDto {
-  id: string;
-  bookingId: string;
-  action: string;
-  description: string;
-  previousStatus?: string | null;
-  newStatus?: string | null;
-  previousData?: Record<string, any> | null;
-  newData?: Record<string, any> | null;
-  createdBy?: string | null;
-  createdAt: string;
-  notes?: string | null;
-  isSystemGenerated: boolean;
+export class BookingHistoryDto {
+  @ApiProperty() id: string;
+  @ApiProperty() bookingId: string;
+  @ApiProperty() action: string;
+  @ApiProperty() description: string;
+  @ApiPropertyOptional({ nullable: true }) previousStatus?: string | null;
+  @ApiPropertyOptional({ nullable: true }) newStatus?: string | null;
+  @ApiPropertyOptional({ nullable: true }) previousData?: Record<string, any> | null;
+  @ApiPropertyOptional({ nullable: true }) newData?: Record<string, any> | null;
+  @ApiPropertyOptional({ nullable: true }) createdBy?: string | null;
+  @ApiProperty() createdAt: string;
+  @ApiPropertyOptional({ nullable: true }) notes?: string | null;
+  @ApiProperty() isSystemGenerated: boolean;
 }
 
 export type GetBookingHistoryResponse = NatsResponse<BookingHistoryDto[]>;
