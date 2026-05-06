@@ -398,6 +398,9 @@ export class CreateEInvoiceFromInvoiceNatsRequest {
   @ApiPropertyOptional({ description: 'Buyer name' })
   buyerName?: string;
 
+  @ApiPropertyOptional({ description: 'Whether invoice was sent to buyer' })
+  buyerWantsInvoice?: boolean;
+
   @ApiProperty({ description: 'Payment method', enum: InvoicePaymentMethod })
   paymentMethod: InvoicePaymentMethod;
 
@@ -406,6 +409,9 @@ export class CreateEInvoiceFromInvoiceNatsRequest {
 
   @ApiPropertyOptional({ description: 'Notes' })
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Invoice-level discount amount' })
+  discountAmount?: number;
 }
 
 export class UpdateEInvoiceNatsRequest {
@@ -456,6 +462,9 @@ export class UpdateEInvoiceNatsRequest {
 
   @ApiPropertyOptional({ description: 'Updated line items', type: [EInvoiceItemInput] })
   items?: EInvoiceItemInput[];
+
+  @ApiPropertyOptional({ description: 'Invoice-level discount amount' })
+  discountAmount?: number;
 }
 
 export class IssueEInvoiceNatsRequest {

@@ -68,6 +68,7 @@ export declare class EInvoiceData {
     customerEmail?: string;
     customerPhone?: string;
     buyerName?: string;
+    buyerWantsInvoice?: boolean;
     paymentMethod: InvoicePaymentMethod;
     currency: string;
     subtotal: number;
@@ -124,6 +125,7 @@ export declare const EINVOICE_PATTERNS: {
     readonly FIND_ONE: "einvoice.find_one";
     readonly GET_PDF: "einvoice.get_pdf";
     readonly GET_HTML: "einvoice.get_html";
+    readonly GET_XML: "einvoice.get_xml";
     readonly PROVIDER_CONFIG_SAVE: "einvoice.provider_config.save";
     readonly PROVIDER_CONFIG_GET: "einvoice.provider_config.get";
     readonly PROVIDER_CONFIG_STATUS: "einvoice.provider_config.status";
@@ -144,9 +146,11 @@ export declare class CreateEInvoiceNatsRequest {
     customerEmail?: string;
     customerPhone?: string;
     buyerName?: string;
+    buyerWantsInvoice?: boolean;
     paymentMethod: InvoicePaymentMethod;
     arisingDate: string;
     notes?: string;
+    discountAmount?: number;
     items: EInvoiceItemInput[];
 }
 export declare class CreateEInvoiceFromInvoiceNatsRequest {
@@ -162,9 +166,11 @@ export declare class CreateEInvoiceFromInvoiceNatsRequest {
     customerEmail?: string;
     customerPhone?: string;
     buyerName?: string;
+    buyerWantsInvoice?: boolean;
     paymentMethod: InvoicePaymentMethod;
     arisingDate?: string;
     notes?: string;
+    discountAmount?: number;
 }
 export declare class UpdateEInvoiceNatsRequest {
     tenantId: string;
@@ -183,6 +189,7 @@ export declare class UpdateEInvoiceNatsRequest {
     arisingDate?: string;
     notes?: string;
     items?: EInvoiceItemInput[];
+    discountAmount?: number;
 }
 export declare class IssueEInvoiceNatsRequest {
     tenantId: string;
@@ -219,6 +226,11 @@ export declare class GetEInvoicePdfNatsRequest {
     id: string;
 }
 export declare class GetEInvoiceHtmlNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    id: string;
+}
+export declare class GetEInvoiceXmlNatsRequest {
     tenantId: string;
     hotelId: string;
     id: string;

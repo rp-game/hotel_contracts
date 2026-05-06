@@ -27,7 +27,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ReplaceEInvoiceNatsRequest = exports.AdjustEInvoiceNatsRequest = exports.CancelEInvoiceNatsRequest = exports.ProviderConfigStatusData = exports.DeleteProviderConfigNatsRequest = exports.GetProviderConfigStatusNatsRequest = exports.GetProviderConfigNatsRequest = exports.SaveProviderConfigNatsRequest = exports.GetEInvoiceHtmlNatsRequest = exports.GetEInvoicePdfNatsRequest = exports.FindEInvoiceNatsRequest = exports.FindEInvoicesNatsRequest = exports.DeleteEInvoiceNatsRequest = exports.IssueEInvoiceNatsRequest = exports.UpdateEInvoiceNatsRequest = exports.CreateEInvoiceFromInvoiceNatsRequest = exports.CreateEInvoiceNatsRequest = exports.EINVOICE_PATTERNS = exports.ProviderConfigData = exports.EInvoiceSummary = exports.EInvoiceData = exports.EInvoiceHistoryData = exports.EInvoiceItemData = exports.EInvoiceItemInput = void 0;
+exports.ReplaceEInvoiceNatsRequest = exports.AdjustEInvoiceNatsRequest = exports.CancelEInvoiceNatsRequest = exports.ProviderConfigStatusData = exports.DeleteProviderConfigNatsRequest = exports.GetProviderConfigStatusNatsRequest = exports.GetProviderConfigNatsRequest = exports.SaveProviderConfigNatsRequest = exports.GetEInvoiceXmlNatsRequest = exports.GetEInvoiceHtmlNatsRequest = exports.GetEInvoicePdfNatsRequest = exports.FindEInvoiceNatsRequest = exports.FindEInvoicesNatsRequest = exports.DeleteEInvoiceNatsRequest = exports.IssueEInvoiceNatsRequest = exports.UpdateEInvoiceNatsRequest = exports.CreateEInvoiceFromInvoiceNatsRequest = exports.CreateEInvoiceNatsRequest = exports.EINVOICE_PATTERNS = exports.ProviderConfigData = exports.EInvoiceSummary = exports.EInvoiceData = exports.EInvoiceHistoryData = exports.EInvoiceItemData = exports.EInvoiceItemInput = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const enums_1 = require("../enums");
 // ============================================================================
@@ -158,6 +158,7 @@ class EInvoiceData {
     customerEmail;
     customerPhone;
     buyerName;
+    buyerWantsInvoice;
     paymentMethod;
     currency;
     subtotal;
@@ -251,6 +252,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Buyer name (individual)' }),
     __metadata("design:type", String)
 ], EInvoiceData.prototype, "buyerName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether invoice was sent to buyer' }),
+    __metadata("design:type", Boolean)
+], EInvoiceData.prototype, "buyerWantsInvoice", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Payment method', enum: enums_1.InvoicePaymentMethod }),
     __metadata("design:type", String)
@@ -460,6 +465,7 @@ exports.EINVOICE_PATTERNS = {
     FIND_ONE: 'einvoice.find_one',
     GET_PDF: 'einvoice.get_pdf',
     GET_HTML: 'einvoice.get_html',
+    GET_XML: 'einvoice.get_xml',
     PROVIDER_CONFIG_SAVE: 'einvoice.provider_config.save',
     PROVIDER_CONFIG_GET: 'einvoice.provider_config.get',
     PROVIDER_CONFIG_STATUS: 'einvoice.provider_config.status',
@@ -483,9 +489,11 @@ class CreateEInvoiceNatsRequest {
     customerEmail;
     customerPhone;
     buyerName;
+    buyerWantsInvoice;
     paymentMethod;
     arisingDate;
     notes;
+    discountAmount;
     items;
 }
 exports.CreateEInvoiceNatsRequest = CreateEInvoiceNatsRequest;
@@ -534,6 +542,10 @@ __decorate([
     __metadata("design:type", String)
 ], CreateEInvoiceNatsRequest.prototype, "buyerName", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether buyer wants invoice sent to them. Invoice is always created per law.' }),
+    __metadata("design:type", Boolean)
+], CreateEInvoiceNatsRequest.prototype, "buyerWantsInvoice", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Payment method', enum: enums_1.InvoicePaymentMethod }),
     __metadata("design:type", String)
 ], CreateEInvoiceNatsRequest.prototype, "paymentMethod", void 0);
@@ -545,6 +557,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Notes' }),
     __metadata("design:type", String)
 ], CreateEInvoiceNatsRequest.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Invoice-level discount amount (subtracted from total before tax)' }),
+    __metadata("design:type", Number)
+], CreateEInvoiceNatsRequest.prototype, "discountAmount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Line items', type: [EInvoiceItemInput] }),
     __metadata("design:type", Array)
@@ -562,9 +578,11 @@ class CreateEInvoiceFromInvoiceNatsRequest {
     customerEmail;
     customerPhone;
     buyerName;
+    buyerWantsInvoice;
     paymentMethod;
     arisingDate;
     notes;
+    discountAmount;
 }
 exports.CreateEInvoiceFromInvoiceNatsRequest = CreateEInvoiceFromInvoiceNatsRequest;
 __decorate([
@@ -616,6 +634,10 @@ __decorate([
     __metadata("design:type", String)
 ], CreateEInvoiceFromInvoiceNatsRequest.prototype, "buyerName", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether invoice was sent to buyer' }),
+    __metadata("design:type", Boolean)
+], CreateEInvoiceFromInvoiceNatsRequest.prototype, "buyerWantsInvoice", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Payment method', enum: enums_1.InvoicePaymentMethod }),
     __metadata("design:type", String)
 ], CreateEInvoiceFromInvoiceNatsRequest.prototype, "paymentMethod", void 0);
@@ -627,6 +649,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Notes' }),
     __metadata("design:type", String)
 ], CreateEInvoiceFromInvoiceNatsRequest.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Invoice-level discount amount' }),
+    __metadata("design:type", Number)
+], CreateEInvoiceFromInvoiceNatsRequest.prototype, "discountAmount", void 0);
 class UpdateEInvoiceNatsRequest {
     tenantId;
     hotelId;
@@ -644,6 +670,7 @@ class UpdateEInvoiceNatsRequest {
     arisingDate;
     notes;
     items;
+    discountAmount;
 }
 exports.UpdateEInvoiceNatsRequest = UpdateEInvoiceNatsRequest;
 __decorate([
@@ -710,6 +737,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Updated line items', type: [EInvoiceItemInput] }),
     __metadata("design:type", Array)
 ], UpdateEInvoiceNatsRequest.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Invoice-level discount amount' }),
+    __metadata("design:type", Number)
+], UpdateEInvoiceNatsRequest.prototype, "discountAmount", void 0);
 class IssueEInvoiceNatsRequest {
     tenantId;
     hotelId;
@@ -863,6 +894,24 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'E-Invoice ID' }),
     __metadata("design:type", String)
 ], GetEInvoiceHtmlNatsRequest.prototype, "id", void 0);
+class GetEInvoiceXmlNatsRequest {
+    tenantId;
+    hotelId;
+    id;
+}
+exports.GetEInvoiceXmlNatsRequest = GetEInvoiceXmlNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], GetEInvoiceXmlNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], GetEInvoiceXmlNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'E-Invoice ID' }),
+    __metadata("design:type", String)
+], GetEInvoiceXmlNatsRequest.prototype, "id", void 0);
 class SaveProviderConfigNatsRequest {
     tenantId;
     hotelId;
