@@ -167,6 +167,9 @@ export class EInvoiceData {
   @ApiProperty({ description: 'Total amount' })
   totalAmount: number;
 
+  @ApiPropertyOptional({ description: 'Invoice-level discount amount' })
+  discountAmount?: number;
+
   @ApiPropertyOptional({ description: 'Amount in words' })
   amountInWords?: string;
 

@@ -74,6 +74,7 @@ export declare class EInvoiceData {
     subtotal: number;
     vatAmount: number;
     totalAmount: number;
+    discountAmount?: number;
     amountInWords?: string;
     arisingDate: string;
     issuedAt?: string;

@@ -164,6 +164,7 @@ class EInvoiceData {
     subtotal;
     vatAmount;
     totalAmount;
+    discountAmount;
     amountInWords;
     arisingDate;
     issuedAt;
@@ -276,6 +277,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total amount' }),
     __metadata("design:type", Number)
 ], EInvoiceData.prototype, "totalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Invoice-level discount amount' }),
+    __metadata("design:type", Number)
+], EInvoiceData.prototype, "discountAmount", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Amount in words' }),
     __metadata("design:type", String)

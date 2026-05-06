@@ -87,9 +87,11 @@ class CreateEInvoiceDto {
     customerEmail;
     customerPhone;
     buyerName;
+    buyerWantsInvoice;
     paymentMethod;
     arisingDate;
     notes;
+    discountAmount;
     items;
 }
 exports.CreateEInvoiceDto = CreateEInvoiceDto;
@@ -141,6 +143,12 @@ __decorate([
     __metadata("design:type", String)
 ], CreateEInvoiceDto.prototype, "buyerName", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether buyer wants invoice. Default true. Invoice always created per law.', default: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreateEInvoiceDto.prototype, "buyerWantsInvoice", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Payment method', enum: enums_1.InvoicePaymentMethod }),
     (0, class_validator_1.IsEnum)(enums_1.InvoicePaymentMethod),
     __metadata("design:type", String)
@@ -156,6 +164,13 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateEInvoiceDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Invoice-level discount amount (subtracted from totalAmount, not from subtotal)', default: 0 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], CreateEInvoiceDto.prototype, "discountAmount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Line items', type: [CreateEInvoiceItemDto] }),
     (0, class_validator_1.IsArray)(),

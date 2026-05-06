@@ -22,9 +22,11 @@ export declare class CreateEInvoiceDto {
     customerEmail?: string;
     customerPhone?: string;
     buyerName?: string;
+    buyerWantsInvoice?: boolean;
     paymentMethod: InvoicePaymentMethod;
     arisingDate: string;
     notes?: string;
+    discountAmount?: number;
     items: CreateEInvoiceItemDto[];
 }
 export declare class CreateEInvoiceFromInvoiceDto {

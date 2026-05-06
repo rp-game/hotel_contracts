@@ -4,7 +4,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsOptional, IsEnum, IsArray, ValidateNested, IsNumber, Min, IsDateString } from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsArray, ValidateNested, IsNumber, Min, IsDateString, IsBoolean } from 'class-validator';
 import { Type } from 'class-transformer';
 import { EInvoiceStatus, CustomerType, InvoicePaymentMethod, ProviderType } from '../enums';
 
@@ -92,6 +92,11 @@ export class CreateEInvoiceDto {
   @IsString()
   buyerName?: string;
 
+  @ApiPropertyOptional({ description: 'Whether buyer wants invoice. Default true. Invoice always created per law.', default: true })
+  @IsOptional()
+  @IsBoolean()
+  buyerWantsInvoice?: boolean;
+
   @ApiProperty({ description: 'Payment method', enum: InvoicePaymentMethod })
   @IsEnum(InvoicePaymentMethod)
   paymentMethod: InvoicePaymentMethod;
@@ -104,6 +109,12 @@ export class CreateEInvoiceDto {
   @IsOptional()
   @IsString()
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Invoice-level discount amount (subtracted from totalAmount, not from subtotal)', default: 0 })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  discountAmount?: number;
 
   @ApiProperty({ description: 'Line items', type: [CreateEInvoiceItemDto] })
   @IsArray()
