@@ -149,6 +149,9 @@ export class EInvoiceData {
   @ApiPropertyOptional({ description: 'Buyer name (individual)' })
   buyerName?: string;
 
+  @ApiPropertyOptional({ description: 'Whether invoice was sent to buyer' })
+  buyerWantsInvoice?: boolean;
+
   @ApiProperty({ description: 'Payment method', enum: InvoicePaymentMethod })
   paymentMethod: InvoicePaymentMethod;
 
@@ -291,6 +294,7 @@ export const EINVOICE_PATTERNS = {
   FIND_ONE: 'einvoice.find_one',
   GET_PDF: 'einvoice.get_pdf',
   GET_HTML: 'einvoice.get_html',
+  GET_XML: 'einvoice.get_xml',
   PROVIDER_CONFIG_SAVE: 'einvoice.provider_config.save',
   PROVIDER_CONFIG_GET: 'einvoice.provider_config.get',
   PROVIDER_CONFIG_STATUS: 'einvoice.provider_config.status',
@@ -338,6 +342,9 @@ export class CreateEInvoiceNatsRequest {
   @ApiPropertyOptional({ description: 'Buyer name (required for INDIVIDUAL)' })
   buyerName?: string;
 
+  @ApiPropertyOptional({ description: 'Whether buyer wants invoice sent to them. Invoice is always created per law.' })
+  buyerWantsInvoice?: boolean;
+
   @ApiProperty({ description: 'Payment method', enum: InvoicePaymentMethod })
   paymentMethod: InvoicePaymentMethod;
 
@@ -346,6 +353,9 @@ export class CreateEInvoiceNatsRequest {
 
   @ApiPropertyOptional({ description: 'Notes' })
   notes?: string;
+
+  @ApiPropertyOptional({ description: 'Invoice-level discount amount (subtracted from total before tax)' })
+  discountAmount?: number;
 
   @ApiProperty({ description: 'Line items', type: [EInvoiceItemInput] })
   items: EInvoiceItemInput[];
@@ -531,6 +541,17 @@ export class GetEInvoicePdfNatsRequest {
 }
 
 export class GetEInvoiceHtmlNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'E-Invoice ID' })
+  id: string;
+}
+
+export class GetEInvoiceXmlNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
 
