@@ -16,42 +16,45 @@
  * Fire-and-forget pattern means handlers return void, not NatsResponse.
  */
 
-import { ChannelBookingData, AvailabilityData, PricingData } from '../types';
+import { PricingData } from '../types';
 
 /**
- * Booking Created Event
- * Pattern: booking.created
+ * Booking Created/Cancelled Event (OTA inventory sync)
+ * Pattern: booking.created | booking.cancelled
  *
- * Published when a new booking is created in the system.
- * Channel service listens and syncs to external OTA channels.
- *
- * Request payload structure:
- * {
- *   booking: ChannelBookingData (15 fields)
- * }
+ * Published by booking-service via emitChannelInventoryEvent().
+ * Carries post-booking available room count for the affected room type.
+ * Channel service syncs availability to external OTAs.
  *
  * Returns: void (fire-and-forget)
  */
 export interface BookingCreatedNatsRequest {
-  booking: ChannelBookingData;
+  tenantId: string;
+  hotelId: string;
+  roomId: string;
+  checkInDate: string;
+  checkOutDate: string;
+  availableAfterBooking?: number;
+  source?: string;
+  externalBookingId?: string;
 }
 
 /**
  * Booking Updated Event
  * Pattern: booking.updated
  *
- * Published when an existing booking is modified.
- * Channel service listens and syncs updates to external OTA channels.
- *
- * Request payload structure:
- * {
- *   booking: ChannelBookingData (15 fields)
- * }
- *
+ * Same shape as BookingCreatedNatsRequest — published when a booking is modified.
  * Returns: void (fire-and-forget)
  */
 export interface BookingUpdatedNatsRequest {
-  booking: ChannelBookingData;
+  tenantId: string;
+  hotelId: string;
+  roomId: string;
+  checkInDate: string;
+  checkOutDate: string;
+  availableAfterBooking?: number;
+  source?: string;
+  externalBookingId?: string;
 }
 
 /**
@@ -60,12 +63,6 @@ export interface BookingUpdatedNatsRequest {
  *
  * Published when a booking is cancelled.
  * Channel service listens and notifies external OTA channels.
- *
- * Request payload structure:
- * {
- *   bookingId: string (required),
- *   reason?: string (optional)
- * }
  *
  * Returns: void (fire-and-forget)
  */
@@ -78,22 +75,22 @@ export interface BookingCancelledNatsRequest {
  * Room Availability Updated Event
  * Pattern: inventory.room.availability.updated
  *
- * Published when room availability changes.
+ * Published by inventory-service when room availability changes (book/release).
  * Channel service listens and syncs to external channel managers.
- *
- * Request payload structure:
- * {
- *   hotelId: string,
- *   roomTypeId: string,
- *   availability: AvailabilityData[] (array, 6 fields each)
- * }
  *
  * Returns: void (fire-and-forget)
  */
 export interface InventoryRoomAvailabilityUpdatedNatsRequest {
   hotelId: string;
+  tenantId: string;
+  roomId: string;
   roomTypeId: string;
-  availability: AvailabilityData[];
+  checkInDate: string;
+  checkOutDate: string;
+  checkInTime?: string;
+  checkOutTime?: string;
+  action: string;
+  timestamp: string;
 }
 
 /**
@@ -102,13 +99,6 @@ export interface InventoryRoomAvailabilityUpdatedNatsRequest {
  *
  * Published when room rates are updated.
  * Channel service listens and syncs to external channel managers.
- *
- * Request payload structure:
- * {
- *   hotelId: string,
- *   roomTypeId: string,
- *   pricing: PricingData[] (array, 8 fields each)
- * }
  *
  * Returns: void (fire-and-forget)
  */
