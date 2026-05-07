@@ -1,7 +1,4 @@
-/**
- * Provider Credentials Type Definitions
- */
-export interface ProviderCredentials {
+export declare class ProviderCredentials {
     api_key?: string;
     api_secret?: string;
     username?: string;
@@ -9,7 +6,7 @@ export interface ProviderCredentials {
     property_id?: string;
     extra?: Record<string, any>;
 }
-export interface CredentialValidationResult {
+export declare class CredentialValidationResult {
     isValid: boolean;
     message?: string;
     testedAt?: string;
