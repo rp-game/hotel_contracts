@@ -9,7 +9,6 @@
  */
 export interface BaseProviderCredentials {
     api_key?: string;
-    apikey?: string;
     api_secret?: string;
     username?: string;
     password?: string;
@@ -17,12 +16,13 @@ export interface BaseProviderCredentials {
 }
 /**
  * STAAH-specific credentials
+ * All API calls go through SP Connection API (connect[-sandbox].su-api.com).
+ * Endpoint is derived from isSandbox flag — not stored in credentials.
  */
 export interface StaahCredentials extends BaseProviderCredentials {
     hotel_code?: string;
-    apikey?: string;
-    service_endpoint?: string;
-    booking_endpoint?: string;
+    client_id?: string;
+    client_secret?: string;
 }
 /**
  * OAuth provider credentials

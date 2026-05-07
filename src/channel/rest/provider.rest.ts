@@ -7,6 +7,7 @@
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsEnum, IsOptional, IsBoolean, IsObject, IsArray, IsNumber } from 'class-validator';
+import { Transform } from 'class-transformer';
 import { ProviderType } from '../enums/channel.enum';
 import { ChainConfigurationDto } from '../types/chain-config.types';
 
@@ -16,6 +17,17 @@ import { ChainConfigurationDto } from '../types/chain-config.types';
  */
 export class CreateProviderConfigDto {
   @ApiProperty({ description: 'Provider type', enum: ProviderType })
+  @Transform(({ value }) => {
+    if (!value) return value;
+    // Normalize: accept lowercase from channel-service ('staah') or uppercase ('STAAH')
+    const map: Record<string, ProviderType> = {
+      staah: ProviderType.STAAH,       STAAH: ProviderType.STAAH,
+      siteminder: ProviderType.SITEMINDER, SiteMinder: ProviderType.SITEMINDER, SITEMINDER: ProviderType.SITEMINDER,
+      rategain: ProviderType.RATEGAIN,  RateGain: ProviderType.RATEGAIN,  RATEGAIN: ProviderType.RATEGAIN,
+      beds24: ProviderType.BEDS24,     Beds24: ProviderType.BEDS24,      BEDS24: ProviderType.BEDS24,
+    };
+    return map[value] ?? value;
+  })
   @IsEnum(ProviderType)
   providerType: ProviderType;
 

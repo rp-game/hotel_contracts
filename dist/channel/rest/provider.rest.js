@@ -18,6 +18,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TestConnectionResponseDto = exports.TestResultDto = exports.TestConnectionRequestDto = exports.ValidationResponseDto = exports.ValidateProviderConfigDto = exports.CreateProviderConfigDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
 const channel_enum_1 = require("../enums/channel.enum");
 /**
  * Create Provider Configuration DTO
@@ -40,6 +41,18 @@ class CreateProviderConfigDto {
 exports.CreateProviderConfigDto = CreateProviderConfigDto;
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Provider type', enum: channel_enum_1.ProviderType }),
+    (0, class_transformer_1.Transform)(({ value }) => {
+        if (!value)
+            return value;
+        // Normalize: accept lowercase from channel-service ('staah') or uppercase ('STAAH')
+        const map = {
+            staah: channel_enum_1.ProviderType.STAAH, STAAH: channel_enum_1.ProviderType.STAAH,
+            siteminder: channel_enum_1.ProviderType.SITEMINDER, SiteMinder: channel_enum_1.ProviderType.SITEMINDER, SITEMINDER: channel_enum_1.ProviderType.SITEMINDER,
+            rategain: channel_enum_1.ProviderType.RATEGAIN, RateGain: channel_enum_1.ProviderType.RATEGAIN, RATEGAIN: channel_enum_1.ProviderType.RATEGAIN,
+            beds24: channel_enum_1.ProviderType.BEDS24, Beds24: channel_enum_1.ProviderType.BEDS24, BEDS24: channel_enum_1.ProviderType.BEDS24,
+        };
+        return map[value] ?? value;
+    }),
     (0, class_validator_1.IsEnum)(channel_enum_1.ProviderType),
     __metadata("design:type", String)
 ], CreateProviderConfigDto.prototype, "providerType", void 0);
