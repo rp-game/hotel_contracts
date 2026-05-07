@@ -110,14 +110,15 @@ export interface CreateProviderRequest {
  */
 export interface UpdateProviderRequest {
   id: string;
-  providerName?: string;  // NOT "name" - matches API Gateway DTO
+  providerName?: string;
+  isSandbox?: boolean;
   credentials?: ProviderCredentials;
   enableInventorySync?: boolean;
   enableRateSync?: boolean;
   enableBookingSync?: boolean;
-  settings?: any;  // ProviderSettingsDto
-  endpoints?: any;  // ProviderEndpointsDto
-  otaAccounts?: any;  // OTAAccountsConfigDto
+  settings?: any;
+  endpoints?: any;
+  otaAccounts?: any;
   chainConfiguration?: ChainConfigurationDto;
 }
 

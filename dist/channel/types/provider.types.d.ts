@@ -57,6 +57,7 @@ export interface CreateProviderRequest {
 export interface UpdateProviderRequest {
     id: string;
     providerName?: string;
+    isSandbox?: boolean;
     credentials?: ProviderCredentials;
     enableInventorySync?: boolean;
     enableRateSync?: boolean;
