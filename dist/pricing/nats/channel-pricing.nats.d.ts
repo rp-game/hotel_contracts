@@ -21,26 +21,71 @@ export interface GetChannelRateMappingResponse {
 }
 export type GetChannelRateMappingNatsResponse = NatsResponse<GetChannelRateMappingResponse>;
 /**
- * NATS Pattern: pricing.channel-pricing.getByHotel
+ * NATS Pattern: pricing.channel-pricing.getByRatePlan
  *
- * Get all channel mappings for a hotel (hotel-level OTA → externalRateId lookup)
+ * Get channel markup configs for a rate plan (optionally filtered by channel name)
  */
-export declare class GetChannelMappingsByHotelRequest {
-    hotelId: string;
+export declare class GetChannelMappingsByRatePlanRequest {
+    ratePlanId: string;
     tenantId: string;
-    channelProvider?: string;
+    channelName?: string;
 }
-export type GetChannelMappingsByHotelNatsResponse = NatsResponse<ChannelRateMapping[]>;
+export type GetChannelMappingsByRatePlanNatsResponse = NatsResponse<ChannelRateMapping[]>;
 /**
- * NATS Pattern: pricing.channel-pricing.getOtaChannels
+ * NATS Pattern: pricing.channel-pricing.upsertMarkup
  *
- * Get distinct OTA channel names available for a hotel (used in rate plan OTA dropdown)
+ * Create or update markup config for (ratePlanId, channelName)
  */
-export declare class GetOtaChannelsRequest {
+export declare class UpsertChannelMarkupRequest {
+    ratePlanId: string;
+    channelName: string;
+    tenantId: string;
     hotelId: string;
+    pricingConfig?: UpdateChannelPricingConfigDto;
+}
+export interface UpsertChannelMarkupResponse {
+    data: ChannelRateMapping;
+    message: string;
+}
+export type UpsertChannelMarkupNatsResponse = NatsResponse<UpsertChannelMarkupResponse>;
+/**
+ * NATS Pattern: pricing.channel-pricing.deleteMarkup
+ *
+ * Delete markup config by ID
+ */
+export declare class DeleteChannelMarkupRequest {
+    id: string;
     tenantId: string;
 }
-export type GetOtaChannelsNatsResponse = NatsResponse<string[]>;
+export interface DeleteChannelMarkupResponse {
+    message: string;
+}
+export type DeleteChannelMarkupNatsResponse = NatsResponse<DeleteChannelMarkupResponse>;
+/**
+ * NATS Pattern: pricing.rates.calculateForOTA
+ *
+ * Calculate final price for a (ratePlan × roomType × channel) combination
+ * Returns basePrice + markup = finalPrice
+ */
+export declare class CalculateForOtaRequest {
+    ratePlanId: string;
+    roomTypeId: string;
+    hotelId: string;
+    tenantId: string;
+    channelName: string;
+    checkInDate?: string;
+    checkOutDate?: string;
+}
+export interface CalculateForOtaResponse {
+    basePrice: number;
+    markup: number;
+    finalPrice: number;
+    markupApplied: {
+        type: 'PERCENTAGE' | 'FIXED';
+        value: number;
+    } | null;
+}
+export type CalculateForOtaNatsResponse = NatsResponse<CalculateForOtaResponse>;
 /**
  * Update channel pricing configuration DTO
  */

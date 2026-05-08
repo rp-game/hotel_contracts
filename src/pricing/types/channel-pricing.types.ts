@@ -65,28 +65,22 @@ export class ChannelRateMapping {
   tenantId: string;
 
   @ApiProperty({
-    description: 'Hotel ID',
+    description: 'Hotel ID (denormalized)',
     example: '550e8400-e29b-41d4-a716-446655440002',
   })
   hotelId: string;
 
   @ApiProperty({
-    description: 'Channel provider (e.g., STAAH, SITEMINDER, CLOUDBEDS)',
-    example: 'STAAH',
+    description: 'Rate plan ID',
+    example: '550e8400-e29b-41d4-a716-446655440010',
   })
-  channelProvider: string;
+  ratePlanId: string;
 
   @ApiProperty({
     description: 'Channel name (e.g., Booking.com, Agoda, Expedia)',
     example: 'Booking.com',
   })
   channelName: string;
-
-  @ApiPropertyOptional({
-    description: 'External rate ID in channel manager or OTA system',
-    example: '436399',
-  })
-  externalRateId?: string;
 
   @ApiProperty({
     description: 'Active status',

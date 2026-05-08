@@ -33,33 +33,97 @@ export interface GetChannelRateMappingResponse {
 export type GetChannelRateMappingNatsResponse = NatsResponse<GetChannelRateMappingResponse>;
 
 /**
- * NATS Pattern: pricing.channel-pricing.getByHotel
+ * NATS Pattern: pricing.channel-pricing.getByRatePlan
  *
- * Get all channel mappings for a hotel (hotel-level OTA → externalRateId lookup)
+ * Get channel markup configs for a rate plan (optionally filtered by channel name)
  */
-export class GetChannelMappingsByHotelRequest {
-  @ApiProperty({ description: 'Hotel ID' })
+export class GetChannelMappingsByRatePlanRequest {
+  @ApiProperty({ description: 'Rate plan ID' })
   @IsUUID()
-  hotelId: string;
+  ratePlanId: string;
 
   @ApiProperty({ description: 'Tenant ID (multi-tenant isolation)' })
   @IsUUID()
   tenantId: string;
 
-  @ApiPropertyOptional({ description: 'Filter by channel provider (e.g. STAAH)' })
+  @ApiPropertyOptional({ description: 'Filter by channel name (e.g. Booking.com)' })
   @IsOptional()
   @IsString()
-  channelProvider?: string;
+  channelName?: string;
 }
 
-export type GetChannelMappingsByHotelNatsResponse = NatsResponse<ChannelRateMapping[]>;
+export type GetChannelMappingsByRatePlanNatsResponse = NatsResponse<ChannelRateMapping[]>;
 
 /**
- * NATS Pattern: pricing.channel-pricing.getOtaChannels
+ * NATS Pattern: pricing.channel-pricing.upsertMarkup
  *
- * Get distinct OTA channel names available for a hotel (used in rate plan OTA dropdown)
+ * Create or update markup config for (ratePlanId, channelName)
  */
-export class GetOtaChannelsRequest {
+export class UpsertChannelMarkupRequest {
+  @ApiProperty({ description: 'Rate plan ID' })
+  @IsUUID()
+  ratePlanId: string;
+
+  @ApiProperty({ description: 'Channel name (e.g. Booking.com)' })
+  @IsString()
+  channelName: string;
+
+  @ApiProperty({ description: 'Tenant ID (multi-tenant isolation)' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID (from JWT)' })
+  @IsUUID()
+  hotelId: string;
+
+  @ApiPropertyOptional({ description: 'Pricing config (markup, min/max rate)' })
+  @IsOptional()
+  pricingConfig?: UpdateChannelPricingConfigDto;
+}
+
+export interface UpsertChannelMarkupResponse {
+  data: ChannelRateMapping;
+  message: string;
+}
+
+export type UpsertChannelMarkupNatsResponse = NatsResponse<UpsertChannelMarkupResponse>;
+
+/**
+ * NATS Pattern: pricing.channel-pricing.deleteMarkup
+ *
+ * Delete markup config by ID
+ */
+export class DeleteChannelMarkupRequest {
+  @ApiProperty({ description: 'Channel rate mapping ID' })
+  @IsUUID()
+  id: string;
+
+  @ApiProperty({ description: 'Tenant ID (multi-tenant isolation)' })
+  @IsUUID()
+  tenantId: string;
+}
+
+export interface DeleteChannelMarkupResponse {
+  message: string;
+}
+
+export type DeleteChannelMarkupNatsResponse = NatsResponse<DeleteChannelMarkupResponse>;
+
+/**
+ * NATS Pattern: pricing.rates.calculateForOTA
+ *
+ * Calculate final price for a (ratePlan × roomType × channel) combination
+ * Returns basePrice + markup = finalPrice
+ */
+export class CalculateForOtaRequest {
+  @ApiProperty({ description: 'Rate plan ID' })
+  @IsUUID()
+  ratePlanId: string;
+
+  @ApiProperty({ description: 'Room type ID' })
+  @IsUUID()
+  roomTypeId: string;
+
   @ApiProperty({ description: 'Hotel ID' })
   @IsUUID()
   hotelId: string;
@@ -67,9 +131,30 @@ export class GetOtaChannelsRequest {
   @ApiProperty({ description: 'Tenant ID (multi-tenant isolation)' })
   @IsUUID()
   tenantId: string;
+
+  @ApiProperty({ description: 'OTA channel name (e.g. Booking.com)' })
+  @IsString()
+  channelName: string;
+
+  @ApiPropertyOptional({ description: 'Check-in date (YYYY-MM-DD)' })
+  @IsOptional()
+  @IsString()
+  checkInDate?: string;
+
+  @ApiPropertyOptional({ description: 'Check-out date (YYYY-MM-DD)' })
+  @IsOptional()
+  @IsString()
+  checkOutDate?: string;
 }
 
-export type GetOtaChannelsNatsResponse = NatsResponse<string[]>;
+export interface CalculateForOtaResponse {
+  basePrice: number;
+  markup: number;
+  finalPrice: number;
+  markupApplied: { type: 'PERCENTAGE' | 'FIXED'; value: number } | null;
+}
+
+export type CalculateForOtaNatsResponse = NatsResponse<CalculateForOtaResponse>;
 
 /**
  * Update channel pricing configuration DTO

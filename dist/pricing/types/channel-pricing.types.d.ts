@@ -23,9 +23,8 @@ export declare class ChannelRateMapping {
     id: string;
     tenantId: string;
     hotelId: string;
-    channelProvider: string;
+    ratePlanId: string;
     channelName: string;
-    externalRateId?: string;
     isActive: boolean;
     pricingConfig?: ChannelPricingConfigDto;
     createdAt: string;
