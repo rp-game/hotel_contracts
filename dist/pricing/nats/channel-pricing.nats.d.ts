@@ -21,6 +21,16 @@ export interface GetChannelRateMappingResponse {
 }
 export type GetChannelRateMappingNatsResponse = NatsResponse<GetChannelRateMappingResponse>;
 /**
+ * Update channel pricing configuration DTO
+ */
+export declare class UpdateChannelPricingConfigDto {
+    markupType?: 'PERCENTAGE' | 'FIXED';
+    markupValue?: number;
+    minRate?: number;
+    maxRate?: number;
+    commissionIncluded?: boolean;
+}
+/**
  * NATS Pattern: pricing.channel-pricing.getByRatePlan
  *
  * Get channel markup configs for a rate plan (optionally filtered by channel name)
@@ -86,16 +96,6 @@ export interface CalculateForOtaResponse {
     } | null;
 }
 export type CalculateForOtaNatsResponse = NatsResponse<CalculateForOtaResponse>;
-/**
- * Update channel pricing configuration DTO
- */
-export declare class UpdateChannelPricingConfigDto {
-    markupType?: 'PERCENTAGE' | 'FIXED';
-    markupValue?: number;
-    minRate?: number;
-    maxRate?: number;
-    commissionIncluded?: boolean;
-}
 /**
  * NATS Pattern: pricing.channel-pricing.updateConfig
  *

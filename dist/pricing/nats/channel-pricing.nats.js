@@ -16,7 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ClearChannelPricingConfigRequest = exports.UpdateChannelPricingConfigRequest = exports.UpdateChannelPricingConfigDto = exports.CalculateForOtaRequest = exports.DeleteChannelMarkupRequest = exports.UpsertChannelMarkupRequest = exports.GetChannelMappingsByRatePlanRequest = exports.GetChannelRateMappingRequest = void 0;
+exports.ClearChannelPricingConfigRequest = exports.UpdateChannelPricingConfigRequest = exports.CalculateForOtaRequest = exports.DeleteChannelMarkupRequest = exports.UpsertChannelMarkupRequest = exports.GetChannelMappingsByRatePlanRequest = exports.UpdateChannelPricingConfigDto = exports.GetChannelRateMappingRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 /**
@@ -39,6 +39,69 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], GetChannelRateMappingRequest.prototype, "tenantId", void 0);
+/**
+ * Update channel pricing configuration DTO
+ */
+class UpdateChannelPricingConfigDto {
+    markupType;
+    markupValue;
+    minRate;
+    maxRate;
+    commissionIncluded;
+}
+exports.UpdateChannelPricingConfigDto = UpdateChannelPricingConfigDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Markup type (percentage or fixed amount)',
+        enum: ['PERCENTAGE', 'FIXED'],
+        example: 'PERCENTAGE',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(['PERCENTAGE', 'FIXED']),
+    __metadata("design:type", String)
+], UpdateChannelPricingConfigDto.prototype, "markupType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Markup value (percentage or fixed amount)',
+        example: 10,
+        minimum: -100,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(-100),
+    __metadata("design:type", Number)
+], UpdateChannelPricingConfigDto.prototype, "markupValue", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Minimum rate threshold',
+        example: 100000,
+        minimum: 0,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], UpdateChannelPricingConfigDto.prototype, "minRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Maximum rate threshold',
+        example: 5000000,
+        minimum: 0,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    __metadata("design:type", Number)
+], UpdateChannelPricingConfigDto.prototype, "maxRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Whether commission is included in the rate',
+        example: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdateChannelPricingConfigDto.prototype, "commissionIncluded", void 0);
 /**
  * NATS Pattern: pricing.channel-pricing.getByRatePlan
  *
@@ -177,69 +240,6 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CalculateForOtaRequest.prototype, "checkOutDate", void 0);
-/**
- * Update channel pricing configuration DTO
- */
-class UpdateChannelPricingConfigDto {
-    markupType;
-    markupValue;
-    minRate;
-    maxRate;
-    commissionIncluded;
-}
-exports.UpdateChannelPricingConfigDto = UpdateChannelPricingConfigDto;
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Markup type (percentage or fixed amount)',
-        enum: ['PERCENTAGE', 'FIXED'],
-        example: 'PERCENTAGE',
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(['PERCENTAGE', 'FIXED']),
-    __metadata("design:type", String)
-], UpdateChannelPricingConfigDto.prototype, "markupType", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Markup value (percentage or fixed amount)',
-        example: 10,
-        minimum: -100,
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    (0, class_validator_1.Min)(-100),
-    __metadata("design:type", Number)
-], UpdateChannelPricingConfigDto.prototype, "markupValue", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Minimum rate threshold',
-        example: 100000,
-        minimum: 0,
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    (0, class_validator_1.Min)(0),
-    __metadata("design:type", Number)
-], UpdateChannelPricingConfigDto.prototype, "minRate", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Maximum rate threshold',
-        example: 5000000,
-        minimum: 0,
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    (0, class_validator_1.Min)(0),
-    __metadata("design:type", Number)
-], UpdateChannelPricingConfigDto.prototype, "maxRate", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Whether commission is included in the rate',
-        example: false,
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
-], UpdateChannelPricingConfigDto.prototype, "commissionIncluded", void 0);
 /**
  * NATS Pattern: pricing.channel-pricing.updateConfig
  *

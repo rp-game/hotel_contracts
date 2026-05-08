@@ -33,6 +33,58 @@ export interface GetChannelRateMappingResponse {
 export type GetChannelRateMappingNatsResponse = NatsResponse<GetChannelRateMappingResponse>;
 
 /**
+ * Update channel pricing configuration DTO
+ */
+export class UpdateChannelPricingConfigDto {
+  @ApiPropertyOptional({
+    description: 'Markup type (percentage or fixed amount)',
+    enum: ['PERCENTAGE', 'FIXED'],
+    example: 'PERCENTAGE',
+  })
+  @IsOptional()
+  @IsEnum(['PERCENTAGE', 'FIXED'])
+  markupType?: 'PERCENTAGE' | 'FIXED';
+
+  @ApiPropertyOptional({
+    description: 'Markup value (percentage or fixed amount)',
+    example: 10,
+    minimum: -100,
+  })
+  @IsOptional()
+  @IsNumber()
+  @Min(-100)
+  markupValue?: number;
+
+  @ApiPropertyOptional({
+    description: 'Minimum rate threshold',
+    example: 100000,
+    minimum: 0,
+  })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  minRate?: number;
+
+  @ApiPropertyOptional({
+    description: 'Maximum rate threshold',
+    example: 5000000,
+    minimum: 0,
+  })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  maxRate?: number;
+
+  @ApiPropertyOptional({
+    description: 'Whether commission is included in the rate',
+    example: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  commissionIncluded?: boolean;
+}
+
+/**
  * NATS Pattern: pricing.channel-pricing.getByRatePlan
  *
  * Get channel markup configs for a rate plan (optionally filtered by channel name)
@@ -155,58 +207,6 @@ export interface CalculateForOtaResponse {
 }
 
 export type CalculateForOtaNatsResponse = NatsResponse<CalculateForOtaResponse>;
-
-/**
- * Update channel pricing configuration DTO
- */
-export class UpdateChannelPricingConfigDto {
-  @ApiPropertyOptional({
-    description: 'Markup type (percentage or fixed amount)',
-    enum: ['PERCENTAGE', 'FIXED'],
-    example: 'PERCENTAGE',
-  })
-  @IsOptional()
-  @IsEnum(['PERCENTAGE', 'FIXED'])
-  markupType?: 'PERCENTAGE' | 'FIXED';
-
-  @ApiPropertyOptional({
-    description: 'Markup value (percentage or fixed amount)',
-    example: 10,
-    minimum: -100,
-  })
-  @IsOptional()
-  @IsNumber()
-  @Min(-100)
-  markupValue?: number;
-
-  @ApiPropertyOptional({
-    description: 'Minimum rate threshold',
-    example: 100000,
-    minimum: 0,
-  })
-  @IsOptional()
-  @IsNumber()
-  @Min(0)
-  minRate?: number;
-
-  @ApiPropertyOptional({
-    description: 'Maximum rate threshold',
-    example: 5000000,
-    minimum: 0,
-  })
-  @IsOptional()
-  @IsNumber()
-  @Min(0)
-  maxRate?: number;
-
-  @ApiPropertyOptional({
-    description: 'Whether commission is included in the rate',
-    example: false,
-  })
-  @IsOptional()
-  @IsBoolean()
-  commissionIncluded?: boolean;
-}
 
 /**
  * NATS Pattern: pricing.channel-pricing.updateConfig
