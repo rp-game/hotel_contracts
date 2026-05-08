@@ -92,9 +92,8 @@ class CreateRatePlanRequest {
     mealPlan;
     paymentType;
     depositPercent;
-    corporateAccountId;
-    corporateAccountName;
-    accountId;
+    accountIds;
+    accountNames;
     accountType;
     validFrom;
     validTo;
@@ -215,35 +214,30 @@ __decorate([
 ], CreateRatePlanRequest.prototype, "depositPercent", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'Corporate Account ID — if set, this rate plan is restricted to this corporate account. Only valid for DERIVED type.',
-        example: '123e4567-e89b-12d3-a456-426614174099',
+        description: 'Account IDs — for CORPORATE/TRAVEL_AGENT: array of account UUIDs; for OTA: array of OTA channel names (e.g. ["Booking.com", "Agoda"])',
+        type: [String],
+        example: ['123e4567-e89b-12d3-a456-426614174099'],
     }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], CreateRatePlanRequest.prototype, "corporateAccountId", void 0);
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], CreateRatePlanRequest.prototype, "accountIds", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'Corporate account name (denormalized for display). Set automatically from corporate account lookup.',
-        example: 'Samsung Vietnam',
+        description: 'Account display names (denormalized). For CORPORATE/TRAVEL_AGENT: company/agent names parallel to accountIds. Null for OTA/GOVERNMENT/public.',
+        type: [String],
+        example: ['Samsung Vietnam'],
     }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateRatePlanRequest.prototype, "corporateAccountName", void 0);
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], CreateRatePlanRequest.prototype, "accountNames", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'Account ID — generic account reference for corporate, travel agent, or government rate plans. Only valid for DERIVED type.',
-        example: '123e4567-e89b-12d3-a456-426614174099',
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], CreateRatePlanRequest.prototype, "accountId", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Account type — categorizes the rate plan for filtering. Only valid for DERIVED type.',
-        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT'],
+        description: 'Account type — categorizes the rate plan for filtering and visibility.',
+        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA'],
         example: 'CORPORATE',
     }),
     (0, class_validator_1.IsOptional)(),
@@ -323,8 +317,9 @@ class CreateRatePlanResponse {
     mealPlan;
     paymentType;
     depositPercent;
-    corporateAccountId;
-    corporateAccountName;
+    accountType;
+    accountIds;
+    accountNames;
     validFrom;
     validTo;
     blackoutPeriods;
@@ -429,22 +424,28 @@ __decorate([
 ], CreateRatePlanResponse.prototype, "depositPercent", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'Corporate Account ID — if set, this rate plan is restricted to this corporate account',
-        example: '123e4567-e89b-12d3-a456-426614174099',
-        type: String,
+        description: 'Account type',
+        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA'],
         nullable: true,
     }),
     __metadata("design:type", Object)
-], CreateRatePlanResponse.prototype, "corporateAccountId", void 0);
+], CreateRatePlanResponse.prototype, "accountType", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'Corporate account name (denormalized)',
-        example: 'Samsung Vietnam',
-        type: String,
+        description: 'Account IDs (UUIDs for CA/TA, channel names for OTA)',
+        type: [String],
         nullable: true,
     }),
     __metadata("design:type", Object)
-], CreateRatePlanResponse.prototype, "corporateAccountName", void 0);
+], CreateRatePlanResponse.prototype, "accountIds", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Account display names (denormalized). Null for OTA/GOVERNMENT/public.',
+        type: [String],
+        nullable: true,
+    }),
+    __metadata("design:type", Object)
+], CreateRatePlanResponse.prototype, "accountNames", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Rate plan valid from date',

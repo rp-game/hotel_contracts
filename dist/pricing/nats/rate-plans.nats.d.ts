@@ -58,7 +58,6 @@ export type GetRatePlanNatsResponse = NatsResponse<GetRatePlanResponse>;
 export declare class ListRatePlansRequest {
     tenantId: string;
     hotelId: string;
-    corporateAccountId?: string;
     includeAllCorporate?: boolean;
     checkInDate?: string;
     checkOutDate?: string;
@@ -94,7 +93,6 @@ export declare class GetChannelMappingsRequest {
 }
 export declare class ChannelRateMappingResponse {
     id: string;
-    ratePlanId: string;
     channelId: string;
     externalRatePlanId?: string;
     externalRatePlanName?: string;

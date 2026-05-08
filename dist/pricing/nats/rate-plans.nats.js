@@ -246,7 +246,6 @@ __decorate([
 class ListRatePlansRequest {
     tenantId;
     hotelId;
-    corporateAccountId;
     includeAllCorporate;
     checkInDate;
     checkOutDate;
@@ -273,16 +272,7 @@ __decorate([
 ], ListRatePlansRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'Filter: include corporate plans for this account (plus public plans). If omitted, only public plans returned.',
-        example: '123e4567-e89b-12d3-a456-426614174099',
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], ListRatePlansRequest.prototype, "corporateAccountId", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'If true, include ALL plans (corporate + public). For admin/management views only.',
+        description: 'If true, include ALL plans (corporate + public + OTA). For admin/management views only.',
         example: true,
     }),
     (0, class_validator_1.IsOptional)(),
@@ -317,8 +307,8 @@ __decorate([
 ], ListRatePlansRequest.prototype, "accountId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'Filter by account type (CORPORATE, TRAVEL_AGENT, GOVERNMENT)',
-        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT'],
+        description: 'Filter by account type',
+        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA'],
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -437,7 +427,6 @@ __decorate([
 ], GetChannelMappingsRequest.prototype, "ratePlanId", void 0);
 class ChannelRateMappingResponse {
     id;
-    ratePlanId;
     channelId;
     externalRatePlanId;
     externalRatePlanName;
@@ -453,13 +442,6 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], ChannelRateMappingResponse.prototype, "id", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Rate plan ID',
-        example: '123e4567-e89b-12d3-a456-426614174010',
-    }),
-    __metadata("design:type", String)
-], ChannelRateMappingResponse.prototype, "ratePlanId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Channel ID',

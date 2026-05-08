@@ -222,15 +222,7 @@ export class ListRatePlansRequest {
   hotelId: string;
 
   @ApiPropertyOptional({
-    description: 'Filter: include corporate plans for this account (plus public plans). If omitted, only public plans returned.',
-    example: '123e4567-e89b-12d3-a456-426614174099',
-  })
-  @IsOptional()
-  @IsUUID()
-  corporateAccountId?: string;
-
-  @ApiPropertyOptional({
-    description: 'If true, include ALL plans (corporate + public). For admin/management views only.',
+    description: 'If true, include ALL plans (corporate + public + OTA). For admin/management views only.',
     example: true,
   })
   @IsOptional()
@@ -261,8 +253,8 @@ export class ListRatePlansRequest {
   accountId?: string;
 
   @ApiPropertyOptional({
-    description: 'Filter by account type (CORPORATE, TRAVEL_AGENT, GOVERNMENT)',
-    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT'],
+    description: 'Filter by account type',
+    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA'],
   })
   @IsOptional()
   @IsString()
@@ -365,12 +357,6 @@ export class ChannelRateMappingResponse {
     example: '123e4567-e29b-41d4-a716-446655440020',
   })
   id: string;
-
-  @ApiProperty({
-    description: 'Rate plan ID',
-    example: '123e4567-e89b-12d3-a456-426614174010',
-  })
-  ratePlanId: string;
 
   @ApiProperty({
     description: 'Channel ID',

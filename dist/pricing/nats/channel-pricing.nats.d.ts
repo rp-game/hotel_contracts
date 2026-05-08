@@ -21,15 +21,26 @@ export interface GetChannelRateMappingResponse {
 }
 export type GetChannelRateMappingNatsResponse = NatsResponse<GetChannelRateMappingResponse>;
 /**
- * NATS Pattern: pricing.channel-pricing.getByRatePlan
+ * NATS Pattern: pricing.channel-pricing.getByHotel
  *
- * Get all channel mappings for a specific rate plan
+ * Get all channel mappings for a hotel (hotel-level OTA → externalRateId lookup)
  */
-export declare class GetChannelMappingsByRatePlanRequest {
-    ratePlanId: string;
+export declare class GetChannelMappingsByHotelRequest {
+    hotelId: string;
+    tenantId: string;
+    channelProvider?: string;
+}
+export type GetChannelMappingsByHotelNatsResponse = NatsResponse<ChannelRateMapping[]>;
+/**
+ * NATS Pattern: pricing.channel-pricing.getOtaChannels
+ *
+ * Get distinct OTA channel names available for a hotel (used in rate plan OTA dropdown)
+ */
+export declare class GetOtaChannelsRequest {
+    hotelId: string;
     tenantId: string;
 }
-export type GetChannelMappingsByRatePlanNatsResponse = NatsResponse<ChannelRateMapping[]>;
+export type GetOtaChannelsNatsResponse = NatsResponse<string[]>;
 /**
  * Update channel pricing configuration DTO
  */

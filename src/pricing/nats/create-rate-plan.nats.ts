@@ -160,37 +160,33 @@ export class CreateRatePlanRequest {
   depositPercent?: number | null;
 
   @ApiPropertyOptional({
-    description: 'Corporate Account ID — if set, this rate plan is restricted to this corporate account. Only valid for DERIVED type.',
-    example: '123e4567-e89b-12d3-a456-426614174099',
+    description: 'Account IDs — for CORPORATE/TRAVEL_AGENT: array of account UUIDs; for OTA: array of OTA channel names (e.g. ["Booking.com", "Agoda"])',
+    type: [String],
+    example: ['123e4567-e89b-12d3-a456-426614174099'],
   })
   @IsOptional()
-  @IsUUID()
-  corporateAccountId?: string;
+  @IsArray()
+  @IsString({ each: true })
+  accountIds?: string[];
 
   @ApiPropertyOptional({
-    description: 'Corporate account name (denormalized for display). Set automatically from corporate account lookup.',
-    example: 'Samsung Vietnam',
+    description: 'Account display names (denormalized). For CORPORATE/TRAVEL_AGENT: company/agent names parallel to accountIds. Null for OTA/GOVERNMENT/public.',
+    type: [String],
+    example: ['Samsung Vietnam'],
   })
   @IsOptional()
-  @IsString()
-  corporateAccountName?: string;
+  @IsArray()
+  @IsString({ each: true })
+  accountNames?: string[];
 
   @ApiPropertyOptional({
-    description: 'Account ID — generic account reference for corporate, travel agent, or government rate plans. Only valid for DERIVED type.',
-    example: '123e4567-e89b-12d3-a456-426614174099',
-  })
-  @IsOptional()
-  @IsUUID()
-  accountId?: string;
-
-  @ApiPropertyOptional({
-    description: 'Account type — categorizes the rate plan for filtering. Only valid for DERIVED type.',
-    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT'],
+    description: 'Account type — categorizes the rate plan for filtering and visibility.',
+    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA'],
     example: 'CORPORATE',
   })
   @IsOptional()
   @IsString()
-  accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT';
+  accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT' | 'OTA';
 
   @ApiPropertyOptional({
     description: 'Rate plan valid from date (YYYY-MM-DD). If null, always valid.',
@@ -328,20 +324,25 @@ export class CreateRatePlanResponse {
   depositPercent?: number | null;
 
   @ApiPropertyOptional({
-    description: 'Corporate Account ID — if set, this rate plan is restricted to this corporate account',
-    example: '123e4567-e89b-12d3-a456-426614174099',
-    type: String,
+    description: 'Account type',
+    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA'],
     nullable: true,
   })
-  corporateAccountId?: string | null;
+  accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT' | 'OTA' | null;
 
   @ApiPropertyOptional({
-    description: 'Corporate account name (denormalized)',
-    example: 'Samsung Vietnam',
-    type: String,
+    description: 'Account IDs (UUIDs for CA/TA, channel names for OTA)',
+    type: [String],
     nullable: true,
   })
-  corporateAccountName?: string | null;
+  accountIds?: string[] | null;
+
+  @ApiPropertyOptional({
+    description: 'Account display names (denormalized). Null for OTA/GOVERNMENT/public.',
+    type: [String],
+    nullable: true,
+  })
+  accountNames?: string[] | null;
 
   @ApiPropertyOptional({
     description: 'Rate plan valid from date',

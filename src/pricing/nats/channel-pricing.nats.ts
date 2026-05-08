@@ -33,21 +33,43 @@ export interface GetChannelRateMappingResponse {
 export type GetChannelRateMappingNatsResponse = NatsResponse<GetChannelRateMappingResponse>;
 
 /**
- * NATS Pattern: pricing.channel-pricing.getByRatePlan
+ * NATS Pattern: pricing.channel-pricing.getByHotel
  *
- * Get all channel mappings for a specific rate plan
+ * Get all channel mappings for a hotel (hotel-level OTA → externalRateId lookup)
  */
-export class GetChannelMappingsByRatePlanRequest {
-  @ApiProperty({ description: 'Rate plan ID to find mappings for' })
+export class GetChannelMappingsByHotelRequest {
+  @ApiProperty({ description: 'Hotel ID' })
   @IsUUID()
-  ratePlanId: string;
+  hotelId: string;
+
+  @ApiProperty({ description: 'Tenant ID (multi-tenant isolation)' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Filter by channel provider (e.g. STAAH)' })
+  @IsOptional()
+  @IsString()
+  channelProvider?: string;
+}
+
+export type GetChannelMappingsByHotelNatsResponse = NatsResponse<ChannelRateMapping[]>;
+
+/**
+ * NATS Pattern: pricing.channel-pricing.getOtaChannels
+ *
+ * Get distinct OTA channel names available for a hotel (used in rate plan OTA dropdown)
+ */
+export class GetOtaChannelsRequest {
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsUUID()
+  hotelId: string;
 
   @ApiProperty({ description: 'Tenant ID (multi-tenant isolation)' })
   @IsUUID()
   tenantId: string;
 }
 
-export type GetChannelMappingsByRatePlanNatsResponse = NatsResponse<ChannelRateMapping[]>;
+export type GetOtaChannelsNatsResponse = NatsResponse<string[]>;
 
 /**
  * Update channel pricing configuration DTO

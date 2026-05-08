@@ -16,7 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ClearChannelPricingConfigRequest = exports.UpdateChannelPricingConfigRequest = exports.UpdateChannelPricingConfigDto = exports.GetChannelMappingsByRatePlanRequest = exports.GetChannelRateMappingRequest = void 0;
+exports.ClearChannelPricingConfigRequest = exports.UpdateChannelPricingConfigRequest = exports.UpdateChannelPricingConfigDto = exports.GetOtaChannelsRequest = exports.GetChannelMappingsByHotelRequest = exports.GetChannelRateMappingRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 /**
@@ -40,25 +40,52 @@ __decorate([
     __metadata("design:type", String)
 ], GetChannelRateMappingRequest.prototype, "tenantId", void 0);
 /**
- * NATS Pattern: pricing.channel-pricing.getByRatePlan
+ * NATS Pattern: pricing.channel-pricing.getByHotel
  *
- * Get all channel mappings for a specific rate plan
+ * Get all channel mappings for a hotel (hotel-level OTA → externalRateId lookup)
  */
-class GetChannelMappingsByRatePlanRequest {
-    ratePlanId;
+class GetChannelMappingsByHotelRequest {
+    hotelId;
     tenantId;
+    channelProvider;
 }
-exports.GetChannelMappingsByRatePlanRequest = GetChannelMappingsByRatePlanRequest;
+exports.GetChannelMappingsByHotelRequest = GetChannelMappingsByHotelRequest;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Rate plan ID to find mappings for' }),
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
-], GetChannelMappingsByRatePlanRequest.prototype, "ratePlanId", void 0);
+], GetChannelMappingsByHotelRequest.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tenant ID (multi-tenant isolation)' }),
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
-], GetChannelMappingsByRatePlanRequest.prototype, "tenantId", void 0);
+], GetChannelMappingsByHotelRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Filter by channel provider (e.g. STAAH)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetChannelMappingsByHotelRequest.prototype, "channelProvider", void 0);
+/**
+ * NATS Pattern: pricing.channel-pricing.getOtaChannels
+ *
+ * Get distinct OTA channel names available for a hotel (used in rate plan OTA dropdown)
+ */
+class GetOtaChannelsRequest {
+    hotelId;
+    tenantId;
+}
+exports.GetOtaChannelsRequest = GetOtaChannelsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetOtaChannelsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID (multi-tenant isolation)' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], GetOtaChannelsRequest.prototype, "tenantId", void 0);
 /**
  * Update channel pricing configuration DTO
  */

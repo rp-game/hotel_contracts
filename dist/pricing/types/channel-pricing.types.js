@@ -76,7 +76,6 @@ class ChannelRateMapping {
     id;
     tenantId;
     hotelId;
-    ratePlanId;
     channelProvider;
     channelName;
     externalRateId;
@@ -107,13 +106,6 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], ChannelRateMapping.prototype, "hotelId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Rate Plan ID',
-        example: '550e8400-e29b-41d4-a716-446655440095',
-    }),
-    __metadata("design:type", String)
-], ChannelRateMapping.prototype, "ratePlanId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Channel provider (e.g., STAAH, SITEMINDER, CLOUDBEDS)',
