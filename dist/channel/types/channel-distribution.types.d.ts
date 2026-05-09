@@ -29,8 +29,7 @@ export declare class ChannelDistribution {
     ratePlanId: string;
     channelName: string;
     providerId: string;
-    externalRateId: string;
-    externalRateName: string;
+    externalCodes: Record<string, string>;
     isActive: boolean;
     lastSyncedAt?: string;
     pricingConfig?: ChannelPricingConfig;
@@ -47,8 +46,7 @@ export declare class UpsertChannelDistributionRequest {
     ratePlanId: string;
     channelName: string;
     providerId: string;
-    externalRateId: string;
-    externalRateName: string;
+    externalCodes: Record<string, string>;
     isActive?: boolean;
     pricingConfig?: ChannelPricingConfig;
     mappingConfiguration?: RateMappingConfiguration;
@@ -60,8 +58,7 @@ export declare class UpsertChannelDistributionRequest {
  */
 export declare class UpdateChannelDistributionRequest {
     providerId?: string;
-    externalRateId?: string;
-    externalRateName?: string;
+    externalCodes?: Record<string, string>;
     isActive?: boolean;
     pricingConfig?: ChannelPricingConfig;
     mappingConfiguration?: RateMappingConfiguration;

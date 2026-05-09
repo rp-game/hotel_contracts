@@ -81,8 +81,7 @@ class ChannelDistribution {
     ratePlanId;
     channelName;
     providerId;
-    externalRateId;
-    externalRateName;
+    externalCodes;
     isActive;
     lastSyncedAt;
     pricingConfig;
@@ -116,13 +115,13 @@ __decorate([
     __metadata("design:type", String)
 ], ChannelDistribution.prototype, "providerId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'External rate code in provider system', example: 'GRANDHNBAR' }),
-    __metadata("design:type", String)
-], ChannelDistribution.prototype, "externalRateId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'External rate display name', example: 'BAR Standard' }),
-    __metadata("design:type", String)
-], ChannelDistribution.prototype, "externalRateName", void 0);
+    (0, swagger_1.ApiProperty)({
+        description: 'External code per room type — { roomTypeId: externalCode } map',
+        example: { 'a1b2c3d4-e5f6-7890-abcd-ef1234567890': 'GRANDHNBAR-DLX' },
+        additionalProperties: { type: 'string' },
+    }),
+    __metadata("design:type", Object)
+], ChannelDistribution.prototype, "externalCodes", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Active status', example: true }),
     __metadata("design:type", Boolean)
@@ -165,8 +164,7 @@ class UpsertChannelDistributionRequest {
     ratePlanId;
     channelName;
     providerId;
-    externalRateId;
-    externalRateName;
+    externalCodes;
     isActive;
     pricingConfig;
     mappingConfiguration;
@@ -195,13 +193,13 @@ __decorate([
     __metadata("design:type", String)
 ], UpsertChannelDistributionRequest.prototype, "providerId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'External rate code', example: 'GRANDHNBAR' }),
-    __metadata("design:type", String)
-], UpsertChannelDistributionRequest.prototype, "externalRateId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'External rate name', example: 'BAR Standard' }),
-    __metadata("design:type", String)
-], UpsertChannelDistributionRequest.prototype, "externalRateName", void 0);
+    (0, swagger_1.ApiProperty)({
+        description: 'External code per room type — { roomTypeId: externalCode } map',
+        example: { 'a1b2c3d4-e5f6-7890-abcd-ef1234567890': 'GRANDHNBAR-DLX' },
+        additionalProperties: { type: 'string' },
+    }),
+    __metadata("design:type", Object)
+], UpsertChannelDistributionRequest.prototype, "externalCodes", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Active status', default: true }),
     __metadata("design:type", Boolean)
@@ -233,8 +231,7 @@ __decorate([
  */
 class UpdateChannelDistributionRequest {
     providerId;
-    externalRateId;
-    externalRateName;
+    externalCodes;
     isActive;
     pricingConfig;
     mappingConfiguration;
@@ -247,13 +244,12 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateChannelDistributionRequest.prototype, "providerId", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'External rate code' }),
-    __metadata("design:type", String)
-], UpdateChannelDistributionRequest.prototype, "externalRateId", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'External rate name' }),
-    __metadata("design:type", String)
-], UpdateChannelDistributionRequest.prototype, "externalRateName", void 0);
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'External code per room type — { roomTypeId: externalCode } map',
+        additionalProperties: { type: 'string' },
+    }),
+    __metadata("design:type", Object)
+], UpdateChannelDistributionRequest.prototype, "externalCodes", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Active status' }),
     __metadata("design:type", Boolean)

@@ -72,11 +72,12 @@ export class ChannelDistribution {
   @ApiProperty({ description: 'Provider ID (CMS aggregator)', format: 'uuid' })
   providerId: string;
 
-  @ApiProperty({ description: 'External rate code in provider system', example: 'GRANDHNBAR' })
-  externalRateId: string;
-
-  @ApiProperty({ description: 'External rate display name', example: 'BAR Standard' })
-  externalRateName: string;
+  @ApiProperty({
+    description: 'External code per room type — { roomTypeId: externalCode } map',
+    example: { 'a1b2c3d4-e5f6-7890-abcd-ef1234567890': 'GRANDHNBAR-DLX' },
+    additionalProperties: { type: 'string' },
+  })
+  externalCodes: Record<string, string>;
 
   @ApiProperty({ description: 'Active status', example: true })
   isActive: boolean;
@@ -125,11 +126,12 @@ export class UpsertChannelDistributionRequest {
   @ApiProperty({ description: 'Provider ID', format: 'uuid' })
   providerId: string;
 
-  @ApiProperty({ description: 'External rate code', example: 'GRANDHNBAR' })
-  externalRateId: string;
-
-  @ApiProperty({ description: 'External rate name', example: 'BAR Standard' })
-  externalRateName: string;
+  @ApiProperty({
+    description: 'External code per room type — { roomTypeId: externalCode } map',
+    example: { 'a1b2c3d4-e5f6-7890-abcd-ef1234567890': 'GRANDHNBAR-DLX' },
+    additionalProperties: { type: 'string' },
+  })
+  externalCodes: Record<string, string>;
 
   @ApiPropertyOptional({ description: 'Active status', default: true })
   isActive?: boolean;
@@ -160,11 +162,11 @@ export class UpdateChannelDistributionRequest {
   @ApiPropertyOptional({ description: 'Provider ID', format: 'uuid' })
   providerId?: string;
 
-  @ApiPropertyOptional({ description: 'External rate code' })
-  externalRateId?: string;
-
-  @ApiPropertyOptional({ description: 'External rate name' })
-  externalRateName?: string;
+  @ApiPropertyOptional({
+    description: 'External code per room type — { roomTypeId: externalCode } map',
+    additionalProperties: { type: 'string' },
+  })
+  externalCodes?: Record<string, string>;
 
   @ApiPropertyOptional({ description: 'Active status' })
   isActive?: boolean;
