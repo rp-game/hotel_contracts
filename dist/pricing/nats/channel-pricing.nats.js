@@ -16,7 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ClearChannelPricingConfigRequest = exports.UpdateChannelPricingConfigRequest = exports.CalculateForOtaRequest = exports.DeleteChannelMarkupRequest = exports.UpsertChannelMarkupRequest = exports.GetChannelMappingsByRatePlanRequest = exports.UpdateChannelPricingConfigDto = exports.GetChannelRateMappingRequest = void 0;
+exports.CalculateForOtaBatchRequest = exports.CalculateForOtaBatchItem = exports.ClearChannelPricingConfigRequest = exports.UpdateChannelPricingConfigRequest = exports.CalculateForOtaRequest = exports.DeleteChannelMarkupRequest = exports.UpsertChannelMarkupRequest = exports.GetChannelMappingsByRatePlanRequest = exports.UpdateChannelPricingConfigDto = exports.GetChannelRateMappingRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 /**
@@ -308,4 +308,79 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ClearChannelPricingConfigRequest.prototype, "performedByName", void 0);
+/**
+ * NATS Pattern: pricing.rates.calculateForOTA.batch
+ *
+ * Batch version of calculateForOTA. Pre-warms in-memory markup cache via a single
+ * channel.distribution.listByHotel call, then calculates per item.
+ * Used by STAAH full-sync hot path to amortize NATS round-trips.
+ */
+class CalculateForOtaBatchItem {
+    ratePlanId;
+    roomTypeId;
+    channelName;
+    checkInDate;
+    checkOutDate;
+}
+exports.CalculateForOtaBatchItem = CalculateForOtaBatchItem;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Rate plan ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CalculateForOtaBatchItem.prototype, "ratePlanId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CalculateForOtaBatchItem.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'OTA channel name' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CalculateForOtaBatchItem.prototype, "channelName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Check-in date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CalculateForOtaBatchItem.prototype, "checkInDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Check-out date (YYYY-MM-DD)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CalculateForOtaBatchItem.prototype, "checkOutDate", void 0);
+class CalculateForOtaBatchRequest {
+    hotelId;
+    tenantId;
+    items;
+    failOnMissingMarkup;
+}
+exports.CalculateForOtaBatchRequest = CalculateForOtaBatchRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CalculateForOtaBatchRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], CalculateForOtaBatchRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Batch items to calculate',
+        type: [CalculateForOtaBatchItem],
+    }),
+    __metadata("design:type", Array)
+], CalculateForOtaBatchRequest.prototype, "items", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'If true, throw on missing markup (STAAH path). If false, fallback to base rate (REST search path).',
+        default: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CalculateForOtaBatchRequest.prototype, "failOnMissingMarkup", void 0);
 //# sourceMappingURL=channel-pricing.nats.js.map

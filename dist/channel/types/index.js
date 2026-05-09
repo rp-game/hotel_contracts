@@ -26,4 +26,6 @@ __exportStar(require("./channel-data.types"), exports);
 __exportStar(require("./analytics.types"), exports);
 __exportStar(require("./abtest.types"), exports);
 __exportStar(require("./api-response.types"), exports);
+__exportStar(require("./channel-distribution.types"), exports);
+__exportStar(require("./provider-channel-routing.types"), exports);
 //# sourceMappingURL=index.js.map

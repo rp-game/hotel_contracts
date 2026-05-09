@@ -94,6 +94,7 @@ export interface CalculateForOtaResponse {
         type: 'PERCENTAGE' | 'FIXED';
         value: number;
     } | null;
+    perNightPrices?: Record<string, number>;
 }
 export type CalculateForOtaNatsResponse = NatsResponse<CalculateForOtaResponse>;
 /**
@@ -128,4 +129,31 @@ export interface ClearChannelPricingConfigResponse {
     message: string;
 }
 export type ClearChannelPricingConfigNatsResponse = NatsResponse<ClearChannelPricingConfigResponse>;
+/**
+ * NATS Pattern: pricing.rates.calculateForOTA.batch
+ *
+ * Batch version of calculateForOTA. Pre-warms in-memory markup cache via a single
+ * channel.distribution.listByHotel call, then calculates per item.
+ * Used by STAAH full-sync hot path to amortize NATS round-trips.
+ */
+export declare class CalculateForOtaBatchItem {
+    ratePlanId: string;
+    roomTypeId: string;
+    channelName: string;
+    checkInDate?: string;
+    checkOutDate?: string;
+}
+export declare class CalculateForOtaBatchRequest {
+    hotelId: string;
+    tenantId: string;
+    items: CalculateForOtaBatchItem[];
+    failOnMissingMarkup?: boolean;
+}
+export interface CalculateForOtaBatchItemResult extends CalculateForOtaResponse {
+    ratePlanId: string;
+    channelName: string;
+    roomTypeId: string;
+    error?: string;
+}
+export type CalculateForOtaBatchNatsResponse = NatsResponse<CalculateForOtaBatchItemResult[]>;
 //# sourceMappingURL=channel-pricing.nats.d.ts.map

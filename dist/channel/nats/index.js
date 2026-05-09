@@ -24,4 +24,6 @@ __exportStar(require("./events.nats"), exports);
 __exportStar(require("./analytics.nats"), exports);
 __exportStar(require("./rates.nats"), exports);
 __exportStar(require("./failover-errors.nats"), exports);
+__exportStar(require("./channel-distribution.nats"), exports);
+__exportStar(require("./provider-channel-routing.nats"), exports);
 //# sourceMappingURL=index.js.map

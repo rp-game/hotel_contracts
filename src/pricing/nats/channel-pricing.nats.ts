@@ -204,6 +204,7 @@ export interface CalculateForOtaResponse {
   markup: number;
   finalPrice: number;
   markupApplied: { type: 'PERCENTAGE' | 'FIXED'; value: number } | null;
+  perNightPrices?: Record<string, number>;
 }
 
 export type CalculateForOtaNatsResponse = NatsResponse<CalculateForOtaResponse>;
@@ -271,3 +272,69 @@ export interface ClearChannelPricingConfigResponse {
 }
 
 export type ClearChannelPricingConfigNatsResponse = NatsResponse<ClearChannelPricingConfigResponse>;
+
+/**
+ * NATS Pattern: pricing.rates.calculateForOTA.batch
+ *
+ * Batch version of calculateForOTA. Pre-warms in-memory markup cache via a single
+ * channel.distribution.listByHotel call, then calculates per item.
+ * Used by STAAH full-sync hot path to amortize NATS round-trips.
+ */
+export class CalculateForOtaBatchItem {
+  @ApiProperty({ description: 'Rate plan ID' })
+  @IsUUID()
+  ratePlanId: string;
+
+  @ApiProperty({ description: 'Room type ID' })
+  @IsUUID()
+  roomTypeId: string;
+
+  @ApiProperty({ description: 'OTA channel name' })
+  @IsString()
+  channelName: string;
+
+  @ApiPropertyOptional({ description: 'Check-in date (YYYY-MM-DD)' })
+  @IsOptional()
+  @IsString()
+  checkInDate?: string;
+
+  @ApiPropertyOptional({ description: 'Check-out date (YYYY-MM-DD)' })
+  @IsOptional()
+  @IsString()
+  checkOutDate?: string;
+}
+
+export class CalculateForOtaBatchRequest {
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsUUID()
+  hotelId: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiProperty({
+    description: 'Batch items to calculate',
+    type: [CalculateForOtaBatchItem],
+  })
+  items: CalculateForOtaBatchItem[];
+
+  @ApiPropertyOptional({
+    description:
+      'If true, throw on missing markup (STAAH path). If false, fallback to base rate (REST search path).',
+    default: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  failOnMissingMarkup?: boolean;
+}
+
+export interface CalculateForOtaBatchItemResult extends CalculateForOtaResponse {
+  ratePlanId: string;
+  channelName: string;
+  roomTypeId: string;
+  error?: string;
+}
+
+export type CalculateForOtaBatchNatsResponse = NatsResponse<CalculateForOtaBatchItemResult[]>;
+
