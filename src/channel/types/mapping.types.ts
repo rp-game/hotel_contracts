@@ -316,6 +316,12 @@ export class CreateRateMappingRequest {
  * Update rate mapping request
  */
 export class UpdateRateMappingRequest {
+  @ApiPropertyOptional({ description: 'Internal room type ID' })
+  internalRoomId?: string;
+
+  @ApiPropertyOptional({ description: 'Internal rate plan ID' })
+  internalRateId?: string;
+
   @ApiPropertyOptional({ description: 'Internal rate name' })
   internalRateName?: string;
 

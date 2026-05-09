@@ -470,6 +470,8 @@ __decorate([
  * Update rate mapping request
  */
 class UpdateRateMappingRequest {
+    internalRoomId;
+    internalRateId;
     internalRateName;
     externalRateId;
     externalRateName;
@@ -477,6 +479,14 @@ class UpdateRateMappingRequest {
     isActive;
 }
 exports.UpdateRateMappingRequest = UpdateRateMappingRequest;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Internal room type ID' }),
+    __metadata("design:type", String)
+], UpdateRateMappingRequest.prototype, "internalRoomId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Internal rate plan ID' }),
+    __metadata("design:type", String)
+], UpdateRateMappingRequest.prototype, "internalRateId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Internal rate name' }),
     __metadata("design:type", String)

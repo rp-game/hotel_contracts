@@ -123,6 +123,8 @@ export declare class CreateRateMappingRequest {
  * Update rate mapping request
  */
 export declare class UpdateRateMappingRequest {
+    internalRoomId?: string;
+    internalRateId?: string;
     internalRateName?: string;
     externalRateId?: string;
     externalRateName?: string;
