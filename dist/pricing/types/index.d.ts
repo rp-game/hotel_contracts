@@ -16,4 +16,5 @@ export * from './seasonal-adjustments.types';
 export * from './blackout-period.type';
 export * from './voucher.types';
 export * from './rate-plan-extension.types';
+export * from './rate-plan-pricing-detail.types';
 //# sourceMappingURL=index.d.ts.map
