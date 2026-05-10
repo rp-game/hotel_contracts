@@ -15,7 +15,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ExtensionHealthStatus = exports.ListExtensionRunsResponse = exports.ListExtensionRunsRequest = exports.ListExtensionLogsResponse = exports.ListExtensionLogsRequest = exports.GetCoverageResponse = exports.GetCoverageRequest = exports.RatePlanCoverageStatus = exports.UndoExtensionRequest = exports.ExtendRatePlanResponse = exports.ExtendRatePlanRequest = exports.RatePlanExtensionLog = exports.RatePlanExtensionRun = exports.CoverageSeverity = exports.RatePlanExtensionStatus = exports.RatePlanExtensionRunStatus = exports.RatePlanExtensionSource = void 0;
+exports.ExtensionHealthStatus = exports.ListExtensionRunsResponse = exports.ListExtensionRunsRequest = exports.ListExtensionLogsResponse = exports.ListExtensionLogsRequest = exports.GetWeeklyCoverageResponse = exports.GetWeeklyCoverageRequest = exports.WeeklyCoverageStatus = exports.GetCoverageResponse = exports.GetCoverageRequest = exports.RatePlanCoverageStatus = exports.UndoExtensionRequest = exports.ExtendRatePlanResponse = exports.ExtendRatePlanRequest = exports.RatePlanExtensionLog = exports.RatePlanExtensionRun = exports.CoverageSeverity = exports.RatePlanExtensionStatus = exports.RatePlanExtensionRunStatus = exports.RatePlanExtensionSource = void 0;
 const swagger_1 = require("@nestjs/swagger");
 var RatePlanExtensionSource;
 (function (RatePlanExtensionSource) {
@@ -373,6 +373,84 @@ __decorate([
     (0, swagger_1.ApiProperty)({ type: [RatePlanCoverageStatus] }),
     __metadata("design:type", Array)
 ], GetCoverageResponse.prototype, "items", void 0);
+/**
+ * Weekly pricing coverage per room — for Layer 1a auto-extend dashboard.
+ * Replaces rate-plan-keyed coverage (rate_plan_pricing was dropped).
+ */
+class WeeklyCoverageStatus {
+    roomTypeId;
+    roomTypeName;
+    /** Monday ISO of the latest active weekly row, or null if no rows. */
+    latestWeekStart;
+    /** Last covered date = latestWeekStart + 6 days. */
+    latestCoverageDate;
+    /** Days from today to latestCoverageDate; -1 if no rows. */
+    daysRemaining;
+    severity;
+    /** Total active weekly rows for this room. */
+    totalWeeks;
+    hasGaps;
+    /** Missing Mondays between today's-Monday and latestWeekStart. */
+    gaps;
+}
+exports.WeeklyCoverageStatus = WeeklyCoverageStatus;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], WeeklyCoverageStatus.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], WeeklyCoverageStatus.prototype, "roomTypeName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], WeeklyCoverageStatus.prototype, "latestWeekStart", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], WeeklyCoverageStatus.prototype, "latestCoverageDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], WeeklyCoverageStatus.prototype, "daysRemaining", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ enum: CoverageSeverity }),
+    __metadata("design:type", String)
+], WeeklyCoverageStatus.prototype, "severity", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], WeeklyCoverageStatus.prototype, "totalWeeks", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Boolean)
+], WeeklyCoverageStatus.prototype, "hasGaps", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: 'array', items: { type: 'object' } }),
+    __metadata("design:type", Array)
+], WeeklyCoverageStatus.prototype, "gaps", void 0);
+class GetWeeklyCoverageRequest {
+    tenantId;
+    hotelId;
+}
+exports.GetWeeklyCoverageRequest = GetWeeklyCoverageRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GetWeeklyCoverageRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GetWeeklyCoverageRequest.prototype, "hotelId", void 0);
+class GetWeeklyCoverageResponse {
+    items;
+}
+exports.GetWeeklyCoverageResponse = GetWeeklyCoverageResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [WeeklyCoverageStatus] }),
+    __metadata("design:type", Array)
+], GetWeeklyCoverageResponse.prototype, "items", void 0);
 class ListExtensionLogsRequest {
     tenantId;
     hotelId;

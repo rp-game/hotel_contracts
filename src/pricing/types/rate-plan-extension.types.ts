@@ -124,6 +124,37 @@ export class GetCoverageResponse {
   @ApiProperty({ type: [RatePlanCoverageStatus] }) items: RatePlanCoverageStatus[];
 }
 
+/**
+ * Weekly pricing coverage per room — for Layer 1a auto-extend dashboard.
+ * Replaces rate-plan-keyed coverage (rate_plan_pricing was dropped).
+ */
+export class WeeklyCoverageStatus {
+  @ApiProperty() roomTypeId: string;
+  @ApiProperty() roomTypeName: string;
+  /** Monday ISO of the latest active weekly row, or null if no rows. */
+  @ApiPropertyOptional() latestWeekStart?: string | null;
+  /** Last covered date = latestWeekStart + 6 days. */
+  @ApiPropertyOptional() latestCoverageDate?: string | null;
+  /** Days from today to latestCoverageDate; -1 if no rows. */
+  @ApiProperty() daysRemaining: number;
+  @ApiProperty({ enum: CoverageSeverity }) severity: CoverageSeverity;
+  /** Total active weekly rows for this room. */
+  @ApiProperty() totalWeeks: number;
+  @ApiProperty() hasGaps: boolean;
+  /** Missing Mondays between today's-Monday and latestWeekStart. */
+  @ApiPropertyOptional({ type: 'array', items: { type: 'object' } })
+  gaps?: Array<{ weekStart: string }>;
+}
+
+export class GetWeeklyCoverageRequest {
+  @ApiProperty() tenantId: string;
+  @ApiProperty() hotelId: string;
+}
+
+export class GetWeeklyCoverageResponse {
+  @ApiProperty({ type: [WeeklyCoverageStatus] }) items: WeeklyCoverageStatus[];
+}
+
 export class ListExtensionLogsRequest {
   @ApiProperty() tenantId: string;
   @ApiPropertyOptional() hotelId?: string;

@@ -112,6 +112,35 @@ export declare class GetCoverageRequest {
 export declare class GetCoverageResponse {
     items: RatePlanCoverageStatus[];
 }
+/**
+ * Weekly pricing coverage per room — for Layer 1a auto-extend dashboard.
+ * Replaces rate-plan-keyed coverage (rate_plan_pricing was dropped).
+ */
+export declare class WeeklyCoverageStatus {
+    roomTypeId: string;
+    roomTypeName: string;
+    /** Monday ISO of the latest active weekly row, or null if no rows. */
+    latestWeekStart?: string | null;
+    /** Last covered date = latestWeekStart + 6 days. */
+    latestCoverageDate?: string | null;
+    /** Days from today to latestCoverageDate; -1 if no rows. */
+    daysRemaining: number;
+    severity: CoverageSeverity;
+    /** Total active weekly rows for this room. */
+    totalWeeks: number;
+    hasGaps: boolean;
+    /** Missing Mondays between today's-Monday and latestWeekStart. */
+    gaps?: Array<{
+        weekStart: string;
+    }>;
+}
+export declare class GetWeeklyCoverageRequest {
+    tenantId: string;
+    hotelId: string;
+}
+export declare class GetWeeklyCoverageResponse {
+    items: WeeklyCoverageStatus[];
+}
 export declare class ListExtensionLogsRequest {
     tenantId: string;
     hotelId?: string;
