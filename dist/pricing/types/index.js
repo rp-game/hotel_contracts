@@ -31,4 +31,5 @@ __exportStar(require("./room-type-base-rates.types"), exports);
 __exportStar(require("./seasonal-adjustments.types"), exports);
 __exportStar(require("./blackout-period.type"), exports);
 __exportStar(require("./voucher.types"), exports);
+__exportStar(require("./rate-plan-extension.types"), exports);
 //# sourceMappingURL=index.js.map

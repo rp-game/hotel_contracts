@@ -16,3 +16,4 @@ export * from './room-type-base-rates.types';
 export * from './seasonal-adjustments.types';
 export * from './blackout-period.type';
 export * from './voucher.types';
+export * from './rate-plan-extension.types';

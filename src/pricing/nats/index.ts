@@ -21,3 +21,4 @@ export * from './room-type-base-rates.nats';
 export * from './seasonal-adjustments.nats';
 export * from './vouchers.nats';
 export * from './pricing-audit-log.nats';
+export * from './rate-plan-extension.nats';
