@@ -110,6 +110,9 @@ export class RatePlanCoverageStatus {
   @ApiPropertyOptional() lastExtendedAt?: string | null;
   @ApiPropertyOptional() lastStatus?: RatePlanExtensionStatus | null;
   @ApiProperty() hasGaps: boolean;
+  @ApiPropertyOptional({ type: 'array', items: { type: 'object' } })
+  gaps?: Array<{ start: string; end: string; days: number }>;
+  @ApiPropertyOptional() totalRanges?: number;
 }
 
 export class GetCoverageRequest {

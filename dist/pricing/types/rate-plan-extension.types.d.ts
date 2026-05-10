@@ -98,6 +98,12 @@ export declare class RatePlanCoverageStatus {
     lastExtendedAt?: string | null;
     lastStatus?: RatePlanExtensionStatus | null;
     hasGaps: boolean;
+    gaps?: Array<{
+        start: string;
+        end: string;
+        days: number;
+    }>;
+    totalRanges?: number;
 }
 export declare class GetCoverageRequest {
     tenantId: string;

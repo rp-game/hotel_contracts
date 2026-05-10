@@ -304,6 +304,8 @@ class RatePlanCoverageStatus {
     lastExtendedAt;
     lastStatus;
     hasGaps;
+    gaps;
+    totalRanges;
 }
 exports.RatePlanCoverageStatus = RatePlanCoverageStatus;
 __decorate([
@@ -342,6 +344,14 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Boolean)
 ], RatePlanCoverageStatus.prototype, "hasGaps", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: 'array', items: { type: 'object' } }),
+    __metadata("design:type", Array)
+], RatePlanCoverageStatus.prototype, "gaps", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], RatePlanCoverageStatus.prototype, "totalRanges", void 0);
 class GetCoverageRequest {
     tenantId;
     hotelId;
