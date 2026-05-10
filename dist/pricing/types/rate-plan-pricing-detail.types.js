@@ -79,31 +79,31 @@ __decorate([
     __metadata("design:type", Number)
 ], RatePlanPricingItem.prototype, "basePrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingItem.prototype, "mondayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingItem.prototype, "tuesdayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingItem.prototype, "wednesdayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingItem.prototype, "thursdayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingItem.prototype, "fridayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingItem.prototype, "saturdayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingItem.prototype, "sundayPrice", void 0);
 __decorate([
@@ -219,31 +219,31 @@ __decorate([
     __metadata("design:type", Number)
 ], RatePlanPricingRangeInput.prototype, "basePrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingRangeInput.prototype, "mondayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingRangeInput.prototype, "tuesdayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingRangeInput.prototype, "wednesdayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingRangeInput.prototype, "thursdayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingRangeInput.prototype, "fridayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingRangeInput.prototype, "saturdayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], RatePlanPricingRangeInput.prototype, "sundayPrice", void 0);
 __decorate([
@@ -431,31 +431,31 @@ __decorate([
     __metadata("design:type", Number)
 ], UpdateRangeRequest.prototype, "basePrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], UpdateRangeRequest.prototype, "mondayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], UpdateRangeRequest.prototype, "tuesdayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], UpdateRangeRequest.prototype, "wednesdayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], UpdateRangeRequest.prototype, "thursdayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], UpdateRangeRequest.prototype, "fridayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], UpdateRangeRequest.prototype, "saturdayPrice", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
+    (0, swagger_1.ApiPropertyOptional)({ type: Number, nullable: true }),
     __metadata("design:type", Object)
 ], UpdateRangeRequest.prototype, "sundayPrice", void 0);
 __decorate([
