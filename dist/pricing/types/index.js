@@ -32,5 +32,5 @@ __exportStar(require("./seasonal-adjustments.types"), exports);
 __exportStar(require("./blackout-period.type"), exports);
 __exportStar(require("./voucher.types"), exports);
 __exportStar(require("./rate-plan-extension.types"), exports);
-__exportStar(require("./rate-plan-pricing-detail.types"), exports);
+__exportStar(require("./weekly-pricing.types"), exports);
 //# sourceMappingURL=index.js.map
