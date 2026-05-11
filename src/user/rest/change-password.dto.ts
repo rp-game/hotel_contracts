@@ -20,3 +20,14 @@ export class ChangePasswordResponseDto {
   @ApiProperty({ description: 'Response message' })
   message: string;
 }
+
+export class AdminChangePasswordDto {
+  @ApiProperty({ description: 'Target user ID to change password for' })
+  @IsString()
+  targetUserId: string;
+
+  @ApiProperty({ description: 'New password' })
+  @IsString()
+  @MinLength(8)
+  newPassword: string;
+}
