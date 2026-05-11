@@ -28,13 +28,13 @@ var ProviderStatus;
 var ProviderType;
 (function (ProviderType) {
     /** STAAH integration */
-    ProviderType["STAAH"] = "STAAH";
+    ProviderType["STAAH"] = "staah";
     /** SiteMinder integration */
-    ProviderType["SITEMINDER"] = "SiteMinder";
+    ProviderType["SITEMINDER"] = "siteminder";
     /** Beds24 integration */
-    ProviderType["BEDS24"] = "Beds24";
+    ProviderType["BEDS24"] = "beds24";
     /** RateGain integration */
-    ProviderType["RATEGAIN"] = "RateGain";
+    ProviderType["RATEGAIN"] = "rategain";
 })(ProviderType || (exports.ProviderType = ProviderType = {}));
 /**
  * Sync Direction Enum

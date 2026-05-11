@@ -27,16 +27,16 @@ export enum ProviderStatus {
  */
 export enum ProviderType {
   /** STAAH integration */
-  STAAH = 'STAAH',
+  STAAH = 'staah',
 
   /** SiteMinder integration */
-  SITEMINDER = 'SiteMinder',
+  SITEMINDER = 'siteminder',
 
   /** Beds24 integration */
-  BEDS24 = 'Beds24',
+  BEDS24 = 'beds24',
 
   /** RateGain integration */
-  RATEGAIN = 'RateGain',
+  RATEGAIN = 'rategain',
 }
 
 /**
