@@ -244,6 +244,7 @@ export declare class CalculateRateRequestDto extends PricingRequestBaseDto {
         vatRate: number;
         serviceChargeRate: number;
     };
+    currencyRounding?: number;
 }
 /**
  * Update rate request (for specific date)

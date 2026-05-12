@@ -758,6 +758,7 @@ class CalculateRateRequestDto extends PricingRequestBaseDto {
     startTime;
     endTime;
     taxConfiguration;
+    currencyRounding;
 }
 exports.CalculateRateRequestDto = CalculateRateRequestDto;
 __decorate([
@@ -817,6 +818,12 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Object)
 ], CalculateRateRequestDto.prototype, "taxConfiguration", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Currency rounding unit (1 for VND, 0.01 for USD)', example: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CalculateRateRequestDto.prototype, "currencyRounding", void 0);
 /**
  * Update rate request (for specific date)
  */

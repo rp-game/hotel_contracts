@@ -113,6 +113,7 @@ class CalculateRateForPlansRequest {
     ratePlanIds;
     source;
     taxConfiguration;
+    currencyRounding;
 }
 exports.CalculateRateForPlansRequest = CalculateRateForPlansRequest;
 __decorate([
@@ -151,6 +152,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel tax configuration (injected by API gateway)', example: { vatRate: 8, serviceChargeRate: 5 } }),
     __metadata("design:type", Object)
 ], CalculateRateForPlansRequest.prototype, "taxConfiguration", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Currency rounding unit (1 for VND, 0.01 for USD)', example: 1 }),
+    __metadata("design:type", Number)
+], CalculateRateForPlansRequest.prototype, "currencyRounding", void 0);
 class PerNightDetail {
     date;
     dayOfWeek;

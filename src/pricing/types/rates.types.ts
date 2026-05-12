@@ -573,6 +573,11 @@ export class CalculateRateRequestDto extends PricingRequestBaseDto {
     vatRate: number;
     serviceChargeRate: number;
   };
+
+  @ApiPropertyOptional({ description: 'Currency rounding unit (1 for VND, 0.01 for USD)', example: 1 })
+  @IsOptional()
+  @IsNumber()
+  currencyRounding?: number;
 }
 
 /**

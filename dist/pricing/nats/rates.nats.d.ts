@@ -72,6 +72,8 @@ export interface CalculateRateRequest {
         vatRate: number;
         serviceChargeRate: number;
     };
+    /** Currency rounding unit from hotel settings (e.g. 1 for VND, 0.01 for USD) */
+    currencyRounding?: number;
     /** Rate plan ID — if provided, pricing-service applies derivation in pipeline */
     ratePlanId?: string;
     /** Booking source (WALK_IN, WEBSITE, OTA, CORPORATE, TRAVEL_AGENT, DIRECT) */
@@ -95,6 +97,7 @@ export declare class CalculateRateForPlansRequest {
         vatRate: number;
         serviceChargeRate: number;
     };
+    currencyRounding?: number;
 }
 export declare class PerNightDetail {
     date: string;
