@@ -151,3 +151,24 @@ export class GuestInfoNatsResponseData {
 }
 
 export type FindGuestByIdNatsResponse = NatsResponse<GuestInfoNatsResponseData>;
+
+/**
+ * NATS Pattern: booking.confirm_by_code
+ * Confirms a booking (PENDING/PENDING_PAYMENT → CONFIRMED) identified by booking code.
+ * Used by payment-service after webshop payment is confirmed.
+ */
+export class ConfirmByCodeNatsRequest {
+  @ApiProperty({ description: 'Booking code' })
+  code: string;
+
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'Who is confirming', required: false })
+  confirmedBy?: string;
+}
+
+export type ConfirmByCodeNatsResponse = NatsResponse<BookingResponseDto>;

@@ -116,7 +116,8 @@ export interface OfflinePaymentRejectedNatsRequest {
  */
 export interface OfflinePaymentConfirmedNatsRequest {
   paymentId: string;
-  bookingId: string;
+  bookingId?: string;
+  bookingCode?: string;
   amount: number;
   currency: string;
   method: string;
