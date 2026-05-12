@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GuestInfoNatsResponseData = exports.RoomByStatusItem = exports.GetRoomsByStatusNatsRequest = exports.FindGuestByIdNatsRequest = exports.FindBookingByIdNatsRequest = exports.GetBookingByRoomAndGuestNatsRequest = exports.GetBookingByIdSimpleNatsRequest = exports.FindByCodeNatsRequest = void 0;
+exports.ConfirmByCodeNatsRequest = exports.GuestInfoNatsResponseData = exports.RoomByStatusItem = exports.GetRoomsByStatusNatsRequest = exports.FindGuestByIdNatsRequest = exports.FindBookingByIdNatsRequest = exports.GetBookingByRoomAndGuestNatsRequest = exports.GetBookingByIdSimpleNatsRequest = exports.FindByCodeNatsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * NATS Pattern: booking.find_by_code
@@ -217,4 +217,32 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total bookings count' }),
     __metadata("design:type", Number)
 ], GuestInfoNatsResponseData.prototype, "totalBookings", void 0);
+/**
+ * NATS Pattern: booking.confirm_by_code
+ * Confirms a booking (PENDING/PENDING_PAYMENT → CONFIRMED) identified by booking code.
+ * Used by payment-service after webshop payment is confirmed.
+ */
+class ConfirmByCodeNatsRequest {
+    code;
+    tenantId;
+    hotelId;
+    confirmedBy;
+}
+exports.ConfirmByCodeNatsRequest = ConfirmByCodeNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Booking code' }),
+    __metadata("design:type", String)
+], ConfirmByCodeNatsRequest.prototype, "code", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], ConfirmByCodeNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], ConfirmByCodeNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Who is confirming', required: false }),
+    __metadata("design:type", String)
+], ConfirmByCodeNatsRequest.prototype, "confirmedBy", void 0);
 //# sourceMappingURL=booking-lookup.nats.js.map

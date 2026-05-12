@@ -79,4 +79,16 @@ export declare class GuestInfoNatsResponseData {
     totalBookings: number;
 }
 export type FindGuestByIdNatsResponse = NatsResponse<GuestInfoNatsResponseData>;
+/**
+ * NATS Pattern: booking.confirm_by_code
+ * Confirms a booking (PENDING/PENDING_PAYMENT → CONFIRMED) identified by booking code.
+ * Used by payment-service after webshop payment is confirmed.
+ */
+export declare class ConfirmByCodeNatsRequest {
+    code: string;
+    tenantId: string;
+    hotelId: string;
+    confirmedBy?: string;
+}
+export type ConfirmByCodeNatsResponse = NatsResponse<BookingResponseDto>;
 //# sourceMappingURL=booking-lookup.nats.d.ts.map
