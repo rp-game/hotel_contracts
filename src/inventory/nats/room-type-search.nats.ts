@@ -167,6 +167,9 @@ export class PriceBreakdownDto {
 
   @ApiPropertyOptional({ description: 'Gross amount including tax (totalPrice + taxes)', example: 2300000 })
   grossAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Per-night net rates (authoritative array — sum = total net)', type: [Number] })
+  perNightRates?: number[];
 }
 
 export class CancellationPolicySummaryDto {

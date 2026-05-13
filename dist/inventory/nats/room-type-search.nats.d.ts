@@ -40,6 +40,7 @@ export declare class PriceBreakdownDto {
     taxes: number;
     taxBreakdown?: RateTaxBreakdown;
     grossAmount?: number;
+    perNightRates?: number[];
 }
 export declare class CancellationPolicySummaryDto {
     type: string;
