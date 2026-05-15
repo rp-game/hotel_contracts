@@ -71,7 +71,7 @@ export interface BookingData {
 }
 export type CheckInBookingData = BookingData;
 export type CheckInBookingNatsResponse = NatsResponse<CheckInBookingData>;
-export interface CheckOutBookingNatsRequest {
+export declare class CheckOutBookingNatsRequest {
     bookingId: string;
     tenantId: string;
     hotelId: string;
@@ -86,6 +86,11 @@ export interface CheckOutBookingNatsRequest {
     paymentAmount?: number;
     corporateAccountId?: string;
     billItems?: BillItem[];
+    invoiceRequired?: boolean;
+    invoiceCompanyName?: string;
+    invoiceTaxCode?: string;
+    invoiceAddress?: string;
+    invoiceEmail?: string;
 }
 export type CheckOutBookingNatsResponse = NatsResponse<BookingResponseDto>;
 export interface GetPendingCheckinsNatsRequest {

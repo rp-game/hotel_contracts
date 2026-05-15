@@ -13,7 +13,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PendingCheckinsListData = exports.PendingCheckinBooking = exports.CheckInBookingDto = void 0;
+exports.PendingCheckinsListData = exports.PendingCheckinBooking = exports.CheckOutBookingNatsRequest = exports.CheckInBookingDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 /**
  * REST DTO for check-in endpoint (shared across api-gateway and booking-service)
@@ -82,6 +82,105 @@ __decorate([
     }),
     __metadata("design:type", Number)
 ], CheckInBookingDto.prototype, "lateCheckOutFee", void 0);
+// ============= CHECK-OUT =============
+class CheckOutBookingNatsRequest {
+    bookingId;
+    tenantId;
+    hotelId;
+    actualCheckOutTime;
+    additionalCharges;
+    notes;
+    checkedOutBy;
+    checkedOutByName;
+    finalAmount;
+    finalBillAmount;
+    paymentMethod;
+    paymentAmount;
+    corporateAccountId;
+    billItems;
+    invoiceRequired;
+    invoiceCompanyName;
+    invoiceTaxCode;
+    invoiceAddress;
+    invoiceEmail;
+}
+exports.CheckOutBookingNatsRequest = CheckOutBookingNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "actualCheckOutTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], CheckOutBookingNatsRequest.prototype, "additionalCharges", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "checkedOutBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "checkedOutByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], CheckOutBookingNatsRequest.prototype, "finalAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], CheckOutBookingNatsRequest.prototype, "finalBillAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "paymentMethod", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Number)
+], CheckOutBookingNatsRequest.prototype, "paymentAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "corporateAccountId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: () => Array }),
+    __metadata("design:type", Array)
+], CheckOutBookingNatsRequest.prototype, "billItems", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Boolean)
+], CheckOutBookingNatsRequest.prototype, "invoiceRequired", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "invoiceCompanyName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "invoiceTaxCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "invoiceAddress", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", String)
+], CheckOutBookingNatsRequest.prototype, "invoiceEmail", void 0);
 /**
  * Pending Check-in Booking Information
  * Used for both NATS response and REST API response

@@ -112,21 +112,26 @@ export type CheckInBookingNatsResponse = NatsResponse<CheckInBookingData>;
 
 // ============= CHECK-OUT =============
 
-export interface CheckOutBookingNatsRequest {
-  bookingId: string;
-  tenantId: string;
-  hotelId: string;
-  actualCheckOutTime?: string;
-  additionalCharges?: number;
-  notes?: string;
-  checkedOutBy: string;
-  checkedOutByName?: string;
-  finalAmount?: number;
-  finalBillAmount?: string | number;
-  paymentMethod?: string;
-  paymentAmount?: number;
-  corporateAccountId?: string; // Required when paymentMethod = COMPANY_ACCOUNT
-  billItems?: BillItem[];
+export class CheckOutBookingNatsRequest {
+  @ApiProperty() bookingId: string;
+  @ApiProperty() tenantId: string;
+  @ApiProperty() hotelId: string;
+  @ApiPropertyOptional() actualCheckOutTime?: string;
+  @ApiPropertyOptional() additionalCharges?: number;
+  @ApiPropertyOptional() notes?: string;
+  @ApiProperty() checkedOutBy: string;
+  @ApiPropertyOptional() checkedOutByName?: string;
+  @ApiPropertyOptional() finalAmount?: number;
+  @ApiPropertyOptional() finalBillAmount?: string | number;
+  @ApiPropertyOptional() paymentMethod?: string;
+  @ApiPropertyOptional() paymentAmount?: number;
+  @ApiPropertyOptional() corporateAccountId?: string;
+  @ApiPropertyOptional({ type: () => Array }) billItems?: BillItem[];
+  @ApiPropertyOptional() invoiceRequired?: boolean;
+  @ApiPropertyOptional() invoiceCompanyName?: string;
+  @ApiPropertyOptional() invoiceTaxCode?: string;
+  @ApiPropertyOptional() invoiceAddress?: string;
+  @ApiPropertyOptional() invoiceEmail?: string;
 }
 
 export type CheckOutBookingNatsResponse = NatsResponse<BookingResponseDto>;
