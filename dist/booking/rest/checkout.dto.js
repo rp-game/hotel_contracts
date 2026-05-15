@@ -111,6 +111,12 @@ class CheckOutBookingDto {
     lateCheckOutFeeGross;
     lateCheckOutFeeVatRate;
     lateCheckOutFeeServiceChargeRate;
+    // VAT Invoice fields
+    invoiceRequired;
+    invoiceCompanyName;
+    invoiceTaxCode;
+    invoiceAddress;
+    invoiceEmail;
 }
 exports.CheckOutBookingDto = CheckOutBookingDto;
 __decorate([
@@ -231,6 +237,36 @@ __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CheckOutBookingDto.prototype, "lateCheckOutFeeServiceChargeRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Request VAT invoice on checkout' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CheckOutBookingDto.prototype, "invoiceRequired", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Company name for VAT invoice' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "invoiceCompanyName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax code for VAT invoice' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "invoiceTaxCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Company address for VAT invoice' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "invoiceAddress", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Email to receive VAT invoice' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckOutBookingDto.prototype, "invoiceEmail", void 0);
 // ============= REQUEST DTOs =============
 class StartCheckoutRequestDto {
     bookingId;

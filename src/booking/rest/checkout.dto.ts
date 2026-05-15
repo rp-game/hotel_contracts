@@ -161,6 +161,32 @@ export class CheckOutBookingDto {
   @IsOptional()
   @IsNumber()
   lateCheckOutFeeServiceChargeRate?: number;
+
+  // VAT Invoice fields
+  @ApiPropertyOptional({ description: 'Request VAT invoice on checkout' })
+  @IsOptional()
+  @IsBoolean()
+  invoiceRequired?: boolean;
+
+  @ApiPropertyOptional({ description: 'Company name for VAT invoice' })
+  @IsOptional()
+  @IsString()
+  invoiceCompanyName?: string;
+
+  @ApiPropertyOptional({ description: 'Tax code for VAT invoice' })
+  @IsOptional()
+  @IsString()
+  invoiceTaxCode?: string;
+
+  @ApiPropertyOptional({ description: 'Company address for VAT invoice' })
+  @IsOptional()
+  @IsString()
+  invoiceAddress?: string;
+
+  @ApiPropertyOptional({ description: 'Email to receive VAT invoice' })
+  @IsOptional()
+  @IsString()
+  invoiceEmail?: string;
 }
 
 // ============= REQUEST DTOs =============

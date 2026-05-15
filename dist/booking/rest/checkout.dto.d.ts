@@ -39,6 +39,11 @@ export declare class CheckOutBookingDto {
     lateCheckOutFeeGross?: number;
     lateCheckOutFeeVatRate?: number;
     lateCheckOutFeeServiceChargeRate?: number;
+    invoiceRequired?: boolean;
+    invoiceCompanyName?: string;
+    invoiceTaxCode?: string;
+    invoiceAddress?: string;
+    invoiceEmail?: string;
 }
 export declare class StartCheckoutRequestDto {
     bookingId: string;
