@@ -255,6 +255,9 @@ export class CreateRoomMappingRequest {
  * Update room mapping request
  */
 export class UpdateRoomMappingRequest {
+  @ApiPropertyOptional({ description: 'Internal room type ID' })
+  internalRoomId?: string;
+
   @ApiPropertyOptional({ description: 'Internal room name' })
   internalRoomName?: string;
 

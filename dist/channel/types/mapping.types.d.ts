@@ -98,6 +98,7 @@ export declare class CreateRoomMappingRequest {
  * Update room mapping request
  */
 export declare class UpdateRoomMappingRequest {
+    internalRoomId?: string;
     internalRoomName?: string;
     externalRoomId?: string;
     externalRoomName?: string;

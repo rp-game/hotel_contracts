@@ -377,6 +377,7 @@ __decorate([
  * Update room mapping request
  */
 class UpdateRoomMappingRequest {
+    internalRoomId;
     internalRoomName;
     externalRoomId;
     externalRoomName;
@@ -384,6 +385,10 @@ class UpdateRoomMappingRequest {
     isActive;
 }
 exports.UpdateRoomMappingRequest = UpdateRoomMappingRequest;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Internal room type ID' }),
+    __metadata("design:type", String)
+], UpdateRoomMappingRequest.prototype, "internalRoomId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Internal room name' }),
     __metadata("design:type", String)
