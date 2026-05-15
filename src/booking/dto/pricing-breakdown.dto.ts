@@ -78,6 +78,9 @@ export class PricingBreakdownDetailDto {
 
   @ApiPropertyOptional({ description: 'Gross amount (net + all taxes)' })
   grossAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Per-night rates array (one entry per night)', type: [Number] })
+  perNightRates?: number[];
 }
 
 export class RatePlanSnapshotDto {
