@@ -166,6 +166,11 @@ export interface CreateBookingRequest {
              * Replaces the rate-plan calculated price (net or gross depending on hotel priceInputMode).
              */
             priceOverride?: number;
+            /**
+             * Per-night price overrides (net). Mutually exclusive with priceOverride.
+             * Length must equal the number of nights. totalPrice = sum(rates) × quantity.
+             */
+            perNightOverrideRates?: number[];
         }>;
     };
     /**

@@ -22,6 +22,7 @@ export declare class PricingBreakdownDetailDto {
         };
     };
     grossAmount?: number;
+    perNightRates?: number[];
 }
 export declare class RatePlanSnapshotDto {
     id: string;

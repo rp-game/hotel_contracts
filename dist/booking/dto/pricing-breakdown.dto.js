@@ -26,6 +26,7 @@ class PricingBreakdownDetailDto {
     taxes;
     taxBreakdown;
     grossAmount;
+    perNightRates;
 }
 exports.PricingBreakdownDetailDto = PricingBreakdownDetailDto;
 __decorate([
@@ -117,6 +118,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Gross amount (net + all taxes)' }),
     __metadata("design:type", Number)
 ], PricingBreakdownDetailDto.prototype, "grossAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-night rates array (one entry per night)', type: [Number] }),
+    __metadata("design:type", Array)
+], PricingBreakdownDetailDto.prototype, "perNightRates", void 0);
 class RatePlanSnapshotDto {
     id;
     name;
