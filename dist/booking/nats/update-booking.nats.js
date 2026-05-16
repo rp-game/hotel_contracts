@@ -167,6 +167,10 @@ class UpdateBookingDto {
      * Room price overrides — allows updating pricePerUnit for existing booking rooms
      */
     rooms;
+    /**
+     * Display name of the user who performed the override (for audit trail)
+     */
+    overriddenByName;
 }
 exports.UpdateBookingDto = UpdateBookingDto;
 __decorate([
@@ -427,4 +431,10 @@ __decorate([
     (0, class_transformer_1.Type)(() => UpdateBookingRoomDto),
     __metadata("design:type", Array)
 ], UpdateBookingDto.prototype, "rooms", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Display name of user who performed price override', example: 'Giang Sazi' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateBookingDto.prototype, "overriddenByName", void 0);
 //# sourceMappingURL=update-booking.nats.js.map

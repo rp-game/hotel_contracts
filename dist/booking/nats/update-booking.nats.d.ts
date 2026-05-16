@@ -164,6 +164,10 @@ export declare class UpdateBookingDto {
      * Room price overrides — allows updating pricePerUnit for existing booking rooms
      */
     rooms?: UpdateBookingRoomDto[];
+    /**
+     * Display name of the user who performed the override (for audit trail)
+     */
+    overriddenByName?: string;
 }
 /**
  * NATS response containing updated booking

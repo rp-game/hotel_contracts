@@ -390,6 +390,14 @@ export class UpdateBookingDto {
   @ValidateNested({ each: true })
   @Type(() => UpdateBookingRoomDto)
   rooms?: UpdateBookingRoomDto[];
+
+  /**
+   * Display name of the user who performed the override (for audit trail)
+   */
+  @ApiPropertyOptional({ description: 'Display name of user who performed price override', example: 'Giang Sazi' })
+  @IsOptional()
+  @IsString()
+  overriddenByName?: string;
 }
 
 /**
