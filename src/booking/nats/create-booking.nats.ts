@@ -202,6 +202,11 @@ export interface CreateBookingRequest {
        * Length must equal the number of nights. totalPrice = sum(rates) × quantity.
        */
       perNightOverrideRates?: number[];
+
+      /**
+       * Preferred room ID — frontend hint to backend slot-assignment to claim this specific room.
+       */
+      preferredRoomId?: string;
     }>;
   };
 
