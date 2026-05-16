@@ -82,10 +82,6 @@ export class UpdateBookingRoomDto {
   @IsNumber({}, { each: true })
   perNightOverrideRates?: number[];
 
-  @ApiPropertyOptional({ description: 'Number of rooms (used to calculate totalPrice correctly for multi-room)', type: 'number', example: 1 })
-  @IsOptional()
-  @IsNumber()
-  quantity?: number;
 }
 
 /**

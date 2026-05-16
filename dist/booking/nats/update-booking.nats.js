@@ -29,7 +29,6 @@ class UpdateBookingRoomDto {
     roomTypeId;
     priceOverride;
     perNightOverrideRates;
-    quantity;
 }
 exports.UpdateBookingRoomDto = UpdateBookingRoomDto;
 __decorate([
@@ -57,12 +56,6 @@ __decorate([
     (0, class_validator_1.IsNumber)({}, { each: true }),
     __metadata("design:type", Array)
 ], UpdateBookingRoomDto.prototype, "perNightOverrideRates", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of rooms (used to calculate totalPrice correctly for multi-room)', type: 'number', example: 1 }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], UpdateBookingRoomDto.prototype, "quantity", void 0);
 /**
  * Unified UpdateBookingDto for both NATS and REST
  * Single source of truth for booking update operations
