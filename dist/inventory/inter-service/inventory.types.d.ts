@@ -94,6 +94,14 @@ export interface ReleaseRoomRequest {
     hotelId: string;
     bookingId: string;
     roomIds?: string[];
+    /** Check-in date (YYYY-MM-DD). Required for bitmap release (multi-day support). */
+    checkInDate?: string;
+    /** Check-out date (YYYY-MM-DD). Required for bitmap release. */
+    checkOutDate?: string;
+    /** Check-in time (HH:mm). Defaults to '14:00' on receiver side. */
+    checkInTime?: string;
+    /** Check-out time (HH:mm). Defaults to '12:00' on receiver side. */
+    checkOutTime?: string;
 }
 export interface RoomStatusResponse extends NatsResponse {
     data?: {
