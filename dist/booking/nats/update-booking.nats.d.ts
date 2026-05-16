@@ -45,6 +45,14 @@ export interface UpdatedBookingRoom {
     totalPrice: number;
 }
 /**
+ * Room item for price override in UpdateBookingDto
+ */
+export declare class UpdateBookingRoomDto {
+    bookingRoomId?: string;
+    roomTypeId?: string;
+    priceOverride?: number;
+}
+/**
  * Unified UpdateBookingDto for both NATS and REST
  * Single source of truth for booking update operations
  * Used as request DTO for API Gateway and NATS request for booking-service
@@ -151,6 +159,10 @@ export declare class UpdateBookingDto {
      * Whether to keep applying original promotion to new dates
      */
     keepPromotion?: boolean;
+    /**
+     * Room price overrides — allows updating pricePerUnit for existing booking rooms
+     */
+    rooms?: UpdateBookingRoomDto[];
 }
 /**
  * NATS response containing updated booking

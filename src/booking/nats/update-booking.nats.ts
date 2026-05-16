@@ -8,7 +8,8 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsOptional, IsEnum, IsNumber, IsUUID } from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsNumber, IsUUID, IsArray, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common/nats-response.interface';
 
 /**
@@ -54,6 +55,26 @@ export interface UpdatedBookingRoom {
    * Total price
    */
   totalPrice: number;
+}
+
+/**
+ * Room item for price override in UpdateBookingDto
+ */
+export class UpdateBookingRoomDto {
+  @ApiPropertyOptional({ description: 'Booking room ID (preferred identifier)', example: 'uuid' })
+  @IsOptional()
+  @IsUUID()
+  bookingRoomId?: string;
+
+  @ApiPropertyOptional({ description: 'Room type ID (fallback if bookingRoomId not provided)', example: 'uuid' })
+  @IsOptional()
+  @IsUUID()
+  roomTypeId?: string;
+
+  @ApiPropertyOptional({ description: 'Override price per unit (per night)', type: 'number', example: 500000 })
+  @IsOptional()
+  @IsNumber()
+  priceOverride?: number;
 }
 
 /**
@@ -349,6 +370,19 @@ export class UpdateBookingDto {
   })
   @IsOptional()
   keepPromotion?: boolean;
+
+  /**
+   * Room price overrides — allows updating pricePerUnit for existing booking rooms
+   */
+  @ApiPropertyOptional({
+    description: 'Room price overrides (requires OVERRIDE_PRICE role)',
+    type: () => [UpdateBookingRoomDto],
+  })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => UpdateBookingRoomDto)
+  rooms?: UpdateBookingRoomDto[];
 }
 
 /**

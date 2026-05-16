@@ -17,9 +17,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateBookingDto = void 0;
+exports.UpdateBookingDto = exports.UpdateBookingRoomDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
+/**
+ * Room item for price override in UpdateBookingDto
+ */
+class UpdateBookingRoomDto {
+    bookingRoomId;
+    roomTypeId;
+    priceOverride;
+}
+exports.UpdateBookingRoomDto = UpdateBookingRoomDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking room ID (preferred identifier)', example: 'uuid' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateBookingRoomDto.prototype, "bookingRoomId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room type ID (fallback if bookingRoomId not provided)', example: 'uuid' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateBookingRoomDto.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Override price per unit (per night)', type: 'number', example: 500000 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateBookingRoomDto.prototype, "priceOverride", void 0);
 /**
  * Unified UpdateBookingDto for both NATS and REST
  * Single source of truth for booking update operations
@@ -127,6 +155,10 @@ class UpdateBookingDto {
      * Whether to keep applying original promotion to new dates
      */
     keepPromotion;
+    /**
+     * Room price overrides — allows updating pricePerUnit for existing booking rooms
+     */
+    rooms;
 }
 exports.UpdateBookingDto = UpdateBookingDto;
 __decorate([
@@ -376,4 +408,15 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], UpdateBookingDto.prototype, "keepPromotion", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Room price overrides (requires OVERRIDE_PRICE role)',
+        type: () => [UpdateBookingRoomDto],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => UpdateBookingRoomDto),
+    __metadata("design:type", Array)
+], UpdateBookingDto.prototype, "rooms", void 0);
 //# sourceMappingURL=update-booking.nats.js.map
