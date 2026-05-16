@@ -51,6 +51,8 @@ export declare class UpdateBookingRoomDto {
     bookingRoomId?: string;
     roomTypeId?: string;
     priceOverride?: number;
+    perNightOverrideRates?: number[];
+    quantity?: number;
 }
 /**
  * Unified UpdateBookingDto for both NATS and REST

@@ -71,10 +71,21 @@ export class UpdateBookingRoomDto {
   @IsUUID()
   roomTypeId?: string;
 
-  @ApiPropertyOptional({ description: 'Override price per unit (per night)', type: 'number', example: 500000 })
+  @ApiPropertyOptional({ description: 'Override price per unit (ADR — average of perNightOverrideRates if provided)', type: 'number', example: 500000 })
   @IsOptional()
   @IsNumber()
   priceOverride?: number;
+
+  @ApiPropertyOptional({ description: 'Per-night price override (net, one value per night in stay order)', type: [Number], example: [500000, 600000, 500000] })
+  @IsOptional()
+  @IsArray()
+  @IsNumber({}, { each: true })
+  perNightOverrideRates?: number[];
+
+  @ApiPropertyOptional({ description: 'Number of rooms (used to calculate totalPrice correctly for multi-room)', type: 'number', example: 1 })
+  @IsOptional()
+  @IsNumber()
+  quantity?: number;
 }
 
 /**

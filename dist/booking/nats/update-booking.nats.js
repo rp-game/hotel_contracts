@@ -28,6 +28,8 @@ class UpdateBookingRoomDto {
     bookingRoomId;
     roomTypeId;
     priceOverride;
+    perNightOverrideRates;
+    quantity;
 }
 exports.UpdateBookingRoomDto = UpdateBookingRoomDto;
 __decorate([
@@ -43,11 +45,24 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateBookingRoomDto.prototype, "roomTypeId", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Override price per unit (per night)', type: 'number', example: 500000 }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Override price per unit (ADR — average of perNightOverrideRates if provided)', type: 'number', example: 500000 }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateBookingRoomDto.prototype, "priceOverride", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-night price override (net, one value per night in stay order)', type: [Number], example: [500000, 600000, 500000] }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsNumber)({}, { each: true }),
+    __metadata("design:type", Array)
+], UpdateBookingRoomDto.prototype, "perNightOverrideRates", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of rooms (used to calculate totalPrice correctly for multi-room)', type: 'number', example: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateBookingRoomDto.prototype, "quantity", void 0);
 /**
  * Unified UpdateBookingDto for both NATS and REST
  * Single source of truth for booking update operations
