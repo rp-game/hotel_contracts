@@ -172,9 +172,12 @@ export interface CreateBookingRequest {
              */
             perNightOverrideRates?: number[];
             /**
-             * Preferred room ID — frontend hint to backend slot-assignment to claim this specific room.
+             * Preferred room IDs — array of physical room IDs to claim, one per slot.
+             * Length MUST equal `quantity` if provided. Backend expands `quantity=N`
+             * into N booking_rooms rows (1 per slot), each gets `preferredRoomIds[i]`.
+             * Empty/undefined → backend auto-assigns. Duplicates → reject.
              */
-            preferredRoomId?: string;
+            preferredRoomIds?: string[];
         }>;
     };
     /**
