@@ -27,6 +27,10 @@ class BookingRoomResponseDto {
     taxBreakdown;
     adultCount;
     childCount;
+    quantity;
+    totalUnits;
+    isPriceOverride;
+    pricingBreakdown;
 }
 exports.BookingRoomResponseDto = BookingRoomResponseDto;
 __decorate([
@@ -81,6 +85,22 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Child count' }),
     __metadata("design:type", Number)
 ], BookingRoomResponseDto.prototype, "childCount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Number of rooms' }),
+    __metadata("design:type", Number)
+], BookingRoomResponseDto.prototype, "quantity", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Total units (nights for OVERNIGHT, hours for HOURLY)' }),
+    __metadata("design:type", Number)
+], BookingRoomResponseDto.prototype, "totalUnits", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether price was manually overridden' }),
+    __metadata("design:type", Boolean)
+], BookingRoomResponseDto.prototype, "isPriceOverride", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Pricing breakdown including per-night rates', type: 'object', additionalProperties: true }),
+    __metadata("design:type", Object)
+], BookingRoomResponseDto.prototype, "pricingBreakdown", void 0);
 class BookingGuestResponseDto {
     id;
     isMainGuest;

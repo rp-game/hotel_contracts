@@ -23,6 +23,10 @@ export declare class BookingRoomResponseDto {
     };
     adultCount: number;
     childCount: number;
+    quantity?: number;
+    totalUnits?: number;
+    isPriceOverride?: boolean;
+    pricingBreakdown?: Record<string, any>;
 }
 export declare class BookingGuestResponseDto {
     id: string;

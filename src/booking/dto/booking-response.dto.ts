@@ -44,6 +44,18 @@ export class BookingRoomResponseDto {
 
   @ApiProperty({ description: 'Child count' })
   childCount: number;
+
+  @ApiPropertyOptional({ description: 'Number of rooms' })
+  quantity?: number;
+
+  @ApiPropertyOptional({ description: 'Total units (nights for OVERNIGHT, hours for HOURLY)' })
+  totalUnits?: number;
+
+  @ApiPropertyOptional({ description: 'Whether price was manually overridden' })
+  isPriceOverride?: boolean;
+
+  @ApiPropertyOptional({ description: 'Pricing breakdown including per-night rates', type: 'object', additionalProperties: true })
+  pricingBreakdown?: Record<string, any>;
 }
 
 export class BookingGuestResponseDto {
