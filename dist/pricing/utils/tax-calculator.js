@@ -11,6 +11,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DEFAULT_TAX_CONFIG = void 0;
 exports.calculateTax = calculateTax;
+exports.calculateTaxPerNight = calculateTaxPerNight;
 exports.reverseTax = reverseTax;
 /**
  * Default tax config (Vietnam: VAT 8%, Service Charge 5%)
@@ -61,6 +62,40 @@ function calculateTax(netAmount, taxConfig) {
  * @param taxConfig - Hotel's tax configuration
  * @returns Full tax breakdown where netAmount is the back-computed pre-tax price
  */
+/**
+ * Calculate tax per-night then aggregate.
+ * Uses `calculateTax` for each night separately, then sums up. Result is multiplied
+ * by `quantity` (number of rooms of the same type).
+ *
+ * Matches the per-night display in UI (e.g. "X₫/đêm × N đêm") so that displayed tax
+ * sums exactly equal the persisted booking-level tax (no rounding drift).
+ *
+ * @param perNightNet - Array of net amounts per night
+ * @param quantity - Number of rooms of this type (default 1)
+ * @param taxConfig - Hotel's tax configuration
+ */
+function calculateTaxPerNight(perNightNet, quantity = 1, taxConfig) {
+    let scSum = 0;
+    let vatSum = 0;
+    let netSum = 0;
+    for (const nightNet of perNightNet) {
+        const result = calculateTax(nightNet, taxConfig);
+        scSum += result.serviceCharge.amount;
+        vatSum += result.vat.amount;
+        netSum += result.netAmount;
+    }
+    const config = {
+        vatRate: taxConfig?.vatRate ?? exports.DEFAULT_TAX_CONFIG.vatRate,
+        serviceChargeRate: taxConfig?.serviceChargeRate ?? exports.DEFAULT_TAX_CONFIG.serviceChargeRate,
+    };
+    return {
+        netAmount: netSum * quantity,
+        serviceCharge: { rate: config.serviceChargeRate, amount: scSum * quantity },
+        vat: { rate: config.vatRate, amount: vatSum * quantity },
+        totalTax: (scSum + vatSum) * quantity,
+        grossAmount: (netSum + scSum + vatSum) * quantity,
+    };
+}
 function reverseTax(grossAmount, taxConfig) {
     const config = {
         vatRate: taxConfig?.vatRate ?? exports.DEFAULT_TAX_CONFIG.vatRate,

@@ -55,5 +55,18 @@ export declare function calculateTax(netAmount: number, taxConfig?: Partial<TaxC
  * @param taxConfig - Hotel's tax configuration
  * @returns Full tax breakdown where netAmount is the back-computed pre-tax price
  */
+/**
+ * Calculate tax per-night then aggregate.
+ * Uses `calculateTax` for each night separately, then sums up. Result is multiplied
+ * by `quantity` (number of rooms of the same type).
+ *
+ * Matches the per-night display in UI (e.g. "X₫/đêm × N đêm") so that displayed tax
+ * sums exactly equal the persisted booking-level tax (no rounding drift).
+ *
+ * @param perNightNet - Array of net amounts per night
+ * @param quantity - Number of rooms of this type (default 1)
+ * @param taxConfig - Hotel's tax configuration
+ */
+export declare function calculateTaxPerNight(perNightNet: number[], quantity?: number, taxConfig?: Partial<TaxConfig>): TaxCalculationResult;
 export declare function reverseTax(grossAmount: number, taxConfig?: Partial<TaxConfig>): TaxCalculationResult;
 //# sourceMappingURL=tax-calculator.d.ts.map
