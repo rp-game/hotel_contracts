@@ -169,6 +169,14 @@ export declare class UpdateBookingDto {
     backdateReasonNote?: string;
     userRoles?: string[];
     /**
+     * Full-backdate payment: khi user backdate cả check_in + check_out trên CHECKED_IN
+     * booking (case ezCloud backfill), có thể đính kèm 1 payment record để record
+     * khoản đã thu từ khách. Backend sẽ tạo BookingPayment + update paid_amount.
+     * Số tiền default = remaining balance (frontend tính sẵn).
+     */
+    backdatePaymentAmount?: number;
+    backdatePaymentMethod?: string;
+    /**
      * Room price overrides — allows updating pricePerUnit for existing booking rooms
      */
     rooms?: UpdateBookingRoomDto[];

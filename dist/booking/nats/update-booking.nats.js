@@ -172,6 +172,14 @@ class UpdateBookingDto {
     backdateReasonNote;
     userRoles;
     /**
+     * Full-backdate payment: khi user backdate cả check_in + check_out trên CHECKED_IN
+     * booking (case ezCloud backfill), có thể đính kèm 1 payment record để record
+     * khoản đã thu từ khách. Backend sẽ tạo BookingPayment + update paid_amount.
+     * Số tiền default = remaining balance (frontend tính sẵn).
+     */
+    backdatePaymentAmount;
+    backdatePaymentMethod;
+    /**
      * Room price overrides — allows updating pricePerUnit for existing booking rooms
      */
     rooms;
@@ -452,6 +460,23 @@ __decorate([
     (0, class_validator_1.IsArray)(),
     __metadata("design:type", Array)
 ], UpdateBookingDto.prototype, "userRoles", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Amount paid kèm full-backdate (tạo BookingPayment record)',
+        minimum: 0,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateBookingDto.prototype, "backdatePaymentAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Payment method cho full-backdate payment (CASH/CREDIT_CARD/BANK_TRANSFER/...)',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateBookingDto.prototype, "backdatePaymentMethod", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Room price overrides (requires OVERRIDE_PRICE role)',
