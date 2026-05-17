@@ -176,6 +176,8 @@ export declare class UpdateBookingDto {
      */
     backdatePaymentAmount?: number;
     backdatePaymentMethod?: string;
+    confirmBackdateCheckIn?: boolean;
+    confirmBackdateCheckOut?: boolean;
     /**
      * Room price overrides — allows updating pricePerUnit for existing booking rooms
      */

@@ -179,6 +179,8 @@ class UpdateBookingDto {
      */
     backdatePaymentAmount;
     backdatePaymentMethod;
+    confirmBackdateCheckIn;
+    confirmBackdateCheckOut;
     /**
      * Room price overrides — allows updating pricePerUnit for existing booking rooms
      */
@@ -477,6 +479,22 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateBookingDto.prototype, "backdatePaymentMethod", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'User confirm backdate check-in. Khi true + booking PENDING/CONFIRMED, ' +
+            'BE sẽ transition CHECKED_IN với actual_check_in_time=now.',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], UpdateBookingDto.prototype, "confirmBackdateCheckIn", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'User confirm backdate check-out. Khi true + booking CHECKED_IN, ' +
+            'BE sẽ transition CHECKED_OUT với actual_check_out_time=now + tạo payment record (nếu backdatePaymentAmount > 0).',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], UpdateBookingDto.prototype, "confirmBackdateCheckOut", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Room price overrides (requires OVERRIDE_PRICE role)',

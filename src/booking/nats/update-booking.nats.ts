@@ -425,6 +425,20 @@ export class UpdateBookingDto {
   @IsString()
   backdatePaymentMethod?: string;
 
+  @ApiPropertyOptional({
+    description: 'User confirm backdate check-in. Khi true + booking PENDING/CONFIRMED, ' +
+      'BE sẽ transition CHECKED_IN với actual_check_in_time=now.',
+  })
+  @IsOptional()
+  confirmBackdateCheckIn?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'User confirm backdate check-out. Khi true + booking CHECKED_IN, ' +
+      'BE sẽ transition CHECKED_OUT với actual_check_out_time=now + tạo payment record (nếu backdatePaymentAmount > 0).',
+  })
+  @IsOptional()
+  confirmBackdateCheckOut?: boolean;
+
   /**
    * Room price overrides — allows updating pricePerUnit for existing booking rooms
    */
