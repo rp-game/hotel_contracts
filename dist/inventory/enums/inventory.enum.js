@@ -8,12 +8,15 @@ var RoomStatus;
 (function (RoomStatus) {
     RoomStatus["AVAILABLE"] = "AVAILABLE";
     RoomStatus["OCCUPIED"] = "OCCUPIED";
+    RoomStatus["CHECKOUT_PENDING"] = "CHECKOUT_PENDING";
+    RoomStatus["DIRTY"] = "DIRTY";
+    RoomStatus["CLEANING_REQUIRED"] = "CLEANING_REQUIRED";
+    RoomStatus["CLEANING"] = "CLEANING";
+    RoomStatus["INSPECTION"] = "INSPECTION";
+    RoomStatus["OUT_OF_ORDER"] = "OUT_OF_ORDER";
+    RoomStatus["OUT_OF_SERVICE"] = "OUT_OF_SERVICE";
     RoomStatus["MAINTENANCE"] = "MAINTENANCE";
     RoomStatus["BLOCKED"] = "BLOCKED";
-    RoomStatus["DIRTY"] = "DIRTY";
-    RoomStatus["OUT_OF_SERVICE"] = "OUT_OF_SERVICE";
-    RoomStatus["OUT_OF_ORDER"] = "OUT_OF_ORDER";
-    RoomStatus["CLEANING"] = "CLEANING";
     RoomStatus["INACTIVE"] = "INACTIVE";
 })(RoomStatus || (exports.RoomStatus = RoomStatus = {}));
 /**
