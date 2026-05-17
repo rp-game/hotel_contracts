@@ -15,6 +15,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PendingCheckinsListData = exports.PendingCheckinBooking = exports.CheckOutBookingNatsRequest = exports.CheckInBookingDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const booking_enum_1 = require("../enums/booking.enum");
 /**
  * REST DTO for check-in endpoint (shared across api-gateway and booking-service)
  */
@@ -30,6 +31,9 @@ class CheckInBookingDto {
     checkedInBy;
     earlyCheckInFee;
     lateCheckOutFee;
+    effectiveCheckInDate;
+    backdateReasonCategory;
+    backdateReasonNote;
 }
 exports.CheckInBookingDto = CheckInBookingDto;
 __decorate([
@@ -82,6 +86,24 @@ __decorate([
     }),
     __metadata("design:type", Number)
 ], CheckInBookingDto.prototype, "lateCheckOutFee", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Ngày nhận phòng thực tế (YYYY-MM-DD). Default = today in hotel timezone. ' +
+            'Nếu < today → backdate check-in (yêu cầu quyền + reason theo role).',
+    }),
+    __metadata("design:type", String)
+], CheckInBookingDto.prototype, "effectiveCheckInDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Lý do backdate (required khi daysBack > 1)',
+        enum: booking_enum_1.BackdateReasonCategory,
+    }),
+    __metadata("design:type", String)
+], CheckInBookingDto.prototype, "backdateReasonCategory", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Ghi chú thêm cho backdate' }),
+    __metadata("design:type", String)
+], CheckInBookingDto.prototype, "backdateReasonNote", void 0);
 // ============= CHECK-OUT =============
 class CheckOutBookingNatsRequest {
     bookingId;

@@ -3,7 +3,7 @@
  * Booking Domain Enums
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookingPaymentStatus = exports.PaymentStatus = exports.IdType = exports.BookingType = exports.BookingStatus = exports.BookingSource = void 0;
+exports.BookingPaymentStatus = exports.PaymentStatus = exports.IdType = exports.BookingType = exports.BackdateReasonCategory = exports.BookingStatus = exports.BookingSource = void 0;
 var BookingSource;
 (function (BookingSource) {
     BookingSource["DIRECT"] = "DIRECT";
@@ -59,6 +59,18 @@ var BookingStatus;
      */
     BookingStatus["PENDING_PAYMENT"] = "PENDING_PAYMENT";
 })(BookingStatus || (exports.BookingStatus = BookingStatus = {}));
+/**
+ * Reason category for backdated check-in (effectiveCheckInDate < today).
+ * Required when daysBack > 1; optional free-text note can supplement.
+ */
+var BackdateReasonCategory;
+(function (BackdateReasonCategory) {
+    BackdateReasonCategory["GUEST_LATE_ARRIVAL"] = "GUEST_LATE_ARRIVAL";
+    BackdateReasonCategory["STAFF_FORGOT_ENTRY"] = "STAFF_FORGOT_ENTRY";
+    BackdateReasonCategory["CORRECT_WRONG_ENTRY"] = "CORRECT_WRONG_ENTRY";
+    BackdateReasonCategory["ACCOUNTING_RECONCILE"] = "ACCOUNTING_RECONCILE";
+    BackdateReasonCategory["OTHER"] = "OTHER";
+})(BackdateReasonCategory || (exports.BackdateReasonCategory = BackdateReasonCategory = {}));
 /**
  * Booking Type Enumeration
  *

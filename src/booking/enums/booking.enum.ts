@@ -66,6 +66,18 @@ export enum BookingStatus {
 }
 
 /**
+ * Reason category for backdated check-in (effectiveCheckInDate < today).
+ * Required when daysBack > 1; optional free-text note can supplement.
+ */
+export enum BackdateReasonCategory {
+  GUEST_LATE_ARRIVAL = 'GUEST_LATE_ARRIVAL',     // Khách đến trễ (sau giờ đóng ca)
+  STAFF_FORGOT_ENTRY = 'STAFF_FORGOT_ENTRY',     // Lễ tân quên nhập
+  CORRECT_WRONG_ENTRY = 'CORRECT_WRONG_ENTRY',   // Sửa nhập sai
+  ACCOUNTING_RECONCILE = 'ACCOUNTING_RECONCILE', // Đối soát kế toán
+  OTHER = 'OTHER',
+}
+
+/**
  * Booking Type Enumeration
  *
  * Represents the duration/type of a booking

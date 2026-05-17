@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/booking/enums/index.ts"],"names":[],"mappings":"AAAA;;GAEG;AAEH,OAAO,EACL,aAAa,EACb,WAAW,EACX,aAAa,EACb,oBAAoB,EACpB,MAAM,GACP,MAAM,gBAAgB,CAAC"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/booking/enums/index.ts"],"names":[],"mappings":"AAAA;;GAEG;AAEH,OAAO,EACL,aAAa,EACb,WAAW,EACX,aAAa,EACb,oBAAoB,EACpB,MAAM,EACN,sBAAsB,GACvB,MAAM,gBAAgB,CAAC"}

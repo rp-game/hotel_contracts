@@ -8,4 +8,5 @@ export {
   BookingSource,
   BookingPaymentStatus,
   IdType,
+  BackdateReasonCategory,
 } from './booking.enum';

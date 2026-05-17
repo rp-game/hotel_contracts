@@ -21,6 +21,7 @@ exports.UpdateBookingDto = exports.UpdateBookingRoomDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
+const booking_enum_1 = require("../enums/booking.enum");
 /**
  * Room item for price override in UpdateBookingDto
  */
@@ -163,6 +164,13 @@ class UpdateBookingDto {
      * Whether to keep applying original promotion to new dates
      */
     keepPromotion;
+    /**
+     * Backdate check-in reason — required when newCheckIn < oldCheckIn AND daysBack > 1.
+     * Gateway forwards from request body; service enforces window theo userRoles.
+     */
+    backdateReasonCategory;
+    backdateReasonNote;
+    userRoles;
     /**
      * Room price overrides — allows updating pricePerUnit for existing booking rooms
      */
@@ -420,6 +428,30 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], UpdateBookingDto.prototype, "keepPromotion", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Lý do backdate check-in (required khi đổi checkInDate lùi > 1 ngày)',
+        enum: booking_enum_1.BackdateReasonCategory,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(booking_enum_1.BackdateReasonCategory),
+    __metadata("design:type", String)
+], UpdateBookingDto.prototype, "backdateReasonCategory", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Ghi chú thêm cho backdate' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateBookingDto.prototype, "backdateReasonNote", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Roles của user gọi API (gateway pass từ JWT để compute backdate window)',
+        type: [String],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    __metadata("design:type", Array)
+], UpdateBookingDto.prototype, "userRoles", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Room price overrides (requires OVERRIDE_PRICE role)',

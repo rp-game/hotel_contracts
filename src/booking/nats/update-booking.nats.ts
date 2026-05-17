@@ -11,6 +11,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsEnum, IsNumber, IsUUID, IsArray, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common/nats-response.interface';
+import { BackdateReasonCategory } from '../enums/booking.enum';
 
 /**
  * Room details in booking (for update response)
@@ -377,6 +378,31 @@ export class UpdateBookingDto {
   })
   @IsOptional()
   keepPromotion?: boolean;
+
+  /**
+   * Backdate check-in reason — required when newCheckIn < oldCheckIn AND daysBack > 1.
+   * Gateway forwards from request body; service enforces window theo userRoles.
+   */
+  @ApiPropertyOptional({
+    description: 'Lý do backdate check-in (required khi đổi checkInDate lùi > 1 ngày)',
+    enum: BackdateReasonCategory,
+  })
+  @IsOptional()
+  @IsEnum(BackdateReasonCategory)
+  backdateReasonCategory?: BackdateReasonCategory;
+
+  @ApiPropertyOptional({ description: 'Ghi chú thêm cho backdate' })
+  @IsOptional()
+  @IsString()
+  backdateReasonNote?: string;
+
+  @ApiPropertyOptional({
+    description: 'Roles của user gọi API (gateway pass từ JWT để compute backdate window)',
+    type: [String],
+  })
+  @IsOptional()
+  @IsArray()
+  userRoles?: string[];
 
   /**
    * Room price overrides — allows updating pricePerUnit for existing booking rooms

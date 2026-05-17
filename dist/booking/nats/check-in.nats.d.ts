@@ -5,6 +5,7 @@
 import { NatsResponse } from '../../common';
 import { BookingResponseDto } from '../dto/booking-response.dto';
 import { BillItem } from './mobile-checkout.nats';
+import { BackdateReasonCategory } from '../enums/booking.enum';
 export interface PrimaryGuestData {
     fullName: string;
     email?: string;
@@ -28,6 +29,10 @@ export interface CheckInBookingNatsRequest {
     checkedInBy: string;
     earlyCheckInFee?: number;
     lateCheckOutFee?: number;
+    effectiveCheckInDate?: string;
+    backdateReasonCategory?: BackdateReasonCategory;
+    backdateReasonNote?: string;
+    userRoles?: string[];
 }
 /**
  * REST DTO for check-in endpoint (shared across api-gateway and booking-service)
@@ -44,6 +49,9 @@ export declare class CheckInBookingDto {
     checkedInBy?: string;
     earlyCheckInFee?: number;
     lateCheckOutFee?: number;
+    effectiveCheckInDate?: string;
+    backdateReasonCategory?: BackdateReasonCategory;
+    backdateReasonNote?: string;
 }
 export interface BookingData {
     id: string;

@@ -7,6 +7,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
 import { BookingResponseDto } from '../dto/booking-response.dto';
 import { BillItem } from './mobile-checkout.nats';
+import { BackdateReasonCategory } from '../enums/booking.enum';
 
 // ============= CHECK-IN =============
 
@@ -34,6 +35,12 @@ export interface CheckInBookingNatsRequest {
   checkedInBy: string;
   earlyCheckInFee?: number;
   lateCheckOutFee?: number;
+
+  // Backdate check-in fields — optional. Gateway forwards from JWT/body.
+  effectiveCheckInDate?: string;          // YYYY-MM-DD; default = today in hotel timezone
+  backdateReasonCategory?: BackdateReasonCategory;
+  backdateReasonNote?: string;
+  userRoles?: string[];                   // Gateway pass roles từ JWT để service compute window
 }
 
 /**
@@ -78,6 +85,21 @@ export class CheckInBookingDto {
     minimum: 0,
   })
   lateCheckOutFee?: number;
+
+  @ApiPropertyOptional({
+    description: 'Ngày nhận phòng thực tế (YYYY-MM-DD). Default = today in hotel timezone. ' +
+      'Nếu < today → backdate check-in (yêu cầu quyền + reason theo role).',
+  })
+  effectiveCheckInDate?: string;
+
+  @ApiPropertyOptional({
+    description: 'Lý do backdate (required khi daysBack > 1)',
+    enum: BackdateReasonCategory,
+  })
+  backdateReasonCategory?: BackdateReasonCategory;
+
+  @ApiPropertyOptional({ description: 'Ghi chú thêm cho backdate' })
+  backdateReasonNote?: string;
 }
 
 export interface BookingData {

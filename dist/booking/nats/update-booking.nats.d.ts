@@ -7,6 +7,7 @@
  * Used by: calendar page to edit booking details
  */
 import { NatsResponse } from '../../common/nats-response.interface';
+import { BackdateReasonCategory } from '../enums/booking.enum';
 /**
  * Room details in booking (for update response)
  */
@@ -160,6 +161,13 @@ export declare class UpdateBookingDto {
      * Whether to keep applying original promotion to new dates
      */
     keepPromotion?: boolean;
+    /**
+     * Backdate check-in reason — required when newCheckIn < oldCheckIn AND daysBack > 1.
+     * Gateway forwards from request body; service enforces window theo userRoles.
+     */
+    backdateReasonCategory?: BackdateReasonCategory;
+    backdateReasonNote?: string;
+    userRoles?: string[];
     /**
      * Room price overrides — allows updating pricePerUnit for existing booking rooms
      */
