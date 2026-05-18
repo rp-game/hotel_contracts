@@ -337,6 +337,7 @@ class UpdateHotelSettingsRequestDto {
     address;
     city;
     country;
+    provinceId;
     contactEmail;
     contactPhone;
     operationSettings;
@@ -366,6 +367,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateHotelSettingsRequestDto.prototype, "country", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Province ID' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateHotelSettingsRequestDto.prototype, "provinceId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Contact email address' }),
     (0, class_validator_1.IsOptional)(),

@@ -64,6 +64,7 @@ export declare class UpdateHotelSettingsRequestDto {
     address?: string;
     city?: string;
     country?: string;
+    provinceId?: number;
     contactEmail?: string;
     contactPhone?: string;
     operationSettings?: HotelOperationSettingsDto;

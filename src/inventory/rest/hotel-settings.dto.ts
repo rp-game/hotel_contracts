@@ -283,6 +283,11 @@ export class UpdateHotelSettingsRequestDto {
   @IsString()
   country?: string;
 
+  @ApiPropertyOptional({ description: 'Province ID' })
+  @IsOptional()
+  @IsNumber()
+  provinceId?: number;
+
   @ApiPropertyOptional({ description: 'Contact email address' })
   @IsOptional()
   @IsEmail()
