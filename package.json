@@ -1,0 +1,753 @@
+{
+  "name": "@hotel/contracts",
+  "version": "0.1.710",
+  "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./common": {
+      "types": "./dist/common/index.d.ts",
+      "default": "./dist/common/index.js"
+    },
+    "./booking": {
+      "types": "./dist/booking/index.d.ts",
+      "default": "./dist/booking/index.js"
+    },
+    "./booking/nats": {
+      "types": "./dist/booking/nats/index.d.ts",
+      "default": "./dist/booking/nats/index.js"
+    },
+    "./booking/rest": {
+      "types": "./dist/booking/rest/index.d.ts",
+      "default": "./dist/booking/rest/index.js"
+    },
+    "./booking/types": {
+      "types": "./dist/booking/types/index.d.ts",
+      "default": "./dist/booking/types/index.js"
+    },
+    "./booking/enums": {
+      "types": "./dist/booking/enums/index.d.ts",
+      "default": "./dist/booking/enums/index.js"
+    },
+    "./booking/inter-service": {
+      "types": "./dist/booking/inter-service/index.d.ts",
+      "default": "./dist/booking/inter-service/index.js"
+    },
+    "./payment": {
+      "types": "./dist/payment/index.d.ts",
+      "default": "./dist/payment/index.js"
+    },
+    "./payment/enums": {
+      "types": "./dist/payment/enums/index.d.ts",
+      "default": "./dist/payment/enums/index.js"
+    },
+    "./payment/nats": {
+      "types": "./dist/payment/nats/index.d.ts",
+      "default": "./dist/payment/nats/index.js"
+    },
+    "./payment/inter-service": {
+      "types": "./dist/payment/inter-service/index.d.ts",
+      "default": "./dist/payment/inter-service/index.js"
+    },
+    "./pricing": {
+      "types": "./dist/pricing/index.d.ts",
+      "default": "./dist/pricing/index.js"
+    },
+    "./pricing/nats": {
+      "types": "./dist/pricing/nats/index.d.ts",
+      "default": "./dist/pricing/nats/index.js"
+    },
+    "./pricing/rest": {
+      "types": "./dist/pricing/rest/index.d.ts",
+      "default": "./dist/pricing/rest/index.js"
+    },
+    "./pricing/types": {
+      "types": "./dist/pricing/types/index.d.ts",
+      "default": "./dist/pricing/types/index.js"
+    },
+    "./pricing/enums": {
+      "types": "./dist/pricing/enums/index.d.ts",
+      "default": "./dist/pricing/enums/index.js"
+    },
+    "./pricing/inter-service": {
+      "types": "./dist/pricing/inter-service/index.d.ts",
+      "default": "./dist/pricing/inter-service/index.js"
+    },
+    "./inventory": {
+      "types": "./dist/inventory/index.d.ts",
+      "default": "./dist/inventory/index.js"
+    },
+    "./inventory/nats": {
+      "types": "./dist/inventory/nats/index.d.ts",
+      "default": "./dist/inventory/nats/index.js"
+    },
+    "./inventory/rest": {
+      "types": "./dist/inventory/rest/index.d.ts",
+      "default": "./dist/inventory/rest/index.js"
+    },
+    "./inventory/types": {
+      "types": "./dist/inventory/types/index.d.ts",
+      "default": "./dist/inventory/types/index.js"
+    },
+    "./inventory/enums": {
+      "types": "./dist/inventory/enums/index.d.ts",
+      "default": "./dist/inventory/enums/index.js"
+    },
+    "./inventory/inter-service": {
+      "types": "./dist/inventory/inter-service/index.d.ts",
+      "default": "./dist/inventory/inter-service/index.js"
+    },
+    "./housekeeping": {
+      "types": "./dist/housekeeping/index.d.ts",
+      "default": "./dist/housekeeping/index.js"
+    },
+    "./housekeeping/nats": {
+      "types": "./dist/housekeeping/nats/index.d.ts",
+      "default": "./dist/housekeeping/nats/index.js"
+    },
+    "./housekeeping/rest": {
+      "types": "./dist/housekeeping/rest/index.d.ts",
+      "default": "./dist/housekeeping/rest/index.js"
+    },
+    "./housekeeping/types": {
+      "types": "./dist/housekeeping/types/index.d.ts",
+      "default": "./dist/housekeeping/types/index.js"
+    },
+    "./housekeeping/enums": {
+      "types": "./dist/housekeeping/enums/index.d.ts",
+      "default": "./dist/housekeeping/enums/index.js"
+    },
+    "./housekeeping/inter-service": {
+      "types": "./dist/housekeeping/inter-service/index.d.ts",
+      "default": "./dist/housekeeping/inter-service/index.js"
+    },
+    "./user": {
+      "types": "./dist/user/index.d.ts",
+      "default": "./dist/user/index.js"
+    },
+    "./user/nats": {
+      "types": "./dist/user/nats/index.d.ts",
+      "default": "./dist/user/nats/index.js"
+    },
+    "./user/rest": {
+      "types": "./dist/user/rest/index.d.ts",
+      "default": "./dist/user/rest/index.js"
+    },
+    "./user/inter-service": {
+      "types": "./dist/user/inter-service/index.d.ts",
+      "default": "./dist/user/inter-service/index.js"
+    },
+    "./user/types": {
+      "types": "./dist/user/types/index.d.ts",
+      "default": "./dist/user/types/index.js"
+    },
+    "./notification": {
+      "types": "./dist/notification/index.d.ts",
+      "default": "./dist/notification/index.js"
+    },
+    "./notification/inter-service": {
+      "types": "./dist/notification/inter-service/index.d.ts",
+      "default": "./dist/notification/inter-service/index.js"
+    },
+    "./notification/enums": {
+      "types": "./dist/notification/enums/index.d.ts",
+      "default": "./dist/notification/enums/index.js"
+    },
+    "./notification/nats": {
+      "types": "./dist/notification/nats/index.d.ts",
+      "default": "./dist/notification/nats/index.js"
+    },
+    "./notification/rest": {
+      "types": "./dist/notification/rest/index.d.ts",
+      "default": "./dist/notification/rest/index.js"
+    },
+    "./notification/providers": {
+      "types": "./dist/notification/providers/index.d.ts",
+      "default": "./dist/notification/providers/index.js"
+    },
+    "./notification/websocket": {
+      "types": "./dist/notification/websocket/index.d.ts",
+      "default": "./dist/notification/websocket/index.js"
+    },
+    "./ota": {
+      "types": "./dist/ota/index.d.ts",
+      "default": "./dist/ota/index.js"
+    },
+    "./ota/inter-service": {
+      "types": "./dist/ota/inter-service/index.d.ts",
+      "default": "./dist/ota/inter-service/index.js"
+    },
+    "./ota/enums": {
+      "types": "./dist/ota/enums/index.d.ts",
+      "default": "./dist/ota/enums/index.js"
+    },
+    "./crm": {
+      "types": "./dist/crm/index.d.ts",
+      "default": "./dist/crm/index.js"
+    },
+    "./crm/nats": {
+      "types": "./dist/crm/nats/index.d.ts",
+      "default": "./dist/crm/nats/index.js"
+    },
+    "./crm/types": {
+      "types": "./dist/crm/types/index.d.ts",
+      "default": "./dist/crm/types/index.js"
+    },
+    "./loyalty": {
+      "types": "./dist/loyalty/index.d.ts",
+      "default": "./dist/loyalty/index.js"
+    },
+    "./loyalty/nats": {
+      "types": "./dist/loyalty/nats/index.d.ts",
+      "default": "./dist/loyalty/nats/index.js"
+    },
+    "./loyalty/types": {
+      "types": "./dist/loyalty/types/index.d.ts",
+      "default": "./dist/loyalty/types/index.js"
+    },
+    "./financial": {
+      "types": "./dist/financial/index.d.ts",
+      "default": "./dist/financial/index.js"
+    },
+    "./financial/nats": {
+      "types": "./dist/financial/nats/index.d.ts",
+      "default": "./dist/financial/nats/index.js"
+    },
+    "./channel": {
+      "types": "./dist/channel/index.d.ts",
+      "default": "./dist/channel/index.js"
+    },
+    "./channel/nats": {
+      "types": "./dist/channel/nats/index.d.ts",
+      "default": "./dist/channel/nats/index.js"
+    },
+    "./channel/rest": {
+      "types": "./dist/channel/rest/index.d.ts",
+      "default": "./dist/channel/rest/index.js"
+    },
+    "./channel/types": {
+      "types": "./dist/channel/types/index.d.ts",
+      "default": "./dist/channel/types/index.js"
+    },
+    "./channel/enums": {
+      "types": "./dist/channel/enums/index.d.ts",
+      "default": "./dist/channel/enums/index.js"
+    },
+    "./report": {
+      "types": "./dist/report/index.d.ts",
+      "default": "./dist/report/index.js"
+    },
+    "./report/nats": {
+      "types": "./dist/report/nats/index.d.ts",
+      "default": "./dist/report/nats/index.js"
+    },
+    "./platform": {
+      "types": "./dist/platform/index.d.ts",
+      "default": "./dist/platform/index.js"
+    },
+    "./room-move": {
+      "types": "./dist/room-move/index.d.ts",
+      "default": "./dist/room-move/index.js"
+    },
+    "./room-move/nats": {
+      "types": "./dist/room-move/nats/index.d.ts",
+      "default": "./dist/room-move/nats/index.js"
+    },
+    "./room-move/types": {
+      "types": "./dist/room-move/types/index.d.ts",
+      "default": "./dist/room-move/types/index.js"
+    },
+    "./room-move/enums": {
+      "types": "./dist/room-move/enums/index.d.ts",
+      "default": "./dist/room-move/enums/index.js"
+    },
+    "./room-move/rest": {
+      "types": "./dist/room-move/rest/index.d.ts",
+      "default": "./dist/room-move/rest/index.js"
+    },
+    "./group-booking": {
+      "types": "./dist/group-booking/index.d.ts",
+      "default": "./dist/group-booking/index.js"
+    },
+    "./group-booking/nats": {
+      "types": "./dist/group-booking/nats/index.d.ts",
+      "default": "./dist/group-booking/nats/index.js"
+    },
+    "./group-booking/rest": {
+      "types": "./dist/group-booking/rest/index.d.ts",
+      "default": "./dist/group-booking/rest/index.js"
+    },
+    "./group-booking/types": {
+      "types": "./dist/group-booking/types/index.d.ts",
+      "default": "./dist/group-booking/types/index.js"
+    },
+    "./group-booking/enums": {
+      "types": "./dist/group-booking/enums/index.d.ts",
+      "default": "./dist/group-booking/enums/index.js"
+    },
+    "./billing": {
+      "types": "./dist/billing/index.d.ts",
+      "default": "./dist/billing/index.js"
+    },
+    "./billing/nats": {
+      "types": "./dist/billing/nats/index.d.ts",
+      "default": "./dist/billing/nats/index.js"
+    },
+    "./billing/types": {
+      "types": "./dist/billing/types/index.d.ts",
+      "default": "./dist/billing/types/index.js"
+    },
+    "./cms": {
+      "types": "./dist/cms/index.d.ts",
+      "default": "./dist/cms/index.js"
+    },
+    "./cms/nats": {
+      "types": "./dist/cms/nats/index.d.ts",
+      "default": "./dist/cms/nats/index.js"
+    },
+    "./tenants": {
+      "types": "./dist/tenants/index.d.ts",
+      "default": "./dist/tenants/index.js"
+    },
+    "./tenants/nats": {
+      "types": "./dist/tenants/nats/index.d.ts",
+      "default": "./dist/tenants/nats/index.js"
+    },
+    "./tenants/types": {
+      "types": "./dist/tenants/types/index.d.ts",
+      "default": "./dist/tenants/types/index.js"
+    },
+    "./auth": {
+      "types": "./dist/auth/index.d.ts",
+      "default": "./dist/auth/index.js"
+    },
+    "./auth/nats": {
+      "types": "./dist/auth/nats/index.d.ts",
+      "default": "./dist/auth/nats/index.js"
+    },
+    "./auth/rest": {
+      "types": "./dist/auth/rest/index.d.ts",
+      "default": "./dist/auth/rest/index.js"
+    },
+    "./einvoice": {
+      "types": "./dist/einvoice/index.d.ts",
+      "default": "./dist/einvoice/index.js"
+    },
+    "./einvoice/enums": {
+      "types": "./dist/einvoice/enums/index.d.ts",
+      "default": "./dist/einvoice/enums/index.js"
+    },
+    "./einvoice/nats": {
+      "types": "./dist/einvoice/nats/index.d.ts",
+      "default": "./dist/einvoice/nats/index.js"
+    },
+    "./einvoice/rest": {
+      "types": "./dist/einvoice/rest/index.d.ts",
+      "default": "./dist/einvoice/rest/index.js"
+    },
+    "./einvoice/types": {
+      "types": "./dist/einvoice/types/index.d.ts",
+      "default": "./dist/einvoice/types/index.js"
+    },
+    "./stock": {
+      "types": "./dist/stock/index.d.ts",
+      "default": "./dist/stock/index.js"
+    },
+    "./stock/enums": {
+      "types": "./dist/stock/enums/index.d.ts",
+      "default": "./dist/stock/enums/index.js"
+    },
+    "./stock/nats": {
+      "types": "./dist/stock/nats/index.d.ts",
+      "default": "./dist/stock/nats/index.js"
+    },
+    "./stock/rest": {
+      "types": "./dist/stock/rest/index.d.ts",
+      "default": "./dist/stock/rest/index.js"
+    },
+    "./travel-agent": {
+      "types": "./dist/travel-agent/index.d.ts",
+      "default": "./dist/travel-agent/index.js"
+    },
+    "./travel-agent/nats": {
+      "types": "./dist/travel-agent/nats/index.d.ts",
+      "default": "./dist/travel-agent/nats/index.js"
+    },
+    "./travel-agent/rest": {
+      "types": "./dist/travel-agent/rest/index.d.ts",
+      "default": "./dist/travel-agent/rest/index.js"
+    },
+    "./travel-agent/types": {
+      "types": "./dist/travel-agent/types/index.d.ts",
+      "default": "./dist/travel-agent/types/index.js"
+    },
+    "./travel-agent/enums": {
+      "types": "./dist/travel-agent/enums/index.d.ts",
+      "default": "./dist/travel-agent/enums/index.js"
+    },
+    "./sales": {
+      "types": "./dist/sales/index.d.ts",
+      "default": "./dist/sales/index.js"
+    },
+    "./sales/nats": {
+      "types": "./dist/sales/nats/index.d.ts",
+      "default": "./dist/sales/nats/index.js"
+    },
+    "./sales/rest": {
+      "types": "./dist/sales/rest/index.d.ts",
+      "default": "./dist/sales/rest/index.js"
+    },
+    "./sales/types": {
+      "types": "./dist/sales/types/index.d.ts",
+      "default": "./dist/sales/types/index.js"
+    },
+    "./sales/enums": {
+      "types": "./dist/sales/enums/index.d.ts",
+      "default": "./dist/sales/enums/index.js"
+    },
+    "./audit": {
+      "types": "./dist/audit/index.d.ts",
+      "default": "./dist/audit/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "common": [
+        "dist/common/index.d.ts"
+      ],
+      "booking": [
+        "dist/booking/index.d.ts"
+      ],
+      "booking/nats": [
+        "dist/booking/nats/index.d.ts"
+      ],
+      "booking/rest": [
+        "dist/booking/rest/index.d.ts"
+      ],
+      "booking/types": [
+        "dist/booking/types/index.d.ts"
+      ],
+      "booking/enums": [
+        "dist/booking/enums/index.d.ts"
+      ],
+      "booking/inter-service": [
+        "dist/booking/inter-service/index.d.ts"
+      ],
+      "payment": [
+        "dist/payment/index.d.ts"
+      ],
+      "payment/enums": [
+        "dist/payment/enums/index.d.ts"
+      ],
+      "payment/inter-service": [
+        "dist/payment/inter-service/index.d.ts"
+      ],
+      "pricing": [
+        "dist/pricing/index.d.ts"
+      ],
+      "pricing/nats": [
+        "dist/pricing/nats/index.d.ts"
+      ],
+      "pricing/rest": [
+        "dist/pricing/rest/index.d.ts"
+      ],
+      "pricing/types": [
+        "dist/pricing/types/index.d.ts"
+      ],
+      "pricing/enums": [
+        "dist/pricing/enums/index.d.ts"
+      ],
+      "pricing/inter-service": [
+        "dist/pricing/inter-service/index.d.ts"
+      ],
+      "inventory": [
+        "dist/inventory/index.d.ts"
+      ],
+      "inventory/nats": [
+        "dist/inventory/nats/index.d.ts"
+      ],
+      "inventory/rest": [
+        "dist/inventory/rest/index.d.ts"
+      ],
+      "inventory/types": [
+        "dist/inventory/types/index.d.ts"
+      ],
+      "inventory/enums": [
+        "dist/inventory/enums/index.d.ts"
+      ],
+      "inventory/inter-service": [
+        "dist/inventory/inter-service/index.d.ts"
+      ],
+      "housekeeping": [
+        "dist/housekeeping/index.d.ts"
+      ],
+      "housekeeping/nats": [
+        "dist/housekeeping/nats/index.d.ts"
+      ],
+      "housekeeping/rest": [
+        "dist/housekeeping/rest/index.d.ts"
+      ],
+      "housekeeping/types": [
+        "dist/housekeeping/types/index.d.ts"
+      ],
+      "housekeeping/enums": [
+        "dist/housekeeping/enums/index.d.ts"
+      ],
+      "housekeeping/inter-service": [
+        "dist/housekeeping/inter-service/index.d.ts"
+      ],
+      "user": [
+        "dist/user/index.d.ts"
+      ],
+      "user/nats": [
+        "dist/user/nats/index.d.ts"
+      ],
+      "user/inter-service": [
+        "dist/user/inter-service/index.d.ts"
+      ],
+      "user/types": [
+        "dist/user/types/index.d.ts"
+      ],
+      "notification": [
+        "dist/notification/index.d.ts"
+      ],
+      "notification/inter-service": [
+        "dist/notification/inter-service/index.d.ts"
+      ],
+      "notification/enums": [
+        "dist/notification/enums/index.d.ts"
+      ],
+      "notification/nats": [
+        "dist/notification/nats/index.d.ts"
+      ],
+      "notification/rest": [
+        "dist/notification/rest/index.d.ts"
+      ],
+      "notification/providers": [
+        "dist/notification/providers/index.d.ts"
+      ],
+      "notification/websocket": [
+        "dist/notification/websocket/index.d.ts"
+      ],
+      "ota": [
+        "dist/ota/index.d.ts"
+      ],
+      "ota/inter-service": [
+        "dist/ota/inter-service/index.d.ts"
+      ],
+      "ota/enums": [
+        "dist/ota/enums/index.d.ts"
+      ],
+      "crm": [
+        "dist/crm/index.d.ts"
+      ],
+      "crm/nats": [
+        "dist/crm/nats/index.d.ts"
+      ],
+      "crm/types": [
+        "dist/crm/types/index.d.ts"
+      ],
+      "loyalty": [
+        "dist/loyalty/index.d.ts"
+      ],
+      "loyalty/nats": [
+        "dist/loyalty/nats/index.d.ts"
+      ],
+      "loyalty/types": [
+        "dist/loyalty/types/index.d.ts"
+      ],
+      "financial": [
+        "dist/financial/index.d.ts"
+      ],
+      "financial/nats": [
+        "dist/financial/nats/index.d.ts"
+      ],
+      "channel": [
+        "dist/channel/index.d.ts"
+      ],
+      "channel/nats": [
+        "dist/channel/nats/index.d.ts"
+      ],
+      "channel/rest": [
+        "dist/channel/rest/index.d.ts"
+      ],
+      "channel/types": [
+        "dist/channel/types/index.d.ts"
+      ],
+      "channel/enums": [
+        "dist/channel/enums/index.d.ts"
+      ],
+      "report": [
+        "dist/report/index.d.ts"
+      ],
+      "report/nats": [
+        "dist/report/nats/index.d.ts"
+      ],
+      "platform": [
+        "dist/platform/index.d.ts"
+      ],
+      "room-move": [
+        "dist/room-move/index.d.ts"
+      ],
+      "room-move/nats": [
+        "dist/room-move/nats/index.d.ts"
+      ],
+      "room-move/types": [
+        "dist/room-move/types/index.d.ts"
+      ],
+      "room-move/enums": [
+        "dist/room-move/enums/index.d.ts"
+      ],
+      "group-booking": [
+        "dist/group-booking/index.d.ts"
+      ],
+      "group-booking/nats": [
+        "dist/group-booking/nats/index.d.ts"
+      ],
+      "group-booking/rest": [
+        "dist/group-booking/rest/index.d.ts"
+      ],
+      "group-booking/types": [
+        "dist/group-booking/types/index.d.ts"
+      ],
+      "group-booking/enums": [
+        "dist/group-booking/enums/index.d.ts"
+      ],
+      "billing": [
+        "dist/billing/index.d.ts"
+      ],
+      "billing/nats": [
+        "dist/billing/nats/index.d.ts"
+      ],
+      "billing/types": [
+        "dist/billing/types/index.d.ts"
+      ],
+      "cms": [
+        "dist/cms/index.d.ts"
+      ],
+      "cms/nats": [
+        "dist/cms/nats/index.d.ts"
+      ],
+      "tenants": [
+        "dist/tenants/index.d.ts"
+      ],
+      "tenants/nats": [
+        "dist/tenants/nats/index.d.ts"
+      ],
+      "tenants/types": [
+        "dist/tenants/types/index.d.ts"
+      ],
+      "auth": [
+        "dist/auth/index.d.ts"
+      ],
+      "auth/nats": [
+        "dist/auth/nats/index.d.ts"
+      ],
+      "auth/rest": [
+        "dist/auth/rest/index.d.ts"
+      ],
+      "einvoice": [
+        "dist/einvoice/index.d.ts"
+      ],
+      "einvoice/enums": [
+        "dist/einvoice/enums/index.d.ts"
+      ],
+      "einvoice/nats": [
+        "dist/einvoice/nats/index.d.ts"
+      ],
+      "einvoice/rest": [
+        "dist/einvoice/rest/index.d.ts"
+      ],
+      "einvoice/types": [
+        "dist/einvoice/types/index.d.ts"
+      ],
+      "stock": [
+        "dist/stock/index.d.ts"
+      ],
+      "stock/enums": [
+        "dist/stock/enums/index.d.ts"
+      ],
+      "stock/nats": [
+        "dist/stock/nats/index.d.ts"
+      ],
+      "stock/rest": [
+        "dist/stock/rest/index.d.ts"
+      ],
+      "travel-agent": [
+        "dist/travel-agent/index.d.ts"
+      ],
+      "travel-agent/nats": [
+        "dist/travel-agent/nats/index.d.ts"
+      ],
+      "travel-agent/rest": [
+        "dist/travel-agent/rest/index.d.ts"
+      ],
+      "travel-agent/types": [
+        "dist/travel-agent/types/index.d.ts"
+      ],
+      "travel-agent/enums": [
+        "dist/travel-agent/enums/index.d.ts"
+      ],
+      "sales": [
+        "dist/sales/index.d.ts"
+      ],
+      "sales/nats": [
+        "dist/sales/nats/index.d.ts"
+      ],
+      "sales/rest": [
+        "dist/sales/rest/index.d.ts"
+      ],
+      "sales/types": [
+        "dist/sales/types/index.d.ts"
+      ],
+      "sales/enums": [
+        "dist/sales/enums/index.d.ts"
+      ],
+      "audit": [
+        "dist/audit/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Contract definitions are type-checked by TypeScript\" && exit 0"
+  },
+  "keywords": [
+    "hotel",
+    "contracts",
+    "typescript",
+    "shared-types",
+    "nats",
+    "microservices"
+  ],
+  "author": "Hotel Development Team",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "@nestjs/swagger": "^11.2.0",
+    "class-validator": "^0.14.0",
+    "class-transformer": "^0.5.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/hotel-contracts.git"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

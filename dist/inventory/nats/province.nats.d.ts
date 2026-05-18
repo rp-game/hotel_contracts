@@ -11,6 +11,9 @@
 export declare class ListProvincesByChainRequest {
     chainId: string;
 }
+/** Pattern: inventory.provinces.listAll — no request body needed */
+export declare class ListAllProvincesRequest {
+}
 export declare class ListProvincesByIdsRequest {
     provinceIds: number[];
 }

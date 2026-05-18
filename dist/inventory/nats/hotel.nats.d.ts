@@ -73,10 +73,33 @@ export declare class HotelDto {
     checkOutTime?: string;
     timezone?: string;
     currency?: string;
+    provinceId?: number;
+    provinceName?: string;
     createdAt?: string;
     updatedAt?: string;
 }
 export type Hotel = HotelDto;
+/**
+ * DTO for updating a hotel — all fields optional.
+ * Used by PATCH /api/hotels/:id
+ */
+export declare class UpdateHotelRequestDto {
+    name?: string;
+    description?: string;
+    address?: string;
+    city?: string;
+    country?: string;
+    phone?: string;
+    email?: string;
+    website?: string;
+    stars?: number;
+    status?: string;
+    checkInTime?: string;
+    checkOutTime?: string;
+    timezone?: string;
+    currency?: string;
+    provinceId?: number;
+}
 /**
  * Hotel with statistics
  * Returned by hotels.findOne with room counts

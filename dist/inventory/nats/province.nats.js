@@ -19,7 +19,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProvinceDto = exports.ListProvincesByIdsRequest = exports.ListProvincesByChainRequest = void 0;
+exports.ProvinceDto = exports.ListProvincesByIdsRequest = exports.ListAllProvincesRequest = exports.ListProvincesByChainRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 // ============================================================================
@@ -34,6 +34,10 @@ __decorate([
     (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
 ], ListProvincesByChainRequest.prototype, "chainId", void 0);
+/** Pattern: inventory.provinces.listAll — no request body needed */
+class ListAllProvincesRequest {
+}
+exports.ListAllProvincesRequest = ListAllProvincesRequest;
 class ListProvincesByIdsRequest {
     provinceIds;
 }
