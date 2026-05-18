@@ -164,6 +164,8 @@ class HotelOperationSettingsDto {
     guestNameFormat;
     requireNationality;
     requireIdentityDocument;
+    requireEmail;
+    requirePhone;
 }
 exports.HotelOperationSettingsDto = HotelOperationSettingsDto;
 __decorate([
@@ -327,6 +329,18 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], HotelOperationSettingsDto.prototype, "requireIdentityDocument", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether email is required in webshop booking form', default: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], HotelOperationSettingsDto.prototype, "requireEmail", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether phone is required in webshop booking form', default: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], HotelOperationSettingsDto.prototype, "requirePhone", void 0);
 /**
  * Update Hotel Settings Request DTO
  * Used for POST /hotels/:id/settings endpoint

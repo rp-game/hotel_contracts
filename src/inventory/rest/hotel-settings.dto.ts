@@ -255,6 +255,16 @@ export class HotelOperationSettingsDto {
   @IsOptional()
   @IsBoolean()
   requireIdentityDocument?: boolean;
+
+  @ApiPropertyOptional({ description: 'Whether email is required in webshop booking form', default: true })
+  @IsOptional()
+  @IsBoolean()
+  requireEmail?: boolean;
+
+  @ApiPropertyOptional({ description: 'Whether phone is required in webshop booking form', default: true })
+  @IsOptional()
+  @IsBoolean()
+  requirePhone?: boolean;
 }
 
 /**
