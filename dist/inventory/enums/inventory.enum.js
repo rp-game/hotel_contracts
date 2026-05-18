@@ -14,6 +14,8 @@ var RoomStatus;
     RoomStatus["OUT_OF_SERVICE"] = "OUT_OF_SERVICE";
     RoomStatus["OUT_OF_ORDER"] = "OUT_OF_ORDER";
     RoomStatus["CLEANING"] = "CLEANING";
+    RoomStatus["CLEANING_REQUIRED"] = "CLEANING_REQUIRED";
+    RoomStatus["INSPECTION"] = "INSPECTION";
     RoomStatus["INACTIVE"] = "INACTIVE";
 })(RoomStatus || (exports.RoomStatus = RoomStatus = {}));
 /**
