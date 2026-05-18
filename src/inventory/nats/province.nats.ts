@@ -22,6 +22,9 @@ export class ListProvincesByChainRequest {
   chainId: string;
 }
 
+/** Pattern: inventory.provinces.listAll — no request body needed */
+export class ListAllProvincesRequest {}
+
 export class ListProvincesByIdsRequest {
   @ApiProperty({ description: 'Province IDs to look up', type: [Number] })
   @IsArray()

@@ -173,6 +173,16 @@ export class HotelDto {
   @IsString()
   currency?: string;
 
+  @ApiPropertyOptional({ description: 'Province ID (Vietnam administrative province)' })
+  @IsOptional()
+  @IsNumber()
+  provinceId?: number;
+
+  @ApiPropertyOptional({ description: 'Province name' })
+  @IsOptional()
+  @IsString()
+  provinceName?: string;
+
   @ApiPropertyOptional({ description: 'Creation timestamp (ISO 8601 format)' })
   @IsOptional()
   @IsString()
@@ -186,6 +196,28 @@ export class HotelDto {
 
 // Keep Hotel type alias for backward compatibility during migration
 export type Hotel = HotelDto;
+
+/**
+ * DTO for updating a hotel — all fields optional.
+ * Used by PATCH /api/hotels/:id
+ */
+export class UpdateHotelRequestDto {
+  @ApiPropertyOptional() @IsOptional() @IsString() name?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() description?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() address?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() city?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() country?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() phone?: string;
+  @ApiPropertyOptional() @IsOptional() @IsEmail() email?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() website?: string;
+  @ApiPropertyOptional() @IsOptional() @IsNumber() @Min(1) @Max(5) stars?: number;
+  @ApiPropertyOptional() @IsOptional() @IsString() status?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() checkInTime?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() checkOutTime?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() timezone?: string;
+  @ApiPropertyOptional() @IsOptional() @IsString() currency?: string;
+  @ApiPropertyOptional() @IsOptional() @IsNumber() provinceId?: number;
+}
 
 /**
  * Hotel with statistics
