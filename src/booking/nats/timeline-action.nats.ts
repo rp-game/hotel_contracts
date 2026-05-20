@@ -29,6 +29,7 @@ export interface TimelineActionData {
   notes?: string;
   reason?: string;
   extendToDate?: string;
+  extensionPricePerNight?: number;
   guestDetails?: {
     firstName?: string;
     lastName?: string;
