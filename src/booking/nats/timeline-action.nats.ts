@@ -8,7 +8,28 @@
  * Called by: api-gateway (TimelineService)
  */
 
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common';
+
+export class TimelineActionGuestDetails {
+  @ApiPropertyOptional()
+  firstName?: string;
+
+  @ApiPropertyOptional()
+  lastName?: string;
+
+  @ApiPropertyOptional()
+  email?: string;
+
+  @ApiPropertyOptional()
+  phone?: string;
+
+  @ApiPropertyOptional()
+  nationality?: string;
+
+  @ApiPropertyOptional()
+  idNumber?: string;
+}
 
 /**
  * Timeline Action Result
@@ -25,27 +46,26 @@ export interface TimelineActionResult {
   };
 }
 
-export interface TimelineActionData {
+export class TimelineActionData {
+  @ApiPropertyOptional()
   notes?: string;
+
+  @ApiPropertyOptional()
   reason?: string;
+
+  @ApiPropertyOptional({ description: 'New checkout date (YYYY-MM-DD)' })
   extendToDate?: string;
+
+  @ApiPropertyOptional({ description: 'Net price per night for extension nights' })
   extensionPricePerNight?: number;
-  guestDetails?: {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    phone?: string;
-    nationality?: string;
-    idNumber?: string;
-    [key: string]: any;
-  };
+
+  @ApiPropertyOptional({ type: () => TimelineActionGuestDetails })
+  guestDetails?: TimelineActionGuestDetails;
 }
 
 /**
  * Perform Timeline Action Request
  * Pattern: booking.timeline.action
- *
- * Perform an action on a room (confirm, checkin, checkout, cancel)
  */
 export interface PerformTimelineActionNatsRequest {
   roomId: string;

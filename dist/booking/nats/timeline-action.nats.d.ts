@@ -8,6 +8,14 @@
  * Called by: api-gateway (TimelineService)
  */
 import { NatsResponse } from '../../common';
+export declare class TimelineActionGuestDetails {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    phone?: string;
+    nationality?: string;
+    idNumber?: string;
+}
 /**
  * Timeline Action Result
  */
@@ -22,26 +30,16 @@ export interface TimelineActionResult {
         actualCheckOutTime?: Date;
     };
 }
-export interface TimelineActionData {
+export declare class TimelineActionData {
     notes?: string;
     reason?: string;
     extendToDate?: string;
     extensionPricePerNight?: number;
-    guestDetails?: {
-        firstName?: string;
-        lastName?: string;
-        email?: string;
-        phone?: string;
-        nationality?: string;
-        idNumber?: string;
-        [key: string]: any;
-    };
+    guestDetails?: TimelineActionGuestDetails;
 }
 /**
  * Perform Timeline Action Request
  * Pattern: booking.timeline.action
- *
- * Perform an action on a room (confirm, checkin, checkout, cancel)
  */
 export interface PerformTimelineActionNatsRequest {
     roomId: string;
