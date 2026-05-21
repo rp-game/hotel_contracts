@@ -1,11 +1,11 @@
 export declare class PricingBreakdownDetailDto {
     baseAmount: number;
     seasonalAdjustment: number;
-    seasonalAdjustmentPercent: number;
-    advanceBookingDiscount: number;
-    advanceBookingDiscountPercent: number;
-    lengthOfStayDiscount: number;
-    lengthOfStayDiscountPercent: number;
+    seasonalAdjustmentPercent?: number;
+    advanceBookingDiscount?: number;
+    advanceBookingDiscountPercent?: number;
+    lengthOfStayDiscount?: number;
+    lengthOfStayDiscountPercent?: number;
     promotionDiscount?: number;
     promotionDiscountPercent?: number;
     occupancyAdjustment?: number;

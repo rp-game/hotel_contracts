@@ -45,35 +45,35 @@ __decorate([
     __metadata("design:type", Number)
 ], PricingBreakdownDetailDto.prototype, "seasonalAdjustment", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
+    (0, swagger_1.ApiPropertyOptional)({
         description: 'Seasonal adjustment percentage',
         example: 0,
     }),
     __metadata("design:type", Number)
 ], PricingBreakdownDetailDto.prototype, "seasonalAdjustmentPercent", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
+    (0, swagger_1.ApiPropertyOptional)({
         description: 'Advance booking discount amount in VND',
         example: 720000,
     }),
     __metadata("design:type", Number)
 ], PricingBreakdownDetailDto.prototype, "advanceBookingDiscount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
+    (0, swagger_1.ApiPropertyOptional)({
         description: 'Advance booking discount percentage',
         example: 0.2,
     }),
     __metadata("design:type", Number)
 ], PricingBreakdownDetailDto.prototype, "advanceBookingDiscountPercent", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
+    (0, swagger_1.ApiPropertyOptional)({
         description: 'Length of stay discount amount in VND',
         example: 180000,
     }),
     __metadata("design:type", Number)
 ], PricingBreakdownDetailDto.prototype, "lengthOfStayDiscount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
+    (0, swagger_1.ApiPropertyOptional)({
         description: 'Length of stay discount percentage',
         example: 0.05,
     }),

@@ -13,35 +13,35 @@ export class PricingBreakdownDetailDto {
   })
   seasonalAdjustment: number;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Seasonal adjustment percentage',
     example: 0,
   })
-  seasonalAdjustmentPercent: number;
+  seasonalAdjustmentPercent?: number;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Advance booking discount amount in VND',
     example: 720000,
   })
-  advanceBookingDiscount: number;
+  advanceBookingDiscount?: number;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Advance booking discount percentage',
     example: 0.2,
   })
-  advanceBookingDiscountPercent: number;
+  advanceBookingDiscountPercent?: number;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Length of stay discount amount in VND',
     example: 180000,
   })
-  lengthOfStayDiscount: number;
+  lengthOfStayDiscount?: number;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Length of stay discount percentage',
     example: 0.05,
   })
-  lengthOfStayDiscountPercent: number;
+  lengthOfStayDiscountPercent?: number;
 
   @ApiPropertyOptional({
     description: 'Promotion discount amount (optional)',
