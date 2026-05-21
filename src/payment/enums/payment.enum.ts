@@ -7,6 +7,7 @@ export enum PaymentMethod {
   BANK_TRANSFER = 'BANK_TRANSFER',
   ONLINE = 'ONLINE',
   COMPANY_ACCOUNT = 'COMPANY_ACCOUNT',
+  REFUND = 'REFUND',
 }
 
 /**

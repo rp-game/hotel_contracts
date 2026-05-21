@@ -82,8 +82,8 @@ export class PricingBreakdownDetailDto {
   @ApiPropertyOptional({ description: 'Per-night rates from pricing service (origin, never changes after override)', type: [Number] })
   perNightRateOrigin?: number[];
 
-  @ApiPropertyOptional({ description: 'Per-night override rates; undefined = no override; null entry = night not overridden' })
-  perNightRates?: (number | null)[];
+  @ApiPropertyOptional({ description: 'Per-night effective rates (override if set, origin otherwise); undefined = no override', type: [Number] })
+  perNightRates?: number[];
 }
 
 export class RatePlanSnapshotDto {

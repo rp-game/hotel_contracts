@@ -11,6 +11,7 @@ var PaymentMethod;
     PaymentMethod["BANK_TRANSFER"] = "BANK_TRANSFER";
     PaymentMethod["ONLINE"] = "ONLINE";
     PaymentMethod["COMPANY_ACCOUNT"] = "COMPANY_ACCOUNT";
+    PaymentMethod["REFUND"] = "REFUND";
 })(PaymentMethod || (exports.PaymentMethod = PaymentMethod = {}));
 /**
  * Payment Status Enum

@@ -23,7 +23,7 @@ export declare class PricingBreakdownDetailDto {
     };
     grossAmount?: number;
     perNightRateOrigin?: number[];
-    perNightRates?: (number | null)[];
+    perNightRates?: number[];
 }
 export declare class RatePlanSnapshotDto {
     id: string;

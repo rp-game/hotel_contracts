@@ -124,7 +124,7 @@ __decorate([
     __metadata("design:type", Array)
 ], PricingBreakdownDetailDto.prototype, "perNightRateOrigin", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-night override rates; undefined = no override; null entry = night not overridden' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-night effective rates (override if set, origin otherwise); undefined = no override', type: [Number] }),
     __metadata("design:type", Array)
 ], PricingBreakdownDetailDto.prototype, "perNightRates", void 0);
 class RatePlanSnapshotDto {
