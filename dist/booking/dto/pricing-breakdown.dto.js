@@ -26,6 +26,7 @@ class PricingBreakdownDetailDto {
     taxes;
     taxBreakdown;
     grossAmount;
+    perNightRateOrigin;
     perNightRates;
 }
 exports.PricingBreakdownDetailDto = PricingBreakdownDetailDto;
@@ -119,7 +120,11 @@ __decorate([
     __metadata("design:type", Number)
 ], PricingBreakdownDetailDto.prototype, "grossAmount", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-night rates array (one entry per night)', type: [Number] }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-night rates from pricing service (origin, never changes after override)', type: [Number] }),
+    __metadata("design:type", Array)
+], PricingBreakdownDetailDto.prototype, "perNightRateOrigin", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-night override rates; undefined = no override; null entry = night not overridden' }),
     __metadata("design:type", Array)
 ], PricingBreakdownDetailDto.prototype, "perNightRates", void 0);
 class RatePlanSnapshotDto {

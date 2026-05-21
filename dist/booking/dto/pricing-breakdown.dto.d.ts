@@ -22,7 +22,8 @@ export declare class PricingBreakdownDetailDto {
         };
     };
     grossAmount?: number;
-    perNightRates?: number[];
+    perNightRateOrigin?: number[];
+    perNightRates?: (number | null)[];
 }
 export declare class RatePlanSnapshotDto {
     id: string;

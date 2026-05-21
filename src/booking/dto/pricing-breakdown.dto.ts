@@ -79,8 +79,11 @@ export class PricingBreakdownDetailDto {
   @ApiPropertyOptional({ description: 'Gross amount (net + all taxes)' })
   grossAmount?: number;
 
-  @ApiPropertyOptional({ description: 'Per-night rates array (one entry per night)', type: [Number] })
-  perNightRates?: number[];
+  @ApiPropertyOptional({ description: 'Per-night rates from pricing service (origin, never changes after override)', type: [Number] })
+  perNightRateOrigin?: number[];
+
+  @ApiPropertyOptional({ description: 'Per-night override rates; undefined = no override; null entry = night not overridden' })
+  perNightRates?: (number | null)[];
 }
 
 export class RatePlanSnapshotDto {
