@@ -113,6 +113,8 @@ export interface CheckRoomAvailabilityForReassignmentRequest {
     checkOut: string;
     tenantId: string;
     hotelId: string;
+    checkInTime?: string;
+    checkOutTime?: string;
 }
 export interface RoomAvailabilityForReassignmentResponse {
     available: boolean;

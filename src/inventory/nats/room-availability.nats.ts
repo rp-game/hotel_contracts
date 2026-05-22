@@ -129,10 +129,12 @@ export type GetRoomInfoNatsResponse = NatsResponse<RoomInfoResponse>;
 export interface CheckRoomAvailabilityForReassignmentRequest {
   roomId: string;
   bookingId: string;
-  checkIn: string; // YYYY-MM-DD
-  checkOut: string; // YYYY-MM-DD
+  checkIn: string;      // YYYY-MM-DD
+  checkOut: string;     // YYYY-MM-DD
   tenantId: string;
   hotelId: string;
+  checkInTime?: string;  // HH:mm — nếu có sẽ dùng thay vì hotel standard time
+  checkOutTime?: string; // HH:mm
 }
 
 export interface RoomAvailabilityForReassignmentResponse {
