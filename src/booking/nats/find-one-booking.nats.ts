@@ -142,6 +142,15 @@ export class GetBookingByIdResponse {
   @ApiProperty({ description: 'Check-out date (YYYY-MM-DD)' })
   checkOutDate: string;
 
+  @ApiPropertyOptional({ description: 'Booking type', enum: ['OVERNIGHT', 'HOURLY'] })
+  bookingType?: string;
+
+  @ApiPropertyOptional({ description: 'Start time for hourly bookings (HH:MM:SS)' })
+  startTime?: string;
+
+  @ApiPropertyOptional({ description: 'End time for hourly bookings (HH:MM:SS)' })
+  endTime?: string;
+
   @ApiProperty({ description: 'Total booking amount' })
   totalAmount: number;
 

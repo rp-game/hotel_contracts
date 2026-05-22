@@ -193,6 +193,9 @@ class GetBookingByIdResponse {
     paymentStatus;
     checkInDate;
     checkOutDate;
+    bookingType;
+    startTime;
+    endTime;
     totalAmount;
     taxAmount;
     grossAmount;
@@ -265,6 +268,18 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Check-out date (YYYY-MM-DD)' }),
     __metadata("design:type", String)
 ], GetBookingByIdResponse.prototype, "checkOutDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking type', enum: ['OVERNIGHT', 'HOURLY'] }),
+    __metadata("design:type", String)
+], GetBookingByIdResponse.prototype, "bookingType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Start time for hourly bookings (HH:MM:SS)' }),
+    __metadata("design:type", String)
+], GetBookingByIdResponse.prototype, "startTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'End time for hourly bookings (HH:MM:SS)' }),
+    __metadata("design:type", String)
+], GetBookingByIdResponse.prototype, "endTime", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total booking amount' }),
     __metadata("design:type", Number)

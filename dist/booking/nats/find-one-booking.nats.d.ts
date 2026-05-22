@@ -54,6 +54,9 @@ export declare class GetBookingByIdResponse {
     paymentStatus: 'PENDING' | 'PARTIAL' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'REFUNDED';
     checkInDate: string;
     checkOutDate: string;
+    bookingType?: string;
+    startTime?: string;
+    endTime?: string;
     totalAmount: number;
     taxAmount?: number;
     grossAmount?: number;
