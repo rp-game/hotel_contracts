@@ -125,6 +125,7 @@ class CheckOutBookingNatsRequest {
     invoiceTaxCode;
     invoiceAddress;
     invoiceEmail;
+    isBackdate;
 }
 exports.CheckOutBookingNatsRequest = CheckOutBookingNatsRequest;
 __decorate([
@@ -203,6 +204,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", String)
 ], CheckOutBookingNatsRequest.prototype, "invoiceEmail", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Boolean)
+], CheckOutBookingNatsRequest.prototype, "isBackdate", void 0);
 /**
  * Pending Check-in Booking Information
  * Used for both NATS response and REST API response

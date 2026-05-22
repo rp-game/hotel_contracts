@@ -154,6 +154,7 @@ export class CheckOutBookingNatsRequest {
   @ApiPropertyOptional() invoiceTaxCode?: string;
   @ApiPropertyOptional() invoiceAddress?: string;
   @ApiPropertyOptional() invoiceEmail?: string;
+  @ApiPropertyOptional() isBackdate?: boolean;
 }
 
 export type CheckOutBookingNatsResponse = NatsResponse<BookingResponseDto>;
