@@ -37,6 +37,24 @@ export class BookingRoom {
 
   @ApiProperty({ description: 'Total price for this room' })
   totalPrice: number;
+
+  @ApiPropertyOptional({ description: 'Tax amount for this room' })
+  taxAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Gross amount (totalPrice + taxAmount)' })
+  grossAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Whether price was manually overridden' })
+  isPriceOverride?: boolean;
+
+  @ApiPropertyOptional({ description: 'Per-night pricing breakdown' })
+  pricingBreakdown?: Record<string, any>;
+
+  @ApiPropertyOptional({ description: 'Adult guest count' })
+  adultCount?: number;
+
+  @ApiPropertyOptional({ description: 'Child guest count' })
+  childCount?: number;
 }
 
 export class BookingGuest {

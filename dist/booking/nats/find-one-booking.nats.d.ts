@@ -18,6 +18,12 @@ export declare class BookingRoom {
     checkOutDate: string;
     pricePerNight: number;
     totalPrice: number;
+    taxAmount?: number;
+    grossAmount?: number;
+    isPriceOverride?: boolean;
+    pricingBreakdown?: Record<string, any>;
+    adultCount?: number;
+    childCount?: number;
 }
 export declare class BookingGuest {
     id: string;

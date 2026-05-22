@@ -90,6 +90,9 @@ export declare class BookingResponseDto {
     source: BookingSource;
     checkInDate: string;
     checkOutDate: string;
+    bookingType?: string;
+    startTime?: string;
+    endTime?: string;
     estimatedCheckInTime?: Date;
     actualCheckInTime?: Date;
     actualCheckOutTime?: Date;

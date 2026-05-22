@@ -330,6 +330,9 @@ class BookingResponseDto {
     // Time information
     checkInDate;
     checkOutDate;
+    bookingType;
+    startTime;
+    endTime;
     estimatedCheckInTime;
     actualCheckInTime;
     actualCheckOutTime;
@@ -436,6 +439,18 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Check-out date (YYYY-MM-DD)' }),
     __metadata("design:type", String)
 ], BookingResponseDto.prototype, "checkOutDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking type', enum: ['OVERNIGHT', 'HOURLY'] }),
+    __metadata("design:type", String)
+], BookingResponseDto.prototype, "bookingType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Start time for hourly bookings (HH:MM:SS)' }),
+    __metadata("design:type", String)
+], BookingResponseDto.prototype, "startTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'End time for hourly bookings (HH:MM:SS)' }),
+    __metadata("design:type", String)
+], BookingResponseDto.prototype, "endTime", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated check-in time' }),
     __metadata("design:type", Date)

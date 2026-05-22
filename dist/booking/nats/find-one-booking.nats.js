@@ -31,6 +31,12 @@ class BookingRoom {
     checkOutDate;
     pricePerNight;
     totalPrice;
+    taxAmount;
+    grossAmount;
+    isPriceOverride;
+    pricingBreakdown;
+    adultCount;
+    childCount;
 }
 exports.BookingRoom = BookingRoom;
 __decorate([
@@ -65,6 +71,30 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total price for this room' }),
     __metadata("design:type", Number)
 ], BookingRoom.prototype, "totalPrice", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tax amount for this room' }),
+    __metadata("design:type", Number)
+], BookingRoom.prototype, "taxAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Gross amount (totalPrice + taxAmount)' }),
+    __metadata("design:type", Number)
+], BookingRoom.prototype, "grossAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether price was manually overridden' }),
+    __metadata("design:type", Boolean)
+], BookingRoom.prototype, "isPriceOverride", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-night pricing breakdown' }),
+    __metadata("design:type", Object)
+], BookingRoom.prototype, "pricingBreakdown", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Adult guest count' }),
+    __metadata("design:type", Number)
+], BookingRoom.prototype, "adultCount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Child guest count' }),
+    __metadata("design:type", Number)
+], BookingRoom.prototype, "childCount", void 0);
 class BookingGuest {
     id;
     firstName;
