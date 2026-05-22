@@ -359,4 +359,7 @@ export class HotelSettingsResponseDto {
 
   @ApiPropertyOptional({ description: 'Updated at timestamp' })
   updatedAt?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel timezone (IANA)', example: 'Asia/Ho_Chi_Minh' })
+  timezone?: string;
 }

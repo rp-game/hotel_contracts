@@ -426,6 +426,7 @@ class HotelSettingsResponseDto {
     operationSettings;
     createdAt;
     updatedAt;
+    timezone;
 }
 exports.HotelSettingsResponseDto = HotelSettingsResponseDto;
 __decorate([
@@ -475,4 +476,8 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Updated at timestamp' }),
     __metadata("design:type", String)
 ], HotelSettingsResponseDto.prototype, "updatedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel timezone (IANA)', example: 'Asia/Ho_Chi_Minh' }),
+    __metadata("design:type", String)
+], HotelSettingsResponseDto.prototype, "timezone", void 0);
 //# sourceMappingURL=hotel-settings.dto.js.map

@@ -88,5 +88,6 @@ export declare class HotelSettingsResponseDto {
     operationSettings?: HotelOperationSettingsDto;
     createdAt?: string;
     updatedAt?: string;
+    timezone?: string;
 }
 //# sourceMappingURL=hotel-settings.dto.d.ts.map
