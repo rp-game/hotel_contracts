@@ -23,6 +23,8 @@ export interface UnassignedBookingItem {
     specialRequests?: string;
     assignmentStatus: string;
     bookingType: string;
+    startTime?: string;
+    endTime?: string;
 }
 /**
  * Get Unassigned Bookings Request

@@ -75,6 +75,8 @@ export interface GetAvailableRoomsRequest {
   hotelId: string;
   checkIn: string; // YYYY-MM-DD
   checkOut: string; // YYYY-MM-DD
+  checkInTime?: string; // HH:mm for hourly bookings
+  checkOutTime?: string; // HH:mm for hourly bookings
 }
 
 export interface AssignableRoom {

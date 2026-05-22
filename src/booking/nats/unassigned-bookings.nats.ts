@@ -25,6 +25,8 @@ export interface UnassignedBookingItem {
   specialRequests?: string;
   assignmentStatus: string;
   bookingType: string;
+  startTime?: string; // HH:mm for hourly bookings
+  endTime?: string;   // HH:mm for hourly bookings
 }
 
 /**

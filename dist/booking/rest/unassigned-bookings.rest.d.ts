@@ -22,6 +22,8 @@ export declare class UnassignedBookingItemDto {
     specialRequests?: string;
     assignmentStatus: string;
     bookingType: string;
+    startTime?: string;
+    endTime?: string;
 }
 /**
  * Get Unassigned Bookings Response DTO

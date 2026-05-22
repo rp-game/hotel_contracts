@@ -72,6 +72,8 @@ export interface GetAvailableRoomsRequest {
     hotelId: string;
     checkIn: string;
     checkOut: string;
+    checkInTime?: string;
+    checkOutTime?: string;
 }
 export interface AssignableRoom {
     roomId: string;

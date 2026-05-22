@@ -36,6 +36,8 @@ class UnassignedBookingItemDto {
     specialRequests;
     assignmentStatus;
     bookingType;
+    startTime;
+    endTime;
 }
 exports.UnassignedBookingItemDto = UnassignedBookingItemDto;
 __decorate([
@@ -94,6 +96,18 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UnassignedBookingItemDto.prototype, "bookingType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Start time for hourly bookings (HH:mm)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UnassignedBookingItemDto.prototype, "startTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'End time for hourly bookings (HH:mm)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UnassignedBookingItemDto.prototype, "endTime", void 0);
 /**
  * Get Unassigned Bookings Response DTO
  */

@@ -59,6 +59,16 @@ export class UnassignedBookingItemDto {
   @ApiProperty({ description: 'Type of booking (e.g., DIRECT, ONLINE, AGENCY, etc.)' })
   @IsString()
   bookingType: string;
+
+  @ApiPropertyOptional({ description: 'Start time for hourly bookings (HH:mm)' })
+  @IsOptional()
+  @IsString()
+  startTime?: string;
+
+  @ApiPropertyOptional({ description: 'End time for hourly bookings (HH:mm)' })
+  @IsOptional()
+  @IsString()
+  endTime?: string;
 }
 
 /**
