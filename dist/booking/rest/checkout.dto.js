@@ -117,6 +117,7 @@ class CheckOutBookingDto {
     invoiceTaxCode;
     invoiceAddress;
     invoiceEmail;
+    isBackdate;
 }
 exports.CheckOutBookingDto = CheckOutBookingDto;
 __decorate([
@@ -267,6 +268,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CheckOutBookingDto.prototype, "invoiceEmail", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether this is a backdate checkout' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CheckOutBookingDto.prototype, "isBackdate", void 0);
 // ============= REQUEST DTOs =============
 class StartCheckoutRequestDto {
     bookingId;

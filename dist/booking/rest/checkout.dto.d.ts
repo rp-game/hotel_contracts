@@ -44,6 +44,7 @@ export declare class CheckOutBookingDto {
     invoiceTaxCode?: string;
     invoiceAddress?: string;
     invoiceEmail?: string;
+    isBackdate?: boolean;
 }
 export declare class StartCheckoutRequestDto {
     bookingId: string;

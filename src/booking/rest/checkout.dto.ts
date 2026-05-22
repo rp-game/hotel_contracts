@@ -187,6 +187,11 @@ export class CheckOutBookingDto {
   @IsOptional()
   @IsString()
   invoiceEmail?: string;
+
+  @ApiPropertyOptional({ description: 'Whether this is a backdate checkout' })
+  @IsOptional()
+  @IsBoolean()
+  isBackdate?: boolean;
 }
 
 // ============= REQUEST DTOs =============
