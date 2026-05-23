@@ -96,6 +96,13 @@ export declare class BookingResponseDto {
     estimatedCheckInTime?: Date;
     actualCheckInTime?: Date;
     actualCheckOutTime?: Date;
+    pendingInvoiceInfo?: {
+        invoiceRequired: boolean;
+        companyName?: string;
+        taxCode?: string;
+        address?: string;
+        email?: string;
+    } | null;
     totalAmount: number;
     taxAmount?: number;
     grossAmount?: number;

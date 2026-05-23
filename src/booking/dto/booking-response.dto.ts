@@ -247,6 +247,15 @@ export class BookingResponseDto {
   @ApiPropertyOptional({ description: 'Actual check-out time' })
   actualCheckOutTime?: Date;
 
+  @ApiPropertyOptional({ description: 'Invoice info saved at depart, cleared after finalize' })
+  pendingInvoiceInfo?: {
+    invoiceRequired: boolean;
+    companyName?: string;
+    taxCode?: string;
+    address?: string;
+    email?: string;
+  } | null;
+
   // Payment information
   @ApiProperty({ description: 'Total booking amount' })
   totalAmount: number;

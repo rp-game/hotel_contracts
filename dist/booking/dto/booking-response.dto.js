@@ -336,6 +336,7 @@ class BookingResponseDto {
     estimatedCheckInTime;
     actualCheckInTime;
     actualCheckOutTime;
+    pendingInvoiceInfo;
     // Payment information
     totalAmount;
     taxAmount;
@@ -463,6 +464,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Actual check-out time' }),
     __metadata("design:type", Date)
 ], BookingResponseDto.prototype, "actualCheckOutTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Invoice info saved at depart, cleared after finalize' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "pendingInvoiceInfo", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total booking amount' }),
     __metadata("design:type", Number)
