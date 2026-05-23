@@ -84,6 +84,13 @@ export declare class GetBookingByIdResponse {
     updatedBy?: string;
     actualCheckInTime?: string;
     actualCheckOutTime?: string;
+    pendingInvoiceInfo?: {
+        invoiceRequired: boolean;
+        companyName?: string;
+        taxCode?: string;
+        address?: string;
+        email?: string;
+    } | null;
     pricingBreakdown?: PricingBreakdownDto;
     ratePlanId?: string;
     corporateId?: string | null;

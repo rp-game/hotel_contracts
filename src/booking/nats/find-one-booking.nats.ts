@@ -232,6 +232,15 @@ export class GetBookingByIdResponse {
   @ApiPropertyOptional({ description: 'Actual check-out time' })
   actualCheckOutTime?: string;
 
+  @ApiPropertyOptional({ description: 'Invoice info saved at depart, cleared after finalize' })
+  pendingInvoiceInfo?: {
+    invoiceRequired: boolean;
+    companyName?: string;
+    taxCode?: string;
+    address?: string;
+    email?: string;
+  } | null;
+
   @ApiPropertyOptional({ description: 'Pricing breakdown with adjustments and ratePlanSnapshot', type: () => PricingBreakdownDto })
   pricingBreakdown?: PricingBreakdownDto;
 

@@ -247,6 +247,7 @@ class GetBookingByIdResponse {
     updatedBy;
     actualCheckInTime;
     actualCheckOutTime;
+    pendingInvoiceInfo;
     pricingBreakdown;
     ratePlanId;
     // Corporate account info
@@ -394,6 +395,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Actual check-out time' }),
     __metadata("design:type", String)
 ], GetBookingByIdResponse.prototype, "actualCheckOutTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Invoice info saved at depart, cleared after finalize' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "pendingInvoiceInfo", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Pricing breakdown with adjustments and ratePlanSnapshot', type: () => pricing_breakdown_dto_1.PricingBreakdownDto }),
     __metadata("design:type", pricing_breakdown_dto_1.PricingBreakdownDto)
