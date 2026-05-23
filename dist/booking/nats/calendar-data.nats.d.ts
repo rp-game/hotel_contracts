@@ -29,7 +29,7 @@ export declare class CalendarEventDto {
     checkInDate: string;
     checkOutDate: string;
     roomId: string;
-    status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
+    status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED';
     totalAmount: string;
     adultCount: number;
     childCount: number;
@@ -104,7 +104,7 @@ export interface GetCalendarDataRequest {
     /**
      * Booking status filter (optional)
      */
-    status?: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
+    status?: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED';
 }
 /**
  * NATS response containing calendar data

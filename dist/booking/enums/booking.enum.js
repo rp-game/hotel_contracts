@@ -35,7 +35,11 @@ var BookingStatus;
      */
     BookingStatus["CHECKED_IN"] = "CHECKED_IN";
     /**
-     * Guest has checked out
+     * Guest has physically left, room released, folio still open (pending billing finalization)
+     */
+    BookingStatus["DEPARTED"] = "DEPARTED";
+    /**
+     * Guest has checked out and billing finalized
      */
     BookingStatus["CHECKED_OUT"] = "CHECKED_OUT";
     /**

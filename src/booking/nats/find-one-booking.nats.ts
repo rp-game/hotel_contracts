@@ -141,9 +141,9 @@ export class GetBookingByIdResponse {
 
   @ApiProperty({
     description: 'Booking status',
-    enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'CHECKED_OUT', 'CANCELLED'],
+    enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED'],
   })
-  status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
+  status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED';
 
   @ApiProperty({ description: 'Booking source (WEB, OTA, PHONE, WALK_IN, etc.)' })
   source: string;

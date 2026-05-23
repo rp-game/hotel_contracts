@@ -56,8 +56,8 @@ export class CalendarEventDto {
   @ApiProperty({ description: 'Room ID for this booking' })
   roomId: string;
 
-  @ApiProperty({ description: 'Booking status', enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'CHECKED_OUT', 'CANCELLED'] })
-  status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
+  @ApiProperty({ description: 'Booking status', enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED'] })
+  status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED';
 
   @ApiProperty({ description: 'Total booking amount (as string for precision)' })
   totalAmount: string;
@@ -164,7 +164,7 @@ export interface GetCalendarDataRequest {
   /**
    * Booking status filter (optional)
    */
-  status?: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
+  status?: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED';
 }
 
 /**

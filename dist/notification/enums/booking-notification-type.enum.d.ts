@@ -7,6 +7,7 @@ export declare enum BookingNotificationType {
     CHECK_IN_REMINDER = "check_in_reminder",
     CHECK_OUT_REMINDER = "check_out_reminder",
     CHECKED_IN = "checked_in",
+    DEPARTED = "departed",
     CHECKED_OUT = "checked_out",
     SPECIAL_REQUEST = "special_request"
 }

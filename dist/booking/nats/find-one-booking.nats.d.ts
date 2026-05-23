@@ -55,7 +55,7 @@ export declare class GetBookingByIdRequest {
 export declare class GetBookingByIdResponse {
     id: string;
     bookingCode: string;
-    status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
+    status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED';
     source: string;
     paymentStatus: 'PENDING' | 'PARTIAL' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'REFUNDED';
     checkInDate: string;

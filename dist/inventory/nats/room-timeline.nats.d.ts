@@ -86,7 +86,7 @@ export interface BookingTimelineItem {
     roomNumber: string;
     checkIn: string;
     checkOut: string;
-    status: 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
+    status: 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED';
     adultCount: number;
     childCount: number;
     specialRequests?: string;

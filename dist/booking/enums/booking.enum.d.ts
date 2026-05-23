@@ -30,7 +30,11 @@ export declare enum BookingStatus {
      */
     CHECKED_IN = "CHECKED_IN",
     /**
-     * Guest has checked out
+     * Guest has physically left, room released, folio still open (pending billing finalization)
+     */
+    DEPARTED = "DEPARTED",
+    /**
+     * Guest has checked out and billing finalized
      */
     CHECKED_OUT = "CHECKED_OUT",
     /**

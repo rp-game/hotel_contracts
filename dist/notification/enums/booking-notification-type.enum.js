@@ -11,6 +11,7 @@ var BookingNotificationType;
     BookingNotificationType["CHECK_IN_REMINDER"] = "check_in_reminder";
     BookingNotificationType["CHECK_OUT_REMINDER"] = "check_out_reminder";
     BookingNotificationType["CHECKED_IN"] = "checked_in";
+    BookingNotificationType["DEPARTED"] = "departed";
     BookingNotificationType["CHECKED_OUT"] = "checked_out";
     BookingNotificationType["SPECIAL_REQUEST"] = "special_request";
 })(BookingNotificationType || (exports.BookingNotificationType = BookingNotificationType = {}));

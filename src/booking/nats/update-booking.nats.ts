@@ -248,7 +248,7 @@ export class UpdateBookingDto {
    */
   @ApiPropertyOptional({
     description: 'New booking status',
-    enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'CHECKED_OUT', 'CANCELLED'],
+    enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED'],
     example: 'CONFIRMED',
   })
   @IsOptional()

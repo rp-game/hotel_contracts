@@ -42,9 +42,9 @@ export class BookingSummary {
    */
   @ApiProperty({ 
     description: 'Booking status',
-    enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'CHECKED_OUT', 'CANCELLED', 'COMPLETED']
+    enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED', 'COMPLETED']
   })
-  status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED' | 'COMPLETED';
+  status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED' | 'COMPLETED';
 
   /**
    * Booking source (WEB, OTA, PHONE, etc.)
@@ -292,7 +292,7 @@ export interface FindBookingsNatsRequest {
   /**
    * Booking status filter (optional)
    */
-  status?: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED' | 'COMPLETED';
+  status?: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED' | 'COMPLETED';
 
   /**
    * Booking source filter (WEB, OTA, PHONE, etc.)

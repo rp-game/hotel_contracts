@@ -216,7 +216,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Booking status',
-        enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'CHECKED_OUT', 'CANCELLED', 'COMPLETED']
+        enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED', 'COMPLETED']
     }),
     __metadata("design:type", String)
 ], BookingSummary.prototype, "status", void 0);
