@@ -31,6 +31,14 @@ class BookingRoomResponseDto {
     totalUnits;
     isPriceOverride;
     pricingBreakdown;
+    // ─── Phase 1 per-room dates (denormalized cache, source = booking header) ───
+    checkInDate;
+    checkOutDate;
+    startTime;
+    endTime;
+    actualCheckInTime;
+    actualCheckOutTime;
+    status;
 }
 exports.BookingRoomResponseDto = BookingRoomResponseDto;
 __decorate([
@@ -101,6 +109,37 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Pricing breakdown including per-night rates', type: 'object', additionalProperties: true }),
     __metadata("design:type", Object)
 ], BookingRoomResponseDto.prototype, "pricingBreakdown", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-room check-in date (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], BookingRoomResponseDto.prototype, "checkInDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-room check-out date (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], BookingRoomResponseDto.prototype, "checkOutDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-room HOURLY start time (HH:MM:SS)' }),
+    __metadata("design:type", String)
+], BookingRoomResponseDto.prototype, "startTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-room HOURLY end time (HH:MM:SS)' }),
+    __metadata("design:type", String)
+], BookingRoomResponseDto.prototype, "endTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-room actual check-in timestamp' }),
+    __metadata("design:type", String)
+], BookingRoomResponseDto.prototype, "actualCheckInTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-room actual check-out timestamp' }),
+    __metadata("design:type", String)
+], BookingRoomResponseDto.prototype, "actualCheckOutTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Per-room reservation status',
+        enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED', 'NO_SHOW'],
+    }),
+    __metadata("design:type", String)
+], BookingRoomResponseDto.prototype, "status", void 0);
 class BookingGuestResponseDto {
     id;
     isMainGuest;

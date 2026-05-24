@@ -24,6 +24,11 @@ export declare class BookingRoom {
     pricingBreakdown?: Record<string, any>;
     adultCount?: number;
     childCount?: number;
+    startTime?: string;
+    endTime?: string;
+    actualCheckInTime?: string;
+    actualCheckOutTime?: string;
+    status?: string;
 }
 export declare class BookingGuest {
     id: string;
