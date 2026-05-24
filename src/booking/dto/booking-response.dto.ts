@@ -56,6 +56,32 @@ export class BookingRoomResponseDto {
 
   @ApiPropertyOptional({ description: 'Pricing breakdown including per-night rates', type: 'object', additionalProperties: true })
   pricingBreakdown?: Record<string, any>;
+
+  // ─── Phase 1 per-room dates (denormalized cache, source = booking header) ───
+
+  @ApiPropertyOptional({ description: 'Per-room check-in date (YYYY-MM-DD)' })
+  checkInDate?: string;
+
+  @ApiPropertyOptional({ description: 'Per-room check-out date (YYYY-MM-DD)' })
+  checkOutDate?: string;
+
+  @ApiPropertyOptional({ description: 'Per-room HOURLY start time (HH:MM:SS)' })
+  startTime?: string;
+
+  @ApiPropertyOptional({ description: 'Per-room HOURLY end time (HH:MM:SS)' })
+  endTime?: string;
+
+  @ApiPropertyOptional({ description: 'Per-room actual check-in timestamp' })
+  actualCheckInTime?: string;
+
+  @ApiPropertyOptional({ description: 'Per-room actual check-out timestamp' })
+  actualCheckOutTime?: string;
+
+  @ApiPropertyOptional({
+    description: 'Per-room reservation status',
+    enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED', 'NO_SHOW'],
+  })
+  status?: string;
 }
 
 export class BookingGuestResponseDto {

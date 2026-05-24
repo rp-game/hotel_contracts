@@ -55,6 +55,26 @@ export class BookingRoom {
 
   @ApiPropertyOptional({ description: 'Child guest count' })
   childCount?: number;
+
+  // ─── Phase 1 per-room dates (BookingRoom already had checkIn/Out — add the rest) ───
+
+  @ApiPropertyOptional({ description: 'Per-room HOURLY start time (HH:MM:SS)' })
+  startTime?: string;
+
+  @ApiPropertyOptional({ description: 'Per-room HOURLY end time (HH:MM:SS)' })
+  endTime?: string;
+
+  @ApiPropertyOptional({ description: 'Per-room actual check-in timestamp' })
+  actualCheckInTime?: string;
+
+  @ApiPropertyOptional({ description: 'Per-room actual check-out timestamp' })
+  actualCheckOutTime?: string;
+
+  @ApiPropertyOptional({
+    description: 'Per-room reservation status',
+    enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED', 'NO_SHOW'],
+  })
+  status?: string;
 }
 
 export class BookingGuest {
