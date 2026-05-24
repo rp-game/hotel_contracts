@@ -167,6 +167,12 @@ export class CheckOutBookingNatsRequest {
   @ApiPropertyOptional() invoiceAddress?: string;
   @ApiPropertyOptional() invoiceEmail?: string;
   @ApiPropertyOptional() isBackdate?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'Phase 2 per-room: array of booking_room IDs to check out. Empty/undefined → all eligible rooms.',
+    type: [String],
+  })
+  roomIds?: string[];
 }
 
 export type CheckOutBookingNatsResponse = NatsResponse<BookingResponseDto>;
