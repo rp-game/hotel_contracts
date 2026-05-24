@@ -36,6 +36,7 @@ export declare class TimelineActionData {
     extendToDate?: string;
     extensionPricePerNight?: number;
     guestDetails?: TimelineActionGuestDetails;
+    roomIds?: string[];
 }
 /**
  * Perform Timeline Action Request

@@ -61,6 +61,12 @@ export class TimelineActionData {
 
   @ApiPropertyOptional({ type: () => TimelineActionGuestDetails })
   guestDetails?: TimelineActionGuestDetails;
+
+  @ApiPropertyOptional({
+    type: [String],
+    description: 'Phase 2 per-room: room.id list to apply this action to. If omitted, applies to all eligible booking_rooms.',
+  })
+  roomIds?: string[];
 }
 
 /**

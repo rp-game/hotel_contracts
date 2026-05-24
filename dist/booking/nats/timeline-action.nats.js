@@ -59,6 +59,7 @@ class TimelineActionData {
     extendToDate;
     extensionPricePerNight;
     guestDetails;
+    roomIds;
 }
 exports.TimelineActionData = TimelineActionData;
 __decorate([
@@ -81,4 +82,11 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ type: () => TimelineActionGuestDetails }),
     __metadata("design:type", TimelineActionGuestDetails)
 ], TimelineActionData.prototype, "guestDetails", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        type: [String],
+        description: 'Phase 2 per-room: room.id list to apply this action to. If omitted, applies to all eligible booking_rooms.',
+    }),
+    __metadata("design:type", Array)
+], TimelineActionData.prototype, "roomIds", void 0);
 //# sourceMappingURL=timeline-action.nats.js.map
