@@ -337,6 +337,11 @@ class BookingResponseDto {
     actualCheckInTime;
     actualCheckOutTime;
     pendingInvoiceInfo;
+    additionalCharges;
+    lateCheckOutFee;
+    lateCheckOutFeeGross;
+    lateCheckOutFeeVatRate;
+    lateCheckOutFeeServiceChargeRate;
     // Payment information
     totalAmount;
     taxAmount;
@@ -468,6 +473,26 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Invoice info saved at depart, cleared after finalize' }),
     __metadata("design:type", Object)
 ], BookingResponseDto.prototype, "pendingInvoiceInfo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Additional charges (net, no tax)' }),
+    __metadata("design:type", Number)
+], BookingResponseDto.prototype, "additionalCharges", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Late checkout fee (net)' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "lateCheckOutFee", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Late checkout fee (gross, with tax)' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "lateCheckOutFeeGross", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Late checkout fee VAT rate' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "lateCheckOutFeeVatRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Late checkout fee service charge rate' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "lateCheckOutFeeServiceChargeRate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total booking amount' }),
     __metadata("design:type", Number)

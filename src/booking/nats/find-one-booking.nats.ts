@@ -241,6 +241,21 @@ export class GetBookingByIdResponse {
     email?: string;
   } | null;
 
+  @ApiPropertyOptional({ description: 'Additional charges (net, no tax)' })
+  additionalCharges?: number;
+
+  @ApiPropertyOptional({ description: 'Late checkout fee (net)' })
+  lateCheckOutFee?: number | null;
+
+  @ApiPropertyOptional({ description: 'Late checkout fee (gross, with tax)' })
+  lateCheckOutFeeGross?: number | null;
+
+  @ApiPropertyOptional({ description: 'Late checkout fee VAT rate' })
+  lateCheckOutFeeVatRate?: number | null;
+
+  @ApiPropertyOptional({ description: 'Late checkout fee service charge rate' })
+  lateCheckOutFeeServiceChargeRate?: number | null;
+
   @ApiPropertyOptional({ description: 'Pricing breakdown with adjustments and ratePlanSnapshot', type: () => PricingBreakdownDto })
   pricingBreakdown?: PricingBreakdownDto;
 

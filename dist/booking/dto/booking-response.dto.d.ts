@@ -103,6 +103,11 @@ export declare class BookingResponseDto {
         address?: string;
         email?: string;
     } | null;
+    additionalCharges?: number;
+    lateCheckOutFee?: number | null;
+    lateCheckOutFeeGross?: number | null;
+    lateCheckOutFeeVatRate?: number | null;
+    lateCheckOutFeeServiceChargeRate?: number | null;
     totalAmount: number;
     taxAmount?: number;
     grossAmount?: number;

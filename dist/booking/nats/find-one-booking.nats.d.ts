@@ -91,6 +91,11 @@ export declare class GetBookingByIdResponse {
         address?: string;
         email?: string;
     } | null;
+    additionalCharges?: number;
+    lateCheckOutFee?: number | null;
+    lateCheckOutFeeGross?: number | null;
+    lateCheckOutFeeVatRate?: number | null;
+    lateCheckOutFeeServiceChargeRate?: number | null;
     pricingBreakdown?: PricingBreakdownDto;
     ratePlanId?: string;
     corporateId?: string | null;

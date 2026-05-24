@@ -256,6 +256,21 @@ export class BookingResponseDto {
     email?: string;
   } | null;
 
+  @ApiPropertyOptional({ description: 'Additional charges (net, no tax)' })
+  additionalCharges?: number;
+
+  @ApiPropertyOptional({ description: 'Late checkout fee (net)' })
+  lateCheckOutFee?: number | null;
+
+  @ApiPropertyOptional({ description: 'Late checkout fee (gross, with tax)' })
+  lateCheckOutFeeGross?: number | null;
+
+  @ApiPropertyOptional({ description: 'Late checkout fee VAT rate' })
+  lateCheckOutFeeVatRate?: number | null;
+
+  @ApiPropertyOptional({ description: 'Late checkout fee service charge rate' })
+  lateCheckOutFeeServiceChargeRate?: number | null;
+
   // Payment information
   @ApiProperty({ description: 'Total booking amount' })
   totalAmount: number;
