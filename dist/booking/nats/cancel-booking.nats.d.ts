@@ -9,6 +9,7 @@ export interface CancelBookingNatsRequest {
     hotelId: string;
     reason?: string;
     cancelledBy?: string;
+    roomIds?: string[];
 }
 export type CancelBookingNatsResponse = NatsResponse<BookingResponseDto>;
 //# sourceMappingURL=cancel-booking.nats.d.ts.map

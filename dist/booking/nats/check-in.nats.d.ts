@@ -33,6 +33,7 @@ export interface CheckInBookingNatsRequest {
     backdateReasonCategory?: BackdateReasonCategory;
     backdateReasonNote?: string;
     userRoles?: string[];
+    roomIds?: string[];
 }
 /**
  * REST DTO for check-in endpoint (shared across api-gateway and booking-service)
@@ -51,6 +52,7 @@ export declare class CheckInBookingDto {
     lateCheckOutFee?: number;
     effectiveCheckInDate?: string;
     backdateReasonCategory?: BackdateReasonCategory;
+    roomIds?: string[];
     backdateReasonNote?: string;
 }
 export interface BookingData {

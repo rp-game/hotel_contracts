@@ -33,6 +33,7 @@ class CheckInBookingDto {
     lateCheckOutFee;
     effectiveCheckInDate;
     backdateReasonCategory;
+    roomIds;
     backdateReasonNote;
 }
 exports.CheckInBookingDto = CheckInBookingDto;
@@ -100,6 +101,14 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], CheckInBookingDto.prototype, "backdateReasonCategory", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Phase 2 per-room check-in: array of booking_room IDs. ' +
+            'Empty/undefined → apply to all rooms matching CONFIRMED→CHECKED_IN transition.',
+        type: [String],
+    }),
+    __metadata("design:type", Array)
+], CheckInBookingDto.prototype, "roomIds", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Ghi chú thêm cho backdate' }),
     __metadata("design:type", String)

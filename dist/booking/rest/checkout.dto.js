@@ -105,6 +105,7 @@ class CheckOutBookingDto {
     paymentAmount;
     corporateAccountId;
     billItems;
+    roomIds;
     roomInspectionNotes;
     finalPayments;
     lateCheckOutFee;
@@ -200,6 +201,17 @@ __decorate([
     (0, class_transformer_1.Type)(() => BillItemDto),
     __metadata("design:type", Array)
 ], CheckOutBookingDto.prototype, "billItems", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Phase 2 per-room: array of booking_room IDs to check out. ' +
+            'Empty/undefined → apply to all rooms eligible for CHECKED_IN→CHECKED_OUT transition.',
+        type: [String],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsUUID)('all', { each: true }),
+    __metadata("design:type", Array)
+], CheckOutBookingDto.prototype, "roomIds", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Room inspection notes from frontend' }),
     (0, class_validator_1.IsOptional)(),

@@ -33,6 +33,7 @@ export declare class CheckOutBookingDto {
     paymentAmount?: number;
     corporateAccountId?: string;
     billItems?: BillItemDto[];
+    roomIds?: string[];
     roomInspectionNotes?: string;
     finalPayments?: FinalPaymentDto[];
     lateCheckOutFee?: number;
