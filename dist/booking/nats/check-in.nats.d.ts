@@ -102,6 +102,7 @@ export declare class CheckOutBookingNatsRequest {
     invoiceAddress?: string;
     invoiceEmail?: string;
     isBackdate?: boolean;
+    roomIds?: string[];
 }
 export type CheckOutBookingNatsResponse = NatsResponse<BookingResponseDto>;
 export interface GetPendingCheckinsNatsRequest {

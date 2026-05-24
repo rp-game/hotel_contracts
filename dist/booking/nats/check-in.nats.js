@@ -135,6 +135,7 @@ class CheckOutBookingNatsRequest {
     invoiceAddress;
     invoiceEmail;
     isBackdate;
+    roomIds;
 }
 exports.CheckOutBookingNatsRequest = CheckOutBookingNatsRequest;
 __decorate([
@@ -217,6 +218,13 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", Boolean)
 ], CheckOutBookingNatsRequest.prototype, "isBackdate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Phase 2 per-room: array of booking_room IDs to check out. Empty/undefined → all eligible rooms.',
+        type: [String],
+    }),
+    __metadata("design:type", Array)
+], CheckOutBookingNatsRequest.prototype, "roomIds", void 0);
 /**
  * Pending Check-in Booking Information
  * Used for both NATS response and REST API response
