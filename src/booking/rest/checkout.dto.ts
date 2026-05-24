@@ -130,6 +130,16 @@ export class CheckOutBookingDto {
   @Type(() => BillItemDto)
   billItems?: BillItemDto[];
 
+  @ApiPropertyOptional({
+    description: 'Phase 2 per-room: array of booking_room IDs to check out. ' +
+      'Empty/undefined → apply to all rooms eligible for CHECKED_IN→CHECKED_OUT transition.',
+    type: [String],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsUUID('all', { each: true })
+  roomIds?: string[];
+
   @ApiPropertyOptional({ description: 'Room inspection notes from frontend' })
   @IsOptional()
   @IsString()

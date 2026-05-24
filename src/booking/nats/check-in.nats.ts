@@ -41,6 +41,11 @@ export interface CheckInBookingNatsRequest {
   backdateReasonCategory?: BackdateReasonCategory;
   backdateReasonNote?: string;
   userRoles?: string[];                   // Gateway pass roles từ JWT để service compute window
+
+  // Phase 2 per-room mutation — optional. Empty/undefined → apply to all
+  // booking_rooms matching transition status. Specific UUIDs → apply only
+  // to those rooms.
+  roomIds?: string[];
 }
 
 /**
@@ -97,6 +102,13 @@ export class CheckInBookingDto {
     enum: BackdateReasonCategory,
   })
   backdateReasonCategory?: BackdateReasonCategory;
+
+  @ApiPropertyOptional({
+    description: 'Phase 2 per-room check-in: array of booking_room IDs. ' +
+      'Empty/undefined → apply to all rooms matching CONFIRMED→CHECKED_IN transition.',
+    type: [String],
+  })
+  roomIds?: string[];
 
   @ApiPropertyOptional({ description: 'Ghi chú thêm cho backdate' })
   backdateReasonNote?: string;
