@@ -27,6 +27,13 @@ export declare class BookingRoomResponseDto {
     totalUnits?: number;
     isPriceOverride?: boolean;
     pricingBreakdown?: Record<string, any>;
+    checkInDate?: string;
+    checkOutDate?: string;
+    startTime?: string;
+    endTime?: string;
+    actualCheckInTime?: string;
+    actualCheckOutTime?: string;
+    status?: string;
 }
 export declare class BookingGuestResponseDto {
     id: string;

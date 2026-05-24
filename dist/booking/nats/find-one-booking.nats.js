@@ -37,6 +37,12 @@ class BookingRoom {
     pricingBreakdown;
     adultCount;
     childCount;
+    // ─── Phase 1 per-room dates (BookingRoom already had checkIn/Out — add the rest) ───
+    startTime;
+    endTime;
+    actualCheckInTime;
+    actualCheckOutTime;
+    status;
 }
 exports.BookingRoom = BookingRoom;
 __decorate([
@@ -95,6 +101,29 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Child guest count' }),
     __metadata("design:type", Number)
 ], BookingRoom.prototype, "childCount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-room HOURLY start time (HH:MM:SS)' }),
+    __metadata("design:type", String)
+], BookingRoom.prototype, "startTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-room HOURLY end time (HH:MM:SS)' }),
+    __metadata("design:type", String)
+], BookingRoom.prototype, "endTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-room actual check-in timestamp' }),
+    __metadata("design:type", String)
+], BookingRoom.prototype, "actualCheckInTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-room actual check-out timestamp' }),
+    __metadata("design:type", String)
+], BookingRoom.prototype, "actualCheckOutTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Per-room reservation status',
+        enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED', 'NO_SHOW'],
+    }),
+    __metadata("design:type", String)
+], BookingRoom.prototype, "status", void 0);
 class BookingGuest {
     id;
     firstName;
