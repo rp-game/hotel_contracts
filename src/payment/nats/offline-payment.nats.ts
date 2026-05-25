@@ -103,6 +103,13 @@ export interface CreateOfflinePaymentNatsRequest {
   autoConfirm?: boolean;
 
   /**
+   * Khi true, booking-service đã tạo BookingPayment record trực tiếp.
+   * payment-service sẽ pass flag này qua payment.offline.confirmed để
+   * handleOfflinePaymentConfirmed skip tạo record trùng.
+   */
+  skipBookingPaymentRecord?: boolean;
+
+  /**
    * Original amount in foreign currency (e.g. 100 for 100 USD).
    * When provided, backend calculates amount = round(originalAmount * exchangeRate).
    */

@@ -129,6 +129,8 @@ export interface OfflinePaymentConfirmedNatsRequest {
   receivedByName?: string;
   notes?: string;
   offlinePaymentId?: string;
+  /** Pass-through từ CreateOfflinePaymentNatsRequest — booking-service dùng để skip tạo BookingPayment trùng. */
+  skipBookingPaymentRecord?: boolean;
 }
 
 /**
