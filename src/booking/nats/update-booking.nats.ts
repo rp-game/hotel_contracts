@@ -83,6 +83,15 @@ export class UpdateBookingRoomDto {
   @IsNumber({}, { each: true })
   perNightOverrideRates?: number[];
 
+  @ApiPropertyOptional({ description: 'Per-room check-in date override (YYYY-MM-DD). Only applied when room not yet checked in.', example: '2024-05-27' })
+  @IsOptional()
+  @IsString()
+  checkInDate?: string;
+
+  @ApiPropertyOptional({ description: 'Per-room check-out date override (YYYY-MM-DD).', example: '2024-05-30' })
+  @IsOptional()
+  @IsString()
+  checkOutDate?: string;
 }
 
 /**

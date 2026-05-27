@@ -30,6 +30,8 @@ class UpdateBookingRoomDto {
     roomTypeId;
     priceOverride;
     perNightOverrideRates;
+    checkInDate;
+    checkOutDate;
 }
 exports.UpdateBookingRoomDto = UpdateBookingRoomDto;
 __decorate([
@@ -57,6 +59,18 @@ __decorate([
     (0, class_validator_1.IsNumber)({}, { each: true }),
     __metadata("design:type", Array)
 ], UpdateBookingRoomDto.prototype, "perNightOverrideRates", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-room check-in date override (YYYY-MM-DD). Only applied when room not yet checked in.', example: '2024-05-27' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateBookingRoomDto.prototype, "checkInDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Per-room check-out date override (YYYY-MM-DD).', example: '2024-05-30' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateBookingRoomDto.prototype, "checkOutDate", void 0);
 /**
  * Unified UpdateBookingDto for both NATS and REST
  * Single source of truth for booking update operations
