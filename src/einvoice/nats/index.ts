@@ -662,8 +662,8 @@ export class SaveProviderConfigNatsRequest {
   @ApiProperty({ description: 'Username' })
   username: string;
 
-  @ApiProperty({ description: 'Password' })
-  password: string;
+  @ApiPropertyOptional({ description: 'Password (omit to keep existing when editing)' })
+  password?: string;
 
   @ApiPropertyOptional({ description: 'HSM serial cert' })
   serialCert?: string;

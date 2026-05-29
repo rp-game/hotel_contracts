@@ -272,7 +272,7 @@ export declare class SaveProviderConfigNatsRequest {
     providerType: ProviderType;
     apiUrl: string;
     username: string;
-    password: string;
+    password?: string;
     serialCert?: string;
     taxCode: string;
     companyName: string;

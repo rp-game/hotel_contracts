@@ -1073,7 +1073,7 @@ __decorate([
     __metadata("design:type", String)
 ], SaveProviderConfigNatsRequest.prototype, "username", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Password' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Password (omit to keep existing when editing)' }),
     __metadata("design:type", String)
 ], SaveProviderConfigNatsRequest.prototype, "password", void 0);
 __decorate([

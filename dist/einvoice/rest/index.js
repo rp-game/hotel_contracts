@@ -419,7 +419,8 @@ __decorate([
     __metadata("design:type", String)
 ], SaveProviderConfigDto.prototype, "username", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Password' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Password (omit to keep existing when editing)' }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], SaveProviderConfigDto.prototype, "password", void 0);

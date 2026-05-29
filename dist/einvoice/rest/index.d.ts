@@ -67,7 +67,7 @@ export declare class SaveProviderConfigDto {
     providerType: ProviderType;
     apiUrl: string;
     username: string;
-    password: string;
+    password?: string;
     serialCert?: string;
     taxCode: string;
     companyName: string;

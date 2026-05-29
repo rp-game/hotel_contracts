@@ -286,9 +286,10 @@ export class SaveProviderConfigDto {
   @IsString()
   username: string;
 
-  @ApiProperty({ description: 'Password' })
+  @ApiPropertyOptional({ description: 'Password (omit to keep existing when editing)' })
+  @IsOptional()
   @IsString()
-  password: string;
+  password?: string;
 
   @ApiPropertyOptional({ description: 'HSM serial cert' })
   @IsOptional()
