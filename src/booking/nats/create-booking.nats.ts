@@ -210,6 +210,18 @@ export interface CreateBookingRequest {
        * Empty/undefined → backend auto-assigns. Duplicates → reject.
        */
       preferredRoomIds?: string[];
+
+      /**
+       * Per-room check-in date (YYYY-MM-DD). Group booking mixed-dates: cho phép
+       * phòng này có ngày khác header. Bỏ trống → dùng header checkInDate.
+       * Chỉ áp dụng khi backend bật flag CREATE_MIXED_DATES_ENABLED.
+       */
+      checkInDate?: string;
+
+      /**
+       * Per-room check-out date (YYYY-MM-DD). Bỏ trống → dùng header checkOutDate.
+       */
+      checkOutDate?: string;
     }>;
   };
 
