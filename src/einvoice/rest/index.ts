@@ -274,6 +274,11 @@ export class FindEInvoicesQueryDto {
 }
 
 export class SaveProviderConfigDto {
+  @ApiPropertyOptional({ description: 'Hotel ID (chain user gửi kèm hotel đang chọn; gateway fallback JWT nếu trống)' })
+  @IsOptional()
+  @IsString()
+  hotelId?: string;
+
   @ApiProperty({ description: 'Provider type', enum: ProviderType })
   @IsEnum(ProviderType)
   providerType: ProviderType;

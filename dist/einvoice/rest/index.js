@@ -388,6 +388,7 @@ __decorate([
     __metadata("design:type", Number)
 ], FindEInvoicesQueryDto.prototype, "limit", void 0);
 class SaveProviderConfigDto {
+    hotelId;
     providerType;
     apiUrl;
     username;
@@ -403,6 +404,12 @@ class SaveProviderConfigDto {
     requireApproval;
 }
 exports.SaveProviderConfigDto = SaveProviderConfigDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (chain user gửi kèm hotel đang chọn; gateway fallback JWT nếu trống)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SaveProviderConfigDto.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Provider type', enum: enums_1.ProviderType }),
     (0, class_validator_1.IsEnum)(enums_1.ProviderType),

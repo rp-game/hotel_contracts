@@ -64,6 +64,7 @@ export declare class FindEInvoicesQueryDto {
     limit?: number;
 }
 export declare class SaveProviderConfigDto {
+    hotelId?: string;
     providerType: ProviderType;
     apiUrl: string;
     username: string;
