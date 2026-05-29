@@ -76,6 +76,7 @@ export declare class SaveProviderConfigDto {
     serial: string;
     defaultCurrency?: string;
     defaultVatRate?: number;
+    requireApproval?: boolean;
 }
 export declare class CancelEInvoiceBodyDto {
     reason: string;

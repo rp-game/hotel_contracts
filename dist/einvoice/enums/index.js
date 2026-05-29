@@ -4,6 +4,7 @@ exports.EInvoiceAction = exports.ProviderType = exports.InvoicePaymentMethod = e
 var EInvoiceStatus;
 (function (EInvoiceStatus) {
     EInvoiceStatus["DRAFT"] = "DRAFT";
+    EInvoiceStatus["PENDING_APPROVAL"] = "PENDING_APPROVAL";
     EInvoiceStatus["ISSUED"] = "ISSUED";
     EInvoiceStatus["CANCELLED"] = "CANCELLED";
     EInvoiceStatus["ADJUSTED"] = "ADJUSTED";
@@ -42,5 +43,8 @@ var EInvoiceAction;
     EInvoiceAction["ERROR"] = "ERROR";
     EInvoiceAction["RETRIED"] = "RETRIED";
     EInvoiceAction["PDF_DOWNLOADED"] = "PDF_DOWNLOADED";
+    EInvoiceAction["SUBMITTED"] = "SUBMITTED";
+    EInvoiceAction["APPROVED"] = "APPROVED";
+    EInvoiceAction["REJECTED"] = "REJECTED";
 })(EInvoiceAction || (exports.EInvoiceAction = EInvoiceAction = {}));
 //# sourceMappingURL=index.js.map

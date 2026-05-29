@@ -27,7 +27,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ReplaceEInvoiceNatsRequest = exports.AdjustEInvoiceNatsRequest = exports.CancelEInvoiceNatsRequest = exports.ProviderConfigStatusData = exports.DeleteProviderConfigNatsRequest = exports.GetProviderConfigStatusNatsRequest = exports.GetProviderConfigNatsRequest = exports.SaveProviderConfigNatsRequest = exports.GetEInvoiceXmlNatsRequest = exports.GetEInvoiceHtmlNatsRequest = exports.GetEInvoicePdfNatsRequest = exports.FindEInvoiceNatsRequest = exports.FindEInvoicesNatsRequest = exports.DeleteEInvoiceNatsRequest = exports.IssueEInvoiceNatsRequest = exports.UpdateEInvoiceNatsRequest = exports.CreateEInvoiceFromInvoiceNatsRequest = exports.CreateEInvoiceNatsRequest = exports.EINVOICE_PATTERNS = exports.ProviderConfigData = exports.EInvoiceSummary = exports.EInvoiceData = exports.EInvoiceHistoryData = exports.EInvoiceItemData = exports.EInvoiceItemInput = void 0;
+exports.ReplaceEInvoiceNatsRequest = exports.AdjustEInvoiceNatsRequest = exports.CancelEInvoiceNatsRequest = exports.ProviderConfigStatusData = exports.DeleteProviderConfigNatsRequest = exports.GetProviderConfigStatusNatsRequest = exports.GetProviderConfigNatsRequest = exports.SaveProviderConfigNatsRequest = exports.GetEInvoiceXmlNatsRequest = exports.GetEInvoiceHtmlNatsRequest = exports.GetEInvoicePdfNatsRequest = exports.FindEInvoiceNatsRequest = exports.FindEInvoicesNatsRequest = exports.RejectEInvoiceNatsRequest = exports.ApproveEInvoiceNatsRequest = exports.SubmitApprovalNatsRequest = exports.DeleteEInvoiceNatsRequest = exports.IssueEInvoiceNatsRequest = exports.UpdateEInvoiceNatsRequest = exports.CreateEInvoiceFromInvoiceNatsRequest = exports.CreateEInvoiceNatsRequest = exports.EINVOICE_PATTERNS = exports.ProviderConfigData = exports.EInvoiceSummary = exports.EInvoiceData = exports.EInvoiceHistoryData = exports.EInvoiceItemData = exports.EInvoiceItemInput = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const enums_1 = require("../enums");
 // ============================================================================
@@ -171,6 +171,9 @@ class EInvoiceData {
     notes;
     createdBy;
     createdByName;
+    approvedBy;
+    approvedByName;
+    approvedAt;
     createdAt;
     updatedAt;
     items;
@@ -306,6 +309,18 @@ __decorate([
     __metadata("design:type", String)
 ], EInvoiceData.prototype, "createdByName", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Approved by user ID' }),
+    __metadata("design:type", String)
+], EInvoiceData.prototype, "approvedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Approved by user name' }),
+    __metadata("design:type", String)
+], EInvoiceData.prototype, "approvedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'When approved' }),
+    __metadata("design:type", String)
+], EInvoiceData.prototype, "approvedAt", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Creation timestamp' }),
     __metadata("design:type", String)
 ], EInvoiceData.prototype, "createdAt", void 0);
@@ -395,6 +410,7 @@ class ProviderConfigData {
     serial;
     defaultCurrency;
     defaultVatRate;
+    requireApproval;
 }
 exports.ProviderConfigData = ProviderConfigData;
 __decorate([
@@ -457,6 +473,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Default VAT rate', default: 8 }),
     __metadata("design:type", Number)
 ], ProviderConfigData.prototype, "defaultVatRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Require approval before issuing e-invoice', default: false }),
+    __metadata("design:type", Boolean)
+], ProviderConfigData.prototype, "requireApproval", void 0);
 // ============================================================================
 // NATS PATTERNS
 // ============================================================================
@@ -478,6 +498,9 @@ exports.EINVOICE_PATTERNS = {
     CANCEL: 'einvoice.cancel',
     ADJUST: 'einvoice.adjust',
     REPLACE: 'einvoice.replace',
+    SUBMIT_APPROVAL: 'einvoice.submit_approval',
+    APPROVE: 'einvoice.approve',
+    REJECT: 'einvoice.reject',
 };
 // ============================================================================
 // REQUEST TYPES
@@ -802,6 +825,95 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'User name' }),
     __metadata("design:type", String)
 ], DeleteEInvoiceNatsRequest.prototype, "userName", void 0);
+class SubmitApprovalNatsRequest {
+    tenantId;
+    hotelId;
+    id;
+    userId;
+    userName;
+}
+exports.SubmitApprovalNatsRequest = SubmitApprovalNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], SubmitApprovalNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], SubmitApprovalNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'E-Invoice ID' }),
+    __metadata("design:type", String)
+], SubmitApprovalNatsRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID' }),
+    __metadata("design:type", String)
+], SubmitApprovalNatsRequest.prototype, "userId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User name' }),
+    __metadata("design:type", String)
+], SubmitApprovalNatsRequest.prototype, "userName", void 0);
+class ApproveEInvoiceNatsRequest {
+    tenantId;
+    hotelId;
+    id;
+    userId;
+    userName;
+}
+exports.ApproveEInvoiceNatsRequest = ApproveEInvoiceNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], ApproveEInvoiceNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], ApproveEInvoiceNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'E-Invoice ID' }),
+    __metadata("design:type", String)
+], ApproveEInvoiceNatsRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID' }),
+    __metadata("design:type", String)
+], ApproveEInvoiceNatsRequest.prototype, "userId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User name' }),
+    __metadata("design:type", String)
+], ApproveEInvoiceNatsRequest.prototype, "userName", void 0);
+class RejectEInvoiceNatsRequest {
+    tenantId;
+    hotelId;
+    id;
+    reason;
+    userId;
+    userName;
+}
+exports.RejectEInvoiceNatsRequest = RejectEInvoiceNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], RejectEInvoiceNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], RejectEInvoiceNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'E-Invoice ID' }),
+    __metadata("design:type", String)
+], RejectEInvoiceNatsRequest.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reason for rejection' }),
+    __metadata("design:type", String)
+], RejectEInvoiceNatsRequest.prototype, "reason", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User ID' }),
+    __metadata("design:type", String)
+], RejectEInvoiceNatsRequest.prototype, "userId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'User name' }),
+    __metadata("design:type", String)
+], RejectEInvoiceNatsRequest.prototype, "userName", void 0);
 class FindEInvoicesNatsRequest {
     tenantId;
     hotelId;
@@ -933,6 +1045,7 @@ class SaveProviderConfigNatsRequest {
     serial;
     defaultCurrency;
     defaultVatRate;
+    requireApproval;
 }
 exports.SaveProviderConfigNatsRequest = SaveProviderConfigNatsRequest;
 __decorate([
@@ -995,6 +1108,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Default VAT rate', default: 8 }),
     __metadata("design:type", Number)
 ], SaveProviderConfigNatsRequest.prototype, "defaultVatRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Require approval before issuing e-invoice', default: false }),
+    __metadata("design:type", Boolean)
+], SaveProviderConfigNatsRequest.prototype, "requireApproval", void 0);
 class GetProviderConfigNatsRequest {
     tenantId;
     hotelId;

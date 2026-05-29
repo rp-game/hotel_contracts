@@ -400,6 +400,7 @@ class SaveProviderConfigDto {
     serial;
     defaultCurrency;
     defaultVatRate;
+    requireApproval;
 }
 exports.SaveProviderConfigDto = SaveProviderConfigDto;
 __decorate([
@@ -465,6 +466,12 @@ __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], SaveProviderConfigDto.prototype, "defaultVatRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Require approval before issuing e-invoice', default: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], SaveProviderConfigDto.prototype, "requireApproval", void 0);
 class CancelEInvoiceBodyDto {
     reason;
 }

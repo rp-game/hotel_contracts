@@ -1,5 +1,6 @@
 export declare enum EInvoiceStatus {
     DRAFT = "DRAFT",
+    PENDING_APPROVAL = "PENDING_APPROVAL",
     ISSUED = "ISSUED",
     CANCELLED = "CANCELLED",
     ADJUSTED = "ADJUSTED",
@@ -33,6 +34,9 @@ export declare enum EInvoiceAction {
     DELETED = "DELETED",
     ERROR = "ERROR",
     RETRIED = "RETRIED",
-    PDF_DOWNLOADED = "PDF_DOWNLOADED"
+    PDF_DOWNLOADED = "PDF_DOWNLOADED",
+    SUBMITTED = "SUBMITTED",
+    APPROVED = "APPROVED",
+    REJECTED = "REJECTED"
 }
 //# sourceMappingURL=index.d.ts.map

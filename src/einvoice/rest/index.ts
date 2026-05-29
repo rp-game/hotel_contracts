@@ -324,6 +324,11 @@ export class SaveProviderConfigDto {
   @IsOptional()
   @IsNumber()
   defaultVatRate?: number;
+
+  @ApiPropertyOptional({ description: 'Require approval before issuing e-invoice', default: false })
+  @IsOptional()
+  @IsBoolean()
+  requireApproval?: boolean;
 }
 
 export class CancelEInvoiceBodyDto {

@@ -81,6 +81,9 @@ export declare class EInvoiceData {
     notes?: string;
     createdBy?: string;
     createdByName?: string;
+    approvedBy?: string;
+    approvedByName?: string;
+    approvedAt?: string;
     createdAt: string;
     updatedAt: string;
     items?: EInvoiceItemData[];
@@ -115,6 +118,7 @@ export declare class ProviderConfigData {
     serial: string;
     defaultCurrency?: string;
     defaultVatRate?: number;
+    requireApproval?: boolean;
 }
 export declare const EINVOICE_PATTERNS: {
     readonly CREATE: "einvoice.create";
@@ -134,6 +138,9 @@ export declare const EINVOICE_PATTERNS: {
     readonly CANCEL: "einvoice.cancel";
     readonly ADJUST: "einvoice.adjust";
     readonly REPLACE: "einvoice.replace";
+    readonly SUBMIT_APPROVAL: "einvoice.submit_approval";
+    readonly APPROVE: "einvoice.approve";
+    readonly REJECT: "einvoice.reject";
 };
 export declare class CreateEInvoiceNatsRequest {
     tenantId: string;
@@ -206,6 +213,28 @@ export declare class DeleteEInvoiceNatsRequest {
     userId?: string;
     userName?: string;
 }
+export declare class SubmitApprovalNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    id: string;
+    userId?: string;
+    userName?: string;
+}
+export declare class ApproveEInvoiceNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    id: string;
+    userId?: string;
+    userName?: string;
+}
+export declare class RejectEInvoiceNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    id: string;
+    reason: string;
+    userId?: string;
+    userName?: string;
+}
 export declare class FindEInvoicesNatsRequest {
     tenantId: string;
     hotelId?: string;
@@ -252,6 +281,7 @@ export declare class SaveProviderConfigNatsRequest {
     serial: string;
     defaultCurrency?: string;
     defaultVatRate?: number;
+    requireApproval?: boolean;
 }
 export declare class GetProviderConfigNatsRequest {
     tenantId: string;

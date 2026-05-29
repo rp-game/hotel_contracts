@@ -188,6 +188,15 @@ export class EInvoiceData {
   @ApiPropertyOptional({ description: 'Created by user name' })
   createdByName?: string;
 
+  @ApiPropertyOptional({ description: 'Approved by user ID' })
+  approvedBy?: string;
+
+  @ApiPropertyOptional({ description: 'Approved by user name' })
+  approvedByName?: string;
+
+  @ApiPropertyOptional({ description: 'When approved' })
+  approvedAt?: string;
+
   @ApiProperty({ description: 'Creation timestamp' })
   createdAt: string;
 
@@ -281,6 +290,9 @@ export class ProviderConfigData {
 
   @ApiPropertyOptional({ description: 'Default VAT rate', default: 8 })
   defaultVatRate?: number;
+
+  @ApiPropertyOptional({ description: 'Require approval before issuing e-invoice', default: false })
+  requireApproval?: boolean;
 }
 
 // ============================================================================
@@ -305,6 +317,9 @@ export const EINVOICE_PATTERNS = {
   CANCEL: 'einvoice.cancel',
   ADJUST: 'einvoice.adjust',
   REPLACE: 'einvoice.replace',
+  SUBMIT_APPROVAL: 'einvoice.submit_approval',
+  APPROVE: 'einvoice.approve',
+  REJECT: 'einvoice.reject',
 } as const;
 
 // ============================================================================
@@ -504,6 +519,60 @@ export class DeleteEInvoiceNatsRequest {
   userName?: string;
 }
 
+export class SubmitApprovalNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'E-Invoice ID' })
+  id: string;
+
+  @ApiPropertyOptional({ description: 'User ID' })
+  userId?: string;
+
+  @ApiPropertyOptional({ description: 'User name' })
+  userName?: string;
+}
+
+export class ApproveEInvoiceNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'E-Invoice ID' })
+  id: string;
+
+  @ApiPropertyOptional({ description: 'User ID' })
+  userId?: string;
+
+  @ApiPropertyOptional({ description: 'User name' })
+  userName?: string;
+}
+
+export class RejectEInvoiceNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'E-Invoice ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Reason for rejection' })
+  reason: string;
+
+  @ApiPropertyOptional({ description: 'User ID' })
+  userId?: string;
+
+  @ApiPropertyOptional({ description: 'User name' })
+  userName?: string;
+}
+
 export class FindEInvoicesNatsRequest {
   @ApiProperty({ description: 'Tenant ID' })
   tenantId: string;
@@ -619,6 +688,9 @@ export class SaveProviderConfigNatsRequest {
 
   @ApiPropertyOptional({ description: 'Default VAT rate', default: 8 })
   defaultVatRate?: number;
+
+  @ApiPropertyOptional({ description: 'Require approval before issuing e-invoice', default: false })
+  requireApproval?: boolean;
 }
 
 export class GetProviderConfigNatsRequest {
