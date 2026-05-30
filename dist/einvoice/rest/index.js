@@ -402,6 +402,7 @@ class SaveProviderConfigDto {
     defaultCurrency;
     defaultVatRate;
     requireApproval;
+    einvoiceCheckoutMode;
 }
 exports.SaveProviderConfigDto = SaveProviderConfigDto;
 __decorate([
@@ -480,6 +481,12 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], SaveProviderConfigDto.prototype, "requireApproval", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Checkout e-invoice mode', enum: enums_1.EInvoiceCheckoutMode, default: enums_1.EInvoiceCheckoutMode.ON_REQUEST }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(enums_1.EInvoiceCheckoutMode),
+    __metadata("design:type", String)
+], SaveProviderConfigDto.prototype, "einvoiceCheckoutMode", void 0);
 class CancelEInvoiceBodyDto {
     reason;
 }

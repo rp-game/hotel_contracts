@@ -2,7 +2,7 @@
  * E-Invoice REST DTOs
  * Used by API Gateway for Swagger documentation and request validation
  */
-import { EInvoiceStatus, CustomerType, InvoicePaymentMethod, ProviderType } from '../enums';
+import { EInvoiceStatus, CustomerType, InvoicePaymentMethod, ProviderType, EInvoiceCheckoutMode } from '../enums';
 export declare class CreateEInvoiceItemDto {
     orderBy: number;
     code?: string;
@@ -78,6 +78,7 @@ export declare class SaveProviderConfigDto {
     defaultCurrency?: string;
     defaultVatRate?: number;
     requireApproval?: boolean;
+    einvoiceCheckoutMode?: EInvoiceCheckoutMode;
 }
 export declare class CancelEInvoiceBodyDto {
     reason: string;

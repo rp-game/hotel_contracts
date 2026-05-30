@@ -19,7 +19,7 @@
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse, NatsPaginatedResponse } from '../../common/nats-response.interface';
-import { EInvoiceStatus, CustomerType, InvoicePaymentMethod, ProviderType, EInvoiceAction } from '../enums';
+import { EInvoiceStatus, CustomerType, InvoicePaymentMethod, ProviderType, EInvoiceAction, EInvoiceCheckoutMode } from '../enums';
 
 // ============================================================================
 // SHARED DATA TYPES
@@ -293,6 +293,9 @@ export class ProviderConfigData {
 
   @ApiPropertyOptional({ description: 'Require approval before issuing e-invoice', default: false })
   requireApproval?: boolean;
+
+  @ApiPropertyOptional({ description: 'Checkout e-invoice mode', enum: EInvoiceCheckoutMode, default: EInvoiceCheckoutMode.ON_REQUEST })
+  einvoiceCheckoutMode?: EInvoiceCheckoutMode;
 }
 
 // ============================================================================
@@ -691,6 +694,9 @@ export class SaveProviderConfigNatsRequest {
 
   @ApiPropertyOptional({ description: 'Require approval before issuing e-invoice', default: false })
   requireApproval?: boolean;
+
+  @ApiPropertyOptional({ description: 'Checkout e-invoice mode', enum: EInvoiceCheckoutMode, default: EInvoiceCheckoutMode.ON_REQUEST })
+  einvoiceCheckoutMode?: EInvoiceCheckoutMode;
 }
 
 export class GetProviderConfigNatsRequest {

@@ -411,6 +411,7 @@ class ProviderConfigData {
     defaultCurrency;
     defaultVatRate;
     requireApproval;
+    einvoiceCheckoutMode;
 }
 exports.ProviderConfigData = ProviderConfigData;
 __decorate([
@@ -477,6 +478,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Require approval before issuing e-invoice', default: false }),
     __metadata("design:type", Boolean)
 ], ProviderConfigData.prototype, "requireApproval", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Checkout e-invoice mode', enum: enums_1.EInvoiceCheckoutMode, default: enums_1.EInvoiceCheckoutMode.ON_REQUEST }),
+    __metadata("design:type", String)
+], ProviderConfigData.prototype, "einvoiceCheckoutMode", void 0);
 // ============================================================================
 // NATS PATTERNS
 // ============================================================================
@@ -1046,6 +1051,7 @@ class SaveProviderConfigNatsRequest {
     defaultCurrency;
     defaultVatRate;
     requireApproval;
+    einvoiceCheckoutMode;
 }
 exports.SaveProviderConfigNatsRequest = SaveProviderConfigNatsRequest;
 __decorate([
@@ -1112,6 +1118,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Require approval before issuing e-invoice', default: false }),
     __metadata("design:type", Boolean)
 ], SaveProviderConfigNatsRequest.prototype, "requireApproval", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Checkout e-invoice mode', enum: enums_1.EInvoiceCheckoutMode, default: enums_1.EInvoiceCheckoutMode.ON_REQUEST }),
+    __metadata("design:type", String)
+], SaveProviderConfigNatsRequest.prototype, "einvoiceCheckoutMode", void 0);
 class GetProviderConfigNatsRequest {
     tenantId;
     hotelId;

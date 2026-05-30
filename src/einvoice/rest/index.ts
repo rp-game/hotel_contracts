@@ -6,7 +6,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsEnum, IsArray, ValidateNested, IsNumber, Min, IsDateString, IsBoolean } from 'class-validator';
 import { Type } from 'class-transformer';
-import { EInvoiceStatus, CustomerType, InvoicePaymentMethod, ProviderType } from '../enums';
+import { EInvoiceStatus, CustomerType, InvoicePaymentMethod, ProviderType, EInvoiceCheckoutMode } from '../enums';
 
 // ============================================================================
 // REQUEST DTOs
@@ -335,6 +335,11 @@ export class SaveProviderConfigDto {
   @IsOptional()
   @IsBoolean()
   requireApproval?: boolean;
+
+  @ApiPropertyOptional({ description: 'Checkout e-invoice mode', enum: EInvoiceCheckoutMode, default: EInvoiceCheckoutMode.ON_REQUEST })
+  @IsOptional()
+  @IsEnum(EInvoiceCheckoutMode)
+  einvoiceCheckoutMode?: EInvoiceCheckoutMode;
 }
 
 export class CancelEInvoiceBodyDto {

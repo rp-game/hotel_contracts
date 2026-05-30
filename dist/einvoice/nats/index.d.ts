@@ -17,7 +17,7 @@
  * Handler: payment-service (einvoice module)
  */
 import { NatsResponse, NatsPaginatedResponse } from '../../common/nats-response.interface';
-import { EInvoiceStatus, CustomerType, InvoicePaymentMethod, ProviderType, EInvoiceAction } from '../enums';
+import { EInvoiceStatus, CustomerType, InvoicePaymentMethod, ProviderType, EInvoiceAction, EInvoiceCheckoutMode } from '../enums';
 /**
  * Input item for create/update requests (computed fields optional — service calculates them)
  */
@@ -119,6 +119,7 @@ export declare class ProviderConfigData {
     defaultCurrency?: string;
     defaultVatRate?: number;
     requireApproval?: boolean;
+    einvoiceCheckoutMode?: EInvoiceCheckoutMode;
 }
 export declare const EINVOICE_PATTERNS: {
     readonly CREATE: "einvoice.create";
@@ -282,6 +283,7 @@ export declare class SaveProviderConfigNatsRequest {
     defaultCurrency?: string;
     defaultVatRate?: number;
     requireApproval?: boolean;
+    einvoiceCheckoutMode?: EInvoiceCheckoutMode;
 }
 export declare class GetProviderConfigNatsRequest {
     tenantId: string;

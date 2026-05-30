@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EInvoiceAction = exports.ProviderType = exports.InvoicePaymentMethod = exports.CustomerType = exports.EInvoiceStatus = void 0;
+exports.EInvoiceAction = exports.EInvoiceCheckoutMode = exports.ProviderType = exports.InvoicePaymentMethod = exports.CustomerType = exports.EInvoiceStatus = void 0;
 var EInvoiceStatus;
 (function (EInvoiceStatus) {
     EInvoiceStatus["DRAFT"] = "DRAFT";
@@ -31,6 +31,18 @@ var ProviderType;
     ProviderType["VNPT"] = "VNPT";
     ProviderType["MISA"] = "MISA";
 })(ProviderType || (exports.ProviderType = ProviderType = {}));
+/**
+ * Hành vi xuất HĐĐT khi checkout (per hotel).
+ * - ON_REQUEST: chỉ tạo nháp khi khách yêu cầu (mặc định, như hiện tại).
+ * - ALL_DRAFT: tạo nháp mọi checkout (khách không lấy → "Khách lẻ").
+ * - ALL_ISSUE: tạo + phát hành ngay mọi checkout (trừ khi requireApproval bật).
+ */
+var EInvoiceCheckoutMode;
+(function (EInvoiceCheckoutMode) {
+    EInvoiceCheckoutMode["ON_REQUEST"] = "ON_REQUEST";
+    EInvoiceCheckoutMode["ALL_DRAFT"] = "ALL_DRAFT";
+    EInvoiceCheckoutMode["ALL_ISSUE"] = "ALL_ISSUE";
+})(EInvoiceCheckoutMode || (exports.EInvoiceCheckoutMode = EInvoiceCheckoutMode = {}));
 var EInvoiceAction;
 (function (EInvoiceAction) {
     EInvoiceAction["CREATED"] = "CREATED";

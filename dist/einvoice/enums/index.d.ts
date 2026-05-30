@@ -24,6 +24,17 @@ export declare enum ProviderType {
     VNPT = "VNPT",
     MISA = "MISA"
 }
+/**
+ * Hành vi xuất HĐĐT khi checkout (per hotel).
+ * - ON_REQUEST: chỉ tạo nháp khi khách yêu cầu (mặc định, như hiện tại).
+ * - ALL_DRAFT: tạo nháp mọi checkout (khách không lấy → "Khách lẻ").
+ * - ALL_ISSUE: tạo + phát hành ngay mọi checkout (trừ khi requireApproval bật).
+ */
+export declare enum EInvoiceCheckoutMode {
+    ON_REQUEST = "ON_REQUEST",
+    ALL_DRAFT = "ALL_DRAFT",
+    ALL_ISSUE = "ALL_ISSUE"
+}
 export declare enum EInvoiceAction {
     CREATED = "CREATED",
     UPDATED = "UPDATED",
