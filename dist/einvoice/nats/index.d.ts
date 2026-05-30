@@ -146,6 +146,7 @@ export declare const EINVOICE_PATTERNS: {
 export declare class CreateEInvoiceNatsRequest {
     tenantId: string;
     hotelId: string;
+    bookingId?: string;
     userId?: string;
     userName?: string;
     customerType: CustomerType;

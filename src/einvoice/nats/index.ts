@@ -336,6 +336,9 @@ export class CreateEInvoiceNatsRequest {
   @ApiProperty({ description: 'Hotel ID' })
   hotelId: string;
 
+  @ApiPropertyOptional({ description: 'Linked Booking ID (auto-create từ checkout — dùng dedup)' })
+  bookingId?: string;
+
   @ApiPropertyOptional({ description: 'User ID' })
   userId?: string;
 

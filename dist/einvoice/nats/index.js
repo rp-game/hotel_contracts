@@ -513,6 +513,7 @@ exports.EINVOICE_PATTERNS = {
 class CreateEInvoiceNatsRequest {
     tenantId;
     hotelId;
+    bookingId;
     userId;
     userName;
     customerType;
@@ -538,6 +539,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
     __metadata("design:type", String)
 ], CreateEInvoiceNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Linked Booking ID (auto-create từ checkout — dùng dedup)' }),
+    __metadata("design:type", String)
+], CreateEInvoiceNatsRequest.prototype, "bookingId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'User ID' }),
     __metadata("design:type", String)
