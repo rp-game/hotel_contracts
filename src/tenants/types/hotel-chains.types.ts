@@ -465,4 +465,11 @@ export class UpdateHotelDto {
   @IsOptional()
   @IsString()
   currency?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel operation settings (partial merge)' })
+  @IsOptional()
+  operationSettings?: {
+    telegramChatId?: string;
+    [key: string]: any;
+  };
 }
