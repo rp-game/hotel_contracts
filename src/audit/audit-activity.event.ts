@@ -14,6 +14,7 @@ export enum AuditCategory {
   BOOKING = 'BOOKING',
   FINANCIAL = 'FINANCIAL',
   CONFIGURATION = 'CONFIGURATION',
+  CHANNEL = 'CHANNEL',
 }
 
 /** Severity/importance level for visual distinction */

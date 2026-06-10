@@ -160,5 +160,9 @@ export declare class UpdateHotelDto {
     checkOutTime?: string;
     timezone?: string;
     currency?: string;
+    operationSettings?: {
+        telegramChatId?: string;
+        [key: string]: any;
+    };
 }
 //# sourceMappingURL=hotel-chains.types.d.ts.map

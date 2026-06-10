@@ -523,6 +523,7 @@ class UpdateHotelDto {
     checkOutTime;
     timezone;
     currency;
+    operationSettings;
 }
 exports.UpdateHotelDto = UpdateHotelDto;
 __decorate([
@@ -629,4 +630,9 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateHotelDto.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel operation settings (partial merge)' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], UpdateHotelDto.prototype, "operationSettings", void 0);
 //# sourceMappingURL=hotel-chains.types.js.map

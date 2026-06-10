@@ -8,7 +8,8 @@ export declare enum AuditCategory {
     AUTH = "AUTH",
     BOOKING = "BOOKING",
     FINANCIAL = "FINANCIAL",
-    CONFIGURATION = "CONFIGURATION"
+    CONFIGURATION = "CONFIGURATION",
+    CHANNEL = "CHANNEL"
 }
 /** Severity/importance level for visual distinction */
 export declare enum AuditSeverity {

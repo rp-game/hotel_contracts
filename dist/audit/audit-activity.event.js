@@ -25,6 +25,7 @@ var AuditCategory;
     AuditCategory["BOOKING"] = "BOOKING";
     AuditCategory["FINANCIAL"] = "FINANCIAL";
     AuditCategory["CONFIGURATION"] = "CONFIGURATION";
+    AuditCategory["CHANNEL"] = "CHANNEL";
 })(AuditCategory || (exports.AuditCategory = AuditCategory = {}));
 /** Severity/importance level for visual distinction */
 var AuditSeverity;
