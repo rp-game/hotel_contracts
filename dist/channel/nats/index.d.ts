@@ -10,4 +10,5 @@ export * from './rates.nats';
 export * from './failover-errors.nats';
 export * from './channel-distribution.nats';
 export * from './provider-channel-routing.nats';
+export * from './channel-ota-mapping.nats';
 //# sourceMappingURL=index.d.ts.map

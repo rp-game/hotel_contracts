@@ -29,4 +29,5 @@ __exportStar(require("./api-response.types"), exports);
 __exportStar(require("./channel-distribution.types"), exports);
 __exportStar(require("./provider-channel-routing.types"), exports);
 __exportStar(require("./staah-push.types"), exports);
+__exportStar(require("./channel-ota-mapping.types"), exports);
 //# sourceMappingURL=index.js.map

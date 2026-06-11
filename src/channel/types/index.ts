@@ -13,3 +13,4 @@ export * from './api-response.types';
 export * from './channel-distribution.types';
 export * from './provider-channel-routing.types';
 export * from './staah-push.types';
+export * from './channel-ota-mapping.types';
