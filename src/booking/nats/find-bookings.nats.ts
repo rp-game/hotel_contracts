@@ -273,6 +273,12 @@ export class BookingSummary {
 
   @ApiPropertyOptional({ description: 'Agent reference' })
   agentReference?: string | null;
+
+  @ApiPropertyOptional({ description: 'OTA booking ID (mã đặt phòng trên OTA)' })
+  otaBookingId?: string | null;
+
+  @ApiPropertyOptional({ description: 'OTA name / reference (vd: booking.com)' })
+  otaBookingReference?: string | null;
 }
 
 /**

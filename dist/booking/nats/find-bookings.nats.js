@@ -203,6 +203,8 @@ class BookingSummary {
     travelAgentId;
     travelAgentName;
     agentReference;
+    otaBookingId;
+    otaBookingReference;
 }
 exports.BookingSummary = BookingSummary;
 __decorate([
@@ -383,6 +385,14 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Agent reference' }),
     __metadata("design:type", Object)
 ], BookingSummary.prototype, "agentReference", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'OTA booking ID (mã đặt phòng trên OTA)' }),
+    __metadata("design:type", Object)
+], BookingSummary.prototype, "otaBookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'OTA name / reference (vd: booking.com)' }),
+    __metadata("design:type", Object)
+], BookingSummary.prototype, "otaBookingReference", void 0);
 /**
  * Bookings list response - shared between NATS and REST API
  * Used by:

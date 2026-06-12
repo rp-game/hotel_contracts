@@ -178,6 +178,8 @@ export declare class BookingSummary {
     travelAgentId?: string | null;
     travelAgentName?: string | null;
     agentReference?: string | null;
+    otaBookingId?: string | null;
+    otaBookingReference?: string | null;
 }
 /**
  * NATS request to find/list bookings with filters and pagination
