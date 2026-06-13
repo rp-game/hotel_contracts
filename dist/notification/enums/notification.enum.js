@@ -16,6 +16,13 @@ var NotificationType;
     NotificationType["OTA_BOOKING_NEW"] = "ota_booking_new";
     NotificationType["OTA_BOOKING_MODIFIED"] = "ota_booking_modified";
     NotificationType["OTA_BOOKING_CANCELLED"] = "ota_booking_cancelled";
+    NotificationType["BOOKING_CONFLICT"] = "booking_conflict";
+    NotificationType["ROOM_MOVE_PENDING_APPROVAL"] = "room_move_pending_approval";
+    NotificationType["ROOM_MOVE_APPROVED"] = "room_move_approved";
+    NotificationType["ROOM_MOVE_REJECTED"] = "room_move_rejected";
+    NotificationType["PAYMENT_VERIFICATION_PENDING"] = "payment_verification_pending";
+    NotificationType["AMENITY_REQUEST_NEW"] = "amenity_request_new";
+    NotificationType["CHANNEL_SYNC_FAILED"] = "channel_sync_failed";
 })(NotificationType || (exports.NotificationType = NotificationType = {}));
 var NotificationPriority;
 (function (NotificationPriority) {

@@ -11,7 +11,14 @@ export declare enum NotificationType {
     GENERAL = "general",
     OTA_BOOKING_NEW = "ota_booking_new",
     OTA_BOOKING_MODIFIED = "ota_booking_modified",
-    OTA_BOOKING_CANCELLED = "ota_booking_cancelled"
+    OTA_BOOKING_CANCELLED = "ota_booking_cancelled",
+    BOOKING_CONFLICT = "booking_conflict",
+    ROOM_MOVE_PENDING_APPROVAL = "room_move_pending_approval",
+    ROOM_MOVE_APPROVED = "room_move_approved",
+    ROOM_MOVE_REJECTED = "room_move_rejected",
+    PAYMENT_VERIFICATION_PENDING = "payment_verification_pending",
+    AMENITY_REQUEST_NEW = "amenity_request_new",
+    CHANNEL_SYNC_FAILED = "channel_sync_failed"
 }
 export declare enum NotificationPriority {
     LOW = "low",
