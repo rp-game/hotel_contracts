@@ -13,6 +13,9 @@ var NotificationType;
     NotificationType["BOOKING_UPDATE"] = "booking_update";
     NotificationType["GUEST_REQUEST"] = "guest_request";
     NotificationType["GENERAL"] = "general";
+    NotificationType["OTA_BOOKING_NEW"] = "ota_booking_new";
+    NotificationType["OTA_BOOKING_MODIFIED"] = "ota_booking_modified";
+    NotificationType["OTA_BOOKING_CANCELLED"] = "ota_booking_cancelled";
 })(NotificationType || (exports.NotificationType = NotificationType = {}));
 var NotificationPriority;
 (function (NotificationPriority) {

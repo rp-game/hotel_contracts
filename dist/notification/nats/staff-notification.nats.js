@@ -549,6 +549,7 @@ class SendStaffNotificationMultiNatsRequest {
     tenantId;
     hotelId;
     staffIds;
+    roles;
     type;
     title;
     body;
@@ -572,11 +573,22 @@ __decorate([
     __metadata("design:type", String)
 ], SendStaffNotificationMultiNatsRequest.prototype, "hotelId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Staff IDs to notify', type: [String] }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Staff IDs to notify (explicit recipients)', type: [String] }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsString)({ each: true }),
     __metadata("design:type", Array)
 ], SendStaffNotificationMultiNatsRequest.prototype, "staffIds", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Roles to notify within the hotel; notification-service resolves to staffIds (merged + deduped with staffIds)',
+        type: [String],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], SendStaffNotificationMultiNatsRequest.prototype, "roles", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Notification type', enum: notification_enum_1.NotificationType }),
     (0, class_validator_1.IsEnum)(notification_enum_1.NotificationType),

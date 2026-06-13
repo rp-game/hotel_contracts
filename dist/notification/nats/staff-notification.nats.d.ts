@@ -125,7 +125,8 @@ export declare class DeleteNotificationResponseDto {
 export declare class SendStaffNotificationMultiNatsRequest {
     tenantId: string;
     hotelId: string;
-    staffIds: string[];
+    staffIds?: string[];
+    roles?: string[];
     type: NotificationType;
     title: string;
     body: string;

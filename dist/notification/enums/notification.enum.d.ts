@@ -8,7 +8,10 @@ export declare enum NotificationType {
     SYSTEM_ALERT = "system_alert",
     BOOKING_UPDATE = "booking_update",
     GUEST_REQUEST = "guest_request",
-    GENERAL = "general"
+    GENERAL = "general",
+    OTA_BOOKING_NEW = "ota_booking_new",
+    OTA_BOOKING_MODIFIED = "ota_booking_modified",
+    OTA_BOOKING_CANCELLED = "ota_booking_cancelled"
 }
 export declare enum NotificationPriority {
     LOW = "low",

@@ -375,10 +375,20 @@ export class SendStaffNotificationMultiNatsRequest {
   @IsString()
   hotelId: string;
 
-  @ApiProperty({ description: 'Staff IDs to notify', type: [String] })
+  @ApiPropertyOptional({ description: 'Staff IDs to notify (explicit recipients)', type: [String] })
+  @IsOptional()
   @IsArray()
   @IsString({ each: true })
-  staffIds: string[];
+  staffIds?: string[];
+
+  @ApiPropertyOptional({
+    description: 'Roles to notify within the hotel; notification-service resolves to staffIds (merged + deduped with staffIds)',
+    type: [String],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  roles?: string[];
 
   @ApiProperty({ description: 'Notification type', enum: NotificationType })
   @IsEnum(NotificationType)
