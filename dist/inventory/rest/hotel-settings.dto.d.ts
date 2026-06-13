@@ -53,6 +53,7 @@ export declare class HotelOperationSettingsDto {
     guestNameFormat?: 'separate' | 'fullname';
     requireNationality?: boolean;
     requireIdentityDocument?: boolean;
+    requireRoomMoveApproval?: boolean;
     requireEmail?: boolean;
     requirePhone?: boolean;
 }

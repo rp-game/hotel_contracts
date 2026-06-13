@@ -141,6 +141,7 @@ export class HotelDto {
     };
     isMultiWarehouse?: boolean;
     procurementMode?: string; // 'SELF' | 'CHAIN_ONLY' | 'BOTH'
+    requireRoomMoveApproval?: boolean; // bật → chuyển phòng phải qua duyệt
   };
 
   @ApiPropertyOptional({ description: 'Brand standards configuration' })

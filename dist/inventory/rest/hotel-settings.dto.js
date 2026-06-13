@@ -164,6 +164,7 @@ class HotelOperationSettingsDto {
     guestNameFormat;
     requireNationality;
     requireIdentityDocument;
+    requireRoomMoveApproval;
     requireEmail;
     requirePhone;
 }
@@ -329,6 +330,15 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], HotelOperationSettingsDto.prototype, "requireIdentityDocument", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Bật → chuyển phòng phải qua duyệt (lễ tân chỉ tạo yêu cầu PENDING). Thiếu/false → chuyển ngay.',
+        default: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], HotelOperationSettingsDto.prototype, "requireRoomMoveApproval", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Whether email is required in webshop booking form', default: true }),
     (0, class_validator_1.IsOptional)(),

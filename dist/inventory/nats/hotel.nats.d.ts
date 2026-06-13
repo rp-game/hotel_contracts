@@ -66,6 +66,7 @@ export declare class HotelDto {
         };
         isMultiWarehouse?: boolean;
         procurementMode?: string;
+        requireRoomMoveApproval?: boolean;
     };
     brandStandards?: any;
     policies?: any;

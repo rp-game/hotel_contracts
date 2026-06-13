@@ -256,6 +256,14 @@ export class HotelOperationSettingsDto {
   @IsBoolean()
   requireIdentityDocument?: boolean;
 
+  @ApiPropertyOptional({
+    description: 'Bật → chuyển phòng phải qua duyệt (lễ tân chỉ tạo yêu cầu PENDING). Thiếu/false → chuyển ngay.',
+    default: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  requireRoomMoveApproval?: boolean;
+
   @ApiPropertyOptional({ description: 'Whether email is required in webshop booking form', default: true })
   @IsOptional()
   @IsBoolean()
