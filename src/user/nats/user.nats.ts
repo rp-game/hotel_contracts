@@ -46,6 +46,9 @@ export class FindAllUsersRequestDto {
   @ApiPropertyOptional({ description: 'Role filter' })
   role?: string;
 
+  @ApiPropertyOptional({ description: "Hotel filter: UUID = specific hotel, 'null' = chain-level (hotel_id IS NULL), omitted = all" })
+  hotelId?: string;
+
   @ApiPropertyOptional({ description: 'Page number' })
   page?: number;
 

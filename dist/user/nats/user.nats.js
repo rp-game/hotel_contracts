@@ -69,6 +69,7 @@ __decorate([
 class FindAllUsersRequestDto {
     tenantId;
     role;
+    hotelId;
     page;
     limit;
 }
@@ -81,6 +82,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Role filter' }),
     __metadata("design:type", String)
 ], FindAllUsersRequestDto.prototype, "role", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: "Hotel filter: UUID = specific hotel, 'null' = chain-level (hotel_id IS NULL), omitted = all" }),
+    __metadata("design:type", String)
+], FindAllUsersRequestDto.prototype, "hotelId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Page number' }),
     __metadata("design:type", Number)

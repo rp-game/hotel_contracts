@@ -20,6 +20,7 @@ export declare class FindUserRequestDto {
 export declare class FindAllUsersRequestDto {
     tenantId?: string;
     role?: string;
+    hotelId?: string;
     page?: number;
     limit?: number;
 }
