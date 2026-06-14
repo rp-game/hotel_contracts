@@ -37,4 +37,5 @@ __exportStar(require("./seasonal-adjustments.nats"), exports);
 __exportStar(require("./vouchers.nats"), exports);
 __exportStar(require("./pricing-audit-log.nats"), exports);
 __exportStar(require("./rate-plan-extension.nats"), exports);
+__exportStar(require("./grid-pricing.nats"), exports);
 //# sourceMappingURL=index.js.map

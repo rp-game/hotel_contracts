@@ -21,4 +21,5 @@ export * from './seasonal-adjustments.nats';
 export * from './vouchers.nats';
 export * from './pricing-audit-log.nats';
 export * from './rate-plan-extension.nats';
+export * from './grid-pricing.nats';
 //# sourceMappingURL=index.d.ts.map
