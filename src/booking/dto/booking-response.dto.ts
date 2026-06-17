@@ -337,6 +337,9 @@ export class BookingResponseDto {
   @ApiPropertyOptional({ description: 'OTA booking reference' })
   otaBookingReference?: string;
 
+  @ApiPropertyOptional({ description: 'OTA payment type: Hotel Collect or Channel Collect' })
+  otaPaymentType?: string | null;
+
   // Related information
   @ApiProperty({ description: 'Booking rooms', type: [BookingRoomResponseDto] })
   rooms: BookingRoomResponseDto[];

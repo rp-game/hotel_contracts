@@ -127,6 +127,7 @@ export declare class BookingResponseDto {
     childCount: number;
     otaBookingId?: string;
     otaBookingReference?: string;
+    otaPaymentType?: string | null;
     rooms: BookingRoomResponseDto[];
     guests: BookingGuestResponseDto[];
     payments: BookingPaymentResponseDto[];

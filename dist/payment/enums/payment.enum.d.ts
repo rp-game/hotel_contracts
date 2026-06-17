@@ -7,7 +7,8 @@ export declare enum PaymentMethod {
     BANK_TRANSFER = "BANK_TRANSFER",
     ONLINE = "ONLINE",
     COMPANY_ACCOUNT = "COMPANY_ACCOUNT",
-    REFUND = "REFUND"
+    REFUND = "REFUND",
+    OTA_COLLECT = "OTA_COLLECT"
 }
 /**
  * Payment Status Enum

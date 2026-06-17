@@ -8,6 +8,7 @@ export enum PaymentMethod {
   ONLINE = 'ONLINE',
   COMPANY_ACCOUNT = 'COMPANY_ACCOUNT',
   REFUND = 'REFUND',
+  OTA_COLLECT = 'OTA_COLLECT',
 }
 
 /**

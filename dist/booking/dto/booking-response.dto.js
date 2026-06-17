@@ -397,6 +397,7 @@ class BookingResponseDto {
     // OTA information
     otaBookingId;
     otaBookingReference;
+    otaPaymentType;
     // Related information
     rooms;
     guests;
@@ -580,6 +581,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'OTA booking reference' }),
     __metadata("design:type", String)
 ], BookingResponseDto.prototype, "otaBookingReference", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'OTA payment type: Hotel Collect or Channel Collect' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "otaPaymentType", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Booking rooms', type: [BookingRoomResponseDto] }),
     __metadata("design:type", Array)
