@@ -237,7 +237,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Account type — categorizes the rate plan for filtering and visibility.',
-        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA'],
+        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA', 'WEBSITE'],
         example: 'CORPORATE',
     }),
     (0, class_validator_1.IsOptional)(),
@@ -425,7 +425,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Account type',
-        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA'],
+        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA', 'WEBSITE'],
         nullable: true,
     }),
     __metadata("design:type", Object)

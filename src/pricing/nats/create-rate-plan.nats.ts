@@ -181,12 +181,12 @@ export class CreateRatePlanRequest {
 
   @ApiPropertyOptional({
     description: 'Account type — categorizes the rate plan for filtering and visibility.',
-    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA'],
+    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA', 'WEBSITE'],
     example: 'CORPORATE',
   })
   @IsOptional()
   @IsString()
-  accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT' | 'OTA';
+  accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT' | 'OTA' | 'WEBSITE';
 
   @ApiPropertyOptional({
     description: 'Rate plan valid from date (YYYY-MM-DD). If null, always valid.',
@@ -325,10 +325,10 @@ export class CreateRatePlanResponse {
 
   @ApiPropertyOptional({
     description: 'Account type',
-    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA'],
+    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA', 'WEBSITE'],
     nullable: true,
   })
-  accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT' | 'OTA' | null;
+  accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT' | 'OTA' | 'WEBSITE' | null;
 
   @ApiPropertyOptional({
     description: 'Account IDs (UUIDs for CA/TA, channel names for OTA)',

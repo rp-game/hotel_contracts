@@ -48,7 +48,7 @@ export declare class CreateRatePlanRequest {
     depositPercent?: number | null;
     accountIds?: string[];
     accountNames?: string[];
-    accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT' | 'OTA';
+    accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT' | 'OTA' | 'WEBSITE';
     validFrom?: string;
     validTo?: string;
     blackoutPeriods?: BlackoutPeriodDto[];
@@ -73,7 +73,7 @@ export declare class CreateRatePlanResponse {
     mealPlan?: string | null;
     paymentType?: string | null;
     depositPercent?: number | null;
-    accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT' | 'OTA' | null;
+    accountType?: 'CORPORATE' | 'TRAVEL_AGENT' | 'GOVERNMENT' | 'OTA' | 'WEBSITE' | null;
     accountIds?: string[] | null;
     accountNames?: string[] | null;
     validFrom?: string | null;

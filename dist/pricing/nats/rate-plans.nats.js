@@ -308,7 +308,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Filter by account type',
-        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA'],
+        enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA', 'WEBSITE'],
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),

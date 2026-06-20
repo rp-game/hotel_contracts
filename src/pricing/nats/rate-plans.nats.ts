@@ -254,7 +254,7 @@ export class ListRatePlansRequest {
 
   @ApiPropertyOptional({
     description: 'Filter by account type',
-    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA'],
+    enum: ['CORPORATE', 'TRAVEL_AGENT', 'GOVERNMENT', 'OTA', 'WEBSITE'],
   })
   @IsOptional()
   @IsString()
