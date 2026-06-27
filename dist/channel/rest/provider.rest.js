@@ -165,6 +165,7 @@ class TestConnectionRequestDto {
     endpoints;
     testTypes; // ['authentication', 'connection', 'api']
     timeoutMs;
+    isSandbox;
 }
 exports.TestConnectionRequestDto = TestConnectionRequestDto;
 __decorate([
@@ -194,6 +195,12 @@ __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], TestConnectionRequestDto.prototype, "timeoutMs", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Whether to use sandbox environment' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], TestConnectionRequestDto.prototype, "isSandbox", void 0);
 /**
  * Test Result DTO
  * Individual test result within TestConnectionResponseDto

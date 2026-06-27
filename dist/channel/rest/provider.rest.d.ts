@@ -55,6 +55,7 @@ export declare class TestConnectionRequestDto {
     };
     testTypes?: string[];
     timeoutMs?: number;
+    isSandbox?: boolean;
 }
 /**
  * Test Result DTO
