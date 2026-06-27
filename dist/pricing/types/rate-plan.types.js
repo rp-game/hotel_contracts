@@ -50,8 +50,8 @@ __decorate([
     __metadata("design:type", String)
 ], CreateRatePlanDto.prototype, "name", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Rate plan type', enum: ['BASE', 'DERIVED'], example: 'BASE' }),
-    (0, class_validator_1.IsEnum)(['BASE', 'DERIVED']),
+    (0, swagger_1.ApiProperty)({ description: 'Rate plan type', enum: ['BASE', 'DERIVED', 'MASTER'], example: 'BASE' }),
+    (0, class_validator_1.IsEnum)(['BASE', 'DERIVED', 'MASTER']),
     __metadata("design:type", String)
 ], CreateRatePlanDto.prototype, "type", void 0);
 __decorate([
@@ -131,7 +131,7 @@ __decorate([
     __metadata("design:type", String)
 ], RatePlanResponseDto.prototype, "name", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Rate plan type', enum: ['BASE', 'DERIVED'], example: 'BASE' }),
+    (0, swagger_1.ApiProperty)({ description: 'Rate plan type', enum: ['BASE', 'DERIVED', 'MASTER'], example: 'BASE' }),
     __metadata("design:type", String)
 ], RatePlanResponseDto.prototype, "type", void 0);
 __decorate([
@@ -238,7 +238,7 @@ __decorate([
     __metadata("design:type", String)
 ], CalculatePriceResponseDto.prototype, "ratePlanName", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Rate plan type', enum: ['BASE', 'DERIVED'], example: 'DERIVED' }),
+    (0, swagger_1.ApiProperty)({ description: 'Rate plan type', enum: ['BASE', 'DERIVED', 'MASTER'], example: 'DERIVED' }),
     __metadata("design:type", String)
 ], CalculatePriceResponseDto.prototype, "type", void 0);
 __decorate([

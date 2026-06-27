@@ -66,6 +66,7 @@ var RatePlanTypeEnum;
 (function (RatePlanTypeEnum) {
     RatePlanTypeEnum["BASE"] = "BASE";
     RatePlanTypeEnum["DERIVED"] = "DERIVED";
+    RatePlanTypeEnum["MASTER"] = "MASTER";
 })(RatePlanTypeEnum || (exports.RatePlanTypeEnum = RatePlanTypeEnum = {}));
 /**
  * Derivation type for DERIVED rate plans

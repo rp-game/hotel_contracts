@@ -84,7 +84,7 @@ export declare class CreateRatePlanDto {
     tenantId: string;
     hotelId: string;
     name: string;
-    type: 'BASE' | 'DERIVED';
+    type: 'BASE' | 'DERIVED' | 'MASTER';
     parentRatePlanId?: string;
     derivationType?: 'PERCENTAGE' | 'AMOUNT';
     derivationValue?: number;
@@ -100,7 +100,7 @@ export declare class RatePlanResponseDto {
     tenantId: string;
     hotelId: string;
     name: string;
-    type: 'BASE' | 'DERIVED';
+    type: 'BASE' | 'DERIVED' | 'MASTER';
     parentRatePlanId?: string;
     derivationType?: 'PERCENTAGE' | 'AMOUNT';
     derivationValue?: number;
@@ -130,7 +130,7 @@ export declare class ChannelRateMappingResponseDto {
 export declare class CalculatePriceResponseDto {
     ratePlanId: string;
     ratePlanName: string;
-    type: 'BASE' | 'DERIVED';
+    type: 'BASE' | 'DERIVED' | 'MASTER';
     basePrice: number;
     derivationType?: 'PERCENTAGE' | 'AMOUNT';
     derivationValue?: number;

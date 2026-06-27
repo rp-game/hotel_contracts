@@ -20,7 +20,8 @@ export declare class CancellationPolicyDto {
  */
 export declare enum RatePlanTypeEnum {
     BASE = "BASE",
-    DERIVED = "DERIVED"
+    DERIVED = "DERIVED",
+    MASTER = "MASTER"
 }
 /**
  * Derivation type for DERIVED rate plans
