@@ -140,6 +140,12 @@ export class TestConnectionRequestDto {
   @IsOptional()
   @IsNumber()
   timeoutMs?: number;
+
+  @ApiPropertyOptional({ description: 'Whether to use sandbox environment' })
+  @IsOptional()
+  @IsBoolean()
+  isSandbox?: boolean;
+
 }
 
 /**
