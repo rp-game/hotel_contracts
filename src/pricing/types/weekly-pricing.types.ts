@@ -48,6 +48,8 @@ export class ListWeeklyRequest {
   @ApiProperty() roomTypeId: string;
   @ApiProperty({ description: 'YYYY-MM-DD' }) dateFrom: string;
   @ApiProperty({ description: 'YYYY-MM-DD' }) dateTo: string;
+  @ApiPropertyOptional({ description: 'Có → giá weekly RIÊNG của rate plan (MASTER); không → foundation room type' })
+  ratePlanId?: string;
 }
 
 export class ListWeeklyResponse {
@@ -71,6 +73,8 @@ export class UpsertWeekRequest {
   @ApiPropertyOptional({ description: 'Optimistic lock token (ISO updatedAt)' })
   expectedUpdatedAt?: string;
   @ApiPropertyOptional() updatedBy?: string;
+  @ApiPropertyOptional({ description: 'Có → ghi giá weekly RIÊNG của rate plan (MASTER); không → foundation room type' })
+  ratePlanId?: string;
 }
 
 export class UpsertWeekResponse {
