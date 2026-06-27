@@ -47,6 +47,7 @@ export class CancellationPolicyDto {
 export enum RatePlanTypeEnum {
   BASE = 'BASE',
   DERIVED = 'DERIVED',
+  MASTER = 'MASTER',
 }
 
 /**

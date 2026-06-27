@@ -106,9 +106,9 @@ export class CreateRatePlanDto {
   @IsString()
   name: string;
 
-  @ApiProperty({ description: 'Rate plan type', enum: ['BASE', 'DERIVED'], example: 'BASE' })
-  @IsEnum(['BASE', 'DERIVED'])
-  type: 'BASE' | 'DERIVED';
+  @ApiProperty({ description: 'Rate plan type', enum: ['BASE', 'DERIVED', 'MASTER'], example: 'BASE' })
+  @IsEnum(['BASE', 'DERIVED', 'MASTER'])
+  type: 'BASE' | 'DERIVED' | 'MASTER';
 
   @ApiPropertyOptional({ description: 'Parent rate plan ID (required for DERIVED types)' })
   @IsOptional()
@@ -162,8 +162,8 @@ export class RatePlanResponseDto {
   @ApiProperty({ description: 'Rate plan name', example: 'Best Available Rate' })
   name: string;
 
-  @ApiProperty({ description: 'Rate plan type', enum: ['BASE', 'DERIVED'], example: 'BASE' })
-  type: 'BASE' | 'DERIVED';
+  @ApiProperty({ description: 'Rate plan type', enum: ['BASE', 'DERIVED', 'MASTER'], example: 'BASE' })
+  type: 'BASE' | 'DERIVED' | 'MASTER';
 
   @ApiPropertyOptional({ description: 'Parent rate plan ID (for DERIVED types)' })
   parentRatePlanId?: string;
@@ -232,8 +232,8 @@ export class CalculatePriceResponseDto {
   @ApiProperty({ description: 'Rate plan name', example: 'BAR + 4%' })
   ratePlanName: string;
 
-  @ApiProperty({ description: 'Rate plan type', enum: ['BASE', 'DERIVED'], example: 'DERIVED' })
-  type: 'BASE' | 'DERIVED';
+  @ApiProperty({ description: 'Rate plan type', enum: ['BASE', 'DERIVED', 'MASTER'], example: 'DERIVED' })
+  type: 'BASE' | 'DERIVED' | 'MASTER';
 
   @ApiProperty({ description: 'Base price input', example: 250 })
   basePrice: number;
