@@ -34,6 +34,7 @@ export declare class ListWeeklyRequest {
     roomTypeId: string;
     dateFrom: string;
     dateTo: string;
+    ratePlanId?: string;
 }
 export declare class ListWeeklyResponse {
     items: WeeklyPricingItem[];
@@ -47,6 +48,7 @@ export declare class UpsertWeekRequest {
     overrides?: Partial<DowOverrides> | null;
     expectedUpdatedAt?: string;
     updatedBy?: string;
+    ratePlanId?: string;
 }
 export declare class UpsertWeekResponse {
     item: WeeklyPricingItem;

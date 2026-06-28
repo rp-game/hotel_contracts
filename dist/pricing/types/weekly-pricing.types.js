@@ -110,6 +110,7 @@ class ListWeeklyRequest {
     roomTypeId;
     dateFrom;
     dateTo;
+    ratePlanId;
 }
 exports.ListWeeklyRequest = ListWeeklyRequest;
 __decorate([
@@ -132,6 +133,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'YYYY-MM-DD' }),
     __metadata("design:type", String)
 ], ListWeeklyRequest.prototype, "dateTo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Có → giá weekly RIÊNG của rate plan (MASTER); không → foundation room type' }),
+    __metadata("design:type", String)
+], ListWeeklyRequest.prototype, "ratePlanId", void 0);
 class ListWeeklyResponse {
     items;
 }
@@ -150,6 +155,7 @@ class UpsertWeekRequest {
     overrides;
     expectedUpdatedAt;
     updatedBy;
+    ratePlanId;
 }
 exports.UpsertWeekRequest = UpsertWeekRequest;
 __decorate([
@@ -188,6 +194,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", String)
 ], UpsertWeekRequest.prototype, "updatedBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Có → ghi giá weekly RIÊNG của rate plan (MASTER); không → foundation room type' }),
+    __metadata("design:type", String)
+], UpsertWeekRequest.prototype, "ratePlanId", void 0);
 class UpsertWeekResponse {
     item;
 }
