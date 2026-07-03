@@ -27,6 +27,7 @@ import {
 import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { PromotionDto, PromotionsPaginatedResponseDto, PromotionStatus, PromotionConditionsDto, PromotionScope } from '../types';
+import { SalesChannel } from '../../common/enums/sales-channel.enum';
 
 // ============================================================================
 // Query/Request DTOs
@@ -188,6 +189,12 @@ export class CreatePromotionRequest {
   @IsString({ each: true })
   applicableChannels?: string[];
 
+  @ApiPropertyOptional({ description: 'Applicable sales channels (booking sources); empty = all', enum: SalesChannel, isArray: true })
+  @IsOptional()
+  @IsArray()
+  @IsEnum(SalesChannel, { each: true })
+  applicableSources?: SalesChannel[];
+
   @ApiPropertyOptional({ description: 'Minimum stay in nights', minimum: 1 })
   @IsOptional()
   @IsNumber()
@@ -343,6 +350,12 @@ export class UpdatePromotionRequest {
   @IsString({ each: true })
   applicableChannels?: string[];
 
+  @ApiPropertyOptional({ description: 'Updated applicable sales channels (booking sources); empty = all', enum: SalesChannel, isArray: true })
+  @IsOptional()
+  @IsArray()
+  @IsEnum(SalesChannel, { each: true })
+  applicableSources?: SalesChannel[];
+
   @ApiPropertyOptional({ description: 'Updated minimum stay', minimum: 1 })
   @IsOptional()
   @IsNumber()
@@ -493,6 +506,11 @@ export class ValidatePromotionRequest {
   @IsNumber()
   @Min(1)
   totalRooms?: number;
+
+  @ApiPropertyOptional({ description: 'Booking source/sales channel for channel-scoped promotion validation', enum: SalesChannel })
+  @IsOptional()
+  @IsEnum(SalesChannel)
+  source?: SalesChannel;
 }
 
 /**

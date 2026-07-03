@@ -1,16 +1,7 @@
 /**
  * Booking Domain Enums
  */
-export declare enum BookingSource {
-    DIRECT = "DIRECT",
-    WEBSITE = "WEBSITE",
-    PHONE = "PHONE",
-    EMAIL = "EMAIL",
-    WALK_IN = "WALK_IN",
-    TRAVEL_AGENT = "TRAVEL_AGENT",
-    CORPORATE = "CORPORATE",
-    OTA = "OTA"
-}
+export { SalesChannel as BookingSource } from '../../common/enums/sales-channel.enum';
 /**
  * Booking Status Enumeration
  *

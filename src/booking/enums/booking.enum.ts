@@ -2,16 +2,9 @@
  * Booking Domain Enums
  */
 
-export enum BookingSource {
-  DIRECT = 'DIRECT',
-  WEBSITE = 'WEBSITE',
-  PHONE = 'PHONE',
-  EMAIL = 'EMAIL',
-  WALK_IN = 'WALK_IN',
-  TRAVEL_AGENT = 'TRAVEL_AGENT',
-  CORPORATE = 'CORPORATE',
-  OTA = 'OTA',
-}
+// BookingSource = alias của SalesChannel (single source of truth ở common).
+// Giữ tên BookingSource để tương thích mọi nơi đang dùng.
+export { SalesChannel as BookingSource } from '../../common/enums/sales-channel.enum';
 
 /**
  * Booking Status Enumeration

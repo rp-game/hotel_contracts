@@ -24,6 +24,7 @@ const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 const types_1 = require("../types");
+const sales_channel_enum_1 = require("../../common/enums/sales-channel.enum");
 // ============================================================================
 // Query/Request DTOs
 // ============================================================================
@@ -149,6 +150,7 @@ class CreatePromotionRequest {
     freeNightCount;
     applicableRoomTypes;
     applicableChannels;
+    applicableSources;
     minimumStay;
     maximumStay;
     minimumAdvanceBookingDays;
@@ -254,6 +256,13 @@ __decorate([
     __metadata("design:type", Array)
 ], CreatePromotionRequest.prototype, "applicableChannels", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Applicable sales channels (booking sources); empty = all', enum: sales_channel_enum_1.SalesChannel, isArray: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsEnum)(sales_channel_enum_1.SalesChannel, { each: true }),
+    __metadata("design:type", Array)
+], CreatePromotionRequest.prototype, "applicableSources", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Minimum stay in nights', minimum: 1 }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
@@ -358,6 +367,7 @@ class UpdatePromotionRequest {
     freeNightCount;
     applicableRoomTypes;
     applicableChannels;
+    applicableSources;
     minimumStay;
     maximumStay;
     minimumAdvanceBookingDays;
@@ -463,6 +473,13 @@ __decorate([
     (0, class_validator_1.IsString)({ each: true }),
     __metadata("design:type", Array)
 ], UpdatePromotionRequest.prototype, "applicableChannels", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Updated applicable sales channels (booking sources); empty = all', enum: sales_channel_enum_1.SalesChannel, isArray: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsEnum)(sales_channel_enum_1.SalesChannel, { each: true }),
+    __metadata("design:type", Array)
+], UpdatePromotionRequest.prototype, "applicableSources", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Updated minimum stay', minimum: 1 }),
     (0, class_validator_1.IsOptional)(),
@@ -602,6 +619,7 @@ class ValidatePromotionRequest {
     chainId;
     customerId;
     totalRooms;
+    source;
 }
 exports.ValidatePromotionRequest = ValidatePromotionRequest;
 __decorate([
@@ -659,6 +677,12 @@ __decorate([
     (0, class_validator_1.Min)(1),
     __metadata("design:type", Number)
 ], ValidatePromotionRequest.prototype, "totalRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Booking source/sales channel for channel-scoped promotion validation', enum: sales_channel_enum_1.SalesChannel }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(sales_channel_enum_1.SalesChannel),
+    __metadata("design:type", String)
+], ValidatePromotionRequest.prototype, "source", void 0);
 /**
  * Validate promotion response
  */

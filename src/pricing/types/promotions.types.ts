@@ -12,6 +12,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { SalesChannel } from '../../common/enums/sales-channel.enum';
 
 /**
  * Promotion status (computed field, not stored in entity)
@@ -176,6 +177,14 @@ export class PromotionDto {
     example: ['BOOKING_COM', 'EXPEDIA']
   })
   applicableChannels?: string[];
+
+  @ApiPropertyOptional({
+    description: 'Sales channels (booking sources) this promotion applies to (null/empty = all sources)',
+    enum: SalesChannel,
+    isArray: true,
+    example: [SalesChannel.WEBSITE]
+  })
+  applicableSources?: SalesChannel[];
 
   @ApiPropertyOptional({
     description: 'Minimum stay requirement in nights',

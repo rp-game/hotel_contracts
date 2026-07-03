@@ -23,6 +23,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PromotionsPaginatedResponseDto = exports.PromotionDto = exports.PromotionConditionsDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const sales_channel_enum_1 = require("../../common/enums/sales-channel.enum");
 /**
  * Promotion conditions structure
  * Stored as JSONB in database
@@ -97,6 +98,7 @@ class PromotionDto {
     freeNightCount;
     applicableRoomTypes;
     applicableChannels;
+    applicableSources;
     minimumStay;
     maximumStay;
     minimumAdvanceBookingDays;
@@ -235,6 +237,15 @@ __decorate([
     }),
     __metadata("design:type", Array)
 ], PromotionDto.prototype, "applicableChannels", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Sales channels (booking sources) this promotion applies to (null/empty = all sources)',
+        enum: sales_channel_enum_1.SalesChannel,
+        isArray: true,
+        example: [sales_channel_enum_1.SalesChannel.WEBSITE]
+    }),
+    __metadata("design:type", Array)
+], PromotionDto.prototype, "applicableSources", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Minimum stay requirement in nights',

@@ -10,6 +10,7 @@
  */
 import { NatsResponse } from '../../common/nats-response.interface';
 import { PromotionDto, PromotionsPaginatedResponseDto, PromotionStatus, PromotionConditionsDto, PromotionScope } from '../types';
+import { SalesChannel } from '../../common/enums/sales-channel.enum';
 /**
  * Get promotions request with pagination and filtering
  */
@@ -46,6 +47,7 @@ export declare class CreatePromotionRequest {
     freeNightCount?: number;
     applicableRoomTypes?: string[];
     applicableChannels?: string[];
+    applicableSources?: SalesChannel[];
     minimumStay?: number;
     maximumStay?: number;
     minimumAdvanceBookingDays?: number;
@@ -79,6 +81,7 @@ export declare class UpdatePromotionRequest {
     freeNightCount?: number;
     applicableRoomTypes?: string[];
     applicableChannels?: string[];
+    applicableSources?: SalesChannel[];
     minimumStay?: number;
     maximumStay?: number;
     minimumAdvanceBookingDays?: number;
@@ -117,6 +120,7 @@ export declare class ValidatePromotionRequest {
     chainId?: string;
     customerId?: string;
     totalRooms?: number;
+    source?: SalesChannel;
 }
 /**
  * Validate promotion response

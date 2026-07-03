@@ -10,6 +10,7 @@
  * @verified_structure_matches services/pricing-service/src/database/entities/promotion.entity.ts
  * @verified_date 2026-02-13
  */
+import { SalesChannel } from '../../common/enums/sales-channel.enum';
 /**
  * Promotion status (computed field, not stored in entity)
  */
@@ -53,6 +54,7 @@ export declare class PromotionDto {
     freeNightCount?: number;
     applicableRoomTypes?: string[];
     applicableChannels?: string[];
+    applicableSources?: SalesChannel[];
     minimumStay?: number;
     maximumStay?: number;
     minimumAdvanceBookingDays?: number;

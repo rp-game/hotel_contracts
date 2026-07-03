@@ -4,17 +4,10 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookingPaymentStatus = exports.PaymentStatus = exports.IdType = exports.BookingType = exports.BackdateReasonCategory = exports.BookingStatus = exports.BookingSource = void 0;
-var BookingSource;
-(function (BookingSource) {
-    BookingSource["DIRECT"] = "DIRECT";
-    BookingSource["WEBSITE"] = "WEBSITE";
-    BookingSource["PHONE"] = "PHONE";
-    BookingSource["EMAIL"] = "EMAIL";
-    BookingSource["WALK_IN"] = "WALK_IN";
-    BookingSource["TRAVEL_AGENT"] = "TRAVEL_AGENT";
-    BookingSource["CORPORATE"] = "CORPORATE";
-    BookingSource["OTA"] = "OTA";
-})(BookingSource || (exports.BookingSource = BookingSource = {}));
+// BookingSource = alias của SalesChannel (single source of truth ở common).
+// Giữ tên BookingSource để tương thích mọi nơi đang dùng.
+var sales_channel_enum_1 = require("../../common/enums/sales-channel.enum");
+Object.defineProperty(exports, "BookingSource", { enumerable: true, get: function () { return sales_channel_enum_1.SalesChannel; } });
 /**
  * Booking Status Enumeration
  *

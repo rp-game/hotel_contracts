@@ -11,3 +11,4 @@ export * from './query.dto';
 export * from './date-utils';
 export * from './hotel-timezone-cache';
 export * from './validators';
+export * from './enums';

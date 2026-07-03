@@ -1,9 +1,4 @@
 "use strict";
-/**
- * Common Contracts
- *
- * Shared interfaces and types used across all domains
- */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -19,12 +14,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./nats-response.interface"), exports);
-__exportStar(require("./pagination.interface"), exports);
-__exportStar(require("./error.interface"), exports);
-__exportStar(require("./query.dto"), exports);
-__exportStar(require("./date-utils"), exports);
-__exportStar(require("./hotel-timezone-cache"), exports);
-__exportStar(require("./validators"), exports);
-__exportStar(require("./enums"), exports);
+__exportStar(require("./sales-channel.enum"), exports);
 //# sourceMappingURL=index.js.map
