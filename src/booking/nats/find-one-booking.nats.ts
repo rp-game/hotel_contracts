@@ -165,7 +165,7 @@ export class GetBookingByIdResponse {
   })
   status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED';
 
-  @ApiProperty({ description: 'Booking source (WEB, OTA, PHONE, WALK_IN, etc.)' })
+  @ApiProperty({ description: 'Booking source (WEBSITE, OTA, PHONE, WALK_IN, etc.)' })
   source: string;
 
   @ApiProperty({

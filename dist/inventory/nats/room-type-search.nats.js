@@ -350,6 +350,8 @@ class RoomTypeSearchResult {
     basePriceTotal;
     basePriceTaxAmount;
     basePriceGrossAmount;
+    displayPriceGross;
+    originalPriceGross;
     availableCount;
     ratePlans;
 }
@@ -420,6 +422,14 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Base price gross (basePriceTotal + tax)' }),
     __metadata("design:type", Number)
 ], RoomTypeSearchResult.prototype, "basePriceGrossAmount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Giá hiển thị (WEBSITE rate plan rẻ nhất, đã gồm auto-promo + thuế, /đêm). Luôn set.', example: 1100000 }),
+    __metadata("design:type", Number)
+], RoomTypeSearchResult.prototype, "displayPriceGross", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Giá trước auto-promo (đã thuế, /đêm) — chỉ set khi có giảm, để hiển thị gạch giá.', example: 1200000 }),
+    __metadata("design:type", Number)
+], RoomTypeSearchResult.prototype, "originalPriceGross", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Number of rooms available for the requested time range',

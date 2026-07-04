@@ -77,6 +77,8 @@ export declare class RoomTypeSearchResult {
     basePriceTotal?: number;
     basePriceTaxAmount?: number;
     basePriceGrossAmount?: number;
+    displayPriceGross?: number;
+    originalPriceGross?: number;
     availableCount: number;
     ratePlans: RatePlanPricingDetail[];
 }

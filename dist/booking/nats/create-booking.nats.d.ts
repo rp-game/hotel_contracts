@@ -27,7 +27,7 @@ import { BookingType } from '../enums/booking.enum';
  *     checkOutDate: '2024-12-27',
  *     totalAmount: 500,
  *     currency: 'USD',
- *     source: 'WEB',
+ *     source: 'WEBSITE',
  *     rooms: [{...}]
  *   }
  * };
@@ -118,7 +118,7 @@ export interface CreateBookingRequest {
          */
         currency?: string;
         /**
-         * Booking source (WEB, OTA, PHONE, etc.)
+         * Booking source (WEBSITE, OTA, PHONE, etc.)
          */
         source: string;
         /**
@@ -355,7 +355,7 @@ export interface CreateBookingResponse {
      */
     assignmentStatus: string;
     /**
-     * Booking source (WEB, OTA, PHONE, WALK_IN, etc.)
+     * Booking source (WEBSITE, OTA, PHONE, WALK_IN, etc.)
      */
     source: string;
     /**

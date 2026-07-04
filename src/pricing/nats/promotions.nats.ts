@@ -258,6 +258,11 @@ export class CreatePromotionRequest {
   @IsBoolean()
   isActive?: boolean;
 
+  @ApiPropertyOptional({ description: 'Auto-apply (tự động áp dụng, không cần mã)', default: false })
+  @IsOptional()
+  @IsBoolean()
+  isAutoApply?: boolean;
+
   @ApiPropertyOptional({ description: 'User ID performing the action (for audit log)' })
   @IsOptional()
   @IsString()
@@ -418,6 +423,11 @@ export class UpdatePromotionRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional({ description: 'Updated auto-apply (tự động áp dụng, không cần mã)' })
+  @IsOptional()
+  @IsBoolean()
+  isAutoApply?: boolean;
 
   @ApiPropertyOptional({ description: 'User ID performing the action (for audit log)' })
   @IsOptional()

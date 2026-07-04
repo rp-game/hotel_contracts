@@ -268,6 +268,13 @@ export class PromotionDto {
   })
   isActive: boolean;
 
+  @ApiPropertyOptional({
+    description: 'Auto-apply: tự động áp dụng khi tính giá (không cần nhập mã)',
+    example: false,
+    default: false
+  })
+  isAutoApply?: boolean;
+
   @ApiProperty({
     description: 'Computed promotion status based on dates and isActive flag',
     enum: ['ACTIVE', 'INACTIVE', 'EXPIRED', 'UPCOMING'],

@@ -47,9 +47,9 @@ export class BookingSummary {
   status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED' | 'COMPLETED';
 
   /**
-   * Booking source (WEB, OTA, PHONE, etc.)
+   * Booking source (WEBSITE, OTA, PHONE, etc.)
    */
-  @ApiProperty({ description: 'Booking source (WEB, OTA, PHONE, etc.)' })
+  @ApiProperty({ description: 'Booking source (WEBSITE, OTA, PHONE, etc.)' })
   source: string;
 
   /**
@@ -301,7 +301,7 @@ export interface FindBookingsNatsRequest {
   status?: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED' | 'COMPLETED';
 
   /**
-   * Booking source filter (WEB, OTA, PHONE, etc.)
+   * Booking source filter (WEBSITE, OTA, PHONE, etc.)
    */
   source?: string;
 

@@ -59,6 +59,7 @@ export declare class CreatePromotionRequest {
     flashSaleEndTime?: string;
     conditions?: PromotionConditionsDto;
     isActive?: boolean;
+    isAutoApply?: boolean;
     performedBy?: string;
     performedByName?: string;
 }
@@ -93,6 +94,7 @@ export declare class UpdatePromotionRequest {
     flashSaleEndTime?: string;
     conditions?: PromotionConditionsDto;
     isActive?: boolean;
+    isAutoApply?: boolean;
     performedBy?: string;
     performedByName?: string;
 }

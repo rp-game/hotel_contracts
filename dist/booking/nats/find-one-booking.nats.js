@@ -315,7 +315,7 @@ __decorate([
     __metadata("design:type", String)
 ], GetBookingByIdResponse.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Booking source (WEB, OTA, PHONE, WALK_IN, etc.)' }),
+    (0, swagger_1.ApiProperty)({ description: 'Booking source (WEBSITE, OTA, PHONE, WALK_IN, etc.)' }),
     __metadata("design:type", String)
 ], GetBookingByIdResponse.prototype, "source", void 0);
 __decorate([

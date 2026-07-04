@@ -59,7 +59,7 @@ class BookingSummary {
      */
     status;
     /**
-     * Booking source (WEB, OTA, PHONE, etc.)
+     * Booking source (WEBSITE, OTA, PHONE, etc.)
      */
     source;
     /**
@@ -223,7 +223,7 @@ __decorate([
     __metadata("design:type", String)
 ], BookingSummary.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Booking source (WEB, OTA, PHONE, etc.)' }),
+    (0, swagger_1.ApiProperty)({ description: 'Booking source (WEBSITE, OTA, PHONE, etc.)' }),
     __metadata("design:type", String)
 ], BookingSummary.prototype, "source", void 0);
 __decorate([

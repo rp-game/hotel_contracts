@@ -311,6 +311,12 @@ export class RoomTypeSearchResult {
   @ApiPropertyOptional({ description: 'Base price gross (basePriceTotal + tax)' })
   basePriceGrossAmount?: number;
 
+  @ApiPropertyOptional({ description: 'Giá hiển thị (WEBSITE rate plan rẻ nhất, đã gồm auto-promo + thuế, /đêm). Luôn set.', example: 1100000 })
+  displayPriceGross?: number;
+
+  @ApiPropertyOptional({ description: 'Giá trước auto-promo (đã thuế, /đêm) — chỉ set khi có giảm, để hiển thị gạch giá.', example: 1200000 })
+  originalPriceGross?: number;
+
   @ApiProperty({
     description: 'Number of rooms available for the requested time range',
     example: 3,

@@ -111,6 +111,7 @@ class PromotionDto {
     flashSaleEndTime;
     conditions;
     isActive;
+    isAutoApply;
     status;
     createdAt;
     updatedAt;
@@ -340,6 +341,14 @@ __decorate([
     }),
     __metadata("design:type", Boolean)
 ], PromotionDto.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Auto-apply: tự động áp dụng khi tính giá (không cần nhập mã)',
+        example: false,
+        default: false
+    }),
+    __metadata("design:type", Boolean)
+], PromotionDto.prototype, "isAutoApply", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Computed promotion status based on dates and isActive flag',

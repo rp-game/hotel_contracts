@@ -162,6 +162,7 @@ class CreatePromotionRequest {
     flashSaleEndTime;
     conditions;
     isActive;
+    isAutoApply;
     performedBy;
     performedByName;
 }
@@ -337,6 +338,12 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CreatePromotionRequest.prototype, "isActive", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Auto-apply (tự động áp dụng, không cần mã)', default: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreatePromotionRequest.prototype, "isAutoApply", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'User ID performing the action (for audit log)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -379,6 +386,7 @@ class UpdatePromotionRequest {
     flashSaleEndTime;
     conditions;
     isActive;
+    isAutoApply;
     performedBy;
     performedByName;
 }
@@ -554,6 +562,12 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdatePromotionRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Updated auto-apply (tự động áp dụng, không cần mã)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], UpdatePromotionRequest.prototype, "isAutoApply", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'User ID performing the action (for audit log)' }),
     (0, class_validator_1.IsOptional)(),

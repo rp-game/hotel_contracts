@@ -67,6 +67,7 @@ export declare class PromotionDto {
     flashSaleEndTime?: string;
     conditions?: PromotionConditionsDto;
     isActive: boolean;
+    isAutoApply?: boolean;
     status: PromotionStatus;
     createdAt: string;
     updatedAt: string;
