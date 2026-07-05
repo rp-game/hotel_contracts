@@ -271,6 +271,9 @@ export class RoomTypeSearchResult {
   @ApiPropertyOptional({ description: 'Hotel city (populated in multi-hotel search)' })
   hotelCity?: string;
 
+  @ApiPropertyOptional({ description: 'Hotel address (populated in multi-hotel search)' })
+  hotelAddress?: string;
+
   @ApiProperty({ description: 'Room type name', example: 'Deluxe Room' })
   name: string;
 
