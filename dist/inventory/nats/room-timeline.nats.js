@@ -37,7 +37,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateRoomSettingsRequest = exports.TimelinePreferencesContract = exports.AutoStatusTransitionsDto = exports.NotificationSettingsDto = exports.ViewPreferencesDto = exports.WorkingHoursByDepartmentDto = exports.WorkingHoursDto = exports.CleaningTimesDto = exports.AnalyticsComparisonResponseDto = exports.ComprehensiveAnalyticsResponseDto = exports.OccupancyForecastDto = exports.TopPerformingRoomDto = exports.RevenueBreakdownItemDto = exports.HourlyOccupancyDto = exports.RoomTypePerformanceDto = exports.DailyTrendDto = exports.RoomSuggestionDto = exports.RoomSuggestionNextBookingDto = exports.RoomSuggestionFeaturesDto = exports.GetOptimizedRoomAssignmentRequest = exports.RoomBookingAvailability = exports.ConflictInfo = exports.RoomTimelineItem = exports.TimelineEvent = void 0;
+exports.UpdateRoomSettingsRequest = exports.TimelinePreferencesContract = exports.AutoStatusTransitionsDto = exports.NotificationSettingsDto = exports.ViewPreferencesDto = exports.WorkingHoursByDepartmentDto = exports.WorkingHoursDto = exports.CleaningTimesDto = exports.AnalyticsComparisonResponseDto = exports.ComprehensiveAnalyticsResponseDto = exports.OccupancyForecastDto = exports.TopPerformingRoomDto = exports.RevenueBreakdownItemDto = exports.HourlyOccupancyDto = exports.RoomTypePerformanceDto = exports.DailyTrendDto = exports.RoomSuggestionDto = exports.RoomSuggestionNextBookingDto = exports.RoomSuggestionFeaturesDto = exports.GetOptimizedRoomAssignmentRequest = exports.RoomBookingAvailability = exports.ConflictInfo = exports.TimelineData = exports.RoomTypeCapacityItem = exports.RoomTypeCapacityTimeSlot = exports.TimelineSettings = exports.TimelineAutoStatusTransitions = exports.TimelineViewPreferences = exports.TimelineWorkingHours = exports.TimelineSummary = exports.TimelineDateRange = exports.RoomTimelineItem = exports.MaintenanceEvent = exports.BookingTimelineItem = exports.TimelineEvent = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -114,6 +114,125 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Booking metadata for timeline rendering' }),
     __metadata("design:type", Object)
 ], TimelineEvent.prototype, "bookingData", void 0);
+class BookingTimelineItem {
+    id;
+    bookingCode;
+    guestName;
+    guestEmail;
+    roomId;
+    roomNumber;
+    checkIn;
+    checkOut;
+    status;
+    adultCount;
+    childCount;
+    specialRequests;
+    totalAmount;
+}
+exports.BookingTimelineItem = BookingTimelineItem;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Booking ID' }),
+    __metadata("design:type", String)
+], BookingTimelineItem.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Booking code' }),
+    __metadata("design:type", String)
+], BookingTimelineItem.prototype, "bookingCode", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Guest name' }),
+    __metadata("design:type", String)
+], BookingTimelineItem.prototype, "guestName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Guest email' }),
+    __metadata("design:type", String)
+], BookingTimelineItem.prototype, "guestEmail", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room ID' }),
+    __metadata("design:type", String)
+], BookingTimelineItem.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room number' }),
+    __metadata("design:type", String)
+], BookingTimelineItem.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Check-in date/time (ISO)' }),
+    __metadata("design:type", String)
+], BookingTimelineItem.prototype, "checkIn", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Check-out date/time (ISO)' }),
+    __metadata("design:type", String)
+], BookingTimelineItem.prototype, "checkOut", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Booking status',
+        enum: ['CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED'],
+    }),
+    __metadata("design:type", String)
+], BookingTimelineItem.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of adults' }),
+    __metadata("design:type", Number)
+], BookingTimelineItem.prototype, "adultCount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of children' }),
+    __metadata("design:type", Number)
+], BookingTimelineItem.prototype, "childCount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Special requests' }),
+    __metadata("design:type", String)
+], BookingTimelineItem.prototype, "specialRequests", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total booking amount' }),
+    __metadata("design:type", Number)
+], BookingTimelineItem.prototype, "totalAmount", void 0);
+class MaintenanceEvent {
+    id;
+    roomId;
+    type;
+    scheduledDate;
+    estimatedDuration;
+    description;
+    priority;
+    status;
+    assignedTechnician;
+}
+exports.MaintenanceEvent = MaintenanceEvent;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Maintenance event ID' }),
+    __metadata("design:type", String)
+], MaintenanceEvent.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room ID' }),
+    __metadata("design:type", String)
+], MaintenanceEvent.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Maintenance type', enum: ['ROUTINE', 'REPAIR', 'DEEP_CLEAN', 'INSPECTION'] }),
+    __metadata("design:type", String)
+], MaintenanceEvent.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Scheduled date (ISO)' }),
+    __metadata("design:type", String)
+], MaintenanceEvent.prototype, "scheduledDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Estimated duration in minutes' }),
+    __metadata("design:type", Number)
+], MaintenanceEvent.prototype, "estimatedDuration", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Description' }),
+    __metadata("design:type", String)
+], MaintenanceEvent.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Priority', enum: ['LOW', 'MEDIUM', 'HIGH', 'URGENT'] }),
+    __metadata("design:type", String)
+], MaintenanceEvent.prototype, "priority", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Status', enum: ['SCHEDULED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED'] }),
+    __metadata("design:type", String)
+], MaintenanceEvent.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Assigned technician' }),
+    __metadata("design:type", String)
+], MaintenanceEvent.prototype, "assignedTechnician", void 0);
 /**
  * Room Timeline Item DTO
  * Shared DTO for both NATS messages and REST API responses
@@ -180,6 +299,238 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Additional notes', type: String, nullable: true }),
     __metadata("design:type", Object)
 ], RoomTimelineItem.prototype, "notes", void 0);
+class TimelineDateRange {
+    startDate;
+    endDate;
+}
+exports.TimelineDateRange = TimelineDateRange;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Range start date (ISO)' }),
+    __metadata("design:type", String)
+], TimelineDateRange.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Range end date (ISO)' }),
+    __metadata("design:type", String)
+], TimelineDateRange.prototype, "endDate", void 0);
+class TimelineSummary {
+    totalRooms;
+    assignedBookings;
+    unassignedBookings;
+    occupancyRate;
+    availableRooms;
+}
+exports.TimelineSummary = TimelineSummary;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total rooms' }),
+    __metadata("design:type", Number)
+], TimelineSummary.prototype, "totalRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Assigned bookings count' }),
+    __metadata("design:type", Number)
+], TimelineSummary.prototype, "assignedBookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Unassigned bookings count' }),
+    __metadata("design:type", Number)
+], TimelineSummary.prototype, "unassignedBookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Occupancy rate (0-100)' }),
+    __metadata("design:type", Number)
+], TimelineSummary.prototype, "occupancyRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Available rooms count' }),
+    __metadata("design:type", Number)
+], TimelineSummary.prototype, "availableRooms", void 0);
+class TimelineWorkingHours {
+    start;
+    end;
+}
+exports.TimelineWorkingHours = TimelineWorkingHours;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Working hours start (HH:mm)' }),
+    __metadata("design:type", String)
+], TimelineWorkingHours.prototype, "start", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Working hours end (HH:mm)' }),
+    __metadata("design:type", String)
+], TimelineWorkingHours.prototype, "end", void 0);
+class TimelineViewPreferences {
+    defaultView;
+    showGuestNames;
+    showCleaningTimes;
+    showUnassignedBookings;
+    showRoomTypeCapacity;
+}
+exports.TimelineViewPreferences = TimelineViewPreferences;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Default view type' }),
+    __metadata("design:type", String)
+], TimelineViewPreferences.prototype, "defaultView", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Show guest names on timeline blocks' }),
+    __metadata("design:type", Boolean)
+], TimelineViewPreferences.prototype, "showGuestNames", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Show cleaning times' }),
+    __metadata("design:type", Boolean)
+], TimelineViewPreferences.prototype, "showCleaningTimes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Show unassigned bookings' }),
+    __metadata("design:type", Boolean)
+], TimelineViewPreferences.prototype, "showUnassignedBookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Show room type capacity overview' }),
+    __metadata("design:type", Boolean)
+], TimelineViewPreferences.prototype, "showRoomTypeCapacity", void 0);
+class TimelineAutoStatusTransitions {
+    enabled;
+    checkoutToCleaningDelay;
+    cleaningToAvailableAuto;
+}
+exports.TimelineAutoStatusTransitions = TimelineAutoStatusTransitions;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether auto status transitions are enabled' }),
+    __metadata("design:type", Boolean)
+], TimelineAutoStatusTransitions.prototype, "enabled", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Delay (minutes) from checkout to cleaning' }),
+    __metadata("design:type", Number)
+], TimelineAutoStatusTransitions.prototype, "checkoutToCleaningDelay", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether cleaning auto-transitions to available' }),
+    __metadata("design:type", Boolean)
+], TimelineAutoStatusTransitions.prototype, "cleaningToAvailableAuto", void 0);
+class TimelineSettings {
+    defaultCleaningTime;
+    workingHours;
+    statusColors;
+    viewPreferences;
+    autoStatusTransitions;
+}
+exports.TimelineSettings = TimelineSettings;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Default cleaning time in minutes' }),
+    __metadata("design:type", Number)
+], TimelineSettings.prototype, "defaultCleaningTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel working hours', type: TimelineWorkingHours }),
+    __metadata("design:type", TimelineWorkingHours)
+], TimelineSettings.prototype, "workingHours", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Status color map (status -> hex color)', type: 'object', additionalProperties: { type: 'string' } }),
+    __metadata("design:type", Object)
+], TimelineSettings.prototype, "statusColors", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'View preferences', type: TimelineViewPreferences }),
+    __metadata("design:type", TimelineViewPreferences)
+], TimelineSettings.prototype, "viewPreferences", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Auto status transition config', type: TimelineAutoStatusTransitions }),
+    __metadata("design:type", TimelineAutoStatusTransitions)
+], TimelineSettings.prototype, "autoStatusTransitions", void 0);
+class RoomTypeCapacityTimeSlot {
+    startTime;
+    endTime;
+    totalRooms;
+    assignedRooms;
+    reservedUnassigned;
+    availableRooms;
+}
+exports.RoomTypeCapacityTimeSlot = RoomTypeCapacityTimeSlot;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Slot start time (ISO)' }),
+    __metadata("design:type", String)
+], RoomTypeCapacityTimeSlot.prototype, "startTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Slot end time (ISO)' }),
+    __metadata("design:type", String)
+], RoomTypeCapacityTimeSlot.prototype, "endTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total rooms of this type' }),
+    __metadata("design:type", Number)
+], RoomTypeCapacityTimeSlot.prototype, "totalRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Rooms assigned in this slot' }),
+    __metadata("design:type", Number)
+], RoomTypeCapacityTimeSlot.prototype, "assignedRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Rooms reserved but unassigned in this slot' }),
+    __metadata("design:type", Number)
+], RoomTypeCapacityTimeSlot.prototype, "reservedUnassigned", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Available rooms in this slot' }),
+    __metadata("design:type", Number)
+], RoomTypeCapacityTimeSlot.prototype, "availableRooms", void 0);
+class RoomTypeCapacityItem {
+    roomTypeId;
+    roomTypeName;
+    totalRooms;
+    sortId;
+    createdAt;
+    timeSlots;
+}
+exports.RoomTypeCapacityItem = RoomTypeCapacityItem;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type ID' }),
+    __metadata("design:type", String)
+], RoomTypeCapacityItem.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type name' }),
+    __metadata("design:type", String)
+], RoomTypeCapacityItem.prototype, "roomTypeName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total rooms of this type' }),
+    __metadata("design:type", Number)
+], RoomTypeCapacityItem.prototype, "totalRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer-defined display order; null = not explicitly ordered, sorts last', type: Number, nullable: true }),
+    __metadata("design:type", Object)
+], RoomTypeCapacityItem.prototype, "sortId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type creation timestamp (ISO)' }),
+    __metadata("design:type", String)
+], RoomTypeCapacityItem.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Capacity per time slot', type: [RoomTypeCapacityTimeSlot] }),
+    __metadata("design:type", Array)
+], RoomTypeCapacityItem.prototype, "timeSlots", void 0);
+class TimelineData {
+    rooms;
+    bookings;
+    maintenanceEvents;
+    dateRange;
+    summary;
+    settings;
+    roomTypeCapacities;
+}
+exports.TimelineData = TimelineData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Individual room timelines', type: [RoomTimelineItem] }),
+    __metadata("design:type", Array)
+], TimelineData.prototype, "rooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'All bookings (assigned + unassigned)', type: [BookingTimelineItem] }),
+    __metadata("design:type", Array)
+], TimelineData.prototype, "bookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Maintenance events', type: [MaintenanceEvent] }),
+    __metadata("design:type", Array)
+], TimelineData.prototype, "maintenanceEvents", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Date range for this timeline view', type: TimelineDateRange }),
+    __metadata("design:type", TimelineDateRange)
+], TimelineData.prototype, "dateRange", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Timeline summary statistics', type: TimelineSummary }),
+    __metadata("design:type", TimelineSummary)
+], TimelineData.prototype, "summary", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Timeline settings and configuration', type: TimelineSettings }),
+    __metadata("design:type", TimelineSettings)
+], TimelineData.prototype, "settings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type capacity overview', type: [RoomTypeCapacityItem] }),
+    __metadata("design:type", Array)
+], TimelineData.prototype, "roomTypeCapacities", void 0);
 class ConflictInfo {
     type;
     startDate;

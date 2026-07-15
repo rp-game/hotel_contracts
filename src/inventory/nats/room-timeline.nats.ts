@@ -110,31 +110,76 @@ export class TimelineEvent {
   };
 }
 
-export interface BookingTimelineItem {
+export class BookingTimelineItem {
+  @ApiProperty({ description: 'Booking ID' })
   id: string;
+
+  @ApiProperty({ description: 'Booking code' })
   bookingCode: string;
+
+  @ApiProperty({ description: 'Guest name' })
   guestName: string;
+
+  @ApiPropertyOptional({ description: 'Guest email' })
   guestEmail?: string;
+
+  @ApiProperty({ description: 'Room ID' })
   roomId: string;
+
+  @ApiProperty({ description: 'Room number' })
   roomNumber: string;
+
+  @ApiProperty({ description: 'Check-in date/time (ISO)' })
   checkIn: string;
+
+  @ApiProperty({ description: 'Check-out date/time (ISO)' })
   checkOut: string;
+
+  @ApiProperty({
+    description: 'Booking status',
+    enum: ['CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED'],
+  })
   status: 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED';
+
+  @ApiProperty({ description: 'Number of adults' })
   adultCount: number;
+
+  @ApiProperty({ description: 'Number of children' })
   childCount: number;
+
+  @ApiPropertyOptional({ description: 'Special requests' })
   specialRequests?: string;
+
+  @ApiProperty({ description: 'Total booking amount' })
   totalAmount: number;
 }
 
-export interface MaintenanceEvent {
+export class MaintenanceEvent {
+  @ApiProperty({ description: 'Maintenance event ID' })
   id: string;
+
+  @ApiProperty({ description: 'Room ID' })
   roomId: string;
+
+  @ApiProperty({ description: 'Maintenance type', enum: ['ROUTINE', 'REPAIR', 'DEEP_CLEAN', 'INSPECTION'] })
   type: 'ROUTINE' | 'REPAIR' | 'DEEP_CLEAN' | 'INSPECTION';
+
+  @ApiProperty({ description: 'Scheduled date (ISO)' })
   scheduledDate: string;
+
+  @ApiProperty({ description: 'Estimated duration in minutes' })
   estimatedDuration: number;
+
+  @ApiProperty({ description: 'Description' })
   description: string;
+
+  @ApiProperty({ description: 'Priority', enum: ['LOW', 'MEDIUM', 'HIGH', 'URGENT'] })
   priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
+
+  @ApiProperty({ description: 'Status', enum: ['SCHEDULED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED'] })
   status: 'SCHEDULED' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+
+  @ApiPropertyOptional({ description: 'Assigned technician' })
   assignedTechnician?: string;
 }
 
@@ -181,53 +226,145 @@ export class RoomTimelineItem {
   notes?: string | null;
 }
 
-export interface TimelineData {
+export class TimelineDateRange {
+  @ApiProperty({ description: 'Range start date (ISO)' })
+  startDate: string;
+
+  @ApiProperty({ description: 'Range end date (ISO)' })
+  endDate: string;
+}
+
+export class TimelineSummary {
+  @ApiProperty({ description: 'Total rooms' })
+  totalRooms: number;
+
+  @ApiProperty({ description: 'Assigned bookings count' })
+  assignedBookings: number;
+
+  @ApiProperty({ description: 'Unassigned bookings count' })
+  unassignedBookings: number;
+
+  @ApiProperty({ description: 'Occupancy rate (0-100)' })
+  occupancyRate: number;
+
+  @ApiProperty({ description: 'Available rooms count' })
+  availableRooms: number;
+}
+
+export class TimelineWorkingHours {
+  @ApiProperty({ description: 'Working hours start (HH:mm)' })
+  start: string;
+
+  @ApiProperty({ description: 'Working hours end (HH:mm)' })
+  end: string;
+}
+
+export class TimelineViewPreferences {
+  @ApiProperty({ description: 'Default view type' })
+  defaultView: string;
+
+  @ApiProperty({ description: 'Show guest names on timeline blocks' })
+  showGuestNames: boolean;
+
+  @ApiProperty({ description: 'Show cleaning times' })
+  showCleaningTimes: boolean;
+
+  @ApiProperty({ description: 'Show unassigned bookings' })
+  showUnassignedBookings: boolean;
+
+  @ApiProperty({ description: 'Show room type capacity overview' })
+  showRoomTypeCapacity: boolean;
+}
+
+export class TimelineAutoStatusTransitions {
+  @ApiProperty({ description: 'Whether auto status transitions are enabled' })
+  enabled: boolean;
+
+  @ApiProperty({ description: 'Delay (minutes) from checkout to cleaning' })
+  checkoutToCleaningDelay: number;
+
+  @ApiProperty({ description: 'Whether cleaning auto-transitions to available' })
+  cleaningToAvailableAuto: boolean;
+}
+
+export class TimelineSettings {
+  @ApiProperty({ description: 'Default cleaning time in minutes' })
+  defaultCleaningTime: number;
+
+  @ApiProperty({ description: 'Hotel working hours', type: TimelineWorkingHours })
+  workingHours: TimelineWorkingHours;
+
+  @ApiProperty({ description: 'Status color map (status -> hex color)', type: 'object', additionalProperties: { type: 'string' } })
+  statusColors: Record<string, string>;
+
+  @ApiProperty({ description: 'View preferences', type: TimelineViewPreferences })
+  viewPreferences: TimelineViewPreferences;
+
+  @ApiPropertyOptional({ description: 'Auto status transition config', type: TimelineAutoStatusTransitions })
+  autoStatusTransitions?: TimelineAutoStatusTransitions;
+}
+
+export class RoomTypeCapacityTimeSlot {
+  @ApiProperty({ description: 'Slot start time (ISO)' })
+  startTime: string;
+
+  @ApiProperty({ description: 'Slot end time (ISO)' })
+  endTime: string;
+
+  @ApiProperty({ description: 'Total rooms of this type' })
+  totalRooms: number;
+
+  @ApiProperty({ description: 'Rooms assigned in this slot' })
+  assignedRooms: number;
+
+  @ApiProperty({ description: 'Rooms reserved but unassigned in this slot' })
+  reservedUnassigned: number;
+
+  @ApiProperty({ description: 'Available rooms in this slot' })
+  availableRooms: number;
+}
+
+export class RoomTypeCapacityItem {
+  @ApiProperty({ description: 'Room type ID' })
+  roomTypeId: string;
+
+  @ApiProperty({ description: 'Room type name' })
+  roomTypeName: string;
+
+  @ApiProperty({ description: 'Total rooms of this type' })
+  totalRooms: number;
+
+  @ApiProperty({ description: 'Customer-defined display order; null = not explicitly ordered, sorts last', type: Number, nullable: true })
+  sortId: number | null;
+
+  @ApiProperty({ description: 'Room type creation timestamp (ISO)' })
+  createdAt: string;
+
+  @ApiProperty({ description: 'Capacity per time slot', type: [RoomTypeCapacityTimeSlot] })
+  timeSlots: RoomTypeCapacityTimeSlot[];
+}
+
+export class TimelineData {
+  @ApiProperty({ description: 'Individual room timelines', type: [RoomTimelineItem] })
   rooms: RoomTimelineItem[];
+
+  @ApiProperty({ description: 'All bookings (assigned + unassigned)', type: [BookingTimelineItem] })
   bookings: BookingTimelineItem[];
+
+  @ApiProperty({ description: 'Maintenance events', type: [MaintenanceEvent] })
   maintenanceEvents: MaintenanceEvent[];
-  dateRange: {
-    startDate: string;
-    endDate: string;
-  };
-  summary: {
-    totalRooms: number;
-    assignedBookings: number;
-    unassignedBookings: number;
-    occupancyRate: number;
-    availableRooms: number;
-  };
-  settings: {
-    defaultCleaningTime: number;
-    workingHours: { start: string; end: string };
-    statusColors: Record<string, string>;
-    viewPreferences: {
-      defaultView: string;
-      showGuestNames: boolean;
-      showCleaningTimes: boolean;
-      showUnassignedBookings: boolean;
-      showRoomTypeCapacity: boolean;
-    };
-    autoStatusTransitions?: {
-      enabled: boolean;
-      checkoutToCleaningDelay: number;
-      cleaningToAvailableAuto: boolean;
-    };
-  };
-  roomTypeCapacities: {
-    roomTypeId: string;
-    roomTypeName: string;
-    totalRooms: number;
-    sortId: number | null;
-    createdAt: string;
-    timeSlots: {
-      startTime: string;
-      endTime: string;
-      totalRooms: number;
-      assignedRooms: number;
-      reservedUnassigned: number;
-      availableRooms: number;
-    }[];
-  }[];
+
+  @ApiProperty({ description: 'Date range for this timeline view', type: TimelineDateRange })
+  dateRange: TimelineDateRange;
+
+  @ApiProperty({ description: 'Timeline summary statistics', type: TimelineSummary })
+  summary: TimelineSummary;
+
+  @ApiProperty({ description: 'Timeline settings and configuration', type: TimelineSettings })
+  settings: TimelineSettings;
+
+  @ApiProperty({ description: 'Room type capacity overview', type: [RoomTypeCapacityItem] })
+  roomTypeCapacities: RoomTypeCapacityItem[];
 }
 
 export type GetRoomTimelineResponse = TimelineData;

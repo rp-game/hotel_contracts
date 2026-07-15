@@ -77,7 +77,7 @@ export declare class TimelineEvent {
         source?: string;
     };
 }
-export interface BookingTimelineItem {
+export declare class BookingTimelineItem {
     id: string;
     bookingCode: string;
     guestName: string;
@@ -92,7 +92,7 @@ export interface BookingTimelineItem {
     specialRequests?: string;
     totalAmount: number;
 }
-export interface MaintenanceEvent {
+export declare class MaintenanceEvent {
     id: string;
     roomId: string;
     type: 'ROUTINE' | 'REPAIR' | 'DEEP_CLEAN' | 'INSPECTION';
@@ -121,56 +121,64 @@ export declare class RoomTimelineItem {
     nextMaintenance?: string | null;
     notes?: string | null;
 }
-export interface TimelineData {
+export declare class TimelineDateRange {
+    startDate: string;
+    endDate: string;
+}
+export declare class TimelineSummary {
+    totalRooms: number;
+    assignedBookings: number;
+    unassignedBookings: number;
+    occupancyRate: number;
+    availableRooms: number;
+}
+export declare class TimelineWorkingHours {
+    start: string;
+    end: string;
+}
+export declare class TimelineViewPreferences {
+    defaultView: string;
+    showGuestNames: boolean;
+    showCleaningTimes: boolean;
+    showUnassignedBookings: boolean;
+    showRoomTypeCapacity: boolean;
+}
+export declare class TimelineAutoStatusTransitions {
+    enabled: boolean;
+    checkoutToCleaningDelay: number;
+    cleaningToAvailableAuto: boolean;
+}
+export declare class TimelineSettings {
+    defaultCleaningTime: number;
+    workingHours: TimelineWorkingHours;
+    statusColors: Record<string, string>;
+    viewPreferences: TimelineViewPreferences;
+    autoStatusTransitions?: TimelineAutoStatusTransitions;
+}
+export declare class RoomTypeCapacityTimeSlot {
+    startTime: string;
+    endTime: string;
+    totalRooms: number;
+    assignedRooms: number;
+    reservedUnassigned: number;
+    availableRooms: number;
+}
+export declare class RoomTypeCapacityItem {
+    roomTypeId: string;
+    roomTypeName: string;
+    totalRooms: number;
+    sortId: number | null;
+    createdAt: string;
+    timeSlots: RoomTypeCapacityTimeSlot[];
+}
+export declare class TimelineData {
     rooms: RoomTimelineItem[];
     bookings: BookingTimelineItem[];
     maintenanceEvents: MaintenanceEvent[];
-    dateRange: {
-        startDate: string;
-        endDate: string;
-    };
-    summary: {
-        totalRooms: number;
-        assignedBookings: number;
-        unassignedBookings: number;
-        occupancyRate: number;
-        availableRooms: number;
-    };
-    settings: {
-        defaultCleaningTime: number;
-        workingHours: {
-            start: string;
-            end: string;
-        };
-        statusColors: Record<string, string>;
-        viewPreferences: {
-            defaultView: string;
-            showGuestNames: boolean;
-            showCleaningTimes: boolean;
-            showUnassignedBookings: boolean;
-            showRoomTypeCapacity: boolean;
-        };
-        autoStatusTransitions?: {
-            enabled: boolean;
-            checkoutToCleaningDelay: number;
-            cleaningToAvailableAuto: boolean;
-        };
-    };
-    roomTypeCapacities: {
-        roomTypeId: string;
-        roomTypeName: string;
-        totalRooms: number;
-        sortId: number | null;
-        createdAt: string;
-        timeSlots: {
-            startTime: string;
-            endTime: string;
-            totalRooms: number;
-            assignedRooms: number;
-            reservedUnassigned: number;
-            availableRooms: number;
-        }[];
-    }[];
+    dateRange: TimelineDateRange;
+    summary: TimelineSummary;
+    settings: TimelineSettings;
+    roomTypeCapacities: RoomTypeCapacityItem[];
 }
 export type GetRoomTimelineResponse = TimelineData;
 export type GetRoomTimelineNatsResponse = NatsResponse<GetRoomTimelineResponse>;
