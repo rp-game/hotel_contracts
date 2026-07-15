@@ -110,6 +110,9 @@ export declare class ReorderRoomTypesRequest {
 }
 export interface ReorderRoomTypesResponse {
     message: string;
+    updatedCount: number;
+    /** IDs in orderedIds that didn't match any room type for this tenant/hotel (deleted, wrong scope, typo) */
+    notFoundIds: string[];
 }
 export type ReorderRoomTypesNatsResponse = NatsResponse<ReorderRoomTypesResponse>;
 /**
