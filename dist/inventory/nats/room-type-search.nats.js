@@ -340,6 +340,7 @@ class RoomTypeSearchResult {
     hotelId;
     hotelName;
     hotelCity;
+    hotelAddress;
     name;
     description;
     capacity;
@@ -372,6 +373,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel city (populated in multi-hotel search)' }),
     __metadata("design:type", String)
 ], RoomTypeSearchResult.prototype, "hotelCity", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel address (populated in multi-hotel search)' }),
+    __metadata("design:type", String)
+], RoomTypeSearchResult.prototype, "hotelAddress", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Room type name', example: 'Deluxe Room' }),
     __metadata("design:type", String)

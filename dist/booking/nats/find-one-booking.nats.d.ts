@@ -113,6 +113,9 @@ export declare class GetBookingByIdResponse {
     groupId?: string | null;
     groupName?: string | null;
     groupBlockCode?: string | null;
+    otaBookingId?: string;
+    otaBookingReference?: string;
+    otaPaymentType?: string | null;
 }
 export type GetBookingByIdNatsResponse = NatsResponse<GetBookingByIdResponse>;
 //# sourceMappingURL=find-one-booking.nats.d.ts.map

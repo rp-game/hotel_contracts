@@ -314,6 +314,16 @@ export class GetBookingByIdResponse {
 
   @ApiPropertyOptional({ description: 'Group block code', type: String, nullable: true })
   groupBlockCode?: string | null;
+
+  // OTA information
+  @ApiPropertyOptional({ description: 'OTA booking ID' })
+  otaBookingId?: string;
+
+  @ApiPropertyOptional({ description: 'OTA booking reference' })
+  otaBookingReference?: string;
+
+  @ApiPropertyOptional({ description: 'OTA payment type: Hotel Collect or Channel Collect' })
+  otaPaymentType?: string | null;
 }
 
 export type GetBookingByIdNatsResponse = NatsResponse<GetBookingByIdResponse>;

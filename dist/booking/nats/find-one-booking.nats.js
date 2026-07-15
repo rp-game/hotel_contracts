@@ -297,6 +297,10 @@ class GetBookingByIdResponse {
     groupId;
     groupName;
     groupBlockCode;
+    // OTA information
+    otaBookingId;
+    otaBookingReference;
+    otaPaymentType;
 }
 exports.GetBookingByIdResponse = GetBookingByIdResponse;
 __decorate([
@@ -501,4 +505,16 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Group block code', type: String, nullable: true }),
     __metadata("design:type", Object)
 ], GetBookingByIdResponse.prototype, "groupBlockCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'OTA booking ID' }),
+    __metadata("design:type", String)
+], GetBookingByIdResponse.prototype, "otaBookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'OTA booking reference' }),
+    __metadata("design:type", String)
+], GetBookingByIdResponse.prototype, "otaBookingReference", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'OTA payment type: Hotel Collect or Channel Collect' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "otaPaymentType", void 0);
 //# sourceMappingURL=find-one-booking.nats.js.map
