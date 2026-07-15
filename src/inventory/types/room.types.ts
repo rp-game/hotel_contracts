@@ -70,6 +70,9 @@ export class RoomType {
   @ApiProperty({ description: 'Bed type: SINGLE | DOUBLE | TWIN | TRIPLE | KING | QUEEN | BUNK | SOFA_BED', required: false })
   bedType?: string;
 
+  @ApiProperty({ description: 'Customer-defined display order (drag-and-drop); null = not explicitly ordered, sorts last', required: false, nullable: true })
+  sortId?: number | null;
+
   @ApiProperty({ description: 'Creation timestamp (ISO format)' })
   createdAt: string;
 

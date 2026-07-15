@@ -35,6 +35,7 @@ class RoomType {
     features;
     isActive;
     bedType;
+    sortId;
     createdAt;
     updatedAt;
 }
@@ -110,6 +111,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Bed type: SINGLE | DOUBLE | TWIN | TRIPLE | KING | QUEEN | BUNK | SOFA_BED', required: false }),
     __metadata("design:type", String)
 ], RoomType.prototype, "bedType", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer-defined display order (drag-and-drop); null = not explicitly ordered, sorts last', required: false, nullable: true }),
+    __metadata("design:type", Object)
+], RoomType.prototype, "sortId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Creation timestamp (ISO format)' }),
     __metadata("design:type", String)

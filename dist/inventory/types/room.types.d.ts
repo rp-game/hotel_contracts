@@ -22,6 +22,7 @@ export declare class RoomType {
     features?: string[] | null;
     isActive?: boolean;
     bedType?: string;
+    sortId?: number | null;
     createdAt: string;
     updatedAt: string;
 }

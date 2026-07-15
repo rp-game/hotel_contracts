@@ -238,6 +238,31 @@ export interface DeleteRoomTypeResponse {
 export type DeleteRoomTypeNatsResponse = NatsResponse<DeleteRoomTypeResponse>;
 
 /**
+ * Reorder Room Types Request (drag-and-drop display order)
+ * Pattern: inventory.room-types.reorder
+ */
+export class ReorderRoomTypesRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsUUID()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsUUID()
+  hotelId: string;
+
+  @ApiProperty({ description: 'Room type IDs in the desired display order', type: [String] })
+  @IsArray()
+  @IsUUID('all', { each: true })
+  orderedIds: string[];
+}
+
+export interface ReorderRoomTypesResponse {
+  message: string;
+}
+
+export type ReorderRoomTypesNatsResponse = NatsResponse<ReorderRoomTypesResponse>;
+
+/**
  * Add Image to Room Type Request
  * Pattern: inventory.room-types.images.add
  */

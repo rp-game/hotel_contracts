@@ -100,6 +100,19 @@ export interface DeleteRoomTypeResponse {
 }
 export type DeleteRoomTypeNatsResponse = NatsResponse<DeleteRoomTypeResponse>;
 /**
+ * Reorder Room Types Request (drag-and-drop display order)
+ * Pattern: inventory.room-types.reorder
+ */
+export declare class ReorderRoomTypesRequest {
+    tenantId: string;
+    hotelId: string;
+    orderedIds: string[];
+}
+export interface ReorderRoomTypesResponse {
+    message: string;
+}
+export type ReorderRoomTypesNatsResponse = NatsResponse<ReorderRoomTypesResponse>;
+/**
  * Add Image to Room Type Request
  * Pattern: inventory.room-types.images.add
  */

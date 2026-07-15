@@ -160,6 +160,8 @@ export interface TimelineData {
         roomTypeId: string;
         roomTypeName: string;
         totalRooms: number;
+        sortId: number | null;
+        createdAt: string;
         timeSlots: {
             startTime: string;
             endTime: string;

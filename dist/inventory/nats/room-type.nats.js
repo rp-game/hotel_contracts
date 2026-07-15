@@ -23,7 +23,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AddRoomTypeImageRequest = exports.UpdateRoomTypeRequest = exports.CreateRoomTypeRequest = void 0;
+exports.AddRoomTypeImageRequest = exports.ReorderRoomTypesRequest = exports.UpdateRoomTypeRequest = exports.CreateRoomTypeRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 /**
@@ -254,6 +254,32 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateRoomTypeRequest.prototype, "bedType", void 0);
+/**
+ * Reorder Room Types Request (drag-and-drop display order)
+ * Pattern: inventory.room-types.reorder
+ */
+class ReorderRoomTypesRequest {
+    tenantId;
+    hotelId;
+    orderedIds;
+}
+exports.ReorderRoomTypesRequest = ReorderRoomTypesRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], ReorderRoomTypesRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], ReorderRoomTypesRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room type IDs in the desired display order', type: [String] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsUUID)('all', { each: true }),
+    __metadata("design:type", Array)
+], ReorderRoomTypesRequest.prototype, "orderedIds", void 0);
 /**
  * Add Image to Room Type Request
  * Pattern: inventory.room-types.images.add
