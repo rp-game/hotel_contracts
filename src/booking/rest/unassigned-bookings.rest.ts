@@ -19,6 +19,10 @@ export class UnassignedBookingItemDto {
   @IsString()
   bookingId: string;
 
+  @ApiProperty({ description: 'Booking code (e.g., BK-20260705-7822)' })
+  @IsString()
+  bookingCode: string;
+
   @ApiProperty({ description: 'Guest name' })
   @IsString()
   guestName: string;

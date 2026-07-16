@@ -15,6 +15,7 @@ import { NatsResponse } from '../../common';
  */
 export interface UnassignedBookingItem {
   bookingId: string;
+  bookingCode: string;
   guestName: string;
   roomType: string;
   roomTypeId: string;

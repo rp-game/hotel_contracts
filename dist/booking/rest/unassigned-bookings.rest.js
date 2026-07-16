@@ -26,6 +26,7 @@ const class_validator_1 = require("class-validator");
  */
 class UnassignedBookingItemDto {
     bookingId;
+    bookingCode;
     guestName;
     roomType;
     roomTypeId;
@@ -45,6 +46,11 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UnassignedBookingItemDto.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Booking code (e.g., BK-20260705-7822)' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UnassignedBookingItemDto.prototype, "bookingCode", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Guest name' }),
     (0, class_validator_1.IsString)(),
