@@ -47,6 +47,7 @@ export * from './add-payment.nats';
 export * from './cancel-booking.nats';
 export * from './booking-lookup.nats';
 export * from './assign-room.nats';
+export * from './assign-room-slot.nats';
 export * from './payment-events.nats';
 export * from './occupancy.nats';
 export * from './member-revenue.nats';

@@ -72,6 +72,7 @@ __exportStar(require("./add-payment.nats"), exports);
 __exportStar(require("./cancel-booking.nats"), exports);
 __exportStar(require("./booking-lookup.nats"), exports);
 __exportStar(require("./assign-room.nats"), exports);
+__exportStar(require("./assign-room-slot.nats"), exports);
 __exportStar(require("./payment-events.nats"), exports);
 __exportStar(require("./occupancy.nats"), exports);
 __exportStar(require("./member-revenue.nats"), exports);
