@@ -13,6 +13,9 @@ import { NatsResponse } from '../../common';
  */
 export interface UnassignedBookingItem {
     bookingId: string;
+    /** The specific booking_rooms slot this item represents; undefined only for
+     * legacy bookings with no booking_rooms rows at all. */
+    bookingRoomId?: string;
     bookingCode: string;
     guestName: string;
     roomType: string;

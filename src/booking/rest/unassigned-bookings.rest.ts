@@ -23,6 +23,11 @@ export class UnassignedBookingItemDto {
   @IsString()
   bookingCode: string;
 
+  @ApiPropertyOptional({ description: 'The specific booking_rooms slot this item represents; absent only for legacy bookings with no booking_rooms rows' })
+  @IsOptional()
+  @IsString()
+  bookingRoomId?: string;
+
   @ApiProperty({ description: 'Guest name' })
   @IsString()
   guestName: string;

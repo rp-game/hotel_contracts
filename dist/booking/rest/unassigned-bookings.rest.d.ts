@@ -13,6 +13,7 @@
 export declare class UnassignedBookingItemDto {
     bookingId: string;
     bookingCode: string;
+    bookingRoomId?: string;
     guestName: string;
     roomType: string;
     roomTypeId: string;

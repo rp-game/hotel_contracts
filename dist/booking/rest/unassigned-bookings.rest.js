@@ -27,6 +27,7 @@ const class_validator_1 = require("class-validator");
 class UnassignedBookingItemDto {
     bookingId;
     bookingCode;
+    bookingRoomId;
     guestName;
     roomType;
     roomTypeId;
@@ -51,6 +52,12 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UnassignedBookingItemDto.prototype, "bookingCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'The specific booking_rooms slot this item represents; absent only for legacy bookings with no booking_rooms rows' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UnassignedBookingItemDto.prototype, "bookingRoomId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Guest name' }),
     (0, class_validator_1.IsString)(),
