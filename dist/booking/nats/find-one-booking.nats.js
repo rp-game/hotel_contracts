@@ -255,6 +255,8 @@ class GetBookingByIdResponse {
     bookingType;
     startTime;
     endTime;
+    estimatedCheckInTime;
+    estimatedCheckOutTime;
     totalAmount;
     taxAmount;
     grossAmount;
@@ -349,6 +351,14 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'End time for hourly bookings (HH:MM:SS)' }),
     __metadata("design:type", String)
 ], GetBookingByIdResponse.prototype, "endTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated check-in time' }),
+    __metadata("design:type", Date)
+], GetBookingByIdResponse.prototype, "estimatedCheckInTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated check-out time' }),
+    __metadata("design:type", Date)
+], GetBookingByIdResponse.prototype, "estimatedCheckOutTime", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total booking amount' }),
     __metadata("design:type", Number)

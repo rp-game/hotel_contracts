@@ -68,6 +68,8 @@ export declare class GetBookingByIdResponse {
     bookingType?: string;
     startTime?: string;
     endTime?: string;
+    estimatedCheckInTime?: Date;
+    estimatedCheckOutTime?: Date;
     totalAmount: number;
     taxAmount?: number;
     grossAmount?: number;
