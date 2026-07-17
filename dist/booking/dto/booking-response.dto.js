@@ -373,6 +373,7 @@ class BookingResponseDto {
     startTime;
     endTime;
     estimatedCheckInTime;
+    estimatedCheckOutTime;
     actualCheckInTime;
     actualCheckOutTime;
     pendingInvoiceInfo;
@@ -500,6 +501,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated check-in time' }),
     __metadata("design:type", Date)
 ], BookingResponseDto.prototype, "estimatedCheckInTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated check-out time' }),
+    __metadata("design:type", Date)
+], BookingResponseDto.prototype, "estimatedCheckOutTime", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Actual check-in time' }),
     __metadata("design:type", Date)
