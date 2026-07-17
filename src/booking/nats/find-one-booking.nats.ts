@@ -189,6 +189,12 @@ export class GetBookingByIdResponse {
   @ApiPropertyOptional({ description: 'End time for hourly bookings (HH:MM:SS)' })
   endTime?: string;
 
+  @ApiPropertyOptional({ description: 'Estimated check-in time' })
+  estimatedCheckInTime?: Date;
+
+  @ApiPropertyOptional({ description: 'Estimated check-out time' })
+  estimatedCheckOutTime?: Date;
+
   @ApiProperty({ description: 'Total booking amount' })
   totalAmount: number;
 
