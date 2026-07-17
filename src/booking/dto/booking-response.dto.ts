@@ -267,6 +267,9 @@ export class BookingResponseDto {
   @ApiPropertyOptional({ description: 'Estimated check-in time' })
   estimatedCheckInTime?: Date;
 
+  @ApiPropertyOptional({ description: 'Estimated check-out time' })
+  estimatedCheckOutTime?: Date;
+
   @ApiPropertyOptional({ description: 'Actual check-in time' })
   actualCheckInTime?: Date;
 
