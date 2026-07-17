@@ -39,6 +39,7 @@ export interface BookingTimelineData {
     adultCount?: number;
     childCount?: number;
     specialRequests?: string;
+    notes?: string;
     totalAmount?: number;
     corporateName?: string;
     salesPersonName?: string;
