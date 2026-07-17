@@ -101,6 +101,7 @@ export declare class BookingResponseDto {
     startTime?: string;
     endTime?: string;
     estimatedCheckInTime?: Date;
+    estimatedCheckOutTime?: Date;
     actualCheckInTime?: Date;
     actualCheckOutTime?: Date;
     pendingInvoiceInfo?: {
