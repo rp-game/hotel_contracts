@@ -101,6 +101,7 @@ export class TimelineEvent {
     bookingCode?: string;
     totalAmount?: number;
     specialRequests?: string;
+    bookingNotes?: string;
     updatedAt?: string;
     roomTypeId?: string;
     corporateName?: string;
