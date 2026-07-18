@@ -13,7 +13,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TaskTimerDto = exports.TaskStatsDto = exports.MobileTaskListResponseDto = exports.TaskSummaryStatsDto = exports.MobileTaskDto = exports.GetPerformanceMetricsNatsRequest = exports.StaffPerformanceMetricsNatsResponse = exports.GetHousekeepingTasksPayload = exports.EnhancedCleaningTask = exports.ClockOutNatsRequest = exports.ClockInNatsRequest = exports.GetCurrentShiftNatsRequest = exports.ShiftData = exports.QuickCompleteTaskResponseDto = exports.QuickCompleteTaskDto = exports.QuickCompleteResult = exports.QuickCompleteTaskNatsRequest = exports.AddNotesResult = exports.AddTaskNotesNatsRequest = exports.AddTaskNotesBodyDto = exports.GetRoomTasksNatsRequest = exports.SearchTasksNatsRequest = exports.SearchTasksFilters = exports.MobileTaskResponse = exports.GetRecentTasksNatsRequest = exports.FindTaskByIdNatsRequest = void 0;
+exports.MaintenanceTimelineItem = exports.MaintenanceTimelineNatsRequest = exports.TaskTimerDto = exports.TaskStatsDto = exports.MobileTaskListResponseDto = exports.TaskSummaryStatsDto = exports.MobileTaskDto = exports.GetPerformanceMetricsNatsRequest = exports.StaffPerformanceMetricsNatsResponse = exports.GetHousekeepingTasksPayload = exports.EnhancedCleaningTask = exports.ClockOutNatsRequest = exports.ClockInNatsRequest = exports.GetCurrentShiftNatsRequest = exports.ShiftData = exports.QuickCompleteTaskResponseDto = exports.QuickCompleteTaskDto = exports.QuickCompleteResult = exports.QuickCompleteTaskNatsRequest = exports.AddNotesResult = exports.AddTaskNotesNatsRequest = exports.AddTaskNotesBodyDto = exports.GetRoomTasksNatsRequest = exports.SearchTasksNatsRequest = exports.SearchTasksFilters = exports.MobileTaskResponse = exports.GetRecentTasksNatsRequest = exports.FindTaskByIdNatsRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
@@ -1050,4 +1050,97 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Timer status' }),
     __metadata("design:type", String)
 ], TaskTimerDto.prototype, "status", void 0);
+// MAINTENANCE TIMELINE
+// Pattern: housekeeping.maintenance.timeline
+// Lấy các task bảo trì (taskType=MAINTENANCE / MAINTENANCE_CLEAN) của 1 khách sạn
+// có scheduledFor trong khoảng [startDate, endDate] — dùng để inventory-service
+// (proxy) render block bảo trì lên timeline phòng.
+class MaintenanceTimelineNatsRequest {
+    tenantId;
+    hotelId;
+    startDate;
+    endDate;
+}
+exports.MaintenanceTimelineNatsRequest = MaintenanceTimelineNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], MaintenanceTimelineNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], MaintenanceTimelineNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Khoảng bắt đầu (ISO datetime)' }),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], MaintenanceTimelineNatsRequest.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Khoảng kết thúc (ISO datetime)' }),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], MaintenanceTimelineNatsRequest.prototype, "endDate", void 0);
+class MaintenanceTimelineItem {
+    id;
+    roomId;
+    type;
+    scheduledDate;
+    estimatedDuration;
+    description;
+    priority;
+    status;
+    assignedTechnician;
+}
+exports.MaintenanceTimelineItem = MaintenanceTimelineItem;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Maintenance task ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], MaintenanceTimelineItem.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Room ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], MaintenanceTimelineItem.prototype, "roomId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Task type (MAINTENANCE / MAINTENANCE_CLEAN)', enum: cleaning_tasks_nats_1.CleaningTaskType }),
+    (0, class_validator_1.IsEnum)(cleaning_tasks_nats_1.CleaningTaskType),
+    __metadata("design:type", String)
+], MaintenanceTimelineItem.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Scheduled start datetime (ISO)', nullable: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", Object)
+], MaintenanceTimelineItem.prototype, "scheduledDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated duration in minutes', nullable: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Object)
+], MaintenanceTimelineItem.prototype, "estimatedDuration", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Description', nullable: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", Object)
+], MaintenanceTimelineItem.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Priority', enum: enums_1.TaskPriority }),
+    (0, class_validator_1.IsEnum)(enums_1.TaskPriority),
+    __metadata("design:type", String)
+], MaintenanceTimelineItem.prototype, "priority", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Task status', enum: enums_1.TaskStatus }),
+    (0, class_validator_1.IsEnum)(enums_1.TaskStatus),
+    __metadata("design:type", String)
+], MaintenanceTimelineItem.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Assigned technician (staff id) — V1 trả id', nullable: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", Object)
+], MaintenanceTimelineItem.prototype, "assignedTechnician", void 0);
 //# sourceMappingURL=cleaning-tasks-extended.nats.js.map

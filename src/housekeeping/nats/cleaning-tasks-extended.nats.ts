@@ -694,3 +694,70 @@ export class TaskTimerDto {
   @ApiProperty({ description: 'Timer status' })
   status: string;
 }
+
+// MAINTENANCE TIMELINE
+// Pattern: housekeeping.maintenance.timeline
+// Lấy các task bảo trì (taskType=MAINTENANCE / MAINTENANCE_CLEAN) của 1 khách sạn
+// có scheduledFor trong khoảng [startDate, endDate] — dùng để inventory-service
+// (proxy) render block bảo trì lên timeline phòng.
+export class MaintenanceTimelineNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  @IsString()
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  @IsString()
+  hotelId: string;
+
+  @ApiProperty({ description: 'Khoảng bắt đầu (ISO datetime)' })
+  @IsDateString()
+  startDate: string;
+
+  @ApiProperty({ description: 'Khoảng kết thúc (ISO datetime)' })
+  @IsDateString()
+  endDate: string;
+}
+
+export class MaintenanceTimelineItem {
+  @ApiProperty({ description: 'Maintenance task ID' })
+  @IsString()
+  id: string;
+
+  @ApiProperty({ description: 'Room ID' })
+  @IsString()
+  roomId: string;
+
+  @ApiProperty({ description: 'Task type (MAINTENANCE / MAINTENANCE_CLEAN)', enum: CleaningTaskType })
+  @IsEnum(CleaningTaskType)
+  type: CleaningTaskType;
+
+  @ApiPropertyOptional({ description: 'Scheduled start datetime (ISO)', nullable: true })
+  @IsOptional()
+  @IsDateString()
+  scheduledDate?: string | null;
+
+  @ApiPropertyOptional({ description: 'Estimated duration in minutes', nullable: true })
+  @IsOptional()
+  @IsNumber()
+  estimatedDuration?: number | null;
+
+  @ApiPropertyOptional({ description: 'Description', nullable: true })
+  @IsOptional()
+  @IsString()
+  description?: string | null;
+
+  @ApiProperty({ description: 'Priority', enum: TaskPriority })
+  @IsEnum(TaskPriority)
+  priority: TaskPriority;
+
+  @ApiProperty({ description: 'Task status', enum: TaskStatus })
+  @IsEnum(TaskStatus)
+  status: TaskStatus;
+
+  @ApiPropertyOptional({ description: 'Assigned technician (staff id) — V1 trả id', nullable: true })
+  @IsOptional()
+  @IsString()
+  assignedTechnician?: string | null;
+}
+
+export type MaintenanceTimelineNatsResponse = NatsResponse<MaintenanceTimelineItem[]>;

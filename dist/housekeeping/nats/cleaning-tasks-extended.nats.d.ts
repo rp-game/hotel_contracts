@@ -282,4 +282,22 @@ export declare class TaskTimerDto {
     endTime?: string;
     status: string;
 }
+export declare class MaintenanceTimelineNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    startDate: string;
+    endDate: string;
+}
+export declare class MaintenanceTimelineItem {
+    id: string;
+    roomId: string;
+    type: CleaningTaskType;
+    scheduledDate?: string | null;
+    estimatedDuration?: number | null;
+    description?: string | null;
+    priority: TaskPriority;
+    status: TaskStatus;
+    assignedTechnician?: string | null;
+}
+export type MaintenanceTimelineNatsResponse = NatsResponse<MaintenanceTimelineItem[]>;
 //# sourceMappingURL=cleaning-tasks-extended.nats.d.ts.map
