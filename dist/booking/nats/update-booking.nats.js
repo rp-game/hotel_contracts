@@ -203,6 +203,13 @@ class UpdateBookingDto {
      * Display name of the user who performed the override (for audit trail)
      */
     overriddenByName;
+    /**
+     * User confirm áp dụng giá mới khi đổi ngày riêng từng phòng (rooms[].checkInDate/
+     * checkOutDate) trên booking ĐÃ CÓ paidAmount > 0 (PAID/PARTIALLY_PAID). Nếu chưa
+     * true và giá thay đổi, BE trả requiresPriceConfirmation=true kèm giá cũ/mới thay vì
+     * áp thẳng — tránh âm thầm đổi tổng tiền của booking đã thu tiền.
+     */
+    confirmPriceChange;
 }
 exports.UpdateBookingDto = UpdateBookingDto;
 __decorate([
@@ -526,4 +533,11 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateBookingDto.prototype, "overriddenByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'User confirm áp giá mới khi đổi ngày riêng từng phòng trên booking đã thanh toán',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], UpdateBookingDto.prototype, "confirmPriceChange", void 0);
 //# sourceMappingURL=update-booking.nats.js.map
