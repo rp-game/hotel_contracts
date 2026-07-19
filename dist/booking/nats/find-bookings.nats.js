@@ -200,6 +200,7 @@ class BookingSummary {
     groupId;
     groupName;
     groupBlockCode;
+    folioGroupId;
     travelAgentId;
     travelAgentName;
     agentReference;
@@ -373,6 +374,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Group block code' }),
     __metadata("design:type", Object)
 ], BookingSummary.prototype, "groupBlockCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Folio group ID (nếu booking thuộc folio gộp)', type: String, nullable: true, format: 'uuid' }),
+    __metadata("design:type", Object)
+], BookingSummary.prototype, "folioGroupId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Travel Agent ID' }),
     __metadata("design:type", Object)

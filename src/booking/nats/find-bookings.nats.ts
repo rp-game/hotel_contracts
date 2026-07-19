@@ -265,6 +265,9 @@ export class BookingSummary {
   @ApiPropertyOptional({ description: 'Group block code' })
   groupBlockCode?: string | null;
 
+  @ApiPropertyOptional({ description: 'Folio group ID (nếu booking thuộc folio gộp)', type: String, nullable: true, format: 'uuid' })
+  folioGroupId?: string | null;
+
   @ApiPropertyOptional({ description: 'Travel Agent ID' })
   travelAgentId?: string | null;
 
@@ -380,6 +383,11 @@ export interface FindBookingsNatsRequest {
    * Travel Agent ID filter
    */
   travelAgentId?: string;
+
+  /**
+   * Chỉ lấy booking đang thuộc folio gộp (folio_group_id IS NOT NULL)
+   */
+  inFolioGroup?: boolean;
 
   /**
    * Pagination: page number (1-indexed, default: 1)

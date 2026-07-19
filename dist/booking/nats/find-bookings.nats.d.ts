@@ -175,6 +175,7 @@ export declare class BookingSummary {
     groupId?: string | null;
     groupName?: string | null;
     groupBlockCode?: string | null;
+    folioGroupId?: string | null;
     travelAgentId?: string | null;
     travelAgentName?: string | null;
     agentReference?: string | null;
@@ -262,6 +263,10 @@ export interface FindBookingsNatsRequest {
      * Travel Agent ID filter
      */
     travelAgentId?: string;
+    /**
+     * Chỉ lấy booking đang thuộc folio gộp (folio_group_id IS NOT NULL)
+     */
+    inFolioGroup?: boolean;
     /**
      * Pagination: page number (1-indexed, default: 1)
      */
