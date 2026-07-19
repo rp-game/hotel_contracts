@@ -329,6 +329,26 @@ export interface FindBookingsNatsRequest {
   guestName?: string;
 
   /**
+   * Guest email search
+   */
+  guestEmail?: string;
+
+  /**
+   * Guest phone search
+   */
+  guestPhone?: string;
+
+  /**
+   * Convenience exact check-in date (YYYY-MM-DD)
+   */
+  checkInDate?: string;
+
+  /**
+   * Convenience exact check-out date (YYYY-MM-DD)
+   */
+  checkOutDate?: string;
+
+  /**
    * Booking reference/code search
    */
   bookingReference?: string;
