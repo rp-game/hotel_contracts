@@ -386,7 +386,7 @@ export class BookingResponseDto {
   promotionDiscount?: number;
 
   // Folio group (gộp folio thanh toán)
-  @ApiPropertyOptional({ description: 'Folio group ID (nếu booking thuộc folio gộp)' })
+  @ApiPropertyOptional({ description: 'Folio group ID (nếu booking thuộc folio gộp)', type: String, nullable: true, format: 'uuid' })
   folioGroupId?: string | null;
 
   // Group booking info

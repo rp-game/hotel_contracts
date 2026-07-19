@@ -311,6 +311,10 @@ export class GetBookingByIdResponse {
   @ApiPropertyOptional({ description: 'Agent reference number', type: String, nullable: true })
   agentReference?: string | null;
 
+  // Folio group (gộp folio thanh toán)
+  @ApiPropertyOptional({ description: 'Folio group ID', type: String, nullable: true, format: 'uuid' })
+  folioGroupId?: string | null;
+
   // Group booking info
   @ApiPropertyOptional({ description: 'Group booking ID', type: String, nullable: true, format: 'uuid' })
   groupId?: string | null;

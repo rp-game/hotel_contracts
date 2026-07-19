@@ -112,6 +112,7 @@ export declare class GetBookingByIdResponse {
     travelAgentId?: string | null;
     travelAgentName?: string | null;
     agentReference?: string | null;
+    folioGroupId?: string | null;
     groupId?: string | null;
     groupName?: string | null;
     groupBlockCode?: string | null;

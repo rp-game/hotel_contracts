@@ -644,7 +644,7 @@ __decorate([
     __metadata("design:type", Number)
 ], BookingResponseDto.prototype, "promotionDiscount", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Folio group ID (nếu booking thuộc folio gộp)' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Folio group ID (nếu booking thuộc folio gộp)', type: String, nullable: true, format: 'uuid' }),
     __metadata("design:type", Object)
 ], BookingResponseDto.prototype, "folioGroupId", void 0);
 __decorate([

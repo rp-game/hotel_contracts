@@ -295,6 +295,8 @@ class GetBookingByIdResponse {
     travelAgentId;
     travelAgentName;
     agentReference;
+    // Folio group (gộp folio thanh toán)
+    folioGroupId;
     // Group booking info
     groupId;
     groupName;
@@ -503,6 +505,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Agent reference number', type: String, nullable: true }),
     __metadata("design:type", Object)
 ], GetBookingByIdResponse.prototype, "agentReference", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Folio group ID', type: String, nullable: true, format: 'uuid' }),
+    __metadata("design:type", Object)
+], GetBookingByIdResponse.prototype, "folioGroupId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Group booking ID', type: String, nullable: true, format: 'uuid' }),
     __metadata("design:type", Object)
