@@ -414,6 +414,8 @@ class BookingResponseDto {
     promoCode;
     promotionId;
     promotionDiscount;
+    // Folio group (gộp folio thanh toán)
+    folioGroupId;
     // Group booking info
     groupId;
     groupName;
@@ -641,6 +643,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Promotion discount amount' }),
     __metadata("design:type", Number)
 ], BookingResponseDto.prototype, "promotionDiscount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Folio group ID (nếu booking thuộc folio gộp)' }),
+    __metadata("design:type", Object)
+], BookingResponseDto.prototype, "folioGroupId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Group block ID' }),
     __metadata("design:type", Object)

@@ -385,6 +385,10 @@ export class BookingResponseDto {
   @ApiPropertyOptional({ description: 'Promotion discount amount' })
   promotionDiscount?: number;
 
+  // Folio group (gộp folio thanh toán)
+  @ApiPropertyOptional({ description: 'Folio group ID (nếu booking thuộc folio gộp)' })
+  folioGroupId?: string | null;
+
   // Group booking info
   @ApiPropertyOptional({ description: 'Group block ID' })
   groupId?: string | null;

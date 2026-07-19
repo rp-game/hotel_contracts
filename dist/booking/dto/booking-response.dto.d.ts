@@ -141,6 +141,7 @@ export declare class BookingResponseDto {
     promoCode?: string | null;
     promotionId?: string | null;
     promotionDiscount?: number;
+    folioGroupId?: string | null;
     groupId?: string | null;
     groupName?: string | null;
     groupBlockCode?: string | null;
