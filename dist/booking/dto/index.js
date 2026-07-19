@@ -20,4 +20,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./booking-response.dto"), exports);
 __exportStar(require("./conflict-responses.dto"), exports);
 __exportStar(require("./pricing-breakdown.dto"), exports);
+__exportStar(require("./guest-document.dto"), exports);
+__exportStar(require("./room-guest.dto"), exports);
 //# sourceMappingURL=index.js.map

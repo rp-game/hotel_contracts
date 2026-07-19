@@ -1,29 +1,6 @@
 import { NatsResponse } from '../../common/nats-response.interface';
 import { IdType } from '../enums/booking.enum';
-import { GuestDocumentDto } from './guest-documents.nats';
-/**
- * Khách trong 1 phòng (booking_guests) kèm ảnh giấy tờ — phục vụ màn quản lý
- * khách/phòng (khai báo tạm trú). Quản lý theo bookingRoomId, KHÔNG qua booking.modify.
- */
-export interface RoomGuestDto {
-    id: string;
-    bookingId: string;
-    bookingRoomId: string | null;
-    guestId?: string | null;
-    isMainGuest: boolean;
-    fullName: string;
-    email?: string | null;
-    phone?: string | null;
-    idType?: IdType | null;
-    idNumber?: string | null;
-    idIssueDate?: string | null;
-    idExpiryDate?: string | null;
-    nationality?: string | null;
-    dateOfBirth?: string | null;
-    gender?: string | null;
-    address?: string | null;
-    documents: GuestDocumentDto[];
-}
+import { RoomGuestDto } from '../dto/room-guest.dto';
 /**
  * NATS Pattern: booking.room-guests.list
  * Trả tất cả khách của 1 phòng (gồm khách chính + phụ) kèm documents.

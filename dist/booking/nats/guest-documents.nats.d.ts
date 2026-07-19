@@ -1,31 +1,10 @@
 import { NatsResponse } from '../../common/nats-response.interface';
 import { IdType } from '../enums/booking.enum';
-/**
- * Ảnh giấy tờ (CCCD/hộ chiếu...) của 1 khách trong phòng. Lưu ở booking-service
- * dưới dạng metadata + storageKey; file thật nằm ở private bucket do gateway quản.
- */
-export declare enum GuestDocumentSide {
-    FRONT = "FRONT",
-    BACK = "BACK",
-    OTHER = "OTHER"
-}
-export interface GuestDocumentDto {
-    id: string;
-    bookingGuestId: string;
-    bookingId: string;
-    bookingRoomId: string;
-    side: GuestDocumentSide;
-    docType?: IdType | null;
-    /** Key object trên private bucket — KHÔNG phải URL public. */
-    storageKey: string;
-    mimeType: string;
-    fileSize: number;
-    uploadedBy: string;
-    uploadedAt: string;
-}
+import { GuestDocumentDto, GuestDocumentSide } from '../dto/guest-document.dto';
 /**
  * NATS Pattern: booking.guest-documents.create
  * Gateway đã PUT file lên private bucket, gọi pattern này để lưu metadata.
+ * storageKey là request-only (nội bộ), KHÔNG nằm trong GuestDocumentDto trả client.
  */
 export interface CreateGuestDocumentNatsRequest {
     tenantId: string;
@@ -41,6 +20,12 @@ export interface CreateGuestDocumentNatsRequest {
     uploadedBy: string;
 }
 export type CreateGuestDocumentNatsResponse = NatsResponse<GuestDocumentDto>;
+/** Tham chiếu nội bộ để gateway stream/xoá object — KHÔNG lộ ra client. */
+export interface GuestDocumentStorageRef {
+    documentId: string;
+    storageKey: string;
+    mimeType: string;
+}
 /**
  * NATS Pattern: booking.guest-documents.get
  * Resolve documentId → storageKey/mimeType (scope theo tenant/hotel/booking) để
@@ -52,7 +37,7 @@ export interface GetGuestDocumentNatsRequest {
     bookingId: string;
     documentId: string;
 }
-export type GetGuestDocumentNatsResponse = NatsResponse<GuestDocumentDto>;
+export type GetGuestDocumentNatsResponse = NatsResponse<GuestDocumentStorageRef>;
 /**
  * NATS Pattern: booking.guest-documents.remove
  * Trả về storageKey để gateway xoá object trên S3 (đồng bộ).
