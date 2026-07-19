@@ -114,8 +114,33 @@ export interface CollectFolioGroupNatsRequest {
   userName: string;
 }
 
+/** Export ONE consolidated VAT e-invoice (DRAFT) for all members of a folio group */
+export interface ExportFolioGroupInvoiceNatsRequest {
+  tenantId: string;
+  hotelId: string;
+  folioGroupId: string;
+  customerType: 'BUSINESS' | 'INDIVIDUAL';
+  customerName?: string;
+  customerTaxCode?: string;
+  customerAddress?: string;
+  customerEmail?: string;
+  customerPhone?: string;
+  buyerName?: string;
+  paymentMethod: string; // InvoicePaymentMethod: TM | CK | TM/CK | TTD
+  arisingDate?: string; // YYYY-MM-DD; default hôm nay
+  userId: string;
+  userName: string;
+}
+
+export interface FolioGroupInvoiceResult {
+  einvoiceId: string;
+  status: string; // EInvoiceStatus (DRAFT)
+  invoiceCode?: string;
+}
+
 // =================== Responses ===================
 
 export type FolioGroupFolioNatsResponse = NatsResponse<FolioGroupFolio>;
 export type ListFolioGroupsNatsResponse = NatsResponse<FolioGroupSummary[]>;
 export type FindFolioGroupNatsResponse = NatsResponse<FolioGroupSummary>;
+export type ExportFolioGroupInvoiceNatsResponse = NatsResponse<FolioGroupInvoiceResult>;

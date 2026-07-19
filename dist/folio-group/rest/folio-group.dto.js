@@ -16,10 +16,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FolioGroupListItemDto = exports.FolioGroupFolioDto = exports.FolioGroupSummarySectionDto = exports.FolioGroupBookingItemDto = exports.CollectFolioDto = exports.AddBookingToFolioGroupDto = exports.CreateFolioGroupDto = void 0;
+exports.FolioGroupListItemDto = exports.FolioGroupFolioDto = exports.FolioGroupSummarySectionDto = exports.FolioGroupBookingItemDto = exports.ExportFolioGroupInvoiceDto = exports.CollectFolioDto = exports.AddBookingToFolioGroupDto = exports.CreateFolioGroupDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const payment_enum_1 = require("../../payment/enums/payment.enum");
+const enums_1 = require("../../einvoice/enums");
 // =================== Requests ===================
 class CreateFolioGroupDto {
     bookingIds;
@@ -89,6 +90,81 @@ __decorate([
     (0, class_validator_1.MaxLength)(500),
     __metadata("design:type", String)
 ], CollectFolioDto.prototype, "notes", void 0);
+class ExportFolioGroupInvoiceDto {
+    customerType;
+    // BUSINESS bắt buộc name+taxCode+address; INDIVIDUAL bắt buộc buyerName
+    customerName;
+    customerTaxCode;
+    customerAddress;
+    buyerName;
+    customerEmail;
+    customerPhone;
+    paymentMethod;
+    arisingDate;
+}
+exports.ExportFolioGroupInvoiceDto = ExportFolioGroupInvoiceDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer type', enum: enums_1.CustomerType }),
+    (0, class_validator_1.IsEnum)(enums_1.CustomerType),
+    __metadata("design:type", String)
+], ExportFolioGroupInvoiceDto.prototype, "customerType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tên công ty (bắt buộc khi BUSINESS)' }),
+    (0, class_validator_1.ValidateIf)((o) => o.customerType === enums_1.CustomerType.BUSINESS),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.MaxLength)(400),
+    __metadata("design:type", String)
+], ExportFolioGroupInvoiceDto.prototype, "customerName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'MST (bắt buộc khi BUSINESS)' }),
+    (0, class_validator_1.ValidateIf)((o) => o.customerType === enums_1.CustomerType.BUSINESS),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.MaxLength)(20),
+    __metadata("design:type", String)
+], ExportFolioGroupInvoiceDto.prototype, "customerTaxCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Địa chỉ (bắt buộc khi BUSINESS)' }),
+    (0, class_validator_1.ValidateIf)((o) => o.customerType === enums_1.CustomerType.BUSINESS),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.MaxLength)(500),
+    __metadata("design:type", String)
+], ExportFolioGroupInvoiceDto.prototype, "customerAddress", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tên người mua (bắt buộc khi INDIVIDUAL)' }),
+    (0, class_validator_1.ValidateIf)((o) => o.customerType === enums_1.CustomerType.INDIVIDUAL),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.MaxLength)(200),
+    __metadata("design:type", String)
+], ExportFolioGroupInvoiceDto.prototype, "buyerName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Email' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(200),
+    __metadata("design:type", String)
+], ExportFolioGroupInvoiceDto.prototype, "customerEmail", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Số điện thoại' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(50),
+    __metadata("design:type", String)
+], ExportFolioGroupInvoiceDto.prototype, "customerPhone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hình thức thanh toán', enum: enums_1.InvoicePaymentMethod }),
+    (0, class_validator_1.IsEnum)(enums_1.InvoicePaymentMethod),
+    __metadata("design:type", String)
+], ExportFolioGroupInvoiceDto.prototype, "paymentMethod", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Ngày lập (YYYY-MM-DD), mặc định hôm nay' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ExportFolioGroupInvoiceDto.prototype, "arisingDate", void 0);
 // =================== Responses (Swagger) ===================
 class FolioGroupBookingItemDto {
     bookingId;

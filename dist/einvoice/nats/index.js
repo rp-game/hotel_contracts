@@ -27,7 +27,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ReplaceEInvoiceNatsRequest = exports.AdjustEInvoiceNatsRequest = exports.CancelEInvoiceNatsRequest = exports.ProviderConfigStatusData = exports.DeleteProviderConfigNatsRequest = exports.GetProviderConfigStatusNatsRequest = exports.GetProviderConfigNatsRequest = exports.SaveProviderConfigNatsRequest = exports.GetEInvoiceXmlNatsRequest = exports.GetEInvoiceHtmlNatsRequest = exports.GetEInvoicePdfNatsRequest = exports.FindEInvoiceNatsRequest = exports.FindEInvoicesNatsRequest = exports.RejectEInvoiceNatsRequest = exports.ApproveEInvoiceNatsRequest = exports.SubmitApprovalNatsRequest = exports.DeleteEInvoiceNatsRequest = exports.IssueEInvoiceNatsRequest = exports.UpdateEInvoiceNatsRequest = exports.CreateEInvoiceFromInvoiceNatsRequest = exports.CreateEInvoiceNatsRequest = exports.EINVOICE_PATTERNS = exports.ProviderConfigData = exports.EInvoiceSummary = exports.EInvoiceData = exports.EInvoiceHistoryData = exports.EInvoiceItemData = exports.EInvoiceItemInput = void 0;
+exports.ReplaceEInvoiceNatsRequest = exports.AdjustEInvoiceNatsRequest = exports.CancelEInvoiceNatsRequest = exports.ProviderConfigStatusData = exports.DeleteProviderConfigNatsRequest = exports.GetProviderConfigStatusNatsRequest = exports.GetProviderConfigNatsRequest = exports.SaveProviderConfigNatsRequest = exports.GetEInvoiceXmlNatsRequest = exports.GetEInvoiceHtmlNatsRequest = exports.GetEInvoicePdfNatsRequest = exports.FindEInvoiceNatsRequest = exports.FindEInvoicesNatsRequest = exports.RejectEInvoiceNatsRequest = exports.ApproveEInvoiceNatsRequest = exports.SubmitApprovalNatsRequest = exports.DeleteEInvoiceNatsRequest = exports.IssueEInvoiceNatsRequest = exports.UpdateEInvoiceNatsRequest = exports.CreateEInvoiceFromInvoiceNatsRequest = exports.FindEInvoiceByFolioNatsRequest = exports.CreateEInvoiceNatsRequest = exports.EINVOICE_PATTERNS = exports.ProviderConfigData = exports.EInvoiceSummary = exports.EInvoiceData = exports.EInvoiceHistoryData = exports.EInvoiceItemData = exports.EInvoiceItemInput = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const enums_1 = require("../enums");
 // ============================================================================
@@ -493,6 +493,7 @@ exports.EINVOICE_PATTERNS = {
     DELETE: 'einvoice.delete',
     FIND_ALL: 'einvoice.find_all',
     FIND_ONE: 'einvoice.find_one',
+    FIND_BY_FOLIO: 'einvoice.find_by_folio',
     GET_PDF: 'einvoice.get_pdf',
     GET_HTML: 'einvoice.get_html',
     GET_XML: 'einvoice.get_xml',
@@ -514,6 +515,7 @@ class CreateEInvoiceNatsRequest {
     tenantId;
     hotelId;
     bookingId;
+    folioGroupId;
     userId;
     userName;
     customerType;
@@ -543,6 +545,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Linked Booking ID (auto-create từ checkout — dùng dedup)' }),
     __metadata("design:type", String)
 ], CreateEInvoiceNatsRequest.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Linked Folio Group ID (hóa đơn gộp — dùng dedup chống xuất trùng cho nhóm)' }),
+    __metadata("design:type", String)
+], CreateEInvoiceNatsRequest.prototype, "folioGroupId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'User ID' }),
     __metadata("design:type", String)
@@ -603,6 +609,24 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Line items', type: [EInvoiceItemInput] }),
     __metadata("design:type", Array)
 ], CreateEInvoiceNatsRequest.prototype, "items", void 0);
+class FindEInvoiceByFolioNatsRequest {
+    tenantId;
+    hotelId;
+    folioGroupId;
+}
+exports.FindEInvoiceByFolioNatsRequest = FindEInvoiceByFolioNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], FindEInvoiceByFolioNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], FindEInvoiceByFolioNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Folio Group ID' }),
+    __metadata("design:type", String)
+], FindEInvoiceByFolioNatsRequest.prototype, "folioGroupId", void 0);
 class CreateEInvoiceFromInvoiceNatsRequest {
     tenantId;
     hotelId;

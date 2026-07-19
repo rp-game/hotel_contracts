@@ -100,7 +100,30 @@ export interface CollectFolioGroupNatsRequest {
     userId: string;
     userName: string;
 }
+/** Export ONE consolidated VAT e-invoice (DRAFT) for all members of a folio group */
+export interface ExportFolioGroupInvoiceNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    folioGroupId: string;
+    customerType: 'BUSINESS' | 'INDIVIDUAL';
+    customerName?: string;
+    customerTaxCode?: string;
+    customerAddress?: string;
+    customerEmail?: string;
+    customerPhone?: string;
+    buyerName?: string;
+    paymentMethod: string;
+    arisingDate?: string;
+    userId: string;
+    userName: string;
+}
+export interface FolioGroupInvoiceResult {
+    einvoiceId: string;
+    status: string;
+    invoiceCode?: string;
+}
 export type FolioGroupFolioNatsResponse = NatsResponse<FolioGroupFolio>;
 export type ListFolioGroupsNatsResponse = NatsResponse<FolioGroupSummary[]>;
 export type FindFolioGroupNatsResponse = NatsResponse<FolioGroupSummary>;
+export type ExportFolioGroupInvoiceNatsResponse = NatsResponse<FolioGroupInvoiceResult>;
 //# sourceMappingURL=folio-group.nats.d.ts.map

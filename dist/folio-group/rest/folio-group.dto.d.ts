@@ -6,6 +6,7 @@
  * Note: tenantId/hotelId are NOT included — injected from JWT by the controller.
  */
 import { PaymentMethod } from '../../payment/enums/payment.enum';
+import { CustomerType, InvoicePaymentMethod } from '../../einvoice/enums';
 export declare class CreateFolioGroupDto {
     bookingIds: string[];
     name?: string;
@@ -19,6 +20,17 @@ export declare class CollectFolioDto {
     payerName?: string;
     reference?: string;
     notes?: string;
+}
+export declare class ExportFolioGroupInvoiceDto {
+    customerType: CustomerType;
+    customerName?: string;
+    customerTaxCode?: string;
+    customerAddress?: string;
+    buyerName?: string;
+    customerEmail?: string;
+    customerPhone?: string;
+    paymentMethod: InvoicePaymentMethod;
+    arisingDate?: string;
 }
 export declare class FolioGroupBookingItemDto {
     bookingId: string;

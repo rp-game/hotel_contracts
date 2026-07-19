@@ -129,6 +129,7 @@ export declare const EINVOICE_PATTERNS: {
     readonly DELETE: "einvoice.delete";
     readonly FIND_ALL: "einvoice.find_all";
     readonly FIND_ONE: "einvoice.find_one";
+    readonly FIND_BY_FOLIO: "einvoice.find_by_folio";
     readonly GET_PDF: "einvoice.get_pdf";
     readonly GET_HTML: "einvoice.get_html";
     readonly GET_XML: "einvoice.get_xml";
@@ -147,6 +148,7 @@ export declare class CreateEInvoiceNatsRequest {
     tenantId: string;
     hotelId: string;
     bookingId?: string;
+    folioGroupId?: string;
     userId?: string;
     userName?: string;
     customerType: CustomerType;
@@ -162,6 +164,11 @@ export declare class CreateEInvoiceNatsRequest {
     notes?: string;
     discountAmount?: number;
     items: EInvoiceItemInput[];
+}
+export declare class FindEInvoiceByFolioNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    folioGroupId: string;
 }
 export declare class CreateEInvoiceFromInvoiceNatsRequest {
     tenantId: string;
@@ -342,6 +349,7 @@ export type DeleteEInvoiceNatsResponse = NatsResponse<{
 }>;
 export type FindEInvoicesNatsResponse = NatsPaginatedResponse<EInvoiceSummary>;
 export type FindEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
+export type FindEInvoiceByFolioNatsResponse = NatsResponse<EInvoiceSummary | null>;
 export type GetEInvoicePdfNatsResponse = NatsResponse<{
     pdf: string;
 }>;

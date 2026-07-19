@@ -18,8 +18,10 @@ import {
   IsEnum,
   Min,
   MaxLength,
+  ValidateIf,
 } from 'class-validator';
 import { PaymentMethod } from '../../payment/enums/payment.enum';
+import { CustomerType, InvoicePaymentMethod } from '../../einvoice/enums';
 
 // =================== Requests ===================
 
@@ -70,6 +72,62 @@ export class CollectFolioDto {
   @IsString()
   @MaxLength(500)
   notes?: string;
+}
+
+export class ExportFolioGroupInvoiceDto {
+  @ApiProperty({ description: 'Customer type', enum: CustomerType })
+  @IsEnum(CustomerType)
+  customerType: CustomerType;
+
+  // BUSINESS bắt buộc name+taxCode+address; INDIVIDUAL bắt buộc buyerName
+  @ApiPropertyOptional({ description: 'Tên công ty (bắt buộc khi BUSINESS)' })
+  @ValidateIf((o) => o.customerType === CustomerType.BUSINESS)
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(400)
+  customerName?: string;
+
+  @ApiPropertyOptional({ description: 'MST (bắt buộc khi BUSINESS)' })
+  @ValidateIf((o) => o.customerType === CustomerType.BUSINESS)
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(20)
+  customerTaxCode?: string;
+
+  @ApiPropertyOptional({ description: 'Địa chỉ (bắt buộc khi BUSINESS)' })
+  @ValidateIf((o) => o.customerType === CustomerType.BUSINESS)
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(500)
+  customerAddress?: string;
+
+  @ApiPropertyOptional({ description: 'Tên người mua (bắt buộc khi INDIVIDUAL)' })
+  @ValidateIf((o) => o.customerType === CustomerType.INDIVIDUAL)
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(200)
+  buyerName?: string;
+
+  @ApiPropertyOptional({ description: 'Email' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(200)
+  customerEmail?: string;
+
+  @ApiPropertyOptional({ description: 'Số điện thoại' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(50)
+  customerPhone?: string;
+
+  @ApiProperty({ description: 'Hình thức thanh toán', enum: InvoicePaymentMethod })
+  @IsEnum(InvoicePaymentMethod)
+  paymentMethod: InvoicePaymentMethod;
+
+  @ApiPropertyOptional({ description: 'Ngày lập (YYYY-MM-DD), mặc định hôm nay' })
+  @IsOptional()
+  @IsString()
+  arisingDate?: string;
 }
 
 // =================== Responses (Swagger) ===================

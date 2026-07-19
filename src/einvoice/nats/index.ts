@@ -310,6 +310,7 @@ export const EINVOICE_PATTERNS = {
   DELETE: 'einvoice.delete',
   FIND_ALL: 'einvoice.find_all',
   FIND_ONE: 'einvoice.find_one',
+  FIND_BY_FOLIO: 'einvoice.find_by_folio',
   GET_PDF: 'einvoice.get_pdf',
   GET_HTML: 'einvoice.get_html',
   GET_XML: 'einvoice.get_xml',
@@ -338,6 +339,9 @@ export class CreateEInvoiceNatsRequest {
 
   @ApiPropertyOptional({ description: 'Linked Booking ID (auto-create từ checkout — dùng dedup)' })
   bookingId?: string;
+
+  @ApiPropertyOptional({ description: 'Linked Folio Group ID (hóa đơn gộp — dùng dedup chống xuất trùng cho nhóm)' })
+  folioGroupId?: string;
 
   @ApiPropertyOptional({ description: 'User ID' })
   userId?: string;
@@ -383,6 +387,17 @@ export class CreateEInvoiceNatsRequest {
 
   @ApiProperty({ description: 'Line items', type: [EInvoiceItemInput] })
   items: EInvoiceItemInput[];
+}
+
+export class FindEInvoiceByFolioNatsRequest {
+  @ApiProperty({ description: 'Tenant ID' })
+  tenantId: string;
+
+  @ApiProperty({ description: 'Hotel ID' })
+  hotelId: string;
+
+  @ApiProperty({ description: 'Folio Group ID' })
+  folioGroupId: string;
 }
 
 export class CreateEInvoiceFromInvoiceNatsRequest {
@@ -830,6 +845,7 @@ export type IssueEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
 export type DeleteEInvoiceNatsResponse = NatsResponse<{ id: string }>;
 export type FindEInvoicesNatsResponse = NatsPaginatedResponse<EInvoiceSummary>;
 export type FindEInvoiceNatsResponse = NatsResponse<EInvoiceData>;
+export type FindEInvoiceByFolioNatsResponse = NatsResponse<EInvoiceSummary | null>;
 export type GetEInvoicePdfNatsResponse = NatsResponse<{ pdf: string }>; // base64
 export type GetEInvoiceHtmlNatsResponse = NatsResponse<{ html: string }>;
 export type SaveProviderConfigNatsResponse = NatsResponse<ProviderConfigData>;
