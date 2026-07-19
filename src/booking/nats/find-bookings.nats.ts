@@ -9,6 +9,7 @@
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NatsResponse } from '../../common/nats-response.interface';
+import { BookingStatus } from '../enums/booking.enum';
 
 /**
  * Booking summary for list operations
@@ -299,9 +300,9 @@ export interface FindBookingsNatsRequest {
   hotelId: string;
 
   /**
-   * Booking status filter (optional)
+   * Booking status filter (optional) — 1 giá trị hoặc mảng (service hỗ trợ IN)
    */
-  status?: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'DEPARTED' | 'CHECKED_OUT' | 'CANCELLED' | 'COMPLETED';
+  status?: BookingStatus | BookingStatus[];
 
   /**
    * Booking source filter (WEBSITE, OTA, PHONE, etc.)
@@ -403,6 +404,26 @@ export interface FindBookingsNatsRequest {
    * Travel Agent ID filter
    */
   travelAgentId?: string;
+
+  /**
+   * Corporate Account ID filter
+   */
+  corporateId?: string;
+
+  /**
+   * Exact booking code filter
+   */
+  bookingCode?: string;
+
+  /**
+   * Room number filter
+   */
+  roomNumber?: string;
+
+  /**
+   * Payment transaction ID filter
+   */
+  paymentTransactionId?: string;
 
   /**
    * Chỉ lấy booking đang thuộc folio gộp (folio_group_id IS NOT NULL)
