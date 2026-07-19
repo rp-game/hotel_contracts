@@ -153,6 +153,17 @@ export class FolioGroupSummarySectionDto {
   @ApiProperty() totalBalance: number;
 }
 
+export class FolioGroupPaymentItemDto {
+  @ApiProperty() id: string;
+  @ApiProperty() amount: number;
+  @ApiProperty() paymentMethod: string;
+  @ApiPropertyOptional({ type: String, nullable: true }) payerName: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) reference: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) notes: string | null;
+  @ApiPropertyOptional({ type: String, nullable: true }) collectedByName: string | null;
+  @ApiProperty() createdAt: string;
+}
+
 export class FolioGroupFolioDto {
   @ApiProperty() folioGroupId: string;
   @ApiProperty() code: string;
@@ -160,6 +171,7 @@ export class FolioGroupFolioDto {
   @ApiProperty() hotelId: string;
   @ApiProperty({ enum: ['OPEN', 'SETTLED'] }) derivedStatus: 'OPEN' | 'SETTLED';
   @ApiProperty({ type: [FolioGroupBookingItemDto] }) bookings: FolioGroupBookingItemDto[];
+  @ApiProperty({ type: [FolioGroupPaymentItemDto] }) payments: FolioGroupPaymentItemDto[];
   @ApiProperty({ type: FolioGroupSummarySectionDto }) summary: FolioGroupSummarySectionDto;
 }
 

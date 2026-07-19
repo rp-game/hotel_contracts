@@ -16,7 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FolioGroupListItemDto = exports.FolioGroupFolioDto = exports.FolioGroupSummarySectionDto = exports.FolioGroupBookingItemDto = exports.ExportFolioGroupInvoiceDto = exports.CollectFolioDto = exports.AddBookingToFolioGroupDto = exports.CreateFolioGroupDto = void 0;
+exports.FolioGroupListItemDto = exports.FolioGroupFolioDto = exports.FolioGroupPaymentItemDto = exports.FolioGroupSummarySectionDto = exports.FolioGroupBookingItemDto = exports.ExportFolioGroupInvoiceDto = exports.CollectFolioDto = exports.AddBookingToFolioGroupDto = exports.CreateFolioGroupDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const payment_enum_1 = require("../../payment/enums/payment.enum");
@@ -247,6 +247,49 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], FolioGroupSummarySectionDto.prototype, "totalBalance", void 0);
+class FolioGroupPaymentItemDto {
+    id;
+    amount;
+    paymentMethod;
+    payerName;
+    reference;
+    notes;
+    collectedByName;
+    createdAt;
+}
+exports.FolioGroupPaymentItemDto = FolioGroupPaymentItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], FolioGroupPaymentItemDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], FolioGroupPaymentItemDto.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], FolioGroupPaymentItemDto.prototype, "paymentMethod", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], FolioGroupPaymentItemDto.prototype, "payerName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], FolioGroupPaymentItemDto.prototype, "reference", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], FolioGroupPaymentItemDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: String, nullable: true }),
+    __metadata("design:type", Object)
+], FolioGroupPaymentItemDto.prototype, "collectedByName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], FolioGroupPaymentItemDto.prototype, "createdAt", void 0);
 class FolioGroupFolioDto {
     folioGroupId;
     code;
@@ -254,6 +297,7 @@ class FolioGroupFolioDto {
     hotelId;
     derivedStatus;
     bookings;
+    payments;
     summary;
 }
 exports.FolioGroupFolioDto = FolioGroupFolioDto;
@@ -281,6 +325,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ type: [FolioGroupBookingItemDto] }),
     __metadata("design:type", Array)
 ], FolioGroupFolioDto.prototype, "bookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [FolioGroupPaymentItemDto] }),
+    __metadata("design:type", Array)
+], FolioGroupFolioDto.prototype, "payments", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ type: FolioGroupSummarySectionDto }),
     __metadata("design:type", FolioGroupSummarySectionDto)

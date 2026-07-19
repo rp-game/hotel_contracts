@@ -51,6 +51,16 @@ export declare class FolioGroupSummarySectionDto {
     totalPaid: number;
     totalBalance: number;
 }
+export declare class FolioGroupPaymentItemDto {
+    id: string;
+    amount: number;
+    paymentMethod: string;
+    payerName: string | null;
+    reference: string | null;
+    notes: string | null;
+    collectedByName: string | null;
+    createdAt: string;
+}
 export declare class FolioGroupFolioDto {
     folioGroupId: string;
     code: string;
@@ -58,6 +68,7 @@ export declare class FolioGroupFolioDto {
     hotelId: string;
     derivedStatus: 'OPEN' | 'SETTLED';
     bookings: FolioGroupBookingItemDto[];
+    payments: FolioGroupPaymentItemDto[];
     summary: FolioGroupSummarySectionDto;
 }
 export declare class FolioGroupListItemDto {

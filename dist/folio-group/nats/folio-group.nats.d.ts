@@ -32,6 +32,17 @@ export interface FolioGroupBookingItem {
     paidAmount: number;
     balance: number;
 }
+/** Một lần thu gộp (log cấp folio — chỉ hiển thị/audit, không dùng kế toán) */
+export interface FolioGroupPaymentItem {
+    id: string;
+    amount: number;
+    paymentMethod: string;
+    payerName: string | null;
+    reference: string | null;
+    notes: string | null;
+    collectedByName: string | null;
+    createdAt: string;
+}
 /** Combined folio returned by create/add/remove/get/collect */
 export interface FolioGroupFolio {
     folioGroupId: string;
@@ -40,6 +51,8 @@ export interface FolioGroupFolio {
     hotelId: string;
     derivedStatus: FolioGroupDerivedStatus;
     bookings: FolioGroupBookingItem[];
+    /** Nhật ký các lần thu gộp (mới nhất trước) */
+    payments: FolioGroupPaymentItem[];
     summary: {
         totalBookings: number;
         totalDue: number;
