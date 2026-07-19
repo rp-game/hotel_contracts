@@ -1,6 +1,6 @@
 {
   "name": "@hotel/contracts",
-  "version": "0.1.777",
+  "version": "0.1.781",
   "description": "Centralized TypeScript contracts for Hotel Management System - NATS messages, REST DTOs, and shared types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -288,6 +288,18 @@
     "./group-booking/enums": {
       "types": "./dist/group-booking/enums/index.d.ts",
       "default": "./dist/group-booking/enums/index.js"
+    },
+    "./folio-group": {
+      "types": "./dist/folio-group/index.d.ts",
+      "default": "./dist/folio-group/index.js"
+    },
+    "./folio-group/nats": {
+      "types": "./dist/folio-group/nats/index.d.ts",
+      "default": "./dist/folio-group/nats/index.js"
+    },
+    "./folio-group/rest": {
+      "types": "./dist/folio-group/rest/index.d.ts",
+      "default": "./dist/folio-group/rest/index.js"
     },
     "./billing": {
       "types": "./dist/billing/index.d.ts",
@@ -616,6 +628,15 @@
       ],
       "group-booking/enums": [
         "dist/group-booking/enums/index.d.ts"
+      ],
+      "folio-group": [
+        "dist/folio-group/index.d.ts"
+      ],
+      "folio-group/nats": [
+        "dist/folio-group/nats/index.d.ts"
+      ],
+      "folio-group/rest": [
+        "dist/folio-group/rest/index.d.ts"
       ],
       "billing": [
         "dist/billing/index.d.ts"
