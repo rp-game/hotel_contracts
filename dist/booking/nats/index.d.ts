@@ -54,4 +54,6 @@ export * from './member-revenue.nats';
 export * from './refer-code.nats';
 export * from './booking-window.nats';
 export * from './revenue-summary.nats';
+export * from './guest-documents.nats';
+export * from './room-guests.nats';
 //# sourceMappingURL=index.d.ts.map

@@ -81,4 +81,7 @@ __exportStar(require("./refer-code.nats"), exports);
 // Booking window analytics
 __exportStar(require("./booking-window.nats"), exports);
 __exportStar(require("./revenue-summary.nats"), exports);
+// Quản lý khách trong phòng + ảnh giấy tờ (CCCD) — khai báo tạm trú
+__exportStar(require("./guest-documents.nats"), exports);
+__exportStar(require("./room-guests.nats"), exports);
 //# sourceMappingURL=index.js.map

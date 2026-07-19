@@ -78,3 +78,7 @@ export * from './refer-code.nats';
 export * from './booking-window.nats';
 
 export * from './revenue-summary.nats';
+
+// Quản lý khách trong phòng + ảnh giấy tờ (CCCD) — khai báo tạm trú
+export * from './guest-documents.nats';
+export * from './room-guests.nats';
