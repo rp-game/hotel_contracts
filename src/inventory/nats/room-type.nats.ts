@@ -14,8 +14,8 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsUUID, IsNumber, IsOptional, IsArray, IsBoolean, Min } from 'class-validator';
-import { NatsResponse } from '../../common';
+import { IsString, IsUUID, IsNumber, IsOptional, IsArray, IsBoolean, IsEnum, Min } from 'class-validator';
+import { NatsResponse, SalesChannel } from '../../common';
 import { RoomType } from '../types';
 
 /**
@@ -27,6 +27,8 @@ export interface FindAllRoomTypesRequest {
   hotelId?: string;
   page?: number;
   limit?: number;
+  /** Filter to room types exposed on this channel (e.g. WEBSITE for webshop). Omit = no channel filter (admin view, sees all). */
+  channel?: SalesChannel;
 }
 
 export interface FindAllRoomTypesResponse {
@@ -125,6 +127,12 @@ export class CreateRoomTypeRequest {
   @IsOptional()
   @IsString()
   bedType?: string;
+
+  @ApiPropertyOptional({ description: 'Distribution channels this room type is exposed on (e.g. WEBSITE for webshop)', enum: SalesChannel, isArray: true })
+  @IsOptional()
+  @IsArray()
+  @IsEnum(SalesChannel, { each: true })
+  channels?: SalesChannel[];
 }
 
 export type CreateRoomTypeResponse = RoomType;
@@ -217,6 +225,12 @@ export class UpdateRoomTypeRequest {
   @IsOptional()
   @IsString()
   bedType?: string;
+
+  @ApiPropertyOptional({ description: 'Distribution channels this room type is exposed on (e.g. WEBSITE for webshop)', enum: SalesChannel, isArray: true })
+  @IsOptional()
+  @IsArray()
+  @IsEnum(SalesChannel, { each: true })
+  channels?: SalesChannel[];
 }
 
 export type UpdateRoomTypeResponse = RoomType | null;

@@ -4,6 +4,7 @@
 
 import { ApiProperty } from '@nestjs/swagger';
 import { RoomStatus, RoomTypeAmenity } from '../enums';
+import { SalesChannel } from '../../common';
 
 /**
  * Room Type entity
@@ -72,6 +73,14 @@ export class RoomType {
 
   @ApiProperty({ description: 'Customer-defined display order (drag-and-drop); null = not explicitly ordered, sorts last', required: false, nullable: true })
   sortId?: number | null;
+
+  @ApiProperty({
+    description: 'Distribution channels this room type is exposed on (e.g. WEBSITE for webshop). Empty/undefined = not exposed on any channel.',
+    enum: SalesChannel,
+    isArray: true,
+    required: false,
+  })
+  channels?: SalesChannel[];
 
   @ApiProperty({ description: 'Creation timestamp (ISO format)' })
   createdAt: string;

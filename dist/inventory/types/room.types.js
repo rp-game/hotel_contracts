@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Room = exports.RoomType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const enums_1 = require("../enums");
+const common_1 = require("../../common");
 /**
  * Room Type entity
  *
@@ -36,6 +37,7 @@ class RoomType {
     isActive;
     bedType;
     sortId;
+    channels;
     createdAt;
     updatedAt;
 }
@@ -115,6 +117,15 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Customer-defined display order (drag-and-drop); null = not explicitly ordered, sorts last', required: false, nullable: true }),
     __metadata("design:type", Object)
 ], RoomType.prototype, "sortId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Distribution channels this room type is exposed on (e.g. WEBSITE for webshop). Empty/undefined = not exposed on any channel.',
+        enum: common_1.SalesChannel,
+        isArray: true,
+        required: false,
+    }),
+    __metadata("design:type", Array)
+], RoomType.prototype, "channels", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Creation timestamp (ISO format)' }),
     __metadata("design:type", String)

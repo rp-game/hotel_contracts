@@ -2,6 +2,7 @@
  * Inventory Domain Types
  */
 import { RoomStatus } from '../enums';
+import { SalesChannel } from '../../common';
 /**
  * Room Type entity
  *
@@ -23,6 +24,7 @@ export declare class RoomType {
     isActive?: boolean;
     bedType?: string;
     sortId?: number | null;
+    channels?: SalesChannel[];
     createdAt: string;
     updatedAt: string;
 }

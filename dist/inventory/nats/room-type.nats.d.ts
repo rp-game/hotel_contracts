@@ -12,7 +12,7 @@
  * Handler: inventory-service
  * Called by: api-gateway, pricing-service
  */
-import { NatsResponse } from '../../common';
+import { NatsResponse, SalesChannel } from '../../common';
 import { RoomType } from '../types';
 /**
  * Find All Room Types Request
@@ -23,6 +23,8 @@ export interface FindAllRoomTypesRequest {
     hotelId?: string;
     page?: number;
     limit?: number;
+    /** Filter to room types exposed on this channel (e.g. WEBSITE for webshop). Omit = no channel filter (admin view, sees all). */
+    channel?: SalesChannel;
 }
 export interface FindAllRoomTypesResponse {
     data: RoomType[];
@@ -60,6 +62,7 @@ export declare class CreateRoomTypeRequest {
     category?: string;
     images?: string[];
     bedType?: string;
+    channels?: SalesChannel[];
 }
 export type CreateRoomTypeResponse = RoomType;
 export type CreateRoomTypeNatsResponse = NatsResponse<CreateRoomTypeResponse>;
@@ -84,6 +87,7 @@ export declare class UpdateRoomTypeRequest {
     images?: string[];
     isActive?: boolean;
     bedType?: string;
+    channels?: SalesChannel[];
 }
 export type UpdateRoomTypeResponse = RoomType | null;
 export type UpdateRoomTypeNatsResponse = NatsResponse<UpdateRoomTypeResponse>;

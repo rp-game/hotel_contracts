@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AddRoomTypeImageRequest = exports.ReorderRoomTypesRequest = exports.UpdateRoomTypeRequest = exports.CreateRoomTypeRequest = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const common_1 = require("../../common");
 /**
  * Create Room Type Request
  * Pattern: inventory.roomTypes.create
@@ -45,6 +46,7 @@ class CreateRoomTypeRequest {
     category;
     images;
     bedType;
+    channels;
 }
 exports.CreateRoomTypeRequest = CreateRoomTypeRequest;
 __decorate([
@@ -132,6 +134,13 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateRoomTypeRequest.prototype, "bedType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Distribution channels this room type is exposed on (e.g. WEBSITE for webshop)', enum: common_1.SalesChannel, isArray: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsEnum)(common_1.SalesChannel, { each: true }),
+    __metadata("design:type", Array)
+], CreateRoomTypeRequest.prototype, "channels", void 0);
 /**
  * Update Room Type Request
  * Pattern: inventory.roomTypes.update
@@ -153,6 +162,7 @@ class UpdateRoomTypeRequest {
     images;
     isActive;
     bedType;
+    channels;
 }
 exports.UpdateRoomTypeRequest = UpdateRoomTypeRequest;
 __decorate([
@@ -254,6 +264,13 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateRoomTypeRequest.prototype, "bedType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Distribution channels this room type is exposed on (e.g. WEBSITE for webshop)', enum: common_1.SalesChannel, isArray: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsEnum)(common_1.SalesChannel, { each: true }),
+    __metadata("design:type", Array)
+], UpdateRoomTypeRequest.prototype, "channels", void 0);
 /**
  * Reorder Room Types Request (drag-and-drop display order)
  * Pattern: inventory.room-types.reorder
