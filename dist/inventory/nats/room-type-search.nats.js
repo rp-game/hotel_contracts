@@ -23,6 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SearchRoomTypesResponse = exports.RoomTypeSearchResult = exports.RatePlanPricingDetail = exports.CancellationPolicySummaryDto = exports.PriceBreakdownDto = exports.SearchRoomTypesRequest = exports.SearchBookingType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const common_1 = require("../../common");
 const rates_core_types_1 = require("../../pricing/types/rates-core.types");
 var SearchBookingType;
 (function (SearchBookingType) {
@@ -51,6 +52,7 @@ class SearchRoomTypesRequest {
     // --- PAGINATION ---
     page;
     limit;
+    channel;
 }
 exports.SearchRoomTypesRequest = SearchRoomTypesRequest;
 __decorate([
@@ -164,6 +166,15 @@ __decorate([
     (0, class_validator_1.Min)(1),
     __metadata("design:type", Number)
 ], SearchRoomTypesRequest.prototype, "limit", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Chỉ trả room type public trên channel này (vd WEBSITE cho webshop listing). Không truyền = không lọc theo channel (dùng cho luồng đặt phòng thật, không chặn nhầm khả năng đặt).',
+        enum: common_1.SalesChannel,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(common_1.SalesChannel),
+    __metadata("design:type", String)
+], SearchRoomTypesRequest.prototype, "channel", void 0);
 // ============================================================================
 // RESPONSE — nested types
 // ============================================================================

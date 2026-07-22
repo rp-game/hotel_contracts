@@ -9,7 +9,7 @@
  * Handler: inventory-service
  * Called by: api-gateway, frontend-facing services
  */
-import { NatsResponse } from '../../common';
+import { NatsResponse, SalesChannel } from '../../common';
 import { RateTaxBreakdown } from '../../pricing/types/rates-core.types';
 export declare enum SearchBookingType {
     OVERNIGHT = "OVERNIGHT",
@@ -30,6 +30,7 @@ export declare class SearchRoomTypesRequest {
     amenities?: string[];
     page?: number;
     limit?: number;
+    channel?: SalesChannel;
 }
 export declare class PriceBreakdownDto {
     baseAmount: number;

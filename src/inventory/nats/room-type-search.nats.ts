@@ -22,7 +22,7 @@ import {
   Min,
   ValidateIf,
 } from 'class-validator';
-import { NatsResponse } from '../../common';
+import { NatsResponse, SalesChannel } from '../../common';
 import { RateTaxBreakdown } from '../../pricing/types/rates-core.types';
 
 export enum SearchBookingType {
@@ -137,6 +137,14 @@ export class SearchRoomTypesRequest {
   @IsInt()
   @Min(1)
   limit?: number;
+
+  @ApiPropertyOptional({
+    description: 'Chỉ trả room type public trên channel này (vd WEBSITE cho webshop listing). Không truyền = không lọc theo channel (dùng cho luồng đặt phòng thật, không chặn nhầm khả năng đặt).',
+    enum: SalesChannel,
+  })
+  @IsOptional()
+  @IsEnum(SalesChannel)
+  channel?: SalesChannel;
 }
 
 // ============================================================================
