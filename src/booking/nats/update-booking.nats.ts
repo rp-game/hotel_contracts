@@ -8,7 +8,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsOptional, IsEnum, IsNumber, IsUUID, IsArray, ValidateNested } from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsNumber, IsUUID, IsArray, ValidateNested, Matches, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { BackdateReasonCategory } from '../enums/booking.enum';
@@ -92,6 +92,28 @@ export class UpdateBookingRoomDto {
   @IsOptional()
   @IsString()
   checkOutDate?: string;
+
+  @ApiPropertyOptional({ description: 'Giờ check-in dự kiến/đã duyệt cho phòng này, bare "HH:mm" (KHÔNG phải ISO). Backend tự convert theo timezone khách sạn.', example: '15:00' })
+  @IsOptional()
+  @Matches(/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/, { message: 'estimatedCheckInTime must be in HH:mm format' })
+  estimatedCheckInTime?: string;
+
+  @ApiPropertyOptional({ description: 'Giờ check-out dự kiến/đã duyệt (late-checkout) cho phòng này, bare "HH:mm".', example: '15:00' })
+  @IsOptional()
+  @Matches(/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/, { message: 'estimatedCheckOutTime must be in HH:mm format' })
+  estimatedCheckOutTime?: string;
+
+  @ApiPropertyOptional({ description: 'Phí check-in sớm (VND, gross) của riêng phòng này.', example: 200000 })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  earlyCheckInFee?: number;
+
+  @ApiPropertyOptional({ description: 'Phí check-out muộn (VND, gross) của riêng phòng này.', example: 200000 })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  lateCheckOutFee?: number;
 }
 
 /**

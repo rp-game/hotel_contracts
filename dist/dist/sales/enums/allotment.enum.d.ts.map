@@ -1,0 +1,1 @@
+{"version":3,"file":"allotment.enum.d.ts","sourceRoot":"","sources":["../../../src/sales/enums/allotment.enum.ts"],"names":[],"mappings":"AAAA;;GAEG;AAEH,oBAAY,eAAe;IACzB,MAAM,WAAW;IACjB,SAAS,cAAc;IACvB,OAAO,YAAY;IACnB,MAAM,WAAW;CAClB;AAED,oBAAY,yBAAyB;IACnC,wDAAwD;IACxD,OAAO,YAAY;IACnB,2DAA2D;IAC3D,KAAK,UAAU;CAChB;AAED,oBAAY,oBAAoB;IAC9B,SAAS,cAAc;IACvB,YAAY,iBAAiB;CAC9B"}

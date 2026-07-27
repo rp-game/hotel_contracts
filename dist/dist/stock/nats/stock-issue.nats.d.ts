@@ -1,0 +1,120 @@
+import { NatsResponse, NatsPaginatedResponse } from '../../common';
+import { StockIssueType } from '../enums';
+export declare class StockIssueItemDto {
+    itemId: string;
+    quantity: number;
+    chargeToGuest?: boolean;
+    sellingPrice?: number;
+    isComplimentary?: boolean;
+}
+export declare class CreateStockIssueRequest {
+    tenantId: string;
+    hotelId: string;
+    issueType: StockIssueType;
+    department?: string;
+    bookingId?: string;
+    roomId?: string;
+    roomNumber?: string;
+    issueDate: string;
+    notes?: string;
+    issuedBy: string;
+    issuedByName?: string;
+    warehouseId?: string;
+    forceOverride?: boolean;
+    overrideAuthorizedBy?: string;
+    items: StockIssueItemDto[];
+}
+export declare class StockIssueItemResponse {
+    id: string;
+    itemId: string;
+    itemName?: string;
+    itemCode?: string;
+    quantity: number;
+    unitCost: number;
+    totalCost: number;
+    chargeToGuest?: boolean;
+    sellingPrice?: number;
+    isComplimentary?: boolean;
+}
+export declare class StockIssueResponse {
+    id: string;
+    tenantId: string;
+    hotelId: string;
+    issueNumber: string;
+    issueType: StockIssueType;
+    department?: string;
+    bookingId?: string;
+    roomId?: string;
+    roomNumber?: string;
+    issueDate: string;
+    notes?: string;
+    issuedBy: string;
+    issuedByName?: string;
+    totalCost: number;
+    warehouseId?: string;
+    warehouseName?: string;
+    isOverride?: boolean;
+    overrideAuthorizedBy?: string;
+    items: StockIssueItemResponse[];
+    createdAt: Date;
+}
+export declare class LowStockWarningItem {
+    itemId: string;
+    itemName: string;
+    currentStock: number;
+    reorderLevel: number;
+}
+export declare class CreateStockIssueResponseData extends StockIssueResponse {
+    lowStockWarnings?: LowStockWarningItem[];
+}
+export type CreateStockIssueNatsResponse = NatsResponse<CreateStockIssueResponseData>;
+export declare class IssueSupplyKitRequest {
+    tenantId: string;
+    hotelId: string;
+    kitId: string;
+    issuedBy: string;
+    department?: string;
+    notes?: string;
+}
+export type IssueSupplyKitNatsResponse = NatsResponse<StockIssueResponse>;
+export declare class FindStockIssuesRequest {
+    tenantId: string;
+    hotelId: string;
+    issueType?: StockIssueType;
+    dateFrom?: string;
+    dateTo?: string;
+    page?: number;
+    limit?: number;
+}
+export type FindStockIssuesNatsResponse = NatsPaginatedResponse<StockIssueResponse>;
+export declare class FindOneStockIssueRequest {
+    tenantId: string;
+    hotelId: string;
+    id: string;
+}
+export type FindOneStockIssueNatsResponse = NatsResponse<StockIssueResponse>;
+export declare class BatchIssueRoomDto {
+    roomId: string;
+    roomNumber?: string;
+    bookingId?: string;
+    items: StockIssueItemDto[];
+}
+export declare class BatchStockIssueRequest {
+    tenantId: string;
+    hotelId: string;
+    issueType: StockIssueType;
+    department?: string;
+    warehouseId?: string;
+    issueDate: string;
+    notes?: string;
+    issuedBy: string;
+    issuedByName?: string;
+    rooms: BatchIssueRoomDto[];
+}
+export declare class BatchStockIssueResponse {
+    issueCount: number;
+    issueIds: string[];
+    errors?: string[];
+}
+export type BatchStockIssueNatsResponse = NatsResponse<BatchStockIssueResponse>;
+//# sourceMappingURL=stock-issue.nats.d.ts.map

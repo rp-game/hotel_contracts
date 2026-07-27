@@ -1,0 +1,1 @@
+{"version":3,"file":"group-block-stats.nats.d.ts","sourceRoot":"","sources":["../../../src/group-booking/nats/group-block-stats.nats.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,OAAO,EAAE,YAAY,EAAE,MAAM,sCAAsC,CAAC;AAEpE;;GAEG;AACH,MAAM,WAAW,0BAA0B;IACzC,QAAQ,EAAE,MAAM,CAAC;IACjB,OAAO,EAAE,MAAM,CAAC;CACjB;AAED,MAAM,MAAM,2BAA2B,GAAG,YAAY,CAAC,GAAG,CAAC,CAAC"}

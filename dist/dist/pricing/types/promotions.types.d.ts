@@ -1,0 +1,88 @@
+/**
+ * Promotions Types - Centralized Contracts
+ *
+ * IMPORTANT: These contracts are the SINGLE SOURCE OF TRUTH
+ * - Based on database entity structure (promotion.entity.ts)
+ * - Used by NATS handlers for microservices communication
+ * - Used by API Gateway for REST endpoints
+ * - Swagger documentation generated from @ApiProperty decorators
+ *
+ * @verified_structure_matches services/pricing-service/src/database/entities/promotion.entity.ts
+ * @verified_date 2026-02-13
+ */
+import { SalesChannel } from '../../common/enums/sales-channel.enum';
+/**
+ * Promotion status (computed field, not stored in entity)
+ */
+export type PromotionStatus = 'ACTIVE' | 'INACTIVE' | 'EXPIRED' | 'UPCOMING';
+/**
+ * Promotion scope - determines who owns and who can see this promotion
+ * HOTEL: owned by a specific hotel, visible only to that hotel
+ * CHAIN: owned by a hotel chain, inherited by all hotels in the chain (read-only for hotel admins)
+ */
+export type PromotionScope = 'HOTEL' | 'CHAIN';
+/**
+ * Promotion conditions structure
+ * Stored as JSONB in database
+ */
+export declare class PromotionConditionsDto {
+    minNights?: number;
+    minGuests?: number;
+    roomTypes?: string[];
+    channels?: string[];
+    minRooms?: number;
+}
+/**
+ * Promotion DTO
+ * Matches database entity structure exactly
+ * PLUS computed 'status' field added by service layer
+ */
+export declare class PromotionDto {
+    id: string;
+    tenantId: string;
+    hotelId?: string | null;
+    promotionScope: PromotionScope;
+    isChainPromotion?: boolean;
+    name: string;
+    code: string;
+    description?: string;
+    startDate: string;
+    endDate: string;
+    discountType: 'PERCENTAGE' | 'FIXED' | 'FREE_NIGHT';
+    discountValue: number;
+    freeNightStayRequired?: number;
+    freeNightCount?: number;
+    applicableRoomTypes?: string[];
+    applicableChannels?: string[];
+    applicableSources?: SalesChannel[];
+    minimumStay?: number;
+    maximumStay?: number;
+    minimumAdvanceBookingDays?: number;
+    maximumAdvanceBookingDays?: number;
+    blackoutDates?: string[];
+    usageLimit: number;
+    usageCount: number;
+    maxUsagePerCustomer?: number;
+    flashSaleStartTime?: string;
+    flashSaleEndTime?: string;
+    conditions?: PromotionConditionsDto;
+    isActive: boolean;
+    isAutoApply?: boolean;
+    status: PromotionStatus;
+    createdAt: string;
+    updatedAt: string;
+}
+/**
+ * Paginated promotions response
+ */
+export declare class PromotionsPaginatedResponseDto {
+    data: PromotionDto[];
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+}
+export type Promotion = PromotionDto;
+export type PromotionConditions = PromotionConditionsDto;
+export type PromotionsPaginatedResponse = PromotionsPaginatedResponseDto;
+//# sourceMappingURL=promotions.types.d.ts.map

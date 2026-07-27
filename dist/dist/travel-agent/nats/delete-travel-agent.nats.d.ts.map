@@ -1,0 +1,1 @@
+{"version":3,"file":"delete-travel-agent.nats.d.ts","sourceRoot":"","sources":["../../../src/travel-agent/nats/delete-travel-agent.nats.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,OAAO,EAAE,YAAY,EAAE,MAAM,sCAAsC,CAAC;AAEpE,MAAM,WAAW,4BAA4B;IAC3C,QAAQ,EAAE,MAAM,CAAC;IACjB,aAAa,EAAE,MAAM,CAAC;IACtB,SAAS,EAAE,MAAM,CAAC;CACnB;AAED,MAAM,MAAM,2BAA2B,GAAG,YAAY,CAAC,GAAG,CAAC,CAAC"}

@@ -1,0 +1,87 @@
+"use strict";
+/**
+ * Booking Domain - NATS Message Contracts
+ *
+ * These interfaces define the request/response shapes for inter-service
+ * communication via NATS messaging pattern.
+ *
+ * Pattern: booking.*
+ * Handler: booking-service
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+__exportStar(require("./create-booking.nats"), exports);
+__exportStar(require("./find-bookings.nats"), exports);
+__exportStar(require("./find-one-booking.nats"), exports);
+__exportStar(require("./customer-bookings.nats"), exports);
+__exportStar(require("./unassigned-bookings.nats"), exports);
+__exportStar(require("./smart-search.nats"), exports);
+__exportStar(require("./bookings-timeline.nats"), exports);
+__exportStar(require("./timeline-action.nats"), exports);
+__exportStar(require("./timeline-room-details.nats"), exports);
+__exportStar(require("./timeline-weekly.nats"), exports);
+__exportStar(require("./check-in.nats"), exports);
+__exportStar(require("./mobile-checkout.nats"), exports);
+__exportStar(require("./analytics.nats"), exports);
+__exportStar(require("./calendar-data.nats"), exports);
+__exportStar(require("./update-booking.nats"), exports);
+__exportStar(require("./move-booking.nats"), exports);
+__exportStar(require("./get-booking-stats.nats"), exports);
+// Amenity Request NATS contracts
+__exportStar(require("./amenity-requests.nats"), exports);
+__exportStar(require("./booking-lookup.nats"), exports);
+__exportStar(require("./payment-events.nats"), exports);
+__exportStar(require("./booking-events.nats"), exports);
+// Service NATS contracts
+__exportStar(require("./services.nats"), exports);
+// Conflict-related NATS contracts
+__exportStar(require("./check-conflict.nats"), exports);
+__exportStar(require("./get-conflicts.nats"), exports);
+__exportStar(require("./detect-conflicts.nats"), exports);
+__exportStar(require("./get-conflict-stats.nats"), exports);
+__exportStar(require("./get-pending-conflicts.nats"), exports);
+__exportStar(require("./get-critical-conflicts.nats"), exports);
+__exportStar(require("./get-conflict-by-id.nats"), exports);
+__exportStar(require("./create-conflict.nats"), exports);
+__exportStar(require("./update-conflict.nats"), exports);
+__exportStar(require("./delete-conflict.nats"), exports);
+// Room assignment history NATS contracts
+__exportStar(require("./room-assignment.nats"), exports);
+// Reassign room NATS contracts
+__exportStar(require("./reassign-room.nats"), exports);
+// Booking history NATS contracts
+__exportStar(require("./get-booking-history.nats"), exports);
+// Add service NATS contracts
+__exportStar(require("./add-service.nats"), exports);
+// Add payment NATS contracts
+__exportStar(require("./add-payment.nats"), exports);
+// Booking management NATS contracts
+__exportStar(require("./cancel-booking.nats"), exports);
+__exportStar(require("./booking-lookup.nats"), exports);
+__exportStar(require("./assign-room.nats"), exports);
+__exportStar(require("./assign-room-slot.nats"), exports);
+__exportStar(require("./payment-events.nats"), exports);
+__exportStar(require("./occupancy.nats"), exports);
+__exportStar(require("./member-revenue.nats"), exports);
+// Refer Code NATS contracts
+__exportStar(require("./refer-code.nats"), exports);
+// Booking window analytics
+__exportStar(require("./booking-window.nats"), exports);
+__exportStar(require("./revenue-summary.nats"), exports);
+// Quản lý khách trong phòng + ảnh giấy tờ (CCCD) — khai báo tạm trú
+__exportStar(require("./guest-documents.nats"), exports);
+__exportStar(require("./room-guests.nats"), exports);
+//# sourceMappingURL=index.js.map

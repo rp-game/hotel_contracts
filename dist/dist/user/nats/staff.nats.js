@@ -1,0 +1,830 @@
+"use strict";
+/**
+ * Staff NATS Message Types
+ * All staff-related NATS message payloads and responses
+ * Exported from user-service
+ */
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LinkZaloBasicDto = exports.ValidatePermissionResultDto = exports.LinkZaloResultDto = exports.StaffZaloInfoDto = exports.ValidatePermissionPayload = exports.GetStaffHotelsPayload = exports.LinkZaloToStaffPayload = exports.FindStaffByPhonePayload = exports.FindStaffByZaloPayload = exports.AchievementCategory = exports.PerformanceDataDto = exports.PerformanceRankDto = exports.AchievementDto = exports.PerformanceMetricsDto = exports.ChangePasswordPayload = exports.GetStaffSchedulePayload = exports.ShiftStatus = exports.ShiftType = exports.StaffScheduleResponseDto = exports.StaffScheduleRequestDto = exports.ShiftScheduleDto = exports.UploadAvatarPayload = exports.UploadAvatarFilePayload = exports.AvatarUploadResponseDto = exports.ChangePasswordResponseDto = exports.ChangePasswordDto = exports.SubmitFeedbackPayload = exports.FeedbackPriority = exports.FeedbackType = exports.FeedbackResponseDto = exports.FeedbackDto = exports.StaffPermissionCheckDto = exports.StaffTaskStatsDto = exports.StaffTaskStatsMetrics = exports.TaskStatsTaskTypes = exports.TaskStatsRoomTypes = exports.StaffPerformanceDto = exports.StaffPerformanceTrends = exports.StaffPerformanceMetrics = exports.LogActivityResponseDto = exports.StaffActivityLogDto = exports.StaffActivityDto = exports.StaffActivityDetails = exports.StaffPermissionsDto = exports.StaffDto = exports.RemoveStaffPayload = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
+const user_enum_1 = require("../enums/user.enum");
+// ============= UNIFIED DTOs - Re-exported from REST =============
+// CreateStaffDto and UpdateStaffStatusDto are imported above and used for BOTH REST and NATS
+// This ensures ONE source of truth for staff creation/update operations
+var staff_dto_1 = require("../rest/staff.dto");
+Object.defineProperty(exports, "CreateStaffDto", { enumerable: true, get: function () { return staff_dto_1.CreateStaffDto; } });
+Object.defineProperty(exports, "UpdateStaffStatusDto", { enumerable: true, get: function () { return staff_dto_1.UpdateStaffStatusDto; } });
+class RemoveStaffPayload {
+    id;
+    tenantId;
+    hotelId;
+}
+exports.RemoveStaffPayload = RemoveStaffPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], RemoveStaffPayload.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], RemoveStaffPayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], RemoveStaffPayload.prototype, "hotelId", void 0);
+// ============= NATS Response DTOs =============
+/**
+ * Staff DTO - Re-exported from rest/staff.dto.ts
+ * Single unified DTO used by BOTH NATS messages and REST API
+ * This ensures consistency across all layers
+ */
+var staff_dto_2 = require("../rest/staff.dto");
+Object.defineProperty(exports, "StaffDto", { enumerable: true, get: function () { return staff_dto_2.StaffDto; } });
+class StaffPermissionsDto {
+    staffId;
+    permissions;
+    roles;
+    tenantId;
+    hotelId;
+}
+exports.StaffPermissionsDto = StaffPermissionsDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], StaffPermissionsDto.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff permissions', type: [String] }),
+    __metadata("design:type", Array)
+], StaffPermissionsDto.prototype, "permissions", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff roles', type: [String] }),
+    __metadata("design:type", Array)
+], StaffPermissionsDto.prototype, "roles", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], StaffPermissionsDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], StaffPermissionsDto.prototype, "hotelId", void 0);
+// ============= Activity Related Types =============
+class StaffActivityDetails {
+    taskId;
+    roomNumber;
+    shiftType;
+    duration;
+    location;
+    notes;
+}
+exports.StaffActivityDetails = StaffActivityDetails;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Task ID' }),
+    __metadata("design:type", String)
+], StaffActivityDetails.prototype, "taskId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room number' }),
+    __metadata("design:type", String)
+], StaffActivityDetails.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Shift type' }),
+    __metadata("design:type", String)
+], StaffActivityDetails.prototype, "shiftType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Duration in minutes' }),
+    __metadata("design:type", Number)
+], StaffActivityDetails.prototype, "duration", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Location' }),
+    __metadata("design:type", String)
+], StaffActivityDetails.prototype, "location", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Notes' }),
+    __metadata("design:type", String)
+], StaffActivityDetails.prototype, "notes", void 0);
+class StaffActivityDto {
+    id;
+    action;
+    details;
+    timestamp;
+}
+exports.StaffActivityDto = StaffActivityDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Activity ID' }),
+    __metadata("design:type", String)
+], StaffActivityDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Action performed' }),
+    __metadata("design:type", String)
+], StaffActivityDto.prototype, "action", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Activity details', type: StaffActivityDetails }),
+    __metadata("design:type", StaffActivityDetails)
+], StaffActivityDto.prototype, "details", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Timestamp' }),
+    __metadata("design:type", String)
+], StaffActivityDto.prototype, "timestamp", void 0);
+class StaffActivityLogDto {
+    staffId;
+    activities;
+    pagination;
+    tenantId;
+    hotelId;
+}
+exports.StaffActivityLogDto = StaffActivityLogDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], StaffActivityLogDto.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'List of activities', type: [StaffActivityDto] }),
+    __metadata("design:type", Array)
+], StaffActivityLogDto.prototype, "activities", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Pagination info' }),
+    __metadata("design:type", Object)
+], StaffActivityLogDto.prototype, "pagination", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], StaffActivityLogDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], StaffActivityLogDto.prototype, "hotelId", void 0);
+class LogActivityResponseDto {
+    success;
+    activityId;
+    staffId;
+    action;
+    details;
+    timestamp;
+    tenantId;
+    hotelId;
+}
+exports.LogActivityResponseDto = LogActivityResponseDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Success flag' }),
+    __metadata("design:type", Boolean)
+], LogActivityResponseDto.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Activity ID' }),
+    __metadata("design:type", String)
+], LogActivityResponseDto.prototype, "activityId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], LogActivityResponseDto.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Action performed' }),
+    __metadata("design:type", String)
+], LogActivityResponseDto.prototype, "action", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Activity details', type: StaffActivityDetails }),
+    __metadata("design:type", StaffActivityDetails)
+], LogActivityResponseDto.prototype, "details", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Timestamp' }),
+    __metadata("design:type", Date)
+], LogActivityResponseDto.prototype, "timestamp", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], LogActivityResponseDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], LogActivityResponseDto.prototype, "hotelId", void 0);
+// ============= Performance Related Types =============
+class StaffPerformanceMetrics {
+    tasksCompletedToday;
+    averageTaskTime;
+    qualityScore;
+    productivity;
+    onTimeCompletionRate;
+    customerRating;
+}
+exports.StaffPerformanceMetrics = StaffPerformanceMetrics;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tasks completed today' }),
+    __metadata("design:type", Number)
+], StaffPerformanceMetrics.prototype, "tasksCompletedToday", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Average task time' }),
+    __metadata("design:type", Number)
+], StaffPerformanceMetrics.prototype, "averageTaskTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Quality score' }),
+    __metadata("design:type", Number)
+], StaffPerformanceMetrics.prototype, "qualityScore", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Productivity' }),
+    __metadata("design:type", Number)
+], StaffPerformanceMetrics.prototype, "productivity", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'On-time completion rate' }),
+    __metadata("design:type", Number)
+], StaffPerformanceMetrics.prototype, "onTimeCompletionRate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer rating' }),
+    __metadata("design:type", Number)
+], StaffPerformanceMetrics.prototype, "customerRating", void 0);
+class StaffPerformanceTrends {
+    weeklyTasks;
+    weeklyQuality;
+}
+exports.StaffPerformanceTrends = StaffPerformanceTrends;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Weekly tasks', type: [Number] }),
+    __metadata("design:type", Array)
+], StaffPerformanceTrends.prototype, "weeklyTasks", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Weekly quality', type: [Number] }),
+    __metadata("design:type", Array)
+], StaffPerformanceTrends.prototype, "weeklyQuality", void 0);
+class StaffPerformanceDto {
+    staffId;
+    period;
+    metrics;
+    trends;
+    tenantId;
+    hotelId;
+    calculatedAt;
+}
+exports.StaffPerformanceDto = StaffPerformanceDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], StaffPerformanceDto.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Period' }),
+    __metadata("design:type", String)
+], StaffPerformanceDto.prototype, "period", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Performance metrics', type: StaffPerformanceMetrics }),
+    __metadata("design:type", StaffPerformanceMetrics)
+], StaffPerformanceDto.prototype, "metrics", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Performance trends', type: StaffPerformanceTrends }),
+    __metadata("design:type", StaffPerformanceTrends)
+], StaffPerformanceDto.prototype, "trends", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], StaffPerformanceDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], StaffPerformanceDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Calculated at' }),
+    __metadata("design:type", String)
+], StaffPerformanceDto.prototype, "calculatedAt", void 0);
+// ============= Task Stats Related Types =============
+class TaskStatsRoomTypes {
+    Standard;
+    Deluxe;
+    Suite;
+}
+exports.TaskStatsRoomTypes = TaskStatsRoomTypes;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Standard room tasks count' }),
+    __metadata("design:type", Number)
+], TaskStatsRoomTypes.prototype, "Standard", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Deluxe room tasks count' }),
+    __metadata("design:type", Number)
+], TaskStatsRoomTypes.prototype, "Deluxe", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Suite room tasks count' }),
+    __metadata("design:type", Number)
+], TaskStatsRoomTypes.prototype, "Suite", void 0);
+class TaskStatsTaskTypes {
+    Cleaning;
+    Maintenance;
+    Inspection;
+}
+exports.TaskStatsTaskTypes = TaskStatsTaskTypes;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Cleaning tasks count' }),
+    __metadata("design:type", Number)
+], TaskStatsTaskTypes.prototype, "Cleaning", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Maintenance tasks count' }),
+    __metadata("design:type", Number)
+], TaskStatsTaskTypes.prototype, "Maintenance", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Inspection tasks count' }),
+    __metadata("design:type", Number)
+], TaskStatsTaskTypes.prototype, "Inspection", void 0);
+class StaffTaskStatsMetrics {
+    totalTasks;
+    completedTasks;
+    pendingTasks;
+    cancelledTasks;
+    averageCompletionTime;
+    fastestCompletion;
+    slowestCompletion;
+    roomTypes;
+    taskTypes;
+}
+exports.StaffTaskStatsMetrics = StaffTaskStatsMetrics;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total tasks assigned' }),
+    __metadata("design:type", Number)
+], StaffTaskStatsMetrics.prototype, "totalTasks", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Completed tasks count' }),
+    __metadata("design:type", Number)
+], StaffTaskStatsMetrics.prototype, "completedTasks", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Pending tasks count' }),
+    __metadata("design:type", Number)
+], StaffTaskStatsMetrics.prototype, "pendingTasks", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Cancelled tasks count' }),
+    __metadata("design:type", Number)
+], StaffTaskStatsMetrics.prototype, "cancelledTasks", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Average completion time in minutes' }),
+    __metadata("design:type", Number)
+], StaffTaskStatsMetrics.prototype, "averageCompletionTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Fastest completion time in minutes' }),
+    __metadata("design:type", Number)
+], StaffTaskStatsMetrics.prototype, "fastestCompletion", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Slowest completion time in minutes' }),
+    __metadata("design:type", Number)
+], StaffTaskStatsMetrics.prototype, "slowestCompletion", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tasks by room type', type: TaskStatsRoomTypes }),
+    __metadata("design:type", TaskStatsRoomTypes)
+], StaffTaskStatsMetrics.prototype, "roomTypes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tasks by task type', type: TaskStatsTaskTypes }),
+    __metadata("design:type", TaskStatsTaskTypes)
+], StaffTaskStatsMetrics.prototype, "taskTypes", void 0);
+class StaffTaskStatsDto {
+    staffId;
+    period;
+    stats;
+    tenantId;
+    hotelId;
+}
+exports.StaffTaskStatsDto = StaffTaskStatsDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], StaffTaskStatsDto.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Period for statistics',
+        type: 'object',
+        properties: {
+            startDate: { type: 'string', format: 'date-time' },
+            endDate: { type: 'string', format: 'date-time' }
+        }
+    }),
+    __metadata("design:type", Object)
+], StaffTaskStatsDto.prototype, "period", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Task statistics', type: StaffTaskStatsMetrics }),
+    __metadata("design:type", StaffTaskStatsMetrics)
+], StaffTaskStatsDto.prototype, "stats", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], StaffTaskStatsDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], StaffTaskStatsDto.prototype, "hotelId", void 0);
+// ============= Permission Check Types =============
+class StaffPermissionCheckDto {
+    staffId;
+    permission;
+    allowed;
+    tenantId;
+    hotelId;
+}
+exports.StaffPermissionCheckDto = StaffPermissionCheckDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], StaffPermissionCheckDto.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Permission being checked' }),
+    __metadata("design:type", String)
+], StaffPermissionCheckDto.prototype, "permission", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether permission is allowed' }),
+    __metadata("design:type", Boolean)
+], StaffPermissionCheckDto.prototype, "allowed", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], StaffPermissionCheckDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    __metadata("design:type", String)
+], StaffPermissionCheckDto.prototype, "hotelId", void 0);
+// ============= FEEDBACK =============
+var feedback_dto_1 = require("../rest/feedback.dto");
+Object.defineProperty(exports, "FeedbackDto", { enumerable: true, get: function () { return feedback_dto_1.FeedbackDto; } });
+Object.defineProperty(exports, "FeedbackResponseDto", { enumerable: true, get: function () { return feedback_dto_1.FeedbackResponseDto; } });
+var user_enum_2 = require("../enums/user.enum");
+Object.defineProperty(exports, "FeedbackType", { enumerable: true, get: function () { return user_enum_2.FeedbackType; } });
+Object.defineProperty(exports, "FeedbackPriority", { enumerable: true, get: function () { return user_enum_2.FeedbackPriority; } });
+class SubmitFeedbackPayload {
+    staffId;
+    tenantId;
+    type;
+    subject;
+    description;
+    priority;
+    contactEmail;
+    userAgent;
+    appVersion;
+}
+exports.SubmitFeedbackPayload = SubmitFeedbackPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Feedback type', enum: user_enum_1.FeedbackType }),
+    (0, class_validator_1.IsEnum)(user_enum_1.FeedbackType),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Feedback subject' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(5),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "subject", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Detailed description' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(10),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Priority level', enum: user_enum_1.FeedbackPriority }),
+    (0, class_validator_1.IsEnum)(user_enum_1.FeedbackPriority),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "priority", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Contact email' }),
+    (0, class_validator_1.IsEmail)(),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "contactEmail", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User agent/platform' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "userAgent", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'App version' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SubmitFeedbackPayload.prototype, "appVersion", void 0);
+// ============= CHANGE PASSWORD =============
+var change_password_dto_1 = require("../rest/change-password.dto");
+Object.defineProperty(exports, "ChangePasswordDto", { enumerable: true, get: function () { return change_password_dto_1.ChangePasswordDto; } });
+Object.defineProperty(exports, "ChangePasswordResponseDto", { enumerable: true, get: function () { return change_password_dto_1.ChangePasswordResponseDto; } });
+// ============= AVATAR UPLOAD =============
+var avatar_dto_1 = require("../rest/avatar.dto");
+Object.defineProperty(exports, "AvatarUploadResponseDto", { enumerable: true, get: function () { return avatar_dto_1.AvatarUploadResponseDto; } });
+/**
+ * File metadata for avatar upload via NATS.
+ * Note: No @ApiProperty on `buffer` because Buffer is not Swagger-serializable.
+ * This class is NATS-only — the REST side uses multipart/form-data with @ApiConsumes + inline schema.
+ */
+class UploadAvatarFilePayload {
+    buffer; // Buffer - binary data, not typed to avoid @types/node dependency
+    originalname;
+    mimetype;
+    size;
+}
+exports.UploadAvatarFilePayload = UploadAvatarFilePayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Original filename' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UploadAvatarFilePayload.prototype, "originalname", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'File MIME type' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UploadAvatarFilePayload.prototype, "mimetype", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'File size in bytes' }),
+    __metadata("design:type", Number)
+], UploadAvatarFilePayload.prototype, "size", void 0);
+class UploadAvatarPayload {
+    staffId;
+    tenantId;
+    file;
+}
+exports.UploadAvatarPayload = UploadAvatarPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UploadAvatarPayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UploadAvatarPayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Avatar file' }),
+    __metadata("design:type", UploadAvatarFilePayload)
+], UploadAvatarPayload.prototype, "file", void 0);
+// ============= STAFF SCHEDULE =============
+var schedule_dto_1 = require("../rest/schedule.dto");
+Object.defineProperty(exports, "ShiftScheduleDto", { enumerable: true, get: function () { return schedule_dto_1.ShiftScheduleDto; } });
+Object.defineProperty(exports, "StaffScheduleRequestDto", { enumerable: true, get: function () { return schedule_dto_1.StaffScheduleRequestDto; } });
+Object.defineProperty(exports, "StaffScheduleResponseDto", { enumerable: true, get: function () { return schedule_dto_1.StaffScheduleResponseDto; } });
+var user_enum_3 = require("../enums/user.enum");
+Object.defineProperty(exports, "ShiftType", { enumerable: true, get: function () { return user_enum_3.ShiftType; } });
+Object.defineProperty(exports, "ShiftStatus", { enumerable: true, get: function () { return user_enum_3.ShiftStatus; } });
+class GetStaffSchedulePayload {
+    staffId;
+    tenantId;
+    hotelId;
+    startDate;
+    endDate;
+}
+exports.GetStaffSchedulePayload = GetStaffSchedulePayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetStaffSchedulePayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetStaffSchedulePayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetStaffSchedulePayload.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Start date', example: '2025-08-17' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetStaffSchedulePayload.prototype, "startDate", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'End date', example: '2025-08-23' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetStaffSchedulePayload.prototype, "endDate", void 0);
+// ============= CHANGE PASSWORD =============
+class ChangePasswordPayload {
+    staffId;
+    tenantId;
+    currentPassword;
+    newPassword;
+}
+exports.ChangePasswordPayload = ChangePasswordPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ChangePasswordPayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ChangePasswordPayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Current password' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(1),
+    __metadata("design:type", String)
+], ChangePasswordPayload.prototype, "currentPassword", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'New password' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(8),
+    __metadata("design:type", String)
+], ChangePasswordPayload.prototype, "newPassword", void 0);
+// ============= STAFF PERFORMANCE (REST response) =============
+var performance_dto_1 = require("../rest/performance.dto");
+Object.defineProperty(exports, "PerformanceMetricsDto", { enumerable: true, get: function () { return performance_dto_1.PerformanceMetricsDto; } });
+Object.defineProperty(exports, "AchievementDto", { enumerable: true, get: function () { return performance_dto_1.AchievementDto; } });
+Object.defineProperty(exports, "PerformanceRankDto", { enumerable: true, get: function () { return performance_dto_1.PerformanceRankDto; } });
+Object.defineProperty(exports, "PerformanceDataDto", { enumerable: true, get: function () { return performance_dto_1.PerformanceDataDto; } });
+var user_enum_4 = require("../enums/user.enum");
+Object.defineProperty(exports, "AchievementCategory", { enumerable: true, get: function () { return user_enum_4.AchievementCategory; } });
+// ============= STAFF MOBILE NATS =============
+// --- Request Payloads ---
+class FindStaffByZaloPayload {
+    zaloUserId;
+}
+exports.FindStaffByZaloPayload = FindStaffByZaloPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo user ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindStaffByZaloPayload.prototype, "zaloUserId", void 0);
+class FindStaffByPhonePayload {
+    phone;
+}
+exports.FindStaffByPhonePayload = FindStaffByPhonePayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Phone number' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FindStaffByPhonePayload.prototype, "phone", void 0);
+class LinkZaloToStaffPayload {
+    staffId;
+    zaloUserId;
+    zaloPhone;
+    zaloName;
+    zaloAvatar;
+}
+exports.LinkZaloToStaffPayload = LinkZaloToStaffPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloToStaffPayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo user ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloToStaffPayload.prototype, "zaloUserId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo phone number' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloToStaffPayload.prototype, "zaloPhone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo display name' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloToStaffPayload.prototype, "zaloName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Zalo avatar URL' }),
+    __metadata("design:type", String)
+], LinkZaloToStaffPayload.prototype, "zaloAvatar", void 0);
+class GetStaffHotelsPayload {
+    staffId;
+    tenantId;
+}
+exports.GetStaffHotelsPayload = GetStaffHotelsPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetStaffHotelsPayload.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID filter' }),
+    __metadata("design:type", String)
+], GetStaffHotelsPayload.prototype, "tenantId", void 0);
+class ValidatePermissionPayload {
+    userId;
+    resource;
+    action;
+    tenantId;
+}
+exports.ValidatePermissionPayload = ValidatePermissionPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'User ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ValidatePermissionPayload.prototype, "userId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Resource to check permission for' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ValidatePermissionPayload.prototype, "resource", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Action to check permission for' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ValidatePermissionPayload.prototype, "action", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], ValidatePermissionPayload.prototype, "tenantId", void 0);
+// --- Response DTOs ---
+class StaffZaloInfoDto {
+    id;
+    name;
+    email;
+    phone;
+    roles;
+    tenantId;
+    zaloUserId;
+}
+exports.StaffZaloInfoDto = StaffZaloInfoDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], StaffZaloInfoDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff full name' }),
+    __metadata("design:type", String)
+], StaffZaloInfoDto.prototype, "name", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff email' }),
+    __metadata("design:type", String)
+], StaffZaloInfoDto.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Phone number' }),
+    __metadata("design:type", String)
+], StaffZaloInfoDto.prototype, "phone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff roles', type: [String] }),
+    __metadata("design:type", Array)
+], StaffZaloInfoDto.prototype, "roles", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID' }),
+    __metadata("design:type", String)
+], StaffZaloInfoDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Zalo user ID (present when found via Zalo)' }),
+    __metadata("design:type", String)
+], StaffZaloInfoDto.prototype, "zaloUserId", void 0);
+class LinkZaloResultDto {
+    success;
+    message;
+    staffId;
+    zaloUserId;
+}
+exports.LinkZaloResultDto = LinkZaloResultDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Operation success' }),
+    __metadata("design:type", Boolean)
+], LinkZaloResultDto.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Result message' }),
+    __metadata("design:type", String)
+], LinkZaloResultDto.prototype, "message", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], LinkZaloResultDto.prototype, "staffId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo user ID' }),
+    __metadata("design:type", String)
+], LinkZaloResultDto.prototype, "zaloUserId", void 0);
+class ValidatePermissionResultDto {
+    hasPermission;
+}
+exports.ValidatePermissionResultDto = ValidatePermissionResultDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Whether user has the requested permission' }),
+    __metadata("design:type", Boolean)
+], ValidatePermissionResultDto.prototype, "hasPermission", void 0);
+// --- REST Body DTO (for POST :staffId/link-zalo) ---
+class LinkZaloBasicDto {
+    zaloUserId;
+    zaloPhone;
+    zaloName;
+    zaloAvatar;
+}
+exports.LinkZaloBasicDto = LinkZaloBasicDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo user ID' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloBasicDto.prototype, "zaloUserId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo phone number' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloBasicDto.prototype, "zaloPhone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Zalo display name' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LinkZaloBasicDto.prototype, "zaloName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Zalo avatar URL' }),
+    __metadata("design:type", String)
+], LinkZaloBasicDto.prototype, "zaloAvatar", void 0);
+//# sourceMappingURL=staff.nats.js.map

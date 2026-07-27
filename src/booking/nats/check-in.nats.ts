@@ -46,6 +46,13 @@ export interface CheckInBookingNatsRequest {
   // booking_rooms matching transition status. Specific UUIDs → apply only
   // to those rooms.
   roomIds?: string[];
+
+  /**
+   * booking_rooms.id để gán earlyCheckInFee/lateCheckOutFee vào ĐÚNG PHÒNG (booking
+   * nhiều phòng). Bỏ trống → dùng phòng có createdAt sớm nhất (deterministic fallback,
+   * KHÔNG dùng findOne không order như trước).
+   */
+  feeBookingRoomId?: string;
 }
 
 /**
@@ -112,6 +119,13 @@ export class CheckInBookingDto {
 
   @ApiPropertyOptional({ description: 'Ghi chú thêm cho backdate' })
   backdateReasonNote?: string;
+
+  @ApiPropertyOptional({
+    description: 'booking_rooms.id để gán earlyCheckInFee/lateCheckOutFee vào đúng phòng ' +
+      '(booking nhiều phòng). Bỏ trống → dùng phòng createdAt sớm nhất.',
+    format: 'uuid',
+  })
+  feeBookingRoomId?: string;
 }
 
 export interface BookingData {

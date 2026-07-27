@@ -70,6 +70,18 @@ export class BookingRoom {
   @ApiPropertyOptional({ description: 'Per-room actual check-out timestamp' })
   actualCheckOutTime?: string;
 
+  @ApiPropertyOptional({ description: 'Per-room estimated/approved check-in timestamp (ISO)' })
+  estimatedCheckInTime?: string;
+
+  @ApiPropertyOptional({ description: 'Per-room estimated/approved check-out timestamp (ISO)' })
+  estimatedCheckOutTime?: string;
+
+  @ApiPropertyOptional({ description: 'Per-room early check-in fee (VND, gross)' })
+  earlyCheckInFee?: number | null;
+
+  @ApiPropertyOptional({ description: 'Per-room late check-out fee (VND, gross)' })
+  lateCheckOutFee?: number | null;
+
   @ApiPropertyOptional({
     description: 'Per-room reservation status',
     enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED', 'NO_SHOW'],

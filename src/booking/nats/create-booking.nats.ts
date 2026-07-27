@@ -222,6 +222,33 @@ export interface CreateBookingRequest {
        * Per-room check-out date (YYYY-MM-DD). Bỏ trống → dùng header checkOutDate.
        */
       checkOutDate?: string;
+
+      /**
+       * Giờ check-in dự kiến/đã duyệt cho phòng này, dạng bare "HH:mm" — KHÔNG phải
+       * ISO string, KHÔNG có timezone marker. Backend tự convert đúng bằng timezone
+       * của khách sạn (tra qua hotelId), không dựa vào timezone của trình duyệt/máy
+       * client. Bỏ trống → không có giờ tuỳ chỉnh cho phòng này.
+       */
+      estimatedCheckInTime?: string;
+
+      /**
+       * Giờ check-out dự kiến/đã duyệt cho phòng này, dạng bare "HH:mm". Cùng quy tắc
+       * convert như estimatedCheckInTime.
+       */
+      estimatedCheckOutTime?: string;
+
+      /**
+       * Phí check-in sớm (VND, gross) CỦA RIÊNG PHÒNG NÀY. Backend ghi vào booking_rooms
+       * và tự tính tổng header `earlyCheckInFee` (root level) = SUM qua các phòng — không
+       * cần client tự cộng, nhưng vẫn nên gửi kèm header field để hiển thị ngay lúc phản hồi
+       * (tương thích ngược với code đang đọc header).
+       */
+      earlyCheckInFee?: number;
+
+      /**
+       * Phí check-out muộn (VND, gross) CỦA RIÊNG PHÒNG NÀY. Cùng quy tắc như earlyCheckInFee.
+       */
+      lateCheckOutFee?: number;
     }>;
   };
 
@@ -308,22 +335,15 @@ export interface CreateBookingRequest {
   requestInvoice?: boolean;
 
   /**
-   * Requested check-in time override (ISO string). When provided, overrides hotel default.
-   */
-  estimatedCheckInTime?: string;
-
-  /**
-   * Requested check-out time override (ISO string). When provided, overrides hotel default.
-   */
-  estimatedCheckOutTime?: string;
-
-  /**
-   * Early check-in fee entered by receptionist (VND). Stored in additionalCharges.
+   * Tổng phí check-in sớm (VND) — backend TỰ TÍNH lại bằng SUM các phòng trong
+   * `bookingDetails.rooms[].earlyCheckInFee` nếu có; field này chỉ còn ý nghĩa
+   * tương thích ngược (đọc nhanh 1 số, không tách phòng) — không phải nguồn dữ liệu chính.
    */
   earlyCheckInFee?: number;
 
   /**
-   * Late check-out fee entered by receptionist (VND). Stored in additionalCharges.
+   * Tổng phí check-out muộn (VND) — cùng quy tắc như earlyCheckInFee (backend SUM lại
+   * từ `bookingDetails.rooms[].lateCheckOutFee`).
    */
   lateCheckOutFee?: number;
 

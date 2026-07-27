@@ -1,0 +1,1 @@
+{"version":3,"file":"revenue.nats.d.ts","sourceRoot":"","sources":["../../../src/billing/nats/revenue.nats.ts"],"names":[],"mappings":"AAAA;;;;;;;;GAQG;AAEH,OAAO,EAAE,YAAY,EAAE,MAAM,cAAc,CAAC;AAC5C,OAAO,EAAE,iBAAiB,EAAE,oBAAoB,EAAE,MAAM,UAAU,CAAC;AAEnE;;;;;GAKG;AACH,MAAM,MAAM,0BAA0B,GAAG,iBAAiB,CAAC;AAE3D,MAAM,MAAM,2BAA2B,GAAG,YAAY,CAAC,oBAAoB,CAAC,CAAC"}
