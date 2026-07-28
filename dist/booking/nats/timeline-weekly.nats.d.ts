@@ -37,6 +37,7 @@ export declare class TimelineBookingDataDto {
     checkInTime?: string;
     checkOutTime?: string;
     actualCheckInTime?: string;
+    estimatedCheckInTime?: string;
     bookingCode?: string;
     totalAmount?: number;
     specialRequests?: string;

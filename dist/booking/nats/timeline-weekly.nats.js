@@ -125,6 +125,7 @@ class TimelineBookingDataDto {
     checkInTime;
     checkOutTime;
     actualCheckInTime;
+    estimatedCheckInTime;
     bookingCode;
     totalAmount;
     specialRequests;
@@ -147,6 +148,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Actual check-in time (ISO)' }),
     __metadata("design:type", String)
 ], TimelineBookingDataDto.prototype, "actualCheckInTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Estimated check-in time (ISO) — set khi lễ tân thỏa thuận trước cho khách đến sớm/muộn' }),
+    __metadata("design:type", String)
+], TimelineBookingDataDto.prototype, "estimatedCheckInTime", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Booking code' }),
     __metadata("design:type", String)
