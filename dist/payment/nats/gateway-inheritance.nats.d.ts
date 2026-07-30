@@ -739,4 +739,37 @@ export type UpdateChainPaymentGatewayNatsResponse = UpdateGatewayNatsResponse;
  */
 export type UpdatePaymentGatewayNatsRequest = UpdateGatewayRequest;
 export type UpdatePaymentGatewayNatsResponse = UpdateGatewayNatsResponse;
+/**
+ * NATS payload to create a brand-new payment gateway config at exactly one level
+ * (HOTEL, CHAIN, or PLATFORM — pass exactly one of hotelId/chainId/platformId).
+ */
+export declare class CreateGatewayPayload {
+    tenantId: string;
+    hotelId?: string;
+    chainId?: string;
+    platformId?: string;
+    gatewayType: GatewayType | string;
+    isActive?: boolean;
+    merchantId?: string;
+    apiKey?: string;
+    secretKey?: string;
+    configuration?: UpdateGatewayConfigPayload;
+    fees?: UpdateGatewayFees;
+}
+export type CreateGatewayNatsResponse = NatsResponse<GatewayConfigData>;
+/**
+ * Create hotel-level payment gateway — alias for CreateGatewayPayload with hotelId
+ */
+export type CreateHotelPaymentGatewayNatsRequest = CreateGatewayPayload;
+export type CreateHotelPaymentGatewayNatsResponse = CreateGatewayNatsResponse;
+/**
+ * Create chain-level payment gateway — alias for CreateGatewayPayload with chainId
+ */
+export type CreateChainPaymentGatewayNatsRequest = CreateGatewayPayload;
+export type CreateChainPaymentGatewayNatsResponse = CreateGatewayNatsResponse;
+/**
+ * Create platform-level payment gateway — alias for CreateGatewayPayload with platformId
+ */
+export type CreatePlatformPaymentGatewayNatsRequest = CreateGatewayPayload;
+export type CreatePlatformPaymentGatewayNatsResponse = CreateGatewayNatsResponse;
 //# sourceMappingURL=gateway-inheritance.nats.d.ts.map

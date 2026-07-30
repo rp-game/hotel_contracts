@@ -26,7 +26,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TestPaymentGatewayData = exports.TestPaymentGatewayNatsRequest = exports.BulkUpdateGatewayResponseData = exports.BulkUpdateGatewayResult = exports.BulkUpdatePaymentGatewayNatsRequest = exports.BulkGatewayUpdateFields = exports.UpdateGatewayPayload = exports.UpdateGatewayConfigPayload = exports.UpdateGatewayFees = exports.ResolvedGatewayConfigData = exports.GatewayStatistics = exports.GatewayConfigData = exports.GatewayConfiguration = exports.GatewayCurrencyConfig = exports.ResolvedConfigMetadata = exports.InheritanceConfig = exports.GatewaySyncStatus = exports.GatewayType = exports.ConfigLevel = void 0;
+exports.CreateGatewayPayload = exports.TestPaymentGatewayData = exports.TestPaymentGatewayNatsRequest = exports.BulkUpdateGatewayResponseData = exports.BulkUpdateGatewayResult = exports.BulkUpdatePaymentGatewayNatsRequest = exports.BulkGatewayUpdateFields = exports.UpdateGatewayPayload = exports.UpdateGatewayConfigPayload = exports.UpdateGatewayFees = exports.ResolvedGatewayConfigData = exports.GatewayStatistics = exports.GatewayConfigData = exports.GatewayConfiguration = exports.GatewayCurrencyConfig = exports.ResolvedConfigMetadata = exports.InheritanceConfig = exports.GatewaySyncStatus = exports.GatewayType = exports.ConfigLevel = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
@@ -713,4 +713,71 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Test timestamp (ISO 8601)' }),
     __metadata("design:type", String)
 ], TestPaymentGatewayData.prototype, "testedAt", void 0);
+// ============ CREATE GATEWAY (gateway.create) ============
+/**
+ * NATS payload to create a brand-new payment gateway config at exactly one level
+ * (HOTEL, CHAIN, or PLATFORM — pass exactly one of hotelId/chainId/platformId).
+ */
+class CreateGatewayPayload {
+    tenantId;
+    hotelId;
+    chainId;
+    platformId;
+    gatewayType;
+    isActive;
+    merchantId;
+    apiKey;
+    secretKey;
+    configuration;
+    fees;
+}
+exports.CreateGatewayPayload = CreateGatewayPayload;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Tenant ID (multi-tenant isolation)' }),
+    __metadata("design:type", String)
+], CreateGatewayPayload.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID — set when creating a HOTEL-level config' }),
+    __metadata("design:type", String)
+], CreateGatewayPayload.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Chain ID — set when creating a CHAIN-level config' }),
+    __metadata("design:type", String)
+], CreateGatewayPayload.prototype, "chainId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Platform ID — set when creating a PLATFORM-level config' }),
+    __metadata("design:type", String)
+], CreateGatewayPayload.prototype, "platformId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Payment gateway type', enum: GatewayType }),
+    __metadata("design:type", String)
+], CreateGatewayPayload.prototype, "gatewayType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Active/enabled status', default: false }),
+    __metadata("design:type", Boolean)
+], CreateGatewayPayload.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Merchant ID (ROOT LEVEL - database column)' }),
+    __metadata("design:type", String)
+], CreateGatewayPayload.prototype, "merchantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'API Key (ROOT LEVEL - database column)' }),
+    __metadata("design:type", String)
+], CreateGatewayPayload.prototype, "apiKey", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Secret Key (ROOT LEVEL - database column)' }),
+    __metadata("design:type", String)
+], CreateGatewayPayload.prototype, "secretKey", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Gateway-specific configuration', type: () => UpdateGatewayConfigPayload }),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => UpdateGatewayConfigPayload),
+    __metadata("design:type", UpdateGatewayConfigPayload)
+], CreateGatewayPayload.prototype, "configuration", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Fee configuration', type: () => UpdateGatewayFees }),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => UpdateGatewayFees),
+    __metadata("design:type", UpdateGatewayFees)
+], CreateGatewayPayload.prototype, "fees", void 0);
 //# sourceMappingURL=gateway-inheritance.nats.js.map
