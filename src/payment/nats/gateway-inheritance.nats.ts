@@ -1070,3 +1070,68 @@ export type UpdateChainPaymentGatewayNatsResponse = UpdateGatewayNatsResponse;
  */
 export type UpdatePaymentGatewayNatsRequest = UpdateGatewayRequest;
 export type UpdatePaymentGatewayNatsResponse = UpdateGatewayNatsResponse;
+
+// ============ CREATE GATEWAY (gateway.create) ============
+
+/**
+ * NATS payload to create a brand-new payment gateway config at exactly one level
+ * (HOTEL, CHAIN, or PLATFORM — pass exactly one of hotelId/chainId/platformId).
+ */
+export class CreateGatewayPayload {
+  @ApiProperty({ description: 'Tenant ID (multi-tenant isolation)' })
+  tenantId: string;
+
+  @ApiPropertyOptional({ description: 'Hotel ID — set when creating a HOTEL-level config' })
+  hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Chain ID — set when creating a CHAIN-level config' })
+  chainId?: string;
+
+  @ApiPropertyOptional({ description: 'Platform ID — set when creating a PLATFORM-level config' })
+  platformId?: string;
+
+  @ApiProperty({ description: 'Payment gateway type', enum: GatewayType })
+  gatewayType: GatewayType | string;
+
+  @ApiPropertyOptional({ description: 'Active/enabled status', default: false })
+  isActive?: boolean;
+
+  @ApiPropertyOptional({ description: 'Merchant ID (ROOT LEVEL - database column)' })
+  merchantId?: string;
+
+  @ApiPropertyOptional({ description: 'API Key (ROOT LEVEL - database column)' })
+  apiKey?: string;
+
+  @ApiPropertyOptional({ description: 'Secret Key (ROOT LEVEL - database column)' })
+  secretKey?: string;
+
+  @ApiPropertyOptional({ description: 'Gateway-specific configuration', type: () => UpdateGatewayConfigPayload })
+  @ValidateNested()
+  @Type(() => UpdateGatewayConfigPayload)
+  configuration?: UpdateGatewayConfigPayload;
+
+  @ApiPropertyOptional({ description: 'Fee configuration', type: () => UpdateGatewayFees })
+  @ValidateNested()
+  @Type(() => UpdateGatewayFees)
+  fees?: UpdateGatewayFees;
+}
+
+export type CreateGatewayNatsResponse = NatsResponse<GatewayConfigData>;
+
+/**
+ * Create hotel-level payment gateway — alias for CreateGatewayPayload with hotelId
+ */
+export type CreateHotelPaymentGatewayNatsRequest = CreateGatewayPayload;
+export type CreateHotelPaymentGatewayNatsResponse = CreateGatewayNatsResponse;
+
+/**
+ * Create chain-level payment gateway — alias for CreateGatewayPayload with chainId
+ */
+export type CreateChainPaymentGatewayNatsRequest = CreateGatewayPayload;
+export type CreateChainPaymentGatewayNatsResponse = CreateGatewayNatsResponse;
+
+/**
+ * Create platform-level payment gateway — alias for CreateGatewayPayload with platformId
+ */
+export type CreatePlatformPaymentGatewayNatsRequest = CreateGatewayPayload;
+export type CreatePlatformPaymentGatewayNatsResponse = CreateGatewayNatsResponse;
