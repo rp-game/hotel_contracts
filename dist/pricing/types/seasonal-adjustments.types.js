@@ -25,6 +25,7 @@ class SeasonalAdjustment {
     tenantId;
     hotelId;
     roomTypeId;
+    roomTypeIds;
     seasonName;
     startDate;
     endDate;
@@ -49,9 +50,21 @@ __decorate([
     __metadata("design:type", String)
 ], SeasonalAdjustment.prototype, "hotelId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Room Type ID', example: '550e8400-e29b-41d4-a716-446655440001' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'DEPRECATED — dùng roomTypeIds. Giữ lại để tương thích dữ liệu cũ, không dùng cho record mới.',
+        example: '550e8400-e29b-41d4-a716-446655440001',
+        deprecated: true,
+    }),
     __metadata("design:type", String)
 ], SeasonalAdjustment.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Danh sách room type áp dụng season này (1 hoặc nhiều)',
+        example: ['550e8400-e29b-41d4-a716-446655440001'],
+        type: [String],
+    }),
+    __metadata("design:type", Array)
+], SeasonalAdjustment.prototype, "roomTypeIds", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Season name', example: 'Summer 2025', maxLength: 100 }),
     __metadata("design:type", String)

@@ -23,7 +23,7 @@ export type FindSeasonalAdjustmentByIdNatsResponse = NatsResponse<FindSeasonalAd
 export declare class CreateSeasonalAdjustmentRequest {
     tenantId: string;
     hotelId: string;
-    roomTypeId: string;
+    roomTypeIds: string[];
     seasonName: string;
     startDate: string;
     endDate: string;
@@ -44,6 +44,7 @@ export type CreateSeasonalAdjustmentNatsResponse = NatsResponse<CreateSeasonalAd
  * Contains only the fields that can be updated
  */
 export declare class UpdateSeasonalAdjustmentDto {
+    roomTypeIds?: string[];
     seasonName?: string;
     startDate?: string;
     endDate?: string;

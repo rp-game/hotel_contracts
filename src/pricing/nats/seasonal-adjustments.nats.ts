@@ -3,7 +3,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsUUID, IsString, IsDateString, IsEnum, IsNumber, IsOptional, IsBoolean, Min, Max, MaxLength } from 'class-validator';
+import { IsUUID, IsString, IsDateString, IsEnum, IsNumber, IsOptional, IsBoolean, Min, Max, MaxLength, IsArray, ArrayNotEmpty } from 'class-validator';
 import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { SeasonalAdjustment } from '../types';
@@ -68,9 +68,15 @@ export class CreateSeasonalAdjustmentRequest {
   @IsUUID()
   hotelId: string;
 
-  @ApiProperty({ description: 'Room Type ID', example: '550e8400-e29b-41d4-a716-446655440001' })
-  @IsUUID()
-  roomTypeId: string;
+  @ApiProperty({
+    description: 'Danh sách room type áp dụng season này (1 hoặc nhiều)',
+    example: ['550e8400-e29b-41d4-a716-446655440001'],
+    type: [String],
+  })
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsUUID('4', { each: true })
+  roomTypeIds: string[];
 
   @ApiProperty({ description: 'Season name', example: 'Summer 2025', maxLength: 100 })
   @IsString()
@@ -144,6 +150,17 @@ export type CreateSeasonalAdjustmentNatsResponse = NatsResponse<CreateSeasonalAd
  * Contains only the fields that can be updated
  */
 export class UpdateSeasonalAdjustmentDto {
+  @ApiPropertyOptional({
+    description: 'Danh sách room type áp dụng season này (1 hoặc nhiều)',
+    example: ['550e8400-e29b-41d4-a716-446655440001'],
+    type: [String],
+  })
+  @IsOptional()
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsUUID('4', { each: true })
+  roomTypeIds?: string[];
+
   @ApiPropertyOptional({ description: 'Season name', example: 'Summer 2025', maxLength: 100 })
   @IsOptional()
   @IsString()

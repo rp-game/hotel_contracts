@@ -11,7 +11,8 @@ export declare class SeasonalAdjustment {
     id: string;
     tenantId: string;
     hotelId: string;
-    roomTypeId: string;
+    roomTypeId?: string;
+    roomTypeIds: string[];
     seasonName: string;
     startDate: string;
     endDate: string;
