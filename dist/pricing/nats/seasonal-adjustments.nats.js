@@ -82,7 +82,7 @@ __decorate([
 class CreateSeasonalAdjustmentRequest {
     tenantId;
     hotelId;
-    roomTypeId;
+    roomTypeIds;
     seasonName;
     startDate;
     endDate;
@@ -105,10 +105,16 @@ __decorate([
     __metadata("design:type", String)
 ], CreateSeasonalAdjustmentRequest.prototype, "hotelId", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Room Type ID', example: '550e8400-e29b-41d4-a716-446655440001' }),
-    (0, class_validator_1.IsUUID)(),
-    __metadata("design:type", String)
-], CreateSeasonalAdjustmentRequest.prototype, "roomTypeId", void 0);
+    (0, swagger_1.ApiProperty)({
+        description: 'Danh sách room type áp dụng season này (1 hoặc nhiều)',
+        example: ['550e8400-e29b-41d4-a716-446655440001'],
+        type: [String],
+    }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ArrayNotEmpty)(),
+    (0, class_validator_1.IsUUID)('4', { each: true }),
+    __metadata("design:type", Array)
+], CreateSeasonalAdjustmentRequest.prototype, "roomTypeIds", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Season name', example: 'Summer 2025', maxLength: 100 }),
     (0, class_validator_1.IsString)(),
@@ -191,6 +197,7 @@ __decorate([
  * Contains only the fields that can be updated
  */
 class UpdateSeasonalAdjustmentDto {
+    roomTypeIds;
     seasonName;
     startDate;
     endDate;
@@ -200,6 +207,18 @@ class UpdateSeasonalAdjustmentDto {
     isActive;
 }
 exports.UpdateSeasonalAdjustmentDto = UpdateSeasonalAdjustmentDto;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Danh sách room type áp dụng season này (1 hoặc nhiều)',
+        example: ['550e8400-e29b-41d4-a716-446655440001'],
+        type: [String],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ArrayNotEmpty)(),
+    (0, class_validator_1.IsUUID)('4', { each: true }),
+    __metadata("design:type", Array)
+], UpdateSeasonalAdjustmentDto.prototype, "roomTypeIds", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Season name', example: 'Summer 2025', maxLength: 100 }),
     (0, class_validator_1.IsOptional)(),

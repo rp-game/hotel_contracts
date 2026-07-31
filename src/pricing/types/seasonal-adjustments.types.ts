@@ -20,8 +20,19 @@ export class SeasonalAdjustment {
   @ApiProperty({ description: 'Hotel ID', example: '550e8400-e29b-41d4-a716-446655440002' })
   hotelId: string;
 
-  @ApiProperty({ description: 'Room Type ID', example: '550e8400-e29b-41d4-a716-446655440001' })
-  roomTypeId: string;
+  @ApiProperty({
+    description: 'DEPRECATED — dùng roomTypeIds. Giữ lại để tương thích dữ liệu cũ, không dùng cho record mới.',
+    example: '550e8400-e29b-41d4-a716-446655440001',
+    deprecated: true,
+  })
+  roomTypeId?: string;
+
+  @ApiProperty({
+    description: 'Danh sách room type áp dụng season này (1 hoặc nhiều)',
+    example: ['550e8400-e29b-41d4-a716-446655440001'],
+    type: [String],
+  })
+  roomTypeIds: string[];
 
   @ApiProperty({ description: 'Season name', example: 'Summer 2025', maxLength: 100 })
   seasonName: string;
