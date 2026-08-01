@@ -27,4 +27,5 @@ __exportStar(require("./failover-errors.nats"), exports);
 __exportStar(require("./channel-distribution.nats"), exports);
 __exportStar(require("./provider-channel-routing.nats"), exports);
 __exportStar(require("./channel-ota-mapping.nats"), exports);
+__exportStar(require("./auto-sync-price.nats"), exports);
 //# sourceMappingURL=index.js.map

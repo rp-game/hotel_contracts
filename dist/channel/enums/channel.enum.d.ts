@@ -81,7 +81,13 @@ export declare enum SyncStatus {
     /** Synchronization failed completely */
     FAILED = "FAILED",
     /** Synchronization was cancelled */
-    CANCELLED = "CANCELLED"
+    CANCELLED = "CANCELLED",
+    /** Auto-sync giá: đang chờ debounce/rate-limit tới hạn flush */
+    QUEUED = "QUEUED",
+    /** Auto-sync giá: giá lệch >ngưỡng sanity-check, chờ backoffice xác nhận thủ công */
+    PENDING_CONFIRMATION = "PENDING_CONFIRMATION",
+    /** PENDING_CONFIRMATION quá hạn không được xác nhận — chỉ đổi trạng thái hiển thị, không tự hành động */
+    EXPIRED = "EXPIRED"
 }
 /**
  * Sync Trigger Enum

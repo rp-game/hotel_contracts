@@ -90,6 +90,12 @@ var SyncStatus;
     SyncStatus["FAILED"] = "FAILED";
     /** Synchronization was cancelled */
     SyncStatus["CANCELLED"] = "CANCELLED";
+    /** Auto-sync giá: đang chờ debounce/rate-limit tới hạn flush */
+    SyncStatus["QUEUED"] = "QUEUED";
+    /** Auto-sync giá: giá lệch >ngưỡng sanity-check, chờ backoffice xác nhận thủ công */
+    SyncStatus["PENDING_CONFIRMATION"] = "PENDING_CONFIRMATION";
+    /** PENDING_CONFIRMATION quá hạn không được xác nhận — chỉ đổi trạng thái hiển thị, không tự hành động */
+    SyncStatus["EXPIRED"] = "EXPIRED";
 })(SyncStatus || (exports.SyncStatus = SyncStatus = {}));
 /**
  * Sync Trigger Enum
