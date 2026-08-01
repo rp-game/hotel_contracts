@@ -18,7 +18,9 @@ export declare enum NotificationType {
     ROOM_MOVE_REJECTED = "room_move_rejected",
     PAYMENT_VERIFICATION_PENDING = "payment_verification_pending",
     AMENITY_REQUEST_NEW = "amenity_request_new",
-    CHANNEL_SYNC_FAILED = "channel_sync_failed"
+    CHANNEL_SYNC_FAILED = "channel_sync_failed",
+    STAAH_PRICE_SANITY_CHECK_PENDING = "staah_price_sanity_check_pending",
+    STAAH_AUTO_SYNC_DISABLED = "staah_auto_sync_disabled"
 }
 export declare enum NotificationPriority {
     LOW = "low",

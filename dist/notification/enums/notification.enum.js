@@ -23,6 +23,8 @@ var NotificationType;
     NotificationType["PAYMENT_VERIFICATION_PENDING"] = "payment_verification_pending";
     NotificationType["AMENITY_REQUEST_NEW"] = "amenity_request_new";
     NotificationType["CHANNEL_SYNC_FAILED"] = "channel_sync_failed";
+    NotificationType["STAAH_PRICE_SANITY_CHECK_PENDING"] = "staah_price_sanity_check_pending";
+    NotificationType["STAAH_AUTO_SYNC_DISABLED"] = "staah_auto_sync_disabled";
 })(NotificationType || (exports.NotificationType = NotificationType = {}));
 var NotificationPriority;
 (function (NotificationPriority) {
