@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateProfileDto = exports.PublicUserListResponseDto = exports.BatchUploadPhotosDto = exports.QuickUploadPhotoDto = exports.PhotoUploadContextDto = exports.BatchPhotoUploadResultDto = exports.PhotoUploadResultDto = exports.SelectHotelResultDto = exports.StaffMobileDashboardDto = exports.StaffMobilePerformanceDto = exports.StaffMobileDashboardHotelStatusDto = exports.StaffRecentActivityDto = exports.StaffAlertDto = exports.QuickActionItemDto = exports.StaffMobileDashboardTaskSummaryDto = exports.StaffMobileDashboardStaffDto = exports.PublicUserDto = exports.StaffProfileDto = exports.UserPreferencesDto = exports.NotificationPreferencesDto = exports.EmergencyContactDto = exports.ClockInOutDto = exports.DeviceInfoDto = exports.QuickActionResponseDto = exports.NextActionDto = exports.QuickActionExecuteDto = exports.QuickActionParametersDto = exports.QuickStatsResponseDto = exports.MobileDashboardDto = exports.DashboardCurrentShiftDto = exports.DashboardPerformanceDto = exports.DashboardOccupancyDto = exports.DashboardTaskStatsDto = exports.DashboardStaffInfoDto = exports.StaffResponseDto = exports.CreateStaffResponseDto = exports.StaffListResponseDto = exports.StaffDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
+exports.UpdateProfileDto = exports.PublicUserListResponseDto = exports.BatchUploadPhotosDto = exports.QuickUploadPhotoDto = exports.PhotoUploadContextDto = exports.BatchPhotoUploadResultDto = exports.PhotoUploadResultDto = exports.SelectHotelResultDto = exports.StaffMobileDashboardDto = exports.StaffMobilePerformanceDto = exports.StaffMobileDashboardHotelStatusDto = exports.StaffRecentActivityDto = exports.StaffAlertDto = exports.QuickActionItemDto = exports.StaffMobileDashboardTaskSummaryDto = exports.StaffMobileDashboardStaffDto = exports.PublicUserDto = exports.StaffProfileDto = exports.UserPreferencesDto = exports.NotificationPreferencesDto = exports.EmergencyContactDto = exports.ClockInOutDto = exports.DeviceInfoDto = exports.QuickActionResponseDto = exports.NextActionDto = exports.QuickActionExecuteDto = exports.QuickActionParametersDto = exports.QuickStatsResponseDto = exports.MobileDashboardDto = exports.DashboardCurrentShiftDto = exports.DashboardPerformanceDto = exports.DashboardOccupancyDto = exports.DashboardTaskStatsDto = exports.DashboardStaffInfoDto = exports.StaffResponseDto = exports.CreateStaffResponseDto = exports.StaffListResponseDto = exports.StaffDto = exports.AssignHotelIdsDto = exports.UpdateStaffStatusDto = exports.CreateStaffDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
@@ -182,6 +182,23 @@ __decorate([
     (0, class_validator_1.IsEnum)(enums_1.StaffStatus),
     __metadata("design:type", String)
 ], UpdateStaffStatusDto.prototype, "status", void 0);
+/**
+ * Assign Hotel IDs DTO — danh sách hotel user cấp chain (hotelId=null) được phép truy cập.
+ * @usage PATCH /api/users/staff/:id/hotel-ids (REST) + user.staff.assignHotelIds (NATS)
+ */
+class AssignHotelIdsDto {
+    hotelIds;
+}
+exports.AssignHotelIdsDto = AssignHotelIdsDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Danh sách hotel được phép truy cập. Rỗng = không giới hạn. Sentinel 00000000-0000-0000-0000-000000000000 = tất cả hotel (tường minh).',
+        type: [String],
+    }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsUUID)(undefined, { each: true }),
+    __metadata("design:type", Array)
+], AssignHotelIdsDto.prototype, "hotelIds", void 0);
 // ============================================================================
 // RESPONSE DTOs
 // ============================================================================

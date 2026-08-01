@@ -135,6 +135,20 @@ export class UpdateStaffStatusDto {
   status: StaffStatus;
 }
 
+/**
+ * Assign Hotel IDs DTO — danh sách hotel user cấp chain (hotelId=null) được phép truy cập.
+ * @usage PATCH /api/users/staff/:id/hotel-ids (REST) + user.staff.assignHotelIds (NATS)
+ */
+export class AssignHotelIdsDto {
+  @ApiProperty({
+    description: 'Danh sách hotel được phép truy cập. Rỗng = không giới hạn. Sentinel 00000000-0000-0000-0000-000000000000 = tất cả hotel (tường minh).',
+    type: [String],
+  })
+  @IsArray()
+  @IsUUID(undefined, { each: true })
+  hotelIds: string[];
+}
+
 // ============================================================================
 // RESPONSE DTOs
 // ============================================================================

@@ -42,6 +42,13 @@ export declare class UpdateStaffStatusDto {
     status: StaffStatus;
 }
 /**
+ * Assign Hotel IDs DTO — danh sách hotel user cấp chain (hotelId=null) được phép truy cập.
+ * @usage PATCH /api/users/staff/:id/hotel-ids (REST) + user.staff.assignHotelIds (NATS)
+ */
+export declare class AssignHotelIdsDto {
+    hotelIds: string[];
+}
+/**
  * Staff DTO
  * @description Complete staff member information
  * @usage Response data for staff operations
