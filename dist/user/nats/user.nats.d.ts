@@ -62,8 +62,13 @@ export declare class AssignStaffToHotelRequestDto {
     id: string;
     hotelId: string;
 }
+export declare class AssignHotelIdsRequestDto {
+    id: string;
+    hotelIds: string[];
+}
 export declare class CreateStaffRequestDto extends CreateUserRequestDto {
-    hotelId: string;
+    hotelId?: string;
+    hotelIds?: string[];
     staffStatus?: StaffStatus;
     employeeId?: string;
     position?: string;
@@ -103,6 +108,7 @@ export declare class UserResponseDto {
     isActive: boolean;
     staffStatus?: StaffStatus;
     hotelId?: string;
+    hotelIds?: string[];
     createdAt: Date;
     updatedAt: Date;
 }
@@ -114,6 +120,7 @@ export declare class StaffInfoResponseDto {
     roles: string[];
     staffStatus?: StaffStatus;
     hotelId?: string;
+    hotelIds?: string[];
 }
 export declare class UserStatsDto {
     totalUsers: number;

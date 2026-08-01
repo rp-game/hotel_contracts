@@ -140,9 +140,26 @@ export class AssignStaffToHotelRequestDto {
   hotelId: string;
 }
 
+export class AssignHotelIdsRequestDto {
+  @ApiProperty({ description: 'Staff ID' })
+  id: string;
+
+  @ApiProperty({
+    description: 'Danh sách hotel được phép truy cập (chỉ áp dụng cho user cấp chain, hotelId=null). Rỗng = không giới hạn. Sentinel 00000000-0000-0000-0000-000000000000 = tất cả hotel (tường minh).',
+    type: [String],
+  })
+  hotelIds: string[];
+}
+
 export class CreateStaffRequestDto extends CreateUserRequestDto {
-  @ApiProperty({ description: 'Hotel ID' })
-  hotelId: string;
+  @ApiPropertyOptional({ description: 'Hotel ID (bắt buộc trừ khi tạo user cấp chain với hotelIds)' })
+  hotelId?: string;
+
+  @ApiPropertyOptional({
+    description: 'Danh sách hotel được phép truy cập khi tạo user cấp chain (hotelId để trống). Sentinel 00000000-0000-0000-0000-000000000000 = tất cả hotel.',
+    type: [String],
+  })
+  hotelIds?: string[];
 
   @ApiPropertyOptional({ description: 'Staff status', enum: StaffStatus })
   staffStatus?: StaffStatus;
@@ -237,6 +254,9 @@ export class UserResponseDto {
   @ApiPropertyOptional({ description: 'Hotel ID' })
   hotelId?: string;
 
+  @ApiPropertyOptional({ description: 'Danh sách hotel được phép truy cập (chỉ có ý nghĩa khi hotelId=null)', type: [String] })
+  hotelIds?: string[];
+
   @ApiProperty({ description: 'Created at' })
   createdAt: Date;
 
@@ -265,6 +285,9 @@ export class StaffInfoResponseDto {
 
   @ApiPropertyOptional({ description: 'Hotel ID' })
   hotelId?: string;
+
+  @ApiPropertyOptional({ description: 'Danh sách hotel được phép truy cập (chỉ có ý nghĩa khi hotelId=null)', type: [String] })
+  hotelIds?: string[];
 }
 
 export class UserStatsDto {

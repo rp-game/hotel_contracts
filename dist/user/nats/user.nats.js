@@ -14,7 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FindStaffListNatsResponseDto = exports.UserStatsDto = exports.StaffInfoResponseDto = exports.UserResponseDto = exports.GetGuestRequestDto = exports.DeactivateUserRequestDto = exports.ActivateUserRequestDto = exports.AssignRolesRequestDto = exports.GetUserStatsRequestDto = exports.SearchUsersRequestDto = exports.CreateStaffRequestDto = exports.AssignStaffToHotelRequestDto = exports.UpdateStaffStatusRequestDto = exports.FindStaffByRoleRequestDto = exports.GetStaffByIdRequestDto = exports.FindStaffRequestDto = exports.RemoveUserRequestDto = exports.UpdateUserRequestDto = exports.FindUserByEmailRequestDto = exports.FindAllUsersRequestDto = exports.FindUserRequestDto = exports.CreateUserRequestDto = void 0;
+exports.FindStaffListNatsResponseDto = exports.UserStatsDto = exports.StaffInfoResponseDto = exports.UserResponseDto = exports.GetGuestRequestDto = exports.DeactivateUserRequestDto = exports.ActivateUserRequestDto = exports.AssignRolesRequestDto = exports.GetUserStatsRequestDto = exports.SearchUsersRequestDto = exports.CreateStaffRequestDto = exports.AssignHotelIdsRequestDto = exports.AssignStaffToHotelRequestDto = exports.UpdateStaffStatusRequestDto = exports.FindStaffByRoleRequestDto = exports.GetStaffByIdRequestDto = exports.FindStaffRequestDto = exports.RemoveUserRequestDto = exports.UpdateUserRequestDto = exports.FindUserByEmailRequestDto = exports.FindAllUsersRequestDto = exports.FindUserRequestDto = exports.CreateUserRequestDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const enums_1 = require("../enums");
 const enums_2 = require("../enums");
@@ -229,8 +229,25 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
     __metadata("design:type", String)
 ], AssignStaffToHotelRequestDto.prototype, "hotelId", void 0);
+class AssignHotelIdsRequestDto {
+    id;
+    hotelIds;
+}
+exports.AssignHotelIdsRequestDto = AssignHotelIdsRequestDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Staff ID' }),
+    __metadata("design:type", String)
+], AssignHotelIdsRequestDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Danh sách hotel được phép truy cập (chỉ áp dụng cho user cấp chain, hotelId=null). Rỗng = không giới hạn. Sentinel 00000000-0000-0000-0000-000000000000 = tất cả hotel (tường minh).',
+        type: [String],
+    }),
+    __metadata("design:type", Array)
+], AssignHotelIdsRequestDto.prototype, "hotelIds", void 0);
 class CreateStaffRequestDto extends CreateUserRequestDto {
     hotelId;
+    hotelIds;
     staffStatus;
     employeeId;
     position;
@@ -239,9 +256,16 @@ class CreateStaffRequestDto extends CreateUserRequestDto {
 }
 exports.CreateStaffRequestDto = CreateStaffRequestDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Hotel ID' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID (bắt buộc trừ khi tạo user cấp chain với hotelIds)' }),
     __metadata("design:type", String)
 ], CreateStaffRequestDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Danh sách hotel được phép truy cập khi tạo user cấp chain (hotelId để trống). Sentinel 00000000-0000-0000-0000-000000000000 = tất cả hotel.',
+        type: [String],
+    }),
+    __metadata("design:type", Array)
+], CreateStaffRequestDto.prototype, "hotelIds", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Staff status', enum: enums_2.StaffStatus }),
     __metadata("design:type", String)
@@ -347,6 +371,7 @@ class UserResponseDto {
     isActive;
     staffStatus;
     hotelId;
+    hotelIds;
     createdAt;
     updatedAt;
 }
@@ -388,6 +413,10 @@ __decorate([
     __metadata("design:type", String)
 ], UserResponseDto.prototype, "hotelId", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Danh sách hotel được phép truy cập (chỉ có ý nghĩa khi hotelId=null)', type: [String] }),
+    __metadata("design:type", Array)
+], UserResponseDto.prototype, "hotelIds", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Created at' }),
     __metadata("design:type", Date)
 ], UserResponseDto.prototype, "createdAt", void 0);
@@ -403,6 +432,7 @@ class StaffInfoResponseDto {
     roles;
     staffStatus;
     hotelId;
+    hotelIds;
 }
 exports.StaffInfoResponseDto = StaffInfoResponseDto;
 __decorate([
@@ -433,6 +463,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel ID' }),
     __metadata("design:type", String)
 ], StaffInfoResponseDto.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Danh sách hotel được phép truy cập (chỉ có ý nghĩa khi hotelId=null)', type: [String] }),
+    __metadata("design:type", Array)
+], StaffInfoResponseDto.prototype, "hotelIds", void 0);
 class UserStatsDto {
     totalUsers;
     activeUsers;
