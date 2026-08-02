@@ -69,6 +69,7 @@ export declare class RoomTypeSearchResult {
     hotelName?: string;
     hotelCity?: string;
     hotelAddress?: string;
+    hotelSlug?: string;
     name: string;
     description: string | null;
     capacity: number;

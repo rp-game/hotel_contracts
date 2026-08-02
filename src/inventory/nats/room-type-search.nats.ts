@@ -282,6 +282,9 @@ export class RoomTypeSearchResult {
   @ApiPropertyOptional({ description: 'Hotel address (populated in multi-hotel search)' })
   hotelAddress?: string;
 
+  @ApiPropertyOptional({ description: 'Hotel slug (URL-friendly, dùng làm anchor #slug trên storefront)' })
+  hotelSlug?: string;
+
   @ApiProperty({ description: 'Room type name', example: 'Deluxe Room' })
   name: string;
 
