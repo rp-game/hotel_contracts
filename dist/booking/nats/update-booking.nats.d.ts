@@ -57,6 +57,8 @@ export declare class UpdateBookingRoomDto {
     checkOutDate?: string;
     estimatedCheckInTime?: string;
     estimatedCheckOutTime?: string;
+    startTime?: string;
+    endTime?: string;
     earlyCheckInFee?: number;
     lateCheckOutFee?: number;
 }

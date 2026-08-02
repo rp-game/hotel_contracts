@@ -103,6 +103,16 @@ export class UpdateBookingRoomDto {
   @Matches(/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/, { message: 'estimatedCheckOutTime must be in HH:mm format' })
   estimatedCheckOutTime?: string;
 
+  @ApiPropertyOptional({ description: 'Giờ bắt đầu khung giờ HOURLY của riêng phòng này, bare "HH:mm". Chỉ áp dụng booking theo giờ. endTime <= startTime nghĩa là qua đêm (checkOutDate +1).', example: '14:00' })
+  @IsOptional()
+  @Matches(/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/, { message: 'startTime must be in HH:mm format' })
+  startTime?: string;
+
+  @ApiPropertyOptional({ description: 'Giờ kết thúc khung giờ HOURLY của riêng phòng này, bare "HH:mm". Chỉ áp dụng booking theo giờ.', example: '17:00' })
+  @IsOptional()
+  @Matches(/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/, { message: 'endTime must be in HH:mm format' })
+  endTime?: string;
+
   @ApiPropertyOptional({ description: 'Phí check-in sớm (VND, gross) của riêng phòng này.', example: 200000 })
   @IsOptional()
   @IsNumber()
