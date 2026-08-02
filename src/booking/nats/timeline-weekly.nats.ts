@@ -99,6 +99,9 @@ export class TimelineBookingDataDto {
   @ApiPropertyOptional({ description: 'Actual check-in time (ISO)' })
   actualCheckInTime?: string;
 
+  @ApiPropertyOptional({ description: 'Estimated check-in time (ISO) — lễ tân thỏa thuận trước cho khách đến sớm; FE dùng để nới điều kiện chặn check-in sớm trên Timeline' })
+  estimatedCheckInTime?: string;
+
   @ApiPropertyOptional({ description: 'Booking code' })
   bookingCode?: string;
 
