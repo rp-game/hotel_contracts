@@ -35,4 +35,5 @@ __exportStar(require("./enums"), exports);
 __exportStar(require("./inter-service"), exports);
 __exportStar(require("./rest/cashier-shift.dto"), exports);
 __exportStar(require("./rest/offline-payment.dto"), exports);
+__exportStar(require("./rest/cash-transaction.dto"), exports);
 //# sourceMappingURL=index.js.map

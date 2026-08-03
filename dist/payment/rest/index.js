@@ -17,4 +17,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("../nats"), exports);
 __exportStar(require("./cashier-shift.dto"), exports);
 __exportStar(require("./offline-payment.dto"), exports);
+__exportStar(require("./cash-transaction.dto"), exports);
 //# sourceMappingURL=index.js.map

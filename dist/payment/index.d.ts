@@ -19,4 +19,5 @@ export * from './enums';
 export * from './inter-service';
 export * from './rest/cashier-shift.dto';
 export * from './rest/offline-payment.dto';
+export * from './rest/cash-transaction.dto';
 //# sourceMappingURL=index.d.ts.map

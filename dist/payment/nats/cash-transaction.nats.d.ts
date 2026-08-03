@@ -1,0 +1,76 @@
+/**
+ * Cash Transaction NATS Contract
+ *
+ * NATS Patterns: cash-transaction.create, cash-transaction.list
+ * Handler: payment-service
+ * Called by: api-gateway
+ * Used by: recording cash drawer movements (thu/chi ngoài) not tied to guest payments —
+ *          paid-out (taxi/ship hộ khách, mua vật tư, tạm ứng, nộp két, hoàn tiền mặt),
+ *          paid-in (thu dịch vụ ngoài, bổ sung quỹ)
+ */
+import { NatsResponse } from '../../common/nats-response.interface';
+/**
+ * Direction of the cash movement relative to the cash drawer
+ */
+export declare enum CashTransactionDirection {
+    IN = "IN",
+    OUT = "OUT"
+}
+/**
+ * Category of the cash movement
+ */
+export declare enum CashTransactionCategory {
+    PAID_OUT = "PAID_OUT",
+    SUPPLY = "SUPPLY",
+    ADVANCE = "ADVANCE",
+    CASH_DROP = "CASH_DROP",
+    REFUND = "REFUND",
+    MISC_EXPENSE = "MISC_EXPENSE",
+    MISC_INCOME = "MISC_INCOME",
+    CASH_TOPUP = "CASH_TOPUP",
+    MISC = "MISC"
+}
+/**
+ * NATS request to record a cash transaction (thu/chi ngoài) in the active shift
+ * Pattern: cash-transaction.create
+ */
+export interface CreateCashTransactionNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    cashierShiftId: string;
+    direction: CashTransactionDirection | string;
+    category: CashTransactionCategory | string;
+    amount: number;
+    currency?: string;
+    reason: string;
+    referenceNumber?: string;
+    performedBy: string;
+    performedByName: string;
+}
+/**
+ * NATS request to list cash transactions for a shift
+ * Pattern: cash-transaction.list
+ */
+export interface ListCashTransactionsNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    cashierShiftId: string;
+}
+export interface CashTransactionData {
+    id: string;
+    tenantId: string;
+    hotelId: string;
+    cashierShiftId: string;
+    direction: CashTransactionDirection | string;
+    category: CashTransactionCategory | string;
+    amount: number;
+    currency: string;
+    reason: string;
+    referenceNumber?: string;
+    performedBy: string;
+    performedByName: string;
+    createdAt: string;
+}
+export type CreateCashTransactionNatsResponse = NatsResponse<CashTransactionData>;
+export type ListCashTransactionsNatsResponse = NatsResponse<CashTransactionData[]>;
+//# sourceMappingURL=cash-transaction.nats.d.ts.map

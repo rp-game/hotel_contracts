@@ -1,4 +1,5 @@
 export * from '../nats';
 export * from './cashier-shift.dto';
 export * from './offline-payment.dto';
+export * from './cash-transaction.dto';
 //# sourceMappingURL=index.d.ts.map
