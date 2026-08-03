@@ -68,6 +68,8 @@ export declare class UpdateHotelSettingsRequestDto {
     city?: string;
     country?: string;
     provinceId?: number;
+    latitude?: number;
+    longitude?: number;
     contactEmail?: string;
     contactPhone?: string;
     operationSettings?: HotelOperationSettingsDto;
@@ -83,6 +85,8 @@ export declare class HotelSettingsResponseDto {
     address?: string;
     city?: string;
     country?: string;
+    latitude?: number;
+    longitude?: number;
     contactEmail?: string;
     contactPhone?: string;
     tenantId?: string;

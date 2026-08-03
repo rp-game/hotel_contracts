@@ -306,6 +306,16 @@ export class UpdateHotelSettingsRequestDto {
   @IsNumber()
   provinceId?: number;
 
+  @ApiPropertyOptional({ description: 'Latitude coordinate' })
+  @IsOptional()
+  @IsNumber()
+  latitude?: number;
+
+  @ApiPropertyOptional({ description: 'Longitude coordinate' })
+  @IsOptional()
+  @IsNumber()
+  longitude?: number;
+
   @ApiPropertyOptional({ description: 'Contact email address' })
   @IsOptional()
   @IsEmail()
@@ -346,6 +356,12 @@ export class HotelSettingsResponseDto {
 
   @ApiPropertyOptional({ description: 'Country' })
   country?: string;
+
+  @ApiPropertyOptional({ description: 'Latitude coordinate' })
+  latitude?: number;
+
+  @ApiPropertyOptional({ description: 'Longitude coordinate' })
+  longitude?: number;
 
   @ApiPropertyOptional({ description: 'Contact email address' })
   contactEmail?: string;

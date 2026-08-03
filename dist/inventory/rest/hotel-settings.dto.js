@@ -362,6 +362,8 @@ class UpdateHotelSettingsRequestDto {
     city;
     country;
     provinceId;
+    latitude;
+    longitude;
     contactEmail;
     contactPhone;
     operationSettings;
@@ -398,6 +400,18 @@ __decorate([
     __metadata("design:type", Number)
 ], UpdateHotelSettingsRequestDto.prototype, "provinceId", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Latitude coordinate' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateHotelSettingsRequestDto.prototype, "latitude", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Longitude coordinate' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateHotelSettingsRequestDto.prototype, "longitude", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Contact email address' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEmail)(),
@@ -430,6 +444,8 @@ class HotelSettingsResponseDto {
     address;
     city;
     country;
+    latitude;
+    longitude;
     contactEmail;
     contactPhone;
     tenantId;
@@ -459,6 +475,14 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Country' }),
     __metadata("design:type", String)
 ], HotelSettingsResponseDto.prototype, "country", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Latitude coordinate' }),
+    __metadata("design:type", Number)
+], HotelSettingsResponseDto.prototype, "latitude", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Longitude coordinate' }),
+    __metadata("design:type", Number)
+], HotelSettingsResponseDto.prototype, "longitude", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Contact email address' }),
     __metadata("design:type", String)
