@@ -127,3 +127,60 @@ export class CashierShiftDetailDto extends CashierShiftDto {
   @ApiProperty({ description: 'Total number of payments' })
   totalPaymentsCount: number;
 }
+
+export class CashierShiftCashTransactionSummaryDto {
+  @ApiProperty({ description: 'Direction: IN or OUT' })
+  direction: string;
+
+  @ApiProperty({ description: 'Category' })
+  category: string;
+
+  @ApiProperty({ description: 'Number of transactions' })
+  count: number;
+
+  @ApiProperty({ description: 'Total amount' })
+  total: number;
+}
+
+export class CashierShiftLedgerEntryDto {
+  @ApiProperty({ description: 'Entry type', enum: ['PAYMENT', 'CASH_TRANSACTION'] })
+  type: 'PAYMENT' | 'CASH_TRANSACTION';
+
+  @ApiProperty({ description: 'Entry ID' })
+  id: string;
+
+  @ApiProperty({ description: 'Timestamp' })
+  time: string;
+
+  @ApiPropertyOptional({ description: 'Payment method (PAYMENT entries)' })
+  method?: string;
+
+  @ApiPropertyOptional({ description: 'Direction (CASH_TRANSACTION entries)' })
+  direction?: string;
+
+  @ApiPropertyOptional({ description: 'Category (CASH_TRANSACTION entries)' })
+  category?: string;
+
+  @ApiProperty({ description: 'Amount' })
+  amount: number;
+
+  @ApiProperty({ description: 'Description' })
+  description: string;
+
+  @ApiPropertyOptional({ description: 'Staff who performed this transaction' })
+  performedByName?: string;
+}
+
+export class CashierShiftReportDto extends CashierShiftDetailDto {
+  @ApiProperty({ type: [CashierShiftCashTransactionSummaryDto], description: 'Cash transaction summary by direction/category' })
+  cashTransactionSummary: CashierShiftCashTransactionSummaryDto[];
+
+  @ApiProperty({ description: 'Total cash IN (thu ngoài)' })
+  totalCashIn: number;
+
+  @ApiProperty({ description: 'Total cash OUT (chi ngoài)' })
+  totalCashOut: number;
+
+  @ApiProperty({ type: [CashierShiftLedgerEntryDto], description: 'Combined transaction ledger (payments + cash transactions), sorted by time' })
+  ledger: CashierShiftLedgerEntryDto[];
+}

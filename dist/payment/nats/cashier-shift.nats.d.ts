@@ -158,10 +158,52 @@ export interface CashierShiftDetailData extends CashierShiftData {
     totalCashPayments: number;
     totalPaymentsCount: number;
 }
+/**
+ * Cash transaction summary breakdown by direction + category (for shift report)
+ */
+export interface CashierShiftCashTransactionSummary {
+    direction: string;
+    category: string;
+    count: number;
+    total: number;
+}
+/**
+ * Single line in the combined shift transaction ledger (payments + thu/chi ngoài)
+ */
+export interface CashierShiftLedgerEntry {
+    type: 'PAYMENT' | 'CASH_TRANSACTION';
+    id: string;
+    time: string;
+    method?: string;
+    direction?: string;
+    category?: string;
+    amount: number;
+    description: string;
+    performedByName?: string;
+}
+/**
+ * NATS request to get a full shift report (for handover/biên bản bàn giao)
+ * Pattern: cashier-shift.report
+ */
+export interface GetCashierShiftReportNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    id: string;
+}
+/**
+ * Full shift report data — everything needed for the handover document
+ */
+export interface CashierShiftReportData extends CashierShiftDetailData {
+    cashTransactionSummary: CashierShiftCashTransactionSummary[];
+    totalCashIn: number;
+    totalCashOut: number;
+    ledger: CashierShiftLedgerEntry[];
+}
 export type OpenCashierShiftNatsResponse = NatsResponse<CashierShiftData>;
 export type CloseCashierShiftNatsResponse = NatsResponse<CashierShiftData>;
 export type ForceCloseCashierShiftNatsResponse = NatsResponse<CashierShiftData>;
 export type GetCashierShiftNatsResponse = NatsResponse<CashierShiftDetailData>;
 export type FindCashierShiftsNatsResponse = NatsResponse<CashierShiftData[]>;
 export type GetActiveCashierShiftNatsResponse = NatsResponse<CashierShiftData | null>;
+export type GetCashierShiftReportNatsResponse = NatsResponse<CashierShiftReportData>;
 //# sourceMappingURL=cashier-shift.nats.d.ts.map

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CashierShiftDetailDto = exports.CashierShiftDto = exports.CashierShiftPaymentSummaryDto = exports.CashierShiftCurrencyBreakdownDto = exports.ForceCloseCashierShiftDto = exports.CloseCashierShiftDto = exports.OpenCashierShiftDto = void 0;
+exports.CashierShiftReportDto = exports.CashierShiftLedgerEntryDto = exports.CashierShiftCashTransactionSummaryDto = exports.CashierShiftDetailDto = exports.CashierShiftDto = exports.CashierShiftPaymentSummaryDto = exports.CashierShiftCurrencyBreakdownDto = exports.ForceCloseCashierShiftDto = exports.CloseCashierShiftDto = exports.OpenCashierShiftDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 // ─── Request DTOs ───────────────────────────────────────────────────
@@ -210,4 +210,98 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Total number of payments' }),
     __metadata("design:type", Number)
 ], CashierShiftDetailDto.prototype, "totalPaymentsCount", void 0);
+class CashierShiftCashTransactionSummaryDto {
+    direction;
+    category;
+    count;
+    total;
+}
+exports.CashierShiftCashTransactionSummaryDto = CashierShiftCashTransactionSummaryDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Direction: IN or OUT' }),
+    __metadata("design:type", String)
+], CashierShiftCashTransactionSummaryDto.prototype, "direction", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Category' }),
+    __metadata("design:type", String)
+], CashierShiftCashTransactionSummaryDto.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Number of transactions' }),
+    __metadata("design:type", Number)
+], CashierShiftCashTransactionSummaryDto.prototype, "count", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total amount' }),
+    __metadata("design:type", Number)
+], CashierShiftCashTransactionSummaryDto.prototype, "total", void 0);
+class CashierShiftLedgerEntryDto {
+    type;
+    id;
+    time;
+    method;
+    direction;
+    category;
+    amount;
+    description;
+    performedByName;
+}
+exports.CashierShiftLedgerEntryDto = CashierShiftLedgerEntryDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Entry type', enum: ['PAYMENT', 'CASH_TRANSACTION'] }),
+    __metadata("design:type", String)
+], CashierShiftLedgerEntryDto.prototype, "type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Entry ID' }),
+    __metadata("design:type", String)
+], CashierShiftLedgerEntryDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Timestamp' }),
+    __metadata("design:type", String)
+], CashierShiftLedgerEntryDto.prototype, "time", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Payment method (PAYMENT entries)' }),
+    __metadata("design:type", String)
+], CashierShiftLedgerEntryDto.prototype, "method", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Direction (CASH_TRANSACTION entries)' }),
+    __metadata("design:type", String)
+], CashierShiftLedgerEntryDto.prototype, "direction", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Category (CASH_TRANSACTION entries)' }),
+    __metadata("design:type", String)
+], CashierShiftLedgerEntryDto.prototype, "category", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Amount' }),
+    __metadata("design:type", Number)
+], CashierShiftLedgerEntryDto.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Description' }),
+    __metadata("design:type", String)
+], CashierShiftLedgerEntryDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Staff who performed this transaction' }),
+    __metadata("design:type", String)
+], CashierShiftLedgerEntryDto.prototype, "performedByName", void 0);
+class CashierShiftReportDto extends CashierShiftDetailDto {
+    cashTransactionSummary;
+    totalCashIn;
+    totalCashOut;
+    ledger;
+}
+exports.CashierShiftReportDto = CashierShiftReportDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [CashierShiftCashTransactionSummaryDto], description: 'Cash transaction summary by direction/category' }),
+    __metadata("design:type", Array)
+], CashierShiftReportDto.prototype, "cashTransactionSummary", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total cash IN (thu ngoài)' }),
+    __metadata("design:type", Number)
+], CashierShiftReportDto.prototype, "totalCashIn", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Total cash OUT (chi ngoài)' }),
+    __metadata("design:type", Number)
+], CashierShiftReportDto.prototype, "totalCashOut", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [CashierShiftLedgerEntryDto], description: 'Combined transaction ledger (payments + cash transactions), sorted by time' }),
+    __metadata("design:type", Array)
+], CashierShiftReportDto.prototype, "ledger", void 0);
 //# sourceMappingURL=cashier-shift.dto.js.map

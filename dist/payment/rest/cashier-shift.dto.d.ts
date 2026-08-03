@@ -45,4 +45,27 @@ export declare class CashierShiftDetailDto extends CashierShiftDto {
     totalCashPayments: number;
     totalPaymentsCount: number;
 }
+export declare class CashierShiftCashTransactionSummaryDto {
+    direction: string;
+    category: string;
+    count: number;
+    total: number;
+}
+export declare class CashierShiftLedgerEntryDto {
+    type: 'PAYMENT' | 'CASH_TRANSACTION';
+    id: string;
+    time: string;
+    method?: string;
+    direction?: string;
+    category?: string;
+    amount: number;
+    description: string;
+    performedByName?: string;
+}
+export declare class CashierShiftReportDto extends CashierShiftDetailDto {
+    cashTransactionSummary: CashierShiftCashTransactionSummaryDto[];
+    totalCashIn: number;
+    totalCashOut: number;
+    ledger: CashierShiftLedgerEntryDto[];
+}
 //# sourceMappingURL=cashier-shift.dto.d.ts.map
