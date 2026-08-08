@@ -25,6 +25,7 @@ export declare enum CashTransactionCategory {
     ADVANCE = "ADVANCE",
     CASH_DROP = "CASH_DROP",
     REFUND = "REFUND",
+    CORRECTION = "CORRECTION",
     MISC_EXPENSE = "MISC_EXPENSE",
     MISC_INCOME = "MISC_INCOME",
     CASH_TOPUP = "CASH_TOPUP",

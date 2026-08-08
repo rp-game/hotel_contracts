@@ -147,3 +147,19 @@ export interface OfflinePaymentRefundedNatsRequest {
   refundedBy: string;
   refundedAt: string;
 }
+
+/**
+ * NATS Pattern: payment.offline.voided
+ * Sent by payment-service when a confirmed offline payment is voided (huỷ — sửa sai
+ * ghi nhận, KHÁC refund). booking-service trừ paidAmount full amount + mark BookingPayment.
+ */
+export interface OfflinePaymentVoidedNatsRequest {
+  offlinePaymentId: string;
+  bookingId: string;
+  tenantId: string;
+  hotelId: string;
+  amount: number;
+  reason: string;
+  voidedBy: string;
+  voidedAt: string;
+}

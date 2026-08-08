@@ -21,7 +21,8 @@ export declare enum OfflinePaymentStatus {
     PENDING = "PENDING",
     CONFIRMED = "CONFIRMED",
     REJECTED = "REJECTED",
-    REFUNDED = "REFUNDED"
+    REFUNDED = "REFUNDED",
+    VOIDED = "VOIDED"
 }
 /**
  * NATS request to create offline payment
@@ -286,6 +287,20 @@ export interface RefundOfflinePaymentNatsRequest {
     refundedBy: string;
 }
 export type RefundOfflinePaymentNatsResponse = NatsResponse<OfflinePaymentData>;
+/**
+ * NATS request to void (huỷ) a confirmed offline payment — sửa sai ghi nhận,
+ * KHÁC refund (trả tiền thật cho khách). Full amount.
+ * Pattern: offline-payment.void
+ * Used by: api-gateway → void flow (quyền payment:void)
+ */
+export interface VoidOfflinePaymentNatsRequest {
+    id: string;
+    tenantId: string;
+    hotelId: string;
+    reason: string;
+    voidedBy: string;
+}
+export type VoidOfflinePaymentNatsResponse = NatsResponse<OfflinePaymentData>;
 /**
  * Event emitted by payment-service after successful refund
  * Pattern: payment.offline.refunded

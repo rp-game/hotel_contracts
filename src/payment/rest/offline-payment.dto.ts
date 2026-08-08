@@ -85,3 +85,14 @@ export class RefundOfflinePaymentDto {
   @IsNotEmpty()
   reason: string;
 }
+
+/**
+ * Request body for voiding (huỷ — sửa sai ghi nhận) a confirmed offline payment.
+ * Full amount, không nhận amount (khác refund). reason bắt buộc.
+ */
+export class VoidOfflinePaymentDto {
+  @ApiProperty({ description: 'Reason for voiding the payment' })
+  @IsString()
+  @IsNotEmpty()
+  reason: string;
+}

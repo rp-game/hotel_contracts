@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RefundOfflinePaymentDto = exports.RejectOfflinePaymentDto = exports.ConfirmOfflinePaymentDto = exports.OfflinePaymentListResponseDto = exports.OfflinePaymentResponseDto = exports.OfflinePaymentDto = void 0;
+exports.VoidOfflinePaymentDto = exports.RefundOfflinePaymentDto = exports.RejectOfflinePaymentDto = exports.ConfirmOfflinePaymentDto = exports.OfflinePaymentListResponseDto = exports.OfflinePaymentResponseDto = exports.OfflinePaymentDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const offline_payment_nats_1 = require("../nats/offline-payment.nats");
@@ -205,4 +205,18 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], RefundOfflinePaymentDto.prototype, "reason", void 0);
+/**
+ * Request body for voiding (huỷ — sửa sai ghi nhận) a confirmed offline payment.
+ * Full amount, không nhận amount (khác refund). reason bắt buộc.
+ */
+class VoidOfflinePaymentDto {
+    reason;
+}
+exports.VoidOfflinePaymentDto = VoidOfflinePaymentDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reason for voiding the payment' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], VoidOfflinePaymentDto.prototype, "reason", void 0);
 //# sourceMappingURL=offline-payment.dto.js.map

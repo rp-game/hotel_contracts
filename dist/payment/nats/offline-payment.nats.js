@@ -26,5 +26,6 @@ var OfflinePaymentStatus;
     OfflinePaymentStatus["CONFIRMED"] = "CONFIRMED";
     OfflinePaymentStatus["REJECTED"] = "REJECTED";
     OfflinePaymentStatus["REFUNDED"] = "REFUNDED";
+    OfflinePaymentStatus["VOIDED"] = "VOIDED";
 })(OfflinePaymentStatus || (exports.OfflinePaymentStatus = OfflinePaymentStatus = {}));
 //# sourceMappingURL=offline-payment.nats.js.map

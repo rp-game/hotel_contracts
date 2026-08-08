@@ -29,6 +29,7 @@ var CashTransactionCategory;
     CashTransactionCategory["ADVANCE"] = "ADVANCE";
     CashTransactionCategory["CASH_DROP"] = "CASH_DROP";
     CashTransactionCategory["REFUND"] = "REFUND";
+    CashTransactionCategory["CORRECTION"] = "CORRECTION";
     CashTransactionCategory["MISC_EXPENSE"] = "MISC_EXPENSE";
     CashTransactionCategory["MISC_INCOME"] = "MISC_INCOME";
     CashTransactionCategory["CASH_TOPUP"] = "CASH_TOPUP";

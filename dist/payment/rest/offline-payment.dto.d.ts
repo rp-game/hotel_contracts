@@ -51,4 +51,11 @@ export declare class RefundOfflinePaymentDto {
     amount: number;
     reason: string;
 }
+/**
+ * Request body for voiding (huỷ — sửa sai ghi nhận) a confirmed offline payment.
+ * Full amount, không nhận amount (khác refund). reason bắt buộc.
+ */
+export declare class VoidOfflinePaymentDto {
+    reason: string;
+}
 //# sourceMappingURL=offline-payment.dto.d.ts.map
