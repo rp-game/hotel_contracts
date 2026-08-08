@@ -128,6 +128,7 @@ export enum PaymentStatus {
   FAILED = 'FAILED',
   REFUNDED = 'REFUNDED',
   PARTIAL = 'PARTIAL',
+  VOIDED = 'VOIDED',
 }
 
 // Re-export with domain-scoped name to avoid collision at root contracts level

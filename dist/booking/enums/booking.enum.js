@@ -117,5 +117,6 @@ var PaymentStatus;
     PaymentStatus["FAILED"] = "FAILED";
     PaymentStatus["REFUNDED"] = "REFUNDED";
     PaymentStatus["PARTIAL"] = "PARTIAL";
+    PaymentStatus["VOIDED"] = "VOIDED";
 })(PaymentStatus || (exports.BookingPaymentStatus = exports.PaymentStatus = PaymentStatus = {}));
 //# sourceMappingURL=booking.enum.js.map
