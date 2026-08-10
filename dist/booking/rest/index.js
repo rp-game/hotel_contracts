@@ -24,4 +24,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./unassigned-bookings.rest"), exports);
 __exportStar(require("./checkout.dto"), exports);
+__exportStar(require("./add-payment.dto"), exports);
 //# sourceMappingURL=index.js.map

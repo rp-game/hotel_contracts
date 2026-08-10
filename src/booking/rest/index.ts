@@ -9,3 +9,4 @@
 
 export * from './unassigned-bookings.rest';
 export * from './checkout.dto';
+export * from './add-payment.dto';

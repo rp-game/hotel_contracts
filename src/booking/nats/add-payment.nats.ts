@@ -9,6 +9,8 @@ export interface AddPaymentNatsRequest {
   bookingId: string;
   amount: number;
   paymentMethod: string;
+  /** Bắt buộc khi paymentMethod = COMPANY_ACCOUNT (ghi công nợ vào tài khoản công ty). */
+  corporateAccountId?: string;
   transactionId?: string;
   notes?: string;
   payerName?: string;
