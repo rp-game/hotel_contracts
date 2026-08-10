@@ -9,4 +9,5 @@
 export * from './unassigned-bookings.rest';
 export * from './checkout.dto';
 export * from './add-payment.dto';
+export * from './void-payment.dto';
 //# sourceMappingURL=index.d.ts.map

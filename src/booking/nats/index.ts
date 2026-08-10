@@ -61,6 +61,7 @@ export * from './add-service.nats';
 
 // Add payment NATS contracts
 export * from './add-payment.nats';
+export * from './void-payment.nats';
 
 // Booking management NATS contracts
 export * from './cancel-booking.nats';

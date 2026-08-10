@@ -68,6 +68,7 @@ __exportStar(require("./get-booking-history.nats"), exports);
 __exportStar(require("./add-service.nats"), exports);
 // Add payment NATS contracts
 __exportStar(require("./add-payment.nats"), exports);
+__exportStar(require("./void-payment.nats"), exports);
 // Booking management NATS contracts
 __exportStar(require("./cancel-booking.nats"), exports);
 __exportStar(require("./booking-lookup.nats"), exports);
