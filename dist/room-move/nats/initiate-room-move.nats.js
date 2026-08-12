@@ -36,6 +36,7 @@ class InitiateRoomMoveRequest {
     assignedPorterName;
     guestApprovalRequired;
     preferredMoveTime;
+    moveFromTs;
     isEmergency;
     tenantId;
     hotelId;
@@ -131,6 +132,15 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], InitiateRoomMoveRequest.prototype, "preferredMoveTime", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Mid-stay move point (ISO datetime). Chỉ đoạn [moveFromTs, checkout] chuyển sang phòng mới; ' +
+            '[checkin, moveFromTs) giữ phòng cũ. Bỏ trống = chuyển cả kỳ (hành vi cũ).',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], InitiateRoomMoveRequest.prototype, "moveFromTs", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Whether this is an emergency move' }),
     (0, class_validator_1.IsOptional)(),

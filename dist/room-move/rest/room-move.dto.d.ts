@@ -12,6 +12,7 @@ export declare class InitiateRoomMoveDto {
     reason: RoomMoveReason;
     priority?: RoomMovePriority;
     description?: string;
+    moveFromTs?: string;
 }
 export declare class ApproveRoomMoveDto {
     notes?: string;

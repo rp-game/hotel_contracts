@@ -27,6 +27,7 @@ class InitiateRoomMoveDto {
     reason;
     priority;
     description;
+    moveFromTs;
 }
 exports.InitiateRoomMoveDto = InitiateRoomMoveDto;
 __decorate([
@@ -65,6 +66,15 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], InitiateRoomMoveDto.prototype, "description", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Mid-stay move point (ISO datetime). Chỉ đoạn [moveFromTs, checkout] chuyển sang phòng mới; ' +
+            '[checkin, moveFromTs) giữ phòng cũ. Bỏ trống = chuyển cả kỳ (hành vi cũ).',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], InitiateRoomMoveDto.prototype, "moveFromTs", void 0);
 class ApproveRoomMoveDto {
     notes;
 }

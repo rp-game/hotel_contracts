@@ -41,6 +41,15 @@ export class InitiateRoomMoveDto {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @ApiPropertyOptional({
+    description:
+      'Mid-stay move point (ISO datetime). Chỉ đoạn [moveFromTs, checkout] chuyển sang phòng mới; ' +
+      '[checkin, moveFromTs) giữ phòng cũ. Bỏ trống = chuyển cả kỳ (hành vi cũ).',
+  })
+  @IsOptional()
+  @IsDateString()
+  moveFromTs?: string;
 }
 
 export class ApproveRoomMoveDto {

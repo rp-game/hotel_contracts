@@ -88,6 +88,15 @@ export class InitiateRoomMoveRequest {
   @IsString()
   preferredMoveTime?: string;
 
+  @ApiPropertyOptional({
+    description:
+      'Mid-stay move point (ISO datetime). Chỉ đoạn [moveFromTs, checkout] chuyển sang phòng mới; ' +
+      '[checkin, moveFromTs) giữ phòng cũ. Bỏ trống = chuyển cả kỳ (hành vi cũ).',
+  })
+  @IsOptional()
+  @IsString()
+  moveFromTs?: string;
+
   @ApiPropertyOptional({ description: 'Whether this is an emergency move' })
   @IsOptional()
   @IsBoolean()

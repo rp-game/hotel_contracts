@@ -24,6 +24,7 @@ export declare class InitiateRoomMoveRequest {
     assignedPorterName?: string;
     guestApprovalRequired?: boolean;
     preferredMoveTime?: string;
+    moveFromTs?: string;
     isEmergency?: boolean;
     tenantId: string;
     hotelId: string;
