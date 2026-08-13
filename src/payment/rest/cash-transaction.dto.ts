@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID, Min } from 'class-validator';
-import { CashTransactionCategory, CashTransactionDirection } from '../nats/cash-transaction.nats';
+import { CashTransactionCategory, CashTransactionDirection, CashTransactionStatus } from '../nats/cash-transaction.nats';
 
 // ─── Request DTOs ───────────────────────────────────────────────────
 
@@ -38,6 +38,13 @@ export class CreateCashTransactionDto {
   referenceNumber?: string;
 }
 
+export class CancelCashTransactionDto {
+  @ApiProperty({ description: 'Lý do huỷ giao dịch (bắt buộc)' })
+  @IsString()
+  @IsNotEmpty()
+  reason: string;
+}
+
 // ─── Response DTOs ──────────────────────────────────────────────────
 
 export class CashTransactionDto {
@@ -73,4 +80,19 @@ export class CashTransactionDto {
 
   @ApiProperty({ description: 'Created date' })
   createdAt: string;
+
+  @ApiProperty({ description: 'Trạng thái giao dịch', enum: CashTransactionStatus })
+  status: string;
+
+  @ApiPropertyOptional({ description: 'Người huỷ (staff user ID)' })
+  cancelledBy?: string | null;
+
+  @ApiPropertyOptional({ description: 'Người huỷ (tên hiển thị)' })
+  cancelledByName?: string | null;
+
+  @ApiPropertyOptional({ description: 'Thời điểm huỷ' })
+  cancelledAt?: string | null;
+
+  @ApiPropertyOptional({ description: 'Lý do huỷ' })
+  cancelReason?: string | null;
 }

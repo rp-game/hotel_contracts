@@ -2,7 +2,7 @@
 /**
  * Cash Transaction NATS Contract
  *
- * NATS Patterns: cash-transaction.create, cash-transaction.list
+ * NATS Patterns: cash-transaction.create, cash-transaction.list, cash-transaction.cancel
  * Handler: payment-service
  * Called by: api-gateway
  * Used by: recording cash drawer movements (thu/chi ngoài) not tied to guest payments —
@@ -10,7 +10,7 @@
  *          paid-in (thu dịch vụ ngoài, bổ sung quỹ)
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CashTransactionCategory = exports.CashTransactionDirection = void 0;
+exports.CashTransactionCategory = exports.CashTransactionStatus = exports.CashTransactionDirection = void 0;
 /**
  * Direction of the cash movement relative to the cash drawer
  */
@@ -19,6 +19,15 @@ var CashTransactionDirection;
     CashTransactionDirection["IN"] = "IN";
     CashTransactionDirection["OUT"] = "OUT";
 })(CashTransactionDirection || (exports.CashTransactionDirection = CashTransactionDirection = {}));
+/**
+ * Trạng thái giao dịch. Mặc định ACTIVE khi tạo; CANCELLED khi bị huỷ (chỉ cho phép huỷ
+ * khi ca còn OPEN). Row CANCELLED bị loại khỏi tính số dư ca và tổng thu/chi.
+ */
+var CashTransactionStatus;
+(function (CashTransactionStatus) {
+    CashTransactionStatus["ACTIVE"] = "ACTIVE";
+    CashTransactionStatus["CANCELLED"] = "CANCELLED";
+})(CashTransactionStatus || (exports.CashTransactionStatus = CashTransactionStatus = {}));
 /**
  * Category of the cash movement
  */

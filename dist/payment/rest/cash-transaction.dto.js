@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CashTransactionDto = exports.CreateCashTransactionDto = void 0;
+exports.CashTransactionDto = exports.CancelCashTransactionDto = exports.CreateCashTransactionDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const cash_transaction_nats_1 = require("../nats/cash-transaction.nats");
@@ -63,6 +63,16 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateCashTransactionDto.prototype, "referenceNumber", void 0);
+class CancelCashTransactionDto {
+    reason;
+}
+exports.CancelCashTransactionDto = CancelCashTransactionDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Lý do huỷ giao dịch (bắt buộc)' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CancelCashTransactionDto.prototype, "reason", void 0);
 // ─── Response DTOs ──────────────────────────────────────────────────
 class CashTransactionDto {
     id;
@@ -76,6 +86,11 @@ class CashTransactionDto {
     performedBy;
     performedByName;
     createdAt;
+    status;
+    cancelledBy;
+    cancelledByName;
+    cancelledAt;
+    cancelReason;
 }
 exports.CashTransactionDto = CashTransactionDto;
 __decorate([
@@ -122,4 +137,24 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Created date' }),
     __metadata("design:type", String)
 ], CashTransactionDto.prototype, "createdAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Trạng thái giao dịch', enum: cash_transaction_nats_1.CashTransactionStatus }),
+    __metadata("design:type", String)
+], CashTransactionDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Người huỷ (staff user ID)' }),
+    __metadata("design:type", Object)
+], CashTransactionDto.prototype, "cancelledBy", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Người huỷ (tên hiển thị)' }),
+    __metadata("design:type", Object)
+], CashTransactionDto.prototype, "cancelledByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Thời điểm huỷ' }),
+    __metadata("design:type", Object)
+], CashTransactionDto.prototype, "cancelledAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Lý do huỷ' }),
+    __metadata("design:type", Object)
+], CashTransactionDto.prototype, "cancelReason", void 0);
 //# sourceMappingURL=cash-transaction.dto.js.map

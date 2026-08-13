@@ -1,7 +1,7 @@
 /**
  * Cash Transaction NATS Contract
  *
- * NATS Patterns: cash-transaction.create, cash-transaction.list
+ * NATS Patterns: cash-transaction.create, cash-transaction.list, cash-transaction.cancel
  * Handler: payment-service
  * Called by: api-gateway
  * Used by: recording cash drawer movements (thu/chi ngoài) not tied to guest payments —
@@ -17,6 +17,15 @@ import { NatsResponse } from '../../common/nats-response.interface';
 export enum CashTransactionDirection {
   IN = 'IN',
   OUT = 'OUT',
+}
+
+/**
+ * Trạng thái giao dịch. Mặc định ACTIVE khi tạo; CANCELLED khi bị huỷ (chỉ cho phép huỷ
+ * khi ca còn OPEN). Row CANCELLED bị loại khỏi tính số dư ca và tổng thu/chi.
+ */
+export enum CashTransactionStatus {
+  ACTIVE = 'ACTIVE',
+  CANCELLED = 'CANCELLED',
 }
 
 /**
@@ -65,6 +74,23 @@ export interface ListCashTransactionsNatsRequest {
   cashierShiftId: string;
 }
 
+/**
+ * NATS request to cancel (huỷ) a cash transaction. Chỉ huỷ được khi ca đang OPEN.
+ * Pattern: cash-transaction.cancel
+ * ownScopeOnly: true = actor chỉ được huỷ giao dịch thuộc ca của CHÍNH MÌNH (nhân viên
+ * thường); false = huỷ được ca của người khác (quản lý). Do api-gateway suy ra từ Casbin
+ * scope (own vs *) và truyền xuống.
+ */
+export interface CancelCashTransactionNatsRequest {
+  id: string;
+  tenantId: string;
+  hotelId: string;
+  reason: string;
+  cancelledBy: string;
+  cancelledByName?: string;
+  ownScopeOnly: boolean;
+}
+
 // ─── Response Data Interfaces ───────────────────────────────────────
 
 export interface CashTransactionData {
@@ -81,9 +107,15 @@ export interface CashTransactionData {
   performedBy: string;
   performedByName: string;
   createdAt: string;
+  status: CashTransactionStatus | string;
+  cancelledBy?: string | null;
+  cancelledByName?: string | null;
+  cancelledAt?: string | null;
+  cancelReason?: string | null;
 }
 
 // ─── Response Type Aliases ──────────────────────────────────────────
 
 export type CreateCashTransactionNatsResponse = NatsResponse<CashTransactionData>;
 export type ListCashTransactionsNatsResponse = NatsResponse<CashTransactionData[]>;
+export type CancelCashTransactionNatsResponse = NatsResponse<CashTransactionData>;
