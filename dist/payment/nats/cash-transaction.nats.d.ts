@@ -66,6 +66,17 @@ export interface ListCashTransactionsNatsRequest {
     cashierShiftId: string;
 }
 /**
+ * NATS request to list cash transactions theo KHOẢNG NGÀY (toàn khách sạn, nhiều ca) — phục vụ
+ * báo cáo thu/chi ngoài theo kỳ. dateFrom/dateTo dạng ISO date/datetime (bao gồm cả 2 đầu).
+ * Pattern: cash-transaction.listByPeriod
+ */
+export interface ListCashTransactionsByPeriodNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    dateFrom: string;
+    dateTo: string;
+}
+/**
  * NATS request to cancel (huỷ) a cash transaction. Chỉ huỷ được khi ca đang OPEN.
  * Pattern: cash-transaction.cancel
  * ownScopeOnly: true = actor chỉ được huỷ giao dịch thuộc ca của CHÍNH MÌNH (nhân viên
