@@ -13,6 +13,7 @@ export declare class CancelCashTransactionDto {
 }
 export declare class CashTransactionDto {
     id: string;
+    voucherNo?: string | null;
     cashierShiftId: string;
     direction: string;
     category: string;

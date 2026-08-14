@@ -51,6 +51,9 @@ export class CashTransactionDto {
   @ApiProperty({ description: 'Transaction ID' })
   id: string;
 
+  @ApiPropertyOptional({ description: 'Mã phiếu thu/chi (PT-/PC-YYYYMMDD-NNN)' })
+  voucherNo?: string | null;
+
   @ApiProperty({ description: 'Cashier shift ID' })
   cashierShiftId: string;
 

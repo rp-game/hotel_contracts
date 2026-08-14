@@ -76,6 +76,7 @@ __decorate([
 // ─── Response DTOs ──────────────────────────────────────────────────
 class CashTransactionDto {
     id;
+    voucherNo;
     cashierShiftId;
     direction;
     category;
@@ -97,6 +98,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Transaction ID' }),
     __metadata("design:type", String)
 ], CashTransactionDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Mã phiếu thu/chi (PT-/PC-YYYYMMDD-NNN)' }),
+    __metadata("design:type", Object)
+], CashTransactionDto.prototype, "voucherNo", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Cashier shift ID' }),
     __metadata("design:type", String)

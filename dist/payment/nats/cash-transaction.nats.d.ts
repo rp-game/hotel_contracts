@@ -96,6 +96,7 @@ export interface CashTransactionData {
     id: string;
     tenantId: string;
     hotelId: string;
+    voucherNo?: string | null;
     cashierShiftId: string;
     direction: CashTransactionDirection | string;
     category: CashTransactionCategory | string;
