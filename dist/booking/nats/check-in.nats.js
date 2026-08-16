@@ -32,6 +32,7 @@ class CheckInBookingDto {
     earlyCheckInFee;
     lateCheckOutFee;
     effectiveCheckInDate;
+    effectiveCheckInTime;
     backdateReasonCategory;
     roomIds;
     backdateReasonNote;
@@ -95,6 +96,13 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], CheckInBookingDto.prototype, "effectiveCheckInDate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Giờ nhận phòng thực tế (HH:mm) cho booking HOURLY — cùng ngày booking, ' +
+            'cho phép sớm hơn (kéo dài) hoặc muộn hơn (rút ngắn) giờ đã đặt. Recompute folio theo số giờ.',
+    }),
+    __metadata("design:type", String)
+], CheckInBookingDto.prototype, "effectiveCheckInTime", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Lý do backdate (required khi daysBack > 1)',

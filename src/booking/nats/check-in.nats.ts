@@ -38,6 +38,7 @@ export interface CheckInBookingNatsRequest {
 
   // Backdate check-in fields — optional. Gateway forwards from JWT/body.
   effectiveCheckInDate?: string;          // YYYY-MM-DD; default = today in hotel timezone
+  effectiveCheckInTime?: string;          // "HH:mm" — giờ nhận thực tế cho booking HOURLY (cùng ngày, cho phép sớm/muộn)
   backdateReasonCategory?: BackdateReasonCategory;
   backdateReasonNote?: string;
   userRoles?: string[];                   // Gateway pass roles từ JWT để service compute window
@@ -103,6 +104,12 @@ export class CheckInBookingDto {
       'Nếu < today → backdate check-in (yêu cầu quyền + reason theo role).',
   })
   effectiveCheckInDate?: string;
+
+  @ApiPropertyOptional({
+    description: 'Giờ nhận phòng thực tế (HH:mm) cho booking HOURLY — cùng ngày booking, ' +
+      'cho phép sớm hơn (kéo dài) hoặc muộn hơn (rút ngắn) giờ đã đặt. Recompute folio theo số giờ.',
+  })
+  effectiveCheckInTime?: string;
 
   @ApiPropertyOptional({
     description: 'Lý do backdate (required khi daysBack > 1)',

@@ -30,6 +30,7 @@ export interface CheckInBookingNatsRequest {
     earlyCheckInFee?: number;
     lateCheckOutFee?: number;
     effectiveCheckInDate?: string;
+    effectiveCheckInTime?: string;
     backdateReasonCategory?: BackdateReasonCategory;
     backdateReasonNote?: string;
     userRoles?: string[];
@@ -57,6 +58,7 @@ export declare class CheckInBookingDto {
     earlyCheckInFee?: number;
     lateCheckOutFee?: number;
     effectiveCheckInDate?: string;
+    effectiveCheckInTime?: string;
     backdateReasonCategory?: BackdateReasonCategory;
     roomIds?: string[];
     backdateReasonNote?: string;
