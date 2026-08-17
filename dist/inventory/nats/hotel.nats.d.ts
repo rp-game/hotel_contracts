@@ -59,6 +59,7 @@ export declare class HotelDto {
         currency?: string;
         defaultCleaningDuration?: number;
         gracePeriodMinutes?: number;
+        checkInDeviationThresholdMinutes?: number;
         autoAssignRooms?: boolean;
         businessHours?: {
             start: string;

@@ -152,6 +152,7 @@ class HotelOperationSettingsDto {
     currencyRounding;
     defaultCleaningDuration;
     gracePeriodMinutes;
+    checkInDeviationThresholdMinutes;
     autoAssignRooms;
     hourlyBooking;
     preferBookingMode;
@@ -216,6 +217,17 @@ __decorate([
     (0, class_validator_1.Max)(120),
     __metadata("design:type", Number)
 ], HotelOperationSettingsDto.prototype, "gracePeriodMinutes", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Ngưỡng lệch giờ nhận phòng (phút): khi giờ check-in thực tế lệch giờ dự kiến quá ngưỡng thì nhắc lễ tân xác nhận giờ đến thật; trong ngưỡng coi như đúng giờ. Default 60.',
+        example: 60,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Max)(720),
+    __metadata("design:type", Number)
+], HotelOperationSettingsDto.prototype, "checkInDeviationThresholdMinutes", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Auto-assign rooms when booking is confirmed', example: false }),
     (0, class_validator_1.IsOptional)(),

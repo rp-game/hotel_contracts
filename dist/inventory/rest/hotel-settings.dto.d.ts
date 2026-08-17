@@ -38,6 +38,7 @@ export declare class HotelOperationSettingsDto {
     currencyRounding?: number;
     defaultCleaningDuration?: number;
     gracePeriodMinutes?: number;
+    checkInDeviationThresholdMinutes?: number;
     autoAssignRooms?: boolean;
     hourlyBooking?: boolean;
     preferBookingMode?: 'hourly' | 'daily';

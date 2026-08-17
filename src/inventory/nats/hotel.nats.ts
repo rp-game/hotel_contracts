@@ -134,6 +134,7 @@ export class HotelDto {
     currency?: string;
     defaultCleaningDuration?: number;
     gracePeriodMinutes?: number;
+    checkInDeviationThresholdMinutes?: number; // ngưỡng lệch giờ nhận phòng (phút); >ngưỡng → nhắc lễ tân
     autoAssignRooms?: boolean;
     businessHours?: {
       start: string;

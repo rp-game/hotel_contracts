@@ -151,6 +151,16 @@ export class HotelOperationSettingsDto {
   @Max(120)
   gracePeriodMinutes?: number;
 
+  @ApiPropertyOptional({
+    description: 'Ngưỡng lệch giờ nhận phòng (phút): khi giờ check-in thực tế lệch giờ dự kiến quá ngưỡng thì nhắc lễ tân xác nhận giờ đến thật; trong ngưỡng coi như đúng giờ. Default 60.',
+    example: 60,
+  })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(720)
+  checkInDeviationThresholdMinutes?: number;
+
   @ApiPropertyOptional({ description: 'Auto-assign rooms when booking is confirmed', example: false })
   @IsOptional()
   @IsBoolean()
