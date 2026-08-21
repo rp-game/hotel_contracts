@@ -35,6 +35,8 @@ export declare class HotelOperationSettingsDto {
     checkOutTime?: string;
     timezone?: string;
     currency?: string;
+    logoUrl?: string;
+    faviconUrl?: string;
     currencyRounding?: number;
     defaultCleaningDuration?: number;
     gracePeriodMinutes?: number;

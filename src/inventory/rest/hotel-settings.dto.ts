@@ -131,6 +131,16 @@ export class HotelOperationSettingsDto {
   @IsString()
   currency?: string;
 
+  @ApiPropertyOptional({ description: 'Hotel logo URL (256x256, for documents/web display)' })
+  @IsOptional()
+  @IsString()
+  logoUrl?: string;
+
+  @ApiPropertyOptional({ description: 'Hotel favicon URL (64x64, for web tab icon)' })
+  @IsOptional()
+  @IsString()
+  faviconUrl?: string;
+
   @ApiPropertyOptional({ description: 'Rounding unit for monetary amounts (e.g. 1 for VND, 0.01 for USD)', example: 1 })
   @IsOptional()
   @IsNumber()

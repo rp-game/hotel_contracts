@@ -149,6 +149,8 @@ class HotelOperationSettingsDto {
     checkOutTime;
     timezone;
     currency;
+    logoUrl;
+    faviconUrl;
     currencyRounding;
     defaultCleaningDuration;
     gracePeriodMinutes;
@@ -194,6 +196,18 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], HotelOperationSettingsDto.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel logo URL (256x256, for documents/web display)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], HotelOperationSettingsDto.prototype, "logoUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Hotel favicon URL (64x64, for web tab icon)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], HotelOperationSettingsDto.prototype, "faviconUrl", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Rounding unit for monetary amounts (e.g. 1 for VND, 0.01 for USD)', example: 1 }),
     (0, class_validator_1.IsOptional)(),

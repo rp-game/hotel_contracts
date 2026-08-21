@@ -36,6 +36,7 @@ export declare class UpdateHotelChainDto {
     headquartersAddress?: string;
     websiteUrl?: string;
     logoUrl?: string;
+    faviconUrl?: string;
     status?: HotelChainStatus;
     operatingRegions?: string[];
     targetMarkets?: string[];
@@ -59,6 +60,7 @@ export declare class HotelChain {
     headquartersAddress?: string;
     websiteUrl?: string;
     logoUrl?: string;
+    faviconUrl?: string;
     status: HotelChainStatus;
     operatingRegions?: string[];
     targetMarkets?: string[];

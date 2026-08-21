@@ -78,10 +78,15 @@ export class UpdateHotelChainDto {
   @IsString()
   websiteUrl?: string;
 
-  @ApiPropertyOptional({ description: 'Chain logo URL' })
+  @ApiPropertyOptional({ description: 'Chain logo URL (256x256)' })
   @IsOptional()
   @IsString()
   logoUrl?: string;
+
+  @ApiPropertyOptional({ description: 'Chain favicon URL (64x64)' })
+  @IsOptional()
+  @IsString()
+  faviconUrl?: string;
 
   @ApiPropertyOptional({ description: 'Chain status', enum: HotelChainStatus })
   @IsOptional()
@@ -156,8 +161,11 @@ export class HotelChain {
   @ApiPropertyOptional({ description: 'Website URL' })
   websiteUrl?: string;
 
-  @ApiPropertyOptional({ description: 'Logo URL' })
+  @ApiPropertyOptional({ description: 'Logo URL (256x256)' })
   logoUrl?: string;
+
+  @ApiPropertyOptional({ description: 'Favicon URL (64x64)' })
+  faviconUrl?: string;
 
   @ApiProperty({ description: 'Chain status', enum: HotelChainStatus })
   status: HotelChainStatus;

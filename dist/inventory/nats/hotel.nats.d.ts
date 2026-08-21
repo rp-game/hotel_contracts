@@ -57,6 +57,8 @@ export declare class HotelDto {
         checkOutTime?: string;
         timezone?: string;
         currency?: string;
+        logoUrl?: string;
+        faviconUrl?: string;
         defaultCleaningDuration?: number;
         gracePeriodMinutes?: number;
         checkInDeviationThresholdMinutes?: number;

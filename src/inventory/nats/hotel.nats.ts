@@ -132,6 +132,8 @@ export class HotelDto {
     checkOutTime?: string;
     timezone?: string;
     currency?: string;
+    logoUrl?: string; // logo 256x256 (tài liệu/web)
+    faviconUrl?: string; // favicon 64x64 (tab web)
     defaultCleaningDuration?: number;
     gracePeriodMinutes?: number;
     checkInDeviationThresholdMinutes?: number; // ngưỡng lệch giờ nhận phòng (phút); >ngưỡng → nhắc lễ tân

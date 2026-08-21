@@ -45,6 +45,7 @@ class CreateHotelChainDto {
     headquartersAddress;
     websiteUrl;
     logoUrl;
+    faviconUrl;
     status;
     operatingRegions;
     targetMarkets;
@@ -104,11 +105,17 @@ __decorate([
     __metadata("design:type", String)
 ], CreateHotelChainDto.prototype, "websiteUrl", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Chain logo URL' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Chain logo URL (256x256)' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateHotelChainDto.prototype, "logoUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Chain favicon URL (64x64)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateHotelChainDto.prototype, "faviconUrl", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Chain status', enum: hotel_chain_types_1.HotelChainStatus }),
     (0, class_validator_1.IsEnum)(hotel_chain_types_1.HotelChainStatus),
@@ -158,6 +165,7 @@ class HotelChainResponseDto {
     headquartersAddress;
     websiteUrl;
     logoUrl;
+    faviconUrl;
     phone;
     email;
     status;
@@ -221,9 +229,13 @@ __decorate([
     __metadata("design:type", String)
 ], HotelChainResponseDto.prototype, "websiteUrl", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Logo URL' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Logo URL (256x256)' }),
     __metadata("design:type", String)
 ], HotelChainResponseDto.prototype, "logoUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Favicon URL (64x64)' }),
+    __metadata("design:type", String)
+], HotelChainResponseDto.prototype, "faviconUrl", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)

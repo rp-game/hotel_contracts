@@ -24,6 +24,7 @@ export declare class CreateHotelChainDto {
     headquartersAddress?: string;
     websiteUrl?: string;
     logoUrl?: string;
+    faviconUrl?: string;
     status: HotelChainStatus;
     operatingRegions?: string[];
     targetMarkets?: string[];
@@ -47,6 +48,7 @@ export declare class HotelChainResponseDto {
     headquartersAddress?: string;
     websiteUrl?: string;
     logoUrl?: string;
+    faviconUrl?: string;
     phone: string;
     email: string;
     status: HotelChainStatus;
