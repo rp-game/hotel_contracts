@@ -942,6 +942,7 @@ export class DailyPaymentByMethod {
   @ApiProperty() total: number;
 }
 export class DailyPaymentTxn {
+  @ApiPropertyOptional() bookingId?: string | null;
   @ApiPropertyOptional() roomNumber?: string | null;
   @ApiPropertyOptional() roomName?: string | null;
   @ApiPropertyOptional() guestName?: string | null;
@@ -995,3 +996,92 @@ export class OccupancyByDateReportData {
 export type GetGuestMovementReportNatsResponse = NatsResponse<GuestMovementReportData>;
 export type GetDailyPaymentReportNatsResponse = NatsResponse<DailyPaymentReportData>;
 export type GetOccupancyByDateReportNatsResponse = NatsResponse<OccupancyByDateReportData>;
+
+// ---- Doanh thu chi tiết (per booking-room) ----
+export class GetRevenueDetailReportNatsRequest {
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
+  @ApiProperty({ description: 'YYYY-MM-DD' }) @IsString() from: string;
+  @ApiProperty({ description: 'YYYY-MM-DD' }) @IsString() to: string;
+  @ApiPropertyOptional({ description: 'true = lọc theo ngày trả phòng; false/undefined = theo ngày đến' })
+  @IsOptional() byCheckout?: boolean;
+}
+export class RevenueDetailRow {
+  @ApiProperty() bookingCode: string;
+  @ApiPropertyOptional() roomType?: string | null;
+  @ApiPropertyOptional() roomName?: string | null;
+  @ApiPropertyOptional() guestName?: string | null;
+  @ApiPropertyOptional() checkIn?: string | null;
+  @ApiPropertyOptional() checkOut?: string | null;
+  @ApiProperty() roomCharge: number;
+  @ApiProperty() serviceCharge: number;
+  @ApiProperty() discount: number;
+  @ApiProperty() totalRevenue: number;
+  @ApiProperty() priorDebt: number;
+  @ApiProperty() cash: number;
+  @ApiProperty() card: number;
+  @ApiProperty() bankTransfer: number;
+  @ApiProperty() companyDebt: number;
+  @ApiProperty() outstanding: number;
+  @ApiPropertyOptional() idNo?: string | null;
+  @ApiPropertyOptional() email?: string | null;
+  @ApiPropertyOptional() phone?: string | null;
+  @ApiPropertyOptional() company?: string | null;
+  @ApiPropertyOptional() source?: string | null;
+  @ApiPropertyOptional() marketSegment?: string | null;
+  @ApiPropertyOptional() createdByName?: string | null;
+  @ApiPropertyOptional() status?: string | null;
+  @ApiProperty() nights: number;
+  @ApiProperty() avgRate: number;
+  @ApiPropertyOptional() invoiceNo?: string | null;
+  @ApiPropertyOptional() cmsCode?: string | null;
+  @ApiPropertyOptional() otaCode?: string | null;
+}
+export class RevenueDetailReportData {
+  @ApiProperty({ type: [RevenueDetailRow] }) @ValidateNested({ each: true }) @Type(() => RevenueDetailRow) rows: RevenueDetailRow[];
+  @ApiProperty({ type: RevenueDetailRow }) @ValidateNested() @Type(() => RevenueDetailRow) totals: RevenueDetailRow;
+}
+
+// ---- Công nợ (đối tác: corporate) ----
+export class GetArReportNatsRequest {
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
+  @ApiProperty({ description: 'YYYY-MM-DD' }) @IsString() from: string;
+  @ApiProperty({ description: 'YYYY-MM-DD' }) @IsString() to: string;
+}
+export class ArSummaryRow {
+  @ApiProperty() partner: string;
+  @ApiPropertyOptional() representative?: string | null;
+  @ApiPropertyOptional() phone?: string | null;
+  @ApiProperty() opening: number;
+  @ApiProperty() paidInPeriod: number;
+  @ApiProperty() chargedInPeriod: number;
+  @ApiProperty() closing: number;
+}
+export class ArSummaryReportData {
+  @ApiProperty({ type: [ArSummaryRow] }) @ValidateNested({ each: true }) @Type(() => ArSummaryRow) rows: ArSummaryRow[];
+  @ApiProperty({ type: ArSummaryRow }) @ValidateNested() @Type(() => ArSummaryRow) totals: ArSummaryRow;
+}
+export class ArDetailTxn {
+  @ApiPropertyOptional() date?: string | null;
+  @ApiPropertyOptional() docNo?: string | null;
+  @ApiPropertyOptional() currency?: string | null;
+  @ApiProperty() amount: number;
+  @ApiPropertyOptional() detail?: string | null;
+  @ApiProperty() paidInPeriod: number;
+  @ApiProperty() chargedInPeriod: number;
+  @ApiProperty() runningBalance: number;
+}
+export class ArDetailGroup {
+  @ApiProperty() partner: string;
+  @ApiProperty() opening: number;
+  @ApiProperty({ type: [ArDetailTxn] }) @ValidateNested({ each: true }) @Type(() => ArDetailTxn) transactions: ArDetailTxn[];
+  @ApiProperty() closing: number;
+}
+export class ArDetailReportData {
+  @ApiProperty({ type: [ArDetailGroup] }) @ValidateNested({ each: true }) @Type(() => ArDetailGroup) groups: ArDetailGroup[];
+}
+
+export type GetRevenueDetailReportNatsResponse = NatsResponse<RevenueDetailReportData>;
+export type GetArSummaryReportNatsResponse = NatsResponse<ArSummaryReportData>;
+export type GetArDetailReportNatsResponse = NatsResponse<ArDetailReportData>;
