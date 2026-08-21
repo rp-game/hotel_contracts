@@ -392,6 +392,12 @@ export class HotelSettingsResponseDto {
   @ApiPropertyOptional({ description: 'Tenant ID' })
   tenantId?: string;
 
+  @ApiPropertyOptional({ description: 'Logo hiệu lực (KS có thì dùng, không thì fallback logo chuỗi) — 256x256' })
+  effectiveLogoUrl?: string;
+
+  @ApiPropertyOptional({ description: 'Favicon hiệu lực (fallback chuỗi) — 64x64' })
+  effectiveFaviconUrl?: string;
+
   @ApiPropertyOptional({
     description: 'Operation settings',
     type: HotelOperationSettingsDto

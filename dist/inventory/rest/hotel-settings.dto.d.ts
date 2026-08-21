@@ -93,6 +93,8 @@ export declare class HotelSettingsResponseDto {
     contactEmail?: string;
     contactPhone?: string;
     tenantId?: string;
+    effectiveLogoUrl?: string;
+    effectiveFaviconUrl?: string;
     operationSettings?: HotelOperationSettingsDto;
     createdAt?: string;
     updatedAt?: string;

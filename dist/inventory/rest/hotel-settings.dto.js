@@ -475,6 +475,8 @@ class HotelSettingsResponseDto {
     contactEmail;
     contactPhone;
     tenantId;
+    effectiveLogoUrl;
+    effectiveFaviconUrl;
     operationSettings;
     createdAt;
     updatedAt;
@@ -521,6 +523,14 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Tenant ID' }),
     __metadata("design:type", String)
 ], HotelSettingsResponseDto.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Logo hiệu lực (KS có thì dùng, không thì fallback logo chuỗi) — 256x256' }),
+    __metadata("design:type", String)
+], HotelSettingsResponseDto.prototype, "effectiveLogoUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Favicon hiệu lực (fallback chuỗi) — 64x64' }),
+    __metadata("design:type", String)
+], HotelSettingsResponseDto.prototype, "effectiveFaviconUrl", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Operation settings',
