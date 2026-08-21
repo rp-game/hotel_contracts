@@ -389,4 +389,104 @@ export type GetPerformanceReportNatsResponse = NatsResponse<PerformanceReportNat
 export type ExportReportNatsResponse = NatsResponse<ExportReportApiResponse>;
 export type GetDashboardDataNatsResponse = NatsResponse<DashboardReportNatsResponse>;
 export type GetComparativeReportNatsResponse = NatsResponse<ComparativeReportNatsResponse>;
+export type GuestMovementMode = 'arrivals' | 'checkedIn' | 'inHouse' | 'departures' | 'departed';
+export declare class GetGuestMovementReportNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    mode: GuestMovementMode;
+    from?: string;
+    to?: string;
+}
+export declare class GuestMovementRow {
+    bookingId: string;
+    bookingCode: string;
+    guestName: string;
+    roomNumber?: string | null;
+    roomTypeName?: string | null;
+    checkIn?: string | null;
+    checkOut?: string | null;
+    adults: number;
+    children: number;
+    company?: string | null;
+    source?: string | null;
+    marketSegment?: string | null;
+    note?: string | null;
+}
+export declare class GuestMovementTotals {
+    bookings: number;
+    rooms: number;
+    adults: number;
+    children: number;
+}
+export declare class GuestMovementReportData {
+    rows: GuestMovementRow[];
+    totals: GuestMovementTotals;
+}
+export declare class GetDailyPaymentReportNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    from: string;
+    to: string;
+}
+export declare class DailyPaymentByCashier {
+    cashier: string;
+    cashIn: number;
+    cashOut: number;
+    total: number;
+}
+export declare class DailyPaymentByMethod {
+    method: string;
+    total: number;
+}
+export declare class DailyPaymentTxn {
+    roomNumber?: string | null;
+    roomName?: string | null;
+    guestName?: string | null;
+    paymentNo?: string | null;
+    note?: string | null;
+    amount: number;
+    currency?: string | null;
+    method?: string | null;
+    time?: string | null;
+    createdByName?: string | null;
+    deletedAt?: string | null;
+    deletedByName?: string | null;
+}
+export declare class DailyPaymentReportData {
+    byCashier: DailyPaymentByCashier[];
+    byMethod: DailyPaymentByMethod[];
+    receipts: DailyPaymentTxn[];
+    payouts: DailyPaymentTxn[];
+    receiptTotal: number;
+    payoutTotal: number;
+    netTotal: number;
+}
+export declare class GetOccupancyByDateReportNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    from: string;
+    to: string;
+}
+export declare class OccupancyByDateRow {
+    date: string;
+    totalRooms: number;
+    sold: number;
+    comp: number;
+    occupancyPct: number;
+    avgRateSold: number;
+    avgRateAvailable: number;
+    adults: number;
+    children: number;
+    roomRevenue: number;
+    serviceRevenue: number;
+    actualCollected: number;
+    debt: number;
+}
+export declare class OccupancyByDateReportData {
+    rows: OccupancyByDateRow[];
+    totals: OccupancyByDateRow;
+}
+export type GetGuestMovementReportNatsResponse = NatsResponse<GuestMovementReportData>;
+export type GetDailyPaymentReportNatsResponse = NatsResponse<DailyPaymentReportData>;
+export type GetOccupancyByDateReportNatsResponse = NatsResponse<OccupancyByDateReportData>;
 //# sourceMappingURL=reports.nats.d.ts.map

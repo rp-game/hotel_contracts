@@ -62,6 +62,7 @@ class BookingSummary {
      * Booking source (WEBSITE, OTA, PHONE, etc.)
      */
     source;
+    marketSegment;
     /**
      * Payment status (enum)
      */
@@ -227,6 +228,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Booking source (WEBSITE, OTA, PHONE, etc.)' }),
     __metadata("design:type", String)
 ], BookingSummary.prototype, "source", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Phân khúc thị trường (market segment)' }),
+    __metadata("design:type", Object)
+], BookingSummary.prototype, "marketSegment", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Payment status',

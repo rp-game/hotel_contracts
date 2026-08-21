@@ -53,6 +53,9 @@ export class BookingSummary {
   @ApiProperty({ description: 'Booking source (WEBSITE, OTA, PHONE, etc.)' })
   source: string;
 
+  @ApiPropertyOptional({ description: 'Phân khúc thị trường (market segment)' })
+  marketSegment?: string | null;
+
   /**
    * Payment status (enum)
    */
@@ -378,6 +381,14 @@ export interface FindBookingsNatsRequest {
    * Check-out date end filter (YYYY-MM-DD)
    */
   checkOutDateEnd?: string;
+
+  /**
+   * Lọc theo giờ NHẬN/TRẢ THỰC TẾ (per-room, ISO timestamptz) — báo cáo "đã đến/đã đi".
+   */
+  actualCheckInFrom?: string;
+  actualCheckInTo?: string;
+  actualCheckOutFrom?: string;
+  actualCheckOutTo?: string;
 
   /**
    * Room type ID filter (optional)

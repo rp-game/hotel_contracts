@@ -25,7 +25,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetComparativeReportNatsRequest = exports.GetDashboardDataNatsRequest = exports.ExportReportNatsRequest = exports.GetPerformanceReportNatsRequest = exports.GetFinancialReportNatsRequest = exports.GetGuestAnalyticsReportNatsRequest = exports.GetOccupancyReportNatsRequest = exports.GetRevenueReportNatsRequest = exports.ComparativeReportNatsResponse = exports.ComparativeReportData = exports.ComparativeVarianceData = exports.ComparativePeriodData = exports.DashboardReportNatsResponse = exports.DashboardReportData = exports.DashboardKPIData = exports.ExportReportApiResponse = exports.ExportReportData = exports.PerformanceReportNatsResponse = exports.PerformanceReportData = exports.DepartmentPerformanceItem = exports.StaffPerformanceItem = exports.HousekeepingReportNatsResponse = exports.HousekeepingReportData = exports.HousekeepingRoomStatusItem = exports.HousekeepingStaffPerformanceItem = exports.FinancialReportNatsResponse = exports.FinancialReportData = exports.FinancialReportKPIs = exports.FinancialReportExpenseBreakdown = exports.FinancialReportRevenueBreakdown = exports.GuestAnalyticsReportNatsResponse = exports.GuestReportData = exports.GuestDemographicsItem = exports.OccupancyReportNatsResponse = exports.OccupancyReportData = exports.OccupancyReportPeriodItem = exports.RevenueReportNatsResponse = exports.RevenueReportData = exports.RevenueReportMonthlyItem = exports.RevenueReportDailyItem = void 0;
+exports.GetOccupancyByDateReportNatsRequest = exports.DailyPaymentReportData = exports.DailyPaymentTxn = exports.DailyPaymentByMethod = exports.DailyPaymentByCashier = exports.GetDailyPaymentReportNatsRequest = exports.GuestMovementReportData = exports.GuestMovementTotals = exports.GuestMovementRow = exports.GetGuestMovementReportNatsRequest = exports.GetComparativeReportNatsRequest = exports.GetDashboardDataNatsRequest = exports.ExportReportNatsRequest = exports.GetPerformanceReportNatsRequest = exports.GetFinancialReportNatsRequest = exports.GetGuestAnalyticsReportNatsRequest = exports.GetOccupancyReportNatsRequest = exports.GetRevenueReportNatsRequest = exports.ComparativeReportNatsResponse = exports.ComparativeReportData = exports.ComparativeVarianceData = exports.ComparativePeriodData = exports.DashboardReportNatsResponse = exports.DashboardReportData = exports.DashboardKPIData = exports.ExportReportApiResponse = exports.ExportReportData = exports.PerformanceReportNatsResponse = exports.PerformanceReportData = exports.DepartmentPerformanceItem = exports.StaffPerformanceItem = exports.HousekeepingReportNatsResponse = exports.HousekeepingReportData = exports.HousekeepingRoomStatusItem = exports.HousekeepingStaffPerformanceItem = exports.FinancialReportNatsResponse = exports.FinancialReportData = exports.FinancialReportKPIs = exports.FinancialReportExpenseBreakdown = exports.FinancialReportRevenueBreakdown = exports.GuestAnalyticsReportNatsResponse = exports.GuestReportData = exports.GuestDemographicsItem = exports.OccupancyReportNatsResponse = exports.OccupancyReportData = exports.OccupancyReportPeriodItem = exports.RevenueReportNatsResponse = exports.RevenueReportData = exports.RevenueReportMonthlyItem = exports.RevenueReportDailyItem = void 0;
+exports.OccupancyByDateReportData = exports.OccupancyByDateRow = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -1276,4 +1277,433 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], GetComparativeReportNatsRequest.prototype, "compareEndDate", void 0);
+class GetGuestMovementReportNatsRequest {
+    tenantId;
+    hotelId;
+    mode;
+    from;
+    to;
+}
+exports.GetGuestMovementReportNatsRequest = GetGuestMovementReportNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetGuestMovementReportNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetGuestMovementReportNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'arrivals|checkedIn|inHouse|departures|departed' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetGuestMovementReportNatsRequest.prototype, "mode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'ISO from (bỏ qua với inHouse)' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetGuestMovementReportNatsRequest.prototype, "from", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'ISO to' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetGuestMovementReportNatsRequest.prototype, "to", void 0);
+class GuestMovementRow {
+    bookingId;
+    bookingCode;
+    guestName;
+    roomNumber;
+    roomTypeName;
+    checkIn;
+    checkOut;
+    adults;
+    children;
+    company;
+    source;
+    marketSegment;
+    note;
+}
+exports.GuestMovementRow = GuestMovementRow;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GuestMovementRow.prototype, "bookingId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GuestMovementRow.prototype, "bookingCode", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], GuestMovementRow.prototype, "guestName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], GuestMovementRow.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], GuestMovementRow.prototype, "roomTypeName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], GuestMovementRow.prototype, "checkIn", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], GuestMovementRow.prototype, "checkOut", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GuestMovementRow.prototype, "adults", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GuestMovementRow.prototype, "children", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], GuestMovementRow.prototype, "company", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], GuestMovementRow.prototype, "source", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], GuestMovementRow.prototype, "marketSegment", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], GuestMovementRow.prototype, "note", void 0);
+class GuestMovementTotals {
+    bookings;
+    rooms;
+    adults;
+    children;
+}
+exports.GuestMovementTotals = GuestMovementTotals;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GuestMovementTotals.prototype, "bookings", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GuestMovementTotals.prototype, "rooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GuestMovementTotals.prototype, "adults", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], GuestMovementTotals.prototype, "children", void 0);
+class GuestMovementReportData {
+    rows;
+    totals;
+}
+exports.GuestMovementReportData = GuestMovementReportData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [GuestMovementRow] }),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => GuestMovementRow),
+    __metadata("design:type", Array)
+], GuestMovementReportData.prototype, "rows", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: GuestMovementTotals }),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => GuestMovementTotals),
+    __metadata("design:type", GuestMovementTotals)
+], GuestMovementReportData.prototype, "totals", void 0);
+// ---- Daily payment (Thanh toán hàng ngày) ----
+class GetDailyPaymentReportNatsRequest {
+    tenantId;
+    hotelId;
+    from;
+    to;
+}
+exports.GetDailyPaymentReportNatsRequest = GetDailyPaymentReportNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetDailyPaymentReportNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetDailyPaymentReportNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'ISO from' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetDailyPaymentReportNatsRequest.prototype, "from", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'ISO to' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetDailyPaymentReportNatsRequest.prototype, "to", void 0);
+class DailyPaymentByCashier {
+    cashier;
+    cashIn;
+    cashOut;
+    total;
+}
+exports.DailyPaymentByCashier = DailyPaymentByCashier;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], DailyPaymentByCashier.prototype, "cashier", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyPaymentByCashier.prototype, "cashIn", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyPaymentByCashier.prototype, "cashOut", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyPaymentByCashier.prototype, "total", void 0);
+class DailyPaymentByMethod {
+    method;
+    total;
+}
+exports.DailyPaymentByMethod = DailyPaymentByMethod;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], DailyPaymentByMethod.prototype, "method", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyPaymentByMethod.prototype, "total", void 0);
+class DailyPaymentTxn {
+    roomNumber;
+    roomName;
+    guestName;
+    paymentNo;
+    note;
+    amount;
+    currency;
+    method;
+    time;
+    createdByName;
+    deletedAt;
+    deletedByName;
+}
+exports.DailyPaymentTxn = DailyPaymentTxn;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], DailyPaymentTxn.prototype, "roomNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], DailyPaymentTxn.prototype, "roomName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], DailyPaymentTxn.prototype, "guestName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], DailyPaymentTxn.prototype, "paymentNo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], DailyPaymentTxn.prototype, "note", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyPaymentTxn.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], DailyPaymentTxn.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], DailyPaymentTxn.prototype, "method", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], DailyPaymentTxn.prototype, "time", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], DailyPaymentTxn.prototype, "createdByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], DailyPaymentTxn.prototype, "deletedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], DailyPaymentTxn.prototype, "deletedByName", void 0);
+class DailyPaymentReportData {
+    byCashier;
+    byMethod;
+    receipts;
+    payouts;
+    receiptTotal;
+    payoutTotal;
+    netTotal;
+}
+exports.DailyPaymentReportData = DailyPaymentReportData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [DailyPaymentByCashier] }),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => DailyPaymentByCashier),
+    __metadata("design:type", Array)
+], DailyPaymentReportData.prototype, "byCashier", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [DailyPaymentByMethod] }),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => DailyPaymentByMethod),
+    __metadata("design:type", Array)
+], DailyPaymentReportData.prototype, "byMethod", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [DailyPaymentTxn] }),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => DailyPaymentTxn),
+    __metadata("design:type", Array)
+], DailyPaymentReportData.prototype, "receipts", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [DailyPaymentTxn] }),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => DailyPaymentTxn),
+    __metadata("design:type", Array)
+], DailyPaymentReportData.prototype, "payouts", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyPaymentReportData.prototype, "receiptTotal", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyPaymentReportData.prototype, "payoutTotal", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], DailyPaymentReportData.prototype, "netTotal", void 0);
+// ---- Occupancy by date (Công suất phòng theo ngày) ----
+class GetOccupancyByDateReportNatsRequest {
+    tenantId;
+    hotelId;
+    from;
+    to;
+}
+exports.GetOccupancyByDateReportNatsRequest = GetOccupancyByDateReportNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetOccupancyByDateReportNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetOccupancyByDateReportNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'ISO from' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetOccupancyByDateReportNatsRequest.prototype, "from", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'ISO to' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetOccupancyByDateReportNatsRequest.prototype, "to", void 0);
+class OccupancyByDateRow {
+    date;
+    totalRooms;
+    sold;
+    comp;
+    occupancyPct;
+    avgRateSold;
+    avgRateAvailable;
+    adults;
+    children;
+    roomRevenue;
+    serviceRevenue;
+    actualCollected;
+    debt;
+}
+exports.OccupancyByDateRow = OccupancyByDateRow;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], OccupancyByDateRow.prototype, "date", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyByDateRow.prototype, "totalRooms", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyByDateRow.prototype, "sold", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyByDateRow.prototype, "comp", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyByDateRow.prototype, "occupancyPct", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyByDateRow.prototype, "avgRateSold", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyByDateRow.prototype, "avgRateAvailable", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyByDateRow.prototype, "adults", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyByDateRow.prototype, "children", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyByDateRow.prototype, "roomRevenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyByDateRow.prototype, "serviceRevenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyByDateRow.prototype, "actualCollected", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], OccupancyByDateRow.prototype, "debt", void 0);
+class OccupancyByDateReportData {
+    rows;
+    totals;
+}
+exports.OccupancyByDateReportData = OccupancyByDateReportData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [OccupancyByDateRow] }),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => OccupancyByDateRow),
+    __metadata("design:type", Array)
+], OccupancyByDateReportData.prototype, "rows", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: OccupancyByDateRow }),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => OccupancyByDateRow),
+    __metadata("design:type", OccupancyByDateRow)
+], OccupancyByDateReportData.prototype, "totals", void 0);
 //# sourceMappingURL=reports.nats.js.map

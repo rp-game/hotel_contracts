@@ -872,3 +872,126 @@ export type GetPerformanceReportNatsResponse = NatsResponse<PerformanceReportNat
 export type ExportReportNatsResponse = NatsResponse<ExportReportApiResponse>;
 export type GetDashboardDataNatsResponse = NatsResponse<DashboardReportNatsResponse>;
 export type GetComparativeReportNatsResponse = NatsResponse<ComparativeReportNatsResponse>;
+
+/* ============================================================================
+ * Báo cáo vận hành đợt 1 (SAZI): guest-movement, daily-payment, occupancy-daily
+ * report-service map GỌN về đúng cột trước khi trả (tránh payload NATS 1MB).
+ * ==========================================================================*/
+
+// ---- Guest movement (Khách sẽ/đã đến, sẽ/đã đi, đang ở) ----
+export type GuestMovementMode =
+  | 'arrivals' | 'checkedIn' | 'inHouse' | 'departures' | 'departed';
+
+export class GetGuestMovementReportNatsRequest {
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
+  @ApiProperty({ description: 'arrivals|checkedIn|inHouse|departures|departed' })
+  @IsString() mode: GuestMovementMode;
+  @ApiPropertyOptional({ description: 'ISO from (bỏ qua với inHouse)' }) @IsOptional() @IsString() from?: string;
+  @ApiPropertyOptional({ description: 'ISO to' }) @IsOptional() @IsString() to?: string;
+}
+
+export class GuestMovementRow {
+  @ApiProperty() bookingId: string;
+  @ApiProperty() bookingCode: string;
+  @ApiProperty() guestName: string;
+  @ApiPropertyOptional() roomNumber?: string | null;
+  @ApiPropertyOptional() roomTypeName?: string | null;
+  @ApiPropertyOptional() checkIn?: string | null;
+  @ApiPropertyOptional() checkOut?: string | null;
+  @ApiProperty() adults: number;
+  @ApiProperty() children: number;
+  @ApiPropertyOptional() company?: string | null;
+  @ApiPropertyOptional() source?: string | null;
+  @ApiPropertyOptional() marketSegment?: string | null;
+  @ApiPropertyOptional() note?: string | null;
+}
+
+export class GuestMovementTotals {
+  @ApiProperty() bookings: number;
+  @ApiProperty() rooms: number;
+  @ApiProperty() adults: number;
+  @ApiProperty() children: number;
+}
+
+export class GuestMovementReportData {
+  @ApiProperty({ type: [GuestMovementRow] })
+  @ValidateNested({ each: true }) @Type(() => GuestMovementRow)
+  rows: GuestMovementRow[];
+  @ApiProperty({ type: GuestMovementTotals })
+  @ValidateNested() @Type(() => GuestMovementTotals)
+  totals: GuestMovementTotals;
+}
+
+// ---- Daily payment (Thanh toán hàng ngày) ----
+export class GetDailyPaymentReportNatsRequest {
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
+  @ApiProperty({ description: 'ISO from' }) @IsString() from: string;
+  @ApiProperty({ description: 'ISO to' }) @IsString() to: string;
+}
+
+export class DailyPaymentByCashier {
+  @ApiProperty() cashier: string;
+  @ApiProperty() cashIn: number;
+  @ApiProperty() cashOut: number;
+  @ApiProperty() total: number;
+}
+export class DailyPaymentByMethod {
+  @ApiProperty() method: string;
+  @ApiProperty() total: number;
+}
+export class DailyPaymentTxn {
+  @ApiPropertyOptional() roomNumber?: string | null;
+  @ApiPropertyOptional() roomName?: string | null;
+  @ApiPropertyOptional() guestName?: string | null;
+  @ApiPropertyOptional() paymentNo?: string | null;
+  @ApiPropertyOptional() note?: string | null;
+  @ApiProperty() amount: number;
+  @ApiPropertyOptional() currency?: string | null;
+  @ApiPropertyOptional() method?: string | null;
+  @ApiPropertyOptional() time?: string | null;
+  @ApiPropertyOptional() createdByName?: string | null;
+  @ApiPropertyOptional() deletedAt?: string | null;
+  @ApiPropertyOptional() deletedByName?: string | null;
+}
+export class DailyPaymentReportData {
+  @ApiProperty({ type: [DailyPaymentByCashier] }) @ValidateNested({ each: true }) @Type(() => DailyPaymentByCashier) byCashier: DailyPaymentByCashier[];
+  @ApiProperty({ type: [DailyPaymentByMethod] }) @ValidateNested({ each: true }) @Type(() => DailyPaymentByMethod) byMethod: DailyPaymentByMethod[];
+  @ApiProperty({ type: [DailyPaymentTxn] }) @ValidateNested({ each: true }) @Type(() => DailyPaymentTxn) receipts: DailyPaymentTxn[];
+  @ApiProperty({ type: [DailyPaymentTxn] }) @ValidateNested({ each: true }) @Type(() => DailyPaymentTxn) payouts: DailyPaymentTxn[];
+  @ApiProperty() receiptTotal: number;
+  @ApiProperty() payoutTotal: number;
+  @ApiProperty() netTotal: number;
+}
+
+// ---- Occupancy by date (Công suất phòng theo ngày) ----
+export class GetOccupancyByDateReportNatsRequest {
+  @ApiProperty() @IsString() tenantId: string;
+  @ApiProperty() @IsString() hotelId: string;
+  @ApiProperty({ description: 'ISO from' }) @IsString() from: string;
+  @ApiProperty({ description: 'ISO to' }) @IsString() to: string;
+}
+export class OccupancyByDateRow {
+  @ApiProperty() date: string;
+  @ApiProperty() totalRooms: number;
+  @ApiProperty() sold: number;
+  @ApiProperty() comp: number;
+  @ApiProperty() occupancyPct: number;
+  @ApiProperty() avgRateSold: number;
+  @ApiProperty() avgRateAvailable: number;
+  @ApiProperty() adults: number;
+  @ApiProperty() children: number;
+  @ApiProperty() roomRevenue: number;
+  @ApiProperty() serviceRevenue: number;
+  @ApiProperty() actualCollected: number;
+  @ApiProperty() debt: number;
+}
+export class OccupancyByDateReportData {
+  @ApiProperty({ type: [OccupancyByDateRow] }) @ValidateNested({ each: true }) @Type(() => OccupancyByDateRow) rows: OccupancyByDateRow[];
+  @ApiProperty({ type: OccupancyByDateRow }) @ValidateNested() @Type(() => OccupancyByDateRow) totals: OccupancyByDateRow;
+}
+
+export type GetGuestMovementReportNatsResponse = NatsResponse<GuestMovementReportData>;
+export type GetDailyPaymentReportNatsResponse = NatsResponse<DailyPaymentReportData>;
+export type GetOccupancyByDateReportNatsResponse = NatsResponse<OccupancyByDateReportData>;
