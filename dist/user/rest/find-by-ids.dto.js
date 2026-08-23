@@ -18,8 +18,9 @@ class FindUsersByIdsDto {
 exports.FindUsersByIdsDto = FindUsersByIdsDto;
 __decorate([
     (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ArrayMaxSize)(200),
     (0, class_validator_1.IsUUID)('4', { each: true }),
-    (0, swagger_1.ApiProperty)({ description: 'Danh sách user ID cần resolve tên', type: [String] }),
+    (0, swagger_1.ApiProperty)({ description: 'Danh sách user ID cần resolve tên (tối đa 200)', type: [String] }),
     __metadata("design:type", Array)
 ], FindUsersByIdsDto.prototype, "ids", void 0);
 class UserSlimDto {
