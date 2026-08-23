@@ -26,7 +26,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetOccupancyByDateReportNatsRequest = exports.DailyPaymentReportData = exports.DailyPaymentTxn = exports.DailyPaymentByMethod = exports.DailyPaymentByCashier = exports.GetDailyPaymentReportNatsRequest = exports.GuestMovementReportData = exports.GuestMovementTotals = exports.GuestMovementRow = exports.GetGuestMovementReportNatsRequest = exports.GetComparativeReportNatsRequest = exports.GetDashboardDataNatsRequest = exports.ExportReportNatsRequest = exports.GetPerformanceReportNatsRequest = exports.GetFinancialReportNatsRequest = exports.GetGuestAnalyticsReportNatsRequest = exports.GetOccupancyReportNatsRequest = exports.GetRevenueReportNatsRequest = exports.ComparativeReportNatsResponse = exports.ComparativeReportData = exports.ComparativeVarianceData = exports.ComparativePeriodData = exports.DashboardReportNatsResponse = exports.DashboardReportData = exports.DashboardKPIData = exports.ExportReportApiResponse = exports.ExportReportData = exports.PerformanceReportNatsResponse = exports.PerformanceReportData = exports.DepartmentPerformanceItem = exports.StaffPerformanceItem = exports.HousekeepingReportNatsResponse = exports.HousekeepingReportData = exports.HousekeepingRoomStatusItem = exports.HousekeepingStaffPerformanceItem = exports.FinancialReportNatsResponse = exports.FinancialReportData = exports.FinancialReportKPIs = exports.FinancialReportExpenseBreakdown = exports.FinancialReportRevenueBreakdown = exports.GuestAnalyticsReportNatsResponse = exports.GuestReportData = exports.GuestDemographicsItem = exports.OccupancyReportNatsResponse = exports.OccupancyReportData = exports.OccupancyReportPeriodItem = exports.RevenueReportNatsResponse = exports.RevenueReportData = exports.RevenueReportMonthlyItem = exports.RevenueReportDailyItem = void 0;
-exports.OccupancyByDateReportData = exports.OccupancyByDateRow = void 0;
+exports.ArDetailReportData = exports.ArDetailGroup = exports.ArDetailTxn = exports.ArSummaryReportData = exports.ArSummaryRow = exports.GetArReportNatsRequest = exports.RevenueDetailReportData = exports.RevenueDetailRow = exports.GetRevenueDetailReportNatsRequest = exports.OccupancyByDateReportData = exports.OccupancyByDateRow = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -1485,6 +1485,7 @@ __decorate([
     __metadata("design:type", Number)
 ], DailyPaymentByMethod.prototype, "total", void 0);
 class DailyPaymentTxn {
+    bookingId;
     roomNumber;
     roomName;
     guestName;
@@ -1499,6 +1500,10 @@ class DailyPaymentTxn {
     deletedByName;
 }
 exports.DailyPaymentTxn = DailyPaymentTxn;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], DailyPaymentTxn.prototype, "bookingId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     __metadata("design:type", Object)
@@ -1706,4 +1711,364 @@ __decorate([
     (0, class_transformer_1.Type)(() => OccupancyByDateRow),
     __metadata("design:type", OccupancyByDateRow)
 ], OccupancyByDateReportData.prototype, "totals", void 0);
+// ---- Doanh thu chi tiết (per booking-room) ----
+class GetRevenueDetailReportNatsRequest {
+    tenantId;
+    hotelId;
+    from;
+    to;
+    byCheckout;
+}
+exports.GetRevenueDetailReportNatsRequest = GetRevenueDetailReportNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetRevenueDetailReportNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetRevenueDetailReportNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'YYYY-MM-DD' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetRevenueDetailReportNatsRequest.prototype, "from", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'YYYY-MM-DD' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetRevenueDetailReportNatsRequest.prototype, "to", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'true = lọc theo ngày trả phòng; false/undefined = theo ngày đến' }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Boolean)
+], GetRevenueDetailReportNatsRequest.prototype, "byCheckout", void 0);
+class RevenueDetailRow {
+    bookingCode;
+    roomType;
+    roomName;
+    guestName;
+    checkIn;
+    checkOut;
+    roomCharge;
+    serviceCharge;
+    discount;
+    totalRevenue;
+    priorDebt;
+    cash;
+    card;
+    bankTransfer;
+    companyDebt;
+    outstanding;
+    idNo;
+    email;
+    phone;
+    company;
+    source;
+    marketSegment;
+    createdByName;
+    status;
+    nights;
+    avgRate;
+    invoiceNo;
+    cmsCode;
+    otaCode;
+}
+exports.RevenueDetailRow = RevenueDetailRow;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], RevenueDetailRow.prototype, "bookingCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "roomType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "roomName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "guestName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "checkIn", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "checkOut", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueDetailRow.prototype, "roomCharge", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueDetailRow.prototype, "serviceCharge", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueDetailRow.prototype, "discount", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueDetailRow.prototype, "totalRevenue", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueDetailRow.prototype, "priorDebt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueDetailRow.prototype, "cash", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueDetailRow.prototype, "card", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueDetailRow.prototype, "bankTransfer", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueDetailRow.prototype, "companyDebt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueDetailRow.prototype, "outstanding", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "idNo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "phone", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "company", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "source", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "marketSegment", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "createdByName", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueDetailRow.prototype, "nights", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], RevenueDetailRow.prototype, "avgRate", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "invoiceNo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "cmsCode", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], RevenueDetailRow.prototype, "otaCode", void 0);
+class RevenueDetailReportData {
+    rows;
+    totals;
+}
+exports.RevenueDetailReportData = RevenueDetailReportData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [RevenueDetailRow] }),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => RevenueDetailRow),
+    __metadata("design:type", Array)
+], RevenueDetailReportData.prototype, "rows", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: RevenueDetailRow }),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => RevenueDetailRow),
+    __metadata("design:type", RevenueDetailRow)
+], RevenueDetailReportData.prototype, "totals", void 0);
+// ---- Công nợ (đối tác: corporate) ----
+class GetArReportNatsRequest {
+    tenantId;
+    hotelId;
+    from;
+    to;
+}
+exports.GetArReportNatsRequest = GetArReportNatsRequest;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetArReportNatsRequest.prototype, "tenantId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetArReportNatsRequest.prototype, "hotelId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'YYYY-MM-DD' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetArReportNatsRequest.prototype, "from", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'YYYY-MM-DD' }),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetArReportNatsRequest.prototype, "to", void 0);
+class ArSummaryRow {
+    partner;
+    representative;
+    phone;
+    opening;
+    paidInPeriod;
+    chargedInPeriod;
+    closing;
+}
+exports.ArSummaryRow = ArSummaryRow;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], ArSummaryRow.prototype, "partner", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], ArSummaryRow.prototype, "representative", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], ArSummaryRow.prototype, "phone", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ArSummaryRow.prototype, "opening", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ArSummaryRow.prototype, "paidInPeriod", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ArSummaryRow.prototype, "chargedInPeriod", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ArSummaryRow.prototype, "closing", void 0);
+class ArSummaryReportData {
+    rows;
+    totals;
+}
+exports.ArSummaryReportData = ArSummaryReportData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [ArSummaryRow] }),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => ArSummaryRow),
+    __metadata("design:type", Array)
+], ArSummaryReportData.prototype, "rows", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: ArSummaryRow }),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => ArSummaryRow),
+    __metadata("design:type", ArSummaryRow)
+], ArSummaryReportData.prototype, "totals", void 0);
+class ArDetailTxn {
+    date;
+    docNo;
+    currency;
+    amount;
+    detail;
+    paidInPeriod;
+    chargedInPeriod;
+    runningBalance;
+}
+exports.ArDetailTxn = ArDetailTxn;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], ArDetailTxn.prototype, "date", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], ArDetailTxn.prototype, "docNo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], ArDetailTxn.prototype, "currency", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ArDetailTxn.prototype, "amount", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    __metadata("design:type", Object)
+], ArDetailTxn.prototype, "detail", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ArDetailTxn.prototype, "paidInPeriod", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ArDetailTxn.prototype, "chargedInPeriod", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ArDetailTxn.prototype, "runningBalance", void 0);
+class ArDetailGroup {
+    partner;
+    opening;
+    transactions;
+    closing;
+}
+exports.ArDetailGroup = ArDetailGroup;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], ArDetailGroup.prototype, "partner", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ArDetailGroup.prototype, "opening", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [ArDetailTxn] }),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => ArDetailTxn),
+    __metadata("design:type", Array)
+], ArDetailGroup.prototype, "transactions", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ArDetailGroup.prototype, "closing", void 0);
+class ArDetailReportData {
+    groups;
+}
+exports.ArDetailReportData = ArDetailReportData;
+__decorate([
+    (0, swagger_1.ApiProperty)({ type: [ArDetailGroup] }),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => ArDetailGroup),
+    __metadata("design:type", Array)
+], ArDetailReportData.prototype, "groups", void 0);
 //# sourceMappingURL=reports.nats.js.map

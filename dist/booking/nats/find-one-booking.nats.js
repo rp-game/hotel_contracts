@@ -154,6 +154,7 @@ class BookingGuest {
     nationality;
     idType;
     idNumber;
+    address;
 }
 exports.BookingGuest = BookingGuest;
 __decorate([
@@ -192,6 +193,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Guest ID number' }),
     __metadata("design:type", String)
 ], BookingGuest.prototype, "idNumber", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Guest address' }),
+    __metadata("design:type", String)
+], BookingGuest.prototype, "address", void 0);
 class BookingPayment {
     id;
     method;

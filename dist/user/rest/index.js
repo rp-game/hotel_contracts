@@ -23,4 +23,5 @@ __exportStar(require("./change-password.dto"), exports);
 __exportStar(require("./avatar.dto"), exports);
 __exportStar(require("./schedule.dto"), exports);
 __exportStar(require("./performance.dto"), exports);
+__exportStar(require("./find-by-ids.dto"), exports);
 //# sourceMappingURL=index.js.map

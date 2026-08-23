@@ -169,6 +169,7 @@ class BookingGuestResponseDto {
     idType;
     idNumber;
     nationality;
+    address;
 }
 exports.BookingGuestResponseDto = BookingGuestResponseDto;
 __decorate([
@@ -203,6 +204,10 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Nationality' }),
     __metadata("design:type", String)
 ], BookingGuestResponseDto.prototype, "nationality", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Address' }),
+    __metadata("design:type", String)
+], BookingGuestResponseDto.prototype, "address", void 0);
 class BookingPaymentResponseDto {
     id;
     amount;

@@ -44,6 +44,7 @@ export declare class BookingGuest {
     nationality?: string;
     idType?: string;
     idNumber?: string;
+    address?: string;
 }
 export declare class BookingPayment {
     id: string;

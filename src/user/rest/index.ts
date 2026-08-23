@@ -7,3 +7,4 @@ export * from './change-password.dto';
 export * from './avatar.dto';
 export * from './schedule.dto';
 export * from './performance.dto';
+export * from './find-by-ids.dto';

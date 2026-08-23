@@ -48,6 +48,7 @@ export declare class BookingGuestResponseDto {
     idType?: string;
     idNumber?: string;
     nationality?: string;
+    address?: string;
 }
 export declare class BookingPaymentResponseDto {
     id: string;

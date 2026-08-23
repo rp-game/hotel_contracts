@@ -116,6 +116,9 @@ export class BookingGuest {
 
   @ApiPropertyOptional({ description: 'Guest ID number' })
   idNumber?: string;
+
+  @ApiPropertyOptional({ description: 'Guest address' })
+  address?: string;
 }
 
 export class BookingPayment {

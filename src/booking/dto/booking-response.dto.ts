@@ -120,6 +120,9 @@ export class BookingGuestResponseDto {
 
   @ApiPropertyOptional({ description: 'Nationality' })
   nationality?: string;
+
+  @ApiPropertyOptional({ description: 'Address' })
+  address?: string;
 }
 
 export class BookingPaymentResponseDto {

@@ -439,6 +439,7 @@ export declare class DailyPaymentByMethod {
     total: number;
 }
 export declare class DailyPaymentTxn {
+    bookingId?: string | null;
     roomNumber?: string | null;
     roomName?: string | null;
     guestName?: string | null;
@@ -489,4 +490,87 @@ export declare class OccupancyByDateReportData {
 export type GetGuestMovementReportNatsResponse = NatsResponse<GuestMovementReportData>;
 export type GetDailyPaymentReportNatsResponse = NatsResponse<DailyPaymentReportData>;
 export type GetOccupancyByDateReportNatsResponse = NatsResponse<OccupancyByDateReportData>;
+export declare class GetRevenueDetailReportNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    from: string;
+    to: string;
+    byCheckout?: boolean;
+}
+export declare class RevenueDetailRow {
+    bookingCode: string;
+    roomType?: string | null;
+    roomName?: string | null;
+    guestName?: string | null;
+    checkIn?: string | null;
+    checkOut?: string | null;
+    roomCharge: number;
+    serviceCharge: number;
+    discount: number;
+    totalRevenue: number;
+    priorDebt: number;
+    cash: number;
+    card: number;
+    bankTransfer: number;
+    companyDebt: number;
+    outstanding: number;
+    idNo?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    company?: string | null;
+    source?: string | null;
+    marketSegment?: string | null;
+    createdByName?: string | null;
+    status?: string | null;
+    nights: number;
+    avgRate: number;
+    invoiceNo?: string | null;
+    cmsCode?: string | null;
+    otaCode?: string | null;
+}
+export declare class RevenueDetailReportData {
+    rows: RevenueDetailRow[];
+    totals: RevenueDetailRow;
+}
+export declare class GetArReportNatsRequest {
+    tenantId: string;
+    hotelId: string;
+    from: string;
+    to: string;
+}
+export declare class ArSummaryRow {
+    partner: string;
+    representative?: string | null;
+    phone?: string | null;
+    opening: number;
+    paidInPeriod: number;
+    chargedInPeriod: number;
+    closing: number;
+}
+export declare class ArSummaryReportData {
+    rows: ArSummaryRow[];
+    totals: ArSummaryRow;
+}
+export declare class ArDetailTxn {
+    date?: string | null;
+    docNo?: string | null;
+    currency?: string | null;
+    amount: number;
+    detail?: string | null;
+    paidInPeriod: number;
+    chargedInPeriod: number;
+    runningBalance: number;
+}
+export declare class ArDetailGroup {
+    partner: string;
+    opening: number;
+    transactions: ArDetailTxn[];
+    closing: number;
+}
+export declare class ArDetailReportData {
+    groups: ArDetailGroup[];
+}
+export type GetRevenueDetailReportNatsResponse = NatsResponse<RevenueDetailReportData>;
+export type GetArSummaryReportNatsResponse = NatsResponse<ArSummaryReportData>;
+export type GetArDetailReportNatsResponse = NatsResponse<ArDetailReportData>;
 //# sourceMappingURL=reports.nats.d.ts.map
