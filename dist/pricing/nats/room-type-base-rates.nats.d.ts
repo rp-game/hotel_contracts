@@ -33,6 +33,9 @@ export declare class UpsertRoomTypeBaseRateRequest {
     hourlyRate?: number;
     currency?: string;
     isActive?: boolean;
+    parentRoomTypeId?: string | null;
+    derivationType?: 'PERCENTAGE' | 'AMOUNT' | null;
+    derivationValue?: number | null;
     performedBy?: string;
     performedByName?: string;
 }

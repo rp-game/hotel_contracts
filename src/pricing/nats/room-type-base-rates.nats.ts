@@ -5,7 +5,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNumber, IsBoolean, IsOptional, IsArray, ValidateNested } from 'class-validator';
+import { IsString, IsNumber, IsBoolean, IsOptional, IsArray, IsIn, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { RoomTypeBaseRate } from '../types';
@@ -157,6 +157,32 @@ export class UpsertRoomTypeBaseRateRequest {
   @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiPropertyOptional({
+    description:
+      'Room type to derive base price from (single-level only). Omit field to leave existing reference untouched; send null to explicitly clear it.',
+    nullable: true,
+  })
+  @IsOptional()
+  @IsString()
+  parentRoomTypeId?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Derivation formula applied to parent room type\'s rates',
+    enum: ['PERCENTAGE', 'AMOUNT'],
+    nullable: true,
+  })
+  @IsOptional()
+  @IsIn(['PERCENTAGE', 'AMOUNT'])
+  derivationType?: 'PERCENTAGE' | 'AMOUNT' | null;
+
+  @ApiPropertyOptional({
+    description: 'Derivation value (percent or fixed amount depending on derivationType)',
+    nullable: true,
+  })
+  @IsOptional()
+  @IsNumber()
+  derivationValue?: number | null;
 
   @ApiPropertyOptional()
   @IsOptional()

@@ -17,6 +17,9 @@ export declare class RoomTypeBaseRate {
     weekendRate?: number;
     hourlyRate?: number;
     useWeekdayWeekend: boolean;
+    parentRoomTypeId?: string | null;
+    derivationType?: 'PERCENTAGE' | 'AMOUNT' | null;
+    derivationValue?: number | null;
     currency: string;
     isActive: boolean;
     createdAt: string;
@@ -72,6 +75,9 @@ export declare class UpsertRoomTypeBaseRateRequestDto {
     hourlyRate?: number;
     currency?: string;
     isActive?: boolean;
+    parentRoomTypeId?: string | null;
+    derivationType?: 'PERCENTAGE' | 'AMOUNT' | null;
+    derivationValue?: number | null;
 }
 /**
  * Room type base rate item for bulk operations
