@@ -161,6 +161,7 @@ export class UpsertRoomTypeBaseRateRequest {
   @ApiPropertyOptional({
     description:
       'Room type to derive base price from (single-level only). Omit field to leave existing reference untouched; send null to explicitly clear it.',
+    type: String,
     nullable: true,
   })
   @IsOptional()
@@ -178,6 +179,7 @@ export class UpsertRoomTypeBaseRateRequest {
 
   @ApiPropertyOptional({
     description: 'Derivation value (percent or fixed amount depending on derivationType)',
+    type: Number,
     nullable: true,
   })
   @IsOptional()

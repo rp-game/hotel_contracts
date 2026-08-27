@@ -38,13 +38,13 @@ export class RoomTypeBaseRate {
   @ApiProperty({ description: 'Whether to use weekday/weekend pricing' })
   useWeekdayWeekend: boolean;
 
-  @ApiPropertyOptional({ description: 'Room type this rate derives its base price from (single-level reference only)' })
+  @ApiPropertyOptional({ description: 'Room type this rate derives its base price from (single-level reference only)', type: String, nullable: true })
   parentRoomTypeId?: string | null;
 
-  @ApiPropertyOptional({ description: 'Derivation formula applied to parent room type\'s rates', enum: ['PERCENTAGE', 'AMOUNT'] })
+  @ApiPropertyOptional({ description: 'Derivation formula applied to parent room type\'s rates', enum: ['PERCENTAGE', 'AMOUNT'], nullable: true })
   derivationType?: 'PERCENTAGE' | 'AMOUNT' | null;
 
-  @ApiPropertyOptional({ description: 'Derivation value (percent or fixed amount depending on derivationType)' })
+  @ApiPropertyOptional({ description: 'Derivation value (percent or fixed amount depending on derivationType)', type: Number, nullable: true })
   derivationValue?: number | null;
 
   @ApiProperty({ description: 'Currency code' })
@@ -164,6 +164,7 @@ export class UpsertRoomTypeBaseRateRequestDto {
   @ApiPropertyOptional({
     description:
       'Room type to derive base price from. Omit field entirely to leave existing reference untouched; send null to explicitly clear it (revert to independent manual pricing).',
+    type: String,
     nullable: true,
   })
   @IsOptional()
@@ -175,7 +176,7 @@ export class UpsertRoomTypeBaseRateRequestDto {
   @IsIn(['PERCENTAGE', 'AMOUNT'])
   derivationType?: 'PERCENTAGE' | 'AMOUNT' | null;
 
-  @ApiPropertyOptional({ description: 'Derivation value (percent or fixed amount depending on derivationType)', nullable: true })
+  @ApiPropertyOptional({ description: 'Derivation value (percent or fixed amount depending on derivationType)', type: Number, nullable: true })
   @IsOptional()
   @IsNumber()
   derivationValue?: number | null;

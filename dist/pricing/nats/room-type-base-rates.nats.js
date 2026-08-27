@@ -208,6 +208,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Room type to derive base price from (single-level only). Omit field to leave existing reference untouched; send null to explicitly clear it.',
+        type: String,
         nullable: true,
     }),
     (0, class_validator_1.IsOptional)(),
@@ -227,6 +228,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Derivation value (percent or fixed amount depending on derivationType)',
+        type: Number,
         nullable: true,
     }),
     (0, class_validator_1.IsOptional)(),
