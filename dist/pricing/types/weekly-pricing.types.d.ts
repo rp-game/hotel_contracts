@@ -55,6 +55,7 @@ export declare class UpsertWeekRequest {
     expectedUpdatedAt?: string;
     updatedBy?: string;
     ratePlanId?: string;
+    preserveSource?: boolean;
 }
 export declare class UpsertWeekResponse {
     item: WeeklyPricingItem;

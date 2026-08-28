@@ -171,6 +171,7 @@ class UpsertWeekRequest {
     expectedUpdatedAt;
     updatedBy;
     ratePlanId;
+    preserveSource;
 }
 exports.UpsertWeekRequest = UpsertWeekRequest;
 __decorate([
@@ -213,6 +214,13 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Có → ghi giá weekly RIÊNG của rate plan (MASTER); không → foundation room type' }),
     __metadata("design:type", String)
 ], UpsertWeekRequest.prototype, "ratePlanId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'true khi call này chỉ GỠ 1 override ngày để trả về giá kế thừa (không phải staff nhập giá tay mới) — ' +
+            'giữ nguyên source hiện có của row (vd "cron" từ cascade tham chiếu), không ép về "manual".',
+    }),
+    __metadata("design:type", Boolean)
+], UpsertWeekRequest.prototype, "preserveSource", void 0);
 class UpsertWeekResponse {
     item;
     skippedCascades;

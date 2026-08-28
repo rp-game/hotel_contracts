@@ -82,6 +82,12 @@ export class UpsertWeekRequest {
   @ApiPropertyOptional() updatedBy?: string;
   @ApiPropertyOptional({ description: 'Có → ghi giá weekly RIÊNG của rate plan (MASTER); không → foundation room type' })
   ratePlanId?: string;
+  @ApiPropertyOptional({
+    description:
+      'true khi call này chỉ GỠ 1 override ngày để trả về giá kế thừa (không phải staff nhập giá tay mới) — ' +
+      'giữ nguyên source hiện có của row (vd "cron" từ cascade tham chiếu), không ép về "manual".',
+  })
+  preserveSource?: boolean;
 }
 
 export class UpsertWeekResponse {
