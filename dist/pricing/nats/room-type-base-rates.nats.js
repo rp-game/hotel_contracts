@@ -112,6 +112,9 @@ class UpsertRoomTypeBaseRateRequest {
     hourlyRate;
     currency;
     isActive;
+    parentRoomTypeId;
+    derivationType;
+    derivationValue;
     performedBy;
     performedByName;
 }
@@ -202,6 +205,36 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpsertRoomTypeBaseRateRequest.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Room type to derive base price from (single-level only). Omit field to leave existing reference untouched; send null to explicitly clear it.',
+        type: String,
+        nullable: true,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", Object)
+], UpsertRoomTypeBaseRateRequest.prototype, "parentRoomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Derivation formula applied to parent room type\'s rates',
+        enum: ['PERCENTAGE', 'AMOUNT'],
+        nullable: true,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsIn)(['PERCENTAGE', 'AMOUNT']),
+    __metadata("design:type", Object)
+], UpsertRoomTypeBaseRateRequest.prototype, "derivationType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Derivation value (percent or fixed amount depending on derivationType)',
+        type: Number,
+        nullable: true,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Object)
+], UpsertRoomTypeBaseRateRequest.prototype, "derivationValue", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
     (0, class_validator_1.IsOptional)(),

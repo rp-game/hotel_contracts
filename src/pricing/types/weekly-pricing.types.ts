@@ -17,6 +17,13 @@ export enum WeeklyPricingSource {
 
 export type DowOverrides = Record<'1' | '2' | '3' | '4' | '5' | '6' | '7', number>;
 
+/** 1 room type × 1 tuần bị BỎ QUA khi cascade giá tham chiếu (room-type-base-rates) vì tuần
+ * đó đang có giá override thủ công (source=manual) — không tự động ghi đè theo giá gốc mới. */
+export class SkippedCascade {
+  @ApiProperty() roomTypeId: string;
+  @ApiProperty({ description: 'Monday of the ISO week (YYYY-MM-DD)' }) startDate: string;
+}
+
 export class WeeklyPricingItem {
   @ApiProperty() id: string;
   @ApiProperty() tenantId: string;
@@ -75,10 +82,17 @@ export class UpsertWeekRequest {
   @ApiPropertyOptional() updatedBy?: string;
   @ApiPropertyOptional({ description: 'Có → ghi giá weekly RIÊNG của rate plan (MASTER); không → foundation room type' })
   ratePlanId?: string;
+  @ApiPropertyOptional({
+    description:
+      'true khi call này chỉ GỠ 1 override ngày để trả về giá kế thừa (không phải staff nhập giá tay mới) — ' +
+      'giữ nguyên source hiện có của row (vd "cron" từ cascade tham chiếu), không ép về "manual".',
+  })
+  preserveSource?: boolean;
 }
 
 export class UpsertWeekResponse {
   @ApiProperty() item: WeeklyPricingItem;
+  @ApiPropertyOptional({ type: [SkippedCascade] }) skippedCascades?: SkippedCascade[];
 }
 
 // ─── Preview repeat ──────────────────────────────────────────────────────
@@ -136,6 +150,7 @@ export class SoftDeleteWeekRequest {
 
 export class SoftDeleteWeekResponse {
   @ApiProperty() success: boolean;
+  @ApiPropertyOptional({ type: [SkippedCascade] }) skippedCascades?: SkippedCascade[];
 }
 
 // ─── Bulk set 1 week × N rooms ───────────────────────────────────────────
@@ -161,6 +176,7 @@ export class BulkSetWeekRequest {
 
 export class BulkSetWeekResponse {
   @ApiProperty() upserted: number;
+  @ApiPropertyOptional({ type: [SkippedCascade] }) skippedCascades?: SkippedCascade[];
 }
 
 // ─── Bootstrap from base_rate ────────────────────────────────────────────

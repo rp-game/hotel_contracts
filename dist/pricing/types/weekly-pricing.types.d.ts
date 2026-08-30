@@ -12,6 +12,12 @@ export declare enum WeeklyPricingSource {
     MANUAL = "manual"
 }
 export type DowOverrides = Record<'1' | '2' | '3' | '4' | '5' | '6' | '7', number>;
+/** 1 room type × 1 tuần bị BỎ QUA khi cascade giá tham chiếu (room-type-base-rates) vì tuần
+ * đó đang có giá override thủ công (source=manual) — không tự động ghi đè theo giá gốc mới. */
+export declare class SkippedCascade {
+    roomTypeId: string;
+    startDate: string;
+}
 export declare class WeeklyPricingItem {
     id: string;
     tenantId: string;
@@ -49,9 +55,11 @@ export declare class UpsertWeekRequest {
     expectedUpdatedAt?: string;
     updatedBy?: string;
     ratePlanId?: string;
+    preserveSource?: boolean;
 }
 export declare class UpsertWeekResponse {
     item: WeeklyPricingItem;
+    skippedCascades?: SkippedCascade[];
 }
 export declare class PreviewRepeatTarget {
     weekStart: string;
@@ -91,6 +99,7 @@ export declare class SoftDeleteWeekRequest {
 }
 export declare class SoftDeleteWeekResponse {
     success: boolean;
+    skippedCascades?: SkippedCascade[];
 }
 export declare class BulkSetWeekRoom {
     roomTypeId: string;
@@ -106,6 +115,7 @@ export declare class BulkSetWeekRequest {
 }
 export declare class BulkSetWeekResponse {
     upserted: number;
+    skippedCascades?: SkippedCascade[];
 }
 export declare class BootstrapFromBaseRateRequest {
     tenantId: string;

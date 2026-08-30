@@ -18,13 +18,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BootstrapFromBaseRateResponse = exports.BootstrapFromBaseRateRequest = exports.BulkSetWeekResponse = exports.BulkSetWeekRequest = exports.BulkSetWeekRoom = exports.SoftDeleteWeekResponse = exports.SoftDeleteWeekRequest = exports.ExecuteRepeatResponse = exports.ExecuteRepeatRequest = exports.PreviewRepeatResponse = exports.PreviewRepeatRequest = exports.PreviewRepeatTarget = exports.UpsertWeekResponse = exports.UpsertWeekRequest = exports.ListWeeklyResponse = exports.ListWeeklyRequest = exports.WeeklyPricingItem = exports.WeeklyPricingSource = void 0;
+exports.BootstrapFromBaseRateResponse = exports.BootstrapFromBaseRateRequest = exports.BulkSetWeekResponse = exports.BulkSetWeekRequest = exports.BulkSetWeekRoom = exports.SoftDeleteWeekResponse = exports.SoftDeleteWeekRequest = exports.ExecuteRepeatResponse = exports.ExecuteRepeatRequest = exports.PreviewRepeatResponse = exports.PreviewRepeatRequest = exports.PreviewRepeatTarget = exports.UpsertWeekResponse = exports.UpsertWeekRequest = exports.ListWeeklyResponse = exports.ListWeeklyRequest = exports.WeeklyPricingItem = exports.SkippedCascade = exports.WeeklyPricingSource = void 0;
 const swagger_1 = require("@nestjs/swagger");
 var WeeklyPricingSource;
 (function (WeeklyPricingSource) {
     WeeklyPricingSource["CRON"] = "cron";
     WeeklyPricingSource["MANUAL"] = "manual";
 })(WeeklyPricingSource || (exports.WeeklyPricingSource = WeeklyPricingSource = {}));
+/** 1 room type × 1 tuần bị BỎ QUA khi cascade giá tham chiếu (room-type-base-rates) vì tuần
+ * đó đang có giá override thủ công (source=manual) — không tự động ghi đè theo giá gốc mới. */
+class SkippedCascade {
+    roomTypeId;
+    startDate;
+}
+exports.SkippedCascade = SkippedCascade;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
+], SkippedCascade.prototype, "roomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Monday of the ISO week (YYYY-MM-DD)' }),
+    __metadata("design:type", String)
+], SkippedCascade.prototype, "startDate", void 0);
 class WeeklyPricingItem {
     id;
     tenantId;
@@ -156,6 +171,7 @@ class UpsertWeekRequest {
     expectedUpdatedAt;
     updatedBy;
     ratePlanId;
+    preserveSource;
 }
 exports.UpsertWeekRequest = UpsertWeekRequest;
 __decorate([
@@ -198,14 +214,26 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Có → ghi giá weekly RIÊNG của rate plan (MASTER); không → foundation room type' }),
     __metadata("design:type", String)
 ], UpsertWeekRequest.prototype, "ratePlanId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'true khi call này chỉ GỠ 1 override ngày để trả về giá kế thừa (không phải staff nhập giá tay mới) — ' +
+            'giữ nguyên source hiện có của row (vd "cron" từ cascade tham chiếu), không ép về "manual".',
+    }),
+    __metadata("design:type", Boolean)
+], UpsertWeekRequest.prototype, "preserveSource", void 0);
 class UpsertWeekResponse {
     item;
+    skippedCascades;
 }
 exports.UpsertWeekResponse = UpsertWeekResponse;
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", WeeklyPricingItem)
 ], UpsertWeekResponse.prototype, "item", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [SkippedCascade] }),
+    __metadata("design:type", Array)
+], UpsertWeekResponse.prototype, "skippedCascades", void 0);
 // ─── Preview repeat ──────────────────────────────────────────────────────
 class PreviewRepeatTarget {
     weekStart;
@@ -353,12 +381,17 @@ __decorate([
 ], SoftDeleteWeekRequest.prototype, "expectedUpdatedAt", void 0);
 class SoftDeleteWeekResponse {
     success;
+    skippedCascades;
 }
 exports.SoftDeleteWeekResponse = SoftDeleteWeekResponse;
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Boolean)
 ], SoftDeleteWeekResponse.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [SkippedCascade] }),
+    __metadata("design:type", Array)
+], SoftDeleteWeekResponse.prototype, "skippedCascades", void 0);
 // ─── Bulk set 1 week × N rooms ───────────────────────────────────────────
 class BulkSetWeekRoom {
     roomTypeId;
@@ -412,12 +445,17 @@ __decorate([
 ], BulkSetWeekRequest.prototype, "updatedBy", void 0);
 class BulkSetWeekResponse {
     upserted;
+    skippedCascades;
 }
 exports.BulkSetWeekResponse = BulkSetWeekResponse;
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], BulkSetWeekResponse.prototype, "upserted", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [SkippedCascade] }),
+    __metadata("design:type", Array)
+], BulkSetWeekResponse.prototype, "skippedCascades", void 0);
 // ─── Bootstrap from base_rate ────────────────────────────────────────────
 class BootstrapFromBaseRateRequest {
     tenantId;

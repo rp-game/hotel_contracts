@@ -30,6 +30,9 @@ class RoomTypeBaseRate {
     weekendRate;
     hourlyRate;
     useWeekdayWeekend;
+    parentRoomTypeId;
+    derivationType;
+    derivationValue;
     currency;
     isActive;
     createdAt;
@@ -72,6 +75,18 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Whether to use weekday/weekend pricing' }),
     __metadata("design:type", Boolean)
 ], RoomTypeBaseRate.prototype, "useWeekdayWeekend", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Room type this rate derives its base price from (single-level reference only)', type: String, nullable: true }),
+    __metadata("design:type", Object)
+], RoomTypeBaseRate.prototype, "parentRoomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Derivation formula applied to parent room type\'s rates', enum: ['PERCENTAGE', 'AMOUNT'], nullable: true }),
+    __metadata("design:type", Object)
+], RoomTypeBaseRate.prototype, "derivationType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Derivation value (percent or fixed amount depending on derivationType)', type: Number, nullable: true }),
+    __metadata("design:type", Object)
+], RoomTypeBaseRate.prototype, "derivationValue", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Currency code' }),
     __metadata("design:type", String)
@@ -140,6 +155,9 @@ class UpsertRoomTypeBaseRateRequestDto {
     hourlyRate;
     currency;
     isActive;
+    parentRoomTypeId;
+    derivationType;
+    derivationValue;
 }
 exports.UpsertRoomTypeBaseRateRequestDto = UpsertRoomTypeBaseRateRequestDto;
 __decorate([
@@ -188,6 +206,28 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpsertRoomTypeBaseRateRequestDto.prototype, "isActive", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Room type to derive base price from. Omit field entirely to leave existing reference untouched; send null to explicitly clear it (revert to independent manual pricing).',
+        type: String,
+        nullable: true,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", Object)
+], UpsertRoomTypeBaseRateRequestDto.prototype, "parentRoomTypeId", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Derivation formula applied to parent room type\'s rates', enum: ['PERCENTAGE', 'AMOUNT'], nullable: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsIn)(['PERCENTAGE', 'AMOUNT']),
+    __metadata("design:type", Object)
+], UpsertRoomTypeBaseRateRequestDto.prototype, "derivationType", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Derivation value (percent or fixed amount depending on derivationType)', type: Number, nullable: true }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Object)
+], UpsertRoomTypeBaseRateRequestDto.prototype, "derivationValue", void 0);
 /**
  * Room type base rate item for bulk operations
  */
