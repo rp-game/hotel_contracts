@@ -379,11 +379,11 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'New booking status',
-        enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED'],
+        enum: booking_enum_1.BookingStatus,
         example: 'CONFIRMED',
     }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(['PENDING', 'CONFIRMED', 'CHECKED_IN', 'CHECKED_OUT', 'CANCELLED']),
+    (0, class_validator_1.IsEnum)(booking_enum_1.BookingStatus),
     __metadata("design:type", String)
 ], UpdateBookingDto.prototype, "status", void 0);
 __decorate([

@@ -11,7 +11,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsEnum, IsNumber, IsUUID, IsArray, ValidateNested, Matches, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 import { NatsResponse } from '../../common/nats-response.interface';
-import { BackdateReasonCategory } from '../enums/booking.enum';
+import { BackdateReasonCategory, BookingStatus } from '../enums/booking.enum';
 
 /**
  * Room details in booking (for update response)
@@ -289,12 +289,12 @@ export class UpdateBookingDto {
    */
   @ApiPropertyOptional({
     description: 'New booking status',
-    enum: ['PENDING', 'CONFIRMED', 'CHECKED_IN', 'DEPARTED', 'CHECKED_OUT', 'CANCELLED'],
+    enum: BookingStatus,
     example: 'CONFIRMED',
   })
   @IsOptional()
-  @IsEnum(['PENDING', 'CONFIRMED', 'CHECKED_IN', 'CHECKED_OUT', 'CANCELLED'])
-  status?: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
+  @IsEnum(BookingStatus)
+  status?: BookingStatus;
 
   /**
    * User ID who made the update
@@ -531,7 +531,7 @@ export interface UpdateBookingResponse {
   /**
    * Current booking status
    */
-  status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
+  status: BookingStatus;
 
   /**
    * Check-in date

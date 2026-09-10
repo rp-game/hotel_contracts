@@ -7,7 +7,7 @@
  * Used by: calendar page to edit booking details
  */
 import { NatsResponse } from '../../common/nats-response.interface';
-import { BackdateReasonCategory } from '../enums/booking.enum';
+import { BackdateReasonCategory, BookingStatus } from '../enums/booking.enum';
 /**
  * Room details in booking (for update response)
  */
@@ -129,7 +129,7 @@ export declare class UpdateBookingDto {
     /**
      * New booking status
      */
-    status?: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
+    status?: BookingStatus;
     /**
      * User ID who made the update
      */
@@ -217,7 +217,7 @@ export interface UpdateBookingResponse {
     /**
      * Current booking status
      */
-    status: 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'CHECKED_OUT' | 'CANCELLED';
+    status: BookingStatus;
     /**
      * Check-in date
      */
