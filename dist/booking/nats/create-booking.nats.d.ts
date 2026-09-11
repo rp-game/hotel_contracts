@@ -122,6 +122,13 @@ export interface CreateBookingRequest {
          */
         source: string;
         /**
+         * Optional initial status override. Chỉ `PENDING_PAYMENT` được tôn trọng, và chỉ khi
+         * `source === 'WEBSITE'` — dùng cho booking tạo qua webshop khi bắt buộc thanh toán online,
+         * chờ thanh toán trước khi confirm. Mọi giá trị khác/mọi source khác đều bị bỏ qua, booking
+         * tạo ở PENDING như mặc định.
+         */
+        status?: string;
+        /**
          * Who created this booking
          */
         createdBy: string;
