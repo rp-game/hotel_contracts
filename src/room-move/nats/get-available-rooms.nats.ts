@@ -45,6 +45,16 @@ export class GetAvailableRoomsForMoveRequest {
   @ApiPropertyOptional({ description: 'Whether this is an emergency request' })
   @IsOptional()
   emergency?: boolean;
+
+  @ApiPropertyOptional({
+    description:
+      'Mốc giờ chuyển hiệu lực từ (ISO datetime). Chỉ tìm phòng trống TỪ mốc này trở đi ' +
+      '(không phải cả kỳ lưu trú) — vd khách cũ trả phòng trước mốc này không còn coi là bận. ' +
+      'Bỏ trống = mặc định max(giờ nhận phòng gốc của booking, hiện tại).',
+  })
+  @IsOptional()
+  @IsString()
+  fromTime?: string;
 }
 
 /**
