@@ -7,7 +7,7 @@
  */
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsOptional, IsUUID, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsUUID, IsNumber, IsDateString } from 'class-validator';
 import { NatsResponse } from '../../common/nats-response.interface';
 import { AvailableRoom } from '../types';
 
@@ -53,7 +53,7 @@ export class GetAvailableRoomsForMoveRequest {
       'Bỏ trống = mặc định max(giờ nhận phòng gốc của booking, hiện tại).',
   })
   @IsOptional()
-  @IsString()
+  @IsDateString()
   fromTime?: string;
 }
 

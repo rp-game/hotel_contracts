@@ -78,7 +78,7 @@ __decorate([
             'Bỏ trống = mặc định max(giờ nhận phòng gốc của booking, hiện tại).',
     }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], GetAvailableRoomsForMoveRequest.prototype, "fromTime", void 0);
 //# sourceMappingURL=get-available-rooms.nats.js.map
