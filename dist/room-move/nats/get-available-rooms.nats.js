@@ -27,6 +27,7 @@ class GetAvailableRoomsForMoveRequest {
     maxRateDifference;
     limit;
     emergency;
+    fromTime;
 }
 exports.GetAvailableRoomsForMoveRequest = GetAvailableRoomsForMoveRequest;
 __decorate([
@@ -70,4 +71,14 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], GetAvailableRoomsForMoveRequest.prototype, "emergency", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Mốc giờ chuyển hiệu lực từ (ISO datetime). Chỉ tìm phòng trống TỪ mốc này trở đi ' +
+            '(không phải cả kỳ lưu trú) — vd khách cũ trả phòng trước mốc này không còn coi là bận. ' +
+            'Bỏ trống = mặc định max(giờ nhận phòng gốc của booking, hiện tại).',
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetAvailableRoomsForMoveRequest.prototype, "fromTime", void 0);
 //# sourceMappingURL=get-available-rooms.nats.js.map

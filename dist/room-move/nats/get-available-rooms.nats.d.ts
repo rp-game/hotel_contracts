@@ -15,6 +15,7 @@ export declare class GetAvailableRoomsForMoveRequest {
     maxRateDifference?: number;
     limit?: number;
     emergency?: boolean;
+    fromTime?: string;
 }
 /**
  * Type-safe NATS response wrapper
